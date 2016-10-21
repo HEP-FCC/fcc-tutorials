@@ -1,6 +1,3 @@
----
-layout: site
----
 []() FCC Pythia + Delphes Analysis (Documentation)
 ==================================================
 

@@ -1,6 +1,3 @@
----
-layout: site
----
 []() CMake guide for the FCC software
 =====================================
 

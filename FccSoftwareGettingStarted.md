@@ -1,8 +1,3 @@
----
-layout: site
-thisversion: ""
----
-
 FCC: Getting started with the production and analysis of fast-simulated events
 ===================================================================================
 
@@ -93,12 +88,12 @@ Get the code of FCCSW:
 Tutorial branch - to follow the tutorial:
 
     git clone https://github.com/HEP-FCC/FCCSW.git -b tutorial
-    cd FCCSW 
+    cd FCCSW
 
 or the master branch - to proceed with a full version
 
     git clone https://github.com/HEP-FCC/FCCSW.git -b master
-    cd FCCSW 
+    cd FCCSW
 
 Follow [these instructions](https://github.com/HEP-FCC/FCCSW/blob/tutorial/README.md)
 to compile and test [FCCSW](https://github.com/HEP-FCC/FCCSW). The simplest option is
@@ -108,7 +103,7 @@ below:
     export FCCBASE=$PWD
     export FCCSW=$FCCBASE/FCCSW
     cd $FCCSW
-    make -j 12 
+    make -j 12
 
 In case of problems, please do not proceed any further and contact J. Lingemann.
 
@@ -224,12 +219,12 @@ being said, it is of course possible to generate events with FCCSW.
 
 Generate ee to ZH events with Z to mumu and H to b bbar:
 
-    fcc-pythia8-generate ee_ZH_Zmumu_Hbb.txt 
+    fcc-pythia8-generate ee_ZH_Zmumu_Hbb.txt
 
 You should obtain a file `ee_ZH_Zmumu_Hbb.root` written in the
 FCC EDM format. Let us open it and check the contents:
 
-    root  ee_ZH_Zmumu_Hbb.root 
+    root  ee_ZH_Zmumu_Hbb.root
     events->Print()
 
 You're getting a list of the available collections. You can use root to
@@ -378,13 +373,13 @@ You get an output directory `OutDir` . Check its contents and the
 contents of its subdirectories. In particular, the following directory
 contains an ntuple with the variables we need:
 
-    OutDir/example/heppy.analyzers.examples.zh.ZHTreeProducer.ZHTreeProducer_1/tree.root  
+    OutDir/example/heppy.analyzers.examples.zh.ZHTreeProducer.ZHTreeProducer_1/tree.root
 
 ### Make plots
 
 Open the root file containing the ntuple in root:
 
-    root OutDir/example/heppy.analyzers.examples.zh.ZHTreeProducer.ZHTreeProducer_1/tree.root  
+    root OutDir/example/heppy.analyzers.examples.zh.ZHTreeProducer.ZHTreeProducer_1/tree.root
 
 Make a few plots:
 
@@ -410,7 +405,7 @@ First go to your FCC directory.
 
 Then:
 
-    export FCC=$PWD 
+    export FCC=$PWD
     cd heppy/
     source ./init.sh
     cd $FCC/Workdir
@@ -445,7 +440,7 @@ If %FCCSW% not initialized:
 Now you are ready to produce 100TeV ttbar events with Pythia, process
 them through Delphes and store them in the FCC-EDM :
 
-    ./run gaudirun.py Sim/SimDelphesInterface/options/PythiaDelphes_config.py 
+    ./run gaudirun.py Sim/SimDelphesInterface/options/PythiaDelphes_config.py
 
 you should obtain a file called `    FCCDelphesOutput.root   `
 
@@ -453,7 +448,7 @@ Install the [heppy
 (https://github.com/HEP-FCC/heppy.git) package.
 
 Edit the ttbar example:
-     
+
     heppy/test/analysis_hh_ttbar_cfg.py
 
 and link the file you produced running FCCSW previously

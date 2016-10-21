@@ -1,6 +1,3 @@
----
-layout: site
----
 []() Git for the FCC software
 =============================
 
@@ -108,7 +105,7 @@ Please always follow the recommendations below:
 
 <!-- -->
 
-    first version of a pythia interface # this line should be a short 1 liner 
+    first version of a pythia interface # this line should be a short 1 liner
 
     Here, you may write a few more lines if needed
 

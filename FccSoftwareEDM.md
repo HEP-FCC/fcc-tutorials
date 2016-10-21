@@ -1,6 +1,3 @@
----
-layout: site
----
 []() FCC Event Data Model
 =========================
 
@@ -76,7 +73,7 @@ Clone this repository in your FCC directory:
     cd $FCC
     git clone git@github.com:HEP-FCC/albers-core.git
     cd albers-core
-    git checkout -t origin/tutorial 
+    git checkout -t origin/tutorial
 
 And follow the instructions in the
 [README.md](https://github.com/HEP-FCC/albers-core/blob/tutorial/README.md)

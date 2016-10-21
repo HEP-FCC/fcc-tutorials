@@ -1,6 +1,3 @@
----
-layout: site
----
 []() The FCC Virtual Machine: The Fastest Way To Get Started
 ============================================================
 

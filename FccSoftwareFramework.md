@@ -1,6 +1,3 @@
----
-layout: site
----
 []() FCCSW
 ==========
 
@@ -101,7 +98,7 @@ Please have a detailed look at
 -   recompile and run again:
 
            cd $FCCSW
-           make 
+           make
 
 Note how the total energy is generally way too high. It is due to the
 fact that both stable and unstable particles are clustered into jets,
@@ -145,7 +142,7 @@ The new algorithm, `  genp_filter` , will:
 
 Go to the `  Generation/` directory.
 
-     
+
     cd Generation/src
 
 Take the HepMCConverter as a base, and make a GenParticleFilter
@@ -158,14 +155,14 @@ Since you created new files, next time you compile, you will need to do
 the following so that your files are detected by the build system:
 
     cd $FCCSW
-    rm build.x86_64-slc6-gcc48-opt/CMakeCache.txt 
+    rm build.x86_64-slc6-gcc48-opt/CMakeCache.txt
     make -j 4
 
 When you just edit existing files, don't remove the `  CMakeCache.txt`
 file, and just do:
 
     cd $FCCSW
-    make -j 4 
+    make -j 4
 
 **Edit the GenParticleFilter** so that:
 

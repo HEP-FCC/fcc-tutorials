@@ -1,6 +1,3 @@
----
-layout: site
----
 []() FCC Software Questions & Answers
 =====================================
 

@@ -1,6 +1,3 @@
----
-layout: site
----
 []() Heppy : a mini framework for HEP event processing in python
 ================================================================
 
@@ -290,25 +287,25 @@ Print the sequence of analyzers:
     ->
     0 :
     Analyzer: heppy_fcc.analyzers.FCCReader.FCCReader_1
-            class_object   :   
+            class_object   :
             instance_label :   1
             verbose        :   False :
     1 :
     Analyzer: heppy_fcc.analyzers.Recoil.Recoil_gen
-            class_object   :   
+            class_object   :
             instance_label :   gen
             particles      :   gen_particles_stable
             sqrts          :   91.0
             verbose        :   False :
     2 :
     Analyzer: heppy_fcc.analyzers.JetClusterizer.JetClusterizer_gen
-            class_object   :   
+            class_object   :
             instance_label :   gen
             particles      :   gen_particles_stable
             verbose        :   False :
     3 :
     Analyzer: heppy_fcc.analyzers.SimpleTreeProducer.SimpleTreeProducer_1
-            class_object   :   
+            class_object   :
             instance_label :   1
             verbose        :   False :
 
@@ -383,7 +380,7 @@ of all directories within. Have a look at the text files, but ignore the
 Fire up root (here we choose to use ipython + pyroot), and check the
 main output tree:
 
-    ipython 
+    ipython
     from ROOT import TFile
     f = TFile('Out/example/heppy_fcc.analyzers.SimpleTreeProducer.SimpleTreeProducer_1/tree.root')
     f.ls()
@@ -403,7 +400,7 @@ and add the following lines, after the creation of the `  comp`
 component object.
 
     comp.files.append('example_2.root')
-    comp.splitFactor = 2  # splitting the component in 2 chunks 
+    comp.splitFactor = 2  # splitting the component in 2 chunks
 
 As usual, load the configutation script in python, and print the
 `  config` object. You should be able to see that the component now has
@@ -418,7 +415,7 @@ correspond to one of the threads you have run We're going to add
 everything up:
 
     cd Multi
-    heppy_check.py * 
+    heppy_check.py *
     heppy_hadd.py .
 
 The first command checks that all chunks terminated correctly. The
@@ -478,7 +475,7 @@ To run this confirguration file, do:
 
 Then, check the output jet tree:
 
-    ipython 
+    ipython
     from ROOT import TFile
     f = TFile('Papas/example/heppy_fcc.analyzers.JetTreeProducer.JetTreeProducer_papas/jet_tree.root')
     f.ls()
