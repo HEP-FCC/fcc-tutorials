@@ -1,4 +1,4 @@
-[]() CMake guide for the FCC software
+CMake guide for the FCC software
 =====================================
 
 Contents
@@ -21,7 +21,7 @@ standard outside HEP. In HEP, it is for example used by the ILC/CLIC
 communities and by the LHCb collaboration. For CMS people, CMake is the
 equivalent of scram.
 
-[]() CMake example packages
+CMake example packages
 ---------------------------
 
 Colin provides [a few simple CMake
@@ -38,7 +38,7 @@ Follow the instructions in
 [README.md](https://github.com/cbernet/cmake-examples/blob/master/README.md)
 .
 
-[]() CMake in the FCC software framework
+CMake in the FCC software framework
 ----------------------------------------
 
 The FCC software framework is split into single packages `  Generation`
@@ -58,11 +58,9 @@ Note that when changing the name of a property of an algorithm or a
 tool, `  make` (and not only `  make packagename` ) needs to be run for
 Gaudi to be aware of the change.
 
-### []() Using an internal library
+### Using an internal library
 
-### []() Building a new Gaudi module
+### Building a new Gaudi module
 
-### []() Using an external library
+### Using an external library
 
--- [<span class="wikiUser ColinBernet"> ColinBernet
-</span>](/twiki/bin/view/Main/ColinBernet){.twikiLink} - 21 Sep 2014
