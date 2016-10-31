@@ -1,8 +1,6 @@
 CMake guide for the FCC software
 =====================================
 
-Contents
-
 -   [CMake guide for the FCC
     software](#cmake-guide-for-the-fcc-software)
     -   [Overview](#overview)
@@ -19,7 +17,7 @@ Overview
 CMake is a tool for building software, which has become the de-facto
 standard outside HEP. In HEP, it is for example used by the ILC/CLIC
 communities and by the LHCb collaboration. For CMS people, CMake is the
-equivalent of scram.
+equivalent of scram. In FCCSW, CMake is used mainly via Gaudi macros, which are however fairly similar to plain CMake commands in syntax.
 
 CMake example packages
 ---------------------------
@@ -58,9 +56,31 @@ Note that when changing the name of a property of an algorithm or a
 tool, `  make` (and not only `  make packagename` ) needs to be run for
 Gaudi to be aware of the change.
 
+### CTest in FCCSW
+
+FCCSW also uses the cmake for integration tests.
+This is described in detail in `doc/AddingTestsToFCCSW.md`.
+
 ### Using an internal library
+
+Once Gaudi is notified that a certain subdirectory is needed by invoking `gaudi_depends_on_subdir`, internal libraries defined in this subdirectory can be used by simply adding them to the list of `INCLUDE_DIRS` and `LINK_LIBRARIES`. An example would be the way the internal library `DetCommon` is used by the module `Test/TestGeometryPlugins` in FCCSW.
+
+
 
 ### Building a new Gaudi module
 
+The best way is to look at existing modules in FCCSW for inspiration. The syntax to declare the module `TestGeometryPlugins`, for example, is:
+
+```
+gaudi_add_module(TestGeometryPlugins
+                 src/components/*.cpp
+                 INCLUDE_DIRS Geant4 FWCore SimG4Interface SimG4Common DetInterface DetCommon TestGeometry
+                 LINK_LIBRARIES GaudiKernel FWCore Geant4 DetCommon TestGeometry)
+
+```
+
 ### Using an external library
+
+This can be done using the standard cmake command [find_package](https://cmake.org/cmake/help/v3.0/command/find_package.html). See [Colins CMake examples](https://github.com/cbernet/cmake-examples) for details.
+
 
