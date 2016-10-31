@@ -67,12 +67,8 @@ Delphes configuration card - use an official experiment card located in
 [Sim/SimDelphesInterface/data](https://github.com/HEP-FCC/FCCSW/tree/master/Sim/SimDelphesInterface/data)
 directory:
 
--   [FCChh\_DelphesCard\_WithDipole\_v00.tcl](https://github.com/HEP-FCC/FCCSW/blob/master/Sim/SimDelphesInterface/data/FCChh_DelphesCard_WithDipole_v00.tcl)
-    : FCC-hh detector desctription - option with dipole in the forward
-    region
--   [FCChh\_DelphesCard\_WithoutDipole\_v00.tcl](https://github.com/HEP-FCC/FCCSW/blob/master/Sim/SimDelphesInterface/data/FCChh_DelphesCard_WithoutDipole_v00.tcl)
-    : FCC-hh detector desctription - option without dipole in the
-    forward region
+-   [FCChh.tcl](https://github.com/HEP-FCC/FCCSW/blob/master/Sim/SimDelphesInterface/data/FCChh.tcl)
+    : FCC-hh detector desctription - 
 
 Program workflow:
 
@@ -166,7 +162,7 @@ First, start with the configuration files, adjust them accordingly:
     -   `             Random:seed = 0           ` --&gt; Set seed:
         -1=default seed, 0=seed based on time, &gt;0 user seed number
 
--   **FCChh\_DelphesCard\_\*vXX.tcl** : Official FCChh Delphes
+-   **FCChh.tcl** : Official FCChh Delphes
     configuration card, defining sequence of Delphes modules to be
     executed and detector characterization.
 
