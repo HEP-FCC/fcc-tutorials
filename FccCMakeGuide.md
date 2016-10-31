@@ -13,7 +13,7 @@ Contents
         -   [Building a new Gaudi module](#building-a-new-gaudi-module)
         -   [Using an external library](#using-an-external-library)
 
-[]() Overview
+Overview
 -------------
 
 CMake is a tool for building software, which has become the de-facto
