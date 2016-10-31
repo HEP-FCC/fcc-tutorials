@@ -42,7 +42,7 @@ source /afs/cern.ch/exp/fcc/sw/0.8pre/setup.sh
 **You will need to source this script everytime you want to use the
 software.**
 
-* Then, install [heppy](https://github.com/cbernet/heppy/blob/master/README.md)
+* Then, install [heppy](https://github.com/HEP-FCC/heppy/blob/master/README.md)
 
 
 Getting started with papas (FCC-ee)
@@ -51,7 +51,7 @@ Getting started with papas (FCC-ee)
 In this tutorial, you will learn how to:
 
 -   generate events with pythia8 and write them in the FCC EDM format.
--   read these events with [heppy](https://github.com/cbernet/heppy.git) to run the papas simulation and the
+-   read these events with [heppy](https://github.com/HEP-FCC/heppy.git) to run the papas simulation and the
     analysis to create an ntuple
 -   read this ntuple with ROOT to make a few plots
 
@@ -72,7 +72,7 @@ On MacOS, do:
 
     curl -O https://raw.githubusercontent.com/HEP-FCC/fcc-physics/master/pythia8/ee_ZH_Zmumu_Hbb.txt
 
-Get the [heppy](https://github.com/cbernet/heppy.git) configuration file for a ZH analysis:
+Get the [heppy](https://github.com/HEP-FCC/heppy.git) configuration file for a ZH analysis:
 
     cp $HEPPY/test/analysis_ee_ZH_cfg.py .
 
@@ -108,7 +108,7 @@ exit root:
 We are now going to run the papas simulation and to build an ntuple with
 meaningful variables for the analysis.
 
-### Run papas and the analysis in [heppy](https://github.com/cbernet/heppy.git)
+### Run papas and the analysis in [heppy](https://github.com/HEP-FCC/heppy.git)
 
 The ROOT file obtained in the previous section contains for each event
 all generated particles produced by pythia.
@@ -235,7 +235,7 @@ In this tutorial, you will learn how to:
 
 -   generate events with Pythia8, process them through Delphes with
     FCCSW and write them in the FCC EDM format.
--   read these events with [heppy](https://github.com/cbernet/heppy.git) to perfom basic selection and create an
+-   read these events with [heppy](https://github.com/HEP-FCC/heppy.git) to perfom basic selection and create an
     ntuple
 -   read this ntuple with ROOT to make a few plots
 
@@ -261,7 +261,7 @@ them through Delphes and store them in the FCC-EDM :
 
 you should obtain a file called `    FCCDelphesOutput.root   `
 
-Edit the ttbar example of [heppy](https://github.com/cbernet/heppy.git):
+Edit the ttbar example of [heppy](https://github.com/HEP-FCC/heppy.git):
 
     heppy/test/analysis_hh_ttbar_cfg.py
 
