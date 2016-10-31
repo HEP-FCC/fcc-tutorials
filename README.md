@@ -1,7 +1,9 @@
 # List of available tutorials
 
 - [Getting Started](./FccSoftwareGettingStarted.md)
-- [Using Virtual Machine](./FccVirtualMachine.md)
+- Working locally on your laptop
+    - [Using Virtual Machine](./FccVirtualMachine.md)
+    - [Installing the standalone packages](./installing-fcc.md)
 - [The FCC Software](./FccSoftwareFramework.md)
 - [FCC Event Data Model](./FccSoftwareEDM.md)
 - [Pythia + Delphes](./FccPythiaDelphes.md)
