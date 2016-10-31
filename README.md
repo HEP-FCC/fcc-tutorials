@@ -9,3 +9,6 @@
 - [Pythia + Delphes](./FccPythiaDelphes.md)
 - [Github Workflow](./FccSoftwareGit.md)
 - [Questions & Answers](./FccSoftwareQA.md)
+
+### For the administrators:
+- [How to do software releases](./releases.md)
