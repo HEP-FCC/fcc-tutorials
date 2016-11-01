@@ -68,7 +68,6 @@ Delphes configuration card - use an official experiment card located in
 directory:
 
 -   [FCChh.tcl](https://github.com/HEP-FCC/FCCSW/blob/master/Sim/SimDelphesInterface/data/FCChh.tcl)
-    : FCC-hh detector desctription - 
 
 Program workflow:
 
