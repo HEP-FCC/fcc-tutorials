@@ -83,4 +83,14 @@ gaudi_add_module(TestGeometryPlugins
 
 This can be done using the standard cmake command [find_package](https://cmake.org/cmake/help/v3.0/command/find_package.html). See [Colins CMake examples](https://github.com/cbernet/cmake-examples) for details.
 
+Sometimes external libraries require special treatment, and their documentation needs to be consulted. One known case is DD4hep, for which in some cases the CMake variable `${DD4hep_COMPONENT_LIBRARIES}` needs to be used in the `LINK_LIBRARIES` line (if the DDRec or DDSegmentation package is used). Example:
+
+```
+gaudi_add_library(DetCommon
+                 src/*.cpp
+                 INCLUDE_DIRS DD4hep ROOT Geant4 DetSegmentation
+                 LINK_LIBRARIES GaudiKernel DD4hep ROOT Geant4 DetSegmentation ${DD4hep_COMPONENT_LIBRARIES}
+                 PUBLIC_HEADERS DetCommon)
+
+```
 
