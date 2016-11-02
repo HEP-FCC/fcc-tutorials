@@ -42,7 +42,7 @@ CMake in the FCC software framework
 The FCC software framework is split into single packages `  Generation`
 , `  Examples` , `  Simulation` , .... Each of these packages contains
 the file `  CMakeLists.txt` , defining its content. To build the entire
-SW `  make` can be invoked. To rebuild a single package
+SW, a Makefile is provided in the top level directory, so `  make` can be invoked there to build FCCSW. To rebuild a single package
 `  make packagename` is sufficient.
 
 When adding new source files to a package, the CMake build system needs
