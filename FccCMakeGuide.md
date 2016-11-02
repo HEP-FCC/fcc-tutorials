@@ -59,17 +59,17 @@ Gaudi to be aware of the change.
 ### CTest in FCCSW
 
 FCCSW also uses the cmake for integration tests.
-This is described in detail in `doc/AddingTestsToFCCSW.md`.
+This is described in detail in the documentation page on [adding tests to FCCSW](https://github.com/HEP-FCC/FCCSW/blob/master/doc/AddingTestsToFCCSW.md).
 
 ### Using an internal library
 
-Once Gaudi is notified that a certain subdirectory is needed by invoking `gaudi_depends_on_subdir`, internal libraries defined in this subdirectory can be used by simply adding them to the list of `INCLUDE_DIRS` and `LINK_LIBRARIES`. An example would be the way the internal library `DetCommon` is used by the module `Test/TestGeometryPlugins` in FCCSW.
+Once Gaudi is notified that a certain subdirectory is needed by invoking `gaudi_depends_on_subdir`, internal libraries defined in this subdirectory can be used by simply adding them to the list of `INCLUDE_DIRS` and `LINK_LIBRARIES`. An example would be the way the internal library `DetCommon` is used by the module [`Test/TestGeometryPlugins`](https://github.com/HEP-FCC/FCCSW/blob/master/Test/TestGeometry/CMakeLists.txt) in FCCSW.
 
 
 
 ### Building a new Gaudi module
 
-The best way is to look at existing modules in FCCSW for inspiration. The syntax to declare the module `TestGeometryPlugins`, for example, is:
+The best way is to look at existing modules in FCCSW for inspiration. The syntax to declare the module [`TestGeometryPlugins`](https://github.com/HEP-FCC/FCCSW/blob/master/Test/TestGeometry/CMakeLists.txt), for example, is:
 
 ```
 gaudi_add_module(TestGeometryPlugins
