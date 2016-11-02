@@ -63,7 +63,13 @@ This is described in detail in `doc/AddingTestsToFCCSW.md`.
 
 ### Using an internal library
 
+Libraries are the main tool to avoid code duplication, i.e. make pieces of code available in other parts of the framework.
 Once Gaudi is notified that a certain subdirectory is needed by invoking `gaudi_depends_on_subdir`, internal libraries defined in this subdirectory can be used by simply adding them to the list of `INCLUDE_DIRS` and `LINK_LIBRARIES`. An example would be the way the internal library `DetCommon` is used by the module `Test/TestGeometryPlugins` in FCCSW.
+The required changes to use the `DetCommon` library are
+* declare the dependency on the subdirectory `Detector/DetCommon`
+* add the `DetCommon` headers by adding `DetCommon` to the `INCLUDE_DIRS` line
+* link the `DetCommon` libraries by adding `DetCommon` to the `LINK_LIBRARIES` line.
+
 
 
 
