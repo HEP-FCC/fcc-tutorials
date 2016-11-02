@@ -69,6 +69,7 @@ Once Gaudi is notified that a certain subdirectory is needed by invoking `gaudi_
 
 ### Building a new Gaudi module
 
+A more general introduction to Gaudi modules and the differences with respect to libraries can be found in the [LHCb twiki](https://twiki.cern.ch/twiki/bin/view/LHCb/GaudiCMakeConfiguration#Building_a_Module_AKA_component).
 The best way is to look at existing modules in FCCSW for inspiration. The syntax to declare the module `TestGeometryPlugins`, for example, is:
 
 ```
