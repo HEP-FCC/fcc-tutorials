@@ -28,8 +28,7 @@ We currently support two different approaches for fast simulation, Papas and Del
 
 However, ultimately, all users are encouraged to try both fast simulations and to compare the results.
 
-An analysis ntuple will be produced with [heppy](https://github.com/HEP-FCC/heppy), a simple modular event
-processing framework for high energy physics.
+An analysis ntuple will be produced with [heppy](https://github.com/HEP-FCC/heppy), a simple modular event processing framework for high energy physics. 
 
 ## Installation
 
@@ -120,15 +119,21 @@ In this section we will run an [heppy](https://github.com/HEP-FCC/heppy.git) job
     analysis variables;
 -   store these variables in an ntuple written in an output root file.
 
-The [heppy](https://github.com/HEP-FCC/heppy.git) configuration file
-[analysis\_ee\_ZH\_cfg.py](https://github.com/HEP-FCC/heppy/blob/tutorial/test/analysis_ee_ZH_cfg.py)
-describes these steps.
+The [heppy](https://github.com/HEP-FCC/heppy.git) configuration file describing these steps,
+[analysis\_ee\_ZH\_cfg.py](https://github.com/HEP-FCC/heppy/blob/master/test/analysis_ee_ZH_cfg.py),
+is explained [here](https://github.com/HEP-FCC/heppy/blob/master/doc/example_analysis.md).
+Just refer to this documentation as needed while following the instructions below.
 
 First, produce the display for the first event:
 
     ipython -i analysis_ee_ZH_cfg.py 0
 
-You should get an event display. Move to the next event, and print the
+Two ROOT windows showing different views of the event should open: 
+
+![xy view](./getting_started_fastsim/xy.png)
+![yz view](./getting_started_fastsim/yz.png)
+
+Move to the next event, and print the
 event content:
 
     next()
@@ -199,18 +204,27 @@ Open the root file containing the ntuple in root:
 
 Make a few plots:
 
--   reconstructed Z mass:
+**reconstructed Z mass:**
 
-        events->Draw("zed_m")
+    events->Draw("zed_m")
+        
+![Z mass](./getting_started_fastsim/zed_m.png)
+        
+**recoil mass:**
 
--   recoil mass:
+    events->Draw("recoil_m", "zed_m>80")
 
-        events->Draw("recoil_m", "zed_m>80")
+![Recoil mass](./getting_started_fastsim/recoil_m.png)
 
--   dijet mass (note that jets have not been calibrated, using raw jets
-    here):
+**dijet mass (note that jets have not been calibrated, using raw jets here):**
 
-        events->Draw("higgs_m", "zed_m>80")
+    events->Draw("higgs_m", "zed_m>80")
+
+![Higgs mass](./getting_started_fastsim/higgs_m.png)
+
+### More information
+
+Please refer to the [heppy documentation](https://github.com/HEP-FCC/heppy/blob/master/README.md)
 
 <!--
 ### Re-running the tutorial after logging out.
