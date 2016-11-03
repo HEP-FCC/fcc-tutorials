@@ -63,7 +63,6 @@ This is described in detail in the documentation page on [adding tests to FCCSW]
 
 ### Using an internal library
 
-<<<<<<< HEAD
 Libraries are the main tool to avoid code duplication, i.e. make pieces of code available in other parts of the framework.
 Once Gaudi is notified that a certain subdirectory is needed by invoking `gaudi_depends_on_subdir`, internal libraries defined in this subdirectory can be used by simply adding them to the list of `INCLUDE_DIRS` and `LINK_LIBRARIES`. An example would be the way the internal library `DetCommon` is used by the module  [`Test/TestGeometryPlugins`](https://github.com/HEP-FCC/FCCSW/blob/master/Test/TestGeometry/CMakeLists.txt)  in FCCSW.
 The required changes to use the `DetCommon` library are
