@@ -101,3 +101,7 @@ gaudi_add_library(DetCommon
 
 ```
 
+ROOT is needed in many modules of FCCSW. More information how to use it in a CMake-based project is available on the [ROOT website](https://root.cern.ch/how/integrate-root-my-project-cmake).
+
+
+
