@@ -1,7 +1,5 @@
-[]() CMake guide for the FCC software
+CMake guide for the FCC software
 =====================================
-
-Contents
 
 -   [CMake guide for the FCC
     software](#cmake-guide-for-the-fcc-software)
@@ -13,15 +11,15 @@ Contents
         -   [Building a new Gaudi module](#building-a-new-gaudi-module)
         -   [Using an external library](#using-an-external-library)
 
-[]() Overview
+Overview
 -------------
 
 CMake is a tool for building software, which has become the de-facto
 standard outside HEP. In HEP, it is for example used by the ILC/CLIC
 communities and by the LHCb collaboration. For CMS people, CMake is the
-equivalent of scram.
+equivalent of scram. In FCCSW, CMake is used mainly via Gaudi macros, which are however fairly similar to plain CMake commands in syntax.
 
-[]() CMake example packages
+CMake example packages
 ---------------------------
 
 Colin provides [a few simple CMake
@@ -38,13 +36,13 @@ Follow the instructions in
 [README.md](https://github.com/cbernet/cmake-examples/blob/master/README.md)
 .
 
-[]() CMake in the FCC software framework
+CMake in the FCC software framework
 ----------------------------------------
 
 The FCC software framework is split into single packages `  Generation`
 , `  Examples` , `  Simulation` , .... Each of these packages contains
 the file `  CMakeLists.txt` , defining its content. To build the entire
-SW `  make` can be invoked. To rebuild a single package
+SW, a Makefile is provided in the top level directory, so `  make` can be invoked there to build FCCSW. To rebuild a single package
 `  make packagename` is sufficient.
 
 When adding new source files to a package, the CMake build system needs
@@ -58,11 +56,52 @@ Note that when changing the name of a property of an algorithm or a
 tool, `  make` (and not only `  make packagename` ) needs to be run for
 Gaudi to be aware of the change.
 
-### []() Using an internal library
+### CTest in FCCSW
 
-### []() Building a new Gaudi module
+FCCSW also uses the cmake for integration tests.
+This is described in detail in the documentation page on [adding tests to FCCSW](https://github.com/HEP-FCC/FCCSW/blob/master/doc/AddingTestsToFCCSW.md).
 
-### []() Using an external library
+### Using an internal library
 
--- [<span class="wikiUser ColinBernet"> ColinBernet
-</span>](/twiki/bin/view/Main/ColinBernet){.twikiLink} - 21 Sep 2014
+Libraries are the main tool to avoid code duplication, i.e. make pieces of code available in other parts of the framework.
+Once Gaudi is notified that a certain subdirectory is needed by invoking `gaudi_depends_on_subdir`, internal libraries defined in this subdirectory can be used by simply adding them to the list of `INCLUDE_DIRS` and `LINK_LIBRARIES`. An example would be the way the internal library `DetCommon` is used by the module  [`Test/TestGeometryPlugins`](https://github.com/HEP-FCC/FCCSW/blob/master/Test/TestGeometry/CMakeLists.txt)  in FCCSW.
+The required changes to use the `DetCommon` library are
+* declare the dependency on the subdirectory `Detector/DetCommon`
+* add the `DetCommon` headers by adding `DetCommon` to the `INCLUDE_DIRS` line
+* link the `DetCommon` libraries by adding `DetCommon` to the `LINK_LIBRARIES` line.
+
+
+
+
+### Building a new Gaudi module
+
+A more general introduction to Gaudi modules and the differences with respect to libraries can be found in the [LHCb twiki](https://twiki.cern.ch/twiki/bin/view/LHCb/GaudiCMakeConfiguration#Building_a_Module_AKA_component).
+The best way is to look at existing modules in FCCSW for inspiration. The syntax to declare the module [`TestGeometryPlugins`](https://github.com/HEP-FCC/FCCSW/blob/master/Test/TestGeometry/CMakeLists.txt), for example, is:
+
+```
+gaudi_add_module(TestGeometryPlugins
+                 src/components/*.cpp
+                 INCLUDE_DIRS Geant4 FWCore SimG4Interface SimG4Common DetInterface DetCommon TestGeometry
+                 LINK_LIBRARIES GaudiKernel FWCore Geant4 DetCommon TestGeometry)
+
+```
+
+### Using an external library
+
+This can be done using the standard cmake command [find_package](https://cmake.org/cmake/help/v3.0/command/find_package.html). See [Colins CMake examples](https://github.com/cbernet/cmake-examples) for details.
+
+Sometimes external libraries require special treatment, and their documentation needs to be consulted. One known case is DD4hep, for which in some cases the CMake variable `${DD4hep_COMPONENT_LIBRARIES}` needs to be used in the `LINK_LIBRARIES` line (if the DDRec or DDSegmentation package is used). Example:
+
+```
+gaudi_add_library(DetCommon
+                 src/*.cpp
+                 INCLUDE_DIRS DD4hep ROOT Geant4 DetSegmentation
+                 LINK_LIBRARIES GaudiKernel DD4hep ROOT Geant4 DetSegmentation ${DD4hep_COMPONENT_LIBRARIES}
+                 PUBLIC_HEADERS DetCommon)
+
+```
+
+ROOT is needed in many modules of FCCSW. More information how to use it in a CMake-based project is available on the [ROOT website](https://root.cern.ch/how/integrate-root-my-project-cmake).
+
+
+
