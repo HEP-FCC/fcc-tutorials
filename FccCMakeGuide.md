@@ -4,6 +4,7 @@ CMake guide for the FCC software
 -   [CMake guide for the FCC
     software](#cmake-guide-for-the-fcc-software)
     -   [Overview](#overview)
+    -   [Quick start into building FCCSW](#quick-start-into-building-fccsw)
     -   [CMake example packages](#cmake-example-packages)
     -   [CMake in the FCC software
         framework](#cmake-in-the-fcc-software-framew)
@@ -22,6 +23,14 @@ equivalent of scram. In FCCSW, CMake is used mainly via Gaudi macros, which are 
 This [LHCb Twiki](https://twiki.cern.ch/twiki/bin/view/LHCb/GaudiCMakeConfiguration) has some additional information on
 various Gaudi CMake functions.
 
+Quick start into building FCCSW
+---
+
+- The software can be compiled in the root directory with `make -j8`.
+- After adding new files, do `make configure`
+- Building single packages: `make packagename`
+- Cleaning up (rebuild from scratch): `make purge`
+
 CMake example packages
 ---------------------------
 
@@ -36,11 +45,10 @@ Get these packages:
     cd cmake-examples
 
 Follow the instructions in
-[README.md](https://github.com/cbernet/cmake-examples/blob/master/README.md)
-.
+[README.md](https://github.com/cbernet/cmake-examples/blob/master/README.md).
 
 CMake in the FCC software framework
-----------------------------------------
+------------------------------------
 
 The FCC software framework is split into single packages `Generation`, `Examples`, `Simulation` , .... Each of these packages contains
 the file `CMakeLists.txt`, defining its content. To build the entire
@@ -57,6 +65,16 @@ new files. To update the list of files, it is fastest to run
 Note that when changing the name of a property of an algorithm or a
 tool, `make` (and not only `make packagename` ) needs to be run for
 Gaudi to be aware of the change.
+
+The `make` command creates a directory `build.xxxx` where `xxxx` depends on your platform and compiler. All build files
+are writtin in that directory. There are situations where you need to clean this build folder before you can
+successfully build the software:
+
+- The FCCSW environment changed (version change)
+- Fetching changes from other users or the HEP-FCC repository with deleted files
+
+In those cases you'll need to do `make purge` (this target deletes the build and install directories) and rebuild the
+entire software.
 
 ### CTest in FCCSW
 
@@ -104,6 +122,3 @@ gaudi_add_library(DetCommon
 ```
 
 ROOT is needed in many modules of FCCSW. More information how to use it in a CMake-based project is available on the [ROOT website](https://root.cern.ch/how/integrate-root-my-project-cmake).
-
-
-
