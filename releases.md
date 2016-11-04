@@ -30,6 +30,9 @@ You will be confronted with a form:
     - Also if you put an AFS path here, the release will be linked to CVMFS
 - `release_name` a name for the release (e.g. `0.8`)
 
+During the release, also the documentation website will be regenerated. If you are interested in learning how to
+generate the website have a look at [this tutorial](FccDocPage.md)
+
 ## Step 4: Test the release
 
 [Go to Jenkins and launch a new test job](https://phsft-jenkins.cern.ch/view/FCC/job/FCCSW-integration/build?delay=0sec).
