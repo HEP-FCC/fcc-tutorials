@@ -19,6 +19,9 @@ standard outside HEP. In HEP, it is for example used by the ILC/CLIC
 communities and by the LHCb collaboration. For CMS people, CMake is the
 equivalent of scram. In FCCSW, CMake is used mainly via Gaudi macros, which are however fairly similar to plain CMake commands in syntax.
 
+This [LHCb Twiki](https://twiki.cern.ch/twiki/bin/view/LHCb/GaudiCMakeConfiguration) has some additional information on
+various Gaudi CMake functions.
+
 CMake example packages
 ---------------------------
 
@@ -39,21 +42,20 @@ Follow the instructions in
 CMake in the FCC software framework
 ----------------------------------------
 
-The FCC software framework is split into single packages `  Generation`
-, `  Examples` , `  Simulation` , .... Each of these packages contains
-the file `  CMakeLists.txt` , defining its content. To build the entire
-SW, a Makefile is provided in the top level directory, so `  make` can be invoked there to build FCCSW. To rebuild a single package
-`  make packagename` is sufficient.
+The FCC software framework is split into single packages `Generation`, `Examples`, `Simulation` , .... Each of these packages contains
+the file `CMakeLists.txt`, defining its content. To build the entire
+SW, a Makefile is provided in the top level directory, so `make` can be invoked there to build FCCSW. To rebuild a single package
+`make packagename` is sufficient.
 
 When adding new source files to a package, the CMake build system needs
-to be made aware of them. Usually `  CMakeLists.txt` contains a wildcard
+to be made aware of them. Usually `CMakeLists.txt` contains a wildcard
 expression that adds all implementation files in a subfolder, e.g.
-`  src/*.cpp` , so there is no need to explicitly add the names of the
+`src/*.cpp` , so there is no need to explicitly add the names of the
 new files. To update the list of files, it is fastest to run
-`  make configure` .
+`make configure` .
 
 Note that when changing the name of a property of an algorithm or a
-tool, `  make` (and not only `  make packagename` ) needs to be run for
+tool, `make` (and not only `make packagename` ) needs to be run for
 Gaudi to be aware of the change.
 
 ### CTest in FCCSW
@@ -78,7 +80,7 @@ The required changes to use the `DetCommon` library are
 A more general introduction to Gaudi modules and the differences with respect to libraries can be found in the [LHCb twiki](https://twiki.cern.ch/twiki/bin/view/LHCb/GaudiCMakeConfiguration#Building_a_Module_AKA_component).
 The best way is to look at existing modules in FCCSW for inspiration. The syntax to declare the module [`TestGeometryPlugins`](https://github.com/HEP-FCC/FCCSW/blob/master/Test/TestGeometry/CMakeLists.txt), for example, is:
 
-```
+```cmake
 gaudi_add_module(TestGeometryPlugins
                  src/components/*.cpp
                  INCLUDE_DIRS Geant4 FWCore SimG4Interface SimG4Common DetInterface DetCommon TestGeometry
@@ -92,7 +94,7 @@ This can be done using the standard cmake command [find_package](https://cmake.o
 
 Sometimes external libraries require special treatment, and their documentation needs to be consulted. One known case is DD4hep, for which in some cases the CMake variable `${DD4hep_COMPONENT_LIBRARIES}` needs to be used in the `LINK_LIBRARIES` line (if the DDRec or DDSegmentation package is used). Example:
 
-```
+```cmake
 gaudi_add_library(DetCommon
                  src/*.cpp
                  INCLUDE_DIRS DD4hep ROOT Geant4 DetSegmentation
