@@ -9,7 +9,6 @@
 - Working locally on your laptop
     - [Using Virtual Machine](./FccVirtualMachine.md)
     - [Installing the standalone packages](./installing-fcc.md)
-- [FCC Event Data Model](./FccSoftwareEDM.md)
 - [Writing Documentation](./FccDocPage.md)
 - [Questions & Answers](./FccSoftwareQA.md)
 - [How to do software releases](./releases.md)
