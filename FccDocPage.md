@@ -4,7 +4,7 @@
 
 - Writing documentation for the FCC software
   - [Where to put documentation](#where-to-put-documentation)
-  - [When and how is the documentation page updated](#when-and-where-is-the-documentation-page-updated)
+  - [When and how is the documentation page updated](#when-and-how-is-the-documentation-page-updated)
   - [Running website generation locally](#running-website-generation-locally)
     - [For the impatient](#for-the-impatient)
     - [For the interested](#for-the-interested)
@@ -12,7 +12,7 @@
   - [Tricks for writing documentation](#tricks-for-writing-documentation)
     - [Getting the newest version name](#getting-the-newest-version-name)
     - [Using bootstrap](#using-bootstrap)
-
+    - [Linking to other resources](#linking-to-other-resources)
 
 ## Where to put documentation
 
@@ -68,6 +68,10 @@ be smarter to clone the repositories and use them directly, see below.
 - `loadfiles`, expects a folder containing all markdown and image files. You can create this structure either by using
 the above option or by cloning all repositories in a common base directory (e.g. local-files/FCCSW, local-files/podio, etc.)
 
+In order to check the formatting of files, you should modify the files in the `loadfiles` directory and re-run the
+`collect_tutorials` script again. The script also modifies the tutorials: Links are changed and the jekyll front matter
+is added (se below).
+
 ### About jekyll
 
 We are using jekyll to build our website. If you are interested in extending the website have a look in
@@ -91,3 +95,9 @@ In the following you can use `{{latest_version}}` and it will print the name of 
 ### Using bootstrap
 
 We use bootstrap and you can mix your markdown with html to use any [bootstrap functionality](http://getbootstrap.com/).
+
+### Linking to other resources
+
+In general you don't have to take a lot of care how you link. If you link to other content within this repository, just
+use relative paths. If you want to link to something in another repository, use the full URL. In the latter case, during
+the markdown collection, the links are modified to point to the generated websites in case it is a markdown file.
