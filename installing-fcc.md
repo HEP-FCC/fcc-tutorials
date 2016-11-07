@@ -12,17 +12,25 @@ The packages that are supported for local usage are [fcc-physics](https://github
 
 ## Installing the latest version
 
-1. First you need to install the **external** dependencies, check [fcc-physics README](https://github.com/HEP-FCC/fcc-physics#installing-required-software)
+Setup a development area:
 
-    - Either you set up as mentioned in the README or
-    - Install all external packages in one directory `$FCC/externals` and do `export externals_prefix=$FCC/externals`
+~~~{.sh}
+mkdir FCC
+cd FCC
+export FCC=${PWD}
+~~~
 
-2. Install the latest version of the standalone FCC packages:
+You need to install the **external** dependencies, check the [fcc-physics README](https://github.com/HEP-FCC/fcc-physics#installing-required-software):
 
-    ```
-    cd $FCC # your local development area
-    git clone https://github.com/HEP-FCC/fcc-spi
-    cd fcc-spi
-    python build_latest.py [MY_INSTALL_AREA]
-    ```
+- Either you set up as mentioned in the README (and set `CMAKE_PREFIX_PATH` accordingly) or
+- Install all external packages in one directory `$FCC/externals` and do `export externals_prefix=$FCC/externals`
+
+Install the latest version of the standalone FCC packages:
+
+~~~{.sh}
+cd $FCC # your local development area
+git clone https://github.com/HEP-FCC/fcc-spi
+cd fcc-spi
+python ./build_latest.py $FCC
+~~~
 
