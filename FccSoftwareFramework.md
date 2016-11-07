@@ -137,31 +137,28 @@ Take the HepMCConverter as a base, and make a GenParticleFilter
 algorithm:
 
 ~~~{.sh}
-cp HepMCConverter.h GenParticleFilter.h
-cp HepMCConverter.cpp GenParticleFilter.cpp
+cp ReadTestConsumer.cpp MyGenParticleFilter.cpp
 ~~~
 
 Since you created new files, next time you compile, you will need to do
 the following so that your files are detected by the build system:
 
 ~~~{.sh}
-cd $FCCSW
+cd ../../../ # go to the FCCSW root directory
 make configure
 make -j 4
 ~~~
 
-When you just edit existing files, don't remove the `CMakeCache.txt`
-file, and just do:
+When you just edit existing files, don't reconfigure, and just do:
 
 ~~~{.sh}
-cd $FCCSW
 make -j 4
 ~~~
 
 **Edit the GenParticleFilter** so that:
 
--   it takes in input a MCParticleCollection
--   it creates in output a MCParticleCollection (see [HepMCConverter](https://github.com/HEP-FCC/FCCSW/blob/master/Generation/src/HepMCConverter.cpp) )
+-   the class name matches your file name (also note the `DECLARE_COMPONENT` at the end of the file)
+-   it creates as output a MCParticleCollection (see [HepMCConverter](https://github.com/HEP-FCC/FCCSW/blob/master/Generation/src/HepMCConverter.cpp))
 -   it copies only the particles with status 1 to the output collection
     (see the [MCParticle.h](http://fccsw.web.cern.ch/fccsw/fcc-edm/0.4/de/d22/classfcc_1_1_m_c_particle.html)
     and [BareParticle.h](http://fccsw.web.cern.ch/fccsw/fcc-edm/0.4/d2/df9/classfcc_1_1_bare_particle.html)
