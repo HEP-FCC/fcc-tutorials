@@ -21,18 +21,18 @@ Contents:
 If you want to get started fast with the analysis of fast-simulated
 events, you're at the right place.
 
-We currently support two different approaches for fast simulation, Papas and Delphes. For now, 
+We currently support two different approaches for fast simulation, Papas and Delphes. For now,
 
-* FCC-ee users are encouraged to use Papas, 
-* FCC-hh and FCC-eh users should use Delphes. 
+* FCC-ee users are encouraged to use Papas,
+* FCC-hh and FCC-eh users should use Delphes.
 
 However, ultimately, all users are encouraged to try both fast simulations and to compare the results.
 
-An analysis ntuple will be produced with [heppy](https://github.com/HEP-FCC/heppy), a simple modular event processing framework for high energy physics. 
+An analysis ntuple will be produced with [heppy](https://github.com/HEP-FCC/heppy), a simple modular event processing framework for high energy physics.
 
 ## Installation
 
-* To configure your environment for the FCC software, just do: 
+* To configure your environment for the FCC software, just do:
 
 ```
 source /afs/cern.ch/exp/fcc/sw/0.8pre/setup.sh
@@ -128,10 +128,10 @@ First, produce the display for the first event:
 
     ipython -i analysis_ee_ZH_cfg.py 0
 
-Two ROOT windows showing different views of the event should open: 
+Two ROOT windows showing different views of the event should open:
 
-![xy view](./getting_started_fastsim/xy.png)
-![yz view](./getting_started_fastsim/yz.png)
+![xy view](./images/FccSoftwareGettingStartedFastSim/xy.png)
+![yz view](./images/FccSoftwareGettingStartedFastSim/yz.png)
 
 Move to the next event, and print the
 event content:
@@ -188,13 +188,13 @@ Process the whole input file:
 
     heppy_loop.py OutDir analysis_ee_ZH_cfg.py -N 1000
 
-For your analysis, you will be able to use parallel processing, either on a multicore machine or on the CERN LSF cluster. 
+For your analysis, you will be able to use parallel processing, either on a multicore machine or on the CERN LSF cluster.
 
 You get an output directory `OutDir` . Check its contents and the
 contents of its subdirectories. In particular, the following root file
 contains an ntuple with the variables we need:
 
-    OutDir/ee_ZH_Zmumu_Hbb/heppy.analyzers.examples.zh.ZHTreeProducer.ZHTreeProducer_1/tree.root 
+    OutDir/ee_ZH_Zmumu_Hbb/heppy.analyzers.examples.zh.ZHTreeProducer.ZHTreeProducer_1/tree.root
 
 ### Make plots
 
@@ -207,20 +207,20 @@ Make a few plots:
 **reconstructed Z mass:**
 
     events->Draw("zed_m")
-        
-![Z mass](./getting_started_fastsim/zed_m.png)
-        
+
+![Z mass](./images/FccSoftwareGettingStartedFastSim/zed_m.png)
+
 **recoil mass:**
 
     events->Draw("recoil_m", "zed_m>80")
 
-![Recoil mass](./getting_started_fastsim/recoil_m.png)
+![Recoil mass](./images/FccSoftwareGettingStartedFastSim/recoil_m.png)
 
 **dijet mass (note that jets have not been calibrated, using raw jets here):**
 
     events->Draw("higgs_m", "zed_m>80")
 
-![Higgs mass](./getting_started_fastsim/higgs_m.png)
+![Higgs mass](./images/FccSoftwareGettingStartedFastSim/higgs_m.png)
 
 ### More information
 
@@ -288,7 +288,7 @@ you will need to setup eos:
     source /afs/cern.ch/project/eos/installation/client/etc/setup.sh
 
 Now you are ready to run the ttbar example:
-    
+
     cd test
     heppy_loop.py myoutput analysis_hh_ttbar_cfg.py
 
