@@ -12,7 +12,7 @@ Contents:
       * [Generate events with pythia8](#generate-events-with-pythia8)
       * [Run papas and the analysis in heppy](#run-papas-and-the-analysis-in-heppy)
       * [Make plots](#make-plots)
-      * [Re\-running the tutorial after logging out\.](#re-running-the-tutorial-after-logging-out)
+      <!--* [Re\-running the tutorial after logging out\.](#re-running-the-tutorial-after-logging-out)-->
     * [Getting started with Delphes (FCC\-hh)](#getting-started-with-delphes-fcc-hh)
       * [Set up your working directory](#set-up-your-working-directory-1)
 
@@ -253,27 +253,27 @@ In this tutorial, you will learn how to:
     ntuple
 -   read this ntuple with ROOT to make a few plots
 
-But first, you will set up a working directory for your analysis.
+But first, you will set up a working directory for your analysis, please folow [Installation](#installation)
 
 ### Set up your working directory
 
 Start by getting the master branch of
-[FCCSW](/twiki/bin/view/FCC/FccSoftwareGettingStarted#Optional_install_FCCSW){.twikiCurrentTopicLink
-.twikiAnchorLink} and proceed with installation. If not already in
-%FCCSW%:
+[FCCSW](/twiki/bin/view/FCC/FccSoftwareGettingStarted#Optional_install_FCCSW) and proceed with installation. If not already in
+**FCCSW** directory:
 
-    cd $FCCSW
+    cd PATHTOMYFCCSW/FCCSW
 
-If %FCCSW% not initialized:
+If **FCCSW** is not initialized:
 
     source ./init.sh
 
-Now you are ready to produce 100TeV ttbar events with Pythia, process
-them through Delphes and store them in the FCC-EDM :
+Now you are ready to produce 100TeV ttbar events with Pythia, process them through Delphes and store them in the FCC-EDM :
 
     ./run gaudirun.py Sim/SimDelphesInterface/options/PythiaDelphes_config.py
 
-you should obtain a file called `    FCCDelphesOutput.root   `
+you should obtain a file called `FCCDelphesOutput.root`.
+
+With this file you are now ready to run the analysis framework [heppy](https://github.com/HEP-FCC/heppy.git):
 
 Edit the ttbar example of [heppy](https://github.com/HEP-FCC/heppy.git):
 
