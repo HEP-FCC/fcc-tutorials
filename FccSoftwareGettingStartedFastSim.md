@@ -15,8 +15,8 @@ Contents:
       <!--* [Re\-running the tutorial after logging out\.](#re-running-the-tutorial-after-logging-out)-->
     * [Getting started with Delphes (FCC\-hh)](#getting-started-with-delphes-fcc-hh)
       * [Set up your working directory](#set-up-your-working-directory-1)
-      * [Run FCCSW with Pythia8+Delphes](#run-fccsw-withpythia8+delphes)
-      * [Run the analysis in heppy](#run-the-ananlysis-in-heppy)
+      * [Run FCCSW with Pythia8+Delphes](#run-fccsw-with-pythia8+delphes)
+      * [Run the analysis in heppy](#run-the-analysis-in-heppy)
       * [Make plots](#make-plots-1)
 
 ## Overview
@@ -282,7 +282,7 @@ This will run 100 events by default. To have more events for plotting purposes, 
 
 ### Run the analysis in heppy
 
-If not already done install the heppy package #installation
+If not already done install the heppy package [installation]
 Edit the ttbar example of [heppy](https://github.com/HEP-FCC/heppy.git):
 
     heppy/test/analysis_hh_ttbar_cfg.py
