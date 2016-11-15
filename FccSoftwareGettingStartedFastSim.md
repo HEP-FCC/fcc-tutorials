@@ -15,6 +15,9 @@ Contents:
       <!--* [Re\-running the tutorial after logging out\.](#re-running-the-tutorial-after-logging-out)-->
     * [Getting started with Delphes (FCC\-hh)](#getting-started-with-delphes-fcc-hh)
       * [Set up your working directory](#set-up-your-working-directory-1)
+      * [Run FCCSW with Pythia8+Delphes](#run-fccsw-withpythia8+delphes)
+      * [Run the analysis in heppy](#run-the-ananlysis-in-heppy)
+      * [Make plots](#make-plots-1)
 
 ## Overview
 
@@ -253,13 +256,12 @@ In this tutorial, you will learn how to:
     ntuple
 -   read this ntuple with ROOT to make a few plots
 
-But first, you will set up a working directory for your analysis, please folow [Installation](#installation)
+But first, you will set up a working directory for your analysis.
 
 ### Set up your working directory
 
-Start by getting the master branch of
-[FCCSW](/twiki/bin/view/FCC/FccSoftwareGettingStarted#Optional_install_FCCSW) and proceed with installation. If not already in
-**FCCSW** directory:
+Start by installing [FCCSW]https://github.com/HEP-FCC/FCCSW if not already done.
+If FCCSW is already installed, go in **FCCSW** directory:
 
     cd PATHTOMYFCCSW/FCCSW
 
@@ -267,13 +269,18 @@ If **FCCSW** is not initialized:
 
     source ./init.sh
 
+### Run FCCSW with Pythia8+Delphes
+
 Now you are ready to produce 100TeV ttbar events with Pythia, process them through Delphes and store them in the FCC-EDM :
 
     ./run gaudirun.py Sim/SimDelphesInterface/options/PythiaDelphes_config.py
 
 you should obtain a file called `FCCDelphesOutput.root`.
 
-With this file you are now ready to run the analysis framework [heppy](https://github.com/HEP-FCC/heppy.git):
+With this file you are now ready to run the analysis framework [heppy](https://github.com/HEP-FCC/heppy.git)
+This will run 100 events by default. To have more events for plotting purposes, you can increase this number or use files that have been already produced and stored on eos (see next section)
+
+### Run the analysis in heppy
 
 Edit the ttbar example of [heppy](https://github.com/HEP-FCC/heppy.git):
 
@@ -293,3 +300,6 @@ Now you are ready to run the ttbar example:
     heppy_loop.py myoutput analysis_hh_ttbar_cfg.py
 
 Look at the output files
+
+
+### Make plots
