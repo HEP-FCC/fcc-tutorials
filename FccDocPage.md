@@ -61,6 +61,7 @@ Now you should be able to see the website at `localhost:4000`.
 
 The `collect_tutorials.py` script fetches the trees of the above listed repositories and searches for
 markdown files and images. The script has the options:
+
 - `savetree`, the tree is saved to the given location.
 - `loadtree`, load the tree.
 - `savefiles`, the markdown and image files are saved to the given location. If you want to debug your markdown, it may

@@ -32,8 +32,15 @@ repositories. We have set up a short [Git guide](./FccSoftwareGit) for
 people who are not familar with Git, and where we explain the
 recommended way to contribute code to the FCC software.
 
-<span class="glyphicon glyphicon-info-sign" aria-hidden="true"> </span>
-All new developers should read this guide.
+<div class="panel panel-info">
+    <div class="panel-heading"><h3 class="panel-title">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"> </span>
+        Recommendation
+    </h3></div>
+    <div class="panel-body">
+     <p>All new developers should read this guide since it also contains information on how to contribute to the FCC software.</p>
+    </div>
+</div>
 
 CMake
 --
@@ -44,8 +51,8 @@ The build process of the FCC software is managed with CMake. Here is a
 Installation
 --
 
-Log in an lxplus6 machine and follow [these
-instructions](https://github.com/HEP-FCC/FCCSW), also see the [getting started instructions](./FccSoftwareGettingStarted.md).
+Log in an lxplus6 machine and follow [these instructions](https://github.com/HEP-FCC/FCCSW/blob/master/README.md), also
+see the [getting started instructions](./FccSoftwareGettingStarted.md).
 
 Example process
 --
@@ -111,7 +118,7 @@ way:
         )
 ~~~
 
-And check the results.
+And check the results. Do you see a difference in the momentum distribution of the jets?
 
 ### 3- Adding a filtering algorithm
 
@@ -145,11 +152,12 @@ the following so that your files are detected by the build system:
 
 ~~~{.sh}
 cd ../../../ # go to the FCCSW root directory
+pwd # make sure you actually are in the FCCSW root directory
 make configure
 make -j 4
 ~~~
 
-When you just edit existing files, don't reconfigure, and just do:
+When you just edit existing files, you don't need to reconfigure, and just do:
 
 ~~~{.sh}
 make -j 4

@@ -23,7 +23,7 @@ from event generation through parameterized and full detector simulation, recons
 Depending on what you want to do, there are different starting points in the FCC software stack. The following flow
 chart should get you to the point where you know where to start and what you need to setup:
 
-![flow-chart getting started](./FccSoftwareGettingStarted/flow_chart_starting.png)
+![flow-chart getting started](./images/FccSoftwareGettingStarted/flow_chart_starting.png)
 
 ## Setting up the FCC environment
 
