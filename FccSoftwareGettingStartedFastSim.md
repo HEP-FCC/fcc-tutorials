@@ -282,6 +282,7 @@ This will run 100 events by default. To have more events for plotting purposes, 
 
 ### Run the analysis in heppy
 
+If not already done install the heppy package #installation
 Edit the ttbar example of [heppy](https://github.com/HEP-FCC/heppy.git):
 
     heppy/test/analysis_hh_ttbar_cfg.py
