@@ -37,7 +37,12 @@ After initialisation, you'll be confronted with the following
 In order to apply a cernvm-online context, use #<PIN> as username
 ```
 
-FIXME: which context should we take?
+For the moment you will have to log in the [CernVM Online](https://cernvm-online.cern.ch) system, go to `Marketplace` and
+select `Experimental` at the bottom. You'll see a couple of contexts, click on the one named `FCC` and click on `pair`.
+The number shown is what you'll need to insert prefixed with `#` in the command prompt of your VM.
+
+This will launch a SLC6 environment with a user `guest` and the password corresponds to the numbers one to four. Make
+sure to change the password.
 
 
 To use the FCC software in the virtual machine follow the usual [tutorial](FccSoftwareGettingStarted.md).
