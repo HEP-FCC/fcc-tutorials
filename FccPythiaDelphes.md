@@ -154,8 +154,8 @@ First, start with the configuration files, adjust them accordingly:
     -   `             delphesRootOutFile           ` --&gt; Delphes
         output file (use "" to avoid extra output with Delphes objects
         to ROOT file, FCC-EDM objects automatically written out!)
-    -   `             delphes???OutArray           ` --&gt; Define
-        Delphes output arrays to be processed as FCC-EDM ??? particles
+    -   `             delphesXXXOutArray           ` --&gt; Define
+        Delphes output arrays to be processed as FCC-EDM XXX particles
         (muons, electrons, etc.) --&gt; various Delphes modules provide
         the same type of particle with different level of processing.
         (For better understanding, watch the content of the Delphes card
@@ -204,7 +204,8 @@ First, start with the configuration files, adjust them accordingly:
 
 The following collections and relations will be saved in the output
 file. Each collection (relation) is handled in the FCCSW through a
-dedicated handle. For reference, the handle name (specified in a
+dedicated handle. To get an idea on the EDM, have a look at the [yaml](https://github.com/HEP-FCC/fcc-edm/blob/master/edm.yaml) file.
+For reference, the handle name (specified in a
 [DelphesPythia\_config.py](https://github.com/HEP-FCC/FCCSW/blob/master/Sim/SimDelphesInterface/options/PythiaDelphes_config.py)
 file) is given in the brackets \[\] below:
 
@@ -226,11 +227,11 @@ file) is given in the brackets \[\] below:
     -   `             fcc::METCollection           ` --&gt;
         reconstructed missing Et `      [met]     `
     -   `             fcc::TaggedJetCollection           ` --&gt;
-        collection of reconstructed tagged jets - b-tags, c-tags and tau-tags, hold a relation to the original jet
+        collection of reconstructed tagged jets - b-tags, c-tags and tau-tags, holds a relation to the original jet
         `      [bTags, cTags, tauTags]     `
     -   `             fcc::TaggedParticleCollection           ` --&gt;
         collection reconstructed isolation tag info for electrons, muons and
-        photons, hold a relation to the particle `      [muonITags, electronITags, photonITags]     `
+        photons, holds a relation to the original particle `      [muonITags, electronITags, photonITags]     `
 
 -   **Relations:**
     -   `             fcc::ParticleMCParticleAssociationCollection           `
