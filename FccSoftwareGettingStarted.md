@@ -18,20 +18,14 @@ from event generation through parameterized and full detector simulation, recons
     </div>
 </div>
 
-## Where do I start?
-
-Depending on what you want to do, there are different starting points in the FCC software stack. The following flow
-chart should get you to the point where you know where to start and what you need to setup:
-
-![flow-chart getting started](./images/FccSoftwareGettingStarted/flow_chart_starting.png)
-
 ## Setting up the FCC environment
 
 This will set up the pre-installed software on SLC6 machines:
 
 ```bash
-source /cvmfs/fcc.cern.ch/sw/{{latest_version}}/setup.sh
+source /afs/cern.ch/exp/fcc/sw/{{latest_version}}/setup.sh
 ```
+<!--source /cvmfs/fcc.cern.ch/sw/{{latest_version}}/setup.sh-->
 
 <div class="panel panel-info">
     <div class="panel-heading"><h3 class="panel-title">
@@ -44,30 +38,76 @@ source /cvmfs/fcc.cern.ch/sw/{{latest_version}}/setup.sh
 </div>
 
 > We recommend to newcomers to use the central installation, but some of the software (heppy and fcc-physics)
-> can also be used standalone on your laptop. See the  [virtual machine](./FccVirtualMachine) and
+> can also be used standalone on your laptop. See the  [virtual machine](./FccVirtualMachine.md) and
 > [installation](./installing-fcc.md) tutorials.
 
-## Where do I go from here?
+<!-- ![flow-chart getting started](./images/FccSoftwareGettingStarted/flow_chart_starting.png) -->
 
-The chart hopefully let you select the starting point for what you want to do. If not, feel free to contact our
-mailing list: fcc-experiments-sw-devATSPAMNOTcern.ch
+## Where do I start?
 
-### FCCSW
+That of course depends on what you want to do:
+
+### Produce and analyse fast-simulated events:
+
+- [Getting started with the production and analysis of fast-simulated events](FccSoftwareGettingStartedFastSim.md)
+    - [Getting started with papas (FCC\-ee)](FccSoftwareGettingStartedFastSim.md#getting-started-with-papas-fcc-ee)
+    - [Getting started with Delphes (FCC\-hh)](FccSoftwareGettingStartedFastSim.md#getting-started-with-delphes-fcc-hh)
+
+### Develop or use full simulation, reconstruction and detailed detector descriptions:
 
 - [Getting started with FCCSW](./FccSoftwareFramework.md)
-- Getting started with simulation:
-    - [Using parametric Delphes simulation](./FccPythiaDelphes.md)
-    - [Geant 4 full (and fast) simulation](https://github.com/HEP-FCC/FCCSW/tree/master/Sim/doc/README.md)
+- [Geant 4 full (and fast) simulation](https://github.com/HEP-FCC/FCCSW/tree/master/Sim/doc/README.md)
 - [Getting started with detector description](https://github.com/HEP-FCC/FCCSW/tree/master/Detector/doc/DD4hepInFCCSW.md)
-
-### fcc-physics
-
-- [Generating events](FccSoftwareGettingStartedFastSim.md)
-- Writing analyses with fcc-physics
-
-### heppy
-
-- [Getting started with parametric PAPAS simulation](FccSoftwareGettingStartedFastSim.md)
-- Writing analyses with HEPPY
+- Reconstruction
+    - [Information about calorimeter reconstruction](https://github.com/HEP-FCC/FCCSW/tree/master/Reconstruction/doc/RecCalorimeter.md)
+    - [Information about track reconstruction](https://acts.web.cern.ch)
+- For information about using Delphes, see the [FCC-hh example](FccSoftwareGettingStartedFastSim.md#getting-started-with-delphes-fcc-hh) mentioned above
 
 Additional information is to be found in the [index](README.md)
+
+## Where do I find more information?
+
+Depending on what you want to do, there are three different repositories that are your entry point in the FCC software stack.
+
+The [tutorials overview](http://fccsw.web.cern.ch/fccsw/tutorials) has links to further reading material grouped by repository.
+
+The following panels should help you identify where to look for more:
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title">
+            Look at <a href="http://fccsw.web.cern.ch/fccsw/tutorials#further-reading">heppy &amp; fcc-physics</a> for:
+        </h3></div>
+        <div class="panel-body">
+            <p>Analysis and fast simulation</p>
+            <ul>
+                <li>Standalone Pythia event generation</li>
+                <li>FCC-ee parametric fast simulation (papas)</li>
+                <li>FCC-ee and FCC-hh physics analysis</li>
+            </ul>
+        </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title">
+            Look at <a href="http://fccsw.web.cern.ch/fccsw/tutorials#further-reading">FCCSW</a> for:
+        </h3></div>
+        <div class="panel-body">
+        <p>Event generation, simulation and reconstruction</p>
+        <ul>
+            <li>Event generation with Pythia (more to come)</li>
+            <li>FCC-hh parametric fast simulation (Delphes)</li>
+            <li>Full and fast simulation with Geant 4</li>
+            <li>Detector descriptions with DD4hep</li>
+            <li>Reconstruction algorithms</li>
+        </ul>
+        </div>
+        </div>
+    </div>
+</div>
+
+***
+
+If you encounter problems or have ideas for improving our tutorials, feel free to write an email to our mailing list: fcc-experiments-sw-devATSPAMNOTcern.ch
