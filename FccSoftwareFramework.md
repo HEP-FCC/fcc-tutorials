@@ -10,12 +10,9 @@ Contents:
     -   [Installation](#installation)
     -   [Example process](#example-process)
     -   [Exercises](#exercises)
-        -   [1- Modifying an existing
-            algorithm](#1-modifying-an-existing-algorith)
-        -   [2- Changing an algorithm
-            parameter](#2-changing-an-algorithm-paramete)
-        -   [3- Adding a filtering
-            algorithm](#3-adding-a-filtering-algorithm)
+        -   [1- Modifying an existing algorithm](#1--modifying-an-existing-algorithm)
+        -   [2- Changing an algorithm parameter](#2--changing-an-algorithm-parameter)
+        -   [3- Adding a filtering algorithm](#3--adding-a-filtering-algorithm)
 
 Overview
 --
@@ -103,7 +100,7 @@ clustering.
 
 ### 2- Changing an algorithm parameter
 
-Open [JetClustering.cpp](https://github.com/HEP-FCC/FCCSW/blob/master/Reconstruction/src/JetClustering.cpp), and have a look at the constructor of the class. Several properties
+Open [JetClustering.cpp](https://github.com/HEP-FCC/FCCSW/blob/master/Reconstruction/RecCalorimeter/src/components/JetClustering.cpp) and [JetClustering.h](https://github.com/HEP-FCC/FCCSW/blob/master/Reconstruction/RecCalorimeter/src/components/JetClustering.h), and have a look at the constructor of the class. Several properties
 are declared.
 
 Properties can be set in the configuration file.
@@ -140,11 +137,12 @@ Go to the `Generation/` directory.
 cd Generation/src/components
 ~~~
 
-Take the HepMCConverter as a base, and make a GenParticleFilter
+Take the ReadTestConsumer as a baseline, and make a GenParticleFilter
 algorithm:
 
 ~~~{.sh}
-cp ReadTestConsumer.cpp MyGenParticleFilter.cpp
+cp ../../../Examples/src/ReadTestConsumer.cpp MyGenParticleFilter.cpp
+# If the relative path does not work: Examples is directly in the FCCSW folder
 ~~~
 
 Since you created new files, next time you compile, you will need to do
