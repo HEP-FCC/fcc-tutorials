@@ -277,8 +277,10 @@ Now you are ready to produce 100TeV ttbar events with Pythia, process them throu
 
 you should obtain a file called `FCCDelphesOutput.root`.
 
-With this file you are now ready to run the analysis framework [heppy](https://github.com/HEP-FCC/heppy.git)
-This will run 100 events by default. To have more events for plotting purposes, you can increase this number or use files that have been already produced and stored on eos (see next section)
+This will run 100 events by default. To have more events for plotting purposes, you can increase this number or use files that have been already produced and stored on eos (see next section).
+
+With this file you are now ready to run the analysis framework [heppy](https://github.com/HEP-FCC/heppy.git).
+
 
 ### Run the analysis in heppy
 
@@ -288,7 +290,7 @@ Edit the ttbar example of [heppy](https://github.com/HEP-FCC/heppy.git):
     heppy/test/analysis_hh_ttbar_cfg.py
 
 and link the file you produced running FCCSW previously
-`    FCCDelphesOutput.root   ` in the `    files   ` list line 14. If
+`    FCCDelphesOutput.root   ` in the `    files   ` list line 13. If
 not the example will use files already produced and stored on eos, so
 you will need to setup eos:
 
@@ -304,3 +306,15 @@ Look at the output files
 
 
 ### Make plots
+
+Open the root file containing the ntuple in root:
+
+    root myoutput/example/heppy.analyzers.examples.ttbar.TTbarTreeProducer.TTbarTreeProducer_1/tree.root 
+
+Make a few plots:
+
+**reconstructed W leptonic transverse mass:**
+
+    events->Draw("mtw")
+    
+![Wt mass](./images/FccSoftwareGettingStartedFastSim/wt.png)
