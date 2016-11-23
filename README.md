@@ -4,7 +4,7 @@
 - [Github workflow and contribution guide](./FccSoftwareGit.md)
 - [Getting started with the production and analysis of fast-simulated events](./FccSoftwareGettingStartedFastSim.md)
 - [The FCC Software Framework](./FccSoftwareFramework.md)
-    - [Using Pythia and Delphes](./FccPythiaDelphes.md)
+    - [Full analysis example using Pythia, Delphes and Heppy](./FccFullAnalysis.md)
     - [CMake in FCCSW](./FccCMakeGuide.md)
 - Working locally on your laptop
     - [Using Virtual Machine](./FccVirtualMachine.md)
