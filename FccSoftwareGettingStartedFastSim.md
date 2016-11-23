@@ -256,7 +256,7 @@ In this tutorial, you will learn how to:
     ntuple
 -   read this ntuple with ROOT to make a few plots
 
-But first, you will set up a working directory for your analysis.
+But first, you will set up a working directory for your analysis, please folow [Installation](#installation)
 
 ### Set up your working directory
 
@@ -317,4 +317,4 @@ Make a few plots:
 
     events->Draw("mtw")
 
-![Wt mass](./images/FccSoftwareGettingStartedFastSim/wt.png)
+![Wt mass](./images/FccSoftwareGettingStartedFastSim/mtw.png)
