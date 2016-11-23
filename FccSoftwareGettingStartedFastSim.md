@@ -260,7 +260,6 @@ But first, you will set up a working directory for your analysis, please folow [
 
 ### Set up your working directory
 
-
 Start by installing [FCCSW]https://github.com/HEP-FCC/FCCSW if not already done.
 If FCCSW is already installed, go in **FCCSW** directory:
 
@@ -270,7 +269,6 @@ If **FCCSW** is not initialized:
 
     source ./init.sh
 
-
 ### Run FCCSW with Pythia8+Delphes
 
 Now you are ready to produce 100TeV ttbar events with Pythia, process them through Delphes and store them in the FCC-EDM :
@@ -278,7 +276,6 @@ Now you are ready to produce 100TeV ttbar events with Pythia, process them throu
     ./run gaudirun.py Sim/SimDelphesInterface/options/PythiaDelphes_config.py
 
 you should obtain a file called `FCCDelphesOutput.root`.
-
 
 This will run 100 events by default. To have more events for plotting purposes, you can increase this number or use files that have been already produced and stored on eos (see next section).
 
@@ -320,4 +317,4 @@ Make a few plots:
 
     events->Draw("mtw")
     
-![Wt mass](./images/FccSoftwareGettingStartedFastSim/wt.png)
+![Wt mass](./images/FccSoftwareGettingStartedFastSim/wmt.png)
