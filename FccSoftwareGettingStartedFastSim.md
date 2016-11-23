@@ -317,4 +317,4 @@ Make a few plots:
 
     events->Draw("mtw")
     
-![Wt mass](./images/FccSoftwareGettingStartedFastSim/wmt.png)
+![Wt mass](./images/FccSoftwareGettingStartedFastSim/mtw.png)
