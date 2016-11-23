@@ -302,7 +302,11 @@ Now you are ready to run the ttbar example:
     cd test
     heppy_loop.py myoutput analysis_hh_ttbar_cfg.py
 
-Look at the output files
+You get an output directory `myoutput` . Check its contents and the
+contents of its subdirectories. In particular, the following root file
+contains an ntuple with the variables we need:
+
+    myoutput/example/heppy.analyzers.examples.ttbar.TTbarTreeProducer.TTbarTreeProducer_1/tree.root 
 
 
 ### Make plots
@@ -318,3 +322,21 @@ Make a few plots:
     events->Draw("mtw")
     
 ![Wt mass](./images/FccSoftwareGettingStartedFastSim/mtw.png)
+
+
+### CutFlow
+
+The file
+
+    myoutput/example/heppy.analyzers.examples.ttbar.selection.Selection_cuts/cut_flow.txt 
+
+contains a cut flow
+
+```
+Counter cut_flow :
+	 All events                                   10000 	 1.00 	 1.0000
+	 At least 4 jets                               8170 	 0.82 	 0.8170
+	 At least 1 b-jet                              7153 	 0.88 	 0.7153
+	 Exactly 1 lepton                              1303 	 0.18 	 0.1303
+	 MET > 20GeV                                   1202 	 0.92 	 0.1202
+```
