@@ -18,6 +18,7 @@ Contents:
       * [Run FCCSW with Pythia8+Delphes](#run-fccsw-with-pythia8-+-delphes)
       * [Run the analysis in heppy](#run-the-analysis-in-heppy)
       * [Make plots](#make-plots-1)
+      * [CutFlow](#cutflow)
 
 ## Overview
 
@@ -340,3 +341,6 @@ Counter cut_flow :
 	 Exactly 1 lepton                              1303 	 0.18 	 0.1303
 	 MET > 20GeV                                   1202 	 0.92 	 0.1202
 ```
+
+The first column represents the cut, the second one the raw number of events, 
+the third one the efficiency of the cut, and the last one the overall efficiency.
