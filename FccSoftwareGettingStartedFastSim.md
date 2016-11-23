@@ -12,9 +12,12 @@ Contents:
       * [Generate events with pythia8](#generate-events-with-pythia8)
       * [Run papas and the analysis in heppy](#run-papas-and-the-analysis-in-heppy)
       * [Make plots](#make-plots)
-      * [Re\-running the tutorial after logging out\.](#re-running-the-tutorial-after-logging-out)
+      <!--* [Re\-running the tutorial after logging out\.](#re-running-the-tutorial-after-logging-out)-->
     * [Getting started with Delphes (FCC\-hh)](#getting-started-with-delphes-fcc-hh)
       * [Set up your working directory](#set-up-your-working-directory-1)
+      * [Run FCCSW with Pythia8+Delphes](#run-fccsw-with-pythia8-+-delphes)
+      * [Run the analysis in heppy](#run-the-analysis-in-heppy)
+      * [Make plots](#make-plots-1)
 
 ## Overview
 
@@ -257,30 +260,37 @@ But first, you will set up a working directory for your analysis.
 
 ### Set up your working directory
 
-Start by getting the master branch of
-[FCCSW](/twiki/bin/view/FCC/FccSoftwareGettingStarted#Optional_install_FCCSW){.twikiCurrentTopicLink
-.twikiAnchorLink} and proceed with installation. If not already in
-%FCCSW%:
+Start by installing [FCCSW]https://github.com/HEP-FCC/FCCSW if not already done.
+If FCCSW is already installed, go in **FCCSW** directory:
 
-    cd $FCCSW
+    cd PATHTOMYFCCSW/FCCSW
 
-If %FCCSW% not initialized:
+If **FCCSW** is not initialized:
 
     source ./init.sh
 
-Now you are ready to produce 100TeV ttbar events with Pythia, process
-them through Delphes and store them in the FCC-EDM :
+### Run FCCSW with Pythia8+Delphes
+
+Now you are ready to produce 100TeV ttbar events with Pythia, process them through Delphes and store them in the FCC-EDM :
 
     ./run gaudirun.py Sim/SimDelphesInterface/options/PythiaDelphes_config.py
 
-you should obtain a file called `    FCCDelphesOutput.root   `
+you should obtain a file called `FCCDelphesOutput.root`.
 
+This will run 100 events by default. To have more events for plotting purposes, you can increase this number or use files that have been already produced and stored on eos (see next section).
+
+With this file you are now ready to run the analysis framework [heppy](https://github.com/HEP-FCC/heppy.git).
+
+
+### Run the analysis in heppy
+
+If not already done install the heppy package [Installation](#installation)
 Edit the ttbar example of [heppy](https://github.com/HEP-FCC/heppy.git):
 
     heppy/test/analysis_hh_ttbar_cfg.py
 
 and link the file you produced running FCCSW previously
-`    FCCDelphesOutput.root   ` in the `    files   ` list line 14. If
+`    FCCDelphesOutput.root   ` in the `    files   ` list line 13. If
 not the example will use files already produced and stored on eos, so
 you will need to setup eos:
 
@@ -293,3 +303,18 @@ Now you are ready to run the ttbar example:
     heppy_loop.py myoutput analysis_hh_ttbar_cfg.py
 
 Look at the output files
+
+
+### Make plots
+
+Open the root file containing the ntuple in root:
+
+    root myoutput/example/heppy.analyzers.examples.ttbar.TTbarTreeProducer.TTbarTreeProducer_1/tree.root 
+
+Make a few plots:
+
+**reconstructed W leptonic transverse mass:**
+
+    events->Draw("mtw")
+    
+![Wt mass](./images/FccSoftwareGettingStartedFastSim/wt.png)
