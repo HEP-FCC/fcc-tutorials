@@ -96,7 +96,7 @@ gPad->SetLogy()
 
 <!-- ![elept](./images/FccFullAnalysis/ele1_pt.png) -->
 
-<img src=./images/FccFullAnalysis/ele1_pt.png width="400">
+<img src=./images/FccFullAnalysis/ele1_pt.png width="800">
 
 []()Part II: Analyze the output with Heppy
 ------------------------------------------
