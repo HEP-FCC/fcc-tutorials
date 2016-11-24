@@ -26,17 +26,17 @@ This tutorial will teach you how to:
 
 First, log into lxplus, and **install the FCC software**:
 
-``` {style="padding-left: 30px;"}
+```
 git clone git@github.com:HEP-FCC/FCCSW.git
 cd FCCSW
 source ./init.sh
 make -j 12
 ```
 
-For this tutorial we will consider the following **physics processes**: 
+For this tutorial we will consider the following **physics processes**:
 
 -   p p -> H -> 4 l
--   p p -> Z/gamma Z/gamma -> 4 l 
+-   p p -> Z/gamma Z/gamma -> 4 l
 
 Pythia can be configured to hadronize previously generated hard scattering in the form of Les Houches event files (.lhe),
 or generate the hard process itself and then run the parton shower and hadronization. **In either case, the FCCSW takes
@@ -44,36 +44,36 @@ as input a Pythia8 configuration file** (.cmd), and does not need to know which 
 
 The following commands will run Pythia8 and Delphes and produce the relevant signal and background samples:
 
-``` {style="padding-left: 30px;"}
+```
 ./run fccrun.py Sim/SimDelphesInterface/options/PythiaDelphes_config.py --inputfile=Generation/data/Pythia_pp_h_4l.cmd --outputfile=pp_h_4l.root --nevents=1000
 ./run fccrun.py Sim/SimDelphesInterface/options/PythiaDelphes_config.py --inputfile=Generation/data/Pythia_pp_zgzg_4l.cmd --outputfile=pp_zgzg_4l.root --nevents=1000
 ```
 
 The `--inputfile` , `--outputfile` and `--nevents` options simply overwrite parameters that are defined in the main
-configuration `Sim/SimDelphesInterface/options/PythiaDelphes_config.py`. For a complete discussion on the structure of configuration file, see [this page](https://github.com/HEP-FCC/fcc-tutorials/blob/master/FccPythiaDelphes.md). 
-Aside from I/O and number of events (which can be specified through command line), 
-for most use cases as a user you won't need to apply any change to the configuration file. 
+configuration `Sim/SimDelphesInterface/options/PythiaDelphes_config.py`. For a complete discussion on the structure of configuration file, see [this page](https://github.com/HEP-FCC/fcc-tutorials/blob/master/FccPythiaDelphes.md).
+Aside from I/O and number of events (which can be specified through command line),
+for most use cases as a user you won't need to apply any change to the configuration file.
 
 In additon to the **workflow**, and which **output collections** to be stored in the output tree, the following
 parameters can be specified via the configuration file:
 
--   `             nEvents           ` --&gt; number 
+-   `             nEvents           ` --&gt; number
     of events to be simulated
--   `             pythiaConfFile           ` --&gt; 
+-   `             pythiaConfFile           ` --&gt;
     Pythia8 configuration file
--   `             delphesCard           ` --&gt; 
+-   `             delphesCard           ` --&gt;
     Delphes detector card
--   `             out.filename           ` --&gt; 
+-   `             out.filename           ` --&gt;
     name of output file
 
-In this example, Delphes is run on the fly with the baseline FCC-hh detector configuration. 
-Other detector cards can be found in the ```$DELPHES_DIR/cards``` directory, such as a ATLAS, CMS or ILD detector configurations: 
+In this example, Delphes is run on the fly with the baseline FCC-hh detector configuration.
+Other detector cards can be found in the ```$DELPHES_DIR/cards``` directory, such as a ATLAS, CMS or ILD detector configurations:
 ```delphes_card_ATLAS.tcl```, ```delphes_card_CMS.tcl``` and  ```delphes_card_ILD.tcl```. Many of the questions you might have on Delphes Fast Simulation are probably answered
 [here](https://cp3.irmp.ucl.ac.be/projects/delphes/wiki/WorkBook).
 
 Now overwrite the samples you just produced, with larger samples (10k events) that have been previously produced and stored in eos.
 
-``` {style="padding-left: 30px;"}
+```
 export EOS_MGM_URL="root://eospublic.cern.ch"
 source /afs/cern.ch/project/eos/installation/client/etc/setup.sh
 eos cp /eos/fcc/hh/tutorials/Higgs_4l/pp_h_4l.root .
@@ -82,14 +82,14 @@ eos cp /eos/fcc/hh/tutorials/Higgs_4l/pp_zgzg_4l.root .
 
 The output is a ROOT file containing a tree in the FCC [Event Data Model structure](https://github.com/HEP-FCC/fcc-edm). It is browsable with ROOT:
 
-``` {style="padding-left: 30px;"}
-root -l pp_h_4l.root 
+```
+root -l pp_h_4l.root
 TBrowser t;
 ```
 
 Plotting some basic quantities directly on this output is possible, although not very handy:
 
-``` {style="padding-left: 30px;"}
+```
 events->Draw("sqrt(electrons[0].core.p4.px*electrons[0].core.p4.px + electrons[0].core.p4.py*electrons[0].core.p4.py)")
 gPad->SetLogy()
 ```
@@ -104,16 +104,16 @@ gPad->SetLogy()
 
 First install HEPPY:
 
-``` {style="padding-left: 30px;"}
+```
 git clone git@github.com:cbernet/heppy.git
 cd heppy
 source init.sh
 cd ..
 ```
- 
+
 Understand the configuration file for this **H->4l analysis**: `heppy/test/analysis_pp_hTo4l_simple_cfg.py`
 This is where **filters** on input collections and **event selection** are defined.
-The sequence is divided in two parts, a gen level analysis, and a reco level. 
+The sequence is divided in two parts, a gen level analysis, and a reco level.
 
 -   The **gen level analysis** simply filters interesting leptons (`gen_leptons`) and stores pT, eta in in flat tree (`gen_tree`).
 
@@ -122,11 +122,11 @@ Have a look at the corresponding code in `heppy/analyzers/examples/hzz4l/HTo4lGe
 -   The **reco level analysis** first **selects isolated leptons** (`selected_muons`, `selected_electrons`), merges them into a single collection (`selected_leptons`),
 **builds Z candidates** (`zeds`) and finally **builds higgs candidates**  (`higgses`). After that an **event selection** is applied (`selection`).
 
-Open `heppy/analyzers/examples/hzz4l/selection.py` and understand the event selection. 
+Open `heppy/analyzers/examples/hzz4l/selection.py` and understand the event selection.
 
 Finally another flat tree is produced `HTo4lTreeProducer`.
-This tree contains contains all relevant information for the two reconstructed Z bosons, the Higgs, and the four associated leptons. 
-For comparison, also the MC level counterparts of the reconstructed quantities are stored. 
+This tree contains contains all relevant information for the two reconstructed Z bosons, the Higgs, and the four associated leptons.
+For comparison, also the MC level counterparts of the reconstructed quantities are stored.
 
 To summarize, when designing a new analysis, you will have to define:
 
@@ -137,7 +137,7 @@ To summarize, when designing a new analysis, you will have to define:
 
 Now run HEPPY:
 
-``` {style="padding-left: 30px;"}
+```
 heppy_loop.py pp_h_4l heppy/test/analysis_pp_hTo4l_simple_cfg.py -N 10000 -I pp_h_4l.root;
 heppy_loop.py pp_zgzg_4l heppy/test/analysis_pp_hTo4l_simple_cfg.py -N 10000 -I pp_zgzg_4l.root;
 ```
@@ -157,13 +157,13 @@ The **gen-level** and **reco-level** output trees can be found here:
 
 Download the python code:
 
-``` {style="padding-left: 30px;"}
+```
 git clone git@github.com:selvaggi/tutorials.git
 ```
 
 Produce Gen-level plots:
 
-``` {style="padding-left: 30px;"}
+```
 python tutorials/fcc/createGenHistos.py
 eog plots/lep*.png
 ```
@@ -173,7 +173,7 @@ eog plots/lep*.png
 
 Produce Reco-level plots:
 
-``` {style="padding-left: 30px;"}
+```
 python tutorials/fcc/createRecoHistos.py
 eog plots/*_m.png
 ```
