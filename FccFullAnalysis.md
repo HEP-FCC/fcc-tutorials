@@ -94,8 +94,7 @@ events->Draw("sqrt(electrons[0].core.p4.px*electrons[0].core.p4.px + electrons[0
 gPad->SetLogy()
 ```
 
-<img src="images/FccFullAnalysis/ele1_pt.png" width="400")
-
+![elept](./images/FccFullAnalysis/ele1_pt.png)
 
 []()Part II: Analyze the output with Heppy
 ------------------------------------------
