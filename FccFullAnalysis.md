@@ -27,7 +27,7 @@ This tutorial will teach you how to:
 First, log into lxplus, and **install the FCC software**:
 
 ``` {style="padding-left: 30px;"}
-git clone git@github.com:HEP-FCC/FCCSW.git
+git clone https://github.com/HEP-FCC/FCCSW.git
 cd FCCSW
 source ./init.sh
 make -j 12
@@ -105,7 +105,7 @@ gPad->SetLogy()
 First install HEPPY:
 
 ``` {style="padding-left: 30px;"}
-git clone git@github.com:cbernet/heppy.git
+git clone https://github.com/cbernet/heppy.git
 cd heppy
 source init.sh
 cd ..
@@ -158,7 +158,7 @@ The **gen-level** and **reco-level** output trees can be found here:
 Download the python code:
 
 ``` {style="padding-left: 30px;"}
-git clone git@github.com:selvaggi/tutorials.git
+git clone https://github.com/selvaggi/tutorials.git
 ```
 
 Produce Gen-level plots:
