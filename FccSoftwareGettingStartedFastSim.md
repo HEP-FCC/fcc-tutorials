@@ -18,6 +18,7 @@ Contents:
       * [Run FCCSW with Pythia8+Delphes](#run-fccsw-with-pythia8-+-delphes)
       * [Run the analysis in heppy](#run-the-analysis-in-heppy)
       * [Make plots](#make-plots-1)
+      * [CutFlow](#cutflow)
 
 ## Overview
 
@@ -260,8 +261,8 @@ But first, you will set up a working directory for your analysis, please folow [
 
 ### Set up your working directory
 
-Start by installing [FCCSW]https://github.com/HEP-FCC/FCCSW if not already done.
-If FCCSW is already installed, go in **FCCSW** directory:
+Start by installing [FCCSW](https://github.com/HEP-FCC/FCCSW) if not already done.
+If FCCSW is already installed, go into the **FCCSW** directory:
 
     cd PATHTOMYFCCSW/FCCSW
 
@@ -271,13 +272,13 @@ If **FCCSW** is not initialized:
 
 ### Run FCCSW with Pythia8+Delphes
 
-Now you are ready to produce 100TeV ttbar events with Pythia, process them through Delphes and store them in the FCC-EDM :
+Now you are ready to produce 100TeV ttbar events with Pythia, process them through Delphes and store them in the FCC-EDM:
 
     ./run gaudirun.py Sim/SimDelphesInterface/options/PythiaDelphes_config.py
 
 you should obtain a file called `FCCDelphesOutput.root`.
 
-This will run 100 events by default. To have more events for plotting purposes, you can increase this number or use files that have been already produced and stored on eos (see next section).
+This example will run 100 events by default. To have more events for plotting purposes, you can increase this number or use files that have been already produced and stored on eos (see next section).
 
 With this file you are now ready to run the analysis framework [heppy](https://github.com/HEP-FCC/heppy.git).
 
@@ -289,9 +290,9 @@ Edit the ttbar example of [heppy](https://github.com/HEP-FCC/heppy.git):
 
     heppy/test/analysis_hh_ttbar_cfg.py
 
-and link the file you produced running FCCSW previously
-`    FCCDelphesOutput.root   ` in the `    files   ` list line 13. If
-not the example will use files already produced and stored on eos, so
+and use the file you produced running FCCSW previously
+`FCCDelphesOutput.root` in the `files` list in line 13. If
+you skip this step, the example will use files already produced and stored on eos, so
 you will need to setup eos:
 
     export EOS_MGM_URL="root://eospublic.cern.ch"
@@ -302,19 +303,44 @@ Now you are ready to run the ttbar example:
     cd test
     heppy_loop.py myoutput analysis_hh_ttbar_cfg.py
 
-Look at the output files
+You get an output directory `myoutput` . Check its contents and the
+contents of its subdirectories. In particular, the following root file
+contains an ntuple with the variables we need:
+
+    myoutput/example/heppy.analyzers.examples.ttbar.TTbarTreeProducer.TTbarTreeProducer_1/tree.root 
 
 
 ### Make plots
 
 Open the root file containing the ntuple in root:
 
-    root myoutput/example/heppy.analyzers.examples.ttbar.TTbarTreeProducer.TTbarTreeProducer_1/tree.root 
+    root myoutput/example/heppy.analyzers.examples.ttbar.TTbarTreeProducer.TTbarTreeProducer_1/tree.root
 
 Make a few plots:
 
 **reconstructed W leptonic transverse mass:**
 
     events->Draw("mtw")
-    
+
 ![Wt mass](./images/FccSoftwareGettingStartedFastSim/mtw.png)
+
+
+### CutFlow
+
+The file
+
+    myoutput/example/heppy.analyzers.examples.ttbar.selection.Selection_cuts/cut_flow.txt 
+
+contains a cut flow
+
+```
+Counter cut_flow :
+	 All events                                   10000 	 1.00 	 1.0000
+	 At least 4 jets                               8170 	 0.82 	 0.8170
+	 At least 1 b-jet                              7153 	 0.88 	 0.7153
+	 Exactly 1 lepton                              1303 	 0.18 	 0.1303
+	 MET > 20GeV                                   1202 	 0.92 	 0.1202
+```
+
+The first column represents the cut, the second one the raw number of events, 
+the third one the efficiency of the cut, and the last one the overall efficiency.
