@@ -94,7 +94,7 @@ events->Draw("sqrt(electrons[0].core.p4.px*electrons[0].core.p4.px + electrons[0
 gPad->SetLogy()
 ```
 
-<img src=./images/FccFullAnalysis/ele1_pt.png width="400">
+<img src="./images/FccFullAnalysis/ele1_pt.png" width="400">
 
 []()Part II: Analyze the output with Heppy
 ------------------------------------------
@@ -168,27 +168,27 @@ python tutorials/fcc/createGenHistos.py
 eog plots/lep*.png
 ```
 
-<img src=./images/FccFullAnalysis/lep1vsPt_pt.png width="400">
-<img src=./images/FccFullAnalysis/lep1vsEta_eta.png width="400">
+<img src="./images/FccFullAnalysis/lep1vsPt_pt.png" width="400">
+<img src="./images/FccFullAnalysis/lep1vsEta_eta.png" width="400">
 
 Produce Reco-level plots:
 
 ```
 python tutorials/fcc/createRecoHistos.py
-eog plots/*_m.png
+eog plots/*_m.png"
 ```
 
 Appreciate the signal yield for **25 fb-1 of data**. Compare with [ATLAS results](https://arxiv.org/pdf/1408.5191v3.pdf) at 7,8 TeV .
 
-<img src=./images/FccFullAnalysis/higgs_m.png width="400">
-<img src=./images/FccFullAnalysis/m4l_80_170_allYear_125.png width="400">
+<img src="./images/FccFullAnalysis/higgs_m.png" width="400">
+<img src="./images/FccFullAnalysis/m4l_80_170_allYear_125.png" width="400">
 
 []()Part V: Homework
 ---------------------
 
 As an exercise you can **re-run the full analysis with the CMS detector configuration**. You should obtain a plot similar to the following:
 
-<img src=./images/FccFullAnalysis/higgs_m_cms.png width="400">
+<img src="./images/FccFullAnalysis/higgs_m_cms.png" width="400">
 
 By comparing the CMS and FCC Delphes cards, try to explain:
 
