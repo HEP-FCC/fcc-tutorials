@@ -1,17 +1,15 @@
-Git for the FCC software
+Github workflow and contribution guide
 =========================
 
 Contents
 --------
 
--   Git for the FCC software
-    -   [Overview](#overview)
-    -   [FCC Git tutorial](#fcc-git-tutorial)
-    -   [Generate and set up ssh keys for
-        github](#generate-and-set-up-ssh-keys-for-github)
-    -   [Development workflow](#development-workflow)
-    -   [Recommendations](#recommendations)
-    -   [Need help?](#need-help)
+-   [Overview](#overview)
+-   [Generate and set up ssh keys for github](#generate-and-set-up-ssh-keys-for-github)
+-   [Development workflow](#development-workflow)
+-   [Recommendations](#recommendations)
+-   [Trouble shooting](#trouble-shooting)
+-   [Need help?](#need-help)
 
 Overview
 -------------
@@ -29,8 +27,11 @@ For a general introduction to git, have a look at these tutorials:
 Generate and set up ssh keys for github
 --------------------------------------------
 
-See the corresponding github
-[help-page](https://help.github.com/articles/generating-an-ssh-key/)
+When working on lxplus we recommend to clone github repositories via SSH, especially if you want to contribute code. For this to work, you need to generate ssh keys for authentication. See the corresponding github [help-page](https://help.github.com/articles/generating-an-ssh-key/).
+
+> If you only want to use the software it may be easier to use https. In that case you don't need to generate the keys but have to replace `git@github:` with `https://github.com/` in all the instructions. Note that you'll not be able to push to your repository when you are on lxplus. You can also start using https for now and later re-add your repository with ssh authentication, see the [trouble shooting section](#trouble-shooting)
+
+
 
 Development workflow
 -------------------------
@@ -106,6 +107,46 @@ Please always follow the recommendations below:
 
     Here, you may write a few more lines if needed
     ```
+
+- You may also want to have a look at our [coding guidelines](https://github.com/HEP-FCC/FCCSW/blob/master/doc/CppCodingStyleGuidelines.md).
+
+Trouble-shooting
+----------------
+
+### When I try to push to the repository, I get an authentication error
+
+Check with `git remote -v` which remote repositories you have added to your local copy. You should see something like:
+
+```
+hep-fcc	git@github.com:HEP-FCC/FCCSW.git (fetch)
+hep-fcc	git@github.com:HEP-FCC/FCCSW.git (push)
+origin	git@github.com:[your git user name]/FCCSW.git (fetch)
+origin	git@github.com:[your git user name]/FCCSW.git (push)
+```
+
+If you see something similar but all the addresses start with `https`, see [below](#i-have-cloned-with-https-and-now-i-cant-push-my-changes-what-do-i-do).
+
+If you only see `origin git@github.com:HEP-FCC/FCCSW.git`, you need to add your own repository, push to that and do a pull request, as described above. To add your own repository do:
+
+```
+git remote rename origin hep-fcc
+git remote add myfccsw git@github.com:[your git user name]/FCCSW.git
+```
+
+
+### I have cloned with https and now I can't push my changes, what do I do?
+
+You only need to re-add your repository as a remote with ssh authentication:
+
+```
+git remote add myfccsw_ssh git@github.com:[your git user name]/FCCSW.git
+```
+
+Now you can push to that remote with:
+
+```
+git push myfccsw_ssh [the branch you want to push]
+```
 
 Need help?
 ---------------
