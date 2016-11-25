@@ -1,10 +1,9 @@
-Git for the FCC software
+Github workflow and contribution guide
 =========================
 
 Contents
 --------
 
--   Git for the FCC software
     -   [Overview](#overview)
     -   [Generate and set up ssh keys for
         github](#generate-and-set-up-ssh-keys-for-github)
