@@ -4,13 +4,12 @@ Github workflow and contribution guide
 Contents
 --------
 
-    -   [Overview](#overview)
-    -   [Generate and set up ssh keys for
-        github](#generate-and-set-up-ssh-keys-for-github)
-    -   [Development workflow](#development-workflow)
-    -   [Recommendations](#recommendations)
-    -   [Trouble shooting](#trouble-shooting)
-    -   [Need help?](#need-help)
+-   [Overview](#overview)
+-   [Generate and set up ssh keys for github](#generate-and-set-up-ssh-keys-for-github)
+-   [Development workflow](#development-workflow)
+-   [Recommendations](#recommendations)
+-   [Trouble shooting](#trouble-shooting)
+-   [Need help?](#need-help)
 
 Overview
 -------------
@@ -108,6 +107,8 @@ Please always follow the recommendations below:
 
     Here, you may write a few more lines if needed
     ```
+
+- You may also want to have a look at our [coding guidelines](https://github.com/HEP-FCC/FCCSW/blob/master/doc/CppCodingStyleGuidelines.md).
 
 Trouble-shooting
 ----------------
