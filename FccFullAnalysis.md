@@ -24,10 +24,10 @@ This tutorial will teach you how to:
 []()Part I: Generate and simulate Events with FCCSW
 ----------------------------------------------------
 
-First, log into lxplus, and **install the FCC software**:
+First, log into lxplus, and **install the FCC software**, using [git](./FccSoftwareGit.md):
 
 ```
-git clone git@github.com:HEP-FCC/FCCSW.git
+git clone https://github.com/HEP-FCC/FCCSW.git
 cd FCCSW
 source ./init.sh
 make -j 12
@@ -100,12 +100,13 @@ gPad->SetLogy()
 ------------------------------------------
 
 
-[Heppy](https://github.com/cbernet/heppy) is a python framework suitable for analyzing the FCCSW output.
+[Heppy](https://github.com/HEP-FCC/heppy) is a python framework suitable for analyzing the FCCSW output.
 
 First install HEPPY:
 
+
 ```
-git clone git@github.com:cbernet/heppy.git
+git clone https://github.com/HEP-FCC/heppy.git
 cd heppy
 source init.sh
 cd ..
@@ -158,7 +159,7 @@ The **gen-level** and **reco-level** output trees can be found here:
 Download the python code:
 
 ```
-git clone git@github.com:selvaggi/tutorials.git
+git clone https://github.com/selvaggi/tutorials.git
 ```
 
 Produce Gen-level plots:
