@@ -100,13 +100,13 @@ gPad->SetLogy()
 ------------------------------------------
 
 
-[Heppy](https://github.com/cbernet/heppy) is a python framework suitable for analyzing the FCCSW output.
+[Heppy](https://github.com/HEP-FCC/heppy) is a python framework suitable for analyzing the FCCSW output.
 
 First install HEPPY:
 
 
 ```
-git clone https://github.com/cbernet/heppy.git
+git clone https://github.com/HEP-FCC/heppy.git
 cd heppy
 source init.sh
 cd ..
