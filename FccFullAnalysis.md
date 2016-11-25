@@ -24,7 +24,7 @@ This tutorial will teach you how to:
 []()Part I: Generate and simulate Events with FCCSW
 ----------------------------------------------------
 
-First, log into lxplus, and **install the FCC software**:
+First, log into lxplus, and **install the FCC software**, using [git](./FccSoftwareGit.md):
 
 ```
 git clone https://github.com/HEP-FCC/FCCSW.git
