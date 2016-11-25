@@ -50,20 +50,20 @@ The following commands will run Pythia8 and Delphes and produce the relevant sig
 ```
 
 The `--inputfile` , `--outputfile` and `--nevents` options simply overwrite parameters that are defined in the main
-configuration `Sim/SimDelphesInterface/options/PythiaDelphes_config.py`. For a complete discussion on the structure of configuration file, see [this page](https://github.com/HEP-FCC/fcc-tutorials/blob/master/FccPythiaDelphes.md).
+configuration `Sim/SimDelphesInterface/options/PythiaDelphes_config.py`. For a complete discussion on the structure of configuration file, see [this page](https://github.com/HEP-FCC/FCCSW/blob/master/Sim/SimDelphesInterface/doc/FccPythiaDelphes.md).
 Aside from I/O and number of events (which can be specified through command line),
 for most use cases as a user you won't need to apply any change to the configuration file.
 
 In additon to the **workflow**, and which **output collections** to be stored in the output tree, the following
 parameters can be specified via the configuration file:
 
--   `             nEvents           ` --&gt; number
+-   `nEvents` --&gt; number
     of events to be simulated
--   `             pythiaConfFile           ` --&gt;
+-   `pythiaConfFile` --&gt;
     Pythia8 configuration file
--   `             delphesCard           ` --&gt;
+-   `delphesCard` --&gt;
     Delphes detector card
--   `             out.filename           ` --&gt;
+-   `out.filename` --&gt;
     name of output file
 
 In this example, Delphes is run on the fly with the baseline FCC-hh detector configuration.
