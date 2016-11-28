@@ -12,7 +12,6 @@ Contents:
       * [Generate events with pythia8](#generate-events-with-pythia8)
       * [Run papas and the analysis in heppy](#run-papas-and-the-analysis-in-heppy)
       * [Make plots](#make-plots)
-      <!--* [Re\-running the tutorial after logging out\.](#re-running-the-tutorial-after-logging-out)-->
     * [Getting started with Delphes (FCC\-hh)](#getting-started-with-delphes-fcc-hh)
       * [Set up your working directory](#set-up-your-working-directory-1)
       * [Run FCCSW with Pythia8+Delphes](#run-fccsw-with-pythia8-+-delphes)
@@ -130,7 +129,7 @@ Just refer to this documentation as needed while following the instructions belo
 
 First, produce the display for the first event:
 
-    ipython -i analysis_ee_ZH_cfg.py 0
+    heppy -i analysis_ee_ZH_cfg.py -e 0
 
 Two ROOT windows showing different views of the event should open:
 
@@ -190,7 +189,7 @@ Exit ipython:
 
 Process the whole input file:
 
-    heppy_loop.py OutDir analysis_ee_ZH_cfg.py -N 1000
+    heppy OutDir analysis_ee_ZH_cfg.py -N 1000
 
 For your analysis, you will be able to use parallel processing, either on a multicore machine or on the CERN LSF cluster.
 
@@ -301,7 +300,7 @@ you will need to setup eos:
 Now you are ready to run the ttbar example:
 
     cd test
-    heppy_loop.py myoutput analysis_hh_ttbar_cfg.py
+    heppy myoutput analysis_hh_ttbar_cfg.py
 
 You get an output directory `myoutput` . Check its contents and the
 contents of its subdirectories. In particular, the following root file
