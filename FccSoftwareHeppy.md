@@ -1,31 +1,23 @@
-[]() Heppy : a mini framework for HEP event processing in python
+Heppy : a mini framework for HEP event processing in python
 ================================================================
 
 Contents:
 
--   [Heppy : a mini framework for HEP event processing in
-    python](#heppy-a-mini-framework-for-hep-e)
+-   Heppy : a mini framework for HEP event processing in python
     -   [Prerequisites](#prerequisites)
     -   [Reference guide](#reference-guide)
-    -   [A short description of the analysis
-        system](#a-short-description-of-the-analy)
+    -   [A short description of the analysis system](#a-short-description-of-the-analysis-system)
         -   [The ntuplizer](#the-ntuplizer)
     -   [Installation](#installation)
-    -   [Generating an EDM root file with
-        pythia](#generating-an-edm-root-file-with)
+    -   [Generating an EDM root file with pythia](#generating-an-edm-root-file-with)
     -   [Exercises](#exercises)
-        -   [1- Understanding the configuration
-            file](#1-understanding-the-configuratio)
-        -   [2- Finding existing analysis
-            code](#2-finding-existing-analysis-code)
-        -   [3- Running interactively on one
-            component](#3-running-interactively-on-one-c)
-        -   [4- Multiprocessing on a single
-            machine](#4-multiprocessing-on-a-single-ma)
-        -   [5- Using PAPAS, the particle flow
-            simulation](#5-using-papas-the-particle-flow)
+        -   [1- Understanding the configuration file](#1--understanding-the-configuration-file)
+        -   [2- Finding existing analysis code](#2--finding-existing-analysis-code)
+        -   [3- Running interactively on one component](#3--running-interactively-on-one-component)
+        -   [4- Multiprocessing on a single machine](#4--multiprocessing-on-a-single-machine)
+        -   [5- Using PAPAS, the particle flow simulation](#5--using-papas-the-particle-flow)
 
-[]() Prerequisites
+Prerequisites
 ------------------
 
 **You must follow [FccSoftwareEDM](./FccSoftwareEDM){.twikiLink} first**
@@ -33,8 +25,7 @@ Contents:
 
 **You should be familiar with python to follow this tutorial** .
 
-I strongly advise to carefully follow [the python
-tutorial](http://docs.python.org/tutorial/index.html) if not yet done.
+I strongly advise to carefully follow [the python tutorial](http://docs.python.org/tutorial/index.html) if not yet done.
 It will take you a few hours now, but will gain you many days in the
 future.
 
@@ -52,17 +43,16 @@ Why python? In short:
     of particle-like objects.
 -   very large and easy-to-use standard library
 
-[]() Reference guide
+Reference guide
 --------------------
 
--   [Reference
-    guide](http://fcc-support-heppy.web.cern.ch/fcc-support-heppy/) :
+-   [Reference guide](http://fcc-support-heppy.web.cern.ch/fcc-support-heppy/) :
     documentation automatically generated with pydoc
 
-[]() A short description of the analysis system
+A short description of the analysis system
 -----------------------------------------------
 
-### []() The ntuplizer
+### The ntuplizer
 
 This goal of the ntuplizer system is to produce a flat tree for each of
 the datasets (also called "components") used in the analysis. Any
@@ -125,8 +115,7 @@ FCCSW), and to implement it in python. This design boils down to:
 the python event allows you to build the information you want into your
 event, and allows the analyzers to communicate. At the end of the
 processing of a given EDM event, the python event can be filled into a
-flat tree using a specific kind of analyzer [like this
-one](https://github.com/HEP-FCC/heppy/blob/tutorial/analyzers/SimpleTreeProducer.py)
+flat tree using a specific kind of analyzer [like this one](https://github.com/HEP-FCC/heppy/blob/tutorial/analyzers/SimpleTreeProducer.py)
 .
 
 **The code consists of two packages:**
@@ -171,20 +160,18 @@ the python docstring functionality, for example:
     import math
     help(math)
 
-[]() Installation
+Installation
 -----------------
 
-We assume that you have followed
-[FccSoftwareEDM](./FccSoftwareEDM){.twikiLink} , which means that you
-should have a base directory `  $FCC` containing the following packages:
+Install the following three packages
 
--   albers-core
--   fcc-edm
--   analysis-cpp
+-   [podio](https://github.com/HEP-FCC/podio/blob/master/README.md)
+-   [fcc-edm](https://github.com/HEP-FCC/fcc-edm/blob/master/README.md)
+-   [fcc-physics](https://github.com/HEP-FCC/fcc-physics/blob/master/README.md)
 
 For this tutorial, these three packages are all needed.
 
-First, make sure the `  FCC` environment variable is set properly. Do:
+First, make sure the `FCC` environment variable is set properly. Do:
 
     echo $FCC
 
@@ -230,7 +217,7 @@ Go back to your base directory and install the pythiafcc package:
 
 Follow the installation instructions in the README.md file.
 
-[]() Generating an EDM root file with pythia
+Generating an EDM root file with pythia
 --------------------------------------------
 
 [pythiafcc](https://github.com/HEP-FCC/pythiafcc/tree/tutorial) is a
@@ -250,10 +237,10 @@ For now, just do:
 You should get a file called `  example.root` that are going to read in
 the following exercises.
 
-[]() Exercises
+Exercises
 --------------
 
-### []() 1- Understanding the configuration file
+### 1- Understanding the configuration file
 
 Have a detailed look at the configuration file,
 [simple\_analysis\_cfg.py](https://github.com/HEP-FCC/heppy_fcc/blob/tutorial/test/simple_analysis_cfg.py)
@@ -322,7 +309,7 @@ analysis, always make sure that all ingredients (components, analyzers)
 are defined correctly by loading your configuration in python before
 even trying to run.
 
-### []() 2- Finding existing analysis code
+### 2- Finding existing analysis code
 
 Open
 [simple\_analysis\_cfg.py](https://github.com/HEP-FCC/heppy_fcc/blob/tutorial/test/simple_analysis_cfg.py)
@@ -362,7 +349,7 @@ have a look at the documentation of this class:
     from heppy_fcc.analyzers.Recoil import Recoil
     help(Recoil)
 
-### []() 3- Running interactively on one component
+### 3- Running interactively on one component
 
 Run:
 
@@ -388,7 +375,7 @@ main output tree:
     t.Print()
     t.Draw('recoil_visible_gen_m')
 
-### []() 4- Multiprocessing on a single machine
+### 4- Multiprocessing on a single machine
 
 Copy your input file:
 
@@ -434,7 +421,7 @@ Check the number of processors on your machine ( `  cat /proc/cpuinfo`
 <span class="glyphicon glyphicon-info-sign" aria-hidden="true"> </span>
 When debugging your code, make sure to have only one thread.
 
-### []() 5- Using PAPAS, the particle flow simulation
+### 5- Using PAPAS, the particle flow simulation
 
 PAPAS (PAramatrized PArticle Simulation) is a simulation of the particle
 flow. It propagates stable generated particles through a simple detector
