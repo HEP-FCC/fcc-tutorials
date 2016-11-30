@@ -8,7 +8,7 @@
 -   [Homework exercise](#homework-exercise)
 
 
-[]()Part 0: Overview
+[]() Overview
 ---------------------
 
 
