@@ -8,7 +8,7 @@
 -   [Homework exercise](#homework-exercise)
 
 
-[]()Part 0: Overview
+[]() Overview
 ---------------------
 
 
@@ -20,6 +20,7 @@ This tutorial will teach you how to:
 -   produce **flat ntuples** with observables of interest with Heppy
 -   produce plots
 
+**This tutorial has been tested on bash shells. It is not guaranteed to work on other shells.**
 
 []()Part I: Generate and simulate Events with FCCSW
 ----------------------------------------------------
@@ -40,7 +41,10 @@ For this tutorial we will consider the following **physics processes**:
 
 Pythia can be configured to hadronize previously generated hard scattering in the form of Les Houches event files (.lhe),
 or generate the hard process itself and then run the parton shower and hadronization. **In either case, the FCCSW takes
-as input a Pythia8 configuration file** (.cmd), and does not need to know which approach was used.
+as input a Pythia8 configuration file** (.cmd), and does not need to know which approach was used. 
+
+For this tutorial, we are going to run Pythia8 on previously produced LHE files (with [MG5_aMCatNLO](https://launchpad.net/mg5amcnlo)). Additional Pythia8
+configurations are present in ```Generation/data```. 
 
 The following commands will run Pythia8 and Delphes and produce the relevant signal and background samples:
 
@@ -54,7 +58,7 @@ configuration `Sim/SimDelphesInterface/options/PythiaDelphes_config.py`. For a c
 Aside from I/O and number of events (which can be specified through command line),
 for most use cases as a user you won't need to apply any change to the configuration file.
 
-In additon to the **workflow**, and which **output collections** to be stored in the output tree, the following
+In addition to the **sequence of modules** to be executed, and which **output collections** to be stored in the output tree, the following
 parameters can be specified via the configuration file:
 
 -   `nEvents` --&gt; number
@@ -153,7 +157,7 @@ The **gen-level** and **reco-level** output trees can be found here:
 `example/heppy.analyzers.examples.hzz4l.HTo4lTreeProducer.HTo4lTreeProducer_1/tree.root`
 
 
-[]()Part IV: Produce plots
+[]()Part III: Produce plots
 -----------------------
 
 Download the python code:
@@ -176,7 +180,7 @@ Produce Reco-level plots:
 
 ```
 python tutorials/fcc/createRecoHistos.py
-eog plots/*_m.png"
+eog plots/*_m.png
 ```
 
 Appreciate the signal yield for **25 fb-1 of data**. Compare with [ATLAS results](https://arxiv.org/pdf/1408.5191v3.pdf) at 7,8 TeV .
@@ -184,7 +188,7 @@ Appreciate the signal yield for **25 fb-1 of data**. Compare with [ATLAS results
 <img src="./images/FccFullAnalysis/higgs_m.png" width="400">
 <img src="./images/FccFullAnalysis/m4l_80_170_allYear_125.png" width="400">
 
-[]()Part V: Homework
+[]()Part IV: Homework
 ---------------------
 
 As an exercise you can **re-run the full analysis with the CMS detector configuration**. You should obtain a plot similar to the following:
