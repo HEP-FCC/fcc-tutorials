@@ -18,6 +18,8 @@ from event generation through parameterized and full detector simulation, recons
     </div>
 </div>
 
+> When you plan to contribute, have a look at the [./FccSoftwareGit.md](contribution guide).
+
 ## Setting up the FCC environment
 
 This will set up the pre-installed software on SLC6 machines:
