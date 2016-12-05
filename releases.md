@@ -23,6 +23,14 @@ Install on AFS and CVMFS and set the `*_DIR` in that script to the correct locat
 Release notes written on github for the release are automatically picked up by the documentation web-site.
 
 To generate the change-logs, have a look at this [github-changelog-generator](https://github.com/skywinder/github-changelog-generator).
+After installation, generating a github token and setting it up as per the [README](https://github.com/skywinder/github-changelog-generator),
+simply do:
+
+```
+github_changelog_generator -p [e.g. FCCSW] -u HEP-FCC -o changelog.md --since-tag [last release]
+```
+
+And copy the contents of `changelog.md` as the changelog (modifying the *Unreleased* headline).
 
 ### Step 3: Launch the release job in Jenkins
 
