@@ -41,7 +41,7 @@ done
 mkdir podio/build;mkdir fcc-edm/build;mkdir fcc-physics/build
 mkdir fcc-install
 # create a setup.sh file that you'll have to source every time
-echo export FCCEDM=$FCC/fcc-install;export PODIO=$FCC/fcc-install; export FCCPHYSICS=$FCC/fcc-install > setup.sh
+echo "export FCCEDM=$FCC/fcc-install;export PODIO=$FCC/fcc-install;export FCCPHYSICS=$FCC/fcc-install" > setup.sh
 echo source $FCC/fcc-install/init_fcc_stack.sh >> setup.sh
 curl https://raw.githubusercontent.com/HEP-FCC/fcc-spi/master/init_fcc_stack.sh -o $FCC/fcc-install/init_fcc_stack.sh
 source setup.sh
