@@ -194,7 +194,10 @@ Appreciate the signal yield for **25 fb-1 of data**. Compare with [ATLAS results
 As an exercise you can **re-run the full analysis with the CMS detector configuration** .Additional Delphes card can
 be found in ```$DELPHES_DIR/cards```). 
 
-Hint: The input Delphes card can be specified in the command line argument: ```--delphescard=$DELPHES_DIR/cards/delphes_card_CMS.tcl```
+Hint: The input Delphes card can be specified in the command line argument: 
+```
+--delphescard=$DELPHES_DIR/cards/delphes_card_CMS.tcl
+```
 
 You should obtain a plot similar to the following:
 
