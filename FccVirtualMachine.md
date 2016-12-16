@@ -11,8 +11,8 @@ The FCC Virtual Machine: The Fastest Way To Get Started
     - [My keyboard is not correctly recognized](#my-keyboard-is-not-correctly-recognized)
     - [How can I copy-paste on a mac with a touchpad.](#how-can-i-copy-paste-on-a-mac-with-a-touchpad)
     - [I'm getting messages about mouse and keyboard capture](#im-getting-messages-about-mouse-and-keyboard-capture)
-  - [Using Docker](#using-docker)
-    - [Setting up Docker](#setting-up-docker)
+- [Using Docker](#using-docker)
+  - [Setting up Docker](#setting-up-docker)
   - [Adding the FCC image to Docker](#adding-the-fcc-image-to-docker)
     - [A. Downloading the image](#a-downloading-the-image)
     - [B. Building the image yourself](#b-building-the-image-yourself)
@@ -32,8 +32,7 @@ To run FCC software through a virtual machine on your laptop, you have two diffe
   - Quick to set up
   - Offline work may not work 100% reliably
 2. [Use Docker and Spack](#using-docker), will download and install the software on setup
-  - First set up will take a while (the software stack needs to be built from scratch)
-  - Seemlessly work with the software as if it was local
+  - Need to download large image / slow first setup
   - After setup no need to be online
 
 ## Using VirtualBox
@@ -112,9 +111,9 @@ You can safely ignore them, and google these messages if you want to
 know more.
 
 
-### Using Docker
+## Using Docker
 
-#### Setting up Docker
+### Setting up Docker
 
 [Docker](https://www.docker.com) images are light-weight virtual machine images that can be easily distributed. To start, you'll have to
 download and install docker. Here you'll find instructions for your operating system of choice:
@@ -136,6 +135,9 @@ scp [lxplus-username]@lxplus:/afs/cern.ch/exp/fcc/vm/... FIXME!
 
 Now you need to add the image to Docker by:
 
+```
+docker load -i fccimage.tgz
+```
 
 If you'd prefer to only download the image description text file and build yourself, have a look
 [below](#building-the-image-yourself).
@@ -173,22 +175,17 @@ docker build -t fccimage:v1 .
 
 ### Setting up your development environment in a Docker container
 
-In Docker, containers are the actual virtual machines on which you work. In contrast to traditional virtual machines,
-they only live for the duration that it takes to fulfill a certain task. That means each time you run an application the
-machine is created and you have a fresh environment. Containers are created based on Docker images.
+In Docker, containers are the actual virtual machines on which you work.  Containers are created based on Docker images.
 
-This short live also means that any data we produce in the Container is cleaned up once the image is obsolete.
-That means that the first thing we need to do is to set up a persistent data volume that is can be re-used.
-The easiest solution is probably to
+It may be useful to
 [mount a host directory as a data volume](https://docs.docker.com/engine/tutorials/dockervolumes/#/mount-a-host-directory-as-a-data-volume).
-
 This allows you to use your native text editor but then build and run the software in the container.
 
-```
-docker run -i --rm -v [local director]:/work fccimage
-```
+Now you can run an interactive session:
 
-The `--rm` means that docker will clean up after you, if you want to re-use the container do not use this option.
+```
+docker run -i [-v [local director]:/work] --rm fccimage #-v to attach a volume
+```
 
 Now you have an open bash session and you can work as normal, but you want to make sure you keep anything you want to save
 on `/work`.
