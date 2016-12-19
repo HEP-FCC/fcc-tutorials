@@ -8,8 +8,12 @@ Contents
 -   [Generate and set up ssh keys for github](#generate-and-set-up-ssh-keys-for-github)
 -   [Development workflow](#development-workflow)
 -   [Recommendations](#recommendations)
+    - [Commit comments](#commit-comments)
+    - [Pull requests](#pull-requests)
 -   [Trouble shooting](#trouble-shooting)
 -   [Need help?](#need-help)
+
+---
 
 Overview
 -------------
@@ -30,8 +34,6 @@ Generate and set up ssh keys for github
 When working on lxplus we recommend to clone github repositories via SSH, especially if you want to contribute code. For this to work, you need to generate ssh keys for authentication. See the corresponding github [help-page](https://help.github.com/articles/generating-an-ssh-key/).
 
 > If you only want to use the software it may be easier to use https. In that case you don't need to generate the keys but have to replace `git@github:` with `https://github.com/` in all the instructions. Note that you'll not be able to push to your repository when you are on lxplus. You can also start using https for now and later re-add your repository with ssh authentication, see the [trouble shooting section](#trouble-shooting)
-
-
 
 Development workflow
 -------------------------
@@ -72,6 +74,7 @@ To get new code, do the following in 3
 
 To contribute new code, do the following:
 
+-   if you are fixing a bug, first create an issue in the github [issue tracker](https://github.com/HEP-FCC/FCCSW/issues)
 -   develop your feature in 3 on a local branch of your choice, to create a branch do:
 
     ```
@@ -85,20 +88,25 @@ To contribute new code, do the following:
     -   that it produces the expected results
     -   [add tests for your code](https://github.com/HEP-FCC/FCCSW/blob/master/doc/AddingTestsToFCCSW.md)
 -   push your local branch to 2 (see above)
--   create a pull request from 2 to 1 (see github [help-page](https://help.github.com/articles/creating-a-pull-request/) )
+-   create a pull request from 2 to 1 (see github [help-page](https://help.github.com/articles/creating-a-pull-request/))
+    - also see the [recommendations](#pull-requests)
 
 Recommendations
---------------------
+---------------
 
 Please always follow the recommendations below:
 
--   feel free to commit often to your local repository, but do not
-    create pull request for small incremental changes
 -   if you're working on a given topic, always create a branch for
     it, e.g. pythia\_interface. You may commit many times to this branch
     in your local repository. When you have something solid create a
     pull request to the official FCCSW repository.
+
+### Commit comments
+
+-   feel free to commit often to your local repository, but do not
+    create pull request for small incremental changes
 -   always provide a meaningful comment for each commit
+    -   if you are working on an issue, refer to that issue by adding "refs. #[issue id]"
 -   commit comments should look like the one below, so that they show up
     correctly in git printouts.
 
@@ -109,6 +117,16 @@ Please always follow the recommendations below:
     ```
 
 - You may also want to have a look at our [coding guidelines](https://github.com/HEP-FCC/FCCSW/blob/master/doc/CppCodingStyleGuidelines.md).
+
+
+### Pull requests
+
+- Give a meaningful title that appropriately describes what you did (e.g. Add new calorimeter clustering)
+  - Pull requests of work in progress (to make people aware that you are working on a feature) create a PR starting with "[WIP]"
+- In the description, give a short bullet-point list of what was done
+- If your pull request fixes issues tracked in the [issue tracker](https://github.com/HEP-FCC/FCCSW/issues):
+    - Make sure you added a test that shows they are actually fixed
+    - In the description mention that you fixed it by referring to the issue: "fixes #<issue-id>" (this will automatically close the issue)
 
 Trouble-shooting
 ----------------
@@ -148,11 +166,13 @@ Now you can push to that remote with:
 git push myfccsw_ssh [the branch you want to push]
 ```
 
+---
+
 Need help?
 ---------------
 
-In case you have any question on this tutorial, or need help to sort out
-an issue with a repository, Feel free to drop a mail to
-fcc-experiments-sw-dev at CERN, and we'll be happy to help you
+In case you have any questions on this guide, or need help to sort out
+an issue with a repository, feel free to drop a mail to
+fcc-experiments-sw-dev at CERN, and we'll be happy to help you.
+Alternatively create an issue in the [bug tracker](https://github.com/HEP-FCC/FCCSW/issues)
 ![smile](https://twiki.cern.ch/twiki/pub/TWiki/SmiliesPlugin/smile.gif "smile")
-!
