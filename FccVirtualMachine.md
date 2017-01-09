@@ -132,12 +132,13 @@ Make sure that your docker environment is working as expected by following the
 
 #### A. Downloading the image
 
-The image is relatively large (~2 Gb), we provide versions on afs and cvmfs for you to download. On lxplus you can
-inspect the directory and make sure you download the newest version:
+The image is relatively large (~2 Gb), we provide versions on afs and cvmfs for you to download:
 
 ```
-scp [lxplus-username]@lxplus:/afs/cern.ch/exp/fcc/vm/ubuntu[version]_root[version]_fcc[version] [some_location]/fccimage.tgz
+scp [lxplus-username]@lxplus:/afs/cern.ch/exp/fcc/vms/ubuntu[version]_root[version]_fcc[version] [some_location]/fccimage.tgz
 ```
+
+> On lxplus you can look in the directory and make sure you download the newest version.
 
 Now you need to add the image to Docker by providing the correct path to the `fccimage.tgz` below:
 
@@ -165,9 +166,9 @@ The image is described by a  Dockerfile. We have two separate layers we recommen
 to avoid having to recompile ROOT (see [above](#a-downloading-the-image)):
 
 1. Ubuntu + ROOT installation ([Dockerfile](https://github.com/HEP-FCC/fcc-spi/blob/master/docker/Dockerfile-ubuntu+root)
-  and image e.g. `/afs/cern.ch/exp/fcc/vm/ubuntu16.04_root6.08.02.tgz`)
+  and image e.g. `/afs/cern.ch/exp/fcc/vms/ubuntu16.04_root6.08.02.tgz`)
 1. FCC software ([Dockerfile]((https://github.com/HEP-FCC/fcc-spi/blob/master/docker/Dockerfile-fcc) and image e.g.
-  `/afs/cern.ch/exp/fcc/vm/ubuntu16.04_root6.08.02_fcc0.8.tgz`)
+  `/afs/cern.ch/exp/fcc/vms/ubuntu16.04_root6.08.02_fcc0.8.tgz`)
 
 Create an *empty* directory and download the Dockerfile(s).
 https://raw.githubusercontent.com/HEP-FCC/fcc-spi/master/README.md
@@ -192,7 +193,7 @@ docker build -t fccimage -f Dockerfile-fcc .
 
 In Docker, containers are the actual virtual machines on which you work. Containers are created based on Docker images.
 The Docker mantra is that containers are disposable: You should set up your workflow in a way that loosing a given
-container will not result in lost work. To avoid that, at least read [this](#setting-up-a-data-volume).
+container will not result in lost work. To help with that, at least read [this](#setting-up-a-data-volume).
 
 #### Quick start
 
@@ -205,8 +206,23 @@ docker run -ti --name fccsw -v [local directory]:/work --rm fccimage
 You should work in `/work` as detailed [below](#setting-up-a-data-volume). You can access files with any tools on the
 host (e.g. your favorite editor) in the `[local directory]` you supplied in the command.
 
-You should now see a command prompt in the directory `/home/fccuser` (within the container). The FCC software is
-installed in `/usr/local/fcc`. Test it by trying:
+You should now see a command prompt in the directory `/home/fccuser` (within the container):
+
+```
++--------------------------------------------------------------------
+            FCC  ##        .
+           ## ## ##       ==    Welcome to the FCC software docker
+        ## ## ## ##      ===    REMINDER: Containers are disposable;
+    /""""""""""""""""\___/ ===            Keep your data in volumes!
+ ~~{~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~
+    \______ o          __/
+      \    \        __/         Documentation: fccsw.web.cern.ch
+       \____\______/
++--------------------------------------------------------------------
+fccuser@220fd963b5d4:~$
+```
+
+The FCC software is installed in `/usr/local/fcc` and paths are already set up. Test it by trying:
 
 ```
 fcc-pythia8-generate $FCCBASE/share/ee_ZH_Zmumu_Hbb.txt
@@ -236,6 +252,9 @@ docker run -ti --name fccsw -v [local directory]:/work --rm fccimage
 If you work solely in the `/work` directory you'll be able to use host-native tools (e.g. your preferred editor) to work
 with the files you are using in the container.
 
+Of course you can also mount your data volume in any other place by changing `/work` to another path, e.g. the fccuser
+home-directory.
+
 #### Getting X11 forwarding to work
 
 If you want to use root interactively (or any other program using a GUI), you'll need to enable X11 forwarding.
@@ -256,18 +275,18 @@ docker run -ti --name fccsw --rm -v [local directory]:/work \
 ```
 
 **macOS**: Things are a bit more complicated due to the way XQuartz works. The only working solution we could find
-requires additional software as a workaround. If you discover something that runs without this workaround, please let us
-know.
+requires additional software as a workaround. If you discover something that runs without socat, please let us know.
 
-First install socat through homebrew (homebrew is a package management system for macOS). Now we need to run socat in
-the background to forward calls to the X11 socket
+First install socat through homebrew (homebrew is a package management system for macOS, if the command does not work
+you also need to install homebrew): `brew install socat`. Now we need to run socat in the background to forward calls to
+the X11 socket
 
 ```
 ln -fs ${DISPLAY} /tmp/x11_display
 socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:/tmp/x11_display &
 ```
 
-Now when running the container you need to add `-e DISPLAY=$(ipconfig getifaddr en0):0.0`
+Now when running the container you need to add `-e DISPLAY=$(ipconfig getifaddr en0):0.0`, e.g.:
 
 ```
 docker run -ti --name fccsw --rm -v [local directory]:/work \
@@ -290,4 +309,14 @@ docker run -ti --name fccsw --rm -v [local directory]:/work \
 Finally you have the option of adding layers on top of the provided image (e.g. to install an editor if you want to
 edit things via the CLI rather than using host-native tools). For that we refer you to the
 [docker documentation](https://docs.docker.com/engine/reference/builder/).
-The easiest way will be to write your own `Dockerfile` and use `FROM fccimage` and `RUN sudo apt-get install -y [software packages]`.
+
+The easiest way will be to write your own `Dockerfile` and install the packages you need, e.g. for vim:
+
+```
+FROM fccimage
+RUN sudo apt-get install -y vim
+```
+
+And build a new image from this file with docker: `docker build -t myfccimage -f [Dockerfile] .`
+
+> We strongly recommend to have a close look at the Docker documentation if you decide to do this.
