@@ -135,10 +135,11 @@ Make sure that your docker environment is working as expected by following the
 The image is relatively large (~2 Gb), we provide versions on afs and cvmfs for you to download:
 
 ```
-scp [lxplus-username]@lxplus:/afs/cern.ch/exp/fcc/vms/ubuntu[version]_root[version]_fcc[version] [some_location]/fccimage.tgz
+scp [lxplus-username]@lxplus.cern.ch:/afs/cern.ch/exp/fcc/vms/ubuntu[version]_root[version]_fcc[version].tgz [some_location]/fccimage.tgz
 ```
 
-> On lxplus you can look in the directory and make sure you download the newest version.
+> Via lxplus you can look in the directory and make sure you download the newest version (should be last entry):<br>
+`ssh [lxplus-username]@lxplus.cern.ch ls -ltr /afs/cern.ch/exp/fcc/vms/ubuntu*fcc*`
 
 Now you need to add the image to Docker by providing the correct path to the `fccimage.tgz` below:
 
@@ -149,6 +150,9 @@ docker load -i fccimage.tgz
 Now you'll be able to [launch your first container](#setting-up-your-development-environment-in-a-docker-container).
 
 #### B. Building the image yourself
+
+[Skip](#setting-up-your-development-environment-in-a-docker-container) this when you downloaded the image as detailed
+above.
 
 <div class="panel panel-warning">
     <div class="panel-heading"><h3 class="panel-title">
@@ -167,11 +171,11 @@ to avoid having to recompile ROOT (see [above](#a-downloading-the-image)):
 
 1. Ubuntu + ROOT installation ([Dockerfile](https://github.com/HEP-FCC/fcc-spi/blob/master/docker/Dockerfile-ubuntu+root)
   and image e.g. `/afs/cern.ch/exp/fcc/vms/ubuntu16.04_root6.08.02.tgz`)
-1. FCC software ([Dockerfile]((https://github.com/HEP-FCC/fcc-spi/blob/master/docker/Dockerfile-fcc) and image e.g.
+1. FCC software ([Dockerfile](https://github.com/HEP-FCC/fcc-spi/blob/master/docker/Dockerfile-fcc) and image e.g.
   `/afs/cern.ch/exp/fcc/vms/ubuntu16.04_root6.08.02_fcc0.8.tgz`)
 
 Create an *empty* directory and download the Dockerfile(s).
-https://raw.githubusercontent.com/HEP-FCC/fcc-spi/master/README.md
+
 ```
 curl https://raw.githubusercontent.com/HEP-FCC/fcc-spi/master/docker/Dockerfile-ubuntu+root -O # we recommend to skip this one
 curl https://raw.githubusercontent.com/HEP-FCC/fcc-spi/master/docker/Dockerfile-fcc -O
@@ -228,7 +232,7 @@ The FCC software is installed in `/usr/local/fcc` and paths are already set up. 
 fcc-pythia8-generate $FCCBASE/share/ee_ZH_Zmumu_Hbb.txt
 ```
 
-You should see that events are generated and when the process is done find a file `ee_ZH_zmumu_Hbb.root`.
+You should see that events are generated. When the process is done you should find a file `ee_ZH_zmumu_Hbb.root`.
 
 > **NOTE**: If you want to inspect the file with ROOT within the container you need to
 [setup X11 forwarding](#getting-x11-forwarding-to-work).
@@ -260,17 +264,17 @@ home-directory.
 If you want to use root interactively (or any other program using a GUI), you'll need to enable X11 forwarding.
 
 **Linux**: We assume that you have an X windows server running on your host
-(check that `echo $DISPLAY` gives you a non empty output). First allow your local (host machine) user to use the X server:
+(check that `echo $DISPLAY` gives you a non empty output). First allow local connections to the X server:
 
 ```
-xhost +si:localuser:[your host username]
+xhost +local:
 ```
 
 Then run the docker container setting the display and mounting the X11 socket:
 
 ```
 docker run -ti --name fccsw --rm -v [local directory]:/work \
-       -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro
+       -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
        fccimage
 ```
 
@@ -290,7 +294,7 @@ Now when running the container you need to add `-e DISPLAY=$(ipconfig getifaddr 
 
 ```
 docker run -ti --name fccsw --rm -v [local directory]:/work \
-       -e DISPLAY=$(ipconfig getifaddr en0):0.0
+       -e DISPLAY=$(ipconfig getifaddr en0):0.0 \
        fccimage
 ```
 
