@@ -30,6 +30,7 @@ Quick start into building FCCSW
 - After adding new files, do `make configure`
 - Building single packages: `make packagename`
 - Cleaning up (rebuild from scratch): `make purge`
+- To change the build-type (e.g. Release or Debug), set the `BUILDTYPE` variable (e.g. `BUILDTYPE=Debug make`)
 
 CMake example packages
 ---------------------------
@@ -91,8 +92,6 @@ The required changes to use the `DetCommon` library are
 * link the `DetCommon` libraries by adding `DetCommon` to the `LINK_LIBRARIES` line.
 
 
-
-
 ### Building a new Gaudi module
 
 A more general introduction to Gaudi modules and the differences with respect to libraries can be found in the [LHCb twiki](https://twiki.cern.ch/twiki/bin/view/LHCb/GaudiCMakeConfiguration#Building_a_Module_AKA_component).
@@ -122,3 +121,11 @@ gaudi_add_library(DetCommon
 ```
 
 ROOT is needed in many modules of FCCSW. More information how to use it in a CMake-based project is available on the [ROOT website](https://root.cern.ch/how/integrate-root-my-project-cmake).
+
+### Customizing how CMake is run
+
+An environment variable is used to forward command line arguments to the cmake command, for example to run cmake with the `trace` option:
+
+```
+CMAKEOPTS='--trace' make
+```
