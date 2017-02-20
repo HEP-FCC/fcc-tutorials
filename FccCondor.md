@@ -1,28 +1,28 @@
-[]() Getting Started with HTCondor CLI
-======================================
+# Getting Started with HTCondor CLI
+
 
 Contents:
 
--   [HTCondor CLI](#htcondor-cli)
-    -   [Overview](#overview)
-    -   [Submission](#submission)
-        -   [1- The submit file](#1-submit-file)
-        -   [2- Changing the job's requirements](#2-job-req)
-        -   [3- How to run fcc-physics scripts](#3-fcc-physics)
-   -   [Testing](#testing)
-   -   [Perspective](#perspective)
+  * [HTCondor CLI](#htcondor-cli)
+    * [1 - Overview](#1---overview)
+    * [2 - Submission](#2---submission)
+      * [a - The submit file](#a---the-submit-file)
+      * [b - Changing the job requirements](#b---changing-the-job-requirements)
+      * [c - How to run fcc-physics scripts](#c---how-to-run-fcc-physics-scripts)
+    * [3 - Testing](#3---testing)
+    * [4 - Perspective](#4---perspective)
 
 
-[]() Overview
--------------
+## 1 - Overview
+
 
 HTCondor is a management system for job submission. It has been chosen as the successor of LSF at CERN.
 
 As for LSF, you have to log in to an lxplus machine with your cern account if you want to access to the batch.
 
 
-[]() Submission
----------------
+## 2 - Submission
+
 
 Instead of passing the job and its requirements as arguments to the command as you
 usually do with bsub, you just have to pass a submit file :
@@ -32,9 +32,9 @@ condor_q job.sub
 
 ```
 
-If you are interested to understand how it works you can directly play with HTcondor [here !](#testing) otherwise, please continue.
+If you are interested to understand how it works you can directly play with HTcondor [here !](#3---testing) otherwise, please continue.
 
-### []() 1- The submit file
+### a - The submit file
 
 First of all you have to write a submit file i.e **job.sub** as an example with the following content :
 
@@ -64,7 +64,7 @@ where we have the following attributes :
 - error contains the path of the standard error of your job
 
 
-### []() 2- Changing the job's requirements
+### b - Changing the job requirements
 
 We provide you a simple submit file but generally, you will want to add more options to your file.
 
@@ -85,7 +85,7 @@ You can even run your job with different input and output directories, so if you
 
 [Wisconsin's Tutorial advanced](https://research.cs.wisc.edu/htcondor/manual/current/2_5Submitting_Job.html)
 
-### []() 3- How to run fcc-physics scripts
+### c - How to run fcc-physics scripts
 
 For this example we choose to use an intermediate bash script **tmpjob.sh** that executes the actual script we want to launch for the "executable".
 
@@ -137,8 +137,8 @@ After, the script calls the executable followed by the input file.
 By Default, the results should appear in the current working directory.
 
 
-[]() Testing
--------------
+## 3 - Testing
+
 
 
 Login to an lxplus machine and ensure that you have kerberos tickets, as this will authenticate you and your job. Run kinit to refresh tokens as necessary.
@@ -193,8 +193,8 @@ condor_q
 
 ```
 
-[]() Perspective
-----------------
+## 4 - Perspective
+
 
 We are working on accessing to HTCondor from an high level interface to make life easier for end-users than with command line.
 
