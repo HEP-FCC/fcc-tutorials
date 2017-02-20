@@ -22,11 +22,18 @@ from event generation through parameterized and full detector simulation, recons
 
 ## Setting up the FCC environment
 
-This will set up the pre-installed software on SLC6 machines:
+The following  will set up the pre-installed software on SLC6 machines. Either use the cvmfs installation (preferred):
+
+```bash
+source /cvmfs/fcc.cern.ch/sw/{{latest_version}}/setup.sh
+```
+
+**or** the afs installation:
 
 ```bash
 source /afs/cern.ch/exp/fcc/sw/{{latest_version}}/setup.sh
 ```
+
 <!--source /cvmfs/fcc.cern.ch/sw/{{latest_version}}/setup.sh-->
 
 <div class="panel panel-info">

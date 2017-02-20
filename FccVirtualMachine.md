@@ -54,14 +54,11 @@ a virtual [CernVM](ttps://cernvm.cern.ch).
 
 ### Getting started
 
-Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) .
+Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
 
-Get the launch utility from CernVM [here](http://cernvm.cern.ch/portal/launch).
+> Make sure the Hypervisor network is configured correctly by going to the settings of VirtualBox and selecting Network: Under "Host-only Networks" you should see `vboxnet0`. If it is not in the list, add it with the "+" symbol on the right.
 
-This utility allows you to launch a CernVM from the command line.
-
-
-Get the virtual machine `OVA` image [here](https://cernvm.cern.ch/portal/downloads).
+Get the virtual machine `CernVM 3.6.5  OVA` image [here](https://cernvm.cern.ch/portal/downloads).
 
 Import this virtual machine in
 [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (File menu, then
@@ -79,8 +76,14 @@ For the moment you will have to log in the [CernVM Online](https://cernvm-online
 select `Experimental` at the bottom. You'll see a couple of contexts, click on the one named `FCC` and click on `pair`.
 The number shown is what you'll need to insert prefixed with `#` in the command prompt of your VM.
 
-This will launch a SLC6 environment with a user `guest` and the password corresponds to the numbers one to four. Make
-sure to change the password.
+You should now see an X-window session launching and be prompted with a user / password dialog box (if you still get the CLI prompt for a user name, something went wrong with the pairing, most likely you downloaded an incompatible image in the second step):
+
+![x-session](images/FccVirtualMachine/x-session.png)
+
+
+The user name `guest` and the password corresponding to the numbers one to four.
+
+> Make sure to change the password.
 
 
 To use the FCC software in the virtual machine follow the usual [tutorial](FccSoftwareGettingStarted.md).
