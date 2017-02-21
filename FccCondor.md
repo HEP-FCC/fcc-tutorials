@@ -196,10 +196,16 @@ condor_q
 ## 4 - Perspective
 
 
-We are working on accessing to HTCondor from an high level interface to make life easier for end-users than with command line.
+A High-level interface to make life easier for end-users is available here :
 
-We plan to use an existing Python Binding to access HTCondor and offer you a simpler interface.
+[FCCBATCH](https://github.com/sfernana/fcc-spi/tree/master/batch)
+ 
+
+For the moment, we are accessing HTCondor from the command line interface but we plan to use an existing Python Binding to access HTCondor when this binding will be released.
 
 
+Congratulations !!!
 
-For more informations please contact us at : fcc-experiments-sw-devATSPAMNOTcern.ch 
+You ran FCC softwares on HTCondor.
+
+For any questions or any further informations, please contact us at : fcc-experiments-sw-devATSPAMNOTcern.ch
