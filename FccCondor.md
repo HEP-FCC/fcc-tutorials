@@ -185,6 +185,12 @@ condor_submit job.sub
 
 By Default, the results "ee_ZH_Zmumu_Hbb.root" should appear in the current working directory.
 
+
+Congratulations !!!
+
+You ran FCC softwares on HTCondor.
+
+
 You can check the status of your job by typing :
 
 ```
@@ -201,11 +207,8 @@ A High-level interface to make life easier for end-users is available here :
 [FCCBATCH](https://github.com/sfernana/fcc-spi/tree/master/batch)
  
 
-For the moment, we are accessing HTCondor from the command line interface but we plan to use an existing Python Binding to access HTCondor when this binding will be released.
+For the moment, we are accessing HTCondor from the command line interface but we plan to access it from Python when the python binding will be released.
 
 
-Congratulations !!!
-
-You ran FCC softwares on HTCondor.
 
 For any questions or any further informations, please contact us at : fcc-experiments-sw-devATSPAMNOTcern.ch
