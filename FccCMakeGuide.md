@@ -11,6 +11,7 @@ CMake guide for the FCC software
         -   [Using an internal library](#using-an-internal-library)
         -   [Building a new Gaudi module](#building-a-new-gaudi-module)
         -   [Using an external library](#using-an-external-library)
+        -   [Customizing how CMake is run](#customizing-how-cmke-is-run)
 
 Overview
 -------------
@@ -127,5 +128,5 @@ ROOT is needed in many modules of FCCSW. More information how to use it in a CMa
 An environment variable is used to forward command line arguments to the cmake command, for example to run cmake with the `trace` option:
 
 ```
-CMAKEOPTS='--trace' make
+CMAKEFLAGS='--trace' make
 ```
