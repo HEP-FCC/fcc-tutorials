@@ -204,7 +204,7 @@ condor_q
 
 A High-level interface to make life easier for end-users is available here :
 
-[FCCBATCH](https://github.com/sfernana/fcc-spi/tree/master/batch)
+[FCCBATCH](https://github.com/sfernana/fcc-spi/tree/master/FCCBATCH)
  
 
 For the moment, we are accessing HTCondor from the command line interface but we plan to access it from Python when the python binding will be released.
