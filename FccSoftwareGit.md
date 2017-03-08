@@ -63,9 +63,9 @@ You will be using (at least) 3 versions of the FCCSW repository:
 The repositories 1 and 2 are added as remote to the repository 3:
 
 ```bash
-git clone git@github.com:[YOUR_GITHUB_USER]/FCCSW.git # create a local copy 1 of your fork 2
+git clone git@github.com:[YOUR_GITHUB_USER]/FCCSW.git # create a local copy (3) of your fork (2)
 cd FCCSW
-git remote add hep-fcc git@github.com:HEP-FCC/FCCSW.git # add official repo 1 as additional remote
+git remote add hep-fcc git@github.com:HEP-FCC/FCCSW.git # add official repo (1) as additional remote
 ```
 
 ### Keeping your local repository up to date
@@ -119,7 +119,7 @@ Please always follow the recommendations below.
     it, e.g. pythia\_interface. You may commit many times to this branch
     in your local repository. When you have something solid create a
     pull request to the official FCCSW repository.
-- You may also want to have a look at our [coding guidelines](https://github.com/HEP-FCC/FCCSW/blob/master/doc/CppCodingStyleGuidelines.md).
+- Have a look at our [coding guidelines](https://github.com/HEP-FCC/FCCSW/blob/master/doc/CppCodingStyleGuidelines.md).
 
 ### Commit comments
 
