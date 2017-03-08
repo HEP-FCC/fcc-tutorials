@@ -76,13 +76,13 @@ git remote add hep-fcc git@github.com:HEP-FCC/FCCSW.git # add official repo 1 as
     git fetch hep-fcc
     ```
 
--   rebase to your development area on the master branch from the official repository (1):
+-   rebase your development area to the master branch from the official repository (1), **please read [this](https://www.atlassian.com/git/tutorials/rewriting-history) to avoid loss of work**
 
     ```bash
     git rebase -i hep-fcc/master
     ```
 
-    in this process you can also fix any commits that need touching up (more info in the [GitHub help](https://help.github.com/articles/about-git-rebase/) and the [Atlassian tutorial](https://www.atlassian.com/git/tutorials/rewriting-history))
+    in this process you can also fix any commits that need touching up, **be aware that deleting commits in the list will result also in the deletion of the corresponding changes** (more info in the [GitHub help](https://help.github.com/articles/about-git-rebase/) and the [Atlassian tutorial](https://www.atlassian.com/git/tutorials/rewriting-history))
 
 -   push your local changes to your fork (2), see [below](#contributing-code) how to create a local branch
 
