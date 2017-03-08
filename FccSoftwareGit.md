@@ -13,6 +13,7 @@
     - [Recommendations](#recommendations)
         - [General recommendations](#general-recommendations)
         - [Commit comments](#commit-comments)
+        - [Cleaning history](#cleaning-history)
         - [Pull requests](#pull-requests)
     - [Trouble-shooting](#trouble-shooting)
         - [When I try to push to the repository, I get an authentication error](#when-i-try-to-push-to-the-repository-i-get-an-authentication-error)
@@ -65,11 +66,13 @@ git remote add hep-fcc git@github.com:HEP-FCC/FCCSW.git # add official repo 1 as
     git fetch hep-fcc
     ```
 
--   merge the master branch from the official repository (1) into your development area:
+-   rebase to your development area on the master branch from the official repository (1):
 
     ```bash
-    git merge hep-fcc/master
+    git rebase -i hep-fcc/master
     ```
+
+    in this process you can also fix any commits that need touching up (more info in the [GitHub help](https://help.github.com/articles/about-git-rebase/) and the [Atlassian tutorial](https://www.atlassian.com/git/tutorials/rewriting-history))
 
 -   push your local changes to your fork (2), see [below](#contributing-code) how to create a local branch
 
@@ -122,6 +125,24 @@ Please always follow the recommendations below.
 
     Here, you may write a few more lines if needed
     ```
+
+### Cleaning history
+
+- before opening a pull request it may be a good idea to check that your history makes sense (commit messages explain what you did, no unnecessary commits, etc.), check with:
+
+  ```
+  git log
+  ```
+- if you see commits that you'd like to change, there are several ways of doing that, the most commonly used is `git rebase`:
+    - with the interactive version you can rebase your development branch to the official master and fix the history at the same time
+
+    ```
+    git fetch hep-fcc # get changes from the official repo
+    git rebase -i hep-fcc/master # do the actual rebase
+    ```
+
+    - git will guide you through the steps, where you can delete entire commits (and the corresponding changes), merge commits and change commit messages
+    - more information can be found in [this tutorial](https://www.atlassian.com/git/tutorials/rewriting-history#git-rebase-i)
 
 ### Pull requests
 
