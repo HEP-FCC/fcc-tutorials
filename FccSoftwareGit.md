@@ -99,6 +99,7 @@ git remote add hep-fcc git@github.com:HEP-FCC/FCCSW.git # add official repo 1 as
     git branch -b [NAME_OF_LOCAL_BRANCH]
     ```
 
+-   refer to [this tutorial](https://www.atlassian.com/git/tutorials/saving-changes) to see how to commit changes
 -   occasionally, get new code from the official repository (1) as explained above and merge it in this branch
 -   test:
     -   that the code compiles and all tests succeed (`make && make test`)
