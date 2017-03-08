@@ -7,6 +7,7 @@
 - [Github workflow and contribution guide](#github-workflow-and-contribution-guide)
     - [Overview](#overview)
     - [Generate and set up ssh keys for github](#generate-and-set-up-ssh-keys-for-github)
+    - [Improving your git experience](#improving-your-git-experience)
     - [Development workflow](#development-workflow)
         - [Keeping your local repository up to date](#keeping-your-local-repository-up-to-date)
         - [Contributing code](#contributing-code)
@@ -41,6 +42,10 @@ For a general introduction to git, have a look at these tutorials:
 When working on lxplus we recommend to clone github repositories via SSH, especially if you want to contribute code. For this to work, you need to generate ssh keys for authentication. See the corresponding github [help-page](https://help.github.com/articles/generating-an-ssh-key/).
 
 > If you only want to use the software it may be easier to use https. In that case you don't need to generate the keys but have to replace `git@github:` with `https://github.com/` in all the instructions. Note that you'll not be able to push to your repository when you are on lxplus. You can also start using https for now and later re-add your repository with ssh authentication, see the [trouble shooting section](#trouble-shooting)
+
+## Improving your git experience
+
+It may be useful to install [Git integration tools](https://github.com/git/git/tree/master/contrib/completion) for your shell that allow tab-completion of most git commands and also can show you in your prompt on which branch you currently are, what changes you have pending, etc.
 
 ## Development workflow
 
