@@ -6,6 +6,7 @@
 
 - [Github workflow and contribution guide](#github-workflow-and-contribution-guide)
     - [Overview](#overview)
+    - [First time setup of git](#first-time-setup-of-git)
     - [Generate and set up ssh keys for github](#generate-and-set-up-ssh-keys-for-github)
     - [Improving your git experience](#improving-your-git-experience)
     - [Development workflow](#development-workflow)
@@ -36,6 +37,10 @@ For a general introduction to git, have a look at these tutorials:
 -   [Atlassian tutorial](https://www.atlassian.com/git/tutorials/)
 -   [Interactive tutorial](http://pcottle.github.io/learnGitBranching/)
 -   [The git book](https://git-scm.com/book/en/v2)
+
+## First time setup of git
+
+Please refer to [this tutorial](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) and the [GitHub help](https://help.github.com/articles/set-up-git/).
 
 ## Generate and set up ssh keys for github
 
