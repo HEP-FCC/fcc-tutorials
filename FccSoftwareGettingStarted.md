@@ -18,16 +18,17 @@ from event generation through parameterized and full detector simulation, recons
     </div>
 </div>
 
-> When you plan to contribute, have a look at the [./FccSoftwareGit.md](contribution guide).
+> When you plan to contribute, have a look at the [contribution guide](./FccSoftwareGit.md).
 
 ## Setting up the FCC environment
 
 This will set up the pre-installed software on SLC6 machines:
 
+The following  will set up the pre-installed software on SLC6 machines:
+
 ```bash
-source /afs/cern.ch/exp/fcc/sw/{{latest_version}}/setup.sh
+source /cvmfs/fcc.cern.ch/sw/{{latest_version}}/init_fcc_stack.sh
 ```
-<!--source /cvmfs/fcc.cern.ch/sw/{{latest_version}}/setup.sh-->
 
 <div class="panel panel-info">
     <div class="panel-heading"><h3 class="panel-title">
