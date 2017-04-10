@@ -1,18 +1,23 @@
 # Writing documentation for the FCC software
 
-### Contents:
+**Contents:**
 
-- Writing documentation for the FCC software
-  - [Where to put documentation](#where-to-put-documentation)
-  - [When and how is the documentation page updated](#when-and-how-is-the-documentation-page-updated)
-  - [Running website generation locally](#running-website-generation-locally)
-    - [For the impatient](#for-the-impatient)
-    - [For the interested](#for-the-interested)
-    - [About jekyll](#about-jekyll)
-  - [Tricks for writing documentation](#tricks-for-writing-documentation)
-    - [Getting the newest version name](#getting-the-newest-version-name)
-    - [Using bootstrap](#using-bootstrap)
-    - [Linking to other resources](#linking-to-other-resources)
+<!-- TOC -->
+
+- [Writing documentation for the FCC software](#writing-documentation-for-the-fcc-software)
+    - [Where to put documentation](#where-to-put-documentation)
+    - [When and how is the documentation page updated?](#when-and-how-is-the-documentation-page-updated)
+    - [Running website generation locally](#running-website-generation-locally)
+        - [For the impatient](#for-the-impatient)
+        - [For the interested](#for-the-interested)
+        - [About jekyll](#about-jekyll)
+    - [Tricks for writing documentation](#tricks-for-writing-documentation)
+        - [Getting newest version name](#getting-newest-version-name)
+        - [Using bootstrap](#using-bootstrap)
+        - [Linking to other resources](#linking-to-other-resources)
+    - [For website admins](#for-website-admins)
+
+<!-- /TOC -->
 
 ## Where to put documentation
 
@@ -86,12 +91,14 @@ the [repository](https://github.com/HEP-FCC/fcc-spi/blob/master/docpage). Docume
 Jekyll liquid allows us to get the name of the newest version of the software, add this to the beginning of your markdown:
 
 ```
+{% raw "do not paste this, this is to escape" %}
 {% for post in site.posts reversed limit:1 %}
 {% assign latest_version=post.thisversion %}
 {% endfor %}
+{% endraw "do not paste this, this is to escape" %}
 ```
 
-In the following you can use `{{latest_version}}` and it will print the name of the latest FCC software version.
+In the following you can use {% raw "do not paste this, this is to escape" %}`{{latest_version}}`{% endraw "do not paste this, this is to escape" %} and it will print the name of the latest FCC software version.
 
 ### Using bootstrap
 
@@ -102,3 +109,10 @@ We use bootstrap and you can mix your markdown with html to use any [bootstrap f
 In general you don't have to take a lot of care how you link. If you link to other content within this repository, just
 use relative paths. If you want to link to something in another repository, use the full URL. In the latter case, during
 the markdown collection, the links are modified to point to the generated websites in case it is a markdown file.
+
+## For website admins
+
+Administrators controlling access to the webspace need to be members of the e-group `cernbox-project-fccsw-web-admins`.
+
+If you want to have write-access you need to request membership in
+`cernbox-project-fccsw-web-writers`. If you are the main responsible for these activities, you should own the service account `fccsweos` that has admin rights for both the physics data EOS space and the web EOS space.
