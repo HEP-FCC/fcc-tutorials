@@ -65,7 +65,7 @@ parameters can be specified via the configuration file:
     of events to be simulated
 -   `pythiaConfFile` --&gt;
     Pythia8 configuration file
--   `delphesCard` --&gt;
+-   `delphescard` --&gt;
     Delphes detector card
 -   `out.filename` --&gt;
     name of output file
