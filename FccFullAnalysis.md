@@ -79,9 +79,8 @@ Now overwrite the samples you just produced, with larger samples (10k events) th
 
 ```
 export EOS_MGM_URL="root://eospublic.cern.ch"
-source /afs/cern.ch/project/eos/installation/client/etc/setup.sh
-eos cp /eos/fcc/hh/tutorials/Higgs_4l/pp_h_4l.root .
-eos cp /eos/fcc/hh/tutorials/Higgs_4l/pp_zgzg_4l.root .
+cp /eos/experiment/fcc/hh/tutorials/Higgs_4l/pp_h_4l.root .
+cp /eos/experiment/fcc/hh/tutorials/Higgs_4l/pp_zgzg_4l.root .
 ```
 
 The output is a ROOT file containing a tree in the FCC [Event Data Model structure](https://github.com/HEP-FCC/fcc-edm). It is browsable with ROOT:
