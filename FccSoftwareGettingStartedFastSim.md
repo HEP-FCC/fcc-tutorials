@@ -295,7 +295,6 @@ you skip this step, the example will use files already produced and stored on eo
 you will need to setup eos:
 
     export EOS_MGM_URL="root://eospublic.cern.ch"
-    source /afs/cern.ch/project/eos/installation/client/etc/setup.sh
 
 Now you are ready to run the ttbar example:
 
