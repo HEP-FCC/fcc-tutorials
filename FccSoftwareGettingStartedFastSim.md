@@ -38,7 +38,7 @@ An analysis ntuple will be produced with [heppy](https://github.com/HEP-FCC/hepp
 * To configure your environment for the FCC software, just do:
 
 ```
-source /afs/cern.ch/exp/fcc/sw/0.8pre/setup.sh
+source /cvmfs/fcc.cern.ch/sw/views/releases/0.9.1/x86_64-slc6-gcc62-opt/setup.sh
 ```
 
 **You will need to source this script everytime you want to use the
