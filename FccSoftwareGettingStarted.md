@@ -14,21 +14,33 @@ from event generation through parameterized and full detector simulation, recons
     </h3></div>
     <div class="panel-body">
      <p>You should be familiar with basics of <code class="highlighter-rouge">bash</code> and know something about either python or C++ programming. If you are not, there are excellent material on the web.</p>
-     <p>New to CERN? Get to know the lxplus system <a href="http://information-technology.web.cern.ch/book/lxplus-service/lxplus-guide/lxplus-aliases">here</a>, <a href="http://information-technology.web.cern.ch/services/lxplus-service">here</a>, and <a href="https://twiki.cern.ch/twiki/bin/view/LHCb/RemoteLxplusConsoleHowTo">here</a>. Log in with the standard standard <code class="highlighter-rouge">ssh</code> command, if you are on Windows, look at <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">PuTTY</a>.  </p>
+     <p>New to CERN? Get to know the lxplus system <a href="http://information-technology.web.cern.ch/book/lxplus-service/lxplus-guide/lxplus-aliases">here</a>, <a href="http://information-technology.web.cern.ch/services/lxplus-service">here</a>, and <a href="https://twiki.cern.ch/twiki/bin/view/LHCb/RemoteLxplusConsoleHowTo">here</a>. Log in with the standard <code class="highlighter-rouge">ssh</code> command, if you are on Windows, look at <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">PuTTY</a>.  </p>
     </div>
 </div>
+
 
 > When you plan to contribute, have a look at the [contribution guide](./FccSoftwareGit.md).
 
 ## Setting up the FCC environment
 
-This will set up the pre-installed software on SLC6 machines:
+The following  will set up the pre-installed software on SLC6 machines. Either use the cvmfs installation (preferred):
+
+```bash
+source /cvmfs/fcc.cern.ch/sw/{{latest_version}}/setup.sh
+```
+
+**or** the afs installation:
 
 The following  will set up the pre-installed software on SLC6 machines:
 
 ```bash
 source /cvmfs/fcc.cern.ch/sw/{{latest_version}}/init_fcc_stack.sh
 ```
+<<<<<<< HEAD
+
+<!--source /cvmfs/fcc.cern.ch/sw/{{latest_version}}/setup.sh-->
+=======
+>>>>>>> hep-fcc/master
 
 <div class="panel panel-info">
     <div class="panel-heading"><h3 class="panel-title">
