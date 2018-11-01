@@ -273,7 +273,7 @@ If **FCCSW** is not initialized:
 
 Now you are ready to produce 100TeV ttbar events with Pythia, process them through Delphes and store them in the FCC-EDM:
 
-    ./run gaudirun.py Sim/SimDelphesInterface/options/PythiaDelphes_config.py
+    ./run fccrun.py Sim/SimDelphesInterface/options/PythiaDelphes_config.py
 
 you should obtain a file called `FCCDelphesOutput.root`.
 
