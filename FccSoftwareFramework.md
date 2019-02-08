@@ -25,7 +25,7 @@ Git guide for FCC
 --
 
 The code for both the FCC software and Gaudi is managed on Git
-repositories. We have set up a short [Git guide](./FccSoftwareGit) for
+repositories. We have set up a short [Git guide](./FccSoftwareGit.md) for
 people who are not familar with Git, and where we explain the
 recommended way to contribute code to the FCC software.
 
