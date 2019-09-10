@@ -1,6 +1,3 @@
-{% for post in site.posts reversed limit:1 %}
-{% assign latest_version=post.thisversion %}
-{% endfor %}
 
 # Getting started with FCC software
 
@@ -24,27 +21,42 @@ from event generation through parameterized and full detector simulation, recons
 ## Setting up the FCC environment
 
 
-The following  will set up the pre-installed software on SLC6 machines:
+The following  will set up the pre-installed software on lxplus (or any centos7 machine with cvmfs):
 
 ```bash
 
-source /cvmfs/fcc.cern.ch/sw/views/releases/externals/{{latest_version}}/x86_64-slc6-gcc62-opt/setup.sh
+source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
+```
+
+*Note*: This has to  be done every time you start a new session (i.e. when you log into your machine).
+
+Check the setup by looking for the command `fccrun` to run jobs in the Gaudi-based software framework FCCSW:
+
+```
+which fccrun
 ```
 
 
-<div class="panel panel-info">
-    <div class="panel-heading"><h3 class="panel-title">
-        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"> </span>
-        Important
-    </h3></div>
-    <div class="panel-body">
-    <em>Note</em>: This has to  be done every time you start a new session (i.e. when you log into your machine).
-    </div>
-</div>
 
-> We recommend to newcomers to use the central installation, but some of the software (heppy and fcc-physics)
-> can also be used standalone on your laptop. See the  [virtual machine](./FccVirtualMachine.md) and
-> [installation](./installing-fcc.md) tutorials.
+### Alternative setup methods
+
+* The above script should automatically choose the latest installation available.
+For productions it is recommended to explicitly choose the version and platform of the software to use, for example by running
+```
+source /cvmfs/fcc.cern.ch/sw/views/releases/externals/94.2.0/x86_64-centos7-gcc62-opt/setup.sh
+```
+
+Note that the above only sets up the "externals" and not the FCC software framework.
+This must be done in another step, running (fox example):
+```
+/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.10/x86_64-centos7-gcc62-opt/this_fccsw.sh
+```
+
+* In case you don't have a centos7 installation, but you do have docker, you can use the [centos7 docker image provided by LHCb](https://gitlab.cern.ch/lhcb-core/LbDocker/#usage).
+Invoking `lb-docker-run --centos7 --no-lblogin --force-cvmfs` should give you access to the fcc cvmfs installations even if your host machine does not have cvmfs installed.
+
+* In case you want to work offline or need to tweak something deep in the stack, take a look at this repository of [FCC packages for Ubuntu ](https://mattermost.web.cern.ch/fccsw/channels/fcccoreteam).
+
 
 <!-- ![flow-chart getting started](./images/FccSoftwareGettingStarted/flow_chart_starting.png) -->
 
@@ -69,7 +81,7 @@ That of course depends on what you want to do:
 - For information about using Delphes, see the [FCC-hh example](FccSoftwareGettingStartedFastSim.md#getting-started-with-delphes-fcc-hh) mentioned above
 
 Additional information is to be found in the [index](README.md)
-
+ 
 ## Where do I find more information?
 
 Depending on what you want to do, there are three different repositories that are your entry point in the FCC software stack.
@@ -115,4 +127,4 @@ The following panels should help you identify where to look for more:
 
 ***
 
-If you encounter problems or have ideas for improving our tutorials, feel free to write an email to our mailing list: fcc-experiments-sw-devATSPAMNOTcern.ch
+If you encounter problems or have ideas for improving our tutorials, please contact FCC developers  on mattermost, the forum or via mailing-list. Find the links on https://cern.ch/fccsw !
