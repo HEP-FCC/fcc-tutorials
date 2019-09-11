@@ -55,7 +55,7 @@ This must be done in another step, running (fox example):
 * In case you don't have a centos7 installation, but you do have docker, you can use the [centos7 docker image provided by LHCb](https://gitlab.cern.ch/lhcb-core/LbDocker/#usage).
 Invoking `lb-docker-run --centos7 --no-lblogin --force-cvmfs` should give you access to the fcc cvmfs installations even if your host machine does not have cvmfs installed.
 
-* In case you want to work offline or need to tweak something deep in the stack, take a look at this repository of [FCC packages for Ubuntu ](https://mattermost.web.cern.ch/fccsw/channels/fcccoreteam).
+* In case you want to work offline or need to tweak something deep in the stack, take a look at this repository of [FCC packages for Ubuntu ](https://fcc-pileup.web.cern.ch/fcc-pileup/sw/fcc-ubuntu-sw.html).
 
 
 <!-- ![flow-chart getting started](./images/FccSoftwareGettingStarted/flow_chart_starting.png) -->
