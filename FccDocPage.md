@@ -76,31 +76,6 @@ We are using jekyll to build our website. If you are interested in extending the
 the [repository](https://github.com/HEP-FCC/FCCSW/tree/gh-pages). Documentation of jekyll may be found
 [elsewhere](https://jekyllrb.com/). In case of questions contact the fcc-experiments-sw-dev mailing list.
 
-## Tricks for writing documentation
-
-### Getting newest version name
-
-Jekyll liquid allows us to get the name of the newest version of the software, add this to the beginning of your markdown:
-
-```
-{% raw "do not paste this, this is to escape" %}
-{% for post in site.posts reversed limit:1 %}
-{% assign latest_version=post.thisversion %}
-{% endfor %}
-{% endraw "do not paste this, this is to escape" %}
-```
-
-In the following you can use {% raw "do not paste this, this is to escape" %}`{{latest_version}}`{% endraw "do not paste this, this is to escape" %} and it will print the name of the latest FCC software version.
-
-### Using bootstrap
-
-We use bootstrap and you can mix your markdown with html to use any [bootstrap functionality](http://getbootstrap.com/).
-
-### Linking to other resources
-
-In general you don't have to take a lot of care how you link. If you link to other content within this repository, just
-use relative paths. If you want to link to something in another repository, use the full URL. In the latter case, during
-the markdown collection, the links are modified to point to the generated websites in case it is a markdown file.
 
 ## For website admins
 
