@@ -44,3 +44,8 @@ Analyses are run the following way:
 ./bin/analyze.py -n [analysis_name_in_heppy] -c [heppy_cfg] -t [heppy_tree_location] -o [output_dir] -p [analysis_parameters] -j [proc_dict]
 ```
 
+The example we will run here is:
+
+```
+./bin/analyze.py -n Zprime_ttbar -c ../heppy/FCChhAnalyses/HELHC/Zprime_ttbar/analysis.py -t /eos/experiment/fcc/helhc/analyses/Zprime_ttbar/heppy_outputs/helhc_v01/ -o outputs/FCCee -p templates/FCCee/zh_zmumu_ecm240_recoil.py -j /afs/cern.ch/work/h/helsens/public/FCCDicts/FCCee_procDict_fcc_v02.json 
+```
