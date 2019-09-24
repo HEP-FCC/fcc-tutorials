@@ -47,5 +47,6 @@ Analyses are run the following way:
 The example we will run here is:
 
 ```
-./bin/analyze.py -n Zprime_ttbar -c ../heppy/FCChhAnalyses/HELHC/Zprime_ttbar/analysis.py -t /eos/experiment/fcc/helhc/analyses/Zprime_ttbar/heppy_outputs/helhc_v01/ -o outputs/FCCee -p templates/FCCee/zh_zmumu_ecm240_recoil.py -j /afs/cern.ch/work/h/helsens/public/FCCDicts/FCCee_procDict_fcc_v02.json 
+./bin/analyze.py -n ZH_Zmumu -c /afs/cern.ch/work/h/helsens/public/FCCSW_WS/heppy/ZH_Zmumu/analysis.py -t /afs/cern.ch/work/h/helsens/public/FCCSW_WS/data/ -o outputs/ZH_zmumu_ecm240_recoil/ -p templates/FCCee/zh_zmumu_ecm240_recoil.py -j /afs/cern.ch/work/h/helsens/public/FCCSW_WS/dict/FCCee_procDict_fcc_v01.json
 ```
+
