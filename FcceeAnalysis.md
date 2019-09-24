@@ -73,17 +73,13 @@ Then let's run the Z->ee+X analysis with only 50 000 events
 and look at the plots in ```outputs/ZH_zee_ecm240_recoil/plots_ZH/```. The selections are ordered respecting how they have been added in the configuration file, and the plots for selection ```0==selbase``` to ```7===selWW``` should look more or less like those (that have been produced with all the statistics).
 
 No selection
-<img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel0_nostack_lin.png" width="400">
+<img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel0_nostack_lin.png" width="400" alt="grregwgww">
 
-.center[
+<figure class="image">
+  <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel0_nostack_lin.png" alt="{{ include.description }}">
+  <figcaption>{{ include.description }}</figcaption>
+</figure>
 
-![My image](./images/FcceeAnalysis/ZH_Zee/mrecoil_sel0_nostack_lin.png)
-
-.caption[
-**Fig. 1:** Image caption
-]
-
-]
 
 Optimised selection based on some variables
 <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel1_nostack_lin.png" width="400">
