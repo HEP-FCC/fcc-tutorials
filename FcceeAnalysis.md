@@ -74,18 +74,19 @@ and look at the plots in ```outputs/ZH_zee_ecm240_recoil/plots_ZH/```. The selec
 
 
 <figure class="image">
-  <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel0_nostack_lin.png" width="300" alt="No selection">
-  <figcaption>{{ include.description }}</figcaption>
+  <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel0_nostack_lin.png" width="300">
+  <figcaption>[No selection]</figcaption>
 </figure>
 
 <figure class="image">
-  <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel1_nostack_lin.png" width="300" alt="Optimised selection based on some variables">
-  <figcaption>{{ include.description }}</figcaption>
+  <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel1_nostack_lin.png" width="300" >
+  <figcaption>[Optimised selection based on some variables]</figcaption>
 </figure>
 
-
-Optimised selection based on some variables
-<img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel1_nostack_lin.png" width="400">
+<figure class="image">
+  <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel2_nostack_lin.png" width="300" >
+  <figcaption>[Selecting 2 bjet in recoil]</figcaption>
+</figure>
 
 <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel2_nostack_lin.png" width="400">
 <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel3_nostack_lin.png" width="400">
