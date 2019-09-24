@@ -67,7 +67,7 @@ Then let's run the Z->ee+X analysis with only 50 000 events
 ./bin/analyze.py -n ZH_Zee -c /afs/cern.ch/work/h/helsens/public/FCCSW_WS/heppy/ZH_Zee/analysis.py -t /afs/cern.ch/work/h/helsens/public/FCCSW_WS/data/ZH_Zee/ -o outputs/ZH_zee_ecm240_recoil/ -p templates/FCCee/zh_zee_ecm240_recoil.py -j /afs/cern.ch/work/h/helsens/public/FCCSW_WS/dict/FCCee_procDict_fcc_v01.json --nev 50000 -m
 ```
 
-and look at the plots in ```outputs/ZH_zee_ecm240_recoil/plots_ZH/```
+and look at the plots in ```outputs/ZH_zee_ecm240_recoil/plots_ZH/```. The selections are ordered respecting how they have been added in the configuration file, and the plots for selection ```0==selbase``` to ```7===selWW``` should look more or less like those (that have been produced with all the statistics).
 
 <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel0_nostack_lin.png" width="400">
 <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel1_nostack_lin.png" width="400">
@@ -75,3 +75,7 @@ and look at the plots in ```outputs/ZH_zee_ecm240_recoil/plots_ZH/```
 <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel3_nostack_lin.png" width="400">
 <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel4_nostack_lin.png" width="400">
 <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel5_nostack_lin.png" width="400">
+<img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel6_nostack_lin.png" width="400">
+<img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel7_nostack_lin.png" width="400">
+
+What you can do for example now, is add a new selection that will select events with 2 photons in the recoil (the variable is ```nph```), comment all the other selection except this new one and run over the full statistics by removing the ```--nev 50000``` in-line argument.
