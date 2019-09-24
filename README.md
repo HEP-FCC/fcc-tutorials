@@ -1,4 +1,7 @@
 
+
+<a href="https://cern.ch/swanserver/cgi-bin/go?projurl=https://github.com/vvolkl/fcc-tutorials.git" target="_blank"><img src="http://swanserver.web.cern.ch/swanserver/images/badge_swan_white_150.png"/></a>
+
 ### List of available tutorials
 
 - [Getting Started](./FccSoftwareGettingStarted.md)

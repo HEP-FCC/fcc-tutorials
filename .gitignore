@@ -2,3 +2,4 @@
 .ipynb_checkpoints
 geant_fullsim_fccee_pgun.py
 mergeDCHits.py
+*.gdml
