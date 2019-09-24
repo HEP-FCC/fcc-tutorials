@@ -76,8 +76,6 @@ and look at the plots in ```outputs/ZH_zee_ecm240_recoil/plots_ZH/```. The selec
 <figure class="image">
   <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel0_nostack_lin.png" width="300">
   <figcaption>[No selection]</figcaption>
-  <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel1_nostack_lin.png" width="300" >
-  <figcaption>[Optimised selection based on some variables]</figcaption>
 </figure>
 
 <figure class="image">
@@ -90,12 +88,11 @@ and look at the plots in ```outputs/ZH_zee_ecm240_recoil/plots_ZH/```. The selec
   <figcaption>[Selecting 2 bjet in recoil]</figcaption>
 </figure>
 
-<img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel2_nostack_lin.png" width="400">
-<img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel3_nostack_lin.png" width="400">
-<img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel4_nostack_lin.png" width="400">
-<img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel5_nostack_lin.png" width="400">
-<img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel6_nostack_lin.png" width="400">
-<img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel7_nostack_lin.png" width="400">
+<figure class="image">
+  <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel3_nostack_lin.png" width="300" >
+  <figcaption>[Selecting 2 taus in recoil]</figcaption>
+</figure>
+
 
 ## Exercices
 
