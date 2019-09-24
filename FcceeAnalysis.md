@@ -76,6 +76,8 @@ and look at the plots in ```outputs/ZH_zee_ecm240_recoil/plots_ZH/```. The selec
 <figure class="image">
   <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel0_nostack_lin.png" width="300">
   <figcaption>[No selection]</figcaption>
+  <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel1_nostack_lin.png" width="300" >
+  <figcaption>[Optimised selection based on some variables]</figcaption>
 </figure>
 
 <figure class="image">
