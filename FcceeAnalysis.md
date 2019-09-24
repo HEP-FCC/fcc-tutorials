@@ -75,6 +75,16 @@ and look at the plots in ```outputs/ZH_zee_ecm240_recoil/plots_ZH/```. The selec
 No selection
 <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel0_nostack_lin.png" width="400">
 
+.center[
+
+![My image](./images/FcceeAnalysis/ZH_Zee/mrecoil_sel0_nostack_lin.png)
+
+.caption[
+**Fig. 1:** Image caption
+]
+
+]
+
 Optimised selection based on some variables
 <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel1_nostack_lin.png" width="400">
 
