@@ -70,3 +70,8 @@ Then let's run the Z->ee+X analysis with only 50 000 events
 and look at the plots in ```outputs/ZH_zee_ecm240_recoil/plots_ZH/```
 
 <img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel0_nostack_lin.png" width="400">
+<img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel1_nostack_lin.png" width="400">
+<img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel2_nostack_lin.png" width="400">
+<img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel3_nostack_lin.png" width="400">
+<img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel4_nostack_lin.png" width="400">
+<img src="./images/FcceeAnalysis/ZH_Zee/mrecoil_sel5_nostack_lin.png" width="400">
