@@ -46,9 +46,8 @@ from Gaudi.Configuration import *
 from Configurables import GeoSvc
 geoservice = GeoSvc("GeoSvc")
 geoservice.detectors=[
-	os.path.join(os.environ.get("FCC_DETECTORS", ""), 'Detector/DetFCCeeIDEA/compact/FCCee_DectEmptyMaster.xml'),
-  os.path.join(os.environ.get("FCC_DETECTORS", ""), 'Detector/DetFCCeeIDEA/compact/FCCee_DectMaster.xml'),
-                                         ]
+  os.path.join(os.environ.get("FCC_DETECTORS", ""), 'share/FCCSW/Detector/DetFCCeeIDEA/compact/FCCee_DectMaster.xml'),
+                    ]
 
 from Configurables import SimG4Svc
 geantservice = SimG4Svc("SimG4Svc")
@@ -63,7 +62,7 @@ ApplicationMgr( TopAlg = [],
                 EvtMax   = 1,
                 # order is important, as GeoSvc is needed by SimG4Svc
                 ExtSvc = [geoservice, geantservice, geodumpservice],
-                OutputLevel=DEBUG
+                OutputLevel=INFO
  )
 
 ```
@@ -99,7 +98,7 @@ A configuration that runs all of this is distributed with FCCSW and can be run w
 
 
 ```python
-!export FCCSWBASEDIR=/home/vali/repo/FCCSW; export FCC_DETECTORS=/home/vali/repo/FCCSW;time fccrun  $FCCSWBASEDIR/Reconstruction/RecFCCeeCalorimeter/options/runCaloSim.py --filename fccee_idea_LAr_pgun.root -n 500 
+! FCC_DETECTORS=$FCCSWBASEDIR/share/FCCSW; time fccrun  $FCCSWBASEDIR/share/FCCSW/RecFCCeeCalorimeter/options/runCaloSim.py --filename fccee_idea_LAr_pgun.root -n 500 
 ```
 
 The output of this job is `fccee_idea_LAr_pgun.root`, a ROOT file containing the simulation products of 500 single particle events (5 Gev e-) in the FCC event data model.
@@ -135,7 +134,7 @@ c.Draw()
 Now that the detector response is simulated, it is time to reconstruct the signals. FCCSW includes another configuration to run a Sliding Window reconstruction:
 
 ```python
-!export FCCSWBASEDIR=/home/vali/repo/FCCSW; export FCC_DETECTORS=/home/vali/repo/FCCSW;fccrun $FCCSWBASEDIR/Reconstruction/RecFCCeeCalorimeter/options/runFullCaloSystem_ReconstructionSW_noiseFromFile.py --input fccee_idea_LAr_pgun.root -n 500 --noiseFileName elecNoise_ecalBarrelFCCee_50Ohm_traces1_4shieldWidth.root --filename output_allCalo_reco_noise.root
+!FCC_DETECTORS=$FCCSWBASEDIR/share/FCCSW; fccrun $FCCSWBASEDIR/share/FCCSW/RecFCCeeCalorimeter/options/runFullCaloSystem_ReconstructionSW_noiseFromFile.py -v --input fccee_idea_LAr_pgun.root -n 100 --noiseFileName root://eospublic.cern.ch//eos/experiment/fcc/ee/simulation/NoiseConstants/elecNoise_ecalBarrelFCCee_50Ohm_traces1_4shieldWidth.root --filename output_allCalo_reco_noise.root
 ```
 
 This configuration inludes electronics noise especially calculated for this detector geometry. which is overlayed on the branch `ECalBarrelCells` containing information on all cells in the ECal Barrel.
@@ -223,7 +222,9 @@ c.Draw()
 We are of course interested in the Calorimeter response not only at one energy, but over a range of energies,
 and in particular in the usual parametrisation of the resolution:
 
-$$ \frac \sigma_E E \approx  \frac a \sqrt{E} \oplus \frac b E \oplus c  $$,
+
+
+$$  {\sigma_E \over E} =  { a \over \sqrt{E}} \oplus  {b \over E} \oplus c  $$,
 
 where a is the "stochastic term", b the "noise term" and c the "constant term" 
 
