@@ -1,4 +1,12 @@
 *.root
+PythiaDelphes_config.py
+Pythia_pp_h_4l.cmd
+*.pyc
+pp_h_4l
+pp_zgzg_4l
+dumpGeo_fccee.py
+plots
+*.lhe
 .ipynb_checkpoints
 geant_fullsim_fccee_pgun.py
 mergeDCHits.py
