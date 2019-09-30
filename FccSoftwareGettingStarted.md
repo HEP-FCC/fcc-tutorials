@@ -88,18 +88,21 @@ The following panels should help you identify where to look for more:
 ### Look at [heppy & fcc-physics](http://fccsw.web.cern.ch/fccsw/tutorials#further-reading) for:
 
 Analysis and fast simulation
-  - Standalone Pythia event generation
-  - FCC-ee parametric fast simulation (papas)
-  - FCC-ee and FCC-hh physics analysis
+
+- Standalone Pythia event generation
+- FCC-ee parametric fast simulation (papas)
+- FCC-ee and FCC-hh physics analysis
  
 ### Look at [FCCSW](http://fccsw.web.cern.ch/fccsw/tutorials#further-reading) for:
  
 Event generation, simulation and reconstruction
-  - Event generation with Pythia (more to come)
-  - FCC-hh parametric fast simulation (Delphes)
-  - Full and fast simulation with Geant 4
-  - Detector descriptions with DD4hep
-  - Reconstruction algorithms
+
+- Event generation with Pythia (more to come)
+- FCC-hh parametric fast simulation (Delphes)
+- Full and fast simulation with Geant 4
+- Detector descriptions with DD4hep
+- Reconstruction algorithms
+
 ***
 
 If you encounter problems or have ideas for improving our tutorials, please contact FCC developers  on mattermost, the forum or via mailing-list. Find the links on https://cern.ch/fccsw !
