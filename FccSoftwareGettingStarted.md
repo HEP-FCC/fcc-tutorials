@@ -15,7 +15,7 @@ New to CERN? Get to know the lxplus system [here](http://information-technology.
 ## Setting up the FCC environment
 
 
-The following  will set up the pre-installed software on lxplus (or any centos7 machine with cvmfs):
+The following  will set up the pre-installed software on lxplus (or any centos7 machine with cvmfs, e.g. lxplus):
 
 ```bash
 
@@ -30,27 +30,65 @@ Check the setup by looking for the command `fccrun` to run jobs in the Gaudi-bas
 which fccrun
 ```
 
-
-
 ### Alternative setup methods
 
 * The above script should automatically choose the latest installation available.
 For productions it is recommended to explicitly choose the version and platform of the software to use, for example by running
 ```
-source /cvmfs/fcc.cern.ch/sw/views/releases/externals/96b.0.0/x86_64-centos7-gcc8-opt/setup.sh
+source /cvmfs/fcc.cern.ch/sw/views/releases/externals/94.2.0/x86_64-centos7-gcc62-opt/setup.sh
 ```
 
 Note that the above only sets up the "externals" and not the FCC software framework.
 This must be done in another step, running (fox example):
 ```
-/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.11/x86_64-centos7-gcc8-opt/setup.sh
+/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.10/x86_64-centos7-gcc62-opt/this_fccsw.sh
 ```
-Note that the setup.sh script was called `this_fccsw.sh` in older versions of FCCSW . 
-
-* In case you don't have a centos7 installation, but you do have docker, you can use the [centos7 docker image provided by LHCb](https://gitlab.cern.ch/lhcb-core/LbDocker/#usage).
-Invoking `lb-docker-run --centos7 --no-lblogin --force-cvmfs` should give you access to the fcc cvmfs installations even if your host machine does not have cvmfs installed.
+Note that the `this_fccsw.sh` script is called `setup.sh` in versions of FCCSW newer than `0.10`. 
 
 * In case you want to work offline or need to tweak something deep in the stack, take a look at this repository of [FCC packages for Ubuntu ](https://fcc-pileup.web.cern.ch/fcc-pileup/sw/fcc-ubuntu-sw.html).
+
+### Using Virtual Machines or Docker containers
+
+The instructions above should work in any CentOS7 virtual machine or Docker container with `cvmfs` available. We give in the following one example for each of the two cases.
+
+#### CernVM Virtual Appliance
+
+The CernVM project provides a convenient tool to start VMs, [cernvm-launch](https://cernvm.cern.ch/portal/launch), and a [public repository](https://github.com/cernvm/public-contexts) of contexts to be used with `cernvm-launch` to configure the VM at your needs. A context dedicated to the FCC tutorials is available in the repository. The [cernvm-launch](https://cernvm.cern.ch/portal/launch) works with [VirtualBox](https://www.virtualbox.org/), virtualization manager available for free for all platforms.
+
+To create and use a CernVM virtual machine for the FCC tutorials please follow the following steps:
+
+   * Make sure [VirtualBox](https://www.virtualbox.org/) is installed (details installing instructions from the product web page).
+   * Download the `cernvm-launch` binary for your platform from the [dedicated download page](https://ecsft.cern.ch/dist/cernvm/launch/bin/); make sure is visible in your $PATH
+   * Get the [fcc-tutorial.context](https://raw.githubusercontent.com/cernvm/public-contexts/master/fcc-tutorial.context) (use wget or curl)
+
+Once you have all this you can create the VM with this command:
+```
+$ cernvm-launch create --name fcc-tutorial --cpus 4 --memory 8000 --disk 20000 fcc-tutorial.context
+```
+You an choose how many CPU cores to use, the memory and the disk space. Good rules of thumb are to use half the cores of your machine, at least 2 GB memory per core, and enough disk for your job. The above command should oepn a window with VirtualBox and produce on the screen an output like this
+```
+Using user data file: fcc-tutorial.context
+Parameters used for the machine creation:
+	name: fcc-tutorial
+	cpus: 4
+	memory: 8000
+	disk: 20000
+	cernvmVersion: 2019.06-1
+	sharedFolder: /Users/ganis
+```
+You see in partcular that your $HOME area is shared with the VM, so you can exchange files between the VM and the host machine very conveniently.
+From now on you can either work in the VirtualBox window or ssh to the machine with
+```
+cernvm-launch ssh fcc-tutorial
+```
+In either case you need a user name and password, which by default are `fccuser` and `fccpass`; these can be changed in the `fcc-tutorial.context` file.
+Note that the SSH session currently does not support graphics.
+The `cernvm-launch` also supports listing, stopping, starting virtual machines. Please run `cernvm-launch -h` for all the available options.
+
+#### LHCb CentOS7 Docker image
+
+In case you don't have a centos7 installation, but you do have docker, you can use the [centos7 docker image provided by LHCb](https://gitlab.cern.ch/lhcb-core/LbDocker/#usage).
+Invoking `lb-docker-run --centos7 --no-lblogin --force-cvmfs` should give you access to the fcc cvmfs installations even if your host machine does not have cvmfs installed.
 
 
 <!-- ![flow-chart getting started](./images/FccSoftwareGettingStarted/flow_chart_starting.png) -->
