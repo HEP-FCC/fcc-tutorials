@@ -43,14 +43,15 @@ which fccrun
 * The above script should automatically choose the latest installation available.
 For productions it is recommended to explicitly choose the version and platform of the software to use, for example by running
 ```
-source /cvmfs/fcc.cern.ch/sw/views/releases/externals/94.2.0/x86_64-centos7-gcc62-opt/setup.sh
+source /cvmfs/fcc.cern.ch/sw/views/releases/externals/96b.0.0/x86_64-centos7-gcc8-opt/setup.sh
 ```
 
 Note that the above only sets up the "externals" and not the FCC software framework.
 This must be done in another step, running (fox example):
 ```
-/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.10/x86_64-centos7-gcc62-opt/this_fccsw.sh
+/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.11/x86_64-centos7-gcc8-opt/setup.sh
 ```
+Note that the setup.sh script was called `this_fccsw.sh` in older versions of FCCSW . 
 
 * In case you don't have a centos7 installation, but you do have docker, you can use the [centos7 docker image provided by LHCb](https://gitlab.cern.ch/lhcb-core/LbDocker/#usage).
 Invoking `lb-docker-run --centos7 --no-lblogin --force-cvmfs` should give you access to the fcc cvmfs installations even if your host machine does not have cvmfs installed.
