@@ -4,17 +4,11 @@
 The FCC software is the common software for the FCC detector design study. We support the whole chain starting
 from event generation through parameterized and full detector simulation, reconstruction and data analysis.
 
-<div class="panel panel-info">
-    <div class="panel-heading"><h3 class="panel-title">
-        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"> </span>
-        Prerequisites
-    </h3></div>
-    <div class="panel-body">
-     <p>You should be familiar with basics of <code class="highlighter-rouge">bash</code> and know something about either python or C++ programming. If you are not, there are excellent material on the web.</p>
-     <p>New to CERN? Get to know the lxplus system <a href="http://information-technology.web.cern.ch/book/lxplus-service/lxplus-guide/lxplus-aliases">here</a>, <a href="http://information-technology.web.cern.ch/services/lxplus-service">here</a>, and <a href="https://twiki.cern.ch/twiki/bin/view/LHCb/RemoteLxplusConsoleHowTo">here</a>. Log in with the standard <code class="highlighter-rouge">ssh</code> command, if you are on Windows, look at <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">PuTTY</a>.  </p>
-    </div>
-</div>
+### Prerequisites
 
+You should be familiar with basics of `bash` and know something about either python or C++ programming. If you are not, there are excellent material on the web.
+
+New to CERN? Get to know the lxplus system [here](http://information-technology.web.cern.ch/book/lxplus-service/lxplus-guide/lxplus-aliases), [here](http://information-technology.web.cern.ch/services/lxplus-service), and [here](https://twiki.cern.ch/twiki/bin/view/LHCb/RemoteLxplusConsoleHowTo). Log in with the standard `ssh` command; if you are on Windows, look at [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html).
 
 > When you plan to contribute, have a look at the [contribution guide](./FccSoftwareGit.md).
 
@@ -90,42 +84,19 @@ Depending on what you want to do, there are three different repositories that ar
 The [tutorials overview](http://fccsw.web.cern.ch/fccsw/tutorials) has links to further reading material grouped by repository.
 
 The following panels should help you identify where to look for more:
-
-<div class="row">
-    <div class="col-md-6">
-        <div class="panel panel-default">
-        <div class="panel-heading"><h3 class="panel-title">
-            Look at <a href="http://fccsw.web.cern.ch/fccsw/tutorials#further-reading">heppy &amp; fcc-physics</a> for:
-        </h3></div>
-        <div class="panel-body">
-            <p>Analysis and fast simulation</p>
-            <ul>
-                <li>Standalone Pythia event generation</li>
-                <li>FCC-ee parametric fast simulation (papas)</li>
-                <li>FCC-ee and FCC-hh physics analysis</li>
-            </ul>
-        </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="panel panel-default">
-        <div class="panel-heading"><h3 class="panel-title">
-            Look at <a href="http://fccsw.web.cern.ch/fccsw/tutorials#further-reading">FCCSW</a> for:
-        </h3></div>
-        <div class="panel-body">
-        <p>Event generation, simulation and reconstruction</p>
-        <ul>
-            <li>Event generation with Pythia (more to come)</li>
-            <li>FCC-hh parametric fast simulation (Delphes)</li>
-            <li>Full and fast simulation with Geant 4</li>
-            <li>Detector descriptions with DD4hep</li>
-            <li>Reconstruction algorithms</li>
-        </ul>
-        </div>
-        </div>
-    </div>
-</div>
-
+### Look at [heppy & fcc-physics](http://fccsw.web.cern.ch/fccsw/tutorials#further-reading) for:
+Analysis and fast simulation
+  - Standalone Pythia event generation
+  - FCC-ee parametric fast simulation (papas)
+  - FCC-ee and FCC-hh physics analysis
+ 
+ ### Look at [FCCSW](http://fccsw.web.cern.ch/fccsw/tutorials#further-reading) for:
+Event generation, simulation and reconstruction
+  - Event generation with Pythia (more to come)
+  - FCC-hh parametric fast simulation (Delphes)
+  - Full and fast simulation with Geant 4
+  - Detector descriptions with DD4hep
+  - Reconstruction algorithms
 ***
 
 If you encounter problems or have ideas for improving our tutorials, please contact FCC developers  on mattermost, the forum or via mailing-list. Find the links on https://cern.ch/fccsw !
