@@ -8,8 +8,8 @@ Contents:
     * [Overview](#overview)
     * [Installation](#installation)
     * [Set up your working directory](#set-up-your-working-directory)
-    * [Getting started with Delphes](#getting-started-with-delphes-fcc-hh)
-      * [Run FCCSW with Pythia8+Delphes](#run-fccsw-with-pythia8-+-delphes)
+    * [Getting started with Delphes](#getting-started-with-delphes)
+      * [Run FCCSW with Pythia8+Delphes](#run-fccsw-with-pythia8+delphes)
       * [Run the analysis in heppy](#run-the-analysis-in-heppy)
       * [Make plots](#make-plots-1)
       * [CutFlow](#cutflow)
@@ -94,7 +94,7 @@ With this file you are now ready to run the analysis framework [heppy](https://g
 
 Copy locally the ttbar example of [heppy](https://github.com/HEP-FCC/heppy.git):
 
-    cp -rp heppy/test/analysis_hh_ttbar_cfg.py .
+    cp heppy/test/analysis_hh_ttbar_cfg.py .
 
 and edit the file to read the events you just produced running FCCSW previously
 `FCCDelphesOutput.root` in the `files` list in line 13. If
