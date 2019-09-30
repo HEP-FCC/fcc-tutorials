@@ -105,4 +105,4 @@ Event generation, simulation and reconstruction
 
 ***
 
-If you encounter problems or have ideas for improving our tutorials, please contact FCC developers  on mattermost, the forum or via mailing-list. Find the links on https://cern.ch/fccsw !
+If you encounter problems or have ideas for improving our tutorials, please contact FCC developers  on mattermost, the forum or via mailing-list. Find the links on [https://cern.ch/fccsw](https://cern.ch/fccsw) !
