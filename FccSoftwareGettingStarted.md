@@ -99,10 +99,8 @@ That of course depends on what you want to do:
 
 ### Produce and analyse fast-simulated events:
 
-- [Getting started with the production and analysis of fast-simulated events](FccSoftwareGettingStartedFastSim.md)
-    - [Getting started with papas (FCC\-ee)](FccSoftwareGettingStartedFastSim.md#getting-started-with-papas-fcc-ee)
-    - [Getting started with Delphes (FCC\-hh)](FccSoftwareGettingStartedFastSim.md#getting-started-with-delphes-fcc-hh)
-
+- [Getting started with the production and analysis of fast-simulated events with Delphes](FccSoftwareGettingStartedFastSim.md)
+ 
 ### Develop or use full simulation, reconstruction and detailed detector descriptions:
 
 - [Getting started with FCCSW](./FccSoftwareFramework.md)
