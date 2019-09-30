@@ -85,12 +85,14 @@ The [tutorials overview](http://fccsw.web.cern.ch/fccsw/tutorials) has links to 
 
 The following panels should help you identify where to look for more:
 ### Look at [heppy & fcc-physics](http://fccsw.web.cern.ch/fccsw/tutorials#further-reading) for:
+
 Analysis and fast simulation
   - Standalone Pythia event generation
   - FCC-ee parametric fast simulation (papas)
   - FCC-ee and FCC-hh physics analysis
  
  ### Look at [FCCSW](http://fccsw.web.cern.ch/fccsw/tutorials#further-reading) for:
+ 
 Event generation, simulation and reconstruction
   - Event generation with Pythia (more to come)
   - FCC-hh parametric fast simulation (Delphes)
