@@ -84,6 +84,7 @@ Depending on what you want to do, there are three different repositories that ar
 The [tutorials overview](http://fccsw.web.cern.ch/fccsw/tutorials) has links to further reading material grouped by repository.
 
 The following panels should help you identify where to look for more:
+
 ### Look at [heppy & fcc-physics](http://fccsw.web.cern.ch/fccsw/tutorials#further-reading) for:
 
 Analysis and fast simulation
@@ -91,7 +92,7 @@ Analysis and fast simulation
   - FCC-ee parametric fast simulation (papas)
   - FCC-ee and FCC-hh physics analysis
  
- ### Look at [FCCSW](http://fccsw.web.cern.ch/fccsw/tutorials#further-reading) for:
+### Look at [FCCSW](http://fccsw.web.cern.ch/fccsw/tutorials#further-reading) for:
  
 Event generation, simulation and reconstruction
   - Event generation with Pythia (more to come)
