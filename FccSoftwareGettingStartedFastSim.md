@@ -40,7 +40,7 @@ source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 **You will need to source this script everytime you want to use the
 software.**
 
-* You can either install [heppy](https://github.com/HEP-FCC/heppy/blob/master/README.md) or use the installation `cvmfs`, pointed out by the environment variable HEPPY (defined after sourcing the above script).
+* You can either use the `cvmfs` installation of `heppy`, pointed out by the environment variable HEPPY (defined after sourcing the above script), or clone the [heppy git](https://github.com/HEP-FCC/heppy) locally. The latter is mandatory on a fresh virtual machine (for `heppy` internal; problems with `gitpython`). 
 
 ### Set up your working directory
 
@@ -53,15 +53,27 @@ For convenience we suggest to create a symlink to the FCCSW subdierctory with co
 
     ln -sf $FCCSWBASEDIR/share/FCCSW
 
-If you decide to use `heppy` from `cvmfs`create also a seconf symlink
+If you decide to use `heppy` from `cvmfs`create also a second symlink
 
     ln -sf $HEPPY
+
+or clone the GIT `heppy` repository:
+
+    git clone https://github.com/HEP-FCC/heppy.git
 
 You should get something like the following in your working directory:
 ```
 $ ls -lt
 ...
 lrwxr-xr-x. 1 ganis sf 112 Sep 30 19:03 heppy -> /cvmfs/fcc.cern.ch/sw/views/releases/externals/96b.0.0/x86_64-centos7-gcc8-opt/lib/python2.7/site-packages/heppy
+lrwxr-xr-x. 1 ganis sf 123 Sep 30 19:03 FCCSW -> /cvmfs/fcc.cern.ch/sw/releases/fccsw/linux-centos7-x86_64/gcc-8.3.0/fccsw-0.11-qqmlmzumogldsqoegt4ihhel4xnt62yw/share/FCCSW
+...
+```
+or
+```
+$ ls -lt
+...
+lrwxr-xr-x. 1 ganis sf 112 Sep 30 19:03 heppy
 lrwxr-xr-x. 1 ganis sf 123 Sep 30 19:03 FCCSW -> /cvmfs/fcc.cern.ch/sw/releases/fccsw/linux-centos7-x86_64/gcc-8.3.0/fccsw-0.11-qqmlmzumogldsqoegt4ihhel4xnt62yw/share/FCCSW
 ...
 ```
