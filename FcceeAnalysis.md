@@ -30,7 +30,7 @@ cd FCCeePhysics
 Clone the repository and go there:
 
 ```
-git clone git@github.com:HEP-FCC/FlatTreeAnalyzer.git
+git clone https://github.com/HEP-FCC/FlatTreeAnalyzer.git
 cd FlatTreeAnalyzer
 ```
 
