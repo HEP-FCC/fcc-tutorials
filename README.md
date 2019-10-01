@@ -1,6 +1,7 @@
 
 
 <a href="https://cern.ch/swanserver/cgi-bin/go?projurl=https://github.com/HEP-FCC/fcc-tutorials.git" target="_blank"><img src="http://swanserver.web.cern.ch/swanserver/images/badge_swan_white_150.png"/></a>
+and paste this environment script: `/cvmfs/fcc.cern.ch/sw/latest/setup.sh`
 
 ### List of available tutorials
 
