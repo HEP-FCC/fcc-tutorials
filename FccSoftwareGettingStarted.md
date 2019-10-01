@@ -76,13 +76,31 @@ Parameters used for the machine creation:
 	cernvmVersion: 2019.06-1
 	sharedFolder: /Users/ganis
 ```
-You see in partcular that your $HOME area is shared with the VM, so you can exchange files between the VM and the host machine very conveniently.
+You see in partcular that your `$HOME` area is shared with the VM, so you can exchange files between the VM and the host machine very conveniently.
 From now on you can either work in the VirtualBox window or ssh to the machine with
 ```
 cernvm-launch ssh fcc-tutorial
 ```
 In either case you need a user name and password, which by default are `fccuser` and `fccpass`; these can be changed in the `fcc-tutorial.context` file.
-Note that the SSH session currently does not support graphics.
+
+To enable graphics you need to find out the port on which the VM responds and use `ssh -Y -P <port> fccuser@localhost`. For example
+```
+$ cernvm-launch list
+fcc-tutorial:	CVM: 2019.06-1	port: 36998
+...
+$ ssh -Y -P 36998 fccuser@localhost
+The authenticity of host '[localhost]:36998 ([127.0.0.1]:36998)' can't be established.
+ECDSA key fingerprint is SHA256:JXjpOzSu7vIwgEDxc8s/fdDJv4gQs2SUjnbMnEZsaYI.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '[localhost]:36998' (ECDSA) to the list of known hosts.
+fccuser@localhost's password:
+Setting up external dependencies from /cvmfs/fcc.cern.ch/sw/views/releases/externals/96b.0.0/x86_64-centos7-gcc8-opt/setup.sh
+Setting up FCCSW from /cvmfs/fcc.cern.ch/sw/releases/fccsw/0.11/x86_64-centos7-gcc8-opt/setup.sh
+[fccuser@localhost ~]$
+```
+(you can safely ignore warnings about setting LC_CTYPE).
+Graphics should of course work well if you choose to work in the VirtualBox window.
+
 The `cernvm-launch` also supports listing, stopping, starting virtual machines. Please run `cernvm-launch -h` for all the available options.
 
 #### LHCb CentOS7 Docker image
