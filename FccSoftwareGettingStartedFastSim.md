@@ -7,29 +7,25 @@ Contents:
   * [FCC: Getting started with the production and analysis of fast\-simulated events](#fcc-getting-started-with-the-production-and-analysis-of-fast-simulated-events)
     * [Overview](#overview)
     * [Installation](#installation)
-    * [Getting started with papas (FCC\-ee)](#getting-started-with-papas-fcc-ee)
-      * [Set up your working directory](#set-up-your-working-directory)
-      * [Generate events with pythia8](#generate-events-with-pythia8)
-      * [Run papas and the analysis in heppy](#run-papas-and-the-analysis-in-heppy)
-      * [Make plots](#make-plots)
-    * [Getting started with Delphes (FCC\-hh)](#getting-started-with-delphes-fcc-hh)
-      * [Set up your working directory](#set-up-your-working-directory-1)
-      * [Run FCCSW with Pythia8+Delphes](#run-fccsw-with-pythia8-+-delphes)
+    * [Set up your working directory](#set-up-your-working-directory)
+    * [Getting started with Delphes](#getting-started-with-delphes)
+      * [Run FCCSW with Pythia8+Delphes](#run-fccsw-with-pythia8+delphes)
       * [Run the analysis in heppy](#run-the-analysis-in-heppy)
       * [Make plots](#make-plots-1)
       * [CutFlow](#cutflow)
+    * [Legacy: the Papas tool](#getting-started-with-papas-fcc-ee)
+      * [Set up your working directory](#set-up-your-working-directory-1)
+      * [Generate events with pythia8](#generate-events-with-pythia8)
+      * [Run papas and the analysis in heppy](#run-papas-and-the-analysis-in-heppy)
+      * [Make plots](#make-plots)
 
 ## Overview
 
 If you want to get started fast with the analysis of fast-simulated
 events, you're at the right place.
 
-We currently support two different approaches for fast simulation, Papas and Delphes. For now,
-
-* FCC-ee users are encouraged to use Papas,
-* FCC-hh and FCC-eh users should use Delphes.
-
-However, ultimately, all users are encouraged to try both fast simulations and to compare the results.
+Fast simulation is currently supported through the Delphes approach. Support for the Papas approach, initially used for FCC-ee, is
+discontinued and only provided in legacy; see [usage description](#getting-started-with-papas-fcc-ee) at the end of the page. 
 
 An analysis ntuple will be produced with [heppy](https://github.com/HEP-FCC/heppy), a simple modular event processing framework for high energy physics.
 
@@ -38,16 +34,134 @@ An analysis ntuple will be produced with [heppy](https://github.com/HEP-FCC/hepp
 * To configure your environment for the FCC software, just do:
 
 ```
-source /cvmfs/fcc.cern.ch/sw/views/releases/0.9.1/x86_64-slc6-gcc62-opt/setup.sh
+source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```
 
 **You will need to source this script everytime you want to use the
 software.**
 
-* Then, install [heppy](https://github.com/HEP-FCC/heppy/blob/master/README.md)
+* You can either use the `cvmfs` installation of `heppy`, pointed out by the environment variable HEPPY (defined after sourcing the above script), or clone the [heppy git](https://github.com/HEP-FCC/heppy) locally. The latter is mandatory on a fresh virtual machine (for `heppy` internal; problems with `gitpython`). 
+
+### Set up your working directory
+
+In order to have better control on all what is produced during the tutorial we advise to start from a fresh and clean working directory:
+
+    mkdir FCCFastSimTutorial
+    cd FCCFastSimTutorial
+
+For convenience we suggest to create a symlink to the FCCSW subdierctory with config files:
+
+    ln -sf $FCCSWBASEDIR/share/FCCSW
+
+If you decide to use `heppy` from `cvmfs`create also a second symlink
+
+    ln -sf $HEPPY
+
+or clone the GIT `heppy` repository:
+
+    git clone https://github.com/HEP-FCC/heppy.git
+
+You should get something like the following in your working directory:
+```
+$ ls -lt
+...
+lrwxr-xr-x. 1 ganis sf 112 Sep 30 19:03 heppy -> /cvmfs/fcc.cern.ch/sw/views/releases/externals/96b.0.0/x86_64-centos7-gcc8-opt/lib/python2.7/site-packages/heppy
+lrwxr-xr-x. 1 ganis sf 123 Sep 30 19:03 FCCSW -> /cvmfs/fcc.cern.ch/sw/releases/fccsw/linux-centos7-x86_64/gcc-8.3.0/fccsw-0.11-qqmlmzumogldsqoegt4ihhel4xnt62yw/share/FCCSW
+...
+```
+or
+```
+$ ls -lt
+...
+lrwxr-xr-x. 1 ganis sf 112 Sep 30 19:03 heppy
+lrwxr-xr-x. 1 ganis sf 123 Sep 30 19:03 FCCSW -> /cvmfs/fcc.cern.ch/sw/releases/fccsw/linux-centos7-x86_64/gcc-8.3.0/fccsw-0.11-qqmlmzumogldsqoegt4ihhel4xnt62yw/share/FCCSW
+...
+```
+
+## Getting started with Delphes
+
+In this tutorial, you will learn how to:
+
+-   generate events with Pythia8, process them through Delphes with
+    FCCSW and write them in the FCC EDM format.
+-   read these events with [heppy](https://github.com/HEP-FCC/heppy.git) to perfom basic selection and create an
+    ntuple
+-   read this ntuple with ROOT to make a few plots
+
+### Run FCCSW with Pythia8+Delphes
+
+Now you are ready to produce 100TeV ttbar events with Pythia, process them through Delphes and store them in the FCC-EDM:
+
+```
+fccrun FCCSW/Sim/SimDelphesInterface/options/PythiaDelphes_config.py --Filename FCCSW/Generation/data/Pythia_ttbar.cmd --DelphesCard FCCSW/Sim/SimDelphesInterface/data/FCChh_DelphesCard_Baseline_v01.tcl
+```
+you should obtain a file called `FCCDelphesOutput.root`.
+
+This example will run 100 events by default. To have more events for plotting purposes, you can increase this number or use files that have been already produced and stored on eos (see next section).
+
+With this file you are now ready to run the analysis framework [heppy](https://github.com/HEP-FCC/heppy.git).
 
 
-Getting started with papas (FCC-ee)
+### Run the analysis in heppy
+
+Copy locally the ttbar example of [heppy](https://github.com/HEP-FCC/heppy.git):
+
+    cp heppy/test/analysis_hh_ttbar_cfg.py .
+
+and edit the file to read the events you just produced running FCCSW previously
+`FCCDelphesOutput.root` in the `files` list in line 13. If
+you skip this step, the example will use files already produced and stored on eos, so
+you will need to setup eos:
+
+    export EOS_MGM_URL="root://eospublic.cern.ch"
+
+Now you are ready to run the ttbar example:
+
+    heppy myoutput analysis_hh_ttbar_cfg.py
+
+You get an output directory `myoutput` . Check its contents and the
+contents of its subdirectories. In particular, the following root file
+contains an ntuple with the variables we need:
+
+    myoutput/example/heppy.analyzers.examples.ttbar.TTbarTreeProducer.TTbarTreeProducer_1/tree.root 
+
+
+### Make plots
+
+Open the root file containing the ntuple in root:
+
+    root myoutput/example/heppy.analyzers.examples.ttbar.TTbarTreeProducer.TTbarTreeProducer_1/tree.root
+
+Make a few plots:
+
+**reconstructed W leptonic transverse mass:**
+
+    events->Draw("mtw")
+
+![Wt mass](./images/FccSoftwareGettingStartedFastSim/mtw.png)
+
+
+### CutFlow
+
+The file
+
+    myoutput/example/heppy.analyzers.examples.ttbar.selection.Selection_cuts/cut_flow.txt 
+
+contains a cut flow which should be compatible with this (obtained using the file on EOS).
+
+```
+Counter cut_flow :
+	 All events                                   10000 	 1.00 	 1.0000
+	 At least 4 jets                               8170 	 0.82 	 0.8170
+	 At least 1 b-jet                              7153 	 0.88 	 0.7153
+	 Exactly 1 lepton                              1303 	 0.18 	 0.1303
+	 MET > 20GeV                                   1202 	 0.92 	 0.1202
+```
+
+The first column represents the cut, the second one the raw number of events, 
+the third one the efficiency of the cut, and the last one the overall efficiency.
+
+Legacy: using the Papas tool (for FCC-ee)
 ----------------------------------------
 
 In this tutorial, you will learn how to:
@@ -246,99 +360,3 @@ Then:
     cd $FCC/Workdir
 -->
 
-## Getting started with Delphes (FCC-hh)
-
-In this tutorial, you will learn how to:
-
--   generate events with Pythia8, process them through Delphes with
-    FCCSW and write them in the FCC EDM format.
--   read these events with [heppy](https://github.com/HEP-FCC/heppy.git) to perfom basic selection and create an
-    ntuple
--   read this ntuple with ROOT to make a few plots
-
-But first, you will set up a working directory for your analysis, please folow [Installation](#installation)
-
-### Set up your working directory
-
-Start by installing [FCCSW](https://github.com/HEP-FCC/FCCSW) if not already done.
-If FCCSW is already installed, go into the **FCCSW** directory:
-
-    cd PATHTOMYFCCSW/FCCSW
-
-If **FCCSW** is not initialized:
-
-    source ./init.sh
-
-### Run FCCSW with Pythia8+Delphes
-
-Now you are ready to produce 100TeV ttbar events with Pythia, process them through Delphes and store them in the FCC-EDM:
-
-    ./run fccrun.py Sim/SimDelphesInterface/options/PythiaDelphes_config.py
-
-you should obtain a file called `FCCDelphesOutput.root`.
-
-This example will run 100 events by default. To have more events for plotting purposes, you can increase this number or use files that have been already produced and stored on eos (see next section).
-
-With this file you are now ready to run the analysis framework [heppy](https://github.com/HEP-FCC/heppy.git).
-
-
-### Run the analysis in heppy
-
-If not already done install the heppy package [Installation](#installation)
-Edit the ttbar example of [heppy](https://github.com/HEP-FCC/heppy.git):
-
-    heppy/test/analysis_hh_ttbar_cfg.py
-
-and use the file you produced running FCCSW previously
-`FCCDelphesOutput.root` in the `files` list in line 13. If
-you skip this step, the example will use files already produced and stored on eos, so
-you will need to setup eos:
-
-    export EOS_MGM_URL="root://eospublic.cern.ch"
-
-Now you are ready to run the ttbar example:
-
-    cd test
-    heppy myoutput analysis_hh_ttbar_cfg.py
-
-You get an output directory `myoutput` . Check its contents and the
-contents of its subdirectories. In particular, the following root file
-contains an ntuple with the variables we need:
-
-    myoutput/example/heppy.analyzers.examples.ttbar.TTbarTreeProducer.TTbarTreeProducer_1/tree.root 
-
-
-### Make plots
-
-Open the root file containing the ntuple in root:
-
-    root myoutput/example/heppy.analyzers.examples.ttbar.TTbarTreeProducer.TTbarTreeProducer_1/tree.root
-
-Make a few plots:
-
-**reconstructed W leptonic transverse mass:**
-
-    events->Draw("mtw")
-
-![Wt mass](./images/FccSoftwareGettingStartedFastSim/mtw.png)
-
-
-### CutFlow
-
-The file
-
-    myoutput/example/heppy.analyzers.examples.ttbar.selection.Selection_cuts/cut_flow.txt 
-
-contains a cut flow
-
-```
-Counter cut_flow :
-	 All events                                   10000 	 1.00 	 1.0000
-	 At least 4 jets                               8170 	 0.82 	 0.8170
-	 At least 1 b-jet                              7153 	 0.88 	 0.7153
-	 Exactly 1 lepton                              1303 	 0.18 	 0.1303
-	 MET > 20GeV                                   1202 	 0.92 	 0.1202
-```
-
-The first column represents the cut, the second one the raw number of events, 
-the third one the efficiency of the cut, and the last one the overall efficiency.

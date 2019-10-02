@@ -1,4 +1,7 @@
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/vvolkl/fcc-tutorials/mybinder?urlpath=https%3A%2F%2Fgithub.com%2FHEP-FCC%2Ffcc-tutorials%2Fraw%2Fmaster%2Fnotebooks%2FFCCFullAnalysis.ipynb)
+
+
+<a href="https://cern.ch/swanserver/cgi-bin/go?projurl=https://github.com/HEP-FCC/fcc-tutorials.git" target="_blank"><img src="http://swanserver.web.cern.ch/swanserver/images/badge_swan_white_150.png"/></a>
+and paste this environment script: `/cvmfs/fcc.cern.ch/sw/latest/setup.sh`
 
 ### List of available tutorials
 
@@ -12,5 +15,5 @@
     - [Using Virtual Machine](./FccVirtualMachine.md)
     - [Installing the standalone packages](./installing-fcc.md)
 - [Writing Documentation](./FccDocPage.md)
-- [Questions & Answers](./FccSoftwareQA.md)
+- [Questions & Answers](https:/cern.ch/fccsw-forum)
 - [How to do software releases](./releases.md)
