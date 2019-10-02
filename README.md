@@ -5,6 +5,13 @@ and paste this environment script: `/cvmfs/fcc.cern.ch/sw/latest/setup.sh`
 
 ### List of available tutorials
 
+For use with SWAN:
+- Notebook: `FccCaloPerformance.ipynb`
+- Notebook: `FCCeeDriftchamber.ipynb`
+- Notebook: `FCCFullAnalysis.ipynb`
+- `FCCeeAnalysis.md`
+
+Guides and other documentation:
 - [Getting Started](./FccSoftwareGettingStarted.md)
 - [Github workflow and contribution guide](./FccSoftwareGit.md)
 - [Getting started with the production and analysis of fast-simulated events](./FccSoftwareGettingStartedFastSim.md)
