@@ -13,7 +13,6 @@ and paste this environment script: `/cvmfs/fcc.cern.ch/sw/latest/setup.sh`
     - [CMake in FCCSW](./FccCMakeGuide.md)
 - Working locally on your laptop
     - [Using Virtual Machine](./FccVirtualMachine.md)
-    - [Installing the standalone packages](./installing-fcc.md)
+    * [Using FCCSW packaged for Ubuntu](https://fcc-pileup.web.cern.ch/fcc-pileup/sw/fcc-ubuntu-sw.html)
 - [Writing Documentation](./FccDocPage.md)
-- [Questions & Answers](https:/cern.ch/fccsw-forum)
-- [How to do software releases](./releases.md)
+- [Questions & Answers](https://cern.ch/fccsw-forum)
