@@ -58,7 +58,11 @@ The CernVM project provides a convenient tool to start VMs, [cernvm-launch](http
 To create and use a CernVM virtual machine for the FCC tutorials please follow the following steps:
 
    * Make sure [VirtualBox](https://www.virtualbox.org/) is installed (details installing instructions from the product web page).
-   * Download the `cernvm-launch` binary for your platform from the [dedicated download page](https://ecsft.cern.ch/dist/cernvm/launch/bin/); make sure is visible in your $PATH
+   * Download the `cernvm-launch` binary for your platform either from the [dedicated download page](https://ecsft.cern.ch/dist/cernvm/launch/bin/) or from the following links:
+      * [Linux](https://fccsw.web.cern.ch/fccsw/utils/vm/cernvm/launch/linux/cernvm-launch)
+      * [Mac](https://fccsw.web.cern.ch/fccsw/utils/vm/cernvm/launch/mac/cernvm-launch)
+
+     Make sure is visible in your $PATH.
    * Get the [fcc-tutorial.context](https://raw.githubusercontent.com/cernvm/public-contexts/master/fcc-tutorial.context) (use wget or curl)
 
 Once you have all this you can create the VM with this command:
