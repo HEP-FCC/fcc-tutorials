@@ -54,13 +54,13 @@ the workshop!
 
 The [Bash shell](http://cern.ch/go/gdJ9) will be used
 throughout the workshop.
-The default for new LHCb computing accounts is now Bash. If you have an older
+The default for new computing accounts is now Bash. If you have an older
 account, the default used to be a shell called `tcsh`
 (“tee-cee-shell”), which has subtly different ways of doing things
 in comparison with Bash.
 
 It is recommended to change your default shell to Bash if this is the case, which is much more
-widely used than `tcsh` and also supported by LHCb, by visiting the your
+widely used than `tcsh` and also supported by FCC, by visiting the your
 [CERN account page](https://account.cern.ch), then clicking “Resources and
 services”, then “List services”, “LXPLUS and Linux”, “Settings”, then change
 “Unix shell” to `/bin/bash`, and click “Save Selection”.
