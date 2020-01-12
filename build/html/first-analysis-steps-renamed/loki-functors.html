@@ -649,9 +649,9 @@ Therefore, to access the mass of the <span class="math notranslate nohighlight">
 <p>The usage of LoKi functors extends much further than in the interactive
 <code class="docutils literal notranslate"><span class="pre">GaudiPython</span></code> world we’ve been exploring here.</p>
 <p>They constitute the basis of particle filtering in the <em>selection framework</em>,
-discussed in the <a class="reference internal" href="../second-analysis-steps/building-decays-part0.html"><span class="doc">Building your own decay chain</span></a>
+discussed in the <a class="reference external" href="/second-analysis-steps/building-decays-part0">Building your own decay chain</a>
 lesson in
-<a class="reference internal" href="../second-analysis-steps/README.html"><span class="doc">second-analysis-steps</span></a>.
+<a class="reference external" href="/second-analysis-steps/README">second-analysis-steps</a>.
 Selecting particles means using LoKi <em>predicates</em>, functors that give a <code class="docutils literal notranslate"><span class="pre">bool</span></code>
 output, like <code class="docutils literal notranslate"><span class="pre">ISBASIC</span></code> and <code class="docutils literal notranslate"><span class="pre">HASTRACK</span></code>.
 Amongst these, a key functor is <code class="docutils literal notranslate"><span class="pre">in_range</span></code>, which returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the value
@@ -670,7 +670,7 @@ It helps writing CPU-efficient functors and thus is very important when building
 <div class="panel-body docutils container">
 <p>Have a look at the stripping line
 <a class="reference external" href="http://lhcbdoc.web.cern.ch/lhcbdoc/stripping/config/stripping28/charm/strippingd2hhpromptdst2d2kkline.html">D2hhPromptDst2D2KKLine</a> which is used in our example. Open a <code class="docutils literal notranslate"><span class="pre">CombineParticles/D2hhPromptDst2D2KKLine</span></code> section, and explain which requirements are coded in the ‘MotherCut’, ‘DaughterCuts’ and ‘CombinationCut’ sections.
-(More details about <code class="docutils literal notranslate"><span class="pre">CombineParticles</span></code> algorithm are explained in the <a class="reference internal" href="../second-analysis-steps/building-decays-part1.html"><span class="doc">lesson of second analysis steps</span></a>.)</p>
+(More details about <code class="docutils literal notranslate"><span class="pre">CombineParticles</span></code> algorithm are explained in the <a class="reference external" href="/second-analysis-steps/building-decays-part1">lesson of second analysis steps</a>.)</p>
 </div>
 </div>
 <p>Additionally, LoKi functors can be used directly inside our <code class="docutils literal notranslate"><span class="pre">DaVinci</span></code> jobs to store specific bits of information in our ntuples without the need for a complicated C++-based algorithms.

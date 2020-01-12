@@ -10,7 +10,7 @@ install:
   - pip install -vv starterkit-ci>=0.0.10
 
 script:
-  - starterkit_ci build
+  - starterkit_ci --allow-warnings build
   # - starterkit_ci check
 
 # With instructions from http://www.steveklabnik.com/automatically_update_github_pages_with_travis_example/

@@ -8,9 +8,7 @@ author = 'FCC Starterkit'
 html_logo = 'starterkit.png'
 
 exclude_patterns += [
-    'first-analysis-steps*/code/**',
-    'third-analysis-steps*/code/**',
-    'third-analysis-steps/README.md',
+    'archive',
     'README.md',
 ]
 
@@ -31,9 +29,7 @@ linkcheck_ignore += [
     r'https://research\.cs\.wisc\.edu/htcondor/.*',
 ]
 
-starterkit_ci_redirects['first-analysis-steps/index.html'] = 'https://lhcb.github.io/starterkit-lessons/first-analysis-steps/README.html'
-starterkit_ci_redirects['second-analysis-steps/index.html'] = 'https://lhcb.github.io/starterkit-lessons/second-analysis-steps/README.html'
-starterkit_ci_redirects['third-analysis-steps/index.html'] = 'https://lhcb.github.io/starterkit-lessons/third-analysis-steps/README.html'
+#starterkit_ci_redirects['first-analysis-steps/index.html'] = 'https://lhcb.github.io/starterkit-lessons/first-analysis-steps/README.html'
 
 
 def starterkit_ci_setup(app):
