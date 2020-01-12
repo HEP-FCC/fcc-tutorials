@@ -1,0 +1,593 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Github workflow and contribution guide &mdash; FCC Starterkit Lessons  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/panels.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/starterkit.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CMake guide for the FCC software" href="FccCMakeGuide.html" />
+    <link rel="prev" title="Developing FCCSW" href="README.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FCC Starterkit Lessons
+          
+
+          
+            
+            <img src="../_static/starterkit.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">First  Steps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/prerequisites.html">Pre-workshop checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/introduction-to-course.html">Goals of the course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/fccsw.html">An introduction to FCC Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/bookkeeping.html">Finding data in the Bookkeeping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/exploring-fcc-files.html">Inspecting an FCC data file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-events-tree">The <code class="docutils literal notranslate"><span class="pre">events</span></code> tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-metadata-tree">The <code class="docutils literal notranslate"><span class="pre">metadata</span></code> tree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/asking-questions.html">Asking good questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fast-sim-and-analysis/README.html">Generators, Fast Simulation and Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html">FCC: Getting started with the production and analysis of fast-simulated events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#installation">Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#set-up-your-working-directory">Set up your working directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#getting-started-with-delphes">Getting started with Delphes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-fccsw-with-pythia8-delphes">Run FCCSW with Pythia8+Delphes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-the-analysis-in-heppy">Run the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#make-plots">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#cutflow">CutFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#legacy-using-the-papas-tool-for-fcc-ee">Legacy: using the Papas tool (for FCC-ee)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id1">Set up your working directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#generate-events-with-pythia8">Generate events with pythia8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-papas-and-the-analysis-in-heppy">Run papas and the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id2">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#more-information">More information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html">FCC-hh: Pythia, Delphes, Heppy Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-i-generate-and-simulate-events-with-fccsw">Part I: Generate and simulate Events with FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-ii-analyze-the-output-with-heppy">Part II: Analyze the output with Heppy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iii-produce-plots">Part III: Produce plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iv-homework">Part IV: Homework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#other-documentation">Other documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html">FCC-ee: Getting started with analysing simulated physics events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#instructions">Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#exercices">Exercices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">Full Detector Simulations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html">FCC Calorimeter Performance Studies Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#using-the-dd4hep-detector-model-in-fcc-software">Using the DD4hep detector model in FCC Software.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#running-geant4-within-the-fcc-software-framework">Running Geant4 within the FCC Software Framework</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#obtaining-and-plotting-the-energy-resolution">Obtaining and Plotting the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#extracting-and-plotting-the-resolution">Extracting and Plotting the Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-parametrizing-the-energy-resolution">Further Topics: Parametrizing the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-calculating-the-sampling-fraction-and-using-it-in-simulation">Further Topics: Calculating the Sampling Fraction and using it in Simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html">FCCee: Full Simulation of IDEA Driftchamber</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-i-simulations-with-the-idea-detector-model-in-fccsw">Part I: Simulations with the IDEA detector model in  FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-ii-user-task-basic-reconstruction-with-a-hough-transform">Part II User Task: Basic Reconstruction with a Hough-Transform</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">Developing FCCSW</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Github workflow and contribution guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#first-time-setup-of-git">First time setup of git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generate-and-set-up-ssh-keys-for-github">Generate and set up ssh keys for github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#improving-your-git-experience">Improving your git experience</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#development-workflow">Development workflow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#keeping-your-local-repository-up-to-date">Keeping your local repository up to date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#contributing-code">Contributing code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#general-recommendations">General recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#commit-comments">Commit comments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cleaning-history">Cleaning history</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pull-requests">Pull requests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#trouble-shooting">Trouble-shooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#when-i-try-to-push-to-the-repository-i-get-an-authentication-error">When I try to push to the repository, I get an authentication error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#i-have-cloned-with-https-and-now-i-can-t-push-my-changes-what-do-i-do">I have cloned with https and now I can’t push my changes, what do I do?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#need-help">Need help?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FccCMakeGuide.html">CMake guide for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="FccCMakeGuide.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccCMakeGuide.html#quick-start-into-building-fccsw">Quick start into building FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccCMakeGuide.html#cmake-example-packages">CMake example packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccCMakeGuide.html#cmake-in-the-fcc-software-framework">CMake in the FCC software framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccCMakeGuide.html#ctest-in-fccsw">CTest in FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccCMakeGuide.html#using-an-internal-library">Using an internal library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccCMakeGuide.html#building-a-new-gaudi-module">Building a new Gaudi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccCMakeGuide.html#using-an-external-library">Using an external library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="FccCMakeGuide.html#customizing-how-cmake-is-run">Customizing how CMake is run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FccDocPage.html">Writing documentation for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="FccDocPage.html#where-to-put-documentation">Where to put documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccDocPage.html#when-and-how-is-the-documentation-page-updated">When and how is the documentation page updated?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccDocPage.html#structure-of-the-content">Structure of the content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccDocPage.html#running-website-generation-locally">Running website generation locally</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="FccDocPage.html#about-jekyll">About jekyll</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="FccDocPage.html#for-website-admins">For website admins</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CONDUCT.html">Contributor Code of Conduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html">Instructional Material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html#software">Software</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://lhcb.github.io/starterkit">LHCb starterkit</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Starterkit Lessons</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="README.html">Developing FCCSW</a> &raquo;</li>
+        
+      <li>Github workflow and contribution guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/developing-fcc-software/FccSoftwareGit.md" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="github-workflow-and-contribution-guide">
+<h1>Github workflow and contribution guide<a class="headerlink" href="#github-workflow-and-contribution-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This page should allow users that are new to Git to get started with the FCC
+software, and describes the workflow for accessing and contributing FCC
+code.</p>
+<p>For a general introduction to git, have a look at these tutorials:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.atlassian.com/git/tutorials/">Atlassian tutorial</a></p></li>
+<li><p><a class="reference external" href="http://pcottle.github.io/learnGitBranching/">Interactive tutorial</a></p></li>
+<li><p><a class="reference external" href="https://git-scm.com/book/en/v2">The git book</a></p></li>
+</ul>
+</div>
+<div class="section" id="first-time-setup-of-git">
+<h2>First time setup of git<a class="headerlink" href="#first-time-setup-of-git" title="Permalink to this headline">¶</a></h2>
+<p>Please refer to <a class="reference external" href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">this tutorial</a> and the <a class="reference external" href="https://help.github.com/articles/set-up-git/">GitHub help</a>.</p>
+</div>
+<div class="section" id="generate-and-set-up-ssh-keys-for-github">
+<h2>Generate and set up ssh keys for github<a class="headerlink" href="#generate-and-set-up-ssh-keys-for-github" title="Permalink to this headline">¶</a></h2>
+<p>When working on lxplus we recommend to clone github repositories via SSH, especially if you want to contribute code. For this to work, you need to generate ssh keys for authentication. See the corresponding github <a class="reference external" href="https://help.github.com/articles/generating-an-ssh-key/">help-page</a>.</p>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="generate-and-set-up-ssh-keys-for-github"><i class="fa fa-info-circle"></i> Generate and set up ssh keys for github</p>
+</div>
+<div class="panel-body docutils container">
+<p>If you only want to use the software it may be easier to use https. In that case you don’t need to generate the keys but have to replace <code class="docutils literal notranslate"><span class="pre">git&#64;github:</span></code> with <code class="docutils literal notranslate"><span class="pre">https://github.com/</span></code> in all the instructions. Note that you’ll not be able to push to your repository when you are on lxplus. You can also start using https for now and later re-add your repository with ssh authentication, see the <a class="reference external" href="#trouble-shooting">trouble shooting section</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="improving-your-git-experience">
+<h2>Improving your git experience<a class="headerlink" href="#improving-your-git-experience" title="Permalink to this headline">¶</a></h2>
+<p>It may be useful to install <a class="reference external" href="https://github.com/git/git/tree/master/contrib/completion">Git integration tools</a> for your shell that allow tab-completion of most git commands and also can show you in your prompt on which branch you currently are, what changes you have pending, etc.</p>
+</div>
+<div class="section" id="development-workflow">
+<h2>Development workflow<a class="headerlink" href="#development-workflow" title="Permalink to this headline">¶</a></h2>
+<p>You will be using (at least) 3 versions of the FCCSW repository:</p>
+<ol class="simple">
+<li><p>The official <a class="reference external" href="https://github.com/HEP-FCC/FCCSW">FCCSW on github</a></p></li>
+<li><p>Your fork of FCCSW on github (see <a class="reference external" href="https://help.github.com/articles/fork-a-repo/">github help</a> on what that means)</p></li>
+<li><p>Your local repository copy in your work area (e.g. on AFS)</p></li>
+</ol>
+<p>The repositories 1 and 2 are added as remote to the repository 3:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:<span class="o">[</span>YOUR_GITHUB_USER<span class="o">]</span>/FCCSW.git <span class="c1"># create a local copy (3) of your fork (2)</span>
+<span class="nb">cd</span> FCCSW
+git remote add hep-fcc git@github.com:HEP-FCC/FCCSW.git <span class="c1"># add official repo (1) as additional remote</span>
+</pre></div>
+</div>
+<div class="section" id="keeping-your-local-repository-up-to-date">
+<h3>Keeping your local repository up to date<a class="headerlink" href="#keeping-your-local-repository-up-to-date" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>fetch all changes from the official repository (1)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git fetch hep-fcc
+</pre></div>
+</div>
+</li>
+<li><p>rebase your development area to the master branch from the official repository (1), <strong>please read <a class="reference external" href="https://www.atlassian.com/git/tutorials/rewriting-history">this</a> to avoid loss of work</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git rebase -i hep-fcc/master
+</pre></div>
+</div>
+<p>in this process you can also fix any commits that need touching up, <strong>be aware that deleting commits in the list will result also in the deletion of the corresponding changes</strong> (more info in the <a class="reference external" href="https://help.github.com/articles/about-git-rebase/">GitHub help</a> and the <a class="reference external" href="https://www.atlassian.com/git/tutorials/rewriting-history">Atlassian tutorial</a>)</p>
+</li>
+<li><p>push your local changes to your fork (2), see <a class="reference external" href="#contributing-code">below</a> how to create a local branch</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git push origin [NAME_OF_LOCAL_BRANCH]
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="contributing-code">
+<h3>Contributing code<a class="headerlink" href="#contributing-code" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>if you are fixing a bug, first create an issue in the github <a class="reference external" href="https://github.com/HEP-FCC/FCCSW/issues">issue tracker</a></p></li>
+<li><p>develop your feature in your local copy (3) on a local branch of your choice, to create a branch do:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git branch -b [NAME_OF_LOCAL_BRANCH]
+</pre></div>
+</div>
+</li>
+<li><p>refer to <a class="reference external" href="https://www.atlassian.com/git/tutorials/saving-changes">this tutorial</a> to see how to commit changes</p></li>
+<li><p>occasionally, get new code from the official repository (1) as explained above and merge it in this branch</p></li>
+<li><p>test:</p>
+<ul class="simple">
+<li><p>that the code compiles and all tests succeed (<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">test</span></code>)</p></li>
+<li><p>that your code runs (even better: <a class="reference external" href="https://github.com/HEP-FCC/FCCSW/blob/master/doc/AddingTestsToFCCSW">add an automatic test</a>)</p></li>
+<li><p>that it produces the expected results</p></li>
+</ul>
+</li>
+<li><p>push your local branch to your fork (2) (see <a class="reference external" href="#keeping-your-local-repository-up-to-date">above</a>)</p></li>
+<li><p>create a pull request from your fork (2) to the offical repository’s (1) master branch (see github <a class="reference external" href="https://help.github.com/articles/creating-a-pull-request/">help-page</a>)</p>
+<ul class="simple">
+<li><p>also see the <a class="reference external" href="#pull-requests">recommendations for pull requests</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="recommendations">
+<h2>Recommendations<a class="headerlink" href="#recommendations" title="Permalink to this headline">¶</a></h2>
+<p>Please always follow the recommendations below.</p>
+<div class="section" id="general-recommendations">
+<h3>General recommendations<a class="headerlink" href="#general-recommendations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>if you’re working on a given topic, always create a branch for
+it, e.g. <code class="docutils literal notranslate"><span class="pre">pythia_interface</span></code>. You may commit many times to this branch
+in your local repository. When you have something solid create a
+pull request to the official FCCSW repository.</p></li>
+<li><p>Have a look at our <a class="reference external" href="https://github.com/HEP-FCC/FCCSW/blob/master/doc/CppCodingStyleGuidelines">coding guidelines</a>.</p></li>
+</ul>
+</div>
+<div class="section" id="commit-comments">
+<h3>Commit comments<a class="headerlink" href="#commit-comments" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>feel free to commit often to your local repository, make a pull request once the topic you are working on is finished</p>
+<ul class="simple">
+<li><p>if the feature you are working on is large, consider making a work in progress-pull request (see <a class="reference external" href="#pull-requests">below</a>)</p></li>
+<li><p>git commits represent a snapshot of the software as a whole, and not only the difference to a previous commit (although that as well, in practice). It is recommended that each commit compiles and passes the tests. Take a look at the <a class="reference external" href="https://github.com/HEP-FCC/FCCSW/commits/master">commit history of FCCSW</a> and the histories of some individual files to find both good and bad examples.</p></li>
+</ul>
+</li>
+<li><p>always provide a meaningful comment for each commit</p>
+<ul class="simple">
+<li><p>if you are working on an issue, refer to that issue by adding “refs. #[issue id]”, see also
+<a class="reference external" href="https://help.github.com/articles/closing-issues-via-commit-messages/">GitHub help</a></p></li>
+</ul>
+</li>
+<li><p>commit comments should look like the one below, so that they show up
+correctly in git printouts.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>first version of a pythia interface # this line should be a short 1 liner
+
+Here, you may write a few more lines if needed
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="cleaning-history">
+<h3>Cleaning history<a class="headerlink" href="#cleaning-history" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>before opening a pull request it may be a good idea to check that your history makes sense (commit messages explain what you did, no unnecessary commits, etc.), check with:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git log
+</pre></div>
+</div>
+</li>
+<li><p>if you see commits that you’d like to change, there are several ways of doing that, the most commonly used is <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code>:</p>
+<ul class="simple">
+<li><p>with the interactive version you can rebase your development branch to the official master and fix the history at the same time</p></li>
+</ul>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git fetch hep-fcc # get changes from the official repo
+git rebase -i hep-fcc/master # do the actual rebase
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>git will guide you through the steps, where you can delete entire commits (and the corresponding changes), merge commits and change commit messages</p></li>
+<li><p>more information can be found in <a class="reference external" href="https://www.atlassian.com/git/tutorials/rewriting-history#git-rebase-i">this tutorial</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="pull-requests">
+<h3>Pull requests<a class="headerlink" href="#pull-requests" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Give a meaningful title that appropriately describes what you did (e.g. Add new calorimeter clustering)</p>
+<ul>
+<li><p>Pull requests of work in progress (to make people aware that you are working on a feature) create a PR starting with “[WIP]”</p></li>
+</ul>
+</li>
+<li><p>In the description, give a short bullet-point list of what was done</p></li>
+<li><p>If your pull request fixes issues tracked in the <a class="reference external" href="https://github.com/HEP-FCC/FCCSW/issues">issue tracker</a>:</p>
+<ul>
+<li><p>Make sure you added a test that shows they are actually fixed</p></li>
+<li><p>In the description mention that you fixed it by referring to the issue: “fixes #<issue-id>” (this will automatically close the issue, see also <a class="reference external" href="https://help.github.com/articles/closing-issues-via-commit-messages/">GitHub help</a>)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="trouble-shooting">
+<h2>Trouble-shooting<a class="headerlink" href="#trouble-shooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="when-i-try-to-push-to-the-repository-i-get-an-authentication-error">
+<h3>When I try to push to the repository, I get an authentication error<a class="headerlink" href="#when-i-try-to-push-to-the-repository-i-get-an-authentication-error" title="Permalink to this headline">¶</a></h3>
+<p>Check with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span></code> which remote repositories you have added to your local copy. You should see something like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>hep-fcc	git@github.com:HEP-FCC/FCCSW.git (fetch)
+hep-fcc	git@github.com:HEP-FCC/FCCSW.git (push)
+origin	git@github.com:[your git user name]/FCCSW.git (fetch)
+origin	git@github.com:[your git user name]/FCCSW.git (push)
+</pre></div>
+</div>
+<p>If you see something similar but all the addresses start with <code class="docutils literal notranslate"><span class="pre">https</span></code>, see <a class="reference external" href="#i-have-cloned-with-https-and-now-i-cant-push-my-changes-what-do-i-do">below</a>.</p>
+<p>If you only see <code class="docutils literal notranslate"><span class="pre">origin</span> <span class="pre">git&#64;github.com:HEP-FCC/FCCSW.git</span></code>, you need to add your own repository, push to that one and do a pull request, as described above. To add your own repository do:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git remote rename origin hep-fcc
+git remote add myfccsw git@github.com:[your git user name]/FCCSW.git
+</pre></div>
+</div>
+</div>
+<div class="section" id="i-have-cloned-with-https-and-now-i-can-t-push-my-changes-what-do-i-do">
+<h3>I have cloned with https and now I can’t push my changes, what do I do?<a class="headerlink" href="#i-have-cloned-with-https-and-now-i-can-t-push-my-changes-what-do-i-do" title="Permalink to this headline">¶</a></h3>
+<p>You only need to change the URL of your remote pointing to your repository to one that uses SSH instead:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git remote set-url [the remote name] git@github.com:[your git user name]/FCCSW.git
+</pre></div>
+</div>
+<p>Now you can push to that remote with:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git push [the remote name] [the branch you want to push]
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="need-help">
+<h2>Need help?<a class="headerlink" href="#need-help" title="Permalink to this headline">¶</a></h2>
+<p>In case you have any questions on this guide, or need help to sort out
+an issue with a repository, feel free to drop a mail to
+fcc-experiments-sw-dev at CERN, and we’ll be happy to help you.
+Alternatively create an issue in the <a class="reference external" href="https://github.com/HEP-FCC/FCCSW/issues">bug tracker</a>
+<img alt="smile" src="https://twiki.cern.ch/twiki/pub/TWiki/SmiliesPlugin/smile.gif" /></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="FccCMakeGuide.html" class="btn btn-neutral float-right" title="CMake guide for the FCC software" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="README.html" class="btn btn-neutral float-left" title="Developing FCCSW" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, FCC Starterkit
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

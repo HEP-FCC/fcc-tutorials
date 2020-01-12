@@ -1,0 +1,526 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The LHCb data flow &mdash; FCC Starterkit Lessons  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/panels.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/starterkit.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FCC Starterkit Lessons
+          
+
+          
+            
+            <img src="../_static/starterkit.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">First  Steps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/prerequisites.html">Pre-workshop checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/introduction-to-course.html">Goals of the course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/fccsw.html">An introduction to FCC Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/bookkeeping.html">Finding data in the Bookkeeping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/exploring-fcc-files.html">Inspecting an FCC data file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-events-tree">The <code class="docutils literal notranslate"><span class="pre">events</span></code> tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-metadata-tree">The <code class="docutils literal notranslate"><span class="pre">metadata</span></code> tree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/asking-questions.html">Asking good questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fast-sim-and-analysis/README.html">Generators, Fast Simulation and Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html">FCC: Getting started with the production and analysis of fast-simulated events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#installation">Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#set-up-your-working-directory">Set up your working directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#getting-started-with-delphes">Getting started with Delphes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-fccsw-with-pythia8-delphes">Run FCCSW with Pythia8+Delphes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-the-analysis-in-heppy">Run the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#make-plots">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#cutflow">CutFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#legacy-using-the-papas-tool-for-fcc-ee">Legacy: using the Papas tool (for FCC-ee)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id1">Set up your working directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#generate-events-with-pythia8">Generate events with pythia8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-papas-and-the-analysis-in-heppy">Run papas and the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id2">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#more-information">More information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html">FCC-hh: Pythia, Delphes, Heppy Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-i-generate-and-simulate-events-with-fccsw">Part I: Generate and simulate Events with FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-ii-analyze-the-output-with-heppy">Part II: Analyze the output with Heppy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iii-produce-plots">Part III: Produce plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iv-homework">Part IV: Homework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#other-documentation">Other documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html">FCC-ee: Getting started with analysing simulated physics events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#instructions">Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#exercices">Exercices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">Full Detector Simulations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html">FCC Calorimeter Performance Studies Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#using-the-dd4hep-detector-model-in-fcc-software">Using the DD4hep detector model in FCC Software.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#running-geant4-within-the-fcc-software-framework">Running Geant4 within the FCC Software Framework</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#obtaining-and-plotting-the-energy-resolution">Obtaining and Plotting the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#extracting-and-plotting-the-resolution">Extracting and Plotting the Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-parametrizing-the-energy-resolution">Further Topics: Parametrizing the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-calculating-the-sampling-fraction-and-using-it-in-simulation">Further Topics: Calculating the Sampling Fraction and using it in Simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html">FCCee: Full Simulation of IDEA Driftchamber</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-i-simulations-with-the-idea-detector-model-in-fccsw">Part I: Simulations with the IDEA detector model in  FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-ii-user-task-basic-reconstruction-with-a-hough-transform">Part II User Task: Basic Reconstruction with a Hough-Transform</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">Developing FCCSW</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html">Github workflow and contribution guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#first-time-setup-of-git">First time setup of git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#generate-and-set-up-ssh-keys-for-github">Generate and set up ssh keys for github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#improving-your-git-experience">Improving your git experience</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#development-workflow">Development workflow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#keeping-your-local-repository-up-to-date">Keeping your local repository up to date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#contributing-code">Contributing code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#general-recommendations">General recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#commit-comments">Commit comments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#cleaning-history">Cleaning history</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#pull-requests">Pull requests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#trouble-shooting">Trouble-shooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#when-i-try-to-push-to-the-repository-i-get-an-authentication-error">When I try to push to the repository, I get an authentication error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#i-have-cloned-with-https-and-now-i-can-t-push-my-changes-what-do-i-do">I have cloned with https and now I can’t push my changes, what do I do?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#need-help">Need help?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html">CMake guide for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#quick-start-into-building-fccsw">Quick start into building FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-example-packages">CMake example packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-in-the-fcc-software-framework">CMake in the FCC software framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#ctest-in-fccsw">CTest in FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-internal-library">Using an internal library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#building-a-new-gaudi-module">Building a new Gaudi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-external-library">Using an external library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#customizing-how-cmake-is-run">Customizing how CMake is run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html">Writing documentation for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#where-to-put-documentation">Where to put documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#when-and-how-is-the-documentation-page-updated">When and how is the documentation page updated?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#structure-of-the-content">Structure of the content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#running-website-generation-locally">Running website generation locally</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#about-jekyll">About jekyll</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#for-website-admins">For website admins</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CONDUCT.html">Contributor Code of Conduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html">Instructional Material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html#software">Software</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://lhcb.github.io/starterkit">LHCb starterkit</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Starterkit Lessons</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>The LHCb data flow</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/first-analysis-steps-renamed/dataflow.md" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="the-lhcb-data-flow">
+<h1>The LHCb data flow<a class="headerlink" href="#the-lhcb-data-flow" title="Permalink to this headline">¶</a></h1>
+<div class="panel panel-objectives docutils container">
+<div class="panel-header open docutils container">
+<p id="learning-objectives"><i class="fa fa-line-chart"></i> Learning Objectives</p>
+</div>
+<div class="panel-body docutils container">
+<ul class="simple">
+<li><p>Understand the LHCb data flow</p></li>
+<li><p>Learn the key concepts on the stripping</p></li>
+</ul>
+</div>
+</div>
+<p>The Large Hadron Collider provides proton-proton collisions to LHCb 40 million
+times a second.
+This results in a <em>huge</em> amount of data. In fact, if we were to store all the data coming in to LHCb, we would be recording ~ 1 TB <em>every second</em>.</p>
+<p>That’s too much data for us to be able to keep all of it, the price of storage
+is just too high, so instead we need to <em>filter</em> the data and try to keep only
+the events which contain something interesting.
+This raises its own problems:</p>
+<ul class="simple">
+<li><p>How do we filter and process the recorded data quickly and accurately?</p></li>
+<li><p>How do we manage all the complex tasks required to work with collision data?</p></li>
+<li><p>How do we organize all the data of a single bunch crossing in a flexible way?</p></li>
+<li><p>How do we configure our software flexibly without having to recompile it?</p></li>
+<li><p>Can you think of more?</p></li>
+</ul>
+<p>These questions arise mostly due to two key points: the data must be processed
+very quickly because it’s arriving very quickly, and the data is complex so
+there’s a lot that can be done with it. In the last lesson we saw how many
+steps it took just to reconstruct a single decay, but there are thousands of
+possibilities that we might be interested in! Being able to perform such
+combinations in a flexible manner is then very important.</p>
+<p>Collisions recorded by the LHCb detector go through a specific data flow
+designed to maximise the data-taking efficiency and data quality.
+This consists of several steps, each one being controlled by an ‘application’
+that processes the data event-by-event, using the data from the previous step
+and creating the results ready for the next.
+These steps are as follows:</p>
+<ol class="simple">
+<li><p>Data from the detector are filtered through the <em>trigger</em>, which consists
+of the L0, implemented in hardware, and the high level trigger (HLT),
+implemented in software. The application responsible for the software trigger
+is Moore, discussed in the <a class="reference internal" href="../second-analysis-steps/hlt-intro.html"><span class="doc">trigger lesson</span></a>
+in second-analysis-steps.</p></li>
+<li><p>Triggered, raw data are reconstructed to transform the detector hits into
+objects such as tracks and clusters. This is done by the Brunel
+application. The objects are stored into an output file in a ‘DST’ format.</p></li>
+<li><p>The reconstructed DST files are suitable for analysis, but they are not
+accessible to users due to computing restrictions. Data are filtered
+further through a set of selections called the <em>stripping</em>, controlled by
+the DaVinci application which write out data either in the DST or ‘µDST’
+(micro-DST) format. To save disk space and to speed up access for analysts, the
+output files are grouped into <em>streams</em> which contain similar selections.
+By grouping all of the fully hadronic charm selections together, for
+example, analysts interested in that type of physics don’t waste time running
+over the output of the dimuon selections.</p></li>
+</ol>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="the-output-format"><i class="fa fa-info-circle"></i> The output format</p>
+</div>
+<div class="panel-body docutils container">
+<p>A DST file is a ROOT file which contains the full event information, such as
+reconstructed objects and raw data. Each event typically takes around 150kB of
+disk space in the DST format.
+The µDST format was designed to save space by storing only the
+information concerning the build <em>candidates</em> (that is, the objects used
+to construct particle decays like tracks); the raw event, which takes
+around 50kB per event, is discarded.</p>
+<p>The overview of most important file formats used in LHCb can be found <a class="reference external" href="http://lhcbdoc.web.cern.ch/lhcbdoc/gauss/doc/FileTypes.php">here</a>.</p>
+</div>
+</div>
+<ol class="simple">
+<li><p>Users can run their own analysis tools to extract variables for their
+analysis with the DaVinci application. The processing is slightly different
+between DST and µDST, since some calculations need the other tracks in the
+event (not only the signal), which are not available in the latter format.</p></li>
+</ol>
+<p>We also produced lots of simulated events, often called Monte Carlo data, and
+this is processed in a very similar way to real data.
+This similarity is very beneficial, as the simulated data is subject to the
+same deficiencies as in the processing of real data.
+There are two simulation steps which replace the proton-proton collisions and
+the detector response:</p>
+<ol class="simple">
+<li><p>The simulation of proton-proton collisions, and the hadronisation and decay
+of the resulting particles, are ultimately controlled by the Gauss
+application. Gauss is responsible for calling the various Monte Carlo
+generators that are supported such as Pythia (the default in LHCb) and POWHEG,
+and for controlling EvtGen and Geant4. EvtGen is used to describe the decays of
+simulated particles, whilst Geant4 is used to simulate the propagation and
+interaction of particles through and with the detector.</p></li>
+<li><p>The simulated hits made in the virtual detector are converted to signals
+that mimic the real detector by the Boole application. The output of Boole
+is designed to closely match the output of the real detector, and so the
+simulated data can then be passed through the usual data processing chain
+described above, beginning with the trigger.</p></li>
+</ol>
+<p>So, the data flow and the associated applications look like this:</p>
+<p><a class="reference download internal" download="" href="../_downloads/d14f63a74aa92f935be1540f6b690ce6/lhcb_data_flow.png"><code class="xref download docutils literal notranslate"><img alt="&quot;The flow of real and simulated data during Run 1 of the LHC&quot;" src="../_images/lhcb_data_flow.png" /></code></a></p>
+<p>Knowing this flow is essential in selecting your data! Different application
+versions can produce very different physics, so it’s very useful to know how
+each application has manipulated the data you want to use.</p>
+<div class="panel panel-challenge docutils container">
+<div class="panel-header open docutils container">
+<p id="why-are-there-multiple-applications?"><i class="fa fa-square-o"></i> Why are there multiple applications?</p>
+</div>
+<div class="panel-body docutils container">
+<p>It’s often simpler to create and visualise a single, monolithic program that
+does <em>everything</em>, but that’s not how the data flow is set up in LHCb. Why not?
+What are the advantages of splitting up the software per task? What are the
+disadvantages?</p>
+</div>
+</div>
+<p>With the exception of a few specific studies, it is only the DaVinci
+application that is run by users, everything else is run ‘centrally’ either on
+the computing farm next to the detector or on the Grid.</p>
+<p>The reconstruction, Brunel, is rarely performed as it is very computationally
+intensive.
+It is only done when the data are taken and when a new reconstruction
+configuration is available.
+The stripping can be performed more often, since it runs on reconstructed data.</p>
+<p>Stripping ‘campaigns’, when the stripping selections are centrally run, are
+identified by a version as <code class="docutils literal notranslate"><span class="pre">SXrYpZ</span></code>:</p>
+<ul class="simple">
+<li><p>The digit <code class="docutils literal notranslate"><span class="pre">X</span></code> marks the <em>major</em> stripping version. This marks all major
+<em>restrippings</em>, in which the full list of selections are processed.</p></li>
+<li><p>The digit <code class="docutils literal notranslate"><span class="pre">Y</span></code> is the release version, which was used during Run 1 to mark
+the <em>data type</em>, which corresponds to the year the data were taken: <code class="docutils literal notranslate"><span class="pre">0</span></code> was
+used for 2012 and <code class="docutils literal notranslate"><span class="pre">1</span></code> for 2011. The latest stripping for Run 1 data is called
+<code class="docutils literal notranslate"><span class="pre">S21r0p1</span></code> for 2012 and <code class="docutils literal notranslate"><span class="pre">S21r1p2</span></code> for 2011.</p></li>
+<li><p>The digit <code class="docutils literal notranslate"><span class="pre">Z</span></code> marks the <em>patch</em> version, which correspond to <em>incremental
+strippings</em>; campaigns in which only a handful of selections are run, either
+to fix bugs or to add a small number of new ones.</p></li>
+</ul>
+<p>Knowing the reconstruction and stripping versions is often the most important
+part in choosing your data, because the selections generally always change
+between major stripping versions, and variables can look very different between
+reconstruction versions.</p>
+<p>The list of stripping selection largely defines the reconstructed decays that
+are available to you, but the list is very long as there’s a lot we can do with
+our data. If you don’t know the stripping line you need, it’s usually best to
+ask the stripping coordinators of the working group you’ll be presenting your
+work to. To learn more about the stripping, the best resource is the <a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/LHCb/LHCbStripping">stripping
+page on the LHCb
+TWiki</a>.
+In it we can find:</p>
+<ul class="simple">
+<li><p>The status of the current stripping, e.g. for <a class="reference external" href="http://lhcbproject.web.cern.ch/lhcbproject/lbdirac/Reprocessing/stats-re-stripping28.html">Stripping <code class="docutils literal notranslate"><span class="pre">S28</span></code></a>.</p></li>
+<li><p>The configuration of all past stripping campaign, e.g. for <a class="reference external" href="http://lhcbproject.web.cern.ch/lhcbproject/lbdirac/Reprocessing/stats-re-stripping-fall14.html">Stripping <code class="docutils literal notranslate"><span class="pre">S21r1</span></code></a>.</p></li>
+</ul>
+<p>Additionally, the information on all strippings can be found in the <a class="reference external" href="http://lhcbdoc.web.cern.ch/lhcbdoc/stripping/">stripping
+project
+website</a>,
+where you can see all the algorithms run and cuts applied in each <em>line</em>.
+For example, if we wanted to understand the
+<code class="docutils literal notranslate"><span class="pre">D2hhPromptDst2D2KKLine</span></code> line, which we will use in the
+<a class="reference internal" href="interactive-dst.html"><span class="doc">exploring a DST</span></a> lesson later on, we would go
+<a class="reference external" href="http://lhcbdoc.web.cern.ch/lhcbdoc/stripping/config/stripping28/charm/strippingd2hhpromptdst2d2kkline.html">here</a>.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, FCC Starterkit
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

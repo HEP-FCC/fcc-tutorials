@@ -1,0 +1,497 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CMake guide for the FCC software &mdash; FCC Starterkit Lessons  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/panels.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/starterkit.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Writing documentation for the FCC software" href="FccDocPage.html" />
+    <link rel="prev" title="Github workflow and contribution guide" href="FccSoftwareGit.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FCC Starterkit Lessons
+          
+
+          
+            
+            <img src="../_static/starterkit.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">First  Steps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/prerequisites.html">Pre-workshop checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/introduction-to-course.html">Goals of the course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/fccsw.html">An introduction to FCC Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/bookkeeping.html">Finding data in the Bookkeeping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/exploring-fcc-files.html">Inspecting an FCC data file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-events-tree">The <code class="docutils literal notranslate"><span class="pre">events</span></code> tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-metadata-tree">The <code class="docutils literal notranslate"><span class="pre">metadata</span></code> tree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/asking-questions.html">Asking good questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fast-sim-and-analysis/README.html">Generators, Fast Simulation and Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html">FCC: Getting started with the production and analysis of fast-simulated events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#installation">Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#set-up-your-working-directory">Set up your working directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#getting-started-with-delphes">Getting started with Delphes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-fccsw-with-pythia8-delphes">Run FCCSW with Pythia8+Delphes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-the-analysis-in-heppy">Run the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#make-plots">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#cutflow">CutFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#legacy-using-the-papas-tool-for-fcc-ee">Legacy: using the Papas tool (for FCC-ee)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id1">Set up your working directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#generate-events-with-pythia8">Generate events with pythia8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-papas-and-the-analysis-in-heppy">Run papas and the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id2">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#more-information">More information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html">FCC-hh: Pythia, Delphes, Heppy Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-i-generate-and-simulate-events-with-fccsw">Part I: Generate and simulate Events with FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-ii-analyze-the-output-with-heppy">Part II: Analyze the output with Heppy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iii-produce-plots">Part III: Produce plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iv-homework">Part IV: Homework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#other-documentation">Other documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html">FCC-ee: Getting started with analysing simulated physics events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#instructions">Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#exercices">Exercices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">Full Detector Simulations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html">FCC Calorimeter Performance Studies Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#using-the-dd4hep-detector-model-in-fcc-software">Using the DD4hep detector model in FCC Software.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#running-geant4-within-the-fcc-software-framework">Running Geant4 within the FCC Software Framework</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#obtaining-and-plotting-the-energy-resolution">Obtaining and Plotting the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#extracting-and-plotting-the-resolution">Extracting and Plotting the Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-parametrizing-the-energy-resolution">Further Topics: Parametrizing the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-calculating-the-sampling-fraction-and-using-it-in-simulation">Further Topics: Calculating the Sampling Fraction and using it in Simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html">FCCee: Full Simulation of IDEA Driftchamber</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-i-simulations-with-the-idea-detector-model-in-fccsw">Part I: Simulations with the IDEA detector model in  FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-ii-user-task-basic-reconstruction-with-a-hough-transform">Part II User Task: Basic Reconstruction with a Hough-Transform</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">Developing FCCSW</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FccSoftwareGit.html">Github workflow and contribution guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="FccSoftwareGit.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccSoftwareGit.html#first-time-setup-of-git">First time setup of git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccSoftwareGit.html#generate-and-set-up-ssh-keys-for-github">Generate and set up ssh keys for github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccSoftwareGit.html#improving-your-git-experience">Improving your git experience</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccSoftwareGit.html#development-workflow">Development workflow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="FccSoftwareGit.html#keeping-your-local-repository-up-to-date">Keeping your local repository up to date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FccSoftwareGit.html#contributing-code">Contributing code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="FccSoftwareGit.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="FccSoftwareGit.html#general-recommendations">General recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FccSoftwareGit.html#commit-comments">Commit comments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FccSoftwareGit.html#cleaning-history">Cleaning history</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FccSoftwareGit.html#pull-requests">Pull requests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="FccSoftwareGit.html#trouble-shooting">Trouble-shooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="FccSoftwareGit.html#when-i-try-to-push-to-the-repository-i-get-an-authentication-error">When I try to push to the repository, I get an authentication error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FccSoftwareGit.html#i-have-cloned-with-https-and-now-i-can-t-push-my-changes-what-do-i-do">I have cloned with https and now I can’t push my changes, what do I do?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="FccSoftwareGit.html#need-help">Need help?</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">CMake guide for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quick-start-into-building-fccsw">Quick start into building FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmake-example-packages">CMake example packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmake-in-the-fcc-software-framework">CMake in the FCC software framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ctest-in-fccsw">CTest in FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-an-internal-library">Using an internal library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-a-new-gaudi-module">Building a new Gaudi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-an-external-library">Using an external library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#customizing-how-cmake-is-run">Customizing how CMake is run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FccDocPage.html">Writing documentation for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="FccDocPage.html#where-to-put-documentation">Where to put documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccDocPage.html#when-and-how-is-the-documentation-page-updated">When and how is the documentation page updated?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccDocPage.html#structure-of-the-content">Structure of the content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccDocPage.html#running-website-generation-locally">Running website generation locally</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="FccDocPage.html#about-jekyll">About jekyll</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="FccDocPage.html#for-website-admins">For website admins</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CONDUCT.html">Contributor Code of Conduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html">Instructional Material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html#software">Software</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://lhcb.github.io/starterkit">LHCb starterkit</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Starterkit Lessons</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="README.html">Developing FCCSW</a> &raquo;</li>
+        
+      <li>CMake guide for the FCC software</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/developing-fcc-software/FccCMakeGuide.md" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="cmake-guide-for-the-fcc-software">
+<h1>CMake guide for the FCC software<a class="headerlink" href="#cmake-guide-for-the-fcc-software" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>CMake is a tool for building software, which has become the de-facto
+standard outside HEP. In HEP, it is for example used by the ILC/CLIC
+communities and by the LHCb collaboration. For CMS people, CMake is the
+equivalent of scram. In FCCSW, CMake is used mainly via Gaudi macros, which are however fairly similar to plain CMake commands in syntax.</p>
+<p>This <a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/LHCb/GaudiCMakeConfiguration">LHCb Twiki</a> has some additional information on
+various Gaudi CMake functions.</p>
+</div>
+<div class="section" id="quick-start-into-building-fccsw">
+<h2>Quick start into building FCCSW<a class="headerlink" href="#quick-start-into-building-fccsw" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The software can be compiled in the root directory with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">-j8</span></code>.</p></li>
+<li><p>After adding new files, do <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">configure</span></code></p></li>
+<li><p>Building single packages: <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">packagename</span></code></p></li>
+<li><p>Cleaning up (rebuild from scratch): <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">purge</span></code></p></li>
+<li><p>To change the build-type (e.g. Release or Debug), set the <code class="docutils literal notranslate"><span class="pre">BUILDTYPE</span></code> variable (e.g. <code class="docutils literal notranslate"><span class="pre">BUILDTYPE=Debug</span> <span class="pre">make</span></code>)</p></li>
+</ul>
+</div>
+<div class="section" id="cmake-example-packages">
+<h2>CMake example packages<a class="headerlink" href="#cmake-example-packages" title="Permalink to this headline">¶</a></h2>
+<p>Colin provides <a class="reference external" href="https://github.com/cbernet/cmake-examples">a few simple CMake
+examples</a> independent from
+the FCC software framework. They are helpful to understand the basics of
+CMake.</p>
+<p>Get these packages:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/cbernet/cmake-examples.git
+cd cmake-examples
+</pre></div>
+</div>
+<p>Follow the instructions in
+<a class="reference external" href="https://github.com/cbernet/cmake-examples/blob/master/README">README.md</a>.</p>
+</div>
+<div class="section" id="cmake-in-the-fcc-software-framework">
+<h2>CMake in the FCC software framework<a class="headerlink" href="#cmake-in-the-fcc-software-framework" title="Permalink to this headline">¶</a></h2>
+<p>The FCC software framework is split into single packages <code class="docutils literal notranslate"><span class="pre">Generation</span></code>, <code class="docutils literal notranslate"><span class="pre">Examples</span></code>, <code class="docutils literal notranslate"><span class="pre">Simulation</span></code> , …. Each of these packages contains
+the file <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>, defining its content. To build the entire
+SW, a Makefile is provided in the top level directory, so <code class="docutils literal notranslate"><span class="pre">make</span></code> can be invoked there to build FCCSW. To rebuild a single package
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">packagename</span></code> is sufficient.</p>
+<p>When adding new source files to a package, the CMake build system needs
+to be made aware of them. Usually <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> contains a wildcard
+expression that adds all implementation files in a subfolder, e.g.
+<code class="docutils literal notranslate"><span class="pre">src/*.cpp</span></code> , so there is no need to explicitly add the names of the
+new files. To update the list of files, it is fastest to run
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">configure</span></code> .</p>
+<p>Note that when changing the name of a property of an algorithm or a
+tool, <code class="docutils literal notranslate"><span class="pre">make</span></code> (and not only <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">packagename</span></code> ) needs to be run for
+Gaudi to be aware of the change.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">make</span></code> command creates a directory <code class="docutils literal notranslate"><span class="pre">build.xxxx</span></code> where <code class="docutils literal notranslate"><span class="pre">xxxx</span></code> depends on your platform and compiler. All build files
+are writtin in that directory. There are situations where you need to clean this build folder before you can
+successfully build the software:</p>
+<ul class="simple">
+<li><p>The FCCSW environment changed (version change)</p></li>
+<li><p>Fetching changes from other users or the HEP-FCC repository with deleted files</p></li>
+</ul>
+<p>In those cases you’ll need to do <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">purge</span></code> (this target deletes the build and install directories) and rebuild the
+entire software.</p>
+</div>
+<div class="section" id="ctest-in-fccsw">
+<h2>CTest in FCCSW<a class="headerlink" href="#ctest-in-fccsw" title="Permalink to this headline">¶</a></h2>
+<p>FCCSW also uses the cmake for integration tests.
+This is described in detail in the documentation page on <a class="reference external" href="https://github.com/HEP-FCC/FCCSW/blob/master/doc/AddingTestsToFCCSW">adding tests to FCCSW</a>.</p>
+</div>
+<div class="section" id="using-an-internal-library">
+<h2>Using an internal library<a class="headerlink" href="#using-an-internal-library" title="Permalink to this headline">¶</a></h2>
+<p>Libraries are the main tool to avoid code duplication, i.e. make pieces of code available in other parts of the framework.
+Once Gaudi is notified that a certain subdirectory is needed by invoking <code class="docutils literal notranslate"><span class="pre">gaudi_depends_on_subdir</span></code>, internal libraries defined in this subdirectory can be used by simply adding them to the list of <code class="docutils literal notranslate"><span class="pre">INCLUDE_DIRS</span></code> and <code class="docutils literal notranslate"><span class="pre">LINK_LIBRARIES</span></code>. An example would be the way the internal library <code class="docutils literal notranslate"><span class="pre">DetCommon</span></code> is used by the module  <a class="reference external" href="https://github.com/HEP-FCC/FCCSW/blob/master/Test/TestGeometry/CMakeLists.txt"><code class="docutils literal notranslate"><span class="pre">Test/TestGeometryPlugins</span></code></a>  in FCCSW.
+The required changes to use the <code class="docutils literal notranslate"><span class="pre">DetCommon</span></code> library are</p>
+<ul class="simple">
+<li><p>declare the dependency on the subdirectory <code class="docutils literal notranslate"><span class="pre">Detector/DetCommon</span></code></p></li>
+<li><p>add the <code class="docutils literal notranslate"><span class="pre">DetCommon</span></code> headers by adding <code class="docutils literal notranslate"><span class="pre">DetCommon</span></code> to the <code class="docutils literal notranslate"><span class="pre">INCLUDE_DIRS</span></code> line</p></li>
+<li><p>link the <code class="docutils literal notranslate"><span class="pre">DetCommon</span></code> libraries by adding <code class="docutils literal notranslate"><span class="pre">DetCommon</span></code> to the <code class="docutils literal notranslate"><span class="pre">LINK_LIBRARIES</span></code> line.</p></li>
+</ul>
+</div>
+<div class="section" id="building-a-new-gaudi-module">
+<h2>Building a new Gaudi module<a class="headerlink" href="#building-a-new-gaudi-module" title="Permalink to this headline">¶</a></h2>
+<p>A more general introduction to Gaudi modules and the differences with respect to libraries can be found in the <a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/LHCb/GaudiCMakeConfiguration#Building_a_Module_AKA_component">LHCb twiki</a>.
+The best way is to look at existing modules in FCCSW for inspiration. The syntax to declare the module <a class="reference external" href="https://github.com/HEP-FCC/FCCSW/blob/master/Test/TestGeometry/CMakeLists.txt"><code class="docutils literal notranslate"><span class="pre">TestGeometryPlugins</span></code></a>, for example, is:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">gaudi_add_module</span><span class="p">(</span><span class="s">TestGeometryPlugins</span>
+                 <span class="s">src/components/*.cpp</span>
+                 <span class="s">INCLUDE_DIRS</span> <span class="s">Geant4</span> <span class="s">FWCore</span> <span class="s">SimG4Interface</span> <span class="s">SimG4Common</span> <span class="s">DetInterface</span> <span class="s">DetCommon</span> <span class="s">TestGeometry</span>
+                 <span class="s">LINK_LIBRARIES</span> <span class="s">GaudiKernel</span> <span class="s">FWCore</span> <span class="s">Geant4</span> <span class="s">DetCommon</span> <span class="s">TestGeometry</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-an-external-library">
+<h2>Using an external library<a class="headerlink" href="#using-an-external-library" title="Permalink to this headline">¶</a></h2>
+<p>This can be done using the standard cmake command <a class="reference external" href="https://cmake.org/cmake/help/v3.0/command/find_package.html">find_package</a>. See <a class="reference external" href="https://github.com/cbernet/cmake-examples">Colins CMake examples</a> for details.</p>
+<p>Sometimes external libraries require special treatment, and their documentation needs to be consulted. One known case is DD4hep, for which in some cases the CMake variable <code class="docutils literal notranslate"><span class="pre">${DD4hep_COMPONENT_LIBRARIES}</span></code> needs to be used in the <code class="docutils literal notranslate"><span class="pre">LINK_LIBRARIES</span></code> line (if the DDRec or DDSegmentation package is used). Example:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">gaudi_add_library</span><span class="p">(</span><span class="s">DetCommon</span>
+                 <span class="s">src/*.cpp</span>
+                 <span class="s">INCLUDE_DIRS</span> <span class="s">DD4hep</span> <span class="s">ROOT</span> <span class="s">Geant4</span> <span class="s">DetSegmentation</span>
+                 <span class="s">LINK_LIBRARIES</span> <span class="s">GaudiKernel</span> <span class="s">DD4hep</span> <span class="s">ROOT</span> <span class="s">Geant4</span> <span class="s">DetSegmentation</span> <span class="o">${</span><span class="nv">DD4hep_COMPONENT_LIBRARIES</span><span class="o">}</span>
+                 <span class="s">PUBLIC_HEADERS</span> <span class="s">DetCommon</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>ROOT is needed in many modules of FCCSW. More information how to use it in a CMake-based project is available on the <a class="reference external" href="https://root.cern.ch/how/integrate-root-my-project-cmake">ROOT website</a>.</p>
+<div class="section" id="customizing-how-cmake-is-run">
+<h3>Customizing how CMake is run<a class="headerlink" href="#customizing-how-cmake-is-run" title="Permalink to this headline">¶</a></h3>
+<p>An environment variable is used to forward command line arguments to the cmake command, for example to run cmake with the <code class="docutils literal notranslate"><span class="pre">trace</span></code> option:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>CMAKEFLAGS=&#39;--trace&#39; make
+</pre></div>
+</div>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="how-do-i-check-compilation-flags?"><i class="fa fa-info-circle"></i> How do I check compilation flags?</p>
+</div>
+<div class="panel-body docutils container">
+<p>Instead of running <code class="docutils literal notranslate">&#160; <span class="pre">make</span></code> , run:</p>
+<div class="highlight-{.bash} notranslate"><div class="highlight"><pre><span></span>make VERBOSE=1 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="FccDocPage.html" class="btn btn-neutral float-right" title="Writing documentation for the FCC software" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="FccSoftwareGit.html" class="btn btn-neutral float-left" title="Github workflow and contribution guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, FCC Starterkit
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

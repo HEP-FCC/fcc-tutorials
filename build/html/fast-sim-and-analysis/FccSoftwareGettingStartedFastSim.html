@@ -1,0 +1,728 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FCC: Getting started with the production and analysis of fast-simulated events &mdash; FCC Starterkit Lessons  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/panels.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/starterkit.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="FCC-hh: Pythia, Delphes, Heppy Analysis" href="FccFullAnalysis.html" />
+    <link rel="prev" title="Generators, Fast Simulation and Analysis" href="README.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FCC Starterkit Lessons
+          
+
+          
+            
+            <img src="../_static/starterkit.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">First  Steps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/prerequisites.html">Pre-workshop checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/introduction-to-course.html">Goals of the course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/fccsw.html">An introduction to FCC Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/bookkeeping.html">Finding data in the Bookkeeping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/exploring-fcc-files.html">Inspecting an FCC data file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-events-tree">The <code class="docutils literal notranslate"><span class="pre">events</span></code> tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-metadata-tree">The <code class="docutils literal notranslate"><span class="pre">metadata</span></code> tree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/asking-questions.html">Asking good questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">Generators, Fast Simulation and Analysis</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">FCC: Getting started with the production and analysis of fast-simulated events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#set-up-your-working-directory">Set up your working directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-started-with-delphes">Getting started with Delphes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#run-fccsw-with-pythia8-delphes">Run FCCSW with Pythia8+Delphes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-the-analysis-in-heppy">Run the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#make-plots">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cutflow">CutFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#legacy-using-the-papas-tool-for-fcc-ee">Legacy: using the Papas tool (for FCC-ee)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Set up your working directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generate-events-with-pythia8">Generate events with pythia8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-papas-and-the-analysis-in-heppy">Run papas and the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#more-information">More information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FccFullAnalysis.html">FCC-hh: Pythia, Delphes, Heppy Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="FccFullAnalysis.html#part-i-generate-and-simulate-events-with-fccsw">Part I: Generate and simulate Events with FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccFullAnalysis.html#part-ii-analyze-the-output-with-heppy">Part II: Analyze the output with Heppy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccFullAnalysis.html#part-iii-produce-plots">Part III: Produce plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccFullAnalysis.html#part-iv-homework">Part IV: Homework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccFullAnalysis.html#other-documentation">Other documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FcceeAnalysis.html">FCC-ee: Getting started with analysing simulated physics events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="FcceeAnalysis.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FcceeAnalysis.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FcceeAnalysis.html#instructions">Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FcceeAnalysis.html#exercices">Exercices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">Full Detector Simulations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html">FCC Calorimeter Performance Studies Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#using-the-dd4hep-detector-model-in-fcc-software">Using the DD4hep detector model in FCC Software.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#running-geant4-within-the-fcc-software-framework">Running Geant4 within the FCC Software Framework</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#obtaining-and-plotting-the-energy-resolution">Obtaining and Plotting the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#extracting-and-plotting-the-resolution">Extracting and Plotting the Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-parametrizing-the-energy-resolution">Further Topics: Parametrizing the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-calculating-the-sampling-fraction-and-using-it-in-simulation">Further Topics: Calculating the Sampling Fraction and using it in Simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html">FCCee: Full Simulation of IDEA Driftchamber</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-i-simulations-with-the-idea-detector-model-in-fccsw">Part I: Simulations with the IDEA detector model in  FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-ii-user-task-basic-reconstruction-with-a-hough-transform">Part II User Task: Basic Reconstruction with a Hough-Transform</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">Developing FCCSW</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html">Github workflow and contribution guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#first-time-setup-of-git">First time setup of git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#generate-and-set-up-ssh-keys-for-github">Generate and set up ssh keys for github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#improving-your-git-experience">Improving your git experience</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#development-workflow">Development workflow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#keeping-your-local-repository-up-to-date">Keeping your local repository up to date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#contributing-code">Contributing code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#general-recommendations">General recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#commit-comments">Commit comments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#cleaning-history">Cleaning history</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#pull-requests">Pull requests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#trouble-shooting">Trouble-shooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#when-i-try-to-push-to-the-repository-i-get-an-authentication-error">When I try to push to the repository, I get an authentication error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#i-have-cloned-with-https-and-now-i-can-t-push-my-changes-what-do-i-do">I have cloned with https and now I can’t push my changes, what do I do?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#need-help">Need help?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html">CMake guide for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#quick-start-into-building-fccsw">Quick start into building FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-example-packages">CMake example packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-in-the-fcc-software-framework">CMake in the FCC software framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#ctest-in-fccsw">CTest in FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-internal-library">Using an internal library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#building-a-new-gaudi-module">Building a new Gaudi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-external-library">Using an external library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#customizing-how-cmake-is-run">Customizing how CMake is run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html">Writing documentation for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#where-to-put-documentation">Where to put documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#when-and-how-is-the-documentation-page-updated">When and how is the documentation page updated?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#structure-of-the-content">Structure of the content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#running-website-generation-locally">Running website generation locally</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#about-jekyll">About jekyll</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#for-website-admins">For website admins</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CONDUCT.html">Contributor Code of Conduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html">Instructional Material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html#software">Software</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://lhcb.github.io/starterkit">LHCb starterkit</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Starterkit Lessons</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="README.html">Generators, Fast Simulation and Analysis</a> &raquo;</li>
+        
+      <li>FCC: Getting started with the production and analysis of fast-simulated events</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.md" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="fcc-getting-started-with-the-production-and-analysis-of-fast-simulated-events">
+<h1>FCC: Getting started with the production and analysis of fast-simulated events<a class="headerlink" href="#fcc-getting-started-with-the-production-and-analysis-of-fast-simulated-events" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#fcc-getting-started-with-the-production-and-analysis-of-fast-simulated-events">FCC: Getting started with the production and analysis of fast-simulated events</a></p>
+<ul>
+<li><p><a class="reference external" href="#overview">Overview</a></p></li>
+<li><p><a class="reference external" href="#installation">Installation</a></p></li>
+<li><p><a class="reference external" href="#set-up-your-working-directory">Set up your working directory</a></p></li>
+<li><p><a class="reference external" href="#getting-started-with-delphes">Getting started with Delphes</a></p>
+<ul>
+<li><p><a class="reference external" href="#run-fccsw-with-pythia8+delphes">Run FCCSW with Pythia8+Delphes</a></p></li>
+<li><p><a class="reference external" href="#run-the-analysis-in-heppy">Run the analysis in heppy</a></p></li>
+<li><p><a class="reference external" href="#make-plots-1">Make plots</a></p></li>
+<li><p><a class="reference external" href="#cutflow">CutFlow</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#getting-started-with-papas-fcc-ee">Legacy: the Papas tool</a></p>
+<ul>
+<li><p><a class="reference external" href="#set-up-your-working-directory-1">Set up your working directory</a></p></li>
+<li><p><a class="reference external" href="#generate-events-with-pythia8">Generate events with pythia8</a></p></li>
+<li><p><a class="reference external" href="#run-papas-and-the-analysis-in-heppy">Run papas and the analysis in heppy</a></p></li>
+<li><p><a class="reference external" href="#make-plots">Make plots</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>If you want to get started fast with the analysis of fast-simulated
+events, you’re at the right place.</p>
+<p>Fast simulation is currently supported through the Delphes approach. Support for the Papas approach, initially used for FCC-ee, is
+discontinued and only provided in legacy; see <a class="reference external" href="#getting-started-with-papas-fcc-ee">usage description</a> at the end of the page.</p>
+<p>An analysis ntuple will be produced with <a class="reference external" href="https://github.com/HEP-FCC/heppy">heppy</a>, a simple modular event processing framework for high energy physics.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>To configure your environment for the FCC software, just do:</p></li>
+</ul>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
+</pre></div>
+</div>
+<p><strong>You will need to source this script everytime you want to use the
+software.</strong></p>
+<ul class="simple">
+<li><p>You can either use the <code class="docutils literal notranslate"><span class="pre">cvmfs</span></code> installation of <code class="docutils literal notranslate"><span class="pre">heppy</span></code>, pointed out by the environment variable HEPPY (defined after sourcing the above script), or clone the <a class="reference external" href="https://github.com/HEP-FCC/heppy">heppy git</a> locally. The latter is mandatory on a fresh virtual machine (for <code class="docutils literal notranslate"><span class="pre">heppy</span></code> internal; problems with <code class="docutils literal notranslate"><span class="pre">gitpython</span></code>).</p></li>
+</ul>
+<div class="section" id="set-up-your-working-directory">
+<h3>Set up your working directory<a class="headerlink" href="#set-up-your-working-directory" title="Permalink to this headline">¶</a></h3>
+<p>In order to have better control on all what is produced during the tutorial we advise to start from a fresh and clean working directory:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mkdir FCCFastSimTutorial
+cd FCCFastSimTutorial
+</pre></div>
+</div>
+<p>For convenience we suggest to create a symlink to the FCCSW subdierctory with config files:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ln -sf $FCCSWBASEDIR/share/FCCSW
+</pre></div>
+</div>
+<p>If you decide to use <code class="docutils literal notranslate"><span class="pre">heppy</span></code> from <code class="docutils literal notranslate"><span class="pre">cvmfs</span></code>create also a second symlink</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ln -sf $HEPPY
+</pre></div>
+</div>
+<p>or clone the GIT <code class="docutils literal notranslate"><span class="pre">heppy</span></code> repository:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/HEP-FCC/heppy.git
+</pre></div>
+</div>
+<p>You should get something like the following in your working directory:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ls -lt
+...
+lrwxr-xr-x. 1 ganis sf 112 Sep 30 19:03 heppy -&gt; /cvmfs/fcc.cern.ch/sw/views/releases/externals/96b.0.0/x86_64-centos7-gcc8-opt/lib/python2.7/site-packages/heppy
+lrwxr-xr-x. 1 ganis sf 123 Sep 30 19:03 FCCSW -&gt; /cvmfs/fcc.cern.ch/sw/releases/fccsw/linux-centos7-x86_64/gcc-8.3.0/fccsw-0.11-qqmlmzumogldsqoegt4ihhel4xnt62yw/share/FCCSW
+...
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ls -lt
+...
+lrwxr-xr-x. 1 ganis sf 112 Sep 30 19:03 heppy
+lrwxr-xr-x. 1 ganis sf 123 Sep 30 19:03 FCCSW -&gt; /cvmfs/fcc.cern.ch/sw/releases/fccsw/linux-centos7-x86_64/gcc-8.3.0/fccsw-0.11-qqmlmzumogldsqoegt4ihhel4xnt62yw/share/FCCSW
+...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="getting-started-with-delphes">
+<h2>Getting started with Delphes<a class="headerlink" href="#getting-started-with-delphes" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, you will learn how to:</p>
+<ul class="simple">
+<li><p>generate events with Pythia8, process them through Delphes with
+FCCSW and write them in the FCC EDM format.</p></li>
+<li><p>read these events with <a class="reference external" href="https://github.com/HEP-FCC/heppy.git">heppy</a> to perfom basic selection and create an
+ntuple</p></li>
+<li><p>read this ntuple with ROOT to make a few plots</p></li>
+</ul>
+<div class="section" id="run-fccsw-with-pythia8-delphes">
+<h3>Run FCCSW with Pythia8+Delphes<a class="headerlink" href="#run-fccsw-with-pythia8-delphes" title="Permalink to this headline">¶</a></h3>
+<p>Now you are ready to produce 100TeV ttbar events with Pythia, process them through Delphes and store them in the FCC-EDM:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fccrun FCCSW/Sim/SimDelphesInterface/options/PythiaDelphes_config.py --Filename FCCSW/Generation/data/Pythia_ttbar.cmd --DelphesCard FCCSW/Sim/SimDelphesInterface/data/FCChh_DelphesCard_Baseline_v01.tcl
+</pre></div>
+</div>
+<p>you should obtain a file called <code class="docutils literal notranslate"><span class="pre">FCCDelphesOutput.root</span></code>.</p>
+<p>This example will run 100 events by default. To have more events for plotting purposes, you can increase this number or use files that have been already produced and stored on eos (see next section).</p>
+<p>With this file you are now ready to run the analysis framework <a class="reference external" href="https://github.com/HEP-FCC/heppy.git">heppy</a>.</p>
+</div>
+<div class="section" id="run-the-analysis-in-heppy">
+<h3>Run the analysis in heppy<a class="headerlink" href="#run-the-analysis-in-heppy" title="Permalink to this headline">¶</a></h3>
+<p>Copy locally the ttbar example of <a class="reference external" href="https://github.com/HEP-FCC/heppy.git">heppy</a>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cp heppy/test/analysis_hh_ttbar_cfg.py .
+</pre></div>
+</div>
+<p>and edit the file to read the events you just produced running FCCSW previously
+<code class="docutils literal notranslate"><span class="pre">FCCDelphesOutput.root</span></code> in the <code class="docutils literal notranslate"><span class="pre">files</span></code> list in line 13. If
+you skip this step, the example will use files already produced and stored on eos, so
+you will need to setup eos:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>export EOS_MGM_URL=&quot;root://eospublic.cern.ch&quot;
+</pre></div>
+</div>
+<p>Now you are ready to run the ttbar example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>heppy myoutput analysis_hh_ttbar_cfg.py
+</pre></div>
+</div>
+<p>You get an output directory <code class="docutils literal notranslate"><span class="pre">myoutput</span></code> . Check its contents and the
+contents of its subdirectories. In particular, the following root file
+contains an ntuple with the variables we need:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>myoutput/example/heppy.analyzers.examples.ttbar.TTbarTreeProducer.TTbarTreeProducer_1/tree.root 
+</pre></div>
+</div>
+</div>
+<div class="section" id="make-plots">
+<h3>Make plots<a class="headerlink" href="#make-plots" title="Permalink to this headline">¶</a></h3>
+<p>Open the root file containing the ntuple in root:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>root myoutput/example/heppy.analyzers.examples.ttbar.TTbarTreeProducer.TTbarTreeProducer_1/tree.root
+</pre></div>
+</div>
+<p>Make a few plots:</p>
+<p><strong>reconstructed W leptonic transverse mass:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>events-&gt;Draw(&quot;mtw&quot;)
+</pre></div>
+</div>
+<p><img alt="Wt mass" src="../_images/mtw.png" /></p>
+</div>
+<div class="section" id="cutflow">
+<h3>CutFlow<a class="headerlink" href="#cutflow" title="Permalink to this headline">¶</a></h3>
+<p>The file</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>myoutput/example/heppy.analyzers.examples.ttbar.selection.Selection_cuts/cut_flow.txt 
+</pre></div>
+</div>
+<p>contains a cut flow which should be compatible with this (obtained using the file on EOS).</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Counter cut_flow :
+	 All events                                   10000 	 1.00 	 1.0000
+	 At least 4 jets                               8170 	 0.82 	 0.8170
+	 At least 1 b-jet                              7153 	 0.88 	 0.7153
+	 Exactly 1 lepton                              1303 	 0.18 	 0.1303
+	 MET &gt; 20GeV                                   1202 	 0.92 	 0.1202
+</pre></div>
+</div>
+<p>The first column represents the cut, the second one the raw number of events,
+the third one the efficiency of the cut, and the last one the overall efficiency.</p>
+</div>
+</div>
+<div class="section" id="legacy-using-the-papas-tool-for-fcc-ee">
+<h2>Legacy: using the Papas tool (for FCC-ee)<a class="headerlink" href="#legacy-using-the-papas-tool-for-fcc-ee" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, you will learn how to:</p>
+<ul class="simple">
+<li><p>generate events with pythia8 and write them in the FCC EDM format.</p></li>
+<li><p>read these events with <a class="reference external" href="https://github.com/HEP-FCC/heppy.git">heppy</a> to run the papas simulation and the
+analysis to create an ntuple</p></li>
+<li><p>read this ntuple with ROOT to make a few plots</p></li>
+</ul>
+<p>But first, you will set up a working directory for your analysis.</p>
+<div class="section" id="id1">
+<h3>Set up your working directory<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Create a directory anywhere:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mkdir Workdir
+cd Workdir
+</pre></div>
+</div>
+<p>Get a pythia8 card file to generate ZH events. To download this file, on linux, do:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>wget https://raw.githubusercontent.com/HEP-FCC/fcc-physics/master/pythia8/ee_ZH_Zmumu_Hbb.txt
+</pre></div>
+</div>
+<p>On MacOS, do:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>curl -O https://raw.githubusercontent.com/HEP-FCC/fcc-physics/master/pythia8/ee_ZH_Zmumu_Hbb.txt
+</pre></div>
+</div>
+<p>Get the <a class="reference external" href="https://github.com/HEP-FCC/heppy.git">heppy</a> configuration file for a ZH analysis:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cp $HEPPY/test/analysis_ee_ZH_cfg.py .
+</pre></div>
+</div>
+</div>
+<div class="section" id="generate-events-with-pythia8">
+<h3>Generate events with pythia8<a class="headerlink" href="#generate-events-with-pythia8" title="Permalink to this headline">¶</a></h3>
+<p>Here, we decide to use the standalone fcc-physics package to generate
+events instead of FCCSW. The advantage of the fcc-physics package is
+that it is supported for several operating systems, and in particular
+for mac os X and linux while FCCSW only works on lxplus. In other words,
+you could use fcc-physics to generate events on your notebook. That
+being said, it is of course possible to generate events with FCCSW.</p>
+<p>Generate ee to ZH events with Z to mumu and H to b bbar:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fcc-pythia8-generate ee_ZH_Zmumu_Hbb.txt
+</pre></div>
+</div>
+<p>You should obtain a file <code class="docutils literal notranslate"><span class="pre">ee_ZH_Zmumu_Hbb.root</span></code> written in the
+FCC EDM format. Let us open it and check the contents:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>root  ee_ZH_Zmumu_Hbb.root
+events-&gt;Print()
+</pre></div>
+</div>
+<p>You’re getting a list of the available collections. You can use root to
+draw the distribution of a variable. For example, the distribution of
+the charge of the stable generated muons:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>events-&gt;Draw(&quot;GenParticle.core.charge&quot;, &quot;abs(GenParticle.core.pdgId)==13 &amp;&amp; GenParticle.core.status==1&quot;)
+</pre></div>
+</div>
+<p>exit root:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.q
+</pre></div>
+</div>
+<p>We are now going to run the papas simulation and to build an ntuple with
+meaningful variables for the analysis.</p>
+</div>
+<div class="section" id="run-papas-and-the-analysis-in-heppy">
+<h3>Run papas and the analysis in <a class="reference external" href="https://github.com/HEP-FCC/heppy.git">heppy</a><a class="headerlink" href="#run-papas-and-the-analysis-in-heppy" title="Permalink to this headline">¶</a></h3>
+<p>The ROOT file obtained in the previous section contains for each event
+all generated particles produced by pythia.</p>
+<p>In this section we will run an <a class="reference external" href="https://github.com/HEP-FCC/heppy.git">heppy</a> job to:</p>
+<ul class="simple">
+<li><p>run papas, a fast simulation that processes these generated
+particles to produce “reconstructed” particles;</p></li>
+<li><p>process the papas reconstructed particles and compute various
+analysis variables;</p></li>
+<li><p>store these variables in an ntuple written in an output root file.</p></li>
+</ul>
+<p>The <a class="reference external" href="https://github.com/HEP-FCC/heppy.git">heppy</a> configuration file describing these steps,
+<a class="reference external" href="https://github.com/HEP-FCC/heppy/blob/master/test/analysis_ee_ZH_cfg.py">analysis_ee_ZH_cfg.py</a>,
+is explained <a class="reference external" href="https://github.com/HEP-FCC/heppy/blob/master/doc/example_analysis">here</a>.
+Just refer to this documentation as needed while following the instructions below.</p>
+<p>First, produce the display for the first event:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>heppy -i analysis_ee_ZH_cfg.py -e 0
+</pre></div>
+</div>
+<p>Two ROOT windows showing different views of the event should open:</p>
+<p><img alt="xy view" src="../_images/xy.png" />
+<img alt="yz view" src="../_images/yz.png" /></p>
+<p>Move to the next event, and print the
+event content:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>next()
+print loop.event
+</pre></div>
+</div>
+<p>You should get a printout like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Event: 3
+{   &#39;gen_particles_stable&#39;: [   Particle :p1841 :17179871025: pdgid =   -13, status =   1, q =  1 e =  55.1, theta = -1.14, phi =  0.59, mass =  0.11,
+                                Particle :p1840 :17179871024: pdgid =    13, status =   1, q = -1 e =  50.2, theta =  0.56, phi =  2.35, mass =  0.11,
+                                Particle :p1962 :17179871146: pdgid =  2112, status =   1, q =  0 e =  16.6, theta =  0.01, phi = -1.89, mass =  0.94,
+                                Particle :p1849 :17179871033: pdgid =   321, status =   1, q =  1 e =  12.9, theta =  1.05, phi = -0.27, mass =  0.49,
+                                Particle :p1961 :17179871145: pdgid =    22, status =   1, q =  0 e =  11.2, theta =  0.03, phi = -1.80, mass =  0.00,
+                                Particle :p1900 :17179871084: pdgid =    22, status =   1, q =  0 e =   5.9, theta =  1.18, phi = -0.42, mass =  0.00,
+                                Particle :p1892 :17179871076: pdgid =  -211, status =   1, q = -1 e =   5.1, theta = -0.57, phi = -2.08, mass =  0.14,
+                                Particle :p1867 :17179871051: pdgid =   211, status =   1, q =  1 e =   4.7, theta = -0.03, phi = -1.80, mass =  0.14,
+                                Particle :p1925 :17179871109: pdgid =    22, status =   1, q =  0 e =   4.5, theta =  0.43, phi =  0.87, mass =  0.00,
+                                Particle :p1935 :17179871119: pdgid = -2212, status =   1, q = -1 e =   4.4, theta =  0.01, phi = -1.70, mass =  0.94,
+                                &#39;...&#39;,
+                                Particle :p1902 :17179871086: pdgid =    22, status =   1, q =  0 e =   0.1, theta = -0.28, phi =  2.41, mass =  0.00],
+    &#39;higgses&#39;: [   Resonance2 : pdgid =    25, status =   3, q =  0 e = 124.3, theta =  0.65, phi = -0.94, mass = 116.25],
+    &#39;higgses_legs&#39;: [   Jet : e =  66.8, theta =  0.87, phi =  0.63, mass = 39.62, tags=,
+                        Jet : e =  57.5, theta = -0.28, phi = -1.73, mass = 26.31, tags=],
+    &#39;rec_particles&#39;: [   Particle :p1969 :17179871153: pdgid =   -13, status =   1, q =  1 e =  54.8, theta = -1.14, phi =  0.59, mass =  0.10,
+                         Particle :p1971 :17179871155: pdgid =    13, status =   1, q = -1 e =  51.4, theta =  0.56, phi =  2.35, mass =  0.11,
+                         Particle :r2445 :21474838925: pdgid =   211, status =   1, q =  1 e =  12.8, theta =  1.05, phi = -0.27, mass =  0.14,
+                         Particle :r2417 :21474838897: pdgid =    22, status =   1, q =  0 e =  11.2, theta =  1.33, phi =  1.39, mass = -0.00,
+                         Particle :r2442 :21474838922: pdgid =   130, status =   1, q =  0 e =   8.2, theta =  0.01, phi = -1.89, mass =  0.50,
+                         Particle :r2398 :21474838878: pdgid =    22, status =   1, q =  0 e =   7.5, theta =  1.17, phi = -0.42, mass =  0.00,
+                         Particle :r2403 :21474838883: pdgid =    22, status =   1, q =  0 e =   7.5, theta =  0.42, phi =  0.87, mass = -0.00,
+                         Particle :r2414 :21474838894: pdgid =   130, status =   1, q =  0 e =   6.0, theta = -0.40, phi = -0.68, mass =  0.50,
+                         Particle :r2440 :21474838920: pdgid =  -211, status =   1, q = -1 e =   5.0, theta = -0.57, phi = -2.08, mass =  0.14,
+                         Particle :r2416 :21474838896: pdgid =    22, status =   1, q =  0 e =   4.9, theta = -0.61, phi = -2.03, mass = -0.00,
+                         &#39;...&#39;,
+                         Particle :r2422 :21474838902: pdgid =    22, status =   1, q =  0 e =   0.3, theta =  0.33, phi =  1.81, mass =  0.00],
+    &#39;recoil&#39;: Particle : pdgid =     0, status =   1, q =  0 e = 133.8, theta =  0.46, phi = -1.30, mass = 123.97,
+    &#39;zeds&#39;: [   Resonance2 : pdgid =    23, status =   3, q =  0 e = 106.2, theta = -0.46, phi =  1.84, mass = 93.44],
+    &#39;zeds_legs&#39;: [   Particle :p1969 :17179871153: pdgid =   -13, status =   1, q =  1 e =  54.8, theta = -1.14, phi =  0.59, mass =  0.10,
+                     Particle :p1971 :17179871155: pdgid =    13, status =   1, q = -1 e =  51.4, theta =  0.56, phi =  2.35, mass =  0.11]}
+</pre></div>
+</div>
+<p>Locate the zed. If you have none, call <code class="docutils literal notranslate"><span class="pre">next()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">loop.event</span></code> until you do. Check its mass. Then, locate the
+recoil (momentum of the particles recoiling against the zed), and check its mass.</p>
+<p>Exit ipython:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>quit()
+</pre></div>
+</div>
+<p>Process the whole input file:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>heppy OutDir analysis_ee_ZH_cfg.py -N 1000
+</pre></div>
+</div>
+<p>For your analysis, you will be able to use parallel processing, either on a multicore machine or on the CERN LSF cluster.</p>
+<p>You get an output directory <code class="docutils literal notranslate"><span class="pre">OutDir</span></code> . Check its contents and the
+contents of its subdirectories. In particular, the following root file
+contains an ntuple with the variables we need:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>OutDir/ee_ZH_Zmumu_Hbb/heppy.analyzers.examples.zh.ZHTreeProducer.ZHTreeProducer_1/tree.root
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Make plots<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Open the root file containing the ntuple in root:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>root OutDir/ee_ZH_Zmumu_Hbb/heppy.analyzers.examples.zh.ZHTreeProducer.ZHTreeProducer_1/tree.root
+</pre></div>
+</div>
+<p>Make a few plots:</p>
+<p><strong>reconstructed Z mass:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>events-&gt;Draw(&quot;zed_m&quot;)
+</pre></div>
+</div>
+<p><img alt="Z mass" src="../_images/zed_m.png" /></p>
+<p><strong>recoil mass:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>events-&gt;Draw(&quot;recoil_m&quot;, &quot;zed_m&gt;80&quot;)
+</pre></div>
+</div>
+<p><img alt="Recoil mass" src="../_images/recoil_m.png" /></p>
+<p><strong>dijet mass (note that jets have not been calibrated, using raw jets here):</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>events-&gt;Draw(&quot;higgs_m&quot;, &quot;zed_m&gt;80&quot;)
+</pre></div>
+</div>
+<p><img alt="Higgs mass" src="../_images/higgs_m1.png" /></p>
+</div>
+<div class="section" id="more-information">
+<h3>More information<a class="headerlink" href="#more-information" title="Permalink to this headline">¶</a></h3>
+<p>Please refer to the <a class="reference external" href="https://github.com/HEP-FCC/heppy/blob/master/README">heppy documentation</a></p>
+<!--
+### Re-running the tutorial after logging out.
+
+You will need to follow these instructions to set up your environment
+for this tutorial.
+
+First go to your FCC directory.
+
+Then:
+
+    export FCC=$PWD
+    source /afs/cern.ch/exp/fcc/sw/0.8pre/init_fcc_stack.sh
+    cd heppy/
+    source ./init.sh
+    cd $FCC/Workdir
+--></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="FccFullAnalysis.html" class="btn btn-neutral float-right" title="FCC-hh: Pythia, Delphes, Heppy Analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="README.html" class="btn btn-neutral float-left" title="Generators, Fast Simulation and Analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, FCC Starterkit
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

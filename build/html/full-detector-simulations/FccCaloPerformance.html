@@ -1,0 +1,574 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FCC Calorimeter Performance Studies Workflow &mdash; FCC Starterkit Lessons  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/panels.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/starterkit.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="FCCee: Full Simulation of IDEA Driftchamber" href="FCCeeDriftChamber.html" />
+    <link rel="prev" title="Full Detector Simulations" href="README.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FCC Starterkit Lessons
+          
+
+          
+            
+            <img src="../_static/starterkit.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">First  Steps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/prerequisites.html">Pre-workshop checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/introduction-to-course.html">Goals of the course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/fccsw.html">An introduction to FCC Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/bookkeeping.html">Finding data in the Bookkeeping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/exploring-fcc-files.html">Inspecting an FCC data file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-events-tree">The <code class="docutils literal notranslate"><span class="pre">events</span></code> tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-metadata-tree">The <code class="docutils literal notranslate"><span class="pre">metadata</span></code> tree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/asking-questions.html">Asking good questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fast-sim-and-analysis/README.html">Generators, Fast Simulation and Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html">FCC: Getting started with the production and analysis of fast-simulated events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#installation">Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#set-up-your-working-directory">Set up your working directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#getting-started-with-delphes">Getting started with Delphes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-fccsw-with-pythia8-delphes">Run FCCSW with Pythia8+Delphes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-the-analysis-in-heppy">Run the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#make-plots">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#cutflow">CutFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#legacy-using-the-papas-tool-for-fcc-ee">Legacy: using the Papas tool (for FCC-ee)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id1">Set up your working directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#generate-events-with-pythia8">Generate events with pythia8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-papas-and-the-analysis-in-heppy">Run papas and the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id2">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#more-information">More information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html">FCC-hh: Pythia, Delphes, Heppy Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-i-generate-and-simulate-events-with-fccsw">Part I: Generate and simulate Events with FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-ii-analyze-the-output-with-heppy">Part II: Analyze the output with Heppy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iii-produce-plots">Part III: Produce plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iv-homework">Part IV: Homework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#other-documentation">Other documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html">FCC-ee: Getting started with analysing simulated physics events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#instructions">Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#exercices">Exercices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">Full Detector Simulations</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">FCC Calorimeter Performance Studies Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-dd4hep-detector-model-in-fcc-software">Using the DD4hep detector model in FCC Software.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-geant4-within-the-fcc-software-framework">Running Geant4 within the FCC Software Framework</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#obtaining-and-plotting-the-energy-resolution">Obtaining and Plotting the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#extracting-and-plotting-the-resolution">Extracting and Plotting the Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#further-topics-parametrizing-the-energy-resolution">Further Topics: Parametrizing the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#further-topics-calculating-the-sampling-fraction-and-using-it-in-simulation">Further Topics: Calculating the Sampling Fraction and using it in Simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeDriftChamber.html">FCCee: Full Simulation of IDEA Driftchamber</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="FCCeeDriftChamber.html#part-i-simulations-with-the-idea-detector-model-in-fccsw">Part I: Simulations with the IDEA detector model in  FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FCCeeDriftChamber.html#part-ii-user-task-basic-reconstruction-with-a-hough-transform">Part II User Task: Basic Reconstruction with a Hough-Transform</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">Developing FCCSW</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html">Github workflow and contribution guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#first-time-setup-of-git">First time setup of git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#generate-and-set-up-ssh-keys-for-github">Generate and set up ssh keys for github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#improving-your-git-experience">Improving your git experience</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#development-workflow">Development workflow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#keeping-your-local-repository-up-to-date">Keeping your local repository up to date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#contributing-code">Contributing code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#general-recommendations">General recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#commit-comments">Commit comments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#cleaning-history">Cleaning history</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#pull-requests">Pull requests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#trouble-shooting">Trouble-shooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#when-i-try-to-push-to-the-repository-i-get-an-authentication-error">When I try to push to the repository, I get an authentication error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#i-have-cloned-with-https-and-now-i-can-t-push-my-changes-what-do-i-do">I have cloned with https and now I can’t push my changes, what do I do?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#need-help">Need help?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html">CMake guide for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#quick-start-into-building-fccsw">Quick start into building FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-example-packages">CMake example packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-in-the-fcc-software-framework">CMake in the FCC software framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#ctest-in-fccsw">CTest in FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-internal-library">Using an internal library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#building-a-new-gaudi-module">Building a new Gaudi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-external-library">Using an external library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#customizing-how-cmake-is-run">Customizing how CMake is run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html">Writing documentation for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#where-to-put-documentation">Where to put documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#when-and-how-is-the-documentation-page-updated">When and how is the documentation page updated?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#structure-of-the-content">Structure of the content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#running-website-generation-locally">Running website generation locally</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#about-jekyll">About jekyll</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#for-website-admins">For website admins</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CONDUCT.html">Contributor Code of Conduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html">Instructional Material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html#software">Software</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://lhcb.github.io/starterkit">LHCb starterkit</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Starterkit Lessons</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="README.html">Full Detector Simulations</a> &raquo;</li>
+        
+      <li>FCC Calorimeter Performance Studies Workflow</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/full-detector-simulations/FccCaloPerformance.md" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="fcc-calorimeter-performance-studies-workflow">
+<h1>FCC Calorimeter Performance Studies Workflow<a class="headerlink" href="#fcc-calorimeter-performance-studies-workflow" title="Permalink to this headline">¶</a></h1>
+<div class="panel panel-objectives docutils container">
+<div class="panel-header open docutils container">
+<p id="learning-objectives"><i class="fa fa-line-chart"></i> Learning Objectives</p>
+</div>
+<div class="panel-body docutils container">
+<p>This tutorial will teach you how to:</p>
+<ul class="simple">
+<li><p><strong>simulate</strong> the single particle response of the calorimeter detector system</p></li>
+<li><p><strong>reconstruct</strong> physics object from raw signals</p></li>
+<li><p>produce <strong>plots</strong> of energy resolutions and other quantities.</p></li>
+</ul>
+</div>
+</div>
+<p>First, make sure your setup of the FCC software is working.
+You can check that the command to run jobs in the Gaudi framework is available on the command line:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!which fccrun
+</pre></div>
+</div>
+<p>If you don’t see a valid path like <code class="docutils literal notranslate"><span class="pre">/usr/local/bin/fccrun</span></code>  you should consult <a class="reference external" href="https://github.com/vvolkl/fcc-tutorials/blob/master/FccSoftwareGettingStarted">the documentation page on FCCSW setup</a></p>
+<div class="section" id="using-the-dd4hep-detector-model-in-fcc-software">
+<h2>Using the DD4hep detector model in FCC Software.<a class="headerlink" href="#using-the-dd4hep-detector-model-in-fcc-software" title="Permalink to this headline">¶</a></h2>
+<p>The Geant4 geometry is used for the full simulation of the detector is not written directly, but generated using the DD4hep library.
+The detector description in this library consists of two parts:
+A compiled C++ library that constructs the geometry, and a set of xml files that contain parameters that can are parsed by the library at runtime and make the detector geometry (somewhat) configurable.
+In the framework, the geometry is available to all components via the service <code class="docutils literal notranslate"><span class="pre">GeoSvc</span></code>.
+One of the simplest jobs is to write the geometry to a <code class="docutils literal notranslate"><span class="pre">.gdml</span></code> file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">dumpGeo_fccee</span><span class="o">.</span><span class="n">py</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">Gaudi.Configuration</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">GeoSvc</span>
+<span class="n">geoservice</span> <span class="o">=</span> <span class="n">GeoSvc</span><span class="p">(</span><span class="s2">&quot;GeoSvc&quot;</span><span class="p">)</span>
+<span class="n">geoservice</span><span class="o">.</span><span class="n">detectors</span><span class="o">=</span><span class="p">[</span>
+  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;FCC_DETECTORS&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="s1">&#39;share/FCCSW/Detector/DetFCCeeIDEA/compact/FCCee_DectMaster.xml&#39;</span><span class="p">),</span>
+                    <span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">SimG4Svc</span>
+<span class="n">geantservice</span> <span class="o">=</span> <span class="n">SimG4Svc</span><span class="p">(</span><span class="s2">&quot;SimG4Svc&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">GeoToGdmlDumpSvc</span>
+<span class="n">geodumpservice</span> <span class="o">=</span> <span class="n">GeoToGdmlDumpSvc</span><span class="p">(</span><span class="s2">&quot;GeoDump&quot;</span><span class="p">)</span> 
+<span class="n">geodumpservice</span><span class="o">.</span><span class="n">gdml</span><span class="o">=</span><span class="s2">&quot;FCCee_IDEA.gdml&quot;</span>
+
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">ApplicationMgr</span>
+<span class="n">ApplicationMgr</span><span class="p">(</span> <span class="n">TopAlg</span> <span class="o">=</span> <span class="p">[],</span> 
+                <span class="n">EvtSel</span> <span class="o">=</span> <span class="s1">&#39;NONE&#39;</span><span class="p">,</span>
+                <span class="n">EvtMax</span>   <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="c1"># order is important, as GeoSvc is needed by SimG4Svc</span>
+                <span class="n">ExtSvc</span> <span class="o">=</span> <span class="p">[</span><span class="n">geoservice</span><span class="p">,</span> <span class="n">geantservice</span><span class="p">,</span> <span class="n">geodumpservice</span><span class="p">],</span>
+                <span class="n">OutputLevel</span><span class="o">=</span><span class="n">INFO</span>
+ <span class="p">)</span>
+</pre></div>
+</div>
+<p>A job with this configuration can be executed with</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!fccrun dumpGeo_fccee.py
+</pre></div>
+</div>
+<p>Note the printout of the GeoSvc and make sure the information is as expected. If there is something unclear or missing make sure to open an <a class="reference external" href="https://github.com/HEP-FCC/FCCSW/issues">issue</a>!
+Take a look at the resulting gdml file. Although it is text-based it is not really human-readable for a geometry of this size, but you can check the number of lines and volume names if you are familiar with the geometry.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!tail FCCee_IDEA.gdml
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span># count occurences of &quot;physvol&quot;
+!grep -c &quot;&lt;physvol&quot; FCCee_IDEA.gdml
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-geant4-within-the-fcc-software-framework">
+<h2>Running Geant4 within the FCC Software Framework<a class="headerlink" href="#running-geant4-within-the-fcc-software-framework" title="Permalink to this headline">¶</a></h2>
+<p>To run Geant4, a number of additional components are required, foremost the <code class="docutils literal notranslate"><span class="pre">SimG4Alg</span></code> and <code class="docutils literal notranslate"><span class="pre">SimG4Svc</span></code>.
+The simplest way to generate a particle to simulate is to use one of the particle guns (<code class="docutils literal notranslate"><span class="pre">GenAlg</span></code> with the <code class="docutils literal notranslate"><span class="pre">MomentumRangeParticleGun</span></code> tool for example).
+This algorithm produces a particles with energies from a flat probability distribution in HepMC format.
+To use them as input they first need to be converted to the FCC event data model (<code class="docutils literal notranslate"><span class="pre">HepMCToEDMConverter</span></code>) and piped into the Geant4 interface via the <code class="docutils literal notranslate"><span class="pre">SimG4PrimariesFromEdmTool</span></code>.</p>
+<p>A configuration that runs all of this is distributed with FCCSW and can be run with the following command:</p>
+<p>(This simulates the response of 5GeV electrons which makes for modest shower sizes and should produce 500 events in around 2 minutes)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>! FCC_DETECTORS=$FCCSWBASEDIR/share/FCCSW; time fccrun  $FCCSWBASEDIR/share/FCCSW/RecFCCeeCalorimeter/options/runCaloSim.py --filename fccee_idea_LAr_pgun.root -n 500 
+</pre></div>
+</div>
+<p>The output of this job is <code class="docutils literal notranslate"><span class="pre">fccee_idea_LAr_pgun.root</span></code>, a ROOT file containing the simulation products of 500 single particle events (5 Gev e-) in the FCC event data model.
+Check for example that the distribution of the input particles is as you expect:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ROOT</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TFile</span><span class="p">(</span><span class="s2">&quot;fccee_idea_LAr_pgun.root&quot;</span><span class="p">)</span>
+<span class="n">events</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TCanvas</span><span class="p">(</span><span class="s2">&quot;canvas1&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span><span class="mi">600</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TH1F</span><span class="p">(</span><span class="s2">&quot;h_GenParticles_P&quot;</span><span class="p">,</span> <span class="s2">&quot;;Primary particle Momentum P; Events&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">events</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;sqrt(pow(GenParticles.core.p4.px,2) + pow(GenParticles.core.p4.py,2) +pow(GenParticles.core.p4.pz,2))&gt;&gt;h_GenParticles_P&quot;</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">Draw</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The exact position of the energy deposit is available too (Note that this collection, which is MCTruth-level information is not usually saved on disk to save space):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ROOT</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TFile</span><span class="p">(</span><span class="s2">&quot;fccee_idea_LAr_pgun.root&quot;</span><span class="p">)</span>
+<span class="n">events</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TCanvas</span><span class="p">(</span><span class="s2">&quot;c_ECalBarrelPositions_xy&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="c1"># draw hits for first five events</span>
+<span class="n">events</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;ECalBarrelPositions.position.y:ECalBarrelPositions.position.x&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">Draw</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="obtaining-and-plotting-the-energy-resolution">
+<h3>Obtaining and Plotting the Energy Resolution<a class="headerlink" href="#obtaining-and-plotting-the-energy-resolution" title="Permalink to this headline">¶</a></h3>
+<p>Now that the detector response is simulated, it is time to reconstruct the signals. FCCSW includes another configuration to run a Sliding Window reconstruction:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!FCC_DETECTORS=$FCCSWBASEDIR/share/FCCSW; fccrun $FCCSWBASEDIR/share/FCCSW/RecFCCeeCalorimeter/options/runFullCaloSystem_ReconstructionSW_noiseFromFile.py -v --input fccee_idea_LAr_pgun.root -n 100 --noiseFileName root://eospublic.cern.ch//eos/experiment/fcc/ee/simulation/NoiseConstants/elecNoise_ecalBarrelFCCee_50Ohm_traces1_4shieldWidth.root --filename output_allCalo_reco_noise.root
+</pre></div>
+</div>
+<p>This configuration inludes electronics noise especially calculated for this detector geometry. which is overlayed on the branch <code class="docutils literal notranslate"><span class="pre">ECalBarrelCells</span></code> containing information on all cells in the ECal Barrel.
+First, let’s visualize the impact of the noise:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ROOT</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TFile</span><span class="p">(</span><span class="s2">&quot;output_allCalo_reco_noise.root&quot;</span><span class="p">)</span>
+<span class="n">events</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TCanvas</span><span class="p">(</span><span class="s2">&quot;c_ECalBarrelCellsNoise_energy&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TH1F</span><span class="p">(</span><span class="s2">&quot;h_ECalBarrelCells_energy&quot;</span><span class="p">,</span> <span class="s2">&quot;;ECal Barrel Cells Energy [GeV]; Cells&quot;</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span> <span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">events</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;ECalBarrelCells.core.energy &gt;&gt; h_ECalBarrelCells_energy&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">h</span><span class="o">.</span><span class="n">GetYaxis</span><span class="p">()</span><span class="o">.</span><span class="n">SetRangeUser</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">8</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span>
+
+
+
+<span class="n">c</span><span class="o">.</span><span class="n">SetLogy</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">Draw</span><span class="p">()</span>
+
+<span class="n">c2</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TCanvas</span><span class="p">(</span><span class="s2">&quot;c_ECalBarrelCells_energy&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="c1">#h2 = ROOT.TH1F(&quot;h_ECalBarrelCellsNoise_energy&quot;, &quot;;ECall Barrel Cells Energy with Noise [GeV]; Events&quot;, 80, -0.2 ,1)</span>
+<span class="n">h2</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">Clone</span><span class="p">(</span><span class="s2">&quot;h_ECalBarrelCellsNoise_energy&quot;</span><span class="p">)</span>
+<span class="n">h2</span><span class="o">.</span><span class="n">SetTitle</span><span class="p">(</span><span class="s2">&quot;;ECal Barrel Cells Energy with Noise [GeV]; Cells&quot;</span><span class="p">)</span>
+<span class="n">events</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;ECalBarrelCellsNoise.core.energy&gt;&gt; h_ECalBarrelCellsNoise_energy&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">h2</span><span class="o">.</span><span class="n">GetYaxis</span><span class="p">()</span><span class="o">.</span><span class="n">SetRangeUser</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">8</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">h2</span><span class="o">.</span><span class="n">SetLineColor</span><span class="p">(</span><span class="n">ROOT</span><span class="o">.</span><span class="n">kBlack</span><span class="p">)</span>
+
+
+<span class="n">c2</span><span class="o">.</span><span class="n">SetLogy</span><span class="p">()</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">Draw</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>From these plots the impact of the noise becomes clear. Note that the branch <code class="docutils literal notranslate"><span class="pre">EcalBarrelCellsNoise</span></code> is much larger than <code class="docutils literal notranslate"><span class="pre">ECalBarrelCells</span></code>, as all cells that did not record a signal can no longer be ignored, but have to be saved as well due to the presence of noise.</p>
+</div>
+<div class="section" id="extracting-and-plotting-the-resolution">
+<h3>Extracting and Plotting the Resolution<a class="headerlink" href="#extracting-and-plotting-the-resolution" title="Permalink to this headline">¶</a></h3>
+<p>The root file created by FCCSW also contains the output of the Sliding Window reconstruction in the branch “CaloClusters”. Again, we first check the contents:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ROOT</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TFile</span><span class="p">(</span><span class="s2">&quot;output_allCalo_reco_noise.root&quot;</span><span class="p">)</span>
+<span class="n">events</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TCanvas</span><span class="p">(</span><span class="s2">&quot;c_CaloClusters_energy&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="n">hEn</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TH1F</span><span class="p">(</span><span class="s2">&quot;h_CaloClusters_energy&quot;</span><span class="p">,</span> <span class="s2">&quot;;ECal Calo Cluster Energy [GeV]; # Clusters&quot;</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">events</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;CaloClusters.core.energy &gt;&gt; h_CaloClusters_energy&quot;</span><span class="p">)</span>
+
+<span class="n">c</span><span class="o">.</span><span class="n">Draw</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To extract the Calorimeter Performance, we have to fit the reco energy distribution:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="kn">import</span> <span class="nn">ROOT</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TFile</span><span class="p">(</span><span class="s2">&quot;output_allCalo_reco_noise.root&quot;</span><span class="p">)</span>
+<span class="n">events</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TCanvas</span><span class="p">(</span><span class="s2">&quot;c_CaloClusters_energyFit&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="n">hEn</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TH1F</span><span class="p">(</span><span class="s2">&quot;h_CaloClusters_energy&quot;</span><span class="p">,</span> <span class="s2">&quot;;ECal Calo Cluster Energy [GeV]; # Clusters&quot;</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">events</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;CaloClusters.core.energy &gt;&gt; h_CaloClusters_energy&quot;</span><span class="p">)</span>
+
+<span class="n">fitPre</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TF1</span><span class="p">(</span><span class="s2">&quot;fitPre&quot;</span><span class="p">,</span><span class="s2">&quot;gaus&quot;</span><span class="p">,</span> <span class="n">hEn</span><span class="o">.</span><span class="n">GetMean</span><span class="p">()</span> <span class="o">-</span> <span class="mf">1.</span> <span class="o">*</span> <span class="n">hEn</span><span class="o">.</span><span class="n">GetRMS</span><span class="p">(),</span> <span class="n">hEn</span><span class="o">.</span><span class="n">GetMean</span><span class="p">()</span> <span class="o">+</span> <span class="mf">1.</span> <span class="o">*</span> <span class="n">hEn</span><span class="o">.</span><span class="n">GetRMS</span><span class="p">())</span>
+<span class="n">resultPre</span> <span class="o">=</span> <span class="n">hEn</span><span class="o">.</span><span class="n">Fit</span><span class="p">(</span><span class="n">fitPre</span><span class="p">,</span> <span class="s2">&quot;SQRN&quot;</span><span class="p">)</span>
+<span class="n">fit</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TF1</span><span class="p">(</span><span class="s2">&quot;fit&quot;</span><span class="p">,</span><span class="s2">&quot;gaus&quot;</span><span class="p">,</span> <span class="n">resultPre</span><span class="o">.</span><span class="n">Get</span><span class="p">()</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">resultPre</span><span class="o">.</span><span class="n">Get</span><span class="p">()</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">resultPre</span><span class="o">.</span><span class="n">Get</span><span class="p">()</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">resultPre</span><span class="o">.</span><span class="n">Get</span><span class="p">()</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">hEn</span><span class="o">.</span><span class="n">Fit</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span> <span class="s2">&quot;SQRN&quot;</span><span class="p">)</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">Get</span><span class="p">()</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">Get</span><span class="p">()</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dMean</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">Get</span><span class="p">()</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dSigma</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">Get</span><span class="p">()</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span> <span class="s2">&quot;mean:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;[GeV]&quot;</span>
+<span class="nb">print</span> <span class="s2">&quot;sigma:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">sigma</span>  <span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;[GeV]&quot;</span>
+<span class="n">fit</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;SAME&quot;</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">Draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="further-topics-parametrizing-the-energy-resolution">
+<h3>Further Topics: Parametrizing the Energy Resolution<a class="headerlink" href="#further-topics-parametrizing-the-energy-resolution" title="Permalink to this headline">¶</a></h3>
+<p>We are of course interested in the Calorimeter response not only at one energy, but over a range of energies,
+and in particular in the usual parametrisation of the resolution:</p>
+<p><span class="math notranslate nohighlight">\(  {\sigma_E \over E} =  { a \over \sqrt{E}} \oplus  {b \over E} \oplus c  \)</span>,</p>
+<p>where a is the “stochastic term”, b the “noise term” and c the “constant term”</p>
+<p>This requires a somewhat more complex script. The FCC Calo Group maintains one here: https://github.com/faltovaj/FCC_calo_analysis_cpp/blob/master/scripts/plot_enResolution.py</p>
+<p>TODO: Install a modified version of this script that can run on pre-produced samples on eos?</p>
+</div>
+<div class="section" id="further-topics-calculating-the-sampling-fraction-and-using-it-in-simulation">
+<h3>Further Topics: Calculating the Sampling Fraction and using it in Simulation<a class="headerlink" href="#further-topics-calculating-the-sampling-fraction-and-using-it-in-simulation" title="Permalink to this headline">¶</a></h3>
+<p>As you can see in https://github.com/HEP-FCC/FCCSW/blob/master/Reconstruction/RecFCCeeCalorimeter/options/runCaloSim.py#L112, the simulation already corrected for the sampling fraction of our calorimeter.
+These values themselves are taken from simulation and in case you change the geometry they need to be recalculated and updated.</p>
+<p>TODO: This will be part of another tutorial. Add link.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="FCCeeDriftChamber.html" class="btn btn-neutral float-right" title="FCCee: Full Simulation of IDEA Driftchamber" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="README.html" class="btn btn-neutral float-left" title="Full Detector Simulations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, FCC Starterkit
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

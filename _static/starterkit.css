@@ -1,0 +1,16 @@
+p {
+    margin-top: 0;
+    margin-bottom: .85em;
+}
+
+*:last-child {
+    margin-bottom: 0 !important;
+}
+
+.logo {
+    width: 50% !important;
+}
+
+h2 {
+  margin-top: 1.5em;
+}

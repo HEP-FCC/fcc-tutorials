@@ -1,0 +1,747 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Fun with LoKi Functors &mdash; FCC Starterkit Lessons  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/panels.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/starterkit.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FCC Starterkit Lessons
+          
+
+          
+            
+            <img src="../_static/starterkit.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">First  Steps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/prerequisites.html">Pre-workshop checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/introduction-to-course.html">Goals of the course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/fccsw.html">An introduction to FCC Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/bookkeeping.html">Finding data in the Bookkeeping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/exploring-fcc-files.html">Inspecting an FCC data file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-events-tree">The <code class="docutils literal notranslate"><span class="pre">events</span></code> tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-metadata-tree">The <code class="docutils literal notranslate"><span class="pre">metadata</span></code> tree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/asking-questions.html">Asking good questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fast-sim-and-analysis/README.html">Generators, Fast Simulation and Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html">FCC: Getting started with the production and analysis of fast-simulated events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#installation">Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#set-up-your-working-directory">Set up your working directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#getting-started-with-delphes">Getting started with Delphes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-fccsw-with-pythia8-delphes">Run FCCSW with Pythia8+Delphes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-the-analysis-in-heppy">Run the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#make-plots">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#cutflow">CutFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#legacy-using-the-papas-tool-for-fcc-ee">Legacy: using the Papas tool (for FCC-ee)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id1">Set up your working directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#generate-events-with-pythia8">Generate events with pythia8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-papas-and-the-analysis-in-heppy">Run papas and the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id2">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#more-information">More information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html">FCC-hh: Pythia, Delphes, Heppy Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-i-generate-and-simulate-events-with-fccsw">Part I: Generate and simulate Events with FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-ii-analyze-the-output-with-heppy">Part II: Analyze the output with Heppy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iii-produce-plots">Part III: Produce plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iv-homework">Part IV: Homework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#other-documentation">Other documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html">FCC-ee: Getting started with analysing simulated physics events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#instructions">Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#exercices">Exercices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">Full Detector Simulations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html">FCC Calorimeter Performance Studies Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#using-the-dd4hep-detector-model-in-fcc-software">Using the DD4hep detector model in FCC Software.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#running-geant4-within-the-fcc-software-framework">Running Geant4 within the FCC Software Framework</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#obtaining-and-plotting-the-energy-resolution">Obtaining and Plotting the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#extracting-and-plotting-the-resolution">Extracting and Plotting the Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-parametrizing-the-energy-resolution">Further Topics: Parametrizing the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-calculating-the-sampling-fraction-and-using-it-in-simulation">Further Topics: Calculating the Sampling Fraction and using it in Simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html">FCCee: Full Simulation of IDEA Driftchamber</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-i-simulations-with-the-idea-detector-model-in-fccsw">Part I: Simulations with the IDEA detector model in  FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-ii-user-task-basic-reconstruction-with-a-hough-transform">Part II User Task: Basic Reconstruction with a Hough-Transform</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">Developing FCCSW</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html">Github workflow and contribution guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#first-time-setup-of-git">First time setup of git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#generate-and-set-up-ssh-keys-for-github">Generate and set up ssh keys for github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#improving-your-git-experience">Improving your git experience</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#development-workflow">Development workflow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#keeping-your-local-repository-up-to-date">Keeping your local repository up to date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#contributing-code">Contributing code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#general-recommendations">General recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#commit-comments">Commit comments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#cleaning-history">Cleaning history</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#pull-requests">Pull requests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#trouble-shooting">Trouble-shooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#when-i-try-to-push-to-the-repository-i-get-an-authentication-error">When I try to push to the repository, I get an authentication error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#i-have-cloned-with-https-and-now-i-can-t-push-my-changes-what-do-i-do">I have cloned with https and now I can’t push my changes, what do I do?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#need-help">Need help?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html">CMake guide for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#quick-start-into-building-fccsw">Quick start into building FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-example-packages">CMake example packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-in-the-fcc-software-framework">CMake in the FCC software framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#ctest-in-fccsw">CTest in FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-internal-library">Using an internal library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#building-a-new-gaudi-module">Building a new Gaudi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-external-library">Using an external library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#customizing-how-cmake-is-run">Customizing how CMake is run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html">Writing documentation for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#where-to-put-documentation">Where to put documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#when-and-how-is-the-documentation-page-updated">When and how is the documentation page updated?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#structure-of-the-content">Structure of the content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#running-website-generation-locally">Running website generation locally</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#about-jekyll">About jekyll</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#for-website-admins">For website admins</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CONDUCT.html">Contributor Code of Conduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html">Instructional Material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html#software">Software</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://lhcb.github.io/starterkit">LHCb starterkit</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Starterkit Lessons</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Fun with LoKi Functors</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/first-analysis-steps-renamed/loki-functors.md" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="fun-with-loki-functors">
+<h1>Fun with LoKi Functors<a class="headerlink" href="#fun-with-loki-functors" title="Permalink to this headline">¶</a></h1>
+<div class="panel panel-objectives docutils container">
+<div class="panel-header open docutils container">
+<p id="learning-objectives"><i class="fa fa-line-chart"></i> Learning Objectives</p>
+</div>
+<div class="panel-body docutils container">
+<ul class="simple">
+<li><p>Find out how the physics information can be obtained from the DST</p></li>
+<li><p>Understand what LoKi functors are</p></li>
+<li><p>Use LoKi functors interactively</p></li>
+<li><p>Be able to find functors that do what we want</p></li>
+</ul>
+</div>
+</div>
+<p>LoKi functors are designed to flexibly compute and compare properties of the
+current decay, from simple quantities such as the transverse momentum of a
+particle to complicated ones like helicity angles.
+Internally, functors are implemented as C++ classes that take an object of type <code class="docutils literal notranslate"><span class="pre">TYPE1</span></code> and return another of <code class="docutils literal notranslate"><span class="pre">TYPE2</span></code>.
+They can be used both in C++ and in Python code, and can be combined with each other using logical operations.</p>
+<p>According to <code class="docutils literal notranslate"><span class="pre">TYPE2</span></code> there are 3 types of functors:</p>
+<ul class="simple">
+<li><p><em>Functions</em>, which return <code class="docutils literal notranslate"><span class="pre">double</span></code>.</p></li>
+<li><p><em>Predicates</em>, which return a <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p></li>
+<li><p><em>Streamers</em>, which return a <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> of some other type <code class="docutils literal notranslate"><span class="pre">TYPE3</span></code>.</p></li>
+</ul>
+<p>When filling tuples, the most used functors are functions, while predicates are typically used for selections.</p>
+<p>According to <code class="docutils literal notranslate"><span class="pre">TYPE1</span></code>, there are many types of functors, the most important of which are (you can find a full list in the <a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/LHCb/FAQ/LoKiFAQ#How_to_code_own_LoKi_functor">LoKi FAQ</a>):</p>
+<ul class="simple">
+<li><p><em>Particle functors</em>, which take <code class="docutils literal notranslate"><span class="pre">LHCb::Particle*</span></code> as input.</p></li>
+<li><p><em>Vertex functors</em>, which take <code class="docutils literal notranslate"><span class="pre">LHCb::VertexBase*</span></code> as input.</p></li>
+<li><p><em>MC particle functors</em>, which take <code class="docutils literal notranslate"><span class="pre">LHCb::MCParticle*</span></code> as input.</p></li>
+<li><p><em>MC vertex functors</em>, which take <code class="docutils literal notranslate"><span class="pre">LHCb::MCVertex*</span></code> as input.</p></li>
+<li><p><em>Array particle functors</em>, which take a <code class="docutils literal notranslate"><span class="pre">LoKi::Range_</span></code> (an array of particles) as input.</p></li>
+<li><p><em>Track functors</em>, which take <code class="docutils literal notranslate"><span class="pre">LHCb::Track</span></code> as input.</p></li>
+</ul>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="c++-classes"><i class="fa fa-info-circle"></i> C++ classes</p>
+</div>
+<div class="panel-body docutils container">
+<p>Things like <code class="docutils literal notranslate"><span class="pre">LHCb::Particle</span></code> are C++ classes that usually represent some
+physical object. You will interact with the C++ objects directly very rarely,
+if ever.</p>
+</div>
+</div>
+<p>To understand what we can do with LoKi functors, we will pick up from where we
+left off <a class="reference internal" href="interactive-dst.html"><span class="doc">exploring a DST interactively</span></a>.
+First open the DST as we did previously:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ lb-run DaVinci/v45r1 ipython -i first.py 00070793_00000001_7.AllStreams.dst
+</pre></div>
+</div>
+<p>Get the first candidate in the <code class="docutils literal notranslate"><span class="pre">D2hhPromptDst2D2KKLine</span></code> line:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">advance</span><span class="p">(</span><span class="s1">&#39;D2hhPromptDst2D2KKLine&#39;</span><span class="p">)</span>
+<span class="n">cands</span> <span class="o">=</span> <span class="n">evt</span><span class="p">[</span><span class="s1">&#39;/Event/AllStreams/Phys/D2hhPromptDst2D2KKLine/Particles&#39;</span><span class="p">]</span>
+<span class="n">cand</span> <span class="o">=</span> <span class="n">cands</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We can now try to get very simple properties of the <span class="math notranslate nohighlight">\( D^{* +} \)</span> candidate. Let’s start from the components of its momentum.
+This can be done calling the function <code class="docutils literal notranslate"><span class="pre">momentum()</span></code> for our candidate in the following way:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p_x</span> <span class="o">=</span> <span class="n">cand</span><span class="o">.</span><span class="n">momentum</span><span class="p">()</span><span class="o">.</span><span class="n">X</span><span class="p">()</span>
+<span class="n">p_y</span> <span class="o">=</span> <span class="n">cand</span><span class="o">.</span><span class="n">momentum</span><span class="p">()</span><span class="o">.</span><span class="n">Y</span><span class="p">()</span>
+<span class="n">p_z</span> <span class="o">=</span> <span class="n">cand</span><span class="o">.</span><span class="n">momentum</span><span class="p">()</span><span class="o">.</span><span class="n">Z</span><span class="p">()</span>
+<span class="nb">print</span> <span class="n">p_x</span><span class="p">,</span> <span class="n">p_y</span><span class="p">,</span> <span class="n">p_z</span>
+</pre></div>
+</div>
+<p>This is inconvenient when <a class="reference internal" href="minimal-dv-job.html"><span class="doc">running DaVinci with Python options files</span></a>: there’s no way of calling the <code class="docutils literal notranslate"><span class="pre">momentum()</span></code> method.
+Instead, we can use the corresponding LoKi particle functors:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LoKiPhys.decorators</span> <span class="kn">import</span> <span class="n">PX</span><span class="p">,</span> <span class="n">PY</span><span class="p">,</span> <span class="n">PZ</span>
+<span class="nb">print</span> <span class="n">PX</span><span class="p">(</span><span class="n">cand</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">PY</span><span class="p">(</span><span class="n">cand</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">PZ</span><span class="p">(</span><span class="n">cand</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You will see an error when loading the functors:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>LoKiSvc.REPORT      ERROR LoKi::AuxDesktopBase: 	loadDesktop(): unable to load IPhysDesktop! StatusCode=FAILURE
+LoKiSvc.REPORT      ERROR The   ERROR message is suppressed : &#39;LoKi::AuxDesktopBase: 	loadDesktop(): unable to load IPhysDesktop!&#39; StatusCode=FAILURE
+</pre></div>
+</div>
+<p>This is related to the fact that some functors need to run in the <code class="docutils literal notranslate"><span class="pre">DaVinci</span></code>
+‘scope’, and they are all loaded in the <code class="docutils literal notranslate"><span class="pre">LoKiPhys.decorators</span></code> module. It’s
+harmless in the examples we will use.
+If the import is made <em>before</em> the instantiation of the <code class="docutils literal notranslate"><span class="pre">ApplicationMgr</span></code>, there
+will be no warnings.</p>
+<div class="panel panel-challenge docutils container">
+<div class="panel-header open docutils container">
+<p id="does-it-make-sense?"><i class="fa fa-square-o"></i> Does it make sense?</p>
+</div>
+<div class="panel-body docutils container">
+<p>Compare the output of <code class="docutils literal notranslate"><span class="pre">PX</span></code> functor with the result of calling the function <code class="docutils literal notranslate"><span class="pre">cand.momentum().X()</span></code>.</p>
+</div>
+</div>
+<p>Math operations are also allowed:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p_components_sum</span> <span class="o">=</span> <span class="n">PX</span> <span class="o">+</span> <span class="n">PY</span> <span class="o">+</span> <span class="n">PZ</span>
+<span class="n">p_components_sum</span><span class="p">(</span><span class="n">cand</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There exist specific LoKi functors for all the most important properties of the particle. For example, the transverse momentum and mass:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LoKiPhys.decorators</span> <span class="kn">import</span> <span class="n">PT</span><span class="p">,</span> <span class="n">M</span>
+<span class="nb">print</span> <span class="n">PT</span><span class="p">(</span><span class="n">cand</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">M</span><span class="p">(</span><span class="n">cand</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="panel panel-challenge docutils container">
+<div class="panel-header open docutils container">
+<p id="some-practice"><i class="fa fa-square-o"></i> Some practice</p>
+</div>
+<div class="panel-body docutils container">
+<p>Retrieve the momentum magnitude using functors <code class="docutils literal notranslate"><span class="pre">PX</span></code>, <code class="docutils literal notranslate"><span class="pre">PY</span></code> and <code class="docutils literal notranslate"><span class="pre">PZ</span></code>. There is also a specific functor <code class="docutils literal notranslate"><span class="pre">P</span></code> which does the job. Compare the results.</p>
+<p>Now, retrieve the transverse momentum and invariant mass (you will probably need the energy functor <code class="docutils literal notranslate"><span class="pre">E</span></code>), and see if it matches what the <code class="docutils literal notranslate"><span class="pre">PT</span></code> and <code class="docutils literal notranslate"><span class="pre">M</span></code> functors return.</p>
+</div>
+</div>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="a-note-about-units"><i class="fa fa-info-circle"></i> A note about units</p>
+</div>
+<div class="panel-body docutils container">
+<p>By the <a class="reference external" href="https://lhcb-comp.web.cern.ch/lhcb-comp/Support/Conventions/units.pdf">convention</a>, the LHCb default units are MeV, millimeters and nanoseconds. It is easy to print the values of interest in other units:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LoKiPhys.decorators</span> <span class="kn">import</span> <span class="n">GeV</span>
+<span class="nb">print</span> <span class="n">PT</span><span class="p">(</span><span class="n">cand</span><span class="p">)</span><span class="o">/</span><span class="n">GeV</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we want to get the properties of the <span class="math notranslate nohighlight">\( D^{* +} \)</span> vertex, for example its fit
+quality (<span class="math notranslate nohighlight">\( \chi^2 \)</span>), we need to pass a vertex object to the vertex functor.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LoKiPhys.decorators</span> <span class="kn">import</span> <span class="n">VCHI2</span>
+<span class="nb">print</span> <span class="n">VCHI2</span><span class="p">(</span><span class="n">cand</span><span class="o">.</span><span class="n">endVertex</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Again, this is inconvenient when <a class="reference internal" href="minimal-dv-job.html"><span class="doc">running DaVinci with Python options
+files</span></a>, since in that case we don’t have any way of
+calling the <code class="docutils literal notranslate"><span class="pre">endVertex</span></code> method.
+Instead, we can use the <code class="docutils literal notranslate"><span class="pre">VFASPF</span></code> <em>adaptor</em> functor, which allows us to use
+vertex functors as if they were particle functors (note how the functor is
+built by combining two functors).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LoKiPhys.decorators</span> <span class="kn">import</span> <span class="n">VFASPF</span>
+<span class="n">VCHI2</span><span class="p">(</span><span class="n">cand</span><span class="o">.</span><span class="n">endVertex</span><span class="p">())</span> <span class="o">==</span> <span class="n">VFASPF</span><span class="p">(</span><span class="n">VCHI2</span><span class="p">)(</span><span class="n">cand</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="panel panel-challenge docutils container">
+<div class="panel-header open docutils container">
+<p id="functions-of-functions-of-functions-of…"><i class="fa fa-square-o"></i> Functions of functions of functions of…</p>
+</div>
+<div class="panel-body docutils container">
+<p>Make sure you understand what <code class="docutils literal notranslate"><span class="pre">VFASPF(VCHI2)(cand)</span></code> means. It may help to play
+around in Python, creating a function that takes another function as an
+argument, for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_greeting</span><span class="p">(</span><span class="n">salutation</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="nb">print</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">, </span><span class="si">{1}</span><span class="s1">!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">salutation</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">greet</span>
+</pre></div>
+</div>
+<p>What would <code class="docutils literal notranslate"><span class="pre">create_greeting('Hello')</span></code> return? What about
+<code class="docutils literal notranslate"><span class="pre">create_greeting('Howdy')('partner')</span></code>? Why is doing this useful?</p>
+</div>
+</div>
+<p>Calculation of some of the properties, such as the impact parameter (IP) or cosine of the
+direction angle (DIRA), requires the knowledge of the primary vertex (PV)
+associated to the candidate.
+In <code class="docutils literal notranslate"><span class="pre">GaudiPython</span></code>, we can get the PVs ourselves.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pv_finder_tool</span> <span class="o">=</span> <span class="n">appMgr</span><span class="o">.</span><span class="n">toolsvc</span><span class="p">()</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="s1">&#39;GenericParticle2PVRelator&lt;_p2PVWithIPChi2, OfflineDistanceCalculatorName&gt;/P2PVWithIPChi2&#39;</span><span class="p">,</span>
+    <span class="n">interface</span><span class="o">=</span><span class="s1">&#39;IRelatedPVFinder&#39;</span>
+<span class="p">)</span>
+<span class="n">pvs</span> <span class="o">=</span> <span class="n">evt</span><span class="p">[</span><span class="s1">&#39;/Event/Rec/Vertex/Primary&#39;</span><span class="p">]</span>
+<span class="n">best_pv</span> <span class="o">=</span> <span class="n">pv_finder_tool</span><span class="o">.</span><span class="n">relatedPV</span><span class="p">(</span><span class="n">cand</span><span class="p">,</span> <span class="n">pvs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now, we can get the cosine of the direction angle for the candidate given the primary vertex:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LoKiPhys.decorators</span> <span class="kn">import</span> <span class="n">DIRA</span>
+<span class="nb">print</span> <span class="n">DIRA</span><span class="p">(</span><span class="n">best_pv</span><span class="p">)(</span><span class="n">cand</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Given that this is a very common operation, we have the possibility of using, in the context of a <code class="docutils literal notranslate"><span class="pre">DaVinci</span></code> application (Stripping, for example), a special set of functors, starting with the <code class="docutils literal notranslate"><span class="pre">BPV</span></code> prefix (for Best PV), which will get the PV for us.
+Some functors also end with the suffix <code class="docutils literal notranslate"><span class="pre">DV</span></code>, which means they can only be used in the <code class="docutils literal notranslate"><span class="pre">DaVinci</span></code> context.</p>
+<p>To get the quality of impact parameter of the candidate, one needs as well to call a distance calculator:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">GaudiPython.Bindings</span> <span class="kn">import</span> <span class="n">gbl</span>
+<span class="n">distCal</span> <span class="o">=</span> <span class="n">appMgr</span><span class="o">.</span><span class="n">toolSvc</span><span class="p">()</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s2">&quot;LoKi::DistanceCalculator&quot;</span><span class="p">,</span> <span class="n">interface</span><span class="o">=</span><span class="n">gbl</span><span class="o">.</span><span class="n">IDistanceCalculator</span><span class="p">)</span>
+<span class="n">ipTool</span> <span class="o">=</span> <span class="n">gbl</span><span class="o">.</span><span class="n">LoKi</span><span class="o">.</span><span class="n">Vertices</span><span class="o">.</span><span class="n">ImpactParamTool</span><span class="p">(</span><span class="n">distCal</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now, we evaluate the quality of impact parameter of the candidate, given the primary vertex, and using the provided calculator:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LoKiPhys.decorators</span> <span class="kn">import</span> <span class="n">IPCHI2</span>
+<span class="nb">print</span> <span class="n">IPCHI2</span><span class="p">(</span><span class="n">best_pv</span><span class="p">,</span> <span class="n">ipTool</span><span class="p">)(</span><span class="n">cand</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the context of <code class="docutils literal notranslate"><span class="pre">DaVinci</span></code> application, e.g. the Stripping, the things become much simplier since the calculator instances are loaded automatically, and the syntax for calling the <code class="docutils literal notranslate"><span class="pre">IPCHI2</span></code> functor becomes <code class="docutils literal notranslate"><span class="pre">IPCHI2(best_pv,geo())(cand)</span></code>, where <code class="docutils literal notranslate"><span class="pre">geo()</span></code> is the geometry calculator tool.</p>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="finding-loki-functors"><i class="fa fa-info-circle"></i> Finding LoKi functors</p>
+</div>
+<div class="panel-body docutils container">
+<p>The full list of defined LoKi functors can be found in the <code class="docutils literal notranslate"><span class="pre">LoKi::Cuts</span></code>
+namespace in the
+<a class="reference external" href="https://lhcb-doxygen.web.cern.ch/lhcb-doxygen/davinci/latest/d7/dae/namespace_lo_ki_1_1_cuts.html">doxygen</a>.
+They are quite well documented with examples on how to use them.
+The list can be overwhelming, so it’s also worth checking a more curated selection of functors in the TWiki, <a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/LHCb/LoKiHybridFilters">here</a> and <a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/LHCb/LoKiParticleFunctions">here</a>.</p>
+</div>
+</div>
+<p>So far we’ve only looked at the properties of the head of the decay (that is,
+the <span class="math notranslate nohighlight">\( D^{* +} \)</span>), but what if we want to get information about its daughters? As
+an example, let’s get the largest transverse momentum of the final state
+particles.
+A simple solution would be to navigate the tree and calculate the maximum
+<span class="math notranslate nohighlight">\( p_{\text{T}} \)</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_tracks</span><span class="p">(</span><span class="n">particle</span><span class="p">):</span>
+    <span class="n">tracks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">particle</span><span class="o">.</span><span class="n">isBasicParticle</span><span class="p">():</span>
+        <span class="n">proto</span> <span class="o">=</span> <span class="n">particle</span><span class="o">.</span><span class="n">proto</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">proto</span><span class="p">:</span>
+            <span class="n">track</span> <span class="o">=</span> <span class="n">proto</span><span class="o">.</span><span class="n">track</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">track</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">tracks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">particle</span><span class="o">.</span><span class="n">data</span><span class="p">())</span>
+                <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                    <span class="n">tracks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">particle</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">particle</span><span class="o">.</span><span class="n">daughters</span><span class="p">():</span>
+            <span class="n">tracks</span> <span class="o">+=</span> <span class="n">find_tracks</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tracks</span>
+
+<span class="n">max_pt</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">PT</span><span class="p">(</span><span class="n">child</span><span class="p">)</span> <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">find_tracks</span><span class="p">(</span><span class="n">cand</span><span class="p">)])</span>
+</pre></div>
+</div>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="a-note-about-the-try/except"><i class="fa fa-info-circle"></i> A note about the try/except</p>
+</div>
+<div class="panel-body docutils container">
+<p>If you import LoKi before running this example, it magically removes the
+<code class="docutils literal notranslate"><span class="pre">.data()</span></code> function and allows the particle to be used directly. The code above
+is made general using the <code class="docutils literal notranslate"><span class="pre">try</span></code>/<code class="docutils literal notranslate"><span class="pre">except</span></code> block and will work in either case.</p>
+</div>
+</div>
+<p>However, LoKi offers functions for performing such operations, namely <code class="docutils literal notranslate"><span class="pre">MAXTREE</span></code> and <code class="docutils literal notranslate"><span class="pre">MINTREE</span></code>, which get as parameters the selection criteria, the functor to calculate and a default value.
+In our example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LoKiPhys.decorators</span> <span class="kn">import</span> <span class="n">MAXTREE</span><span class="p">,</span> <span class="n">ISBASIC</span><span class="p">,</span> <span class="n">HASTRACK</span>
+<span class="n">MAXTREE</span><span class="p">(</span><span class="n">ISBASIC</span> <span class="o">&amp;</span> <span class="n">HASTRACK</span><span class="p">,</span> <span class="n">PT</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)(</span><span class="n">cand</span><span class="p">)</span> <span class="o">==</span> <span class="n">max_pt</span>
+</pre></div>
+</div>
+<p>In this example, we have used two selection functors, <code class="docutils literal notranslate"><span class="pre">ISBASIC</span></code> and <code class="docutils literal notranslate"><span class="pre">HASTRACK</span></code>, which return true if the particle doesn’t have children and is made up by a track, respectively.
+We can see that they do the same thing as <code class="docutils literal notranslate"><span class="pre">particle.isBasicParticle()</span></code> and <code class="docutils literal notranslate"><span class="pre">particle.proto().track()</span></code> in a more compact way.</p>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="combining-loki-cuts"><i class="fa fa-info-circle"></i> Combining LoKi cuts</p>
+</div>
+<div class="panel-body docutils container">
+<p>You might have noticed above we used the <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> operator (bitwise AND) to
+combine the <code class="docutils literal notranslate"><span class="pre">ISBASIC</span></code> and <code class="docutils literal notranslate"><span class="pre">HASTRACK</span></code> cuts above.
+This is because Python doesn’t allow LoKi to override the behaviour of <code class="docutils literal notranslate"><span class="pre">and</span></code> and <code class="docutils literal notranslate"><span class="pre">or</span></code> (“logical AND/OR”), so if we use them
+the Python interpreter tries to combine the two cuts straight away, before we have even passed in our candidate:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="p">((</span><span class="n">M</span><span class="o">&gt;</span><span class="mi">1200</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">PT</span> <span class="o">&gt;</span> <span class="mi">500</span><span class="p">))</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>  <span class="p">(</span><span class="n">M</span><span class="o">&gt;</span><span class="mi">1200</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>the result is that our <code class="docutils literal notranslate"><span class="pre">PT</span></code> cut vanishes!
+If we use the <code class="docutils literal notranslate"><span class="pre">|</span></code> operator (“bitwise OR”) then LoKi correctly builds a functor representing the <code class="docutils literal notranslate"><span class="pre">OR</span></code> of our cuts:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">((</span><span class="n">M</span><span class="o">&gt;</span><span class="mi">1200</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">PT</span> <span class="o">&gt;</span> <span class="mi">500</span><span class="p">))</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>  <span class="p">(</span> <span class="p">(</span><span class="n">M</span><span class="o">&gt;</span><span class="mi">1200</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">PT</span><span class="o">&gt;</span><span class="mi">500</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>This is why you should <strong>always</strong> use <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> and <code class="docutils literal notranslate"><span class="pre">|</span></code> when combining LoKi functors, and <strong>never</strong> use <code class="docutils literal notranslate"><span class="pre">and</span></code> and <code class="docutils literal notranslate"><span class="pre">or</span></code>.</p>
+</div>
+</div>
+<p>Similarly, the <code class="docutils literal notranslate"><span class="pre">SUMTREE</span></code> functor allows us to accumulate quantities for those children that pass a certain selection:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LoKiPhys.decorators</span> <span class="kn">import</span> <span class="n">SUMTREE</span><span class="p">,</span> <span class="n">ABSID</span>
+<span class="nb">print</span> <span class="n">SUMTREE</span><span class="p">(</span><span class="mi">321</span> <span class="o">==</span> <span class="n">ABSID</span><span class="p">,</span> <span class="n">PT</span><span class="p">)(</span><span class="n">cand</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">SUMTREE</span><span class="p">(</span><span class="s1">&#39;K+&#39;</span> <span class="o">==</span> <span class="n">ABSID</span><span class="p">,</span> <span class="n">PT</span><span class="p">)(</span><span class="n">cand</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this case, we have summed the transverse momentum of the charged kaons in the tree.
+Note the usage of the <code class="docutils literal notranslate"><span class="pre">ABSID</span></code> functor, which selects particles from the decay
+tree using either their <a class="reference external" href="http://pdg.lbl.gov/2019/reviews/rpp2018-rev-monte-carlo-numbering.pdf">PDG Monte Carlo ID</a> or their name.
+If you would like to consider only the kaons of one specific charge in the selection requirement, consider the <code class="docutils literal notranslate"><span class="pre">ID</span></code> functor which does exactly the same thing, however has a sign which is positive for particles and negative for antiparticles.</p>
+<p>Another very useful LoKi functor is <code class="docutils literal notranslate"><span class="pre">CHILD</span></code>, which allows us to access a
+property of a single child of the particle.
+To specify which child we want, its order is used, so we need to know how the candidate was built.
+For example, from</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>In [10]: cand.daughtersVector()
+Out[10]:
+
+ 0 |-&gt;D0                           M/PT/E/PX/PY/PZ: 1.8653/ 2.5848/ 31.32/ 2.508/-0.6267/ 31.15 [GeV]  #  0 
+                                       EndVertex  X/Y/Z: 1.053/-0.2006/-29.13 [mm]  Chi2/nDoF 0.2349/1 #  0 
+ 1    |-&gt;K+                        M/PT/E/PX/PY/PZ: 0.4937/ 2.1334/ 20.26/ 2.129/0.1371/ 20.14 [GeV]  #  5 
+ 1    |-&gt;K-                        M/PT/E/PX/PY/PZ: 0.4937/ 0.8534/ 11.06/0.3795/-0.7643/ 11.01 [GeV]  # 10 
+ 0 |-&gt;pi+                          M/PT/E/PX/PY/PZ: 0.1396/ 0.2558/ 3.101/0.2451/-0.0733/ 3.088 [GeV]  #  4 
+</pre></div>
+</div>
+<p>we know that <code class="docutils literal notranslate"><span class="pre">D0</span></code> is the first child and <code class="docutils literal notranslate"><span class="pre">pi+</span></code> is the second.
+Therefore, to access the mass of the <span class="math notranslate nohighlight">\( D^{0} \)</span> we have 2 options:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LoKiPhys.decorators</span> <span class="kn">import</span> <span class="n">CHILD</span>
+<span class="c1"># Option 1</span>
+<span class="n">mass</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">cand</span><span class="o">.</span><span class="n">daughtersVector</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># Option 2</span>
+<span class="n">mass_child</span> <span class="o">=</span> <span class="n">CHILD</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">1</span><span class="p">)(</span><span class="n">cand</span><span class="p">)</span>
+<span class="c1"># Do they agree?</span>
+<span class="n">mass</span> <span class="o">==</span> <span class="n">mass_child</span>
+</pre></div>
+</div>
+<div class="panel panel-challenge docutils container">
+<div class="panel-header open docutils container">
+<p id="child-vertex?"><i class="fa fa-square-o"></i> Child vertex?</p>
+</div>
+<div class="panel-body docutils container">
+<p>Evaluate the quality of the D0 decay vertex.</p>
+</div>
+</div>
+<p>In the similar way, we may access properties of child of the child: for example, a kaon from the <span class="math notranslate nohighlight">\( D^{0} \)</span> decay:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LoKiPhys.decorators</span> <span class="kn">import</span> <span class="n">CHILD</span>
+<span class="n">mass_kaon</span> <span class="o">=</span> <span class="n">CHILD</span><span class="p">(</span><span class="n">CHILD</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="mi">1</span><span class="p">)(</span><span class="n">cand</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="panel panel-challenge docutils container">
+<div class="panel-header open docutils container">
+<p id="tracks-and-pid"><i class="fa fa-square-o"></i> Tracks and PID</p>
+</div>
+<div class="panel-body docutils container">
+<p>For the particles having tracks, we may exploit track functors to get the corresponding track properties. For instance, the track quality is given by functor <code class="docutils literal notranslate"><span class="pre">TRCHI2</span></code>.</p>
+<p>What happens if we call <code class="docutils literal notranslate"><span class="pre">TRCHI2(cand)</span></code>? Explain the result.</p>
+<p>Evaluate the track quality for the first and second kaon, also independently of that retrieve (in a single line) the worst of two.</p>
+<p>Then, evaluate the probability that each kaon is really a kaon (<code class="docutils literal notranslate"><span class="pre">PROBNNk</span></code>) or rather a misidentified pion (<code class="docutils literal notranslate"><span class="pre">PROBNNpi</span></code>).</p>
+</div>
+</div>
+<p>The usage of LoKi functors extends much further than in the interactive
+<code class="docutils literal notranslate"><span class="pre">GaudiPython</span></code> world we’ve been exploring here.</p>
+<p>They constitute the basis of particle filtering in the <em>selection framework</em>,
+discussed in the <a class="reference internal" href="../second-analysis-steps/building-decays-part0.html"><span class="doc">Building your own decay chain</span></a>
+lesson in
+<a class="reference internal" href="../second-analysis-steps/README.html"><span class="doc">second-analysis-steps</span></a>.
+Selecting particles means using LoKi <em>predicates</em>, functors that give a <code class="docutils literal notranslate"><span class="pre">bool</span></code>
+output, like <code class="docutils literal notranslate"><span class="pre">ISBASIC</span></code> and <code class="docutils literal notranslate"><span class="pre">HASTRACK</span></code>.
+Amongst these, a key functor is <code class="docutils literal notranslate"><span class="pre">in_range</span></code>, which returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the value
+of the given <em>function</em> functor (that is, the functor that returns a <code class="docutils literal notranslate"><span class="pre">double</span></code>)
+is within the given lower and upper limit.
+It helps writing CPU-efficient functors and thus is very important when building time-critical software like trigger or stripping lines.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LoKiCore.functions</span> <span class="kn">import</span> <span class="n">in_range</span>
+<span class="n">in_range</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)(</span><span class="n">cand</span><span class="p">)</span>
+<span class="n">in_range</span><span class="p">(</span><span class="mi">1860</span><span class="p">,</span> <span class="n">CHILD</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1870</span><span class="p">)(</span><span class="n">cand</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="understanding-the-cuts-in-the-stripping-lines"><i class="fa fa-info-circle"></i> Understanding the cuts in the stripping lines</p>
+</div>
+<div class="panel-body docutils container">
+<p>Have a look at the stripping line
+<a class="reference external" href="http://lhcbdoc.web.cern.ch/lhcbdoc/stripping/config/stripping28/charm/strippingd2hhpromptdst2d2kkline.html">D2hhPromptDst2D2KKLine</a> which is used in our example. Open a <code class="docutils literal notranslate"><span class="pre">CombineParticles/D2hhPromptDst2D2KKLine</span></code> section, and explain which requirements are coded in the ‘MotherCut’, ‘DaughterCuts’ and ‘CombinationCut’ sections.
+(More details about <code class="docutils literal notranslate"><span class="pre">CombineParticles</span></code> algorithm are explained in the <a class="reference internal" href="../second-analysis-steps/building-decays-part1.html"><span class="doc">lesson of second analysis steps</span></a>.)</p>
+</div>
+</div>
+<p>Additionally, LoKi functors can be used directly inside our <code class="docutils literal notranslate"><span class="pre">DaVinci</span></code> jobs to store specific bits of information in our ntuples without the need for a complicated C++-based algorithms.
+This second option will be discussed in the <a class="reference internal" href="add-tupletools.html"><span class="doc">TupleTools and branches lesson</span></a>.</p>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="debugging-loki-functors"><i class="fa fa-info-circle"></i> Debugging LoKi functors</p>
+</div>
+<div class="panel-body docutils container">
+<p>If you write complicated LoKi functors, typically in the context of selections,
+you need functions for debugging when things go wrong.
+LoKi provides wrapper functors that evaluate a functor (or functor expression), print debugging information and return the result;
+the most important of these are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dump1</span></code>, which prints the input object and returns the calculated functor value,</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LoKiCore.functions</span> <span class="kn">import</span> <span class="n">dump1</span>
+<span class="n">debug_p_components_sum</span> <span class="o">=</span> <span class="n">dump1</span><span class="p">(</span><span class="n">p_components_sum</span><span class="p">)</span>
+<span class="n">debug_p_components_sum</span><span class="p">(</span><span class="n">cand</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">monitor</span></code> which prints the input the functor string and returns the calculated functor value,</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LoKiCore.functions</span> <span class="kn">import</span> <span class="n">monitor</span>
+<span class="n">monitor_p_components_sum</span> <span class="o">=</span> <span class="n">monitor</span><span class="p">(</span><span class="n">p_components_sum</span><span class="p">)</span>
+<span class="n">monitor_p_components_sum</span><span class="p">(</span><span class="n">cand</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, FCC Starterkit
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

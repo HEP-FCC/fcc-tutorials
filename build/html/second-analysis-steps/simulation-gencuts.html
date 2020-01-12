@@ -1,0 +1,488 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Modifying the decay &mdash; FCC Starterkit Lessons  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/panels.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/starterkit.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FCC Starterkit Lessons
+          
+
+          
+            
+            <img src="../_static/starterkit.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">First  Steps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/prerequisites.html">Pre-workshop checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/introduction-to-course.html">Goals of the course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/fccsw.html">An introduction to FCC Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/bookkeeping.html">Finding data in the Bookkeeping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/exploring-fcc-files.html">Inspecting an FCC data file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-events-tree">The <code class="docutils literal notranslate"><span class="pre">events</span></code> tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-metadata-tree">The <code class="docutils literal notranslate"><span class="pre">metadata</span></code> tree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/asking-questions.html">Asking good questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fast-sim-and-analysis/README.html">Generators, Fast Simulation and Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html">FCC: Getting started with the production and analysis of fast-simulated events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#installation">Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#set-up-your-working-directory">Set up your working directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#getting-started-with-delphes">Getting started with Delphes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-fccsw-with-pythia8-delphes">Run FCCSW with Pythia8+Delphes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-the-analysis-in-heppy">Run the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#make-plots">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#cutflow">CutFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#legacy-using-the-papas-tool-for-fcc-ee">Legacy: using the Papas tool (for FCC-ee)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id1">Set up your working directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#generate-events-with-pythia8">Generate events with pythia8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-papas-and-the-analysis-in-heppy">Run papas and the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id2">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#more-information">More information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html">FCC-hh: Pythia, Delphes, Heppy Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-i-generate-and-simulate-events-with-fccsw">Part I: Generate and simulate Events with FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-ii-analyze-the-output-with-heppy">Part II: Analyze the output with Heppy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iii-produce-plots">Part III: Produce plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iv-homework">Part IV: Homework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#other-documentation">Other documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html">FCC-ee: Getting started with analysing simulated physics events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#instructions">Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#exercices">Exercices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">Full Detector Simulations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html">FCC Calorimeter Performance Studies Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#using-the-dd4hep-detector-model-in-fcc-software">Using the DD4hep detector model in FCC Software.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#running-geant4-within-the-fcc-software-framework">Running Geant4 within the FCC Software Framework</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#obtaining-and-plotting-the-energy-resolution">Obtaining and Plotting the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#extracting-and-plotting-the-resolution">Extracting and Plotting the Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-parametrizing-the-energy-resolution">Further Topics: Parametrizing the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-calculating-the-sampling-fraction-and-using-it-in-simulation">Further Topics: Calculating the Sampling Fraction and using it in Simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html">FCCee: Full Simulation of IDEA Driftchamber</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-i-simulations-with-the-idea-detector-model-in-fccsw">Part I: Simulations with the IDEA detector model in  FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-ii-user-task-basic-reconstruction-with-a-hough-transform">Part II User Task: Basic Reconstruction with a Hough-Transform</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">Developing FCCSW</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html">Github workflow and contribution guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#first-time-setup-of-git">First time setup of git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#generate-and-set-up-ssh-keys-for-github">Generate and set up ssh keys for github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#improving-your-git-experience">Improving your git experience</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#development-workflow">Development workflow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#keeping-your-local-repository-up-to-date">Keeping your local repository up to date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#contributing-code">Contributing code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#general-recommendations">General recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#commit-comments">Commit comments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#cleaning-history">Cleaning history</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#pull-requests">Pull requests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#trouble-shooting">Trouble-shooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#when-i-try-to-push-to-the-repository-i-get-an-authentication-error">When I try to push to the repository, I get an authentication error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#i-have-cloned-with-https-and-now-i-can-t-push-my-changes-what-do-i-do">I have cloned with https and now I can’t push my changes, what do I do?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#need-help">Need help?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html">CMake guide for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#quick-start-into-building-fccsw">Quick start into building FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-example-packages">CMake example packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-in-the-fcc-software-framework">CMake in the FCC software framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#ctest-in-fccsw">CTest in FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-internal-library">Using an internal library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#building-a-new-gaudi-module">Building a new Gaudi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-external-library">Using an external library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#customizing-how-cmake-is-run">Customizing how CMake is run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html">Writing documentation for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#where-to-put-documentation">Where to put documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#when-and-how-is-the-documentation-page-updated">When and how is the documentation page updated?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#structure-of-the-content">Structure of the content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#running-website-generation-locally">Running website generation locally</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#about-jekyll">About jekyll</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#for-website-admins">For website admins</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CONDUCT.html">Contributor Code of Conduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html">Instructional Material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html#software">Software</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://lhcb.github.io/starterkit">LHCb starterkit</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Starterkit Lessons</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Modifying the decay</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/second-analysis-steps/simulation-gencuts.md" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="panel panel-objectives docutils container">
+<div class="panel-header open docutils container">
+<p id="learning-objectives"><i class="fa fa-line-chart"></i> Learning Objectives</p>
+</div>
+<div class="panel-body docutils container">
+<ul class="simple">
+<li><p>Learn how to customise the generated decay</p></li>
+<li><p>Learn how to modify the used decay channels</p></li>
+<li><p>Learn how to modify/remove generator level cuts</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="modifying-the-decay">
+<h1>Modifying the decay<a class="headerlink" href="#modifying-the-decay" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="adding-a-decay-channel">
+<h2>Adding a decay channel<a class="headerlink" href="#adding-a-decay-channel" title="Permalink to this headline">¶</a></h2>
+<p>In order to make our decay model more realistic we can add in known resonances. E.g. instead of solely relying on phase-space, we can add in the prominent <span class="math notranslate nohighlight">\( \Phi\to K^{+}K^{-} \)</span> resonance to hopefully. In the decfile, we can another line to the decay channels of the <span class="math notranslate nohighlight">\( D^0 \)</span>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Decay MyD0                                                                                                                                                                                                                                                 
+  <span class="m">0</span>.5 K+ K- mu+ mu- PHSP<span class="p">;</span>                                                                                                                                                                                                                                
+  <span class="m">0</span>.5 phi mu+ mu- PHSP<span class="p">;</span>                                                                                                                                                                                                                                
+Enddecay                                                                                                                                                                                                                                                   
+CDecay MyantiD0                                                                                                                                                                                                                                            
+</pre></div>
+</div>
+<p>This triggers EvtGen to produce the <span class="math notranslate nohighlight">\( \phi \)</span> resonance in 50% of the cases and <span class="math notranslate nohighlight">\( \phi \)</span> is subsequently decayed. However, we have not told EvtGen that the <span class="math notranslate nohighlight">\( \phi \)</span> should be decayed only to a <span class="math notranslate nohighlight">\( K^+K^- \)</span>, hence it will randomly choose from all possible decays it knows about. Instead of modifying the common <code class="docutils literal notranslate"><span class="pre">phi</span></code>, we apply the same trick as we did for the <span class="math notranslate nohighlight">\( D^0 \)</span> decay:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Alias MyPhi phi
+ChargeConj MyPhi MyPhi
+
+Decay MyD0
+  <span class="m">0</span>.25 K+ K- mu+ mu- PHSP<span class="p">;</span>  
+  <span class="m">0</span>.75 MyPhi mu+ mu- PHSP<span class="p">;</span>  
+Enddecay
+CDecay MyantiD0
+
+Decay MyPhi
+  <span class="m">1</span>.000 K+  K-    VSS<span class="p">;</span>
+Enddecay
+</pre></div>
+</div>
+<p>After changing the decfile, you have to rerun <code class="docutils literal notranslate"><span class="pre">make</span></code>. Try out the modified decfile with Gauss, you should see a large spike in <span class="math notranslate nohighlight">\( m(K^+K^-) \)</span>.</p>
+</div>
+<div class="section" id="generator-level-cuts">
+<h2>Generator level cuts<a class="headerlink" href="#generator-level-cuts" title="Permalink to this headline">¶</a></h2>
+<p>Detector simulation is computationally expensive, and event generation is comparatively fast. Cuts at generator level save a huge amount of CPU and disk space (which means you can have more actually useful events) almost for free. At generator level you can only cut on pre-resolution quantities, so normally you want the generator cuts to be 100% efficient for selected events (within epsilon). The default example is to immediately remove events where the daughters are far outside the LHCb acceptance.
+This is implemented in “DaugthersInLHCb”, aka “DecProdCut” in the NickName. This requires that each “stable charged particle” is in a loose region around the LHCb acceptance (10-400 mrad in Theta).
+Cut tools need to be implemented in C++ and reside in the package <code class="docutils literal notranslate"><span class="pre">Gen/GenCuts</span></code>.</p>
+</div>
+<div class="section" id="removing-the-generator-cuts">
+<h2>Removing the generator cuts<a class="headerlink" href="#removing-the-generator-cuts" title="Permalink to this headline">¶</a></h2>
+<p>The absolute efficiencies for generator cuts can be obtained from the respective <a class="reference external" href="http://lhcbdoc.web.cern.ch/lhcbdoc/STATISTICS/SIM09STAT/index.shtml">website</a> or the produced <code class="docutils literal notranslate"><span class="pre">GeneratorLog.xml</span></code> file, which contains:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;efficiency</span> <span class="na">name =</span> <span class="s">&quot;generator level cut&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;after&gt;</span> 5 <span class="nt">&lt;/after&gt;</span>
+    <span class="nt">&lt;before&gt;</span> 27 <span class="nt">&lt;/before&gt;</span>
+    <span class="nt">&lt;value&gt;</span> 0.18519 <span class="nt">&lt;/value&gt;</span>
+    <span class="nt">&lt;error&gt;</span> 0.074757 <span class="nt">&lt;/error&gt;</span>
+<span class="nt">&lt;/efficiency&gt;</span>
+</pre></div>
+</div>
+<p>However, if you need the efficiencies as functions of some other observables this is not sufficient. Instead one might want to create a generator-only sample without any cuts applied. Two possibilities exist:</p>
+<ol class="simple">
+<li><p>Modify the DecFile and recompile the package</p></li>
+<li><p>Overwrite the python configuration originally configured by <code class="docutils literal notranslate"><span class="pre">&lt;event-type&gt;.py</span></code></p></li>
+</ol>
+<p>The second option is usually easier and in the example used so far only requires one additional line of configuration</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Generation</span><span class="p">()</span><span class="o">.</span><span class="n">SignalPlain</span><span class="o">.</span><span class="n">CutTool</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+<p>which must be included after <code class="docutils literal notranslate"><span class="pre">27163003.py</span></code> is sourced (e.g. in <code class="docutils literal notranslate"><span class="pre">Gauss-Job.py</span></code>). You can convince yourself that this alters the observed
+distributions and leads to a generator level cut efficiency of 100%. A large sample can be found on EOS: <code class="docutils literal notranslate"><span class="pre">root://eosuser.cern.ch//eos/user/l/lhcbsk/sim-lesson-2019/Gauss-27175000-modified-50000ev-20190515.xgen</span></code> (includes additional resonance added above).
+Have a look at the pseudorapidity distribution of the head particle. This illustrates another default behavior of the generation of signal decays in Gauss: The generated events’ z-axis if inverted if the selected signal particle’s momentum along that axis is negative.</p>
+</div>
+<div class="section" id="modifying-the-cut-tool">
+<h2>Modifying the cut tool<a class="headerlink" href="#modifying-the-cut-tool" title="Permalink to this headline">¶</a></h2>
+<p>If you need to modify the cut tool, you generally can pick between multiple options with increasing complexity and time until in production:</p>
+<ol class="simple">
+<li><p>Configure an existing cut-tool in <code class="docutils literal notranslate"><span class="pre">Gen/GenCuts</span></code> if possible.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">LoKi</span></code> functors for <code class="docutils literal notranslate"><span class="pre">GenParticle</span></code> (starting with a <code class="docutils literal notranslate"><span class="pre">G</span></code>) in a <code class="docutils literal notranslate"><span class="pre">LoKi::GenCutTool</span></code>.</p></li>
+<li><p>Last resort for really special things: write your own C++ implementation of the <code class="docutils literal notranslate"><span class="pre">IGenCutTool</span></code> interface.</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">LoKi::GenCutTool</span></code> are a good solution when you need to impose additional requirements beyond those provided by <code class="docutils literal notranslate"><span class="pre">DaughtersInLHCb</span></code>, for example a minimum for the transverse mometum of a <code class="docutils literal notranslate"><span class="pre">D0</span></code>.
+For local tests, this can be easily implemented by overwriting the default cut tool set by <code class="docutils literal notranslate"><span class="pre">27175000.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">LoKi__GenCutTool</span>
+<span class="kn">from</span> <span class="nn">Gauss.Configuration</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">Generation</span><span class="p">()</span><span class="o">.</span><span class="n">SignalPlain</span><span class="o">.</span><span class="n">CutTool</span> <span class="o">=</span> <span class="s2">&quot;LoKi::GenCutTool/TightCut&quot;</span>
+
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">LoKi__GenCutTool</span>
+<span class="n">gen</span><span class="o">=</span><span class="n">Generation</span><span class="p">()</span>
+<span class="n">gen</span><span class="o">.</span><span class="n">SignalPlain</span><span class="o">.</span><span class="n">addTool</span> <span class="p">(</span> <span class="n">LoKi__GenCutTool</span> <span class="p">,</span> <span class="s1">&#39;TightCut&#39;</span> <span class="p">)</span>
+
+<span class="n">tightCut</span> <span class="o">=</span> <span class="n">Generation</span><span class="p">()</span><span class="o">.</span><span class="n">SignalPlain</span><span class="o">.</span><span class="n">TightCut</span>
+<span class="n">tightCut</span><span class="o">.</span><span class="n">Decay</span>     <span class="o">=</span> <span class="s1">&#39;^[D*(2010)+ ==&gt; ^( D0 ==&gt; ^K+ ^K- ^mu+ ^mu- ) pi+]CC&#39;</span>
+<span class="n">tightCut</span><span class="o">.</span><span class="n">Preambulo</span> <span class="o">+=</span> <span class="p">[</span>
+   <span class="s1">&#39;from GaudiKernel.SystemOfUnits import GeV&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;inAcc         =  in_range ( 0.005 , GTHETA , 0.400 )&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;goodD0        =  ( GPT &gt; 2.0 * GeV )&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">tightCut</span><span class="o">.</span><span class="n">Cuts</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s1">&#39;[D0]cc&#39;</span><span class="p">:</span> <span class="s1">&#39;goodD0&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;[K+]cc&#39;</span><span class="p">:</span> <span class="s1">&#39;inAcc&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;[mu+]cc&#39;</span><span class="p">:</span> <span class="s1">&#39;inAcc&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can again check that this works and a larger sample of 10,000 events can be found <code class="docutils literal notranslate"><span class="pre">root://eosuser.cern.ch//eos/user/l/lhcbsk/sim-lesson/GaussTightCut-27163003-10000ev.xgen</span></code>
+.
+You might also notice a slight slow-down in the rate at which events are produced: by default,
+an event failing the generator cut (which is applied after Pythia and EvtGen are done) triggers a reset of
+the entire generation phase of the simulation. Therefore, very tight generator level cuts in combination
+with a signal particle that only rarely occurs in minimum bias events can results in the generation phase
+taking manifold longer than the simulation of the detector response (and you might want to rethink your
+strategy for event generation).
+For some ideas on which kind of cuts to apply, you can have a look here: https://twiki.cern.ch/twiki/bin/view/LHCb/GeneratorLevelTightCuts</p>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="modifying-cut-tools-for-production"><i class="fa fa-info-circle"></i> Modifying cut tools for production</p>
+</div>
+<div class="panel-body docutils container">
+<p>As the cut tools are to be configured in the DecFiles, they form an integral part of the event-type itself.
+Hence, any modification that changes the produced events usually requires the release of a new DecFile including a new event-type or a new simulation sub-version so events end up in a different bookkeeping location.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, FCC Starterkit
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,586 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FCCee: Full Simulation of IDEA Driftchamber &mdash; FCC Starterkit Lessons  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/panels.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/starterkit.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Developing FCCSW" href="../developing-fcc-software/README.html" />
+    <link rel="prev" title="FCC Calorimeter Performance Studies Workflow" href="FccCaloPerformance.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FCC Starterkit Lessons
+          
+
+          
+            
+            <img src="../_static/starterkit.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">First  Steps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/prerequisites.html">Pre-workshop checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/introduction-to-course.html">Goals of the course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/fccsw.html">An introduction to FCC Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/bookkeeping.html">Finding data in the Bookkeeping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/exploring-fcc-files.html">Inspecting an FCC data file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-events-tree">The <code class="docutils literal notranslate"><span class="pre">events</span></code> tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-metadata-tree">The <code class="docutils literal notranslate"><span class="pre">metadata</span></code> tree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/asking-questions.html">Asking good questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fast-sim-and-analysis/README.html">Generators, Fast Simulation and Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html">FCC: Getting started with the production and analysis of fast-simulated events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#installation">Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#set-up-your-working-directory">Set up your working directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#getting-started-with-delphes">Getting started with Delphes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-fccsw-with-pythia8-delphes">Run FCCSW with Pythia8+Delphes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-the-analysis-in-heppy">Run the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#make-plots">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#cutflow">CutFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#legacy-using-the-papas-tool-for-fcc-ee">Legacy: using the Papas tool (for FCC-ee)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id1">Set up your working directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#generate-events-with-pythia8">Generate events with pythia8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-papas-and-the-analysis-in-heppy">Run papas and the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id2">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#more-information">More information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html">FCC-hh: Pythia, Delphes, Heppy Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-i-generate-and-simulate-events-with-fccsw">Part I: Generate and simulate Events with FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-ii-analyze-the-output-with-heppy">Part II: Analyze the output with Heppy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iii-produce-plots">Part III: Produce plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iv-homework">Part IV: Homework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#other-documentation">Other documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html">FCC-ee: Getting started with analysing simulated physics events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#instructions">Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#exercices">Exercices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">Full Detector Simulations</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FccCaloPerformance.html">FCC Calorimeter Performance Studies Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="FccCaloPerformance.html#using-the-dd4hep-detector-model-in-fcc-software">Using the DD4hep detector model in FCC Software.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccCaloPerformance.html#running-geant4-within-the-fcc-software-framework">Running Geant4 within the FCC Software Framework</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="FccCaloPerformance.html#obtaining-and-plotting-the-energy-resolution">Obtaining and Plotting the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FccCaloPerformance.html#extracting-and-plotting-the-resolution">Extracting and Plotting the Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FccCaloPerformance.html#further-topics-parametrizing-the-energy-resolution">Further Topics: Parametrizing the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FccCaloPerformance.html#further-topics-calculating-the-sampling-fraction-and-using-it-in-simulation">Further Topics: Calculating the Sampling Fraction and using it in Simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">FCCee: Full Simulation of IDEA Driftchamber</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#part-i-simulations-with-the-idea-detector-model-in-fccsw">Part I: Simulations with the IDEA detector model in  FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#part-ii-user-task-basic-reconstruction-with-a-hough-transform">Part II User Task: Basic Reconstruction with a Hough-Transform</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">Developing FCCSW</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html">Github workflow and contribution guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#first-time-setup-of-git">First time setup of git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#generate-and-set-up-ssh-keys-for-github">Generate and set up ssh keys for github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#improving-your-git-experience">Improving your git experience</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#development-workflow">Development workflow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#keeping-your-local-repository-up-to-date">Keeping your local repository up to date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#contributing-code">Contributing code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#general-recommendations">General recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#commit-comments">Commit comments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#cleaning-history">Cleaning history</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#pull-requests">Pull requests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#trouble-shooting">Trouble-shooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#when-i-try-to-push-to-the-repository-i-get-an-authentication-error">When I try to push to the repository, I get an authentication error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#i-have-cloned-with-https-and-now-i-can-t-push-my-changes-what-do-i-do">I have cloned with https and now I can’t push my changes, what do I do?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#need-help">Need help?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html">CMake guide for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#quick-start-into-building-fccsw">Quick start into building FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-example-packages">CMake example packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-in-the-fcc-software-framework">CMake in the FCC software framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#ctest-in-fccsw">CTest in FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-internal-library">Using an internal library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#building-a-new-gaudi-module">Building a new Gaudi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-external-library">Using an external library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#customizing-how-cmake-is-run">Customizing how CMake is run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html">Writing documentation for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#where-to-put-documentation">Where to put documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#when-and-how-is-the-documentation-page-updated">When and how is the documentation page updated?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#structure-of-the-content">Structure of the content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#running-website-generation-locally">Running website generation locally</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#about-jekyll">About jekyll</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#for-website-admins">For website admins</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CONDUCT.html">Contributor Code of Conduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html">Instructional Material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html#software">Software</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://lhcb.github.io/starterkit">LHCb starterkit</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Starterkit Lessons</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="README.html">Full Detector Simulations</a> &raquo;</li>
+        
+      <li>FCCee: Full Simulation of IDEA Driftchamber</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/full-detector-simulations/FCCeeDriftChamber.md" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="fccee-full-simulation-of-idea-driftchamber">
+<h1>FCCee: Full Simulation of IDEA Driftchamber<a class="headerlink" href="#fccee-full-simulation-of-idea-driftchamber" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="#generate-events">Generate and Simulate Events</a></p></li>
+<li><p><a class="reference external" href="#analyze-events">Analyze Events</a></p></li>
+<li><p><a class="reference external" href="#plot-events">Plot events</a></p></li>
+<li><p><a class="reference external" href="#homework-exercise">Homework exercise</a></p></li>
+</ul>
+<div class="panel panel-objectives docutils container">
+<div class="panel-header open docutils container">
+<p id="learning-objectives"><i class="fa fa-line-chart"></i> Learning Objectives</p>
+</div>
+<div class="panel-body docutils container">
+<ul class="simple">
+<li><p>visualize and use the Driftchamber model in FCCSW</p></li>
+<li><p>simulate the particle passage in Geant4</p></li>
+<li><p>run digitization and get wire signal</p></li>
+<li><p>run Hough Transform for a first track reconstruction</p></li>
+<li><p>produce plots</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="part-i-simulations-with-the-idea-detector-model-in-fccsw">
+<h2>Part I: Simulations with the IDEA detector model in  FCCSW<a class="headerlink" href="#part-i-simulations-with-the-idea-detector-model-in-fccsw" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<p>This tutorial is based on the FCC Note http://cds.cern.ch/record/2670936 and describes the use of the FCCee IDEA Driftchamber in the FCC software framework.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ROOT</span>
+<span class="n">ROOT</span><span class="o">.</span><span class="n">enableJSVis</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unfortunately this way of displaying the detector won&#39;t work until dd4hep v1-11 is installed in LCG releases</span>
+<span class="c1"># In the meantime, find a similar display here: http://hep-fcc.github.io/FCCSW/geo/geo-ee.html </span>
+
+<span class="c1"># load the dd4hep detector model</span>
+<span class="c1">#import dd4hep</span>
+<span class="c1">#import os</span>
+<span class="c1">#fcc_det_path = os.path.join(os.environ.get(&quot;FCC_DETECTORS&quot;, &quot;&quot;), &quot;share/FCCSW/Detector/DetFCCeeIDEA/compact/FCCee_DectMaster.xml&quot;)</span>
+<span class="c1">#print fcc_det_path</span>
+<span class="c1">#description = dd4hep.Detector.getInstance()</span>
+<span class="c1">#description.fromXML(fcc_det_path)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#c = ROOT.TCanvas(&quot;c_detector_display&quot;, &quot;&quot;, 600,600)</span>
+<span class="c1">#description.manager().SetVisLevel(6)</span>
+<span class="c1">#description.manager().SetVisOption(1)</span>
+<span class="c1">#vol = description.manager().GetTopVolume()</span>
+<span class="c1">#vol.Draw()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!ls $FCCSWBASEDIR/share/FCCSW/Detector/DetFCCeeIDEA/compact
+</pre></div>
+</div>
+<p>From the detector display or the command line, check that the detector subsystems are as you would expect them  from the specifications in the Conceptual Design Report.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!fccrun $FCCSWBASEDIR/share/FCCSW/Examples/options/geant_fullsim_fccee_pgun.py --detectors $FCCSWBASEDIR/share/FCCSW/Detector/DetFCCeeIDEA/compact/FCCee_DectMaster.xml --etaMin -3.5 --etaMax 3.5 -n 20000
+</pre></div>
+</div>
+<p>You can see the created files:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ROOT</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TFile</span><span class="p">(</span><span class="s2">&quot;root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/fccee_idea_pgun.root&quot;</span><span class="p">)</span>
+<span class="n">events</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TCanvas</span><span class="p">(</span><span class="s2">&quot;c_positionedHits_DCH_xy&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="c1"># draw hits for first five events</span>
+<span class="n">events</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;positionedHits_DCH.position.x:positionedHits_DCH.position.y&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">Draw</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">mergeDCHits</span><span class="o">.</span><span class="n">py</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">Gaudi.Configuration</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="kn">import</span> <span class="nn">GaudiKernel.SystemOfUnits</span> <span class="k">as</span> <span class="nn">units</span>
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">ApplicationMgr</span><span class="p">,</span> <span class="n">FCCDataSvc</span><span class="p">,</span> <span class="n">PodioOutput</span>
+
+<span class="n">podioevent</span>   <span class="o">=</span> <span class="n">FCCDataSvc</span><span class="p">(</span><span class="s2">&quot;EventDataSvc&quot;</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="s2">&quot;root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/fccee_idea_pgun.root&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">PodioInput</span><span class="p">,</span> <span class="n">ReadTestConsumer</span>
+<span class="n">podioinput</span> <span class="o">=</span> <span class="n">PodioInput</span><span class="p">(</span><span class="s2">&quot;PodioReader&quot;</span><span class="p">,</span> <span class="n">collections</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;positionedHits_DCH&quot;</span><span class="p">],</span> <span class="n">OutputLevel</span><span class="o">=</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="c1"># Parses the given xml file</span>
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">GeoSvc</span>
+<span class="n">geoservice</span> <span class="o">=</span> <span class="n">GeoSvc</span><span class="p">(</span><span class="s2">&quot;GeoSvc&quot;</span><span class="p">,</span> <span class="n">detectors</span><span class="o">=</span><span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;FCC_DETECTORS&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/share/FCCSW/Detector/DetFCCeeIDEA/compact/FCCee_DectMaster.xml&#39;</span><span class="p">,])</span>
+
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">CreateDCHHits</span>
+<span class="n">createhits</span> <span class="o">=</span> <span class="n">CreateDCHHits</span><span class="p">(</span><span class="s2">&quot;CreateDCHHits&quot;</span><span class="p">,</span>
+                           <span class="n">readoutName</span> <span class="o">=</span> <span class="s2">&quot;DriftChamberCollection&quot;</span><span class="p">,</span>
+                           <span class="n">EdepCut</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="mf">1e-9</span><span class="p">,</span>
+                           <span class="n">DCACut</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span>
+                           <span class="n">OutputLevel</span><span class="o">=</span><span class="n">INFO</span><span class="p">)</span>
+
+<span class="n">createhits</span><span class="o">.</span><span class="n">positionedHits</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="s2">&quot;positionedHits_DCH&quot;</span>
+<span class="n">createhits</span><span class="o">.</span><span class="n">mergedHits</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="s2">&quot;merged_DCH&quot;</span>
+
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">PodioOutput</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">PodioOutput</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">)</span>
+<span class="n">out</span><span class="o">.</span><span class="n">OutputLevel</span><span class="o">=</span><span class="n">DEBUG</span>
+<span class="n">out</span><span class="o">.</span><span class="n">outputCommands</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;keep *&quot;</span><span class="p">]</span>
+<span class="n">out</span><span class="o">.</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;mergedDCHits.root&quot;</span>
+
+
+<span class="n">ApplicationMgr</span><span class="p">(</span> <span class="n">TopAlg</span> <span class="o">=</span> <span class="p">[</span>
+                          <span class="n">podioinput</span><span class="p">,</span> 
+                          <span class="n">createhits</span><span class="p">,</span> 
+                          <span class="n">out</span><span class="p">,</span> 
+                          <span class="p">],</span>
+                <span class="n">EvtSel</span> <span class="o">=</span> <span class="s1">&#39;NONE&#39;</span><span class="p">,</span>
+                <span class="n">EvtMax</span>   <span class="o">=</span> <span class="mi">20000</span><span class="p">,</span>
+                <span class="n">ExtSvc</span> <span class="o">=</span> <span class="p">[</span><span class="n">podioevent</span><span class="p">,</span> <span class="n">geoservice</span> <span class="p">],</span>
+                <span class="n">OutputLevel</span> <span class="o">=</span> <span class="n">INFO</span>
+ <span class="p">)</span>
+
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!fccrun mergeDCHits.py
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!rootls -t mergedDCHits.root
+</pre></div>
+</div>
+<p>By now, we have produced the two files <code class="docutils literal notranslate"><span class="pre">fccee_idea_pgun.root</span></code> and <code class="docutils literal notranslate"><span class="pre">mergedDCHits.root</span></code>.
+You can try to put them in a “test” folder on the shared disk space on eos.
+The files can already be found under the path <code class="docutils literal notranslate"><span class="pre">/eos/experiment/fcc/ee/tutorial</span></code>.
+To use files on eos, you can simply prepend <code class="docutils literal notranslate"><span class="pre">root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/</span></code>  when using TFile, or use <code class="docutils literal notranslate"><span class="pre">xrdcp</span> <span class="pre">root://eospublic.cern.ch/&lt;path</span> <span class="pre">on</span> <span class="pre">eos&gt;</span> <span class="pre">&lt;local</span> <span class="pre">file</span> <span class="pre">name&gt;</span></code>
+And again, check that your files are present in your current directory:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>! xrdcp root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/mergedDCHits.root mergedDCHits3.root
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ROOT</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TFile</span><span class="p">(</span><span class="s2">&quot;root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/mergedDCHits.root&quot;</span><span class="p">)</span>
+<span class="n">events</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># draw hits for first five events</span>
+<span class="n">events</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;DCHitInfo.hit_start.Perp():DCHitInfo.hit_start.z()&quot;</span><span class="p">,</span> <span class="s2">&quot;DCHitInfo.layerId==5&amp;&amp;DCHitInfo.wireId==7&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TCanvas</span><span class="p">(</span><span class="s2">&quot;c_DCH_xy&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TGraph</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">GetSelectedRows</span><span class="p">(),</span> <span class="n">events</span><span class="o">.</span><span class="n">GetV2</span><span class="p">(),</span> <span class="n">events</span><span class="o">.</span><span class="n">GetV1</span><span class="p">())</span>
+<span class="n">g</span><span class="o">.</span><span class="n">SetMarkerStyle</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">SetTitle</span><span class="p">(</span><span class="s2">&quot;DriftChamber Hits on one Wire;x;z&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;AP&quot;</span><span class="p">)</span>
+
+<span class="n">c</span><span class="o">.</span><span class="n">Draw</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ROOT</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TFile</span><span class="p">(</span><span class="s2">&quot;mergedDCHits.root&quot;</span><span class="p">)</span>
+<span class="n">events</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">)</span>
+
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TCanvas</span><span class="p">(</span><span class="s2">&quot;c_DCH_id&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="n">events</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;DCHitInfo.hit_start.x():DCHitInfo.hit_start.y()&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">dat_x</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">GetV1</span><span class="p">()</span>
+<span class="n">dat_y</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">GetV2</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">GetSelectedRows</span><span class="p">()):</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dat_x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dat_y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    
+<span class="n">events</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;DCHitInfo.hit_start.z():DCHitInfo.hit_start.z()&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">dat_z</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">GetV1</span><span class="p">()</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">GetSelectedRows</span><span class="p">()):</span>
+    <span class="n">z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dat_z</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    
+<span class="n">events</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;DCHitInfo.wireId:DCHitInfo.layerId&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">dat_wid</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">GetV1</span><span class="p">()</span>
+<span class="n">dat_lid</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">GetV2</span><span class="p">()</span>
+<span class="n">wid</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">lid</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">GetSelectedRows</span><span class="p">()):</span>
+    <span class="n">lid</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dat_lid</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">wid</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dat_wid</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="n">c</span><span class="o">.</span><span class="n">Draw</span><span class="p">()</span>
+
+<span class="n">lid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lid</span><span class="p">)</span>
+<span class="n">wid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">wid</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">notebook</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span>  <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">):</span>
+    <span class="n">cond</span> <span class="o">=</span> <span class="p">(</span><span class="n">lid</span> <span class="o">==</span><span class="mi">1</span> <span class="p">)</span>  <span class="o">*</span> <span class="p">(</span><span class="n">wid</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">f_x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span>
+    <span class="n">f_y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span>
+    <span class="n">f_z</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">f_x</span><span class="p">,</span> <span class="n">f_y</span><span class="p">,</span> <span class="n">f_z</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="part-ii-user-task-basic-reconstruction-with-a-hough-transform">
+<h2>Part II User Task: Basic Reconstruction with a Hough-Transform<a class="headerlink" href="#part-ii-user-task-basic-reconstruction-with-a-hough-transform" title="Permalink to this headline">¶</a></h2>
+<p>Go back to the note mentioned in the beginning: http://cds.cern.ch/record/2670936 It uses the Hough-Transform, a simple but very effective Reconstruction method for this type of detector. Some python codes implementing it can be found in this repository: https://github.com/HEP-FCC/HoughTransform
+Try to reproduce the results. Background events stored on eos under <code class="docutils literal notranslate"><span class="pre">/eos/experiment/fcc/ee/generation/GUINEA-PIG/</span></code> can be read with this job options file: https://github.com/HEP-FCC/FCCSW/blob/master/Examples/options/geant_fullsim_fccee_hepevt.py.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../developing-fcc-software/README.html" class="btn btn-neutral float-right" title="Developing FCCSW" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="FccCaloPerformance.html" class="btn btn-neutral float-left" title="FCC Calorimeter Performance Studies Workflow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, FCC Starterkit
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
