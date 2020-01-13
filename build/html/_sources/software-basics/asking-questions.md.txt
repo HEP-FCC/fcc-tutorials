@@ -23,7 +23,7 @@ For more general questions [Stack Overflow](https://stackoverflow.com/) and
 
 {% callout "FCC glossary" %}
 
-A broad range of LHCb-related terms, abbreviations and definitions can be found in the  [FCC Glossary](https://hep-fcc.github.io/glossary/) linked from the main experiment page.
+A broad range of FCC-related terms, abbreviations and definitions can be found in the  [FCC Glossary](https://hep-fcc.github.io/glossary/) linked from the main experiment page.
 Feel free to [contribute](https://github.com/HEP-FCC/glossary).  
 
 {% endcallout %} 

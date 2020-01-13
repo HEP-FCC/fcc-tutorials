@@ -14,5 +14,6 @@ If you have any problems or questions, you can [open an issue][lessons-issues] o
 
     FccCaloPerformance.md
     FCCeeDriftChamber.md
+    FCCee_IR_Backgrounds/README.md
 
 ```
