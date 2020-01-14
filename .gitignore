@@ -1,4 +1,11 @@
 _book
+*.root
+*.log
+*.out
+*.so
+*.o
+*.save
+*.dat
 node_modules
 book.pdf
 *~

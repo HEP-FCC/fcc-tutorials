@@ -31,10 +31,10 @@ angle_x=-0.015;
 
 $PARAMETERS::FCCee_Top
 {
-n_x=64 ;
-n_y=32 ;
-n_z=64 ;      
-n_t=10 ;
+n_x=2 ;
+n_y=2 ;
+n_z=2 ;      
+n_t=2 ;
 cut_x=150*sigma_x.1;
 cut_y=60.0*sigma_y.1;
 cut_z=3.0*sigma_z.1 ;

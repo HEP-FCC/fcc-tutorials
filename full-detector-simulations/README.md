@@ -12,8 +12,8 @@ If you have any problems or questions, you can [open an issue][lessons-issues] o
 .. toctree::
     :caption: Contents:
 
-    FccCaloPerformance.md
-    FCCeeDriftChamber.md
+    FccCaloPerformance/FccCaloPerformance.md
+    FCCeeDriftChamber/FCCeeDriftChamber.md
     FCCee_IR_Backgrounds_guinea/README.md
 
 ```
