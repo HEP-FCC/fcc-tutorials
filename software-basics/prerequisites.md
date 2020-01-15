@@ -95,3 +95,11 @@ The following steps have to be executed each time you want to connect:
 10. You now have a remote SSH session at an lxplus server node!
 
 {% endcallout %}
+
+## Setup
+
+There is a complete installation of FCC software provided on `cvmfs`, which can be set up using:
+
+```
+source /cvfms/fcc.cern.ch/sw/latest/setup.sh
+```
