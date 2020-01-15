@@ -30,8 +30,7 @@ From the detector display or the command line, check to see the detector subsyst
 
 
 ```
-
-
+geoDisplay $FCCSWBASEDIR/share/FCCSW/Detector/DetFCCeeIDEA/compact/FCCee_DectMaster.xml
 ```
 
 
