@@ -25,39 +25,14 @@
 
 This tutorial is based on the FCC Note http://cds.cern.ch/record/2670936 and describes the use of the FCCee IDEA Driftchamber in the FCC software framework.
 
-```python
-import ROOT
-ROOT.enableJSVis()
-```
 
-```python
-# Unfortunately this way of displaying the detector won't work until dd4hep v1-11 is installed in LCG releases
-# In the meantime, find a similar display here: http://hep-fcc.github.io/FCCSW/geo/geo-ee.html 
+From the detector display or the command line, check to see the detector subsystems are there.
 
-# load the dd4hep detector model
-#import dd4hep
-#import os
-#fcc_det_path = os.path.join(os.environ.get("FCC_DETECTORS", ""), "/Detector/DetFCCeeIDEA/compact/FCCee_DectMaster.xml")
-#print fcc_det_path
-#description = dd4hep.Detector.getInstance()
-#description.fromXML(fcc_det_path)
-```
-
-```python
-#c = ROOT.TCanvas("c_detector_display", "", 600,600)
-#description.manager().SetVisLevel(6)
-#description.manager().SetVisOption(1)
-#vol = description.manager().GetTopVolume()
-#vol.Draw()
 
 ```
 
-```python
-!ls $FCCSWBASEDIR/share/FCCSW/Detector/DetFCCeeIDEA/compact
+
 ```
-
-From the detector display or the command line, check that the detector subsystems are as you would expect them  from the specifications in the Conceptual Design Report.
-
 
 
 ```python
@@ -67,6 +42,7 @@ From the detector display or the command line, check that the detector subsystem
 You can see the created files:
 
 ```python
+#!/bin/env python
 import ROOT
 f = ROOT.TFile("root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/fccee_idea_pgun.root")
 events = f.Get("events")
@@ -76,6 +52,8 @@ c = ROOT.TCanvas("c_positionedHits_DCH_xy", "", 700, 600)
 events.Draw("positionedHits_DCH.position.x:positionedHits_DCH.position.y", "", "", 10, 0)
 c.Draw()
 ```
+
+This simulation configuration creates hits all along the particle trajectory. To obtain the hits on the wire it is necessary to merge them with [this configuration](https://raw.githubusercontent.com/HEP-FCC/fcc-tutorials/master/full-detector-simulations/FCCeeDriftChamber/mergeDCHits.py)
 
 
 ```bash 
@@ -92,15 +70,16 @@ The files can already be found under the path `/eos/experiment/fcc/ee/tutorial`.
 To use files on eos, you can simply prepend `root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/`  when using TFile, or use `xrdcp root://eospublic.cern.ch/<path on eos> <local file name>`
 And again, check that your files are present in your current directory:
 
-```python
-! xrdcp root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/mergedDCHits.root mergedDCHits3.root
+```bash
+xrdcp root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/mergedDCHits.root mergedDCHits3.root
 ```
 
 ```python
+#!/usr/bin/env python
+
 import ROOT
 f = ROOT.TFile("root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/mergedDCHits.root")
 events = f.Get("events")
-
 
 # draw hits for first five events
 events.Draw("DCHitInfo.hit_start.Perp():DCHitInfo.hit_start.z()", "DCHitInfo.layerId==5&&DCHitInfo.wireId==7", "")
@@ -109,11 +88,18 @@ g = ROOT.TGraph(events.GetSelectedRows(), events.GetV2(), events.GetV1())
 g.SetMarkerStyle(4)
 g.SetTitle("DriftChamber Hits on one Wire;x;z")
 g.Draw("AP")
-
 c.Draw()
 ```
 
+{% challenge %}
+
+Using the simulation hits, find the number of wires in each layer.
+
+
+{% endchallenge %}
+
 ```python
+#!/usr/bin/env python
 import ROOT
 import numpy as np
 f = ROOT.TFile("mergedDCHits.root")
@@ -153,10 +139,8 @@ wid = np.array(wid)
 x = np.array(x)
 y = np.array(y)
 z = np.array(z)
-```
 
-```python
-%matplotlib notebook
+# draw with matplotlib
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 fig = plt.figure()
@@ -169,6 +153,7 @@ for i  in range(500):
     ax.scatter(f_x, f_y, f_z)
 plt.show()
 ```
+
 
 ## Part II User Task: Basic Reconstruction with a Hough-Transform
 
