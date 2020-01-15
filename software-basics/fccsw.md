@@ -54,9 +54,14 @@ You can find comprehensive documentation in the [Gaudi Doxygen](https://gaudi.we
 Usually, you will work with one of the FCC software framework FCCSW that are based on Gaudi.
 One of the most important ones is *DaVinci*, which provides lots of *Algorithms* and *Tools* for physics analysis.
 
+
+
 You can run gaudi using the following command [on lxplus](prerequisites.md):
 
+
+
 ```bash
+source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 echo "from Configurables import ApplicationMgr" > option.py
 fccrun option.py
 ```
