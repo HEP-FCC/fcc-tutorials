@@ -101,5 +101,5 @@ The following steps have to be executed each time you want to connect:
 There is a complete installation of FCC software provided on `cvmfs`, which can be set up using:
 
 ```
-source /cvfms/fcc.cern.ch/sw/latest/setup.sh
+source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```

@@ -23,7 +23,11 @@
 ## Part I: Simulations with the IDEA detector model in  FCCSW
 ----------------------------------------------------
 
-This tutorial is based on the FCC Note http://cds.cern.ch/record/2670936 and describes the use of the FCCee IDEA Driftchamber in the FCC software framework.
+This tutorial is based on the FCC Note http://cds.cern.ch/record/2670936 and describes the use of the FCCee IDEA Driftchamber in the FCC software framework. First, setup the fcc software environment:
+
+```
+source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
+```
 
 
 From the detector display or the command line, check to see the detector subsystems are there.
@@ -56,7 +60,7 @@ This simulation configuration creates hits all along the particle trajectory. To
 
 
 ```bash 
-fcccrun mergeDCHits.py
+fccrun mergeDCHits.py
 ```
 
 ```python
@@ -90,7 +94,7 @@ g.Draw("AP")
 c.Draw()
 ```
 
-{% challenge %}
+{% challenge "Driftchamber layers" %}
 
 Using the simulation hits, find the number of wires in each layer.
 
