@@ -106,7 +106,7 @@ With this file you are now ready to run the analysis framework [heppy](https://g
 
 Copy locally the ttbar example of [heppy](https://github.com/HEP-FCC/heppy.git):
 
-    cp heppy/test/analysis_hh_ttbar_cfg.py .
+    cp heppy/heppy/test/analysis_hh_ttbar_cfg.py .
 
 and edit the file to read the events you just produced running FCCSW previously
 `FCCDelphesOutput.root` in the `files` list in line 13. If
