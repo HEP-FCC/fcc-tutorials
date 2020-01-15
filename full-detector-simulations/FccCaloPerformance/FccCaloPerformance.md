@@ -29,14 +29,14 @@ In the framework, the geometry is available to all components via the service `G
 One of the simplest jobs is to write the geometry to a `.gdml` file:
 
 ```python
-%%writefile dumpGeo_fccee.py
 
+# write to dumpGeo_fccee.py
 import os
 from Gaudi.Configuration import *
 from Configurables import GeoSvc
 geoservice = GeoSvc("GeoSvc")
 geoservice.detectors=[
-  os.path.join(os.environ.get("FCC_DETECTORS", ""), 'share/FCCSW/Detector/DetFCCeeIDEA/compact/FCCee_DectMaster.xml'),
+  "/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.12/x86_64-centos7-gcc8-opt/share/FCCSW/Detector/DetFCCeeIDEA/compact/FCCee_DectMaster.xml",
                     ]
 
 from Configurables import SimG4Svc
@@ -60,7 +60,7 @@ ApplicationMgr( TopAlg = [],
 A job with this configuration can be executed with 
 
 ```python
-!fccrun dumpGeo_fccee.py
+fccrun dumpGeo_fccee.py
 ```
 
 Note the printout of the GeoSvc and make sure the information is as expected. If there is something unclear or missing make sure to open an [issue](https://github.com/HEP-FCC/FCCSW/issues)!
