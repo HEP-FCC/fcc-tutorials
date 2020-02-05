@@ -37,7 +37,7 @@ about teaching good software practices and demystifying code.
 Over the course of 2015, these lessons have been written on 
 [GitHub](https://github.com), a code sharing and collaboration website.
 You can find the source code of these lessons in the 
-[`hep-fcc/software-basics`](https://github.com/hep-fcc/fcc-tutorials/) 
+[`HEP-FCC/fcc-tutorials`](https://github.com/hep-fcc/fcc-tutorials/) 
 repository, and _you_ can contribute!
 Please [submit an issue](https://github.com/hep-fcc/fcc-tutorials/issues) if 
 you spot a mistake or you think something isn't clear enough, or you can [make 
