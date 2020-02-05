@@ -49,7 +49,7 @@ In order to have better control on all what is produced during the tutorial we a
     mkdir FCCFastSimTutorial
     cd FCCFastSimTutorial
 
-For convenience we suggest to create a symlink to the FCCSW subdierctory with config files:
+For convenience we suggest to create a symlink to the FCCSW subdirectory with config files:
 
     ln -sf $FCCSWBASEDIR/share/FCCSW
 
