@@ -102,13 +102,6 @@ This example will run 100 events by default. To have more events for plotting pu
 
 With this file you are now ready to run the analysis framework [heppy](https://github.com/HEP-FCC/heppy.git).
 
-### Run FCCSW with Pythia8+Delphes (FCC-ee)
-
-Let us now produce FCC-ee event with the IDEA delphes card. For that we use a different FCC configuration file than FCC-hh and a different detector parametrisation in Delphes.
-
-```
-fccrun  /eos/experiment/fcc/ee/utils/config/PythiaDelphes_config_v01.py --DelphesCard /eos/experiment/fcc/ee/utils/delphescards/fcc_v01/card.tcl --Filename FCCSW/Generation/data/ee_Z_ddbar.cmd --filename events.root -n 1000
-```
 
 ### Run the analysis in heppy
 
@@ -168,6 +161,28 @@ Counter cut_flow :
 
 The first column represents the cut, the second one the raw number of events, 
 the third one the efficiency of the cut, and the last one the overall efficiency.
+
+### Run FCCSW with Pythia8+Delphes (FCC-ee)
+
+Let us now produce FCC-ee event with the IDEA delphes card. For that we use a different FCC configuration file than FCC-hh and a different detector parametrisation in Delphes.
+
+```
+fccrun  /eos/experiment/fcc/ee/utils/config/PythiaDelphes_config_v01.py --DelphesCard /eos/experiment/fcc/ee/utils/delphescards/fcc_v01/card.tcl --Filename FCCSW/Generation/data/ee_Z_ddbar.cmd --filename events.root -n 1000
+```
+
+### Run dataframe (FCC-ee)
+
+Clone the repository
+```
+git clone https://github.com/HEP-FCC/FCCAnalyses.git
+```
+
+Follow the installation instruction for RDF
+
+then run the template analysis
+```
+python FCCeeAnalyses/Z_Zqq/dataframe/analysis.py  PATHTOTHEFILEPRODUCEBEFORE/events.root
+```
 
 Legacy: using the Papas tool (for FCC-ee)
 ----------------------------------------
