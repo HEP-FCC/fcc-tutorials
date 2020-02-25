@@ -9,7 +9,8 @@ Contents:
     * [Installation](#installation)
     * [Set up your working directory](#set-up-your-working-directory)
     * [Getting started with Delphes](#getting-started-with-delphes)
-      * [Run FCCSW with Pythia8+Delphes](#run-fccsw-with-pythia8+delphes)
+      * [Run FCCSW with Pythia8+Delphes (FCC-hh)](#run-fccsw-with-pythia8+delphes-fcc-hh)
+      * [Run FCCSW with Pythia8+Delphes (FCC-ee)](#run-fccsw-with-pythia8+delphes-fcc-ee)
       * [Run the analysis in heppy](#run-the-analysis-in-heppy)
       * [Make plots](#make-plots-1)
       * [CutFlow](#cutflow)
@@ -88,7 +89,7 @@ In this tutorial, you will learn how to:
     ntuple
 -   read this ntuple with ROOT to make a few plots
 
-### Run FCCSW with Pythia8+Delphes
+### Run FCCSW with Pythia8+Delphes (FCC-hh)
 
 Now you are ready to produce 100TeV ttbar events with Pythia, process them through Delphes and store them in the FCC-EDM:
 
@@ -101,6 +102,13 @@ This example will run 100 events by default. To have more events for plotting pu
 
 With this file you are now ready to run the analysis framework [heppy](https://github.com/HEP-FCC/heppy.git).
 
+### Run FCCSW with Pythia8+Delphes (FCC-ee)
+
+Let us now produce FCC-ee event with the IDEA delphes card. For that we use a different FCC configuration file than FCC-hh and a different detector parametrisation in Delphes.
+
+```
+fccrun /eos/experiment/fcc/ee/utils/config/PythiaDelphes_config_v01.py --delphescard=/eos/experiment/fcc/ee/utils/delphescards/fcc_v01/card.tcl --inputfile=FCCSW/Generation/data/ee_Z_ddbar.cmd --outputfile=events.root --nevents=1000
+```
 
 ### Run the analysis in heppy
 
