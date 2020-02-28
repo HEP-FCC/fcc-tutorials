@@ -172,12 +172,22 @@ fccrun  /eos/experiment/fcc/ee/utils/config/PythiaDelphes_config_v01.py --Delphe
 
 ### Run dataframe (FCC-ee)
 
-Clone the repository
+Clone the repository and go in it
 ```
 git clone https://github.com/HEP-FCC/FCCAnalyses.git
+cd FCCAnalyses
 ```
 
-Follow the installation instruction for RDF
+Follow the installation instruction for dataframe in FCCAnalyses
+
+```
+source setup.sh
+mkdir build install
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=../install
+make install
+cd ..
+```
 
 then run the template analysis
 ```
