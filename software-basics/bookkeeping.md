@@ -15,6 +15,23 @@ eventually lead to the data you need.
 
 {% endobjectives %}
 
+
+## Gaining access permissions
+
+Read/write access to the shared filesystem is gained by subscribing to the relevant egroups [here](https://e-groups.cern.ch/e-groups/EgroupsSearchForm.do):
+
+```
+fcc-eos-read-hh
+fcc-eos-read-ee
+fcc-eos-read-eh
+
+fcc-eos-write-hh
+fcc-eos-write-ee
+fcc-eos-write-eh
+```
+
+## Finding Data
+
 Browse the fcc directory on `eos`, the shared filesystem used by CERN.
 
 ```bash
