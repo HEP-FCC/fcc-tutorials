@@ -56,6 +56,7 @@ Random:setSeed = on
 Main:timesAllowErrors = 10          ! how many aborts before run stops
 
 ! 2) Settings related to output in init(), next() and stat().
+Next:numberCount = 100             ! print message every n events
 Beams:idA = 11                     ! first beam, e+ = 11
 Beams:idB = -11                    ! second beam, e- = -11
 
@@ -82,6 +83,7 @@ Random:setSeed = on
 Main:timesAllowErrors = 10         ! how many aborts before run stops
 
 ! 2) Settings related to output in init(), next() and stat().
+Next:numberCount = 100             ! print message every n events
 Beams:idA = 11                     ! first beam, e+ = 11
 Beams:idB = -11                    ! second beam, e- = -11
 
@@ -102,6 +104,7 @@ Random:setSeed = on
 Main:timesAllowErrors = 10         ! how many aborts before run stops
 
 ! 2) Settings related to output in init(), next() and stat().
+Next:numberCount = 100             ! print message every n events
 Beams:idA = 11                     ! first beam, e+ = 11
 Beams:idB = -11                    ! second beam, e- = -11
 
@@ -254,7 +257,7 @@ metSaveTool.missingEt.Path = "met"
 from Configurables import DelphesSimulation
 delphessim = DelphesSimulation()
 ## Define Delphes card
-delphessim.DelphesCard = os.path.join(os.environ.get("FCCSWSHAREDIR", ""), "Sim/SimDelphesInterface/data/FCChh_DelphesCard_Baseline_v01.tcl")
+delphessim.DelphesCard = os.path.join(os.environ.get("DELPHES_DIR", ""), "cards/delphes_card_IDEA.tcl")
 delphessim.ROOTOutputFile = ""
 delphessim.ApplyGenFilter = True
 delphessim.outputs = [
@@ -289,15 +292,93 @@ ApplicationMgr().TopAlg += [out]
 The `fccrun` allows to change most `Properties` of the job on the command line. All possible arguments to fccrun  are listed with the command 
 
 ```python
-!fccrun PythiaDelphes_config.py -h
+fccrun PythiaDelphes_config.py -h
+```
+
+```
+ -->  GenAlg  -->  Converter  -->  DelphesSimulation  -->  out  
+
+usage: fccrun [-h] [--dry-run] [-v] [-n NUM_EVENTS] [-l] [--gdb]
+              [--ncpus NCPUS] [--ROOTOutputFile [ROOTOUTPUTFILE]]
+              [--ApplyGenFilter [APPLYGENFILTER]]
+              [--outputs OUTPUTS [OUTPUTS ...]] [--DelphesCard [DELPHESCARD]]
+              [--PrintEmptyCounters [PRINTEMPTYCOUNTERS]] [--input [INPUT]]
+              [--Filename [FILENAME]]
+              [--printPythiaStatistics [PRINTPYTHIASTATISTICS]]
+              [--outputCommands OUTPUTCOMMANDS [OUTPUTCOMMANDS ...]]
+              [--filename [FILENAME]] [--filenameRemote [FILENAMEREMOTE]]
+              [--hepmcStatusList HEPMCSTATUSLIST [HEPMCSTATUSLIST ...]]
+              [config_files [config_files ...]]
+
+Run job in the FCC framework
+
+positional arguments:
+  config_files          Gaudi config (python) files describing the job
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --dry-run             Do not actually run the job, just parse the config
+                        files
+  -v, --verbose         Run job with verbose output
+  -n NUM_EVENTS, --num-events NUM_EVENTS
+                        Number of events to run
+  -l, --list            Print all the configurable components available in the
+                        framework and exit
+  --gdb                 Attach gdb debugger
+  --ncpus NCPUS         Start Gaudi in parallel mode using NCPUS processes. 0
+                        => serial mode (default), -1 => use all CPUs
+  --ROOTOutputFile [ROOTOUTPUTFILE]
+                        Name of Delphes Root output file, if defined, the
+                        Delphes standard tree write out (in addition to FCC-
+                        EDM based output to transient data store)
+                        [DelphesSimulation]
+  --ApplyGenFilter [APPLYGENFILTER]
+                        only for debugging purposes. If entire MC particle
+                        collection is needed, request in cfg file.
+                        [DelphesSimulation]
+  --outputs OUTPUTS [OUTPUTS ...]
+                        [DelphesSimulation]
+  --DelphesCard [DELPHESCARD]
+                        Name of Delphes tcl config file with detector and
+                        simulation parameters [DelphesSimulation]
+  --PrintEmptyCounters [PRINTEMPTYCOUNTERS]
+                        force printing of empty counters, otherwise only
+                        printed in DEBUG mode [GaudiCommon<Algorithm>]
+  --input [INPUT]       Name of the file to read [unknown owner type]
+  --Filename [FILENAME]
+                        [PythiaInterface]
+  --printPythiaStatistics [PRINTPYTHIASTATISTICS]
+                        Print Pythia Statistics [PythiaInterface]
+  --outputCommands OUTPUTCOMMANDS [OUTPUTCOMMANDS ...]
+                        A set of commands to declare which collections to keep
+                        or drop. [PodioOutput]
+  --filename [FILENAME]
+                        Name of the file to create [PodioOutput]
+  --filenameRemote [FILENAMEREMOTE]
+                        An optional file path to copy the outputfile to.
+                        [PodioOutput]
+  --hepmcStatusList HEPMCSTATUSLIST [HEPMCSTATUSLIST ...]
+                        list of hepmc statuses to keep. An empty list means
+                        all statuses will be kept [HepMCToEDMConverter]
 ```
 
 
+Thus The following commands will run Pythia8 and Delphes and produce the relevant signal and background samples:
 
 
+```python
+fccrun PythiaDelphes_config.py --Filename Pythia_ee_ZH_Zmumu_ecm240.cmd --filename ee_zh_zmumu_ecm240.root -n 1000
+```
 
+```python
+fccrun PythiaDelphes_config.py --Filename Pythia_ee_ZZ_ecm240.cmd --filename ee_zz_ecm240.root -n 1000
+```
 
+```python
+fccrun PythiaDelphes_config.py --Filename Pythia_ee_WW_ecm240.cmd --filename ee_ww_ecm240.root -n 1000
+```
 
+and the delphes card can be replaced by doing for example:
 
 
 
