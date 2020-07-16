@@ -132,7 +132,7 @@ To run the code, a job options like the following is needed (**Note:** While the
 
 
 ```python
-import os
+import sys, os
 from Gaudi.Configuration import *
 
 # Workflow Steering
@@ -146,10 +146,12 @@ podioEvent = FCCDataSvc("EventDataSvc")
 ApplicationMgr().ExtSvc += [podioEvent]
 ApplicationMgr().OutputLevel = INFO
 
+
 ## Pythia generator
 from Configurables import PythiaInterface
 pythia8gentool = PythiaInterface()
 pythia8gentool.Filename = os.path.join(os.environ.get("FCCSWSHAREDIR", ""),"Generation/data/Pythia_ttbar.cmd")
+
 
 ## Write the HepMC::GenEvent to the data service
 from Configurables import GenAlg
@@ -158,6 +160,7 @@ pythia8gen.SignalProvider = pythia8gentool
 pythia8gen.hepmc.Path = "hepmc"
 ApplicationMgr().TopAlg += [pythia8gen]
 
+
 ### Reads an HepMC::GenEvent from the data service and writes a collection of EDM Particles
 from Configurables import HepMCToEDMConverter
 hepmc_converter = HepMCToEDMConverter("Converter")
@@ -165,6 +168,7 @@ hepmc_converter.hepmc.Path = "hepmc"
 hepmc_converter.genparticles.Path = "genParticles"
 hepmc_converter.genvertices.Path = "genVertices"
 ApplicationMgr().TopAlg += [hepmc_converter]
+
 
 # Define all output tools that convert the Delphes collections to FCC-EDM:
 
@@ -182,29 +186,22 @@ eleSaveTool.particles.Path      = "electrons"
 eleSaveTool.mcAssociations.Path = "electronsToMC"
 eleSaveTool.isolationTags.Path  = "electronITags"
 
-chhadSaveTool = DelphesSaveChargedParticles("pfcharged")
-chhadSaveTool.delphesArrayName = "ChargedHadronFilter/chargedHadrons"
+chhadSaveTool = DelphesSaveChargedParticles("efcharged")
+chhadSaveTool.delphesArrayName = "Calorimeter/eflowTracks"
 chhadSaveTool.saveIsolation = False
-chhadSaveTool.particles.Path      = "pfcharged"
-chhadSaveTool.mcAssociations.Path = "pfchargedToMC"
+chhadSaveTool.particles.Path      = "efcharged"
+chhadSaveTool.mcAssociations.Path = "efchargedToMC"
 
 
 from Configurables import DelphesSaveNeutralParticles
 
-# Particle-Flow Neutral Hadrons output tool
-neuthadSaveTool = DelphesSaveNeutralParticles("pfneutrals")
-neuthadSaveTool.delphesArrayName = "HCal/eflowNeutralHadrons"
-neuthadSaveTool.saveIsolation = False
-neuthadSaveTool.particles.Path      = "pfneutrals"
-neuthadSaveTool.mcAssociations.Path = "pfneutralsToMC"
-
 # Particle-Flow Photons output tool
-pfphotonsSaveTool = DelphesSaveNeutralParticles("pfphotons")
-pfphotonsSaveTool.delphesArrayName="ECal/eflowPhotons"
+pfphotonsSaveTool = DelphesSaveNeutralParticles("efphotons")
+pfphotonsSaveTool.delphesArrayName="Calorimeter/eflowPhotons"
 pfphotonsSaveTool.saveIsolation=False
-pfphotonsSaveTool.particles.Path      = "pfphotons"
-pfphotonsSaveTool.mcAssociations.Path = "pfphotonsToMC"
-pfphotonsSaveTool.isolationTags.Path  = "pfphotonITags"
+pfphotonsSaveTool.particles.Path      = "efphotons"
+pfphotonsSaveTool.mcAssociations.Path = "efphotonsToMC"
+pfphotonsSaveTool.isolationTags.Path  = "efphotonITags"
 
 # Photons output tool
 photonsSaveTool = DelphesSaveNeutralParticles("photons")
@@ -213,8 +210,16 @@ photonsSaveTool.particles.Path      = "photons"
 photonsSaveTool.mcAssociations.Path = "photonsToMC"
 photonsSaveTool.isolationTags.Path  = "photonITags"
 
+# Particle-Flow Neutral Hadrons output tool
+neuthadSaveTool = DelphesSaveNeutralParticles("efneutrals")
+neuthadSaveTool.delphesArrayName = "Calorimeter/eflowNeutralHadrons"
+neuthadSaveTool.saveIsolation = False
+neuthadSaveTool.particles.Path      = "efneutrals"
+neuthadSaveTool.mcAssociations.Path = "efneutralsToMC"
+
 
 from Configurables import DelphesSaveGenJets
+
 genJetSaveTool = DelphesSaveGenJets("genJets")
 genJetSaveTool.delphesArrayName = "GenJetFinder/jets"
 genJetSaveTool.genJets.Path             = "genJets"
@@ -222,6 +227,7 @@ genJetSaveTool.genJetsFlavorTagged.Path = "genJetsFlavor"
 
 
 from Configurables import DelphesSaveJets
+
 jetSaveTool = DelphesSaveJets("jets")
 jetSaveTool.delphesArrayName = "JetEnergyScale/jets"
 jetSaveTool.jets.Path             = "jets"
@@ -231,22 +237,9 @@ jetSaveTool.jetsBTagged.Path      = "bTags"
 jetSaveTool.jetsCTagged.Path      = "cTags"
 jetSaveTool.jetsTauTagged.Path    = "tauTags"
 
-fatjetSaveTool = DelphesSaveJets("fatjets")
-fatjetSaveTool.delphesArrayName = "FatJetFinder/jets"
-fatjetSaveTool.saveSubstructure = True
-fatjetSaveTool.jets.Path                        = "fatjets"
-fatjetSaveTool.jetConstituents.Path             = "fatjetParts"
-fatjetSaveTool.jetsOneSubJettinessTagged.Path   = "jetsOneSubJettiness"
-fatjetSaveTool.jetsTwoSubJettinessTagged.Path   = "jetsTwoSubJettiness"
-fatjetSaveTool.jetsThreeSubJettinessTagged.Path = "jetsThreeSubJettiness"
-fatjetSaveTool.subjetsTrimmingTagged.Path       = "subjetsTrimmingTagged"
-fatjetSaveTool.subjetsPruningTagged.Path        = "subjetsPruningTagged"
-fatjetSaveTool.subjetsPruning.Path              = "subjetsPruning"
-fatjetSaveTool.subjetsSoftDropTagged.Path       = "subjetsSoftDropTagged"
-fatjetSaveTool.subjetsSoftDrop.Path             = "subjetsSoftDrop"
-fatjetSaveTool.subjetsTrimming.Path             = "subjetsTrimming"
 
 from Configurables import DelphesSaveMet
+
 metSaveTool = DelphesSaveMet("met")
 metSaveTool.delphesMETArrayName = "MissingET/momentum"
 metSaveTool.delphesSHTArrayName = "ScalarHT/energy"
@@ -264,19 +257,17 @@ delphessim.outputs = [
                        "DelphesSaveChargedParticles/muons",
                        "DelphesSaveChargedParticles/electrons",
                        "DelphesSaveNeutralParticles/photons",
-                       "DelphesSaveChargedParticles/pfcharged",
-                       "DelphesSaveNeutralParticles/pfphotons",
-                       "DelphesSaveNeutralParticles/pfneutrals",
+                       "DelphesSaveChargedParticles/efcharged",
+                       "DelphesSaveNeutralParticles/efphotons",
+                       "DelphesSaveNeutralParticles/efneutrals",
                        "DelphesSaveGenJets/genJets",
                        "DelphesSaveJets/jets",
-                       "DelphesSaveJets/fatjets",                                        
                        "DelphesSaveMet/met",
                      ]
 delphessim.hepmc.Path               = "hepmc"
 delphessim.genParticles.Path        = "skimmedGenParticles"
 delphessim.mcEventWeights.Path      = "mcEventWeights"
 ApplicationMgr().TopAlg += [delphessim]
-
 
 
 ## FCC event-data model output -> define objects to be written out
@@ -378,20 +369,7 @@ fccrun PythiaDelphes_config.py --Filename Pythia_ee_ZZ_ecm240.cmd --filename ee_
 fccrun PythiaDelphes_config.py --Filename Pythia_ee_WW_ecm240.cmd --filename ee_ww_ecm240.root -n 1000
 ```
 
-and the delphes card can be replaced by doing for example:
+
+## Part II: Analyse with FCCAnalyses
 
 
-
-
-## Getting started
-Login to lxplus or one of the virtual machine provided on open stack.
-Usage of bash shell is highly recommended.
-Create a working directory ```mkdir mytutorial; cd mytutorial```
-Setup FCC software stack ```source /cvmfs/fcc.cern.ch/sw/latest/setup.sh```
-
-## Produce Delphes events with FCCSW
-
-### From Pythia8 directly
-
-
-### From LHE events showered with Pythia8
