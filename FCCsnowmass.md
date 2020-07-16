@@ -1,4 +1,4 @@
-#FCC: Getting started with simulating events and analysing them
+# FCC: Getting started with simulating events and analysing them
 
 {% objectives "Learning Objectives" %}
 
