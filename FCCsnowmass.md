@@ -372,4 +372,18 @@ fccrun PythiaDelphes_config.py --Filename Pythia_ee_WW_ecm240.cmd --filename ee_
 
 ## Part II: Analyse with FCCAnalyses
 
+For this second part we start by cloning the FCCAnalyses GitHub repository
+
+```python
+git clone https://github.com/HEP-FCC/FCCAnalyses.git
+```
+and follow the instructions [here](https://github.com/HEP-FCC/FCCAnalyses/#getting-started) to get started with installation.
+Once the code has been compiled, we can now run the pre-selection on previously produced samples:
+
+```python
+python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py ../ee_zh_zmumu_ecm240.root 
+python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py ../ee_zz_ecm240.root
+python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py ../ee_ww_ecm240.root 
+```
+
 
