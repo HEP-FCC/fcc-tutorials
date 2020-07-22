@@ -358,15 +358,15 @@ Thus The following commands will run Pythia8 and Delphes and produce the relevan
 
 
 ```python
-fccrun PythiaDelphes_config.py --Filename Pythia_ee_ZH_Zmumu_ecm240.cmd --filename ee_zh_zmumu_ecm240.root -n 1000
+fccrun PythiaDelphes_config.py --Filename Pythia_ee_ZH_Zmumu_ecm240.cmd --filename p8_ee_ZH_ecm240.root -n 10000
 ```
 
 ```python
-fccrun PythiaDelphes_config.py --Filename Pythia_ee_ZZ_ecm240.cmd --filename ee_zz_ecm240.root -n 1000
+fccrun PythiaDelphes_config.py --Filename Pythia_ee_ZZ_ecm240.cmd --filename p8_ee_ZZ_ecm240.root -n 10000
 ```
 
 ```python
-fccrun PythiaDelphes_config.py --Filename Pythia_ee_WW_ecm240.cmd --filename ee_ww_ecm240.root -n 1000
+fccrun PythiaDelphes_config.py --Filename Pythia_ee_WW_ecm240.cmd --filename p8_ee_WW_ecm240.root -n 10000
 ```
 
 
@@ -386,4 +386,21 @@ python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py ../ee_zz_ecm240.root
 python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py ../ee_ww_ecm240.root 
 ```
 
+this will produce small ntuples pre-selection files with only variables you are interested in.
 
+lets now run the final selection on the pre-selection files, but first we have to modify the ```baseDir``` variable in the ```FCCeeAnalyses/ZH_Zmumu/dataframe/finalSel.py``` to point to where your pre-selection files are located. The process list also has to be adjusted to something like (comment the one that is there)
+
+```python
+process_list=['ee_zz_ecm240_presel','ee_ww_ecm240_presel','ee_zh_zmumu_ecm240_presel']
+```
+
+Then run:
+
+```python
+python FCCeeAnalyses/ZH_Zmumu/dataframe/finalSel.py
+```
+ this will produce 2 files for each sample and each selection, one with final tree with variables of interest, and one with histograms.
+ 
+ Now we can produce plots, but first adapt the ```inputDir``` to where your final selection files are located, adapt the processes names
+ 
+ p8_ee_ZH_ecm240 ee_zh_zmumu_ecm240_presel
