@@ -359,9 +359,7 @@ Thus The following commands will run Pythia8 and Delphes and produce the relevan
 
 ```python
 fccrun PythiaDelphes_config.py --Filename Pythia_ee_ZH_Zmumu_ecm240.cmd --filename p8_ee_ZH_ecm240.root -n 10000
-
 fccrun PythiaDelphes_config.py --Filename Pythia_ee_ZZ_ecm240.cmd --filename p8_ee_ZZ_ecm240.root -n 10000
-
 fccrun PythiaDelphes_config.py --Filename Pythia_ee_WW_ecm240.cmd --filename p8_ee_WW_ecm240.root -n 10000
 ```
 
@@ -377,9 +375,9 @@ and follow the instructions [here](https://github.com/HEP-FCC/FCCAnalyses/#getti
 Once the code has been compiled, we can now run the pre-selection on previously produced samples:
 
 ```python
-python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py ../ee_zh_zmumu_ecm240.root 
-python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py ../ee_zz_ecm240.root
-python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py ../ee_ww_ecm240.root 
+python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py **PATH_TO_FILES_PART_I**/p8_ee_ZH_ecm240.root
+python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py PATH_TO_FILES_PART_I/p8_ee_ZZ_ecm240.root
+python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py PATH_TO_FILES_PART_I/p8_ee_WW_ecm240.root
 ```
 
 this will produce small ntuples pre-selection files with only variables you are interested in.
