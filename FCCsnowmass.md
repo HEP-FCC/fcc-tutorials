@@ -359,13 +359,9 @@ Thus The following commands will run Pythia8 and Delphes and produce the relevan
 
 ```python
 fccrun PythiaDelphes_config.py --Filename Pythia_ee_ZH_Zmumu_ecm240.cmd --filename p8_ee_ZH_ecm240.root -n 10000
-```
 
-```python
 fccrun PythiaDelphes_config.py --Filename Pythia_ee_ZZ_ecm240.cmd --filename p8_ee_ZZ_ecm240.root -n 10000
-```
 
-```python
 fccrun PythiaDelphes_config.py --Filename Pythia_ee_WW_ecm240.cmd --filename p8_ee_WW_ecm240.root -n 10000
 ```
 
