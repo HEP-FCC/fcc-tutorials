@@ -375,26 +375,45 @@ and follow the instructions [here](https://github.com/HEP-FCC/FCCAnalyses/#getti
 Once the code has been compiled, we can now run the pre-selection on previously produced samples:
 
 ```python
-python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py **PATH_TO_FILES_PART_I**/p8_ee_ZH_ecm240.root
+python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py PATH_TO_FILES_PART_I/p8_ee_ZH_ecm240.root
 python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py PATH_TO_FILES_PART_I/p8_ee_ZZ_ecm240.root
 python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py PATH_TO_FILES_PART_I/p8_ee_WW_ecm240.root
 ```
 
 this will produce small ntuples pre-selection files with only variables you are interested in.
 
-lets now run the final selection on the pre-selection files, but first we have to modify the ```baseDir``` variable in the ```FCCeeAnalyses/ZH_Zmumu/dataframe/finalSel.py``` to point to where your pre-selection files are located. The process list also has to be adjusted to something like (comment the one that is there)
-
-```python
-process_list=['ee_zz_ecm240_presel','ee_ww_ecm240_presel','ee_zh_zmumu_ecm240_presel']
-```
-
-Then run:
+lets now run the final selection on the pre-selection files:
 
 ```python
 python FCCeeAnalyses/ZH_Zmumu/dataframe/finalSel.py
 ```
  this will produce 2 files for each sample and each selection, one with final tree with variables of interest, and one with histograms.
  
- Now we can produce plots, but first adapt the ```inputDir``` to where your final selection files are located, adapt the processes names
+ Now we can produce plots:
  
- p8_ee_ZH_ecm240 ee_zh_zmumu_ecm240_presel
+ ```python
+ python bin/doPlots.py FCCeeAnalyses/ZH_Zmumu/dataframe/plots.py
+```
+
+and look at them in ```FCCee/ZH_Zmumu/plots/```. 
+
+Please note that the event statistics is not great because we only run on 10 000 events.
+In order to produce plots with more statistics, we could use already processed large statistics samples.
+To do so we re-run the pre-selection over 1 percent of the total statistics [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_v01.php):
+
+```python
+ python FCCeeAnalyses/ZH_Zmumu/dataframe/preSel.py
+```
+
+and as before run the final selection and plots:
+
+```python
+python FCCeeAnalyses/ZH_Zmumu/dataframe/finalSel.py
+python bin/doPlots.py FCCeeAnalyses/ZH_Zmumu/dataframe/plots.py
+```
+and look at the new plots in ```FCCee/ZH_Zmumu/plots/```. 
+
+To further increase the event statistics, increase the value (up to 1) of the parameter ```fraction``` in ```FCCeeAnalyses/ZH_Zmumu/dataframe/preSel.py```
+
+
+## Part III: Compare two Monte-Carlo samples
