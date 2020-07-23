@@ -13,7 +13,7 @@ This tutorial will teach you how to:
 {% endobjectives %}
 First login to lxplus or one of the virtual machine provided on open stack. Usage of bash shell is highly recommended. Create a working directory and go inside
 
-```python
+```bash
 mkdir mytutorial
 cd mytutorial
 ```
@@ -21,19 +21,19 @@ cd mytutorial
 Then, make sure your **setup of the FCC software** is working correctly. A quick check is that the executable `fccrun`, which allows you to run jobs in the Gaudi framework is available on the command line:
 
 
-```python
+```bash
 which fccrun
 ```
 
-If the above command fails without printing a path like `/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.12/x86_64-centos7-gcc8-opt/scripts/fccrun`, you ned to setup the FCC software stack 
+If the above command fails without printing a path like `/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.12/x86_64-centos7-gcc8-opt/scripts/fccrun`, you need to setup the FCC software stack 
 
-```python
+```bash
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```
 
 Please also add an environment varialbe for Delphes cards
 
-```python
+```bash
 export DELPHES_DIR='/cvmfs/sft.cern.ch/lcg/releases/delphes/3.4.3pre02-e4803/x86_64-centos7-gcc8-opt/'
 ```
 
@@ -282,7 +282,7 @@ ApplicationMgr().TopAlg += [out]
 
 The `fccrun` allows to change most `Properties` of the job on the command line. All possible arguments to fccrun  are listed with the command 
 
-```python
+```bash
 fccrun PythiaDelphes_config.py -h
 ```
 
@@ -357,7 +357,7 @@ optional arguments:
 Thus The following commands will run Pythia8 and Delphes and produce the relevant signal and background samples:
 
 
-```python
+```bash
 fccrun PythiaDelphes_config.py --Filename Pythia_ee_ZH_Zmumu_ecm240.cmd --filename p8_ee_ZH_ecm240.root -n 10000
 fccrun PythiaDelphes_config.py --Filename Pythia_ee_ZZ_ecm240.cmd --filename p8_ee_ZZ_ecm240.root -n 10000
 fccrun PythiaDelphes_config.py --Filename Pythia_ee_WW_ecm240.cmd --filename p8_ee_WW_ecm240.root -n 10000
@@ -368,13 +368,13 @@ fccrun PythiaDelphes_config.py --Filename Pythia_ee_WW_ecm240.cmd --filename p8_
 
 For this second part we start by cloning the FCCAnalyses GitHub repository
 
-```python
+```bash
 git clone https://github.com/HEP-FCC/FCCAnalyses.git
 ```
 and follow the instructions [here](https://github.com/HEP-FCC/FCCAnalyses/#getting-started) to get started with installation.
 Once the code has been compiled, we can now run the pre-selection on previously produced samples:
 
-```python
+```bash
 python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py PATH_TO_FILES_PART_I/p8_ee_ZH_ecm240.root
 python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py PATH_TO_FILES_PART_I/p8_ee_ZZ_ecm240.root
 python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py PATH_TO_FILES_PART_I/p8_ee_WW_ecm240.root
@@ -384,7 +384,7 @@ this will produce small ntuples pre-selection files with only variables you are 
 
 lets now run the final selection on the pre-selection files:
 
-```python
+```bash
 python FCCeeAnalyses/ZH_Zmumu/dataframe/finalSel.py
 ```
  this will produce 2 files for each sample and each selection, one with final tree with variables of interest, and one with histograms.
@@ -401,13 +401,13 @@ Please note that the event statistics is not great because we only run on 10 000
 In order to produce plots with more statistics, we could use already processed large statistics samples.
 To do so we re-run the pre-selection over 1 percent of the total statistics [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_v01.php):
 
-```python
+```bash
  python FCCeeAnalyses/ZH_Zmumu/dataframe/preSel.py
 ```
 
 and as before run the final selection and plots:
 
-```python
+```bash
 python FCCeeAnalyses/ZH_Zmumu/dataframe/finalSel.py
 python bin/doPlots.py FCCeeAnalyses/ZH_Zmumu/dataframe/plots.py
 ```
