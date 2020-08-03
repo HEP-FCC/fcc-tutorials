@@ -77,7 +77,20 @@ Add the `heppy` executable to your PATH:
 ```
 export PATH=$PWD/heppy/bin:$PATH
 ```
-.
+Heppy needs also the GitPython module. If the following fails:
+```
+$ python
+>>> import git
+```
+you need to install the module:
+```
+$ git clone https://github.com/gitpython-developers/GitPython git-python
+$ cd git-python
+$ git checkout py2 # only if running python 2
+$ cd  ..
+$ export PYTHONPATH=$PWD/git-python:$PYTHONPATH
+```
+The above test should be now successful .
 
 ## Getting started with Delphes
 
