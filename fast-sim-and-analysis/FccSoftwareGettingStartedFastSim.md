@@ -14,11 +14,6 @@ Contents:
       * [Run the analysis in heppy](#run-the-analysis-in-heppy)
       * [Make plots](#make-plots-1)
       * [CutFlow](#cutflow)
-    * [Legacy: the Papas tool](#getting-started-with-papas-fcc-ee)
-      * [Set up your working directory](#set-up-your-working-directory-1)
-      * [Generate events with pythia8](#generate-events-with-pythia8)
-      * [Run papas and the analysis in heppy](#run-papas-and-the-analysis-in-heppy)
-      * [Make plots](#make-plots)
 
 ## Overview
 
@@ -26,7 +21,7 @@ If you want to get started fast with the analysis of fast-simulated
 events, you're at the right place.
 
 Fast simulation is currently supported through the Delphes approach. Support for the Papas approach, initially used for FCC-ee, is
-discontinued and only provided in legacy; see [usage description](#getting-started-with-papas-fcc-ee) at the end of the page. 
+discontinued. 
 
 An analysis ntuple will be produced with [heppy](https://github.com/HEP-FCC/heppy), a simple modular event processing framework for high energy physics.
 
@@ -41,7 +36,7 @@ source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 **You will need to source this script everytime you want to use the
 software.**
 
-* You can either use the `cvmfs` installation of `heppy`, pointed out by the environment variable HEPPY (defined after sourcing the above script), or clone the [heppy git](https://github.com/HEP-FCC/heppy) locally. The latter is mandatory on a fresh virtual machine (for `heppy` internal; problems with `gitpython`). 
+* You should clone the [heppy git](https://github.com/HEP-FCC/heppy) locally.
 
 ### Set up your working directory
 
@@ -78,6 +73,11 @@ lrwxr-xr-x. 1 ganis sf 112 Sep 30 19:03 heppy
 lrwxr-xr-x. 1 ganis sf 123 Sep 30 19:03 FCCSW -> /cvmfs/fcc.cern.ch/sw/releases/fccsw/linux-centos7-x86_64/gcc-8.3.0/fccsw-0.11-qqmlmzumogldsqoegt4ihhel4xnt62yw/share/FCCSW
 ...
 ```
+Add the `heppy` executable to your PATH:
+```
+export PATH=$PWD/heppy/bin:$PATH
+```
+.
 
 ## Getting started with Delphes
 
@@ -98,6 +98,14 @@ fccrun FCCSW/Sim/SimDelphesInterface/options/PythiaDelphes_config.py --Filename 
 ```
 you should obtain a file called `FCCDelphesOutput.root`.
 
+Please ignore errors such as
+```
+Error in <TTree::Bronch>: Cannot find dictionary for class: HepMC::GenEvent
+```
+or
+```
+Error in <TList::Clear>: A list is accessing an object (0x35308a0) already deleted (list name = Browsables)
+```
 This example will run 100 events by default. To have more events for plotting purposes, you can increase this number or use files that have been already produced and stored on eos (see next section).
 
 With this file you are now ready to run the analysis framework [heppy](https://github.com/HEP-FCC/heppy.git).
