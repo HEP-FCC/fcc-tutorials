@@ -114,6 +114,7 @@ pythia8, whizard, MadGraph5, Herwig.
 Pythia8 is fully intergrated in FCCSW and it provides diverse functionality in addition to event generation,
 including capability to read events in LHEF format.
 
+
 ###  Whizard
 
 Whizard is available as standalone program:
@@ -191,7 +192,8 @@ Warning: Encountered events with excess weight: 6 events (  0.600 %)
 | WHIZARD run finished.
 |=============================================================================|
 ```
-The file `z_mumu.lhe` contains 100 e<sup>+</sup>e<sup>-</sup> &#8594; $\mu$<sup>+</sup>$\mu$<sup>-</sup>($\gamma$) events in LHEF 3.0 format .
+The file `z_mumu.lhe` contains 100 e<sup>+</sup>e<sup>-</sup> &#8594; mu<sup>+</sup>mu<sup>-</sup>(gamma) events in LHEF 3.0 format .
+
 
 ###  MadGraph5
 
@@ -200,6 +202,7 @@ MadGraph5 is available as standalone program:
 $ which mg5_aMC
 /cvmfs/fcc.cern.ch/sw/views/releases/fccsw/0.13/LCG_97a_FCC_2/x86_64-centos7-gcc8-opt/bin/mg5_aMC
 ```
+
 
 ###  Herwig
 
