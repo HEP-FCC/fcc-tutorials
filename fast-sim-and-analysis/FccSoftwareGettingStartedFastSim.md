@@ -104,7 +104,7 @@ The above test should be now successful .
 
 ### Overview
 
-The physicas generators available for FCC typically come form the underlying LCG stack. However, any generator
+The physics generators available for FCC typically come form the underlying LCG stack. However, any generator
 able to generate events in one of the understood formats, e.g. HepMC or LHEf, can be used in standalone.
 This pages intend to illustrate the use of a few general purpose generators available when enabling FCCSW:
 pythia8, whizard, MadGraph5, Herwig.
@@ -116,7 +116,7 @@ including capability to read events in LHEF format.
 
 ###  Whizard
 
-Whizards is available as standalone program:
+Whizard is available as standalone program:
 ```
 $ which whizard
 /cvmfs/fcc.cern.ch/sw/views/releases/fccsw/0.13/LCG_97a_FCC_2/x86_64-centos7-gcc8-opt/bin/whizard
@@ -191,7 +191,7 @@ Warning: Encountered events with excess weight: 6 events (  0.600 %)
 | WHIZARD run finished.
 |=============================================================================|
 ```
-The file `z_mumu.lhe` contains 100 e+e- -> mu+mu- events in LHEf 3.0 format .
+The file `z_mumu.lhe` contains 100 e<sup>+</sup>e<sup>-</sup> &#8594; mu<sup>+</sup>mu<sup>-</sup> events in LHEF 3.0 format .
 
 ###  MadGraph5
 
