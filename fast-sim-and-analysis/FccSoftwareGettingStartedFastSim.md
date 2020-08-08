@@ -191,7 +191,7 @@ Warning: Encountered events with excess weight: 6 events (  0.600 %)
 | WHIZARD run finished.
 |=============================================================================|
 ```
-The file `z_mumu.lhe` contains 100 e<sup>+</sup>e<sup>-</sup> &#8594; \mu<sup>+</sup>\mu<sup>-</sup>(\gamma) events in LHEF 3.0 format .
+The file `z_mumu.lhe` contains 100 e<sup>+</sup>e<sup>-</sup> &#8594; $\mu$<sup>+</sup>$\mu$<sup>-</sup>($\gamma$) events in LHEF 3.0 format .
 
 ###  MadGraph5
 
