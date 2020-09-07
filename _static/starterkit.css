@@ -1,12 +1,21 @@
 p {
     margin-top: 0;
+    margin-left: 1em;
     margin-bottom: .85em;
 }
 
+h3 {
+  margin-top: 3em;
+}
+
 *:last-child {
-    margin-bottom: 0 !important;
+    margin-bottom: 1em !important;
 }
 
 .logo {
     width: 50% !important;
+}
+
+.panel {
+  margin-left: -1em;
 }
