@@ -1,4 +1,7 @@
 _book
+.ipynb_checkpoints
+*.ipynb
+
 *.root
 *.log
 *.out

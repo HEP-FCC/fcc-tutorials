@@ -9,7 +9,7 @@ h3 {
 }
 
 *:last-child {
-    margin-bottom: 1em !important;
+    margin-bottom: 0.1em !important;
 }
 
 .logo {
@@ -18,4 +18,8 @@ h3 {
 
 .panel {
   margin-left: -1em;
+}
+
+.rst-footer-buttons {
+ margin-top: 1em;
 }
