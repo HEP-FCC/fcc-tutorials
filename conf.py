@@ -19,10 +19,11 @@ html_context = {
     'github_version': 'master',
     'conf_py_path': '/',
 }
-extensions = [
-    'sphinx_copybutton'
-]
 
+extensions = [
+    'sphinx_copybutton',
+    'recommonmark',
+]
 
 html_static_path += [
     f'_static',
@@ -33,11 +34,7 @@ linkcheck_ignore += [
     r'https://research\.cs\.wisc\.edu/htcondor/.*',
 ]
 
-#starterkit_ci_redirects['first-analysis-steps/index.html'] = 'https://lhcb.github.io/starterkit-lessons/first-analysis-steps/README.html'
-
-
 def starterkit_ci_setup(app):
     app.add_stylesheet('starterkit.css')
-
 
 setup.extra_setup_funcs += [starterkit_ci_setup]
