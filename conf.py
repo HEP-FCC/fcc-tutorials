@@ -19,6 +19,10 @@ html_context = {
     'github_version': 'master',
     'conf_py_path': '/',
 }
+extensions = [
+    'sphinx_copybutton'
+]
+
 
 html_static_path += [
     f'_static',
