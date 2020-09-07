@@ -1,6 +1,11 @@
 p {
     margin-top: 0;
+    margin-left: 1em;
     margin-bottom: .85em;
+}
+
+h3 {
+  margin-top: 3em;
 }
 
 *:last-child {
@@ -9,4 +14,8 @@ p {
 
 .logo {
     width: 50% !important;
+}
+
+.panel {
+  margin-left: -1em;
 }
