@@ -35,13 +35,13 @@ It is recommended to run the FCCee Z accelerator together with the FCCee_Z param
 
 To run GP you should type the following:
 
-```
+```bash
 guinea $ACC #PAR output
 ```
 
 e.g.
 
-```
+```bash
 guinea FCCee_Z FCCee_Z output
 ```
 
@@ -57,36 +57,46 @@ One can use the script at:
 
 that sends a user defined number of bunch crossings to be generated in parallel in Condor. You should modify accordingly the following parts of the script:
 
-```shell
+```bash
 nruns=100
 ```
+
 defines the number of bunch crossings to be generated
 
-```shell
+```bash
 ROOTDIR=/afs/cern.ch/user/v/voutsina/Work/FCCeeBKG_WrapUp/eepairs
 ```
+
 This variable defines the directory where the results will be stored. The script will generate there a new directory, data${i} for the ith generated bunch crossing.
 
 Command
-```shell
+
+```bash
 sed -i -e 's/rndm_seed=1/rndm_seed='${nn}'/g' acc.dat
 ```
+
 Changes the random seed for the ith bunch crossing according to the pattern
-```shell
+
+```bash
     nn=${i}*100000
 ```
+
 Feel free to modify the pattern, but have in mind that if you run N BXs with the same seed, you will generate N times the same data.
 
 In the following line
-```shell
+
+```bash
 /afs/cern.ch/user/v/voutsina/Work/testarea/CodeTest/GP++/guinea-pig.r3238/src/guinea FCCee_Top FCCee_Top output
 ```
+
 you should replace the path where your guinea executable is located, the desired accelerator and configuration-parameters names and the desired output file name.
 
 The queueing in Condor is defined by the following line
-```shell
+
+```bash
 +JobFlavour = "tomorrow"
 ```
+
 For the set of parameters FCCee_Z, featuring an estimating running time of few hours, a job flavour "workday" is recommended. For the  set of parameters FCCee_Top, job flavour "longlunch" should be enough.
 
 #### Analysing the data (only for ILCSOFT users)
@@ -94,7 +104,7 @@ For the set of parameters FCCee_Z, featuring an estimating running time of few h
 Marlin processors used to analyse the simulated data. They were used for CDR results.
 In order to compile them: please initialise ILCSoft environment first.
 
-```shell
+```bash
 mkdir build; cd build
 cmake -C $ILCSOFT/ILCSoft.cmake ..
 make install
@@ -104,12 +114,14 @@ make install
 
 In order to produce `$\gamma\gamma$` to hadrons with GP, we need to add the following commands inside the configuration file acc.dat
 
-```shell
+```bash
 hadron_ratio=100000;
 do_hadrons=3;
 store_hadrons=1;
 ```
+
 while switching off pair production:
+
 ```shell
 do_pairs= 0;
 ```
