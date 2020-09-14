@@ -336,8 +336,8 @@ Thus The following commands will run Pythia8 and Delphes and produce the relevan
 
 
 ```bash
-!xrdcp root://eospublic.cern.ch//eos/experiment/fcc/hh/testsamples/pp_h_4l.lhe ./pp_h_4l.lhe
-!fccrun PythiaDelphes_config.py --Filename $FCCSWBASEDIR/share/FCCSW/Generation/data/Pythia_pp_h_4l.cmd --filename pp_h_4l.root -n 100
+xrdcp root://eospublic.cern.ch//eos/experiment/fcc/hh/testsamples/pp_h_4l.lhe ./pp_h_4l.lhe
+fccrun PythiaDelphes_config.py --Filename $FCCSWBASEDIR/share/FCCSW/Generation/data/Pythia_pp_h_4l.cmd --filename pp_h_4l.root -n 100
 ```
 
 
