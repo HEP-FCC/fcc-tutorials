@@ -7,9 +7,6 @@ This tutorial will teach you how to:
 
 -   **generate** signal and background samples with **Pythia8** within FCCSW
 -   run a fast parametric **detector simulation** with **Delphes** within FCCSW
--   apply an **event selection** on those samples with **Heppy**
--   produce **flat ntuples** with observables of interest with Heppy
--   produce plots
 
 {% endobjectives %}
 
@@ -18,8 +15,8 @@ But first, make sure your **setup of the FCC software** is working correctly. A 
 
 
 
-```python
-!which fccrun
+```bash
+which fccrun
 ```
 
 
@@ -41,7 +38,7 @@ For this tutorial, we are going to run Pythia8 on previously produced LHE files 
 Additional Pythia8 configurations can be found in `FCCSW/Generation/data`.
 
 
-```python
+```
 ! File: Pythia_pp_h_4l.cmd
 !
 ! This file contains commands to be read in for a Pythia8 run.
@@ -268,8 +265,8 @@ ApplicationMgr().TopAlg += [out]
 The `fccrun` allows to change most `Properties` of the job on the command line. All possible arguments to fccrun  are listed with the command 
 
 
-```python
-!fccrun PythiaDelphes_config.py -h
+```bash
+fccrun PythiaDelphes_config.py -h
 ```
 
      -->  GenAlg  -->  Converter  -->  DelphesSimulation  -->  out  
@@ -338,15 +335,15 @@ The `fccrun` allows to change most `Properties` of the job on the command line. 
 Thus The following commands will run Pythia8 and Delphes and produce the relevant signal and background samples:
 
 
-```python
+```bash
 !xrdcp root://eospublic.cern.ch//eos/experiment/fcc/hh/testsamples/pp_h_4l.lhe ./pp_h_4l.lhe
 !fccrun PythiaDelphes_config.py --Filename $FCCSWBASEDIR/share/FCCSW/Generation/data/Pythia_pp_h_4l.cmd --filename pp_h_4l.root -n 100
 ```
 
 
-```python
-!xrdcp root://eospublic.cern.ch//eos/experiment/fcc/hh/testsamples/pp_zgzg_4l.lhe ./pp_zgzg_4l.lhe
-!fccrun PythiaDelphes_config.py --Filename  $FCCSWBASEDIR/share/FCCSW/Generation/data/Pythia_pp_zgzg_4l.cmd --filename pp_zgzg_4l.root -n 100
+```bash
+xrdcp root://eospublic.cern.ch//eos/experiment/fcc/hh/testsamples/pp_zgzg_4l.lhe ./pp_zgzg_4l.lhe
+fccrun PythiaDelphes_config.py --Filename  $FCCSWBASEDIR/share/FCCSW/Generation/data/Pythia_pp_zgzg_4l.cmd --filename pp_zgzg_4l.root -n 100
 ```
 
 
@@ -364,8 +361,8 @@ The output is a ROOT file containing a tree in the FCC [Event Data Model structu
 
 
 
-```python
-!rootls -t pp_h_4l.root
+```bash
+rootls -t pp_h_4l.root
 ```
 
 It contains the Generation-level particles (`skimmedGenParticles`) as well as the Reconstruction-level Delphes output (`muons`, `electrons` ...)
@@ -386,7 +383,6 @@ c.Draw()
 
 ```
 
-    Welcome to JupyROOT 6.18/04
 
 
 
@@ -396,619 +392,15 @@ c.Draw()
 To save time and computing power, more events with the same configuration can be taken from eos:
 
 
-```python
-!export EOS_MGM_URL="root://eospublic.cern.ch"
-!cp /eos/experiment/fcc/hh/tutorials/Higgs_4l/pp_h_4l.root .
-!cp /eos/experiment/fcc/hh/tutorials/Higgs_4l/pp_zgzg_4l.root .
+```bash
+export EOS_MGM_URL="root://eospublic.cern.ch"
+cp /eos/experiment/fcc/hh/tutorials/Higgs_4l/pp_h_4l.root .
+cp /eos/experiment/fcc/hh/tutorials/Higgs_4l/pp_zgzg_4l.root .
 ```
 
-
-
-Part II: Analyze the output with Heppy
-------------------------------------------
-
-
-[Heppy](https://github.com/HEP-FCC/heppy) is a python framework suitable for analyzing the FCCSW output.
-
-
-Understand the configuration file for this **H->4l analysis**: [`analysis_pp_hTo4l_simple_cfg.py`](https://github.com/HEP-FCC/heppy/blob/master/heppy/test/analysis_pp_hTo4l_simple_cfg.py)
-This is where **filters** on input collections and **event selection** are defined.
-The sequence is divided in two parts, a gen level analysis, and a reco level.
-
--   The **gen level analysis** simply filters interesting leptons (`gen_leptons`) and stores pT, eta in in flat tree (`gen_tree`).
-
-Have a look at the corresponding code in `heppy/analyzers/examples/hzz4l/HTo4lGenTreeProducer.py`.
-
--   The **reco level analysis** first **selects isolated leptons** (`selected_muons`, `selected_electrons`), merges them into a single collection (`selected_leptons`),
-**builds Z candidates** (`zeds`) and finally **builds higgs candidates**  (`higgses`). After that an **event selection** is applied (`selection`).
-
-Open `heppy/analyzers/examples/hzz4l/selection.py` and understand the event selection.
-
-Finally another flat tree is produced `HTo4lTreeProducer`.
-This tree contains contains all relevant information for the two reconstructed Z bosons, the Higgs, and the four associated leptons.
-For comparison, also the MC level counterparts of the reconstructed quantities are stored.
-
-To summarize, when designing a new analysis, you will have to define:
-
-- a configuration file containing the analysis sequence
-- an event selection
-- one or several tree producer(s) where the variables to be stored in the output tree(s) are specified
-- optionally, new modules that are specific to your analysis (e.g. `LeptonicZedBuilder` here)
-
-Now run HEPPY:
-
-
-```python
-!heppy_loop.py pp_h_4l analysis_pp_hTo4l_simple_cfg.py -f -N 1000 -I root://eospublic.cern.ch//eos/experiment/fcc/hh/tutorials/Higgs_4l/pp_h_4l.root;
-```
-
-    TClass::Init:0: RuntimeWarning: no dictionary for class fcc::FloatData is available
-    event 100 (57.2 ev/s)
-    event 200 (73.2 ev/s)
-    event 300 (87.4 ev/s)
-    event 400 (100.6 ev/s)
-    event 500 (111.0 ev/s)
-    event 600 (118.6 ev/s)
-    event 700 (125.5 ev/s)
-    event 800 (131.2 ev/s)
-    event 900 (135.3 ev/s)
-    
-    Component: example
-    	dataset_entries:   0
-    	files          :   ['root://eospublic.cern.ch//eos/experiment/fcc/hh/tutorials/Higgs_4l/pp_h_4l.root']
-    	isData         :   False
-    	isEmbed        :   False
-    	isMC           :   False
-    	tree_name      :   None
-    	triggers       :   None
-    
-    
-          ---- TimeReport (all times in ms; first evt is skipped) ---- 
-    processed    all evts    time/proc    time/all   [%]    analyer
-    ---------    --------    ---------   ---------  -----   -------------
-         1000        1000         5.75        5.75  82.3%   heppy.analyzers.fcc.Reader.Reader_1
-         1000        1000         0.06        0.06   0.9%   heppy.analyzers.Selector.Selector_gen_leptons
-         1000        1000         0.51        0.51   7.3%   heppy.analyzers.examples.hzz4l.HTo4lGenTreeProducer.HTo4lGenTreeProducer_1
-         1000        1000         0.02        0.02   0.3%   heppy.analyzers.Selector.Selector_selected_muons
-         1000        1000         0.02        0.02   0.2%   heppy.analyzers.Selector.Selector_selected_electrons
-         1000        1000         0.01        0.01   0.1%   heppy.analyzers.Merger.Merger_selected_leptons
-         1000        1000         0.17        0.17   2.5%   heppy.analyzers.LeptonicZedBuilder.LeptonicZedBuilder_1
-         1000        1000         0.04        0.04   0.5%   heppy.analyzers.examples.hzz4l.selection.Selection_cuts
-          436        1000         0.04        0.02   0.2%   heppy.analyzers.ResonanceBuilder.ResonanceBuilder_1
-          436        1000         0.90        0.39   5.6%   heppy.analyzers.examples.hzz4l.HTo4lTreeProducer.HTo4lTreeProducer_1
-    ---------    --------    ---------   ---------   -------------
-          436        1000        16.03        6.98 100.0%   TOTAL
-    
-    Counter analyzers :
-    	 heppy.analyzers.fcc.Reader.Reader_1                               1000 	 1.00 	 1.0000
-    	 heppy.analyzers.Selector.Selector_gen_leptons                     1000 	 1.00 	 1.0000
-    	 heppy.analyzers.examples.hzz4l.HTo4lGenTreeProducer.HTo4lGenTreeProducer_1      1000 	 1.00 	 1.0000
-    	 heppy.analyzers.Selector.Selector_selected_muons                  1000 	 1.00 	 1.0000
-    	 heppy.analyzers.Selector.Selector_selected_electrons              1000 	 1.00 	 1.0000
-    	 heppy.analyzers.Merger.Merger_selected_leptons                    1000 	 1.00 	 1.0000
-    	 heppy.analyzers.LeptonicZedBuilder.LeptonicZedBuilder_1           1000 	 1.00 	 1.0000
-    	 heppy.analyzers.examples.hzz4l.selection.Selection_cuts            436 	 0.44 	 0.4360
-    	 heppy.analyzers.ResonanceBuilder.ResonanceBuilder_1                436 	 1.00 	 0.4360
-    	 heppy.analyzers.examples.hzz4l.HTo4lTreeProducer.HTo4lTreeProducer_1       436 	 1.00 	 0.4360
-    
-
-
-
-```python
-!heppy_loop.py pp_zgzg_4l analysis_pp_hTo4l_simple_cfg.py -f -N 1000 -I root://eospublic.cern.ch//eos/experiment/fcc/hh/tutorials/Higgs_4l/pp_zgzg_4l.root;
-```
-
-    TClass::Init:0: RuntimeWarning: no dictionary for class fcc::FloatData is available
-    event 100 (71.2 ev/s)
-    event 200 (78.6 ev/s)
-    event 300 (97.0 ev/s)
-    event 400 (112.2 ev/s)
-    event 500 (120.7 ev/s)
-    event 600 (126.6 ev/s)
-    event 700 (134.1 ev/s)
-    event 800 (140.4 ev/s)
-    event 900 (145.6 ev/s)
-    
-    Component: example
-    	dataset_entries:   0
-    	files          :   ['root://eospublic.cern.ch//eos/experiment/fcc/hh/tutorials/Higgs_4l/pp_zgzg_4l.root']
-    	isData         :   False
-    	isEmbed        :   False
-    	isMC           :   False
-    	tree_name      :   None
-    	triggers       :   None
-    
-    
-          ---- TimeReport (all times in ms; first evt is skipped) ---- 
-    processed    all evts    time/proc    time/all   [%]    analyer
-    ---------    --------    ---------   ---------  -----   -------------
-         1000        1000         5.48        5.48  84.2%   heppy.analyzers.fcc.Reader.Reader_1
-         1000        1000         0.06        0.06   1.0%   heppy.analyzers.Selector.Selector_gen_leptons
-         1000        1000         0.49        0.49   7.6%   heppy.analyzers.examples.hzz4l.HTo4lGenTreeProducer.HTo4lGenTreeProducer_1
-         1000        1000         0.02        0.02   0.3%   heppy.analyzers.Selector.Selector_selected_muons
-         1000        1000         0.02        0.02   0.2%   heppy.analyzers.Selector.Selector_selected_electrons
-         1000        1000         0.01        0.01   0.1%   heppy.analyzers.Merger.Merger_selected_leptons
-         1000        1000         0.13        0.13   2.1%   heppy.analyzers.LeptonicZedBuilder.LeptonicZedBuilder_1
-         1000        1000         0.03        0.03   0.5%   heppy.analyzers.examples.hzz4l.selection.Selection_cuts
-          273        1000         0.04        0.01   0.2%   heppy.analyzers.ResonanceBuilder.ResonanceBuilder_1
-          273        1000         0.90        0.25   3.8%   heppy.analyzers.examples.hzz4l.HTo4lTreeProducer.HTo4lTreeProducer_1
-    ---------    --------    ---------   ---------   -------------
-          273        1000        23.88        6.50 100.0%   TOTAL
-    
-    Counter analyzers :
-    	 heppy.analyzers.fcc.Reader.Reader_1                               1000 	 1.00 	 1.0000
-    	 heppy.analyzers.Selector.Selector_gen_leptons                     1000 	 1.00 	 1.0000
-    	 heppy.analyzers.examples.hzz4l.HTo4lGenTreeProducer.HTo4lGenTreeProducer_1      1000 	 1.00 	 1.0000
-    	 heppy.analyzers.Selector.Selector_selected_muons                  1000 	 1.00 	 1.0000
-    	 heppy.analyzers.Selector.Selector_selected_electrons              1000 	 1.00 	 1.0000
-    	 heppy.analyzers.Merger.Merger_selected_leptons                    1000 	 1.00 	 1.0000
-    	 heppy.analyzers.LeptonicZedBuilder.LeptonicZedBuilder_1           1000 	 1.00 	 1.0000
-    	 heppy.analyzers.examples.hzz4l.selection.Selection_cuts            273 	 0.27 	 0.2730
-    	 heppy.analyzers.ResonanceBuilder.ResonanceBuilder_1                273 	 1.00 	 0.2730
-    	 heppy.analyzers.examples.hzz4l.HTo4lTreeProducer.HTo4lTreeProducer_1       273 	 1.00 	 0.2730
-    
-
-
-The runs create two output directories `pp_h_4l` and `pp_zgzg_4l`, with various subdirectories. The breakdown of
-efficiencies by cut can be found in:
-
-`example/heppy.analyzers.examples.hzz4l.selection.Selection_cuts/cut_flow.txt`
-
-
-```python
-!cat pp_h_4l/example/heppy.analyzers.examples.hzz4l.selection.Selection_cuts/cut_flow.txt
-```
-
-    Counter cut_flow :
-    	 All events                                                        1000 	 1.00 	 1.0000
-    	 At least one Z -> l+ l- candidates                                 985 	 0.98 	 0.9850
-    	 40 < mZ1 < 120                                                     811 	 0.82 	 0.8110
-    	 At least a second Z -> l+ l- candidates                            449 	 0.55 	 0.4490
-    	 12 < mZ2 < 120                                                     441 	 0.98 	 0.4410
-    	 leading lepton pT > 20                                             437 	 0.99 	 0.4370
-    	 sub-leading lepton pT > 10                                         436 	 1.00 	 0.4360
-    
-
-
-
-```python
-!cat pp_zgzg_4l/example/heppy.analyzers.examples.hzz4l.selection.Selection_cuts/cut_flow.txt
-```
-
-    Counter cut_flow :
-    	 All events                                                        1000 	 1.00 	 1.0000
-    	 At least one Z -> l+ l- candidates                                 958 	 0.96 	 0.9580
-    	 40 < mZ1 < 120                                                     689 	 0.72 	 0.6890
-    	 At least a second Z -> l+ l- candidates                            362 	 0.53 	 0.3620
-    	 12 < mZ2 < 120                                                     278 	 0.77 	 0.2780
-    	 leading lepton pT > 20                                             274 	 0.99 	 0.2740
-    	 sub-leading lepton pT > 10                                         273 	 1.00 	 0.2730
-    
-
-
-The **gen-level** and **reco-level** output trees can be found here:
-
-`example/heppy.analyzers.examples.hzz4l.HTo4lGenTreeProducer.HTo4lGenTreeProducer_1/tree.root`
-`example/heppy.analyzers.examples.hzz4l.HTo4lTreeProducer.HTo4lTreeProducer_1/tree.root`
-
-## Part III: Produce plots
-
-
-Produce Gen-level plots:
-
-
-```python
-
-import ROOT
-from ROOT import TFile, gROOT, TH1D, kRed, TLegend
-import os
-
-
-def printCanvas(canvas, name, format, directory):
-    if format != "":
-        if not os.path.exists(directory) :
-                os.system("mkdir "+directory)
-        outFile = os.path.join(directory, name) + "." + format
-        canvas.Print(outFile)
-
-
-
-def drawDoublehisto(h1, h2, name, ylabel, legend, leftText, rightText, format, directory, logY):
-    if logY : 
-        name = name+"_logY"
-    canvas = ROOT.TCanvas(name, name, 700, 600) 
-    if logY : 
-        canvas.SetLogy(1)
-    
-    font = 132
-    
-    ROOT.gPad.SetLeftMargin(0.20) ; 
-    ROOT.gPad.SetRightMargin(0.10) ; 
-    ROOT.gPad.SetBottomMargin(0.20) ; 
-    ROOT.gStyle.SetOptStat(0000000);
-    ROOT.gStyle.SetTextFont(font);
-    
-    Tleft = ROOT.TLatex(0.20, 0.92, leftText) 
-    Tleft.SetNDC(ROOT.kTRUE) 
-    Tleft.SetTextSize(0.044) 
-    Tleft.SetTextFont(font) 
-    
-    Tright = ROOT.TText(0.90, 0.92, rightText) ;
-    Tright.SetTextAlign(31);
-    Tright.SetNDC(ROOT.kTRUE) 
-    Tright.SetTextSize(0.044) 
-    Tright.SetTextFont(font) 
-    
-    maxh = max(h1.GetMaximum(),h2.GetMaximum())
-    
-    h1.GetXaxis().SetTitleFont(font)
-    h1.GetXaxis().SetLabelFont(font)
-    
-    h1.GetYaxis().SetTitle(ylabel)
-    h1.GetYaxis().SetTitleFont(font)
-    h1.GetYaxis().SetLabelFont(font)
-    h1.GetXaxis().SetTitleOffset(1.5)
-    h1.GetYaxis().SetTitleOffset(1.6)
-    h1.GetXaxis().SetLabelOffset(0.02)
-    h1.GetYaxis().SetLabelOffset(0.02)
-    h1.GetXaxis().SetTitleSize(0.06)
-    h1.GetYaxis().SetTitleSize(0.06)
-    h1.GetXaxis().SetLabelSize(0.06)
-    h1.GetYaxis().SetLabelSize(0.06)
-    h1.SetNdivisions(505);
-    h1.GetYaxis().SetNdivisions(505);
-
-    h1.SetMaximum(1.5*maxh) 
-    h1.SetTitle("") 
-    h1.Draw("")
-    h2.Draw("same")
-
-    legend.SetTextFont(font) 
-    legend.Draw() 
-    Tleft.Draw() 
-    Tright.Draw() 
-    printCanvas(canvas, name, format, directory) 
-    canvas.Draw()
-
-
-treeName = "events"
-FileS = "pp_h_4l/example/heppy.analyzers.examples.hzz4l.HTo4lGenTreeProducer.HTo4lGenTreeProducer_1/tree.root"
-FileB = "pp_zgzg_4l/example/heppy.analyzers.examples.hzz4l.HTo4lGenTreeProducer.HTo4lGenTreeProducer_1/tree.root"
-
-Vars = {   
-    "lep1vsPt_pt":{"name":"lep1vsPt_pt","title":"p_{T}^{(1)} [GeV]","bin":25,"xmin":0,"xmax":100},
-    "lep2vsPt_pt":{"name":"lep2vsPt_pt","title":"p_{T}^{(2)} [GeV]","bin":25,"xmin":0,"xmax":100},
-    "lep3vsPt_pt":{"name":"lep3vsPt_pt","title":"p_{T}^{(3)} [GeV]","bin":25,"xmin":0,"xmax":50},
-    "lep4vsPt_pt":{"name":"lep4vsPt_pt","title":"p_{T}^{(4)} [GeV]","bin":25,"xmin":0,"xmax":50},
-
-    "lep1vsEta_eta":{"name":"lep1vsEta_eta","title":"#eta^{(1)}","bin":25,"xmin":0,"xmax":10},
-    "lep2vsEta_eta":{"name":"lep2vsEta_eta","title":"#eta^{(2)}","bin":25,"xmin":0,"xmax":10},
-    "lep3vsEta_eta":{"name":"lep3vsEta_eta","title":"#eta^{(3)}","bin":25,"xmin":0,"xmax":10},
-    "lep4vsEta_eta":{"name":"lep4vsEta_eta","title":"#eta^{(4)}","bin":25,"xmin":0,"xmax":10}
-}
-
-
-rootFileS = TFile(FileS,"read")
-treeS = rootFileS.Get(treeName)
-rootFileB = TFile(FileB,"read")
-treeB = rootFileB.Get(treeName)
-
-dict_histoS =  {}
-dict_histoB = {}
-for var in Vars:
-    dict_histoS[var] = TH1D(var+"S", var+"S;"+Vars[var]["title"]+";",Vars[var]["bin"],Vars[var]["xmin"],Vars[var]["xmax"])
-    dict_histoB[var] = TH1D(var+"B",var+"B;"+Vars[var]["title"]+";",Vars[var]["bin"],Vars[var]["xmin"],Vars[var]["xmax"])
-
-
-
-for entry in xrange(treeS.GetEntries()) :
-    treeS.GetEntry(entry)
-    for var in Vars.keys() :
-        dict_histoS[var].Fill(getattr(treeS,Vars[var]["name"]))
-
-for entry in xrange(treeB.GetEntries()) :
-    treeB.GetEntry(entry)
-    for var in Vars.keys() :
-        dict_histoB[var].Fill(getattr(treeB,Vars[var]["name"]))
-
-
-yAxisLabel = "a. u."
-
-rightText = "GEN"
-leftText = "#sqrt{s} = 100 TeV"
-format = "png"
-outputDirectory = "plots" 
-
-if not os.path.exists(outputDirectory) :
-    os.system("mkdir "+outputDirectory)
-
-for var in Vars.keys() : 
-    dict_histoS[var].SetLineWidth(3)
-    dict_histoS[var].SetLineWidth(3)
-    dict_histoB[var].SetLineColor(ROOT.kRed)
-   
-    try : 
-        dict_histoS[var].Scale(1./float(dict_histoS[var].Integral()))
-        dict_histoB[var].Scale(1./float(dict_histoB[var].Integral()))
-    except ZeroDivisionError :
-        print("Can not renormalize because of integral = 0.") 
-    
-    leg = TLegend(0.50,0.76,0.89,0.89)
-    leg.AddEntry(dict_histoS[var],"p p #rightarrow H #rightarrow 4l","l")
-    leg.AddEntry(dict_histoB[var],"p p #rightarrow ZZ / Z #gamma^{*} #rightarrow 4l","l")
-    leg.SetFillColor(0)
-    leg.SetFillStyle(0)
-    leg.SetLineColor(0)
-    #c = ROOT.TCanvas()
-    drawDoublehisto(dict_histoS[var],dict_histoB[var],var,yAxisLabel,leg,leftText,rightText,format,outputDirectory,0)
-    #c.Draw()
-
-
-
-```
-
-    Info in <TCanvas::Print>: png file plots/lep3vsEta_eta.png has been created
-    Info in <TCanvas::Print>: png file plots/lep4vsPt_pt.png has been created
-    Info in <TCanvas::Print>: png file plots/lep3vsPt_pt.png has been created
-    Info in <TCanvas::Print>: png file plots/lep2vsEta_eta.png has been created
-    Info in <TCanvas::Print>: png file plots/lep1vsEta_eta.png has been created
-    Info in <TCanvas::Print>: png file plots/lep4vsEta_eta.png has been created
-    Info in <TCanvas::Print>: png file plots/lep2vsPt_pt.png has been created
-    Info in <TCanvas::Print>: png file plots/lep1vsPt_pt.png has been created
-
-
-
-The plots can be found in the `plots` directory:
-
-![](plots/lep4vsPt_pt.png)
-
-![](images/FccFullAnalysis/lep1vsPt_pt.png)
-![](images/FccFullAnalysis/lep1vsEta_eta.png)
-
-Produce Reco-level plots:
-
-Appreciate the signal yield for **25 fb-1 of data**. Compare with [ATLAS results](https://arxiv.org/pdf/1408.5191v3.pdf) at 7,8 TeV .
-
-![](images/FccFullAnalysis/higgs_m.png)
-![](images/FccFullAnalysis/m4l_80_170_allYear_125.png)
-
-
-```python
-# %load tutorials/fcc/createRecoHistos.py
-from ROOT import TFile, gROOT, TH1D, kRed, TLegend, THStack
-#from tools.drawCanvas import *
-import os
-
-def printCanvas(canvas, name, format, directory):
-    if format != "":
-        if not os.path.exists(directory) :
-                os.system("mkdir "+directory)
-        outFile = os.path.join(directory, name) + "." + format
-        canvas.Print(outFile)
-
-        
-def drawStack(name, ylabel, legend, leftText, rightText, format, directory, logY, hS, hB):
-    if logY : 
-        name = name+"_logY"
-    canvas = ROOT.TCanvas(name, name, 700, 600) 
-    if logY : 
-        canvas.SetLogy(1)
-    
-    font = 132
-    
-    ROOT.gPad.SetLeftMargin(0.20) ; 
-    ROOT.gPad.SetRightMargin(0.10) ; 
-    ROOT.gPad.SetBottomMargin(0.20) ; 
-    ROOT.gStyle.SetOptStat(0000000);
-    ROOT.gStyle.SetTextFont(font);
-    
-    Tleft = ROOT.TLatex(0.20, 0.92, leftText) 
-    Tleft.SetNDC(ROOT.kTRUE) 
-    Tleft.SetTextSize(0.044) 
-    Tleft.SetTextFont(font) 
-    
-    Tright = ROOT.TText(0.90, 0.92, rightText) ;
-    Tright.SetTextAlign(31);
-    Tright.SetNDC(ROOT.kTRUE) 
-    Tright.SetTextSize(0.044) 
-    Tright.SetTextFont(font) 
-    
-    # first retrieve maximum 
-    maxes = []
-    maxes.append(hS.GetMaximum())
-    for h in hB:
-       maxes.append(h.GetMaximum())
-    
-    maxh = max(maxes)
-     
-    # define stacked histo
-    hStack = ROOT.THStack("hstack","")
-    colors = []
-    colors.append(ROOT.kCyan-6);
-    colors.append(ROOT.kBlue-6);
-    colors.append(ROOT.kGreen-6);
-    colors.append(ROOT.kMagenta-6);
-    colors.append(ROOT.kOrange-6);
-   
-    # first plot backgrounds
-         
-    hB[0].SetLineWidth(2)
-    hB[0].SetLineColor(ROOT.kBlack)
-    hB[0].SetFillColor(colors[0])
-    
-    hStack.Add(hB[0])
-    
-    # now loop over other background (skipping first)
-    iterh = iter(hB)
-    next(iterh)
-    
-    for h in iterh:
-       h.SetLineWidth(2)
-       h.SetLineColor(ROOT.kBlack)
-       h.SetFillColor(colors[k])
-       hStack.Add(h)
-    
-    
-    # finally add signal on top
-    hS.SetLineWidth(2)
-    hS.SetLineColor(ROOT.kRed+1)
-    hStack.Add(hS)
-    
-    hStack.Draw("hist")
-   
-    hStack.GetXaxis().SetTitleFont(font)
-    hStack.GetXaxis().SetLabelFont(font)
-    hStack.GetXaxis().SetTitle(hB[0].GetXaxis().GetTitle())
-    hStack.GetYaxis().SetTitle(ylabel)
-    hStack.GetYaxis().SetTitleFont(font)
-    hStack.GetYaxis().SetLabelFont(font)
-    hStack.GetXaxis().SetTitleOffset(1.5)
-    hStack.GetYaxis().SetTitleOffset(1.6)
-    hStack.GetXaxis().SetLabelOffset(0.02)
-    hStack.GetYaxis().SetLabelOffset(0.02)
-    hStack.GetXaxis().SetTitleSize(0.06)
-    hStack.GetYaxis().SetTitleSize(0.06)
-    hStack.GetXaxis().SetLabelSize(0.06)
-    hStack.GetYaxis().SetLabelSize(0.06)
-    hStack.GetXaxis().SetNdivisions(505);
-    hStack.GetYaxis().SetNdivisions(505);
-    hStack.SetMaximum(1.5*maxh) 
-    hStack.SetTitle("") 
-    
-   
-    legend.SetTextFont(font) 
-    legend.Draw() 
-    Tleft.Draw() 
-    Tright.Draw() 
-    printCanvas(canvas, name, format, directory) 
-
-treeName = "events"
-FileS = "pp_h_4l/example/heppy.analyzers.examples.hzz4l.HTo4lTreeProducer.HTo4lTreeProducer_1/tree.root"
-FileB = "pp_zgzg_4l/example/heppy.analyzers.examples.hzz4l.HTo4lTreeProducer.HTo4lTreeProducer_1/tree.root"
-
-# number of generated events
-nGenS = 10000
-nGenB = 10000
-
-# integrated luminosity
-intLumi = 25000
-
-kFactorS = 3.50
-kFactorB = 1.80
-
-# MG5 LO XS x BR in (pb)
-sigmaS = 0.026
-sigmaB = 1.04
-
-weightS = kFactorS*sigmaS*intLumi/nGenS
-weightB = kFactorB*sigmaB*intLumi/nGenB
-
-Vars = {   
-    "zed1_m":{"name":"zed1_m","title":"m_{ll}^{(1)} [GeV]","bin":36,"xmin":0,"xmax":100},
-    "zed2_m":{"name":"zed2_m","title":"m_{ll}^{(2)} [GeV]","bin":36,"xmin":0,"xmax":100},
-    "higgs_m":{"name":"higgs_m","title":"m_{4l} [GeV]","bin":36,"xmin":70,"xmax":170},
-}
-
-rootFileS = TFile(FileS,"read")
-treeS = rootFileS.Get(treeName)
-rootFileB = TFile(FileB,"read")
-treeB = rootFileB.Get(treeName)
-
-dict_histoS = {var:TH1D(var+"S",var+"S;"+Vars[var]["title"]+";",Vars[var]["bin"],Vars[var]["xmin"],Vars[var]["xmax"]) for var in Vars}
-dict_histoB = {var:TH1D(var+"B",var+"B;"+Vars[var]["title"]+";",Vars[var]["bin"],Vars[var]["xmin"],Vars[var]["xmax"]) for var in Vars}
-
-
-
-
-for entry in xrange(treeS.GetEntries()) :
-    treeS.GetEntry(entry)
-
-    for var in Vars.keys() :
-        dict_histoS[var].Fill(getattr(treeS,Vars[var]["name"]))
-
-for entry in xrange(treeB.GetEntries()) :
-    treeB.GetEntry(entry)
-    for var in Vars.keys() :
-        dict_histoB[var].Fill(getattr(treeB,Vars[var]["name"]))
-
-#myBTGStyle()
-
-yAxisLabel = "Events / 2.5 GeV"
-
-rightText = "RECO: Delphes-3.4.0"
-leftText = "#sqrt{s} = 100 TeV, L = 25 fb^{-1}"
-format = "png"
-outputDirectory = "plots" 
-outFile = outputDirectory+"/plots.root"
-
-if not os.path.exists(outputDirectory) :
-    os.system("mkdir "+outputDirectory)
-
-for var in Vars.keys() : 
-     
-    try : 
-        
-	# rescale by
-        dict_histoS[var].Scale(weightS)
-        dict_histoB[var].Scale(weightB)
-
-    except ZeroDivisionError :
-        print "Can not renormalize because of integral = 0." 
-    
-    leg = TLegend(0.69,0.75,0.88,0.88)
-    leg.AddEntry(dict_histoB[var],"ZZ / Z #gamma^{*}","f")
-    leg.AddEntry(dict_histoS[var],"H(125)","l")
-    leg.SetFillColor(0)
-    leg.SetFillStyle(0)
-    leg.SetLineColor(0)
-
-    hS = dict_histoS[var]
-    hB = []
-    hB.append(dict_histoB[var])
-
-    drawStack(var,yAxisLabel,leg,leftText,rightText,format,outputDirectory,0,hS,hB)
-
-
-
-
-
-
-```
-
-    Info in <TCanvas::Print>: png file plots/higgs_m.png has been created
-    Info in <TCanvas::Print>: png file plots/zed2_m.png has been created
-    Info in <TCanvas::Print>: png file plots/zed1_m.png has been created
-
-
-![](plots/higgs_m.png)
-![](plots/zed2_m.png)
-![](plots/zed1_m.png)
-
-Part IV: Homework
----------------------
-
-As an exercise you can **re-run the full analysis with the CMS detector configuration**. 
-Additional Delphes cards canbe found in the `$DELPHES_DIR/cards` folder of your Delphes installation. 
-
-Hint: The input Delphes card can be specified in the command line argument: 
-```
---DelphesCard /cvmfs/sft.cern.ch/lcg/releases/LCG_94/delphes/3.4.2pre12/x86_64-centos7-gcc62-opt/cards/delphes_card_CMS.tcl
-```
-
-You should obtain a plot similar to the following!
-
-
-![You should obtain a plot similar to this one.](images/FccFullAnalysis/higgs_m_cms.png)
-
-By comparing the CMS and FCC Delphes cards, try to explain:
-
--  the **event yields difference between 7/8 TeV and 100 TeV** (by comparing the official ATLAS plot with the CMS configuration you just ran at 100 TeV)
--  the **event yields difference at 100 TeV** between the CMS and FCC detector configurations
--  the **difference in the width of Z and H peaks** between the CMS and FCC detector configurations
 
 ## Other documentation
 
--   [Submit Heppy jobs using the batch queue](https://github.com/HEP-FCC/heppy/blob/master/doc/Heppy_-_Parallel_Processing.md)
 -   [FCCSW webpage](http://fccsw.web.cern.ch/fccsw/index.html)
 -   [Pythia8 manual](http://home.thep.lu.se/~torbjorn/pythia81html/Welcome.html)
 -   [Delphes website](https://cp3.irmp.ucl.ac.be/projects/delphes)
