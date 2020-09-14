@@ -33,7 +33,7 @@ In configuring jobs with the FCC software framework, users can choose the Branch
 
 {% challenge "Inspecting a ROOT file" %}
 
-Let's take a look at an example: `root://eospublic.cern.ch//eos/experiment/fcc/hh/tutorials/output_708223617.root`. 
+Let's take a look at an example: `root://eospublic.cern.ch//eos/experiment/fcc/hh/tutorials/fccee_idea_pgun.root`. 
 This file
 contains simulated data of a single particle passing through the detector and hits from the detector simulation.
 Open the file with ROOT and determine:
@@ -51,17 +51,36 @@ Open the file with ROOT and determine:
 FCC data files contain another tree called `metadata`.
 As the name suggests, this information is mostly used to process the actual data in the `events` tree.
 However, files produced with newer (>0.11) versions of FCCSW
-will store the information of the job options file here, so that they can be reproduced (using the same versions of the software). FCCSW provides a script `fcc_dump_joboptions` that can easily access this information. Unfortunately our example file is too old: 
+will store the information of the job options file here, so that they can be reproduced (using the same versions of the software). FCCSW provides a script `fcc_dump_joboptions` that can easily access this information.
 
 ```bash
-    fcc_dump_joboptions root://eospublic.cern.ch//eos/experiment/fcc/hh/tutorials/output_708223617.root
-    Traceback (most recent call last):
-      File "/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.12/x86_64-centos7-gcc8-opt/scripts/fcc_dump_joboptions", line 63, in <module>
-          dump_joboptions(args.filename)
-            File "/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.12/x86_64-centos7-gcc8-opt/scripts/fcc_dump_joboptions", line 53, in dump_joboptions
-                s =  event.gaudiConfigOptions
-                AttributeError: 'TTree' object has no attribute 'gaudiConfigOptions'
+fcc_dump_joboptions /eos/experiment/fcc/hh/tutorials/fccee_idea_pgun.root 
 ```
-It does not contain the job information.
+```
+EventDataSvc.input = "";
+
+GeoSvc.OutputLevel = 3;
+GeoSvc.detectors = ['/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.12/x86_64-centos7-gcc8-opt/share/FCCSW/Detector/DetFCCeeIDEA/compact/FCCee_DectMaster.xml'];
+
+SimG4Alg.eventProvider = "SimG4SingleParticleGeneratorTool/GeantinoGun";
+SimG4Alg.outputs = ['SimG4SaveParticleHistory/saveHistory', 'SimG4SaveTrackerHits/saveTrackerHits_Barrel', 'SimG4SaveTrackerHits/saveTrackerHits_Endcap', 'SimG4SaveTrackerHits/saveTrackerHits_DCH'];
+
+SimG4Alg.GeantinoGun.energyMax = "2400.0";
+SimG4Alg.GeantinoGun.energyMin = "2400.0";
+SimG4Alg.GeantinoGun.etaMax = "3.5";
+SimG4Alg.GeantinoGun.etaMin = "-3.5";
+SimG4Alg.GeantinoGun.particleName = "mu-";
+SimG4Alg.GeantinoGun.phiMax = "360.0";
+SimG4Alg.GeantinoGun.phiMin = "0.0";
+SimG4Alg.GeantinoGun.saveEdm = False;
+SimG4Alg.GeantinoGun.vertexX = "0.0";
+SimG4Alg.GeantinoGun.vertexY = "0.0";
+SimG4Alg.GeantinoGun.vertexZ = "0.0";
+...
+```
+
+The output can be redirected to a new job options file that can be run with `fccrun`, provided that all the paths to the detector xmls etc. are still valid.
+
+Note that some older files on eos may not contain the metadata information.
 
 

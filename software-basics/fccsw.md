@@ -113,11 +113,11 @@ However, it is advised to follow this tutorial, as many of the components are in
 Take a look at the example job to run Pythia8:
 
 ```bash
-less $FCCSWSHAREDIR/Examples/options/pythia.py
+less $FCCSWBASEDIR/share/FCCSW/Examples/options/pythia.py
 ```
 and compare it with the command line options for fccrun:
 ```bash
-fccrun $FCCSWSHAREDIR/Examples/options/pythia.py -h
+fccrun $FCCSWBASEDIR/share/FCCSW/Examples/options/pythia.py -h
 ```
 And note that you have to give an `options.py` as the first argument to `fccrun` in order for this to work:
 
