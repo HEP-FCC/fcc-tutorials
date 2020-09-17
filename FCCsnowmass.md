@@ -31,11 +31,13 @@ If the above command fails without printing a path like `/cvmfs/fcc.cern.ch/sw/r
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```
 
+<!-- 
 Please also add an environment varialbe for Delphes cards
 
 ```bash
 export DELPHES_DIR='/cvmfs/sft.cern.ch/lcg/releases/delphes/3.4.3pre02-e4803/x86_64-centos7-gcc8-opt/'
 ```
+-->
 
 ## Part I: Generate and simulate Events with FCCSW
 
