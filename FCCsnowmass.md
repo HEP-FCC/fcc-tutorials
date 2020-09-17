@@ -296,18 +296,27 @@ fccrun PythiaDelphes_config.py -h
 Should return something like:
 
 ```
- -->  GenAlg  -->  Converter  -->  DelphesSimulation  -->  out  
+ -->  GenAlg
+ -->  Converter
+ -->  DelphesSimulation
+ -->  out
+ 
 
 usage: fccrun [-h] [--dry-run] [-v] [-n NUM_EVENTS] [-l] [--gdb]
-              [--ncpus NCPUS] [--ROOTOutputFile [ROOTOUTPUTFILE]]
-              [--ApplyGenFilter [APPLYGENFILTER]]
-              [--outputs OUTPUTS [OUTPUTS ...]] [--DelphesCard [DELPHESCARD]]
-              [--PrintEmptyCounters [PRINTEMPTYCOUNTERS]] [--input [INPUT]]
+              [--ncpus NCPUS] [--input [INPUT]] [--Blocking [BLOCKING]]
+              [--PrintEmptyCounters [PRINTEMPTYCOUNTERS]]
               [--Filename [FILENAME]]
               [--printPythiaStatistics [PRINTPYTHIASTATISTICS]]
-              [--outputCommands OUTPUTCOMMANDS [OUTPUTCOMMANDS ...]]
-              [--filename [FILENAME]] [--filenameRemote [FILENAMEREMOTE]]
+              [--doEvtGenDecays [DOEVTGENDECAYS]]
+              [--EvtGenDecayFile [EVTGENDECAYFILE]]
+              [--EvtGenParticleDataFile [EVTGENPARTICLEDATAFILE]]
               [--hepmcStatusList HEPMCSTATUSLIST [HEPMCSTATUSLIST ...]]
+              [--DelphesCard [DELPHESCARD]]
+              [--ROOTOutputFile [ROOTOUTPUTFILE]]
+              [--outputs OUTPUTS [OUTPUTS ...]]
+              [--ApplyGenFilter [APPLYGENFILTER]] [--filename [FILENAME]]
+              [--outputCommands OUTPUTCOMMANDS [OUTPUTCOMMANDS ...]]
+              [--filenameRemote [FILENAMEREMOTE]]
               [config_files [config_files ...]]
 
 Run job in the FCC framework
@@ -327,39 +336,52 @@ optional arguments:
   --gdb                 Attach gdb debugger
   --ncpus NCPUS         Start Gaudi in parallel mode using NCPUS processes. 0
                         => serial mode (default), -1 => use all CPUs
+  --input [INPUT]       Name of the file to read [unknown owner type]
+  --Blocking [BLOCKING]
+                        if algorithm invokes CPU-blocking system calls
+                        (offloads computations to accelerators or quantum
+                        processors, performs disk or network I/O, is bound by
+                        resource synchronization, etc) [Gaudi::Algorithm]
+  --PrintEmptyCounters [PRINTEMPTYCOUNTERS]
+                        force printing of empty counters, otherwise only
+                        printed in DEBUG mode [GaudiCommon<Algorithm>]
+  --Filename [FILENAME]
+                        [PythiaInterface]
+  --printPythiaStatistics [PRINTPYTHIASTATISTICS]
+                        Print Pythia Statistics [PythiaInterface]
+  --doEvtGenDecays [DOEVTGENDECAYS]
+                        Do decays with EvtGen [PythiaInterface]
+  --EvtGenDecayFile [EVTGENDECAYFILE]
+                        Name of the EvtGen Decay File [PythiaInterface]
+  --EvtGenParticleDataFile [EVTGENPARTICLEDATAFILE]
+                        Name of the EvtGen Particle Data File
+                        [PythiaInterface]
+  --hepmcStatusList HEPMCSTATUSLIST [HEPMCSTATUSLIST ...]
+                        list of hepmc statuses to keep. An empty list means
+                        all statuses will be kept [HepMCToEDMConverter]
+  --DelphesCard [DELPHESCARD]
+                        Name of Delphes tcl config file with detector and
+                        simulation parameters [DelphesSimulation]
   --ROOTOutputFile [ROOTOUTPUTFILE]
                         Name of Delphes Root output file, if defined, the
                         Delphes standard tree write out (in addition to FCC-
                         EDM based output to transient data store)
                         [DelphesSimulation]
+  --outputs OUTPUTS [OUTPUTS ...]
+                        [DelphesSimulation]
   --ApplyGenFilter [APPLYGENFILTER]
                         only for debugging purposes. If entire MC particle
                         collection is needed, request in cfg file.
                         [DelphesSimulation]
-  --outputs OUTPUTS [OUTPUTS ...]
-                        [DelphesSimulation]
-  --DelphesCard [DELPHESCARD]
-                        Name of Delphes tcl config file with detector and
-                        simulation parameters [DelphesSimulation]
-  --PrintEmptyCounters [PRINTEMPTYCOUNTERS]
-                        force printing of empty counters, otherwise only
-                        printed in DEBUG mode [GaudiCommon<Algorithm>]
-  --input [INPUT]       Name of the file to read [unknown owner type]
-  --Filename [FILENAME]
-                        [PythiaInterface]
-  --printPythiaStatistics [PRINTPYTHIASTATISTICS]
-                        Print Pythia Statistics [PythiaInterface]
+  --filename [FILENAME]
+                        Name of the file to create [PodioOutput]
   --outputCommands OUTPUTCOMMANDS [OUTPUTCOMMANDS ...]
                         A set of commands to declare which collections to keep
                         or drop. [PodioOutput]
-  --filename [FILENAME]
-                        Name of the file to create [PodioOutput]
   --filenameRemote [FILENAMEREMOTE]
                         An optional file path to copy the outputfile to.
                         [PodioOutput]
-  --hepmcStatusList HEPMCSTATUSLIST [HEPMCSTATUSLIST ...]
-                        list of hepmc statuses to keep. An empty list means
-                        all statuses will be kept [HepMCToEDMConverter]
+
 ```
 
 
