@@ -4,11 +4,12 @@
 
 This tutorial will teach you how to:
 
--   **generate** signal and background samples with **Pythia8** and **MadGraph** within FCCSW
+-   **generate** signal and background samples with **Pythia8** within FCCSW
 -   run a fast parametric **detector simulation** with **Delphes** within FCCSW
 -   apply an **event selection** on those samples with **FCCAnalyses**
 -   produce **flat ntuples** with observables of interest with **FCCAnalyses**
 -   produce plots with **FCCAnalyses**
+-   compare distributions produced with different generators
 
 {% endobjectives %}
 First login to to a fresh shell on lxplus, on OSG, or in one of the virtual machine that could be provided on open stack. Usage of bash shell is highly recommended. Create a working directory and go inside
@@ -132,6 +133,7 @@ Both Pythia8 and Delphes are integrated in the Gaudi-based FCCSW framework as *A
 
 To run the code, a job options like the following is needed (**Note:** While the format of the configuration is a python file, it is not necessarily "pythonic". It can be used with GaudiPython, but we will only use it as to straightforwardly write down a job description for use with `fccrun` ) 
 
+- **PythiaDelphes_config.py** for the FCCSW configuration file
 
 ```python
 import sys, os
@@ -285,12 +287,13 @@ out.outputCommands = [
 ApplicationMgr().TopAlg += [out]
 ```
 
-To start with, copy the above python code in a file called ```bash PythiaDelphes_config.py```.
 The `fccrun` allows to change most `Properties` of the job on the command line. All possible arguments to fccrun  are listed with the command 
 
 ```bash
 fccrun PythiaDelphes_config.py -h
 ```
+
+Should return something like:
 
 ```
  -->  GenAlg  -->  Converter  -->  DelphesSimulation  -->  out  
@@ -360,7 +363,7 @@ optional arguments:
 ```
 
 
-Thus The following commands will run Pythia8 and Delphes and produce the relevant signal and background samples:
+The following commands will run Pythia8 and Delphes and produce the relevant signal and background samples:
 
 
 ```bash
