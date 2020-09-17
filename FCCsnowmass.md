@@ -11,7 +11,7 @@ This tutorial will teach you how to:
 -   produce plots with **FCCAnalyses**
 
 {% endobjectives %}
-First login to lxplus or one of the virtual machine provided on open stack. Usage of bash shell is highly recommended. Create a working directory and go inside
+First login to to a fresh shell on lxplus, on OSG, or in one of the virtual machine that could be provided on open stack. Usage of bash shell is highly recommended. Create a working directory and go inside
 
 ```bash
 mkdir mytutorial
@@ -25,7 +25,7 @@ Then, make sure your **setup of the FCC software** is working correctly. A quick
 which fccrun
 ```
 
-If the above command fails without printing a path like `/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.12/x86_64-centos7-gcc8-opt/scripts/fccrun`, you need to setup the FCC software stack 
+If the above command fails without printing a path like `/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.14/x86_64-centos7-gcc8-opt/scripts/fccrun`, you need to setup the FCC software stack 
 
 ```bash
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
@@ -152,7 +152,7 @@ ApplicationMgr().OutputLevel = INFO
 ## Pythia generator
 from Configurables import PythiaInterface
 pythia8gentool = PythiaInterface()
-pythia8gentool.Filename = os.path.join(os.environ.get("FCCSWSHAREDIR", ""),"Generation/data/Pythia_ttbar.cmd")
+pythia8gentool.Filename = os.path.join(os.environ.get("FCCSWSHAREDIR", ""),"Generation/data/ee_Z_ddbar.cmd")
 
 
 ## Write the HepMC::GenEvent to the data service
@@ -177,14 +177,16 @@ ApplicationMgr().TopAlg += [hepmc_converter]
 from Configurables import DelphesSaveChargedParticles
 
 muonSaveTool = DelphesSaveChargedParticles("muons")
-muonSaveTool.delphesArrayName = "MuonMomentumSmearing/muons"
+muonSaveTool.delphesArrayName = "MuonFilter/muons"
 muonSaveTool.particles.Path      = "muons"
+muonSaveTool.particles_trkCov.Path      = "muons_trkCov"
 muonSaveTool.mcAssociations.Path = "muonsToMC"
 muonSaveTool.isolationTags.Path  = "muonITags"
 
 eleSaveTool = DelphesSaveChargedParticles("electrons")
 eleSaveTool.delphesArrayName = "ElectronFilter/electrons"
 eleSaveTool.particles.Path      = "electrons"
+eleSaveTool.particles_trkCov.Path      = "electrons_trkCov"
 eleSaveTool.mcAssociations.Path = "electronsToMC"
 eleSaveTool.isolationTags.Path  = "electronITags"
 
@@ -192,6 +194,7 @@ chhadSaveTool = DelphesSaveChargedParticles("efcharged")
 chhadSaveTool.delphesArrayName = "Calorimeter/eflowTracks"
 chhadSaveTool.saveIsolation = False
 chhadSaveTool.particles.Path      = "efcharged"
+chhadSaveTool.particles_trkCov.Path      = "efcharged_trkCov"
 chhadSaveTool.mcAssociations.Path = "efchargedToMC"
 
 
@@ -252,7 +255,7 @@ metSaveTool.missingEt.Path = "met"
 from Configurables import DelphesSimulation
 delphessim = DelphesSimulation()
 ## Define Delphes card
-delphessim.DelphesCard = os.path.join(os.environ.get("DELPHES_DIR", ""), "cards/delphes_card_IDEA.tcl")
+delphessim.DelphesCard = os.path.join(os.environ.get("DELPHES_DIR", ""), "cards/delphes_card_IDEAtrkcov.tcl")
 delphessim.ROOTOutputFile = ""
 delphessim.ApplyGenFilter = True
 delphessim.outputs = [
@@ -282,6 +285,7 @@ out.outputCommands = [
 ApplicationMgr().TopAlg += [out]
 ```
 
+To start with, copy the above python code in a file called ```bash PythiaDelphes_config.py```.
 The `fccrun` allows to change most `Properties` of the job on the command line. All possible arguments to fccrun  are listed with the command 
 
 ```bash
