@@ -488,7 +488,7 @@ Where ```Beams:LHEF = events.lhe``` points to the file you have produced with Wh
 Then we shower with Pythia in FCCSW and run the Delphes detector paramterisation:
 
 ```bash
-fccrun PythiaDelphes_config.py --Filename Pythia_LHE.cmd --filename wizhardp8_ee_Z_ecm91.root -n 10000
+fccrun PythiaDelphes_config.py --Filename Pythia_LHE.cmd --filename wizhardp8_ee_Z_Zmumu_ecm91.root -n 10000
 ```
 
 - **Pythia_ee_Zmumu_ecm91.cmd** 
@@ -523,11 +523,20 @@ PartonLevel:FSR = on               ! final-state radiation
 and run fcc on it
 
 ```bash
-fccrun PythiaDelphes_config.py --Filename Pythia_ee_Zmumu_ecm91.cmd --filename p8_ee_Z_ecm91.root -n 10000
+fccrun PythiaDelphes_config.py --Filename Pythia_ee_Zmumu_ecm91.cmd --filename p8_ee_Z_Zmumu_ecm91.root -n 10000
 ```
 
-Now go to the ```FCCAnalyses``` repository you have cloned during Part II, and run the Z to mumu analysis on the file
+Now go to the ```FCCAnalyses``` repository you have cloned during Part II, and run the Z to mumu analysis on the files produced
 
-, shower with Pythia
-generate Z events with Pythia8
-Compare the two
+```bash
+python FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py ../mytutorialtest/wizhardp8_ee_Z_Zmumu_ecm91.root
+python FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py ../mytutorialtest/p8_ee_Z_Zmumu_ecm91.root
+```
+
+```bash
+python FCCeeAnalyses/Z_Zmumu/dataframe/finalSel.py
+```
+
+and look at the new plots in ```FCCee/Z_Zmumu/plots/```. 
+
+
