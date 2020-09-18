@@ -1,0 +1,575 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>TupleTools and branches &mdash; FCC Starterkit Lessons  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/panels.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/starterkit.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FCC Starterkit Lessons
+          
+
+          
+            
+            <img src="../_static/starterkit.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">First  Steps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/prerequisites.html">Pre-workshop checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/introduction-to-course.html">Goals of the course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/fccsw.html">An introduction to FCC Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/bookkeeping.html">Finding data in the Bookkeeping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/exploring-fcc-files.html">Inspecting an FCC data file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-events-tree">The <code class="docutils literal notranslate"><span class="pre">events</span></code> tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-metadata-tree">The <code class="docutils literal notranslate"><span class="pre">metadata</span></code> tree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/asking-questions.html">Asking good questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fast-sim-and-analysis/README.html">Generators, Fast Simulation and Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html">FCC: Getting started with the production and analysis of fast-simulated events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#installation">Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#set-up-your-working-directory">Set up your working directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#getting-started-with-delphes">Getting started with Delphes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-fccsw-with-pythia8-delphes">Run FCCSW with Pythia8+Delphes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-the-analysis-in-heppy">Run the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#make-plots">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#cutflow">CutFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#legacy-using-the-papas-tool-for-fcc-ee">Legacy: using the Papas tool (for FCC-ee)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id1">Set up your working directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#generate-events-with-pythia8">Generate events with pythia8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-papas-and-the-analysis-in-heppy">Run papas and the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id2">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#more-information">More information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html">FCC-hh: Pythia, Delphes, Heppy Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-i-generate-and-simulate-events-with-fccsw">Part I: Generate and simulate Events with FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-ii-analyze-the-output-with-heppy">Part II: Analyze the output with Heppy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iii-produce-plots">Part III: Produce plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iv-homework">Part IV: Homework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#other-documentation">Other documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html">FCC-ee: Getting started with analysing simulated physics events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#instructions">Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#exercices">Exercices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">Full Detector Simulations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html">FCC Calorimeter Performance Studies Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#using-the-dd4hep-detector-model-in-fcc-software">Using the DD4hep detector model in FCC Software.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#running-geant4-within-the-fcc-software-framework">Running Geant4 within the FCC Software Framework</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#obtaining-and-plotting-the-energy-resolution">Obtaining and Plotting the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#extracting-and-plotting-the-resolution">Extracting and Plotting the Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-parametrizing-the-energy-resolution">Further Topics: Parametrizing the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-calculating-the-sampling-fraction-and-using-it-in-simulation">Further Topics: Calculating the Sampling Fraction and using it in Simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html">FCCee: Full Simulation of IDEA Driftchamber</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-i-simulations-with-the-idea-detector-model-in-fccsw">Part I: Simulations with the IDEA detector model in  FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-ii-user-task-basic-reconstruction-with-a-hough-transform">Part II User Task: Basic Reconstruction with a Hough-Transform</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">Developing FCCSW</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html">Github workflow and contribution guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#first-time-setup-of-git">First time setup of git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#generate-and-set-up-ssh-keys-for-github">Generate and set up ssh keys for github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#improving-your-git-experience">Improving your git experience</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#development-workflow">Development workflow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#keeping-your-local-repository-up-to-date">Keeping your local repository up to date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#contributing-code">Contributing code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#general-recommendations">General recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#commit-comments">Commit comments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#cleaning-history">Cleaning history</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#pull-requests">Pull requests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#trouble-shooting">Trouble-shooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#when-i-try-to-push-to-the-repository-i-get-an-authentication-error">When I try to push to the repository, I get an authentication error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#i-have-cloned-with-https-and-now-i-can-t-push-my-changes-what-do-i-do">I have cloned with https and now I can’t push my changes, what do I do?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#need-help">Need help?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html">CMake guide for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#quick-start-into-building-fccsw">Quick start into building FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-example-packages">CMake example packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-in-the-fcc-software-framework">CMake in the FCC software framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#ctest-in-fccsw">CTest in FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-internal-library">Using an internal library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#building-a-new-gaudi-module">Building a new Gaudi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-external-library">Using an external library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#customizing-how-cmake-is-run">Customizing how CMake is run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html">Writing documentation for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#where-to-put-documentation">Where to put documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#when-and-how-is-the-documentation-page-updated">When and how is the documentation page updated?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#structure-of-the-content">Structure of the content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#running-website-generation-locally">Running website generation locally</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#about-jekyll">About jekyll</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#for-website-admins">For website admins</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CONDUCT.html">Contributor Code of Conduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html">Instructional Material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html#software">Software</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://lhcb.github.io/starterkit">LHCb starterkit</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Starterkit Lessons</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>TupleTools and branches</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/first-analysis-steps-renamed/add-tupletools.md" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="tupletools-and-branches">
+<h1>TupleTools and branches<a class="headerlink" href="#tupletools-and-branches" title="Permalink to this headline">¶</a></h1>
+<div class="panel panel-objectives docutils container">
+<div class="panel-header open docutils container">
+<p id="learning-objectives"><i class="fa fa-line-chart"></i> Learning Objectives</p>
+</div>
+<div class="panel-body docutils container">
+<ul class="simple">
+<li><p>Add extra TupleTools to the default DecayTreeTuple</p></li>
+<li><p>Configure the extra TupleTools</p></li>
+<li><p>Use branches</p></li>
+<li><p>Find useful TupleTools</p></li>
+<li><p>Learn how to use LoKi functors in a DecayTreeTuple</p></li>
+</ul>
+</div>
+</div>
+<p>Usually, the default information stored by <code class="docutils literal notranslate"><span class="pre">DecayTreeTuple</span></code> as shown in our <a class="reference internal" href="minimal-dv-job.html"><span class="doc">minimal DaVinci job</span></a> is not enough for physics analysis.
+Fortunately, most of the information we need can be added by adding C++ tools (known as <code class="docutils literal notranslate"><span class="pre">TupleTools</span></code>) to <code class="docutils literal notranslate"><span class="pre">dtt</span></code>;
+there is an extensive library of these, some of which will be briefly discussed during the lesson.</p>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="default-decaytreetuple-tools"><i class="fa fa-info-circle"></i> Default DecayTreeTuple tools</p>
+</div>
+<div class="panel-body docutils container">
+<p>The default tools added in <code class="docutils literal notranslate"><span class="pre">DecayTreeTuple</span></code> are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TupleToolKinematic</span></code>, which fills the kinematic information of the decay;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TupleToolPid</span></code>, which stores DLL and PID information of the particle;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TupleToolANNPID</span></code>, which stores the new NeuralNet-based PID information of the particle;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TupleToolGeometry</span></code>, which stores the geometrical variables (IP, vertex position, etc) of the particle;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TupleToolEventInfo</span></code>, which stores general information (event number, run number, GPS time, etc) of the event.</p></li>
+</ul>
+</div>
+</div>
+<p>In order to add <code class="docutils literal notranslate"><span class="pre">TupleTools</span></code> to <code class="docutils literal notranslate"><span class="pre">dtt</span></code>, we have to use the <code class="docutils literal notranslate"><span class="pre">addTupleTool</span></code> method of <code class="docutils literal notranslate"><span class="pre">DecayTreeTuple</span></code> (only available when we have <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">DecayTreeTuple.Configuration</span> <span class="pre">import</span> <span class="pre">*</span></code> in our script).
+This method instantiates the tool, adds it to the list of tools to execute and returns it.
+For example, if we want to fill the tracking information of our particles, we can add the <code class="docutils literal notranslate"><span class="pre">TupleToolTrackInfo</span></code> tool in the following way:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">track_tool</span> <span class="o">=</span> <span class="n">dtt</span><span class="o">.</span><span class="n">addTupleTool</span><span class="p">(</span><span class="s1">&#39;TupleToolTrackInfo&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Some tools can be configured. For example, if we wanted further information from the tracks, such as the number of degrees of freedom of the track fit, we would have to turn on the verbose mode of the tool:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">track_tool</span><span class="o">.</span><span class="n">Verbose</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>If we don’t need to configure the tool or we want to use the defaults, there’s no need for storing the returned tool in a variable.
+For example, if we wanted the information of the PV associated to our particle, we could just add the <code class="docutils literal notranslate"><span class="pre">TupleToolPrimaries</span></code> with no further configuration:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dtt</span><span class="o">.</span><span class="n">addTupleTool</span><span class="p">(</span><span class="s1">&#39;TupleToolPrimaries&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The way the <code class="docutils literal notranslate"><span class="pre">DecayTreeTuple.Decay</span></code> is written in in our <a class="reference internal" href="minimal-dv-job.html"><span class="doc">minimal DaVinci job</span></a>,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dtt</span><span class="o">.</span><span class="n">Decay</span> <span class="o">=</span> <span class="s1">&#39;[D*(2010)+ -&gt; (D0 -&gt; K- K+) pi+]CC&#39;</span>
+</pre></div>
+</div>
+<p>means that the configured <code class="docutils literal notranslate"><span class="pre">TupleTools</span></code> will only run on the head of the decay chain, that is, the <code class="docutils literal notranslate"><span class="pre">D*(2010)+</span></code>.
+In order to select the particles for which we want the information stored, we need to mark them with a <code class="docutils literal notranslate"><span class="pre">^</span></code> symbol in the decay descriptor.
+For example, if we want to fill the information of the <code class="docutils literal notranslate"><span class="pre">D0</span></code> and its children, as well as the soft <code class="docutils literal notranslate"><span class="pre">pi+</span></code>, we would modify the above line to look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dtt</span><span class="o">.</span><span class="n">Decay</span> <span class="o">=</span> <span class="s1">&#39;[D*(2010)+ -&gt; ^(D0 -&gt; ^K- ^K+) ^pi+]CC&#39;</span>
+</pre></div>
+</div>
+<p>This will run all the configured <code class="docutils literal notranslate"><span class="pre">TupleTools</span></code> on the marked particles, with the caveat that some tools are only run on certain types of particles (eg, tracking tools on particles that have an associated track).
+This configuration is not optimal, since there may be tools which we only want to run on the D’s and some only on the children. Enter <code class="docutils literal notranslate"><span class="pre">Branches</span></code>, which allow us to specify which tools get applied to which particle in the decay (in addition to the <code class="docutils literal notranslate"><span class="pre">TupleTools</span></code> configured at the top level).</p>
+<p><em>Branches</em> let you define custom namespaces in your ntuple by means of a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.
+Its keys define the name of each branch (and, as a consequence, the prefix of the corresponding leaves in the ntuple), while the corresponding values are decay descriptors that specify which particles you want to include in the branch.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dtt</span><span class="o">.</span><span class="n">addBranches</span><span class="p">({</span><span class="s1">&#39;Dstar&#39;</span> <span class="p">:</span> <span class="s1">&#39;[D*(2010)+ -&gt; (D0 -&gt; K- K+) pi+]CC&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;D0&#39;</span>    <span class="p">:</span> <span class="s1">&#39;[D*(2010)+ -&gt; ^(D0 -&gt; K- K+) pi+]CC&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;Kminus&#39;</span><span class="p">:</span> <span class="s1">&#39;[D*(2010)+ -&gt; (D0 -&gt; ^K- K+) pi+]CC&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;Kplus&#39;</span> <span class="p">:</span> <span class="s1">&#39;[D*(2010)+ -&gt; (D0 -&gt; K- ^K+) pi+]CC&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;pisoft&#39;</span><span class="p">:</span> <span class="s1">&#39;[D*(2010)+ -&gt; (D0 -&gt; K- K+) ^pi+]CC&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Note that in order to use branches, we have to make sure that all particles we want to use are marked in the main decay descriptor (<code class="docutils literal notranslate"><span class="pre">dtt.Decay</span></code>).
+DaVinci will ignore branches for particles that have not been marked in <code class="docutils literal notranslate"><span class="pre">dtt.Decay</span></code>!</p>
+<p>Once the branches have been configured, they can be accessed as <code class="docutils literal notranslate"><span class="pre">dtt.PARTICLENAME</span></code>and <code class="docutils literal notranslate"><span class="pre">TupleTools</span></code> can be added as discussed before.
+For example, if we want to store the proper time information of the D0, we would do</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dtt</span><span class="o">.</span><span class="n">D0</span><span class="o">.</span><span class="n">addTupleTool</span><span class="p">(</span><span class="s1">&#39;TupleToolPropertime&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="do-i-really-have-to-type-my-decay-descriptor-that-many-times?"><i class="fa fa-info-circle"></i> Do I really have to type my decay descriptor that many times?</p>
+</div>
+<div class="panel-body docutils container">
+<p>No! You can use the <code class="docutils literal notranslate"><span class="pre">dtt.setDescriptorTemplate()</span></code> method to set up your
+decay descriptor and branches in just one line!
+Note this may not be available in some older versions of `DaVinci’,
+but <a class="reference external" href="https://gitlab.cern.ch/snippets/147">this snippet</a> will add it to an older version.
+With that out of the way, you can simply use</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dtt</span><span class="o">.</span><span class="n">setDescriptorTemplate</span><span class="p">(</span><span class="s1">&#39;$</span><span class="si">{Dstar}</span><span class="s1">[D*(2010)+ -&gt; $</span><span class="si">{D0}</span><span class="s1">(D0 -&gt; $</span><span class="si">{Kminus}</span><span class="s1">K- $</span><span class="si">{Kplus}</span><span class="s1">K+) $</span><span class="si">{pisoft}</span><span class="s1">pi+]CC&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will set up both <code class="docutils literal notranslate"><span class="pre">dtt.Decay</span></code> and <code class="docutils literal notranslate"><span class="pre">Branches</span></code> for you.</p>
+</div>
+</div>
+<p>The usage of <code class="docutils literal notranslate"><span class="pre">Branches</span></code> is very important (and strongly encouraged) to keep the size of your ntuples small, since it prevents us from storing unneeded information (for example trigger information, which will be discussed at a later lesson).</p>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="where-to-find-tupletools"><i class="fa fa-info-circle"></i> Where to find TupleTools</p>
+</div>
+<div class="panel-body docutils container">
+<p>One of the most difficult things is to know which tool we need to add to our
+<code class="docutils literal notranslate"><span class="pre">DecayTreeTuple</span></code> in order to get the information we want.
+For this, it is necessary to know where to find <code class="docutils literal notranslate"><span class="pre">TupleTools</span></code> and their code.
+<code class="docutils literal notranslate"><span class="pre">TupleTools</span></code> are spread in 9 packages under <code class="docutils literal notranslate"><span class="pre">Analysis/Phys</span></code> (see the master branch in <code class="docutils literal notranslate"><span class="pre">git</span></code> <a class="reference external" href="https://gitlab.cern.ch/lhcb/Analysis/tree/master/Phys">here</a>), all starting with the prefix <code class="docutils literal notranslate"><span class="pre">DecayTreeTuple</span></code>, according to the type of information they fill in our ntuple:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DecayTreeTuple</span></code> for the more general tools;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DecayTreeTupleANNPID</span></code> for the NeuralNet-based PID tools;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DecayTreeTupleDalitz</span></code> for Dalitz analysis;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DecayTreeTupleJets</span></code> for obtaining information on jets;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DecayTreeTupleMC</span></code> gives us access to MC-level information;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DecayTreeTupleMuonCalib</span></code> for muon calibration tools;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DecayTreeTupleReco</span></code> for reconstruction-level information, such as <code class="docutils literal notranslate"><span class="pre">TupleToolTrackInfo</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DecayTreeTupleTracking</span></code> for more detailed tools regarding tracking;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DecayTreeTupleTrigger</span></code> for accessing to the trigger information of the candidates.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">TupleTools</span></code> are placed in the <code class="docutils literal notranslate"><span class="pre">src</span></code> folder within each package and it’s usually easy to get what they do just by looking at their name.
+However, the best way to know what a tool does is check its documentation, either by opening its <code class="docutils literal notranslate"><span class="pre">.h</span></code> file or be searching for it in the latest <a class="reference external" href="https://lhcb-doxygen.web.cern.ch/lhcb-doxygen/davinci/latest/index.html"><code class="docutils literal notranslate"><span class="pre">doxygen</span></code></a>.
+Most tools are very well documented and will also inform you of their configuration options.
+As an example, to get the information on the <code class="docutils literal notranslate"><span class="pre">TupleToolTrackInfo</span></code> we used before we could either check its <a class="reference external" href="https://gitlab.cern.ch/lhcb/Analysis/blob/master/Phys/DecayTreeTupleReco/src/TupleToolTrackInfo.h">source code</a> or its <a class="reference external" href="https://lhcb-doxygen.web.cern.ch/lhcb-doxygen/davinci/latest/da/ddd/class_tuple_tool_track_info.html">web documentation</a>.
+In case we need more information or need to know <em>exactly</em> what the code does, the <code class="docutils literal notranslate"><span class="pre">fill</span></code> method is the one we need to look at.</p>
+<p>As a shortcut, the list of tupletools can also be found in doxygen at the top of the pages for the <a class="reference external" href="https://lhcb-doxygen.web.cern.ch/lhcb-doxygen/davinci/latest/de/df8/struct_i_particle_tuple_tool.html"><code class="docutils literal notranslate"><span class="pre">IParticleTupleTool</span></code></a> and the <a class="reference external" href="https://lhcb-doxygen.web.cern.ch/lhcb-doxygen/davinci/latest/d5/d88/struct_i_event_tuple_tool.html"><code class="docutils literal notranslate"><span class="pre">IEventTupleTool</span></code></a> interfaces (depending on whether they fill information about specific particles or the event in general).</p>
+</div>
+</div>
+<p>The updated options can be found <a class="reference download internal" download="" href="../_downloads/56df62bfc39baee9d3f93c597670a781/ntuple_options.py"><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a>.</p>
+<div class="panel panel-challenge docutils container">
+<div class="panel-header open docutils container">
+<p id="test-your-ntuple"><i class="fa fa-square-o"></i> Test your ntuple</p>
+</div>
+<div class="panel-body docutils container">
+<p>Run the options in the same way as in the <a class="reference internal" href="minimal-dv-job.html"><span class="doc">minimal DaVinci
+job</span></a> lesson.
+You will obtain a <code class="docutils literal notranslate"><span class="pre">DVntuple.root</span></code> file, which we can open and inspect with <code class="docutils literal notranslate"><span class="pre">ROOT</span></code>’s <code class="docutils literal notranslate"><span class="pre">TBrowser</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ root DVntuple.root
+root [0]
+Attaching file DVntuple.root as _file0...
+root [1] TBrowser b
+root [2]
+</pre></div>
+</div>
+<p>Try to locate the branches we have added, which are placed in the <code class="docutils literal notranslate"><span class="pre">TupleDstToD0pi_D0ToKpi/DecayTree</span></code>, and plot some distributions by double-clicking the leaves.</p>
+</div>
+</div>
+<p>Picking up with the <a class="reference internal" href="loki-functors.html"><span class="doc">LoKi functors lesson</span></a>, let’s store some specific bits of information discussed there in our ntuple.
+To add LoKi-based leaves to the tree, we need to use the <code class="docutils literal notranslate"><span class="pre">LoKi::Hybrid::TupleTool</span></code>, which is configured with 3 arguments:</p>
+<ol class="simple">
+<li><p>Its <em>name</em>, specified in the <code class="docutils literal notranslate"><span class="pre">addTupleTool</span></code> call after a <code class="docutils literal notranslate"><span class="pre">/</span></code>.  This is
+very useful (and recommended) if we want to have different
+<code class="docutils literal notranslate"><span class="pre">LoKi::Hybrid::TupleTool</span></code> for each of our branches. For instance, we may
+want to add different information for the D*, the D0 and the soft <span class="math notranslate nohighlight">\( \pi \)</span>:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dstar_hybrid</span> <span class="o">=</span> <span class="n">dtt</span><span class="o">.</span><span class="n">Dstar</span><span class="o">.</span><span class="n">addTupleTool</span><span class="p">(</span><span class="s1">&#39;LoKi::Hybrid::TupleTool/LoKi_Dstar&#39;</span><span class="p">)</span>
+<span class="n">d0_hybrid</span> <span class="o">=</span> <span class="n">dtt</span><span class="o">.</span><span class="n">D0</span><span class="o">.</span><span class="n">addTupleTool</span><span class="p">(</span><span class="s1">&#39;LoKi::Hybrid::TupleTool/LoKi_D0&#39;</span><span class="p">)</span>
+<span class="n">pisoft_hybrid</span> <span class="o">=</span> <span class="n">dtt</span><span class="o">.</span><span class="n">pisoft</span><span class="o">.</span><span class="n">addTupleTool</span><span class="p">(</span><span class="s1">&#39;LoKi::Hybrid::TupleTool/LoKi_PiSoft&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Preambulo</span></code> property, which lets us perform preprocessing of the LoKi
+functors to simplify the code that is used to fill the leaves, for example
+creating combinations of LoKi functors or performing mathematical
+operations:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">preamble</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;DZ = VFASPF(VZ) - BPV(VZ)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TRACK_MAX_PT = MAXTREE(ISBASIC &amp; HASTRACK, PT, -1)&#39;</span>
+<span class="p">]</span>
+<span class="n">dstar_hybrid</span><span class="o">.</span><span class="n">Preambulo</span> <span class="o">=</span> <span class="n">preamble</span>
+<span class="n">d0_hybrid</span><span class="o">.</span><span class="n">Preambulo</span> <span class="o">=</span> <span class="n">preamble</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Variables</span></code> property, consisting of a <code class="docutils literal notranslate"><span class="pre">dict</span></code> of (variable name, LoKi
+functor) pairs. In here, LoKi functors can be used, as well as any
+variable we may have defined in the <code class="docutils literal notranslate"><span class="pre">Preambulo</span></code>:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dstar_hybrid</span><span class="o">.</span><span class="n">Variables</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;mass_D0&#39;</span><span class="p">:</span> <span class="s1">&#39;CHILD(M, 1)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;pt&#39;</span><span class="p">:</span> <span class="s1">&#39;PT&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dz&#39;</span><span class="p">:</span> <span class="s1">&#39;DZ&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dira&#39;</span><span class="p">:</span> <span class="s1">&#39;BPVDIRA&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;max_pt&#39;</span><span class="p">:</span> <span class="s1">&#39;MAXTREE(ISBASIC &amp; HASTRACK, PT, -1)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;max_pt_preambulo&#39;</span><span class="p">:</span> <span class="s1">&#39;TRACK_MAX_PT&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;sum_pt_pions&#39;</span><span class="p">:</span> <span class="s1">&#39;SUMTREE(211 == ABSID, PT)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;n_highpt_tracks&#39;</span><span class="p">:</span> <span class="s1">&#39;NINTREE(ISBASIC &amp; HASTRACK &amp; (PT &gt; 1500*MeV))&#39;</span>
+<span class="p">}</span>
+<span class="n">d0_hybrid</span><span class="o">.</span><span class="n">Variables</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;pt&#39;</span><span class="p">:</span> <span class="s1">&#39;PT&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dira&#39;</span><span class="p">:</span> <span class="s1">&#39;BPVDIRA&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;vtx_chi2&#39;</span><span class="p">:</span> <span class="s1">&#39;VFASPF(VCHI2)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dz&#39;</span><span class="p">:</span> <span class="s1">&#39;DZ&#39;</span>
+<span class="p">}</span>
+<span class="n">pisoft_hybrid</span><span class="o">.</span><span class="n">Variables</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="s1">&#39;P&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;pt&#39;</span><span class="p">:</span> <span class="s1">&#39;PT&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the code snippets specified above (available <a class="reference download internal" download="" href="../_downloads/f770ff9cf66964989aa4bf39a9e4e09c/ntuple_options_loki.py"><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a>), you can see that the <code class="docutils literal notranslate"><span class="pre">NINTREE</span></code> functor counts the number of particles that pass the specified criteria. While this is not very useful for ntuple-building (we can always do it offline), it’s a very powerful functor to use when building decay selections.</p>
+<div class="panel panel-challenge docutils container">
+<div class="panel-header open docutils container">
+<p id="getting-more-practice"><i class="fa fa-square-o"></i> Getting more practice</p>
+</div>
+<div class="panel-body docutils container">
+<p>In the <code class="docutils literal notranslate"><span class="pre">LoKi::Hybrid::TupleTool</span></code>we’ve used some  functors that have not been
+described previously. Find out what they do in the
+<a class="reference external" href="https://lhcb-doxygen.web.cern.ch/lhcb-doxygen/davinci/latest/d7/dae/namespace_lo_ki_1_1_cuts.html">doxygen</a>.
+To check <code class="docutils literal notranslate"><span class="pre">SUMTREE</span></code> and <code class="docutils literal notranslate"><span class="pre">CHILD</span></code>, run the code above and check that the <code class="docutils literal notranslate"><span class="pre">Dstar_max_pt</span></code> and <code class="docutils literal notranslate"><span class="pre">Dstar_max_pt_preambulo</span></code> and the <code class="docutils literal notranslate"><span class="pre">Dstar_mass_D0</span></code> and <code class="docutils literal notranslate"><span class="pre">D0_mass</span></code> branches have exactly the same values.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, FCC Starterkit
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

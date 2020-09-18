@@ -1,0 +1,19 @@
+language: python
+python:
+  - "3.7"
+cache: false
+dist: xenial
+
+install:
+  # FIXME: Inline math is broken in upstream recommonmark
+  - pip install git+https://github.com/chrisburr/recommonmark.git@patch-1
+  - pip install -vv starterkit-ci>=0.0.10
+  - pip install -vv sphinx-copybutton
+
+script:
+  - starterkit_ci --allow-warnings build
+  # - starterkit_ci check
+
+after_success:
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && starterkit_ci deploy
+
