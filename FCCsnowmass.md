@@ -491,6 +491,7 @@ Then we shower with Pythia in FCCSW and run the Delphes detector paramterisation
 fccrun PythiaDelphes_config.py --Filename Pythia_LHE.cmd --filename wizhardp8_ee_Z_ecm91.root -n 10000
 ```
 
+Now go to the ```FCCAnalyses``` repository you have cloned during Part II
 
 , shower with Pythia
 generate Z events with Pythia8
