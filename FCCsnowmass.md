@@ -430,8 +430,13 @@ python FCCeeAnalyses/ZH_Zmumu/dataframe/finalSel.py
 and look at them in ```FCCee/ZH_Zmumu/plots/```. 
 
 Please note that the event statistics is not great because we only run on 10 000 events.
-In order to produce plots with more statistics, we could use already processed large statistics samples.
-To do so we re-run the pre-selection over 1 percent of the total statistics [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_v01.php):
+
+- **Exercises** 
+
+1) Modify ```FCCeeAnalyses/ZH_Zmumu/dataframe/plots.py``` to include the muon tracks (look at the output file or to ```FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py``` to check the name.
+
+2) Produce plots wiht larger statistic. In order to produce plots with more statistics, we could use already processed large statistics samples.
+To do so we re-run the pre-selection over 1 percent of the total statistics [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_v02.php):
 
 ```bash
  python FCCeeAnalyses/ZH_Zmumu/dataframe/preSel.py
@@ -449,3 +454,6 @@ To further increase the event statistics, increase the value (up to 1) of the pa
 
 
 ## Part III: Compare two Monte-Carlo samples
+
+In this part we will compare two generators at the Z-pole.
+generate Z events with Whizard, produce a LHE events and 
