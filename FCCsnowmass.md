@@ -435,7 +435,9 @@ Please note that the event statistics is not great because we only run on 10 000
 
 1) Modify ```FCCeeAnalyses/ZH_Zmumu/dataframe/plots.py``` to include the muon tracks (look at the output file or to ```FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py``` to check the name.
 
-2) Produce plots wiht larger statistic. In order to produce plots with more statistics, we could use already processed large statistics samples.
+2) Add the track informations to the output files by modifying ```FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py``` for the ```efcharged``` collection and produce plots with them as in 1)
+
+3) Produce plots wiht larger statistic. In order to produce plots with more statistics, we could use already processed large statistics samples.
 To do so we re-run the pre-selection over 1 percent of the total statistics [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_v02.php):
 
 ```bash
@@ -456,4 +458,40 @@ To further increase the event statistics, increase the value (up to 1) of the pa
 ## Part III: Compare two Monte-Carlo samples
 
 In this part we will compare two generators at the Z-pole.
-generate Z events with Whizard, produce a LHE events and 
+First, follow this tutorial to generate Z events with Whizard and produce a Les Houches Events file: [here](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#whizard).
+
+Once you have followed this tutorial, start from a clean shell, go to your tutorial directoty and run the setup
+
+```bash
+source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
+```
+
+Then create a generic Pythi8 card for reading LHE files
+- **Pythia_LHE.cmd** 
+
+```python
+! 1) Settings that will be used in a main program.
+Main:numberOfEvents = 1            ! number of events to generate
+Main:timesAllowErrors = 10        ! abort run after this many flawed events
+
+! 2) Tell Pythia that LHEF input is used
+Beams:frameType             = 4
+Beams:setProductionScalesFromLHEF = off
+Beams:LHEF = events.lhe
+
+! 4) Settings for the event generation process in the Pythia8 library.
+PartonLevel:ISR = on               ! initial-state radiation
+PartonLevel:FSR = on               ! final-state radiation
+```
+
+Where ```Beams:LHEF = events.lhe``` points to the file you have produced with Whizard.
+Then we shower with Pythia in FCCSW and run the Delphes detector paramterisation:
+
+```bash
+fccrun PythiaDelphes_config.py --Filename Pythia_LHE.cmd --filename wizhardp8_ee_Z_ecm91.root -n 10000
+```
+
+
+, shower with Pythia
+generate Z events with Pythia8
+Compare the two
