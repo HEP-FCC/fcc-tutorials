@@ -491,7 +491,42 @@ Then we shower with Pythia in FCCSW and run the Delphes detector paramterisation
 fccrun PythiaDelphes_config.py --Filename Pythia_LHE.cmd --filename wizhardp8_ee_Z_ecm91.root -n 10000
 ```
 
-Now go to the ```FCCAnalyses``` repository you have cloned during Part II
+- **Pythia_ee_Zmumu_ecm91.cmd** 
+```python
+! File: Pythia_ee_Zmumu_ecm91.cmd
+Random:setSeed = on
+Main:numberOfEvents = 1000         ! number of events to generate
+Main:timesAllowErrors = 5          ! how many aborts before run stops
+
+! 2) Settings related to output in init(), next() and stat().
+Next:numberCount = 100           ! print message every n events
+Beams:idA = 11                   ! first beam, e- = 11
+Beams:idB = -11                  ! second beam, e+ = -11
+
+! 3) Hard process : Z->mumu, at 91.2 GeV
+Beams:eCM = 91.2               ! CM energy of collision
+WeakSingleBoson:ffbar2ffbar(s:gmZ) = on
+
+! 4) Settings for the event generation process in the Pythia8 library.
+PartonLevel:ISR = on               ! initial-state radiation
+PartonLevel:FSR = on               ! final-state radiation
+
+! Decays
+!Z0
+23:onMode = off
+23:onIfAny = 13
+!gamma
+22:onMode = off
+22:onIfAny = 13
+```
+
+and run fcc on it
+
+```bash
+fccrun PythiaDelphes_config.py --Filename Pythia_ee_Zmumu_ecm91.cmd --filename p8_ee_Z_ecm91.root -n 10000
+```
+
+Now go to the ```FCCAnalyses``` repository you have cloned during Part II, and run the Z to mumu analysis on the file
 
 , shower with Pythia
 generate Z events with Pythia8
