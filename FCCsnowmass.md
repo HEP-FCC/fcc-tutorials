@@ -12,6 +12,7 @@ This tutorial will teach you how to:
 -   compare distributions produced with different generators
 
 {% endobjectives %}
+
 First login to to a fresh shell on lxplus, on OSG, or in one of the virtual machine that could be provided on open stack. Usage of bash shell is highly recommended. Create a working directory and go inside
 
 ```bash
@@ -51,7 +52,7 @@ For this tutorial we will consider the following **physics processes**:
 
 Let's start by writing the pythia cards for the various processes.
 
-- **Pythia_ee_ZH_Zmumu_ecm240.cmd** for the Higgs Stralhung signal
+- **Pythia_ee_ZH_Zmumu_ecm240.cmd** for the Higgs Strahlung signal
 
 ```python
 ! File: Pythia_ee_ZH_Zmumu_ecm240.cmd
