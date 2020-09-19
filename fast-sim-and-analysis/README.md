@@ -10,7 +10,6 @@ If you have any problems or questions, you can [open an issue][lessons-issues] o
 
 ```eval_rst
 .. toctree::
-    :numbered:
     :caption: Contents:
 
     FccSoftwareGettingStartedFastSim.md
