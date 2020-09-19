@@ -11,6 +11,7 @@ If you'd just like to learn about how to use the FCC software, [read on](softwar
 
 ```eval_rst
 .. toctree::
+    :numbered:
     :maxdepth: 3
     :includehidden:
     :caption: Contents:
@@ -22,6 +23,7 @@ If you'd just like to learn about how to use the FCC software, [read on](softwar
     CONTRIBUTING.md
 
 .. toctree::
+    :numbered:
     :maxdepth: 2
     :includehidden:
     :caption: External links:
