@@ -15,6 +15,7 @@ The [analysis essentials course](https://hsf-training.github.io/analysis-essenti
 
 ```eval_rst
 .. toctree::
+    :numbered:
     :hidden:
     :caption: Contents:
 
