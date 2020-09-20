@@ -6,7 +6,6 @@
 
 {% endobjectives %}
 
-
 * Follow this guide before arriving; we will do a quick introduction to environment setup
 but we will not have much time to help you with problems on these issues during the workshop.
 This means you will end up watching instead of participating.
@@ -27,7 +26,7 @@ access the internet.
 * The FCCSW has been developed on Linux and the main platform supported is the default platform on CERN lxplus, i.e. CentOS7 .
   Experimental support for other Linux systems (e.g. Ubuntu 20.04 LTS) and MacOxS is provided as it is. There is no support for Windows.
 
-## Checking the chosen resources
+### Checking the chosen resources
 
 Please try the following steps with the computer you will use at the workshop (the example is given for lxplus, but should hold for the other resources as well):
 
@@ -45,16 +44,15 @@ Please try the following steps with the computer you will use at the workshop (t
 If you can successfully execute all of the above steps, you are ready to go for
 the workshop!
 
-## Enabling the FCCSW software installation from `cvmfs`
+### Enabling the FCCSW software installation from `cvmfs`
 
 There is a complete installation of FCC software provided on `cvmfs`, which can be set up using:
-
 ```
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```
 
-## Special notes or alternative cases / settings
 
+## Special notes or alternative cases / settings
 ### Bash shell
 
 The [Bash shell](http://cern.ch/go/gdJ9) will be used
@@ -72,7 +70,6 @@ services”, then “List services”, “LXPLUS and Linux”, “Settings”, t
 
 If you don't want to change your default shell, just execute the `bash`
 command when you login to lxplus.
-
 
 ### Using a virtual machine through VirtualBox
 
