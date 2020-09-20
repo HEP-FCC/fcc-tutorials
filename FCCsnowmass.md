@@ -484,8 +484,8 @@ Beams:setProductionScalesFromLHEF = off
 Beams:LHEF = events.lhe
 
 ! 4) Settings for the event generation process in the Pythia8 library.
-PartonLevel:ISR = on               ! initial-state radiation
-PartonLevel:FSR = on               ! final-state radiation
+! PartonLevel:ISR = on               ! initial-state radiation
+! PartonLevel:FSR = on               ! final-state radiation
 ```
 
 Where ```Beams:LHEF = events.lhe``` points to the file you have produced with Whizard.
@@ -553,4 +553,6 @@ and look at the new plots in ```FCCee/Z_Zmumu/plots/```.
 
 - **Exercises** 
 
-1) Modify ```FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py``` and ```FCCeeAnalyses/Z_Zmumu/dataframe/plots.py``` to include the muon tracks.
+1) Whizard already contains ISR/FSR. To see this effect, rerun FCCSW on the Whizard LHE file by uncommenting the ISR/FSR in the Pythia card, and run the analysis to produce new plots and compare (move the old plots to an other directory as they will be overwritten) 
+
+2) Modify ```FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py``` and ```FCCeeAnalyses/Z_Zmumu/dataframe/plots.py``` to include the muon tracks.
