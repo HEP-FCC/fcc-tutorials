@@ -15,4 +15,5 @@ If you have any problems or questions, you can [open an issue][lessons-issues] o
     FccSoftwareGettingStartedFastSim.md
     FccFullAnalysis.md
     FcceeAnalysis.md
+    FCCgenerationAnalysis.md
 ```
