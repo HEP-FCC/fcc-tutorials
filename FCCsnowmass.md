@@ -556,3 +556,5 @@ and look at the new plots in ```FCCee/Z_Zmumu/plots/```.
 1) Whizard already contains ISR/FSR. To see this effect, rerun FCCSW on the Whizard LHE file by uncommenting the ISR/FSR in the Pythia card, and run the analysis to produce new plots and compare (move the old plots to an other directory as they will be overwritten) 
 
 2) Modify ```FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py``` and ```FCCeeAnalyses/Z_Zmumu/dataframe/plots.py``` to include the muon tracks.
+
+3) **For Experts** Produce the same process with madgraph, shower the LHE file produced with Ptyhia8 in FCCSW (together with Delphes) and compare the dimuon invariant mass distribution with Pythia and Whizard.
