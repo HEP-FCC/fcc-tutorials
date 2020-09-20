@@ -12,7 +12,6 @@ This tutorial will teach you how to:
 
 {% endobjectives %}
 
-```
 
 
 ## Analyse with FCCAnalyses
