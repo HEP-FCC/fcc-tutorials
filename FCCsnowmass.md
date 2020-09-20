@@ -537,8 +537,16 @@ python FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py PATH_TO_FILES/wizhardp8_ee_Z_
 python FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py PATH_TO_FILES/p8_ee_Z_Zmumu_ecm91.root
 ```
 
+Run the final selection:
+
 ```bash
 python FCCeeAnalyses/Z_Zmumu/dataframe/finalSel.py
+```
+
+Now we can produce plots:
+ 
+ ```python
+ python bin/doPlots.py FCCeeAnalyses/Z_Zmumu/dataframe/plots.py
 ```
 
 and look at the new plots in ```FCCee/Z_Zmumu/plots/```. 
