@@ -1,16 +1,9 @@
-FCC: Getting started with the production and analysis of fast-simulated events
+FCC: Getting started with event generation
 ===================================================================================
 
 
 ## Overview
 
-If you want to get started fast with the analysis of fast-simulated
-events, you're at the right place.
-
-Fast simulation is currently supported through the Delphes approach. Support for the Papas approach, initially used for FCC-ee, is
-discontinued. 
-
-An analysis ntuple will be produced with ROOT's RDataFrame, a simple modular event processing framework for high energy physics.
 
 ## Enabling FCCSW
 
@@ -172,72 +165,4 @@ which Herwig
 /cvmfs/fcc.cern.ch/sw/views/releases/fccsw/0.13/LCG_97a_FCC_2/x86_64-centos7-gcc8-opt/bin/Herwig
 ```
 
-## Getting started with Delphes
-
-In this tutorial, you will learn how to:
-
--   generate events with Pythia8, process them through Delphes with
-    FCCSW and write them in the FCC EDM format.
--   read these events with RDataFrame to perfom basic selection and create an
-    ntuple
--   read this ntuple with ROOT to make a few plots
-
-### Run FCCSW with Pythia8+Delphes (FCC-hh)
-
-Now you are ready to produce 100TeV ttbar events with Pythia, process them through Delphes and store them in the FCC-EDM:
-
-```bash
-fccrun FCCSW/Sim/SimDelphesInterface/options/PythiaDelphes_config.py --Filename FCCSW/Generation/data/Pythia_ttbar.cmd --DelphesCard FCCSW/Sim/SimDelphesInterface/data/FCChh_DelphesCard_Baseline_v01.tcl
-```
-
-you should obtain a file called `FCCDelphesOutput.root`.
-
-Please ignore errors such as
-
-```
-Error in <TTree::Bronch>: Cannot find dictionary for class: HepMC::GenEvent
-```
-
-or
-
-```
-Error in <TList::Clear>: A list is accessing an object (0x35308a0) already deleted (list name = Browsables)
-```
-
-This example will run 100 events by default. To have more events for plotting purposes, you can increase this number or use files that have been already produced and stored on eos (see next section).
-
-
-### Run FCCSW with Pythia8+Delphes (FCC-ee)
-
-Let us now produce FCC-ee event with the IDEA delphes card. For that we use a different FCC configuration file than FCC-hh and a different detector parametrisation in Delphes.
-
-```bash
-fccrun  /eos/experiment/fcc/ee/utils/config/PythiaDelphes_config_v01.py --DelphesCard /eos/experiment/fcc/ee/utils/delphescards/fcc_v01/card.tcl --Filename FCCSW/Generation/data/ee_Z_ddbar.cmd --filename events.root -n 1000
-```
-
-### Run dataframe (FCC-ee)
-
-Clone the repository and go in it
-
-```bash
-git clone https://github.com/HEP-FCC/FCCAnalyses.git
-cd FCCAnalyses
-```
-
-Follow the installation instruction for dataframe in FCCAnalyses
-
-```bash
-source setup.sh
-mkdir build install
-cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=../install
-make install
-cd ..
-```
-
-then run the template analysis
-
-```bash
-python FCCeeAnalyses/Z_Zqq/dataframe/analysis.py  PATHTOTHEFILEPRODUCEBEFORE/events.root
-```
 
