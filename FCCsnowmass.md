@@ -402,8 +402,9 @@ For this second part we start by cloning the FCCAnalyses GitHub repository
 
 ```bash
 git clone https://github.com/HEP-FCC/FCCAnalyses.git
+cd FCCAnalyses
 ```
-and follow the instructions [here](https://github.com/HEP-FCC/FCCAnalyses/#getting-started) to get started with installation.
+and follow the compilation instructions [here](https://github.com/HEP-FCC/FCCAnalyses/#getting-started) to get started with **ONLY** the installation.
 Once the code has been compiled, we can now run the pre-selection on previously produced samples:
 
 ```bash
@@ -437,8 +438,11 @@ Please note that the event statistics is not great because we only run on 10 000
 
 2) Add the track informations to the output files by modifying ```FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py``` for the ```efcharged``` collection and produce plots with them as in 1)
 
-3) Produce plots wiht larger statistic. In order to produce plots with more statistics, we could use already processed large statistics samples.
-To do so we re-run the pre-selection over 1 percent of the total statistics [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_v02.php):
+3) Produce plots with larger statistics by re-running ```fccrun``` with more events.
+
+4) **This part can only be on lxplus and for people having the access rights to eos and the analysis dictonary** 
+In order to produce plots with more statistics using centrally produced samples, we could use already processed large statistics samples.
+To do so we re-run the pre-selection over 10 percent of the total statistics [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_v02.php). 
 
 ```bash
  python FCCeeAnalyses/ZH_Zmumu/dataframe/preSel.py
@@ -539,4 +543,6 @@ python FCCeeAnalyses/Z_Zmumu/dataframe/finalSel.py
 
 and look at the new plots in ```FCCee/Z_Zmumu/plots/```. 
 
+- **Exercises** 
 
+1) Modify ```FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py``` and ```FCCeeAnalyses/Z_Zmumu/dataframe/plots.py``` to include the muon tracks.
