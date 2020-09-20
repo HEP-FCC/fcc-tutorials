@@ -12,6 +12,29 @@ This tutorial will teach you how to:
 
 {% endobjectives %}
 
+{% prereq "Run as Notebook" %}
+
+This page can be run as a notebook on the SWAN service at CERN (or any ipython notebook server that can run fcc software). Use the following link
+
+
+[![https://swanserver.web.cern.ch/swanserver/images/badge_swan_white_150.png]](https://swan.cern.ch/hub/user-redirect/download?projurl=https://raw.githubusercontent.com/HEP-FCC/fcc-tutorials/gh-pages/full-detector-simulations/FccCaloPerformance/FccCaloPerformance.ipynb)
+
+When configuring the environment, you **must** select the  97a Python2 software stack, and paste the following in the "Environment Script" Box 
+
+```
+/eos/experiment/fcc/ee/tutorial/setup_swan.sh
+```
+
+When first starting a new notebook in this environment, SWAN may fail to select a kernel and you will see a red box saying "None not found" in the top right corner.
+To fix this, click:  `KERNEL > Change kernel > Python2` in the top menu.
+
+See <https://github.com/swan-cern/help> for more details on SWAN.
+
+
+{% endprereq}
+
+
+
 First, make sure your setup of the FCC software is working. 
 You can check that the command to run jobs in the Gaudi framework is available on the command line:
 
