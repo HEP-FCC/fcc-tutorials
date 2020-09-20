@@ -533,8 +533,8 @@ fccrun PythiaDelphes_config.py --Filename Pythia_ee_Zmumu_ecm91.cmd --filename p
 Now go to the ```FCCAnalyses``` repository you have cloned during Part II, and run the Z to mumu analysis on the files produced
 
 ```bash
-python FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py ../mytutorialtest/wizhardp8_ee_Z_Zmumu_ecm91.root
-python FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py ../mytutorialtest/p8_ee_Z_Zmumu_ecm91.root
+python FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py PATH_TO_FILES/wizhardp8_ee_Z_Zmumu_ecm91.root
+python FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py PATH_TO_FILES/p8_ee_Z_Zmumu_ecm91.root
 ```
 
 ```bash
