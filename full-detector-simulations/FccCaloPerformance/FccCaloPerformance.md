@@ -2,6 +2,27 @@
 # FCC Calorimeter Performance Studies Workflow
 
 
+{% discussion "Run this page as a Notebook on SWAN" [![Click to run this page on SWAN](https://swanserver.web.cern.ch/swanserver/images/badge_swan_white_150.png)](https://swan.cern.ch/hub/user-redirect/download?projurl=https://raw.githubusercontent.com/HEP-FCC/fcc-tutorials/gh-pages/full-detector-simulations/FccCaloPerformance/FccCaloPerformance.ipynb) %}
+
+This page can be run as a notebook on the SWAN service at CERN (or any ipython notebook server that can run fcc software). Use the following link
+
+
+[![Click to run this page on SWAN](https://swanserver.web.cern.ch/swanserver/images/badge_swan_white_150.png)](https://swan.cern.ch/hub/user-redirect/download?projurl=https://raw.githubusercontent.com/HEP-FCC/fcc-tutorials/gh-pages/full-detector-simulations/FccCaloPerformance/FccCaloPerformance.ipynb)
+
+When configuring the environment, you **must** select the  97a Python2 software stack, and paste the following in the "Environment Script" Box 
+
+```
+/eos/experiment/fcc/ee/tutorial/setup_swan.sh
+```
+
+When first starting a new notebook in this environment, SWAN may fail to select a kernel and you will see a red box saying `None not found` in the top right corner.
+To fix this, click:  `KERNEL > Change kernel > Python2` in the top menu.
+
+See <https://github.com/swan-cern/help> for more details on SWAN.
+
+
+{% enddiscussion %}
+
 {% objectives "Learning Objectives" %}
 
 This tutorial will teach you how to:
@@ -12,26 +33,6 @@ This tutorial will teach you how to:
 
 {% endobjectives %}
 
-{% discussion "Run as Notebook on SWAN" %}
-
-This page can be run as a notebook on the SWAN service at CERN (or any ipython notebook server that can run fcc software). Use the following link
-
-
-[![https://swanserver.web.cern.ch/swanserver/images/badge_swan_white_150.png]](https://swan.cern.ch/hub/user-redirect/download?projurl=https://raw.githubusercontent.com/HEP-FCC/fcc-tutorials/gh-pages/full-detector-simulations/FccCaloPerformance/FccCaloPerformance.ipynb)
-
-When configuring the environment, you **must** select the  97a Python2 software stack, and paste the following in the "Environment Script" Box 
-
-```
-/eos/experiment/fcc/ee/tutorial/setup_swan.sh
-```
-
-When first starting a new notebook in this environment, SWAN may fail to select a kernel and you will see a red box saying "None not found" in the top right corner.
-To fix this, click:  `KERNEL > Change kernel > Python2` in the top menu.
-
-See <https://github.com/swan-cern/help> for more details on SWAN.
-
-
-{% enddiscussion %}
 
 
 
