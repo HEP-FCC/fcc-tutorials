@@ -14,7 +14,7 @@ This tutorial will teach you how to:
 
 
 
-## Analyse with FCCAnalyses
+## Part II: Analyse with FCCAnalyses
 
 For this part we start by cloning the FCCAnalyses GitHub repository
 
@@ -43,21 +43,22 @@ python FCCeeAnalyses/ZH_Zmumu/dataframe/finalSel.py
  
  Now we can produce plots:
  
- ```python
+```python
  python bin/doPlots.py FCCeeAnalyses/ZH_Zmumu/dataframe/plots.py
 ```
 
-and look at them in ```FCCee/ZH_Zmumu/plots/```. 
+and look at them in `FCCee/ZH_Zmumu/plots/`. 
 
 Please note that the event statistics is not great because we only run on 10 000 events.
 
-- **Exercises** 
 
-1) Modify ```FCCeeAnalyses/ZH_Zmumu/dataframe/plots.py``` to include the muon tracks (look at the output file or to ```FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py``` to check the name.
+{% challenge "Exercises" %}
 
-2) Add the track informations to the output files by modifying ```FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py``` for the ```efcharged``` collection and produce plots with them as in 1)
+1) Modify `FCCeeAnalyses/ZH_Zmumu/dataframe/plots.py` to include the muon tracks (look at the output file or to `FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py` to check the name.
 
-3) Produce plots with larger statistics by re-running ```fccrun``` with more events.
+2) Add the track informations to the output files by modifying `FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py` for the `efcharged` collection and produce plots with them as in 1)
+
+3) Produce plots with larger statistics by re-running `fccrun` with more events.
 
 4) **This part can only be on lxplus and for people having the access rights to eos and the analysis dictonary** 
 In order to produce plots with more statistics using centrally produced samples, we could use already processed large statistics samples.
@@ -73,10 +74,12 @@ and as before run the final selection and plots:
 python FCCeeAnalyses/ZH_Zmumu/dataframe/finalSel.py
 python bin/doPlots.py FCCeeAnalyses/ZH_Zmumu/dataframe/plots.py
 ```
-and look at the new plots in ```FCCee/ZH_Zmumu/plots/```. 
+and look at the new plots in `FCCee/ZH_Zmumu/plots/`. 
 
-To further increase the event statistics, increase the value (up to 1) of the parameter ```fraction``` in ```FCCeeAnalyses/ZH_Zmumu/dataframe/preSel.py```
+To further increase the event statistics, increase the value (up to 1) of the parameter `fraction` in `FCCeeAnalyses/ZH_Zmumu/dataframe/preSel.py`
 
+
+{% endchallenge %}
 
 ## Part III: Compare two Monte-Carlo samples
 
@@ -89,7 +92,7 @@ Once you have followed this tutorial, start from a clean shell, go to your tutor
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```
 
-Then create a generic Pythi8 card for reading LHE files
+Then create a generic Pythia8 card for reading LHE files
 - **Pythia_LHE.cmd** 
 
 ```python
@@ -107,14 +110,15 @@ Beams:LHEF = events.lhe
 ! PartonLevel:FSR = on               ! final-state radiation
 ```
 
-Where ```Beams:LHEF = events.lhe``` points to the file you have produced with Whizard.
-Then we shower with Pythia in FCCSW and run the Delphes detector paramterisation:
+Where `Beams:LHEF = events.lhe` points to the file you have produced with Whizard.
+Then we shower with Pythia in FCCSW and run the Delphes detector parameterisation:
 
 ```bash
 fccrun PythiaDelphes_config.py --Filename Pythia_LHE.cmd --filename wizhardp8_ee_Z_Zmumu_ecm91.root -n 10000
 ```
 
 - **Pythia_ee_Zmumu_ecm91.cmd** 
+
 ```python
 ! File: Pythia_ee_Zmumu_ecm91.cmd
 Random:setSeed = on
@@ -149,7 +153,7 @@ and run fcc on it
 fccrun PythiaDelphes_config.py --Filename Pythia_ee_Zmumu_ecm91.cmd --filename p8_ee_Z_Zmumu_ecm91.root -n 10000
 ```
 
-Now go to the ```FCCAnalyses``` repository you have cloned during Part II, and run the Z to mumu analysis on the files produced
+Now go to the `FCCAnalyses` repository you have cloned during Part II, and run the Z to mumu analysis on the files produced
 
 ```bash
 python FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py PATH_TO_FILES/wizhardp8_ee_Z_Zmumu_ecm91.root
@@ -164,16 +168,19 @@ python FCCeeAnalyses/Z_Zmumu/dataframe/finalSel.py
 
 Now we can produce plots:
  
- ```python
+```python
  python bin/doPlots.py FCCeeAnalyses/Z_Zmumu/dataframe/plots.py
 ```
 
-and look at the new plots in ```FCCee/Z_Zmumu/plots/```. 
+and look at the new plots in `FCCee/Z_Zmumu/plots/`. 
 
-- **Exercises** 
+
+{% challenge  "**Exercises**"  %} 
 
 1) Whizard already contains ISR/FSR. To see this effect, rerun FCCSW on the Whizard LHE file by uncommenting the ISR/FSR in the Pythia card, and run the analysis to produce new plots and compare (move the old plots to an other directory as they will be overwritten) 
 
 2) Modify ```FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py``` and ```FCCeeAnalyses/Z_Zmumu/dataframe/plots.py``` to include the muon tracks.
 
 3) **For Experts** Produce the same process with madgraph, shower the LHE file produced with Ptyhia8 in FCCSW (together with Delphes) and compare the dimuon invariant mass distribution with Pythia and Whizard.
+
+{% endchallenge %}
