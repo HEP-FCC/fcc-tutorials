@@ -9,10 +9,12 @@ install:
   - pip install git+https://github.com/chrisburr/recommonmark.git@patch-1
   - pip install -vv starterkit-ci>=0.0.10
   - pip install -vv sphinx-copybutton
+  - pip install -vv notedown
 
 script:
   - starterkit_ci --allow-warnings build
   # - starterkit_ci check
+  - notedown fast-sim-and-analysis/FCCFastSimAnalysis.md  -o build/FCCFastSimAnalysis.ipynb
 
 after_success:
   - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && starterkit_ci deploy
