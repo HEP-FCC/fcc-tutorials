@@ -47,7 +47,7 @@ You can see the created files:
 ```python
 #!/bin/env python
 import ROOT
-f = ROOT.TFile("root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/fccee_idea_pgun.root")
+f = ROOT.TFile("https://fccsw.web.cern.ch/fccsw/testsamples/tutorial/fccee_idea_pgun.root")
 events = f.Get("events")
 
 c = ROOT.TCanvas("c_positionedHits_DCH_xy", "", 700, 600)
@@ -71,17 +71,19 @@ By now, we have produced the two files `fccee_idea_pgun.root` and `mergedDCHits.
 You can try to put them in a "test" folder on the shared disk space on eos.
 The files can already be found under the path `/eos/experiment/fcc/ee/tutorial`.
 To use files on eos, you can simply prepend `root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/`  when using TFile, or use `xrdcp root://eospublic.cern.ch/<path on eos> <local file name>`
-And again, check that your files are present in your current directory:
 
 ```bash
 xrdcp root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/mergedDCHits.root mergedDCHits3.root
 ```
 
+For machines without eos access, the files needed for this tutorial are mirrored on an http server.
+This is only for the purposes of the tutorial, for productions eos access is strictly necessary.
+
 ```python
 #!/usr/bin/env python
 
 import ROOT
-f = ROOT.TFile("root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/mergedDCHits.root")
+f = ROOT.TFile("https://fccsw.web.cern.ch/fccsw/testsamples/tutorial/mergedDCHits.root")
 events = f.Get("events")
 
 # draw hits for first five events

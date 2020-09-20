@@ -129,7 +129,7 @@ Now that the detector response is simulated, it is time to reconstruct the signa
 fccrun $FCCSWBASEDIR/share/FCCSW/RecFCCeeCalorimeter/options/runFullCaloSystem_ReconstructionSW_noiseFromFile.py \
        -n 100 \
        --input fccee_idea_LAr_pgun.root \
-       --noiseFileName root://eospublic.cern.ch//eos/experiment/fcc/ee/simulation/NoiseConstants/elecNoise_ecalBarrelFCCee_50Ohm_traces1_4shieldWidth.root \
+       --noiseFileName http://fccsw.web.cern.ch/fccsw/testsamples/elecNoise_ecalBarrelFCCee_50Ohm_traces1_4shieldWidth.root \
        --filename output_allCalo_reco_noise.root
 ```
 
