@@ -82,7 +82,7 @@ To further increase the event statistics, increase the value (up to 1) of the pa
 ## Part III: Compare two Monte-Carlo samples
 
 In this part we will compare two generators at the Z-pole.
-First, follow this tutorial to generate Z events with Whizard and produce a Les Houches Events file: [here](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FCCFastSimGeneration.html#whizard).
+First, follow this tutorial to generate Z events with Whizard and produce a Les Houches Events file: [here](https://hep-fcc.github.io/fcc-tutorials/fast-sim-and-analysis/FccFastSimGeneration.html#whizard).
 
 Once you have followed this tutorial, start from a clean shell, go to your tutorial directoty and run the setup
 

@@ -20,7 +20,7 @@ If you have any problems or questions, you can [open an issue][lessons-issues] o
 .. toctree::
     :caption: Contents:
 
-    FCCFastSimGeneration.md
-    FCCFastSimDelphes.md
-    FCCFastSimAnalysis.md
+    FccFastSimGeneration.md
+    FccFastSimDelphes.md
+    FccFastSimAnalysis.md
 ```
