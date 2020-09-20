@@ -2,7 +2,7 @@
 # FCC Calorimeter Performance Studies Workflow
 
 
-{% discussion "Run this page as a Notebook on SWAN" [![Click to run this page on SWAN](https://swanserver.web.cern.ch/swanserver/images/badge_swan_white_150.png)](https://swan.cern.ch/hub/user-redirect/download?projurl=https://raw.githubusercontent.com/HEP-FCC/fcc-tutorials/gh-pages/full-detector-simulations/FccCaloPerformance/FccCaloPerformance.ipynb) %}
+{% discussion "Run this page as a Notebook on SWAN" %}
 
 This page can be run as a notebook on the SWAN service at CERN (or any ipython notebook server that can run fcc software). Use the following link
 
