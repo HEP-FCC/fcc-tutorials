@@ -12,7 +12,7 @@ This tutorial will teach you how to:
 
 {% endobjectives %}
 
-{% prereq "Run as Notebook" %}
+{% discussion "Run as Notebook on SWAN" %}
 
 This page can be run as a notebook on the SWAN service at CERN (or any ipython notebook server that can run fcc software). Use the following link
 
@@ -31,7 +31,7 @@ To fix this, click:  `KERNEL > Change kernel > Python2` in the top menu.
 See <https://github.com/swan-cern/help> for more details on SWAN.
 
 
-{% endprereq}
+{% enddiscussion %}
 
 
 
