@@ -34,7 +34,7 @@ In configuring jobs with the FCC software framework, users can choose the Branch
 {% challenge "Inspecting a ROOT file" %}
 
 Let's take a look at an example: `root://eospublic.cern.ch//eos/experiment/fcc/hh/tutorials/fccee_idea_pgun.root`. 
-(For machines without eos access, this is mirrored at <https://fccsw.web.cern.ch/fccsw/testsamples/tutorial/mergedDCHits.root>)
+(For machines without eos access, this is mirrored at <https://fccsw.web.cern.ch/fccsw/testsamples/tutorial/fccee_idea_pgun.root>)
 This file
 contains simulated data of a single particle passing through the detector and hits from the detector simulation.
 Open the file with ROOT and determine:
