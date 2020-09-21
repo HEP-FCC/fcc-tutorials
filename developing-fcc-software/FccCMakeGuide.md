@@ -14,11 +14,39 @@ various Gaudi CMake functions.
 
 ## Quick start into building FCCSW
 
+### Set up the environment
+
+In case you are unsure, it is best to use the `init.sh` script provided with FCCSW:
+
+```
+source ./init.sh`
+```
+
+Note that mixing setup scripts (from another package, for example) may or may not work as intended - more likely not.
+For any requests to changes in the environment, feel free to contact the software team on the mailing list or any other channels.
+Developers may also look into `spack` to have more fine-grained control over the build dependencies.
+
+### Using the top-level Makefile
+
+
 - The software can be compiled in the root directory with `make -j8`.
 - After adding new files, do `make configure`
 - Building single packages: `make packagename`
 - Cleaning up (rebuild from scratch): `make purge`
 - To change the build-type (e.g. Release or Debug), set the `BUILDTYPE` variable (e.g. `BUILDTYPE=Debug make`)
+
+### Using plain CMake
+
+The steps that the top-level Makefile does can also be done manually:
+
+* Create a build directory: `mkdir build; cd build`
+* Run CMake in the build directory: `cmake .. `
+* Change any cmake options by rerunning cmake. For example: `cmake .. -DCMAKE_INSTALL_PREFIX=install`. Tools like ccmake may also be useful: `ccmake ..`
+* Compile the software, using all the cpus available:    ```make -j `getconf _NPROCESSORS_ONLN` ```  
+* Install by running `make install`
+* In case any dependency is changed, most likely you need to remove all the contents of the build folder and rerun cmake and the compilation.
+
+
 
 ## CMake example packages
 
@@ -42,6 +70,10 @@ the file `CMakeLists.txt`, defining its content. To build the entire
 SW, a Makefile is provided in the top level directory, so `make` can be invoked there to build FCCSW. To rebuild a single package
 `make packagename` is sufficient.
 
+Note that single subdirectory cannot be installed individually at the moment.
+If you need to install, it is best to compile everything in the beginning (which may take a while), and then work with the build folder. Any changes should only lead to the changed subdirectories being recompiled. 
+
+
 When adding new source files to a package, the CMake build system needs
 to be made aware of them. Usually `CMakeLists.txt` contains a wildcard
 expression that adds all implementation files in a subfolder, e.g.
@@ -62,6 +94,25 @@ successfully build the software:
 
 In those cases you'll need to do `make purge` (this target deletes the build and install directories) and rebuild the
 entire software.
+
+
+### Runtime Environment
+
+FCCSW consists of executables, headers, scripts, dynamic libraries, xmls  and special files describing gaudi components.
+In order to use these, some environment variables need to be set.
+FCCSW includes a setup script that is installed automatically and can be sourced to set up the required variables.
+
+Gaudi also offers the possibility to set up the environment via the `xenv` command. This is done by simply prefixing the command you want to run with the `run` script in the top level directory of FCCSW, or directly in the build directory.
+
+```bash
+./build/run fccrun Examples/options/pythia.py
+```
+
+Sometimes it is convenient to run FCCSW directly from the binaries in the build directory without installing them.
+This can be done by using the `run` script in the build directory, or setting the environment variables as in `setup.sh` for the build folder.
+Note that the directories in the  build folder differ a bit. Mostly it is important the the LD_LIBRARY_PATH is pre-fixed with the library directories. The fccrun command should pick up the components from the build folder then.
+
+
 
 ## CTest in FCCSW
 

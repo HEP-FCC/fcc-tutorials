@@ -3,9 +3,9 @@
 
 ## Where to put documentation
 
-- API documentation is done with Doxygen in the source code
-- Slightly higher level documentation on usage of a piece of software is usually put directly in the corresponding repository
-- Tutorials that introduce users to a piece of software belong in fcc-tutorials
+- API documentation of classes and functions is done with Doxygen notation in the source code.
+- Slightly higher level documentation on usage of a piece of software is usually put directly in the corresponding repository.
+- Long-form documentations  that introduce users to a piece of software belong in [fcc-tutorials](https://hep-fcc.github.io/fcc-tutorials/).
 
 {% callout "Where to put documentation" %}
 
@@ -15,22 +15,22 @@
 
 ## When and how is the documentation page updated?
 
-The documentation page consists of a static website based on `github-pages`. The content of the website is hosted in EOS (`/eos/project/f/fccsw-web/www`). Only members
+There are both a main website (<https://cern.ch/fccsw>) and a readthedocs-style page for the tutorials (<https://hep-fcc.github.io/fcc-tutorials/>).
+
+Both consists of a static website based on `github-pages`. The  main website points to EOS (`/eos/project/f/fccsw-web/www`), from where it is redirected to the github-pages site of FCCSW. Only members
 of the corresponding e-group have write access. All markdown and configuration files are stored in the [`gh-pages`](https://github.com/HEP-FCC/FCCSW/tree/gh-pages) branch of the
 FCCSW Github repository. All dependencies (jquery, bootstrap-sass) are included in the mentioned repository and any change should be automatically deployed to:
 
 [http://hep-fcc.github.io/FCCSW/](http://hep-fcc.github.io/FCCSW/)
 
-The old URL [http://cern.ch/fccsw](http://cern.ch/fccsw) now redirects to [http://hep-fcc.github.io/FCCSW/](http://hep-fcc.github.io/FCCSW/).
 
-## Structure of the content
+## Structure of the content of the main page
 
-There are four main folder which aggregate markdown files by category:
+Folders can be added to aggregate markdown files by category:
 
 - `computing`: FCC Computing Resources
 - `presentations`: Selection of Publications and Presentations relating to FCC Software
-- `stack`: Main pieces of software that compose the FCC Software stack
-- `tutorials`: Different how-to guides for getting started with the different FCC Software packages
+...
 
 The rest of folders and files are mainly configuration files to generate the website itself with [Jekyll](https://jekyllrb.com/):
 
