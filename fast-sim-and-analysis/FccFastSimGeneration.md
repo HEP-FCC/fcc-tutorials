@@ -75,6 +75,7 @@ Some examples more specific to FCC can be found under
 ```bash
 ls /eos/project-f/fccsw-web/www/share/gen/whizard/
 ```
+or browsing `https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/`, if EOS is not available.
 
 It is advised to work in a separate directory for each process. For example, for Z_mumu, we have:
 
@@ -83,7 +84,6 @@ It is advised to work in a separate directory for each process. For example, for
  wget https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/Z_mumu.sin
  whizard Z_mumu.sin
  ```
-Note that you can also copy from /eos/project-f/fccsw-web/www/share/gen/whizard/Zpole/ is EOS is available.
 
  ```
 | Writing log to 'whizard.log'
