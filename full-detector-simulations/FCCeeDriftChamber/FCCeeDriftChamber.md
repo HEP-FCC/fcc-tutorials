@@ -47,7 +47,7 @@ You can see the created files:
 ```python
 #!/bin/env python
 import ROOT
-f = ROOT.TFile("https://fccsw.web.cern.ch/fccsw/testsamples/tutorial/fccee_idea_pgun.root")
+f = ROOT.TFile("https://fccsw.web.cern.ch/fccsw/testsamples/tutorial/fccee_idea_pgun_driftchamber.root")
 events = f.Get("events")
 
 c = ROOT.TCanvas("c_positionedHits_DCH_xy", "", 700, 600)
