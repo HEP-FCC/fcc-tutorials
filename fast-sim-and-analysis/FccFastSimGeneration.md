@@ -23,7 +23,7 @@ which fccrun
 
 ```
 # the output might differ, but shouldn't be empty
-/cvmfs/fcc.cern.ch/sw/views/releases/fccsw/0.13/LCG_97a_FCC_2/x86_64-centos7-gcc8-opt/scripts/fccrun
+/cvmfs/sw.hsf.org/spackages/linux-centos7-broadwell/gcc-8.3.0/fccsw-develop-q57ahua7lm65fvxnzekozih4mgvzptlx/scripts/fccrun
 ```
 
 **You will need to source this script everytime you want to use the
@@ -55,7 +55,7 @@ which whizard
 ```
 
 ```
-/cvmfs/fcc.cern.ch/sw/views/releases/fccsw/0.13/LCG_97a_FCC_2/x86_64-centos7-gcc8-opt/bin/whizard
+/cvmfs/sw.hsf.org/spackages/linux-centos7-broadwell/gcc-8.3.0/whizard-2.8.4-nxnm6ntaaduopm5ff22xr6p35r23euz6/bin/whizard
 ```
 
 Whizard is run as this:
@@ -67,7 +67,7 @@ whizard <process_config>.sin
 Example of process configuration files are found under
 
 ``` bash
-ls /cvmfs/fcc.cern.ch/sw/views/releases/fccsw/0.14/LCG_97a_FCC_3/x86_64-centos7-gcc8-opt/share/whizard/examples/
+ls /cvmfs/sw.hsf.org/spackages/linux-centos7-broadwell/gcc-8.3.0/whizard-2.8.4-nxnm6ntaaduopm5ff22xr6p35r23euz6/share/whizard/examples/
 ```
 or at `https://gitlab.tp.nt.uni-siegen.de/whizard/public/-/tree/master/share/examples` .
 
