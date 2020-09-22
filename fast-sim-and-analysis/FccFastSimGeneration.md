@@ -67,8 +67,9 @@ whizard <process_config>.sin
 Example of process configuration files are found under
 
 ``` bash
-ls /cvmfs/fcc.cern.ch/sw/views/releases/fccsw/0.13/LCG_97a_FCC_2/x86_64-centos7-gcc8-opt/share/whizard/examples/
+ls /cvmfs/fcc.cern.ch/sw/views/releases/fccsw/0.14/LCG_97a_FCC_3/x86_64-centos7-gcc8-opt/share/whizard/examples/
 ```
+or at `https://gitlab.tp.nt.uni-siegen.de/whizard/public/-/tree/master/share/examples` .
 
 Some examples more specific to FCC can be found under
 
