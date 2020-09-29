@@ -42,7 +42,7 @@ make install
 you can use the `run` script in the `build` directory, like:
 
 ```bash
-./run ../K4TestFWCore/options/createExampleEventData.py 
+./run fccrun ../K4TestFWCore/options/createExampleEventData.py 
 
 ```
 
