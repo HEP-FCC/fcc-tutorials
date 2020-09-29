@@ -14,6 +14,6 @@ If you have any problems or questions, you can [open an issue][lessons-issues] o
 
     FccCaloPerformance/FccCaloPerformance.md
     FCCeeDriftChamber/FCCeeDriftChamber.md
-    FCCee_IR_Backgrounds_guinea/README.md
+    FCCeeGuineaPigIRBackgrounds/README.md
 
 ```

@@ -25,7 +25,7 @@
 
 This tutorial is based on the FCC Note http://cds.cern.ch/record/2670936 and describes the use of the FCCee IDEA Driftchamber in the FCC software framework. First, setup the fcc software environment:
 
-```
+```bash
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```
 
@@ -33,13 +33,13 @@ source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 From the detector display or the command line, check to see the detector subsystems are there.
 
 
-```
+```bash
 geoDisplay $FCCSWBASEDIR/share/FCCSW/Detector/DetFCCeeIDEA/compact/FCCee_DectMaster.xml
 ```
 
 
-```python
-!fccrun $FCCSWBASEDIR/share/FCCSW/Examples/options/geant_fullsim_fccee_pgun.py --detectors $FCCSWBASEDIR/share/FCCSW/Detector/DetFCCeeIDEA/compact/FCCee_DectMaster.xml --etaMin -3.5 --etaMax 3.5 -n 20000
+```bash
+fccrun $FCCSWBASEDIR/share/FCCSW/Examples/options/geant_fullsim_fccee_pgun.py --detectors $FCCSWBASEDIR/share/FCCSW/Detector/DetFCCeeIDEA/compact/FCCee_DectMaster.xml --etaMin -3.5 --etaMax 3.5 -n 20000
 ```
 
 You can see the created files:
@@ -47,7 +47,7 @@ You can see the created files:
 ```python
 #!/bin/env python
 import ROOT
-f = ROOT.TFile("root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/fccee_idea_pgun.root")
+f = ROOT.TFile("https://fccsw.web.cern.ch/fccsw/testsamples/tutorial/fccee_idea_pgun_driftchamber.root")
 events = f.Get("events")
 
 c = ROOT.TCanvas("c_positionedHits_DCH_xy", "", 700, 600)
@@ -63,25 +63,27 @@ This simulation configuration creates hits all along the particle trajectory. To
 fccrun mergeDCHits.py
 ```
 
-```python
-!rootls -t mergedDCHits.root
+```bash
+rootls -t mergedDCHits.root
 ```
 
 By now, we have produced the two files `fccee_idea_pgun.root` and `mergedDCHits.root`.
 You can try to put them in a "test" folder on the shared disk space on eos.
 The files can already be found under the path `/eos/experiment/fcc/ee/tutorial`.
 To use files on eos, you can simply prepend `root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/`  when using TFile, or use `xrdcp root://eospublic.cern.ch/<path on eos> <local file name>`
-And again, check that your files are present in your current directory:
 
 ```bash
 xrdcp root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/mergedDCHits.root mergedDCHits3.root
 ```
 
+For machines without eos access, the files needed for this tutorial are mirrored on an http server.
+This is only for the purposes of the tutorial, for productions eos access is strictly necessary.
+
 ```python
 #!/usr/bin/env python
 
 import ROOT
-f = ROOT.TFile("root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/mergedDCHits.root")
+f = ROOT.TFile("https://fccsw.web.cern.ch/fccsw/testsamples/tutorial/mergedDCHits.root")
 events = f.Get("events")
 
 # draw hits for first five events
@@ -163,6 +165,3 @@ plt.show()
 Go back to the note mentioned in the beginning: http://cds.cern.ch/record/2670936 It uses the Hough-Transform, a simple but very effective Reconstruction method for this type of detector. Some python codes implementing it can be found in this repository: https://github.com/HEP-FCC/HoughTransform
 Try to reproduce the results. Background events stored on eos under `/eos/experiment/fcc/ee/generation/GUINEA-PIG/` can be read with this job options file: https://github.com/HEP-FCC/FCCSW/blob/master/Examples/options/geant_fullsim_fccee_hepevt.py.
 
-```python
-
-```

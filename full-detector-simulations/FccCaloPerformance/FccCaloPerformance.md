@@ -2,6 +2,27 @@
 # FCC Calorimeter Performance Studies Workflow
 
 
+{% discussion "Run this page as a Notebook on SWAN" %}
+
+This page can be run as a notebook on the SWAN service at CERN (or any ipython notebook server that can run fcc software). Use the following link
+
+
+[![Click to run this page on SWAN](https://swanserver.web.cern.ch/swanserver/images/badge_swan_white_150.png)](https://swan.cern.ch/hub/user-redirect/download?projurl=https://raw.githubusercontent.com/HEP-FCC/fcc-tutorials/gh-pages/full-detector-simulations/FccCaloPerformance/FccCaloPerformance.ipynb)
+
+When configuring the environment, you **must** select the  97a Python2 software stack, and paste the following in the "Environment Script" Box 
+
+```
+/eos/experiment/fcc/ee/tutorial/setup_swan.sh
+```
+
+When first starting a new notebook in this environment, SWAN may fail to select a kernel and you will see a red box saying `None not found` in the top right corner.
+To fix this, click:  `KERNEL > Change kernel > Python2` in the top menu.
+
+See <https://github.com/swan-cern/help> for more details on SWAN.
+
+
+{% enddiscussion %}
+
 {% objectives "Learning Objectives" %}
 
 This tutorial will teach you how to:
@@ -12,10 +33,13 @@ This tutorial will teach you how to:
 
 {% endobjectives %}
 
+
+
+
 First, make sure your setup of the FCC software is working. 
 You can check that the command to run jobs in the Gaudi framework is available on the command line:
 
-```python
+```bash
 which fccrun
 ```
 If you don't see a valid path like `/usr/local/bin/fccrun`  you should consult [the documentation page on FCCSW setup](https://github.com/vvolkl/fcc-tutorials/blob/master/FccSoftwareGettingStarted.md)
@@ -59,18 +83,18 @@ ApplicationMgr( TopAlg = [],
 
 A job with this configuration can be executed with 
 
-```python
+```bash
 fccrun dumpGeo_fccee.py
 ```
 
 Note the printout of the GeoSvc and make sure the information is as expected. If there is something unclear or missing make sure to open an [issue](https://github.com/HEP-FCC/FCCSW/issues)!
 Take a look at the resulting gdml file. Although it is text-based it is not really human-readable for a geometry of this size, but you can check the number of lines and volume names if you are familiar with the geometry.
 
-```python
+```bash
 tail FCCee_IDEA.gdml
 ```
 
-```python
+```bash
 # count occurences of "physvol"
 grep -c "<physvol" FCCee_IDEA.gdml
 ```
@@ -108,8 +132,10 @@ A configuration that runs all of this is distributed with FCCSW and can be run w
 (This simulates the response of 5GeV electrons which makes for modest shower sizes and should produce 500 events in around 2 minutes)
 
 
-```python
- FCC_DETECTORS=$FCCSWBASEDIR/share/FCCSW; time fccrun  $FCCSWBASEDIR/share/FCCSW/RecFCCeeCalorimeter/options/runCaloSim.py --filename fccee_idea_LAr_pgun.root -n 500 
+```bash
+ fccrun  $FCCSWBASEDIR/share/FCCSW/RecFCCeeCalorimeter/options/runCaloSim.py  \
+          --filename fccee_idea_LAr_pgun.root \
+          -n 500 
 ```
 
 The output of this job is `fccee_idea_LAr_pgun.root`, a ROOT file containing the simulation products of 500 single particle events (5 Gev e-) in the FCC event data model.
@@ -144,8 +170,12 @@ c.Draw()
 
 Now that the detector response is simulated, it is time to reconstruct the signals. FCCSW includes another configuration to run a Sliding Window reconstruction:
 
-```python
-FCC_DETECTORS=$FCCSWBASEDIR/share/FCCSW; fccrun $FCCSWBASEDIR/share/FCCSW/RecFCCeeCalorimeter/options/runFullCaloSystem_ReconstructionSW_noiseFromFile.py -v --input fccee_idea_LAr_pgun.root -n 100 --noiseFileName root://eospublic.cern.ch//eos/experiment/fcc/ee/simulation/NoiseConstants/elecNoise_ecalBarrelFCCee_50Ohm_traces1_4shieldWidth.root --filename output_allCalo_reco_noise.root
+```bash
+fccrun $FCCSWBASEDIR/share/FCCSW/RecFCCeeCalorimeter/options/runFullCaloSystem_ReconstructionSW_noiseFromFile.py \
+       -n 100 \
+       --input fccee_idea_LAr_pgun.root \
+       --noiseFileName http://fccsw.web.cern.ch/fccsw/testsamples/elecNoise_ecalBarrelFCCee_50Ohm_traces1_4shieldWidth.root \
+       --filename output_allCalo_reco_noise.root
 ```
 
 This configuration inludes electronics noise especially calculated for this detector geometry. which is overlayed on the branch `ECalBarrelCells` containing information on all cells in the ECal Barrel.
