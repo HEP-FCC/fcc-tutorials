@@ -7,8 +7,8 @@ Sooner rather than later you will find it necessary write code for FCCSW. These 
 ```eval_rst
 .. toctree::
     :caption: Contents:
-
     FccSoftwareGit.md
     FccCMakeGuide.md
+    writing-algorithms.md
     FccDocPage.md
 ```
