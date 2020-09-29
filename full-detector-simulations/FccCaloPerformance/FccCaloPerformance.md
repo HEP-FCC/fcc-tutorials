@@ -75,6 +75,27 @@ tail FCCee_IDEA.gdml
 grep -c "<physvol" FCCee_IDEA.gdml
 ```
 
+
+The geometry can also be visualised:
+
+```python
+# load the dd4hep detector model
+import ROOT
+import dd4hep
+import os
+fcc_det_path = "/cvmfs/sft.cern.ch/lcg/releases/fccsw/0.13-5b877/x86_64-centos7-gcc8-opt//share/FCCSW/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectMaster.xml"
+print fcc_det_path
+description = dd4hep.Detector.getInstance()
+description.fromXML(fcc_det_path)
+import ROOT
+c = ROOT.TCanvas("c_detector_display", "", 600,600)
+description.manager().SetVisLevel(6)
+description.manager().SetVisOption(1)
+vol = description.manager().GetTopVolume()
+vol.Draw()
+
+```
+
 ## Running Geant4 within the FCC Software Framework
 
 To run Geant4, a number of additional components are required, foremost the `SimG4Alg` and `SimG4Svc`.
