@@ -9,6 +9,6 @@ Sooner rather than later you will find it necessary write code for FCCSW. These 
     :caption: Contents:
     FccSoftwareGit.md
     FccCMakeGuide.md
-    writing-algorithms.md
+    WritingAlgorithms.md
     FccDocPage.md
 ```
