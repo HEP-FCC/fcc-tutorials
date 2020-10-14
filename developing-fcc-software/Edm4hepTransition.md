@@ -54,18 +54,18 @@ EDM4HEP replaces this by the single type `MCParticle`. This contains the vertex 
 The correspondence is fairly direct:
 | | |
 |----|----|
-EDM4HEP | FCCEDM |
-MCParticle | MCParticle/GenVertex/GenJet |
-PDG | core.pdgId |
-generatorStatus | core.status |
-charge | charge |
-time |  startVertex.ctau # Note the unit differences! |
-vertex | startVertex.position |
-endpoint | endVertex.position |
-momentum, mass | core.p4 |
-momentumAtEndpoint ||
-spin | |
-colorFlow | |
+| EDM4HEP | FCCEDM |
+| MCParticle | MCParticle/GenVertex/GenJet |
+| PDG | core.pdgId |
+| generatorStatus | core.status |
+| charge | charge |
+| time |  startVertex.ctau # Note the unit differences! |
+| vertex | startVertex.position |
+| endpoint | endVertex.position |
+| momentum, mass | core.p4 |
+| momentumAtEndpoint ||
+| spin | |
+| colorFlow | |
 
 
 
