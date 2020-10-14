@@ -42,7 +42,7 @@ find_package(EDM4HEP)
 
 ### Component source Code  
 
-The code now can be adapted changing any 
+The code now can be adapted changing any mention of `datamodel` to `edm4hep` and converting the types: 
 
 #### Generation / MCParticles
 
