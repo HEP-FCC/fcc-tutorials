@@ -11,6 +11,7 @@ Sooner rather than later you will find it necessary write code for FCCSW. These 
     FccSoftwareGit.md
     FccCMakeGuide.md
     WritingAlgorithms.md
+    Edm4hepTransition.md
     FccDocPage.md
 
 ```
