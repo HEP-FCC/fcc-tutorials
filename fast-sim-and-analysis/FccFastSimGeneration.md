@@ -13,7 +13,18 @@ FCC: Getting started with event generation
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```
 
-Builds exist on CernVM-FS for CentOS7 (this is the system run on `lxplus`) using gcc8.
+for the Spack installed version or
+
+```bash
+source /cvmfs/fcc.cern.ch/sw/latest/setup-lcg.sh
+```
+
+for the LCG stack installed version.
+While the version should be equivalent in most of the aspects, some packages may be available only 
+in one of the builds. This ill be highlighted when relevant.
+
+Builds exist on CernVM-FS for CentOS7 (this is the system run on `lxplus`) using gcc8. LCG buils exist also
+for Ubuntu 20.04 LTS.
 
 The `fccrun` steering application should be available at this point:
 
@@ -167,4 +178,131 @@ which Herwig
 /cvmfs/fcc.cern.ch/sw/views/releases/fccsw/0.13/LCG_97a_FCC_2/x86_64-centos7-gcc8-opt/bin/Herwig
 ```
 
+###  KKMCee
+
+`KKMCee` is an adaptation of the `KKMC` Monte Carlo generator (the latest version of the `Koral` generetors) to the
+case of FCC-ee. 
+KKMCee is available as standalone program when using the `LCG` installaton of FCCSW version 0.15 or higher:
+
+```bash
+which KKMCee
+```
+
+```
+/cvmfs/sft.cern.ch/lcg/views/LCG_97a_FCC_4/x86_64-centos7-gcc8-opt/bin/KKMCee
+```
+An help function is available
+
+```bash
+KKMCee -h
+
++++ Wrapper around the KKMCee/ProdMC.exe executable +++
+
+Usage: \tKKMCee -f Mu|Tau|Hadrons -e Ecms -n Nevts -o output_file [-s seed_file] [OPTIONS]
+       \tKKMCee -c config_file [-s seed_file]
+
+Options:
+  -c, --config file 		Path to configuration file
+  -f, --flavour flavour 	Flavour to be generated (Mu|Tau|Hadrons)
+  -e, --ecms energy 		Center of Mass energy in GeV
+  -n, --nevts energy 		Number of events to be generated
+  -o, --outfile file 		File with the generated events in LHE format
+  -s, --seedfile file 		File to be used for seeding (randomly generated, if missing)
+
+Examples:
+KKMCee -f Mu -e 91.2 -n 10000 -o kkmu_10000.LHE
+KKMCee -c kkmc_ditau.input
+```
+
+Configuration example files are available under
+
+```bash
+$ ls /cvmfs/sft.cern.ch/lcg/views/LCG_97a_FCC_4/x86_64-centos7-gcc8-opt/share/KKMCee/examples/
+Beast.input  Bottom.input  Down.input  Inclusive.input  Mu.input  Tau.input  Up.input
+```
+
+To generate a sample of dimuon events using the example files, do the following
+
+```bash
+KKMCee -c /cvmfs/sft.cern.ch/lcg/views/LCG_97a_FCC_4/x86_64-centos7-gcc8-opt/share/KKMCee/examples/Mu.input
+```
+The out should somethign like this
+
+```bash
+Seeds: 29318493 48191772
+  29318493      IJKLIN= 29318493  48191772
+         0      NTOTIN= 0
+         0      NTOT2N= 0
+  ------- starting from the scratch ----------
+ranmar initialized: ij,kl,ijkl,ntot,ntot2=       974     18625  29318493         0         0
+        1000  requested events
+ ---------------
+ ****************************
+ *    KK2f_ReaDataX Starts  *
+ ****************************
+ ---------------
+ ---------------
+ ---------------
+ ---------------
+ ---------------
+BeginX
+********************************************************************************
+*               ACTUAL DATA FOR THIS PARTICULAR RUN
+********************************************************************************
+*indx_____data______ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0
+*     Center-of-mass energy [GeV]
+    1    91.0000         CMSene =xpar( 1) Average Center of mass energy [GeV]
+********************************************************************************
+*     Define process
+  413    1.00000          KFfin, muon
+  100    1.00000          store lhe file to (LHE_OUT.LHE)
+ ---------------          26          36 LHE_OUT.LHE
+************************* one can change the lhf file name between brackets
+********************************************************************************
+EndX
+ **************************
+ *   KK2f_ReaDataX Ends   *
+ **************************
+ Tables are READ from DiskFile  dizet/table.down
+amz,amh,amtop,swsq,gammz,amw,gammw=
+     =  91.1876000 125.1000000 173.0000000   0.2234020   2.4953766  80.3588894   2.0898788
+ 
+ ...
+ 
+ 
+
+                            Event listing (summary)
+
+    I particle/jet KS     KF  orig    p_x      p_y      p_z       E        m
+
+    1 !e-!         21      11    0    0.000    0.000   45.500   45.500    0.001
+    2 !e+!         21     -11    0    0.000    0.000  -45.500   45.500    0.001
+    3 (Z0)         11      23    1    0.039    0.001    0.115   90.879   90.879
+    4 gamma         1      22    1    0.000    0.000   -0.001    0.001    0.000
+    5 gamma         1      22    1   -0.039   -0.001   -0.114    0.120    0.000
+    6 mu-           1      13    3   14.678    0.229   43.067   45.500    0.106
+    7 mu+           1     -13    3  -14.639   -0.229  -42.952   45.379    0.106
+                   sum:  0.00         0.000    0.000    0.000   91.000   91.000
+ iev=          501
+  generation finished
+  xSecPb, xErrPb =   1442.5021729176829        13.903134156944603
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++    GLK_PRINT: bmin.eq.bmax, id=     50004 ++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++    GLK_PRINT: bmin.eq.bmax, id=     50005 ++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+real	0m4.043s
+user	0m3.777s
+sys	0m0.085s
+```
+
+and a file `LHE_OUT.LHE` created.
+
+The same can be obtained on the command line:
+
+```bash
+KKMCee -f Mu -e 91.2 -n 1000 -o LHE_OUT_1.LHE
+```
 
