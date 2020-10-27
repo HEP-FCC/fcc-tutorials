@@ -15,7 +15,8 @@ This document should guide users and developers through the transition.
 EDM4HEP and FCCEDM can coexist, but for a frictionless transition, FCCEDM should be replaced completely as soon as possible.
 
 
-The following sections focus on the Gaudi-based framework FCCSW and explain how to transition the components of the datamodel
+The following sections focus on the Gaudi-based framework FCCSW and explain how to transition the components of the datamodel.
+The latest developments can be found on [this branch](https://github.com/HEP-FCC/FCCSW/tree/edm4hep) (PRs welcome).
 
 
 
@@ -52,6 +53,7 @@ The mother/daughter relationship was encoded in the vertices; A particle and its
 EDM4HEP replaces this by the single type `MCParticle`. This contains the vertex information, and Jets are generally treated as particles in EDM4hep.
 
 The correspondence is fairly direct:
+
 | | |
 |----|----|
 | EDM4HEP | FCCEDM |
