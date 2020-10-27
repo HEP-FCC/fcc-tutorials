@@ -9,6 +9,7 @@ install:
   - pip install git+https://github.com/chrisburr/recommonmark.git@patch-1
   - pip install -vv starterkit-ci==0.0.12
   - pip install -vv sphinx-copybutton
+  - pip install -vv sphinx-markdown-tables
   - pip install -vv notedown
 
 script:
