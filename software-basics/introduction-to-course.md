@@ -6,13 +6,13 @@
 
 {% endobjectives %} 
 
-The first FCC Starterkit is all about getting you the data  and toolsyou need to do your studies.
+The first FCC Starterkit is all about getting you the data  and tools you need to do your studies.
 
 
 We want this course to give you the confidence to be able to start by yourself, 
-to understand what the code you'll be writing does and why you're writing it, 
+to understand what the code, you'll be writing, does and why you're writing it, 
 and to teach others how to do the same.
-Each lesson follows on from the previous one, but each can also serve as a 
+Each lesson follows on the previous one, but each can also serve as a 
 standalone reference when you need to revisit a particular topic.
 
 We'll be looking at:
