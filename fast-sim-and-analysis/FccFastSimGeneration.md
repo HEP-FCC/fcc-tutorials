@@ -21,7 +21,7 @@ source /cvmfs/fcc.cern.ch/sw/latest/setup-lcg.sh
 
 for the LCG stack installed version.
 While the version should be equivalent in most of the aspects, some packages may be available only 
-in one of the builds. This ill be highlighted when relevant.
+in one of the builds. This will be highlighted when relevant.
 
 Builds exist on CernVM-FS for CentOS7 (this is the system run on `lxplus`) using gcc8. LCG buils exist also
 for Ubuntu 20.04 LTS.
@@ -46,7 +46,7 @@ software.**
 
 ### Overview
 
-The physics generators available for FCC typically come form the underlying LCG stack. However, any generator
+The physics generators available for FCC typically come from the underlying LCG stack. However, any generator
 able to generate events in one of the understood formats, e.g. HepMC or LHEf, can be used in standalone.
 This pages intend to illustrate the use of a few general purpose generators available when enabling FCCSW:
 pythia8, whizard, MadGraph5, Herwig.
