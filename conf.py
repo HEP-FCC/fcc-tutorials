@@ -22,6 +22,7 @@ html_context = {
 
 extensions = [
     'sphinx_copybutton',
+    'sphinx_markdown_tables',
     'recommonmark',
 ]
 

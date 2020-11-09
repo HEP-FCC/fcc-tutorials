@@ -5,7 +5,7 @@ from Gaudi.Configuration import *
 import GaudiKernel.SystemOfUnits as units
 from Configurables import ApplicationMgr, FCCDataSvc, PodioOutput
 
-podioevent   = FCCDataSvc("EventDataSvc", input="root://eospublic.cern.ch//eos/experiment/fcc/ee/tutorial/fccee_idea_pgun.root")
+podioevent   = FCCDataSvc("EventDataSvc", input="https://fccsw.web.cern.ch/fccsw/testsamples/tutorial/fccee_idea_pgun.root")
 
 from Configurables import PodioInput, ReadTestConsumer
 podioinput = PodioInput("PodioReader", collections=["positionedHits_DCH"], OutputLevel=DEBUG)

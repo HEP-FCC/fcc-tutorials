@@ -2,6 +2,27 @@
 # FCC Calorimeter Performance Studies Workflow
 
 
+{% discussion "Run this page as a Notebook on SWAN" %}
+
+This page can be run as a notebook on the SWAN service at CERN (or any ipython notebook server that can run fcc software). Use the following link
+
+
+[![Click to run this page on SWAN](https://swanserver.web.cern.ch/swanserver/images/badge_swan_white_150.png)](https://swan.cern.ch/hub/user-redirect/download?projurl=https://raw.githubusercontent.com/HEP-FCC/fcc-tutorials/gh-pages/full-detector-simulations/FccCaloPerformance/FccCaloPerformance.ipynb)
+
+When configuring the environment, you **must** select the  97a Python2 software stack, and paste the following in the "Environment Script" Box 
+
+```
+/eos/experiment/fcc/ee/tutorial/setup_swan.sh
+```
+
+When first starting a new notebook in this environment, SWAN may fail to select a kernel and you will see a red box saying `None not found` in the top right corner.
+To fix this, click:  `KERNEL > Change kernel > Python2` in the top menu.
+
+See <https://github.com/swan-cern/help> for more details on SWAN.
+
+
+{% enddiscussion %}
+
 {% objectives "Learning Objectives" %}
 
 This tutorial will teach you how to:
@@ -11,6 +32,9 @@ This tutorial will teach you how to:
 * produce **plots** of energy resolutions and other quantities.
 
 {% endobjectives %}
+
+
+
 
 First, make sure your setup of the FCC software is working. 
 You can check that the command to run jobs in the Gaudi framework is available on the command line:
@@ -75,6 +99,27 @@ tail FCCee_IDEA.gdml
 grep -c "<physvol" FCCee_IDEA.gdml
 ```
 
+
+The geometry can also be visualised:
+
+```python
+# load the dd4hep detector model
+import ROOT
+import dd4hep
+import os
+fcc_det_path = "/cvmfs/sft.cern.ch/lcg/releases/fccsw/0.13-5b877/x86_64-centos7-gcc8-opt//share/FCCSW/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectMaster.xml"
+print fcc_det_path
+description = dd4hep.Detector.getInstance()
+description.fromXML(fcc_det_path)
+import ROOT
+c = ROOT.TCanvas("c_detector_display", "", 600,600)
+description.manager().SetVisLevel(6)
+description.manager().SetVisOption(1)
+vol = description.manager().GetTopVolume()
+vol.Draw()
+
+```
+
 ## Running Geant4 within the FCC Software Framework
 
 To run Geant4, a number of additional components are required, foremost the `SimG4Alg` and `SimG4Svc`.
@@ -129,7 +174,7 @@ Now that the detector response is simulated, it is time to reconstruct the signa
 fccrun $FCCSWBASEDIR/share/FCCSW/RecFCCeeCalorimeter/options/runFullCaloSystem_ReconstructionSW_noiseFromFile.py \
        -n 100 \
        --input fccee_idea_LAr_pgun.root \
-       --noiseFileName root://eospublic.cern.ch//eos/experiment/fcc/ee/simulation/NoiseConstants/elecNoise_ecalBarrelFCCee_50Ohm_traces1_4shieldWidth.root \
+       --noiseFileName http://fccsw.web.cern.ch/fccsw/testsamples/elecNoise_ecalBarrelFCCee_50Ohm_traces1_4shieldWidth.root \
        --filename output_allCalo_reco_noise.root
 ```
 
