@@ -31,7 +31,7 @@ In configuring jobs with the FCC software framework, users can choose the Branch
 
 
 
-{% challenge "Inspecting a ROOT file" %}
+{% challenge "Inspecting a ROOT file" add a link to relevant ROOT tutorial/manual/learing resources?%}
 
 Let's take a look at an example: `root://eospublic.cern.ch//eos/experiment/fcc/hh/tutorials/fccee_idea_pgun.root`. 
 (For machines without eos access, this is mirrored at <https://fccsw.web.cern.ch/fccsw/testsamples/tutorial/fccee_idea_pgun.root>)
