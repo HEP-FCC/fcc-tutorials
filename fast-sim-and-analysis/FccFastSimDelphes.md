@@ -182,6 +182,7 @@ from Configurables import DelphesSaveChargedParticles
 muonSaveTool = DelphesSaveChargedParticles("muons")
 muonSaveTool.delphesArrayName = "MuonFilter/muons"
 muonSaveTool.particles.Path      = "muons"
+muonSaveTool.saveTrkCov = True
 muonSaveTool.particles_trkCov.Path      = "muons_trkCov"
 muonSaveTool.mcAssociations.Path = "muonsToMC"
 muonSaveTool.isolationTags.Path  = "muonITags"
