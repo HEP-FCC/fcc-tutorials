@@ -45,6 +45,7 @@ $ python -m http.server 8000
 ```
 You can see your local version by using a web-browser to navigate to `http://localhost:8000` or wherever it says it's serving the book.
 
+links to LHCb starterkit intended ?? may be https://github.com/HEP-FCC/fcc-tutorials ? 
 [conduct]: CONDUCT.md
 [repo]: https://github.com/lhcb/starterkit-lessons
 [issues]: https://github.com/lhcb/starterkit-lessons/issues

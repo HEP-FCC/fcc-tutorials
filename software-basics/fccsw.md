@@ -49,7 +49,7 @@ To make all of this configurable, Gaudi allows you to set properties of *Algorit
 In an option file, you can specify which Algorithms are run in which order, and set their properties (strings, integers, doubles, and lists and dicts of these things can be set).
 You can then start the Gaudi EventLoop using this option file, and it will set up and run the corresponding C++ objects with specified settings.
 
-You can find comprehensive documentation in the [Gaudi Doxygen](https://gaudi.web.cern.ch/gaudi/doxygen/v30r3/index.html) or the [Gaudi Manual](https://gaudi.web.cern.ch/gaudi/resources/GUG.pdf).
+You can find comprehensive documentation in the [Gaudi Doxygen FIXME?](https://gaudi.web.cern.ch/gaudi/doxygen/v30r3/index.html) or the [Gaudi Manual, FIXME?](https://gaudi.web.cern.ch/gaudi/resources/GUG.pdf).
 
 Usually, you will work with one of the FCC software framework FCCSW that are based on Gaudi.
 One of the most important ones is *DaVinci*, which provides lots of *Algorithms* and *Tools* for physics analysis.
