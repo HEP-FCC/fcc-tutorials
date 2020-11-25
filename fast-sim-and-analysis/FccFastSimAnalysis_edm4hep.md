@@ -23,19 +23,13 @@ git clone https://github.com/HEP-FCC/FCCAnalyses.git
 cd FCCAnalyses
 ```
 
-Then we need to checkout the ```edm4hep``` branch
-
-```bash
-git checkout edm4hep
-```
-
 and follow the compilation instructions [here](https://github.com/HEP-FCC/FCCAnalyses/#getting-started) to get started with **ONLY** the installation.
 Once the code has been compiled, we can now run the pre-selection on previously produced samples:
 
 ```bash
-python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py PATH_TO_FILES_PART_I/p8_ee_ZH_ecm240.root
-python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py PATH_TO_FILES_PART_I/p8_ee_ZZ_ecm240.root
-python FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py PATH_TO_FILES_PART_I/p8_ee_WW_ecm240.root
+python FCCeeAnalyses/ZH_Zmumu/analysis.py PATH_TO_FILES_PART_I/p8_ee_ZH_ecm240.root
+python FCCeeAnalyses/ZH_Zmumu/analysis.py PATH_TO_FILES_PART_I/p8_ee_ZZ_ecm240.root
+python FCCeeAnalyses/ZH_Zmumu/analysis.py PATH_TO_FILES_PART_I/p8_ee_WW_ecm240.root
 ```
 
 this will produce small ntuples pre-selection files with only variables you are interested in.
@@ -43,14 +37,14 @@ this will produce small ntuples pre-selection files with only variables you are 
 lets now run the final selection on the pre-selection files:
 
 ```bash
-python FCCeeAnalyses/ZH_Zmumu/dataframe/finalSel.py
+python FCCeeAnalyses/ZH_Zmumu/finalSel.py
 ```
  this will produce 2 files for each sample and each selection, one with final tree with variables of interest, and one with histograms.
  
  Now we can produce plots:
  
 ```python
- python bin/doPlots.py FCCeeAnalyses/ZH_Zmumu/dataframe/plots.py
+ python bin/doPlots.py FCCeeAnalyses/ZH_Zmumu/plots.py
 ```
 
 and look at them in `FCCee/ZH_Zmumu/plots/`. 
@@ -71,14 +65,14 @@ In order to produce plots with more statistics using centrally produced samples,
 To do so we re-run the pre-selection over 10 percent of the total statistics [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_v02.php). 
 
 ```bash
- python FCCeeAnalyses/ZH_Zmumu/dataframe/preSel.py
+ python FCCeeAnalyses/ZH_Zmumu/preSel.py
 ```
 
 and as before run the final selection and plots:
 
 ```bash
-python FCCeeAnalyses/ZH_Zmumu/dataframe/finalSel.py
-python bin/doPlots.py FCCeeAnalyses/ZH_Zmumu/dataframe/plots.py
+python FCCeeAnalyses/ZH_Zmumu/finalSel.py
+python bin/doPlots.py FCCeeAnalyses/ZH_Zmumu/plots.py
 ```
 and look at the new plots in `FCCee/ZH_Zmumu/plots/`. 
 
