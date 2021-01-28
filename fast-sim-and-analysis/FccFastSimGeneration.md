@@ -198,12 +198,12 @@ KKMCee -h
 
 +++ Wrapper around the KKMCee/ProdMC.exe executable +++
 
-Usage: \tKKMCee -f Mu|Tau|Hadrons -e Ecms -n Nevts -o output_file [-s seed_file] [OPTIONS]
+Usage: \tKKMCee -f Mu|Tau|UDS|C|B|Hadrons -e Ecms -n Nevts -o output_file [-s seed_file] [OPTIONS]
        \tKKMCee -c config_file [-s seed_file]
 
 Options:
   -c, --config file 		Path to configuration file
-  -f, --flavour flavour 	Flavour to be generated (Mu|Tau|Hadrons)
+  -f, --flavour flavour 	Flavour to be generated (Mu|Tau|UDS|C|B|Hadrons)
   -e, --ecms energy 		Center of Mass energy in GeV
   -n, --nevts energy 		Number of events to be generated
   -o, --outfile file 		File with the generated events in LHE format
@@ -226,7 +226,7 @@ To generate a sample of dimuon events using the example files, do the following
 ```bash
 KKMCee -c /cvmfs/sft.cern.ch/lcg/views/LCG_97a_FCC_4/x86_64-centos7-gcc8-opt/share/KKMCee/examples/Mu.input
 ```
-The out should somethign like this
+The output should something like this
 
 ```bash
 Seeds: 29318493 48191772
