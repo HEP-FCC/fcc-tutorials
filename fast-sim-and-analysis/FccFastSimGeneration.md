@@ -13,9 +13,9 @@ FCC: Getting started with event generation
 source /cvmfs/fcc.cern.ch/sw/latest/setup-lcg.sh
 ```
 
-#for the LCG stack installed version.
-#While the version should be equivalent in most of the aspects, some packages may be available only 
-#in one of the builds. This will be highlighted when relevant.
+<!--for the LCG stack installed version.
+While the version should be equivalent in most of the aspects, some packages may be available only 
+in one of the builds. This will be highlighted when relevant.-->
 
 Builds exist on CernVM-FS for CentOS7 (this is the system run on `lxplus`) using gcc8. LCG buils exist also
 for Ubuntu 20.04 LTS.
