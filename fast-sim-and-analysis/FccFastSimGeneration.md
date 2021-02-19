@@ -10,12 +10,6 @@ FCC: Getting started with event generation
 * To configure your environment for the FCC software, just do:
 
 ```bash
-source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
-```
-
-for the Spack installed version or
-
-```bash
 source /cvmfs/fcc.cern.ch/sw/latest/setup-lcg.sh
 ```
 
