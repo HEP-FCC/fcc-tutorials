@@ -1,0 +1,45 @@
+name: linux
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        SETUP: ['/cvmfs/sw.hsf.org/key4hep/setup.sh', '/cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh']
+        PAGE: ['software-basics/exploring-fcc-files',
+               'software-basics/fccsw'
+               'fast-sim-and-analysis/FccFastSimAnalysis',
+               'fast-sim-and-analysis/FccFastSimDelphes'.
+               'fast-sim-and-analysis/FccFastSimGeneration',
+               'fast-sim-and-analysis/FccFastSimParticleMultiplicity',
+               'full-detector-simulations/FccCaloPerformance/FccCaloPerformance',
+               'full-detector-simulations/FCCeeDriftChamber/FCCeeDriftChamber',
+               'full-detector-simulations/FCCeeGuineaPigIRBackgrounds/README',
+              ]
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cvmfs-contrib/github-action-cvmfs@v2
+    - name: Start container
+      run: |
+        docker run -it --name CI_container -v ${GITHUB_WORKSPACE}:/Package -v /cvmfs:/cvmfs:shared -d clicdp/cc7-lcg /bin/bash
+    - name: Setup container
+      run: |
+        docker exec CI_container /bin/bash -c ' ln -s /usr/lib64/liblzma.so.5.2.2 /usr/lib64/liblzma.so;\
+        source ${{ matrix.SETUP }};\
+        pip3 install jupytext;\
+        pip3 install --upgrade jupyter;\
+        python -m ipykernel install --name python3;\
+        python -m ipykernel install --name bash;\
+        '
+
+    - name: ExploringFiles  
+      run: |
+        docker exec CI_container /bin/bash -c 'cd ./Package;\
+        source ${{ matrix.SETUP }};\
+        export PATH=$HOME/.local/bin/:$PATH;\
+        cat .github/scripts/yamlheader.md  $${{ matrix.PAGE }} > ${{ matrix.page }};\
+        jupytext ${{ matrix.PAGE }}.md -o ${{ matrix.PAGE }}.ipynb --execute;\
+        '
