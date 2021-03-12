@@ -55,8 +55,10 @@ However, files produced with newer (>0.11) versions of FCCSW
 will store the information of the job options file here, so that they can be reproduced (using the same versions of the software). FCCSW provides a script `fcc_dump_joboptions` that can easily access this information.
 
 ```bash
-fcc_dump_joboptions /eos/experiment/fcc/hh/tutorials/fccee_idea_pgun.root 
+k4-print-joboptions https://fccsw.web.cern.ch/fccsw/testsamples/tutorial/fccee_idea_pgun.root 
 ```
+
+
 ```
 EventDataSvc.input = "";
 
