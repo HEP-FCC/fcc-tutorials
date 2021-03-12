@@ -58,10 +58,6 @@ will store the information of the job options file here, so that they can be rep
 k4-print-joboptions https://fccsw.web.cern.ch/fccsw/testsamples/tutorial/fccee_idea_pgun.root 
 ```
 
-```python
-assert(1==1)
-```
-
 
 ```
 EventDataSvc.input = "";
