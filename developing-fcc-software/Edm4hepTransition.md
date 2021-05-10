@@ -71,3 +71,32 @@ The correspondence is fairly direct:
 
 
 
+### Job options
+
+As the GenVertex type is no longer an independent type in edm4hep, any components that used to write GenParticles and GenVertices need to be adapted (the opportunity was used to also update the spelling from `genparticles` to `GenParticles` for the Gaudi data property):
+
+```.diff
+- hepmc_converter.genparticles.Path="allGenParticles"
+- hepmc_converter.genvertices.Path="allGenVertices"
++ hepmc_converter.GenParticles.Path="allGenParticles"
+```
+
+The configuration for the SimG4SaveSmearedParticles tool needs to be adapted in the following way:
+
+```.diff
+- from Configurables import SimG4SaveSmearedParticles
+- saveparticlestool = SimG4SaveSmearedParticles("saveSmearedParticles")
+- saveparticlestool.particles.Path = "smearedParticles"
+- saveparticlestool.particlesMCparticles.Path = "particleMCparticleAssociation"
++ saveparticlestool.RecParticles.Path = "smearedParticles"
++ saveparticlestool.MCRecoParticleAssoc.Path = "particleMCparticleAssociation"
+
+```
+
+```.diff
+
+- particle_converter = SimG4PrimariesFromEdmTool("EdmConverter")
+- particle_converter.genParticles.Path = "allGenParticles"
++ particle_converter.GenParticles.Path = "allGenParticles"
+```
+
