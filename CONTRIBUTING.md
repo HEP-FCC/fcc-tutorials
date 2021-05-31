@@ -46,8 +46,8 @@ $ python -m http.server 8000
 You can see your local version by using a web-browser to navigate to `http://localhost:8000` or wherever it says it's serving the book.
 
 [conduct]: CONDUCT.md
-[repo]: https://github.com/lhcb/starterkit-lessons
-[issues]: https://github.com/lhcb/starterkit-lessons/issues
+[repo]: https://github.com/HEP-FCC/fcc-tutorials
+[issues]: https://github.com/HEP-FCC/fcc-tutorials/issues
 [license]: LICENSE.md
 [pro-git-chapter]: http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project
 [gh-fork]: https://help.github.com/en/articles/fork-a-repo

@@ -24,7 +24,7 @@ access the internet.
    * Do not forget to bring your power supply, as well as the relevant plug adaptor, e.g., for CERN, to Swiss and European plugs.
 
 * The FCCSW has been developed on Linux and the main platform supported is the default platform on CERN lxplus, i.e. CentOS7 .
-  Experimental support for other Linux systems (e.g. Ubuntu 20.04 LTS) and MacOxS is provided as it is. There is no support for Windows.
+  Experimental support for other Linux systems (e.g. Ubuntu 20.04 LTS) and MacOxS is provided as is. There is no support for Windows.
 
 ### Checking the chosen resources
 
@@ -63,7 +63,7 @@ account, the default used to be a shell called `tcsh`
 in comparison with Bash.
 
 It is recommended to change your default shell to Bash if this is the case, which is much more
-widely used than `tcsh` and also supported by FCC, by visiting the your
+widely used than `tcsh` and also supported by FCC, by visiting your
 [CERN account page](https://account.cern.ch), then clicking “Resources and
 services”, then “List services”, “LXPLUS and Linux”, “Settings”, then change
 “Unix shell” to `/bin/bash`, and click “Save Selection”.

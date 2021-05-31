@@ -10,18 +10,12 @@ FCC: Getting started with event generation
 * To configure your environment for the FCC software, just do:
 
 ```bash
-source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
-```
-
-for the Spack installed version or
-
-```bash
 source /cvmfs/fcc.cern.ch/sw/latest/setup-lcg.sh
 ```
 
-for the LCG stack installed version.
+<!--for the LCG stack installed version.
 While the version should be equivalent in most of the aspects, some packages may be available only 
-in one of the builds. This ill be highlighted when relevant.
+in one of the builds. This will be highlighted when relevant.-->
 
 Builds exist on CernVM-FS for CentOS7 (this is the system run on `lxplus`) using gcc8. LCG buils exist also
 for Ubuntu 20.04 LTS.
@@ -46,7 +40,7 @@ software.**
 
 ### Overview
 
-The physics generators available for FCC typically come form the underlying LCG stack. However, any generator
+The physics generators available for FCC typically come from the underlying LCG stack. However, any generator
 able to generate events in one of the understood formats, e.g. HepMC or LHEf, can be used in standalone.
 This pages intend to illustrate the use of a few general purpose generators available when enabling FCCSW:
 pythia8, whizard, MadGraph5, Herwig.
@@ -198,12 +192,12 @@ KKMCee -h
 
 +++ Wrapper around the KKMCee/ProdMC.exe executable +++
 
-Usage: \tKKMCee -f Mu|Tau|Hadrons -e Ecms -n Nevts -o output_file [-s seed_file] [OPTIONS]
+Usage: \tKKMCee -f Mu|Tau|UDS|C|B|Hadrons -e Ecms -n Nevts -o output_file [-s seed_file] [OPTIONS]
        \tKKMCee -c config_file [-s seed_file]
 
 Options:
   -c, --config file 		Path to configuration file
-  -f, --flavour flavour 	Flavour to be generated (Mu|Tau|Hadrons)
+  -f, --flavour flavour 	Flavour to be generated (Mu|Tau|UDS|C|B|Hadrons)
   -e, --ecms energy 		Center of Mass energy in GeV
   -n, --nevts energy 		Number of events to be generated
   -o, --outfile file 		File with the generated events in LHE format
@@ -226,7 +220,7 @@ To generate a sample of dimuon events using the example files, do the following
 ```bash
 KKMCee -c /cvmfs/sft.cern.ch/lcg/views/LCG_97a_FCC_4/x86_64-centos7-gcc8-opt/share/KKMCee/examples/Mu.input
 ```
-The out should somethign like this
+The output should something like this
 
 ```bash
 Seeds: 29318493 48191772

@@ -23,6 +23,13 @@ git clone https://github.com/HEP-FCC/FCCAnalyses.git
 cd FCCAnalyses
 ```
 
+This tutorial runs with fcc-edm so we need to checkout the corresponding branch
+
+
+```bash
+git checkout fccedm
+```
+
 and follow the compilation instructions [here](https://github.com/HEP-FCC/FCCAnalyses/#getting-started) to get started with **ONLY** the installation.
 Once the code has been compiled, we can now run the pre-selection on previously produced samples:
 

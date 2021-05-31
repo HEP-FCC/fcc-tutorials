@@ -1,3 +1,4 @@
+
 # An introduction to FCC Software
 
 {% objectives "Learning Objectives" %}
@@ -93,7 +94,7 @@ An `option.py` is just a regular Python script that specifies how to set things 
 Many of the following lessons will teach you how to do something with FCCSW by showing you how to write or extend an `options.py`.
 You can use the above command to test it.
 You can also specify several option files like this:
-```bash
+```
 fccrun options1.py options2.py
 ```
 They will then both be used to set up FCCSW.
@@ -112,12 +113,12 @@ However, it is advised to follow this tutorial, as many of the components are in
 `fccrun` is a wrapper around a gaudi script called `gaudirun.py`. `fccrun` makes it easier to configure jobs on the command line. It is a dynamic script, i.e. it command line options depend on the options file and let you modify `options.py` without opening an editor.
 Take a look at the example job to run Pythia8:
 
-```bash
-less $FCCSWBASEDIR/share/FCCSW/Examples/options/pythia.py
+```
+less $FCCSW/Examples/options/pythia.py
 ```
 and compare it with the command line options for fccrun:
 ```bash
-fccrun $FCCSWBASEDIR/share/FCCSW/Examples/options/pythia.py -h
+fccrun $FCCSW/Examples/options/pythia.py -h
 ```
 And note that you have to give an `options.py` as the first argument to `fccrun` in order for this to work:
 

@@ -30,7 +30,7 @@ which fccrun
 If the above command fails without printing a path like `/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.14/x86_64-centos7-gcc8-opt/scripts/fccrun`, you need to setup the FCC software stack 
 
 ```bash
-source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
+source /cvmfs/fcc.cern.ch/sw/latest/setup-lcg.sh
 ```
 
 <!-- 
@@ -182,6 +182,7 @@ from Configurables import DelphesSaveChargedParticles
 muonSaveTool = DelphesSaveChargedParticles("muons")
 muonSaveTool.delphesArrayName = "MuonFilter/muons"
 muonSaveTool.particles.Path      = "muons"
+muonSaveTool.saveTrkCov = True
 muonSaveTool.particles_trkCov.Path      = "muons_trkCov"
 muonSaveTool.mcAssociations.Path = "muonsToMC"
 muonSaveTool.isolationTags.Path  = "muonITags"
