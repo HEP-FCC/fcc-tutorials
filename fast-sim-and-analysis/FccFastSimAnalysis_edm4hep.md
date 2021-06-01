@@ -27,9 +27,9 @@ and follow the compilation instructions [here](https://github.com/HEP-FCC/FCCAna
 Once the code has been compiled, we can now run the pre-selection on previously produced samples:
 
 ```bash
-python FCCeeAnalyses/ZH_Zmumu/analysis.py PATH_TO_FILES_PART_I/p8_ee_ZH_ecm240.root
-python FCCeeAnalyses/ZH_Zmumu/analysis.py PATH_TO_FILES_PART_I/p8_ee_ZZ_ecm240.root
-python FCCeeAnalyses/ZH_Zmumu/analysis.py PATH_TO_FILES_PART_I/p8_ee_WW_ecm240.root
+python examples/FCCee/higgs/mH-recoil/mumu/analysis.py PATH_TO_FILES_PART_I/p8_ee_ZH_ecm240.root
+python examples/FCCee/higgs/mH-recoil/mumu/analysis.py PATH_TO_FILES_PART_I/p8_ee_ZZ_ecm240.root
+python examples/FCCee/higgs/mH-recoil/mumu/analysis.py PATH_TO_FILES_PART_I/p8_ee_WW_ecm240.root
 ```
 
 this will produce small ntuples pre-selection files with only variables you are interested in.
@@ -37,14 +37,14 @@ this will produce small ntuples pre-selection files with only variables you are 
 lets now run the final selection on the pre-selection files:
 
 ```bash
-python FCCeeAnalyses/ZH_Zmumu/finalSel.py
+python examples/FCCee/higgs/mH-recoil/mumu/finalSel.py
 ```
  this will produce 2 files for each sample and each selection, one with final tree with variables of interest, and one with histograms.
  
  Now we can produce plots:
  
 ```python
- python bin/doPlots.py FCCeeAnalyses/ZH_Zmumu/plots.py
+ python bin/doPlots.py examples/FCCee/higgs/mH-recoil/mumu/plots.py
 ```
 
 and look at them in `FCCee/ZH_Zmumu/plots/`. 
@@ -54,29 +54,29 @@ Please note that the event statistics is not great because we only run on 10 000
 
 {% challenge "Exercises" %}
 
-1) Modify `FCCeeAnalyses/ZH_Zmumu/dataframe/plots.py` to include the muon tracks (look at the output file or to `FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py` to check the name.
+1) Modify `examples/FCCee/higgs/mH-recoil/mumu/plots.py` to include the muon tracks (look at the output file or to `examples/FCCee/higgs/mH-recoil/mumu/analysis.py` to check the name.
 
-2) Add the track informations to the output files by modifying `FCCeeAnalyses/ZH_Zmumu/dataframe/analysis.py` for the `efcharged` collection and produce plots with them as in 1)
+2) Add the track informations to the output files by modifying `examples/FCCee/higgs/mH-recoil/mumu/analysis.py` for the `efcharged` collection and produce plots with them as in 1)
 
 3) Produce plots with larger statistics by re-running `fccrun` with more events.
 
 4) **This part can only be on lxplus and for people having the access rights to eos and the analysis dictonary** 
 In order to produce plots with more statistics using centrally produced samples, we could use already processed large statistics samples.
-To do so we re-run the pre-selection over 10 percent of the total statistics [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_fccee_v02.php). 
+To do so we re-run the pre-selection over 10 percent of the total statistics [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA.php). 
 
 ```bash
- python FCCeeAnalyses/ZH_Zmumu/preSel.py
+ python examples/FCCee/higgs/mH-recoil/mumu/preSel.py
 ```
 
 and as before run the final selection and plots:
 
 ```bash
-python FCCeeAnalyses/ZH_Zmumu/finalSel.py
-python bin/doPlots.py FCCeeAnalyses/ZH_Zmumu/plots.py
+python examples/FCCee/higgs/mH-recoil/mumu/finalSel.py
+python bin/doPlots.py examples/FCCee/higgs/mH-recoil/mumu/plots.py
 ```
 and look at the new plots in `FCCee/ZH_Zmumu/plots/`. 
 
-To further increase the event statistics, increase the value (up to 1) of the parameter `fraction` in `FCCeeAnalyses/ZH_Zmumu/dataframe/preSel.py`
+To further increase the event statistics, increase the value (up to 1) of the parameter `fraction` in `examples/FCCee/higgs/mH-recoil/mumu/preSel.py`
 
 
 {% endchallenge %}

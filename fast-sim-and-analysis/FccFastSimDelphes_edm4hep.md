@@ -161,8 +161,8 @@ The following commands will run Pythia8 and Delphes and produce the relevant sig
 
 
 ```bash
-DelphesPythia8_EDM4HEP $DELPHES_DIR/cards/delphes_card_IDEAtrkCov.tcl edm4hep.tcl Pythia_ee_ZH_Zmumu_ecm240.cmd p8_ee_ZH_ecm240.root
-DelphesPythia8_EDM4HEP $DELPHES_DIR/cards/delphes_card_IDEAtrkCov.tcl edm4hep.tcl Pythia_ee_ZZ_ecm240.cmd p8_ee_ZZ_ecm240.root
-DelphesPythia8_EDM4HEP $DELPHES_DIR/cards/delphes_card_IDEAtrkCov.tcl edm4hep.tcl Pythia_ee_WW_ecm240.cmd p8_ee_WW_ecm240.root
+DelphesPythia8_EDM4HEP $DELPHES/cards/delphes_card_IDEA.tcl edm4hep.tcl Pythia_ee_ZH_Zmumu_ecm240.cmd p8_ee_ZH_ecm240.root
+DelphesPythia8_EDM4HEP $DELPHES/cards/delphes_card_IDEA.tcl edm4hep.tcl Pythia_ee_ZZ_ecm240.cmd p8_ee_ZZ_ecm240.root
+DelphesPythia8_EDM4HEP $DELPHES/cards/delphes_card_IDEA.tcl edm4hep.tcl Pythia_ee_WW_ecm240.cmd p8_ee_WW_ecm240.root
 ```
 
