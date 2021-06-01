@@ -44,7 +44,7 @@ python examples/FCCee/higgs/mH-recoil/mumu/finalSel.py
  Now we can produce plots:
  
 ```python
- python bin/doPlots.py examples/FCCee/higgs/mH-recoil/mumu/plots.py
+ python config/doPlots.py examples/FCCee/higgs/mH-recoil/mumu/plots.py
 ```
 
 and look at them in `FCCee/ZH_Zmumu/plots/`. 
@@ -72,7 +72,7 @@ and as before run the final selection and plots:
 
 ```bash
 python examples/FCCee/higgs/mH-recoil/mumu/finalSel.py
-python bin/doPlots.py examples/FCCee/higgs/mH-recoil/mumu/plots.py
+python config/doPlots.py examples/FCCee/higgs/mH-recoil/mumu/plots.py
 ```
 and look at the new plots in `FCCee/ZH_Zmumu/plots/`. 
 
@@ -169,7 +169,7 @@ python FCCeeAnalyses/Z_Zmumu/dataframe/finalSel.py
 Now we can produce plots:
  
 ```python
- python bin/doPlots.py FCCeeAnalyses/Z_Zmumu/dataframe/plots.py
+ python config/doPlots.py FCCeeAnalyses/Z_Zmumu/dataframe/plots.py
 ```
 
 and look at the new plots in `FCCee/Z_Zmumu/plots/`. 
