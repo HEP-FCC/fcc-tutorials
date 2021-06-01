@@ -80,7 +80,7 @@ To further increase the event statistics, increase the value (up to 1) of the pa
 
 
 {% endchallenge %}
-
+<!--
 ## Part III: Compare two Monte-Carlo samples
 
 In this part we will compare two generators at the Z-pole.
@@ -184,3 +184,4 @@ and look at the new plots in `outputs/FCCee/higgs/mH-recoil/mumu/plots/`.
 3) **For Experts** Produce the same process with madgraph, shower the LHE file produced with Ptyhia8 in FCCSW (together with Delphes) and compare the dimuon invariant mass distribution with Pythia and Whizard.
 
 {% endchallenge %}
+-->
