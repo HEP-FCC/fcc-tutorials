@@ -47,7 +47,7 @@ python examples/FCCee/higgs/mH-recoil/mumu/finalSel.py
  python config/doPlots.py examples/FCCee/higgs/mH-recoil/mumu/plots.py
 ```
 
-and look at them in `FCCee/ZH_Zmumu/plots/`. 
+and look at them in `outputs/FCCee/higgs/mH-recoil/mumu/plots/`. 
 
 Please note that the event statistics is not great because we only run on 10 000 events.
 
@@ -74,7 +74,7 @@ and as before run the final selection and plots:
 python examples/FCCee/higgs/mH-recoil/mumu/finalSel.py
 python config/doPlots.py examples/FCCee/higgs/mH-recoil/mumu/plots.py
 ```
-and look at the new plots in `FCCee/ZH_Zmumu/plots/`. 
+and look at the new plots in `outputs/FCCee/higgs/mH-recoil/mumu/plots/`. 
 
 To further increase the event statistics, increase the value (up to 1) of the parameter `fraction` in `examples/FCCee/higgs/mH-recoil/mumu/preSel.py`
 
@@ -114,7 +114,7 @@ Where `Beams:LHEF = events.lhe` points to the file you have produced with Whizar
 Then we shower with Pythia in FCCSW and run the Delphes detector parameterisation:
 
 ```bash
-fccrun PythiaDelphes_config.py --Filename Pythia_LHE.cmd --filename wizhardp8_ee_Z_Zmumu_ecm91.root -n 10000
+DelphesPythia8_EDM4HEP $DELPHES/cards/delphes_card_IDEA.tcl edm4hep.tcl Pythia_LHE.cmd wzp8_ee_Z_Zmumu_ecm91.root
 ```
 
 - **Pythia_ee_Zmumu_ecm91.cmd** 
@@ -150,36 +150,36 @@ PartonLevel:FSR = on               ! final-state radiation
 and run fcc on it
 
 ```bash
-fccrun PythiaDelphes_config.py --Filename Pythia_ee_Zmumu_ecm91.cmd --filename p8_ee_Z_Zmumu_ecm91.root -n 10000
+DelphesPythia8_EDM4HEP $DELPHES/cards/delphes_card_IDEA.tcl edm4hep.tcl Pythia_ee_Zmumu_ecm91.cmd p8_ee_Z_Zmumu_ecm91.root
 ```
 
 Now go to the `FCCAnalyses` repository you have cloned during Part II, and run the Z to mumu analysis on the files produced
 
 ```bash
-python FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py PATH_TO_FILES/wizhardp8_ee_Z_Zmumu_ecm91.root
-python FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py PATH_TO_FILES/p8_ee_Z_Zmumu_ecm91.root
+python examples/FCCee/higgs/mH-recoil/mumu/analysis.py PATH_TO_FILES/wizhardp8_ee_Z_Zmumu_ecm91.root
+python examples/FCCee/higgs/mH-recoil/mumu/analysis.py PATH_TO_FILES/p8_ee_Z_Zmumu_ecm91.root
 ```
 
 Run the final selection:
 
 ```bash
-python FCCeeAnalyses/Z_Zmumu/dataframe/finalSel.py
+python examples/FCCee/higgs/mH-recoil/mumu/finalSel.py
 ```
 
 Now we can produce plots:
  
 ```python
- python config/doPlots.py FCCeeAnalyses/Z_Zmumu/dataframe/plots.py
+ python config/doPlots.py examples/FCCee/higgs/mH-recoil/mumu/plots.py
 ```
 
-and look at the new plots in `FCCee/Z_Zmumu/plots/`. 
+and look at the new plots in `outputs/FCCee/higgs/mH-recoil/mumu/plots/`. 
 
 
 {% challenge  "**Exercises**"  %} 
 
 1) Whizard already contains ISR/FSR. To see this effect, rerun FCCSW on the Whizard LHE file by uncommenting the ISR/FSR in the Pythia card, and run the analysis to produce new plots and compare (move the old plots to an other directory as they will be overwritten) 
 
-2) Modify ```FCCeeAnalyses/Z_Zmumu/dataframe/analysis.py``` and ```FCCeeAnalyses/Z_Zmumu/dataframe/plots.py``` to include the muon tracks.
+2) Modify ``` examples/FCCee/higgs/mH-recoil/mumu/analysis.py``` and ```examples/FCCee/higgs/mH-recoil/mumu/plots.py``` to include the muon tracks.
 
 3) **For Experts** Produce the same process with madgraph, shower the LHE file produced with Ptyhia8 in FCCSW (together with Delphes) and compare the dimuon invariant mass distribution with Pythia and Whizard.
 
