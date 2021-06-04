@@ -167,7 +167,7 @@ DO_TREE=True
 ###This part is standard to all analyses
 import config.runDataFrameFinal as rdf
 myana=rdf.runDataFrameFinal(baseDir,procDict,process_list,cut_list,variables)
-myana.run(ncpu=NUM_CPUS, doTrees=DO_TREE)
+myana.run(ncpu=NUM_CPUS, doTree=DO_TREE)
 ```
 
 and run 
