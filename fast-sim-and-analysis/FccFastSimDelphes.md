@@ -32,6 +32,33 @@ If the above command fails without printing a path like `/cvmfs/sw.hsf.org/spack
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```
 
+When sourcing the stack, you should see a message like:
+
+```bash
+ ...  Key4HEP release: key4hep-stack/2021-06-02
+ ... Use the following command to reproduce the current environment: 
+ ... 
+         source /cvmfs/sw.hsf.org/spackages2/key4hep-stack/2021-06-02/x86_64-centos7-gcc8.3.0-opt/w6suthuzrwtg3mfan5xjglrv7pz6wvbc/setup.sh
+ ... 
+ ... done. 
+```
+
+this is telling that you have sourced the ```key4hep-stack``` version ```2021-06-02```.
+
+You can check all the packages associated to this release by using spack
+
+```bash
+spack find -p -d key4hep-stack@2021-06-02
+```
+
+for example to check the version of ```Key4SimDelphes``` installed in  version ```2021-06-02```:
+
+```bash
+spack find -p -d key4hep-stack@2021-06-02 | grep k4simdelphes
+```
+
+of course, if you are setting up the lastest software, the version number has to be changed to the one you actually sourced.
+
 
 ## Part I: Generate and simulate Events with DelphesEDM4Hep
 
@@ -161,8 +188,11 @@ The following commands will run Pythia8 and Delphes and produce the relevant sig
 
 
 ```bash
-DelphesPythia8_EDM4HEP $DELPHES/cards/delphes_card_IDEA.tcl edm4hep.tcl Pythia_ee_ZH_Zmumu_ecm240.cmd p8_ee_ZH_ecm240.root
-DelphesPythia8_EDM4HEP $DELPHES/cards/delphes_card_IDEA.tcl edm4hep.tcl Pythia_ee_ZZ_ecm240.cmd p8_ee_ZZ_ecm240.root
-DelphesPythia8_EDM4HEP $DELPHES/cards/delphes_card_IDEA.tcl edm4hep.tcl Pythia_ee_WW_ecm240.cmd p8_ee_WW_ecm240.root
+DelphesPythia8_EDM4HEP $DELPHES/cards/delphes_card_IDEA.tcl edm4hep.tcl Pythia_ee_ZH_Zmumu_ecm240.cmd p8_ee_ZH_ecm240_edm4hep.root
+DelphesPythia8_EDM4HEP $DELPHES/cards/delphes_card_IDEA.tcl edm4hep.tcl Pythia_ee_ZZ_ecm240.cmd p8_ee_ZZ_ecm240_edm4hep.root
+DelphesPythia8_EDM4HEP $DELPHES/cards/delphes_card_IDEA.tcl edm4hep.tcl Pythia_ee_WW_ecm240.cmd p8_ee_WW_ecm240_edm4hep.root
 ```
 
+**Important final remark**
+
+The Delphes, edm4hep and Pythia8 configurations in this tutorial differ from [the official ones](https://github.com/HEP-FCC/FCC-config/tree/spring2021)
