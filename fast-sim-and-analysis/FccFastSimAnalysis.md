@@ -178,7 +178,7 @@ python finalSel.py
 
 this will produce 2 files for each sample and each selection, one with final tree with variables of interest, and one with histograms.
  
-Now we can write the code to produce plots:
+Now we can write the code to produce plots, in ```plots.py```:
 
 
 ```python
