@@ -282,7 +282,7 @@ python /cvmfs/sw.hsf.org/spackages/linux-centos7-x86_64/gcc-8.3.0/fccanalyses-0.
 ```
 and look at the new plots in `plots/`. 
 
-To further increase the event statistics, increase the value (up to 1) of the parameter `fraction` in `examples/FCCee/higgs/mH-recoil/mumu/preSel.py`
+To further increase the event statistics, increase the value (up to 1) of the parameter `fraction` in `preSel.py`
 
 
 {% endchallenge %}
