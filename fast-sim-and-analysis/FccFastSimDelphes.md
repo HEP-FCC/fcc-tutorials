@@ -69,86 +69,26 @@ For this tutorial we will consider the following **physics processes**:
 -   e+ e- -> WW -> W to anything
 
 
-Let's start by writing the pythia cards for the various processes.
+Let's start by downloading the official pythia cards for the various processes:
 
-- **Pythia_ee_ZH_Zmumu_ecm240.cmd** for the Higgs Strahlung signal
-
-```python
-! File: Pythia_ee_ZH_Zmumu_ecm240.cmd
-Random:setSeed = on
-Main:numberOfEvents = 10000        ! number of events to generate
-Main:timesAllowErrors = 10         ! how many aborts before run stops
-
-! 2) Settings related to output in init(), next() and stat().
-Next:numberCount = 100             ! print message every n events
-Beams:idA = 11                     ! first beam, e+ = 11
-Beams:idB = -11                    ! second beam, e- = -11
-
-! 3) Hard process : ZH at 240 GeV
-Beams:eCM = 240  ! CM energy of collision
-HiggsSM:ffbar2HZ = on
-
-! 4) Settings for the event generation process in the Pythia8 library.
-PartonLevel:ISR = on               ! initial-state radiation
-PartonLevel:FSR = on               ! final-state radiation
-
-! 5) Non-standard settings; exemplifies tuning possibilities.
-25:m0        = 125.0               ! Higgs mass
-23:onMode    = off		   ! switch off Z boson decays
-23:onIfAny   = 13		   ! switch on Z boson decay to muons
+```bash
+wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Generator/Pythia8/p8_noBES_ee_ZH_ecm240.cmd
+wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Generator/Pythia8/p8_noBES_ee_ZZ_ecm240.cmd
+wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Generator/Pythia8/p8_noBES_ee_WW_ecm240.cmd
 ```
 
-
-- **Pythia_ee_ZZ_ecm240.cmd** for the ZZ background
-
-```python
-! File: Pythia_ee_ZZ_ecm240.cmd
-Random:setSeed = on
-Main:numberOfEvents = 10000        ! number of events to generate
-Main:timesAllowErrors = 10         ! how many aborts before run stops
-
-! 2) Settings related to output in init(), next() and stat().
-Next:numberCount = 100             ! print message every n events
-Beams:idA = 11                     ! first beam, e+ = 11
-Beams:idB = -11                    ! second beam, e- = -11
-
-! 3) Hard process : ZZ at 240 GeV
-Beams:eCM = 240  ! CM energy of collision
-WeakDoubleBoson:ffbar2gmZgmZ = on
-
-! 4) Settings for the event generation process in the Pythia8 library.
-PartonLevel:ISR = on               ! initial-state radiation
-PartonLevel:FSR = on               ! final-state radiation
-```
-
-- **Pythia_ee_WW_ecm240.cmd** for the WW background
-
-```python
-! File: Pythia_ee_WW_ecm240.cmd
-Random:setSeed = on
-Main:numberOfEvents = 10000        ! number of events to generate
-Main:timesAllowErrors = 10         ! how many aborts before run stops
-
-! 2) Settings related to output in init(), next() and stat().
-Next:numberCount = 100             ! print message every n events
-Beams:idA = 11                     ! first beam, e+ = 11
-Beams:idB = -11                    ! second beam, e- = -11
-
-! 3) Hard process : WW at 240 GeV
-Beams:eCM = 240  ! CM energy of collision
-WeakDoubleBoson:ffbar2WW = on
-
-! 4) Settings for the event generation process in the Pythia8 library.
-PartonLevel:ISR = on               ! initial-state radiation
-PartonLevel:FSR = on               ! final-state radiation
-```
 
 The detector response of the the baseline FCC-ee IDEA detector configuration is estimated with Delphes.
 Other detector cards can be found in the `$DELPHES_DIR/cards` directory, such as a ATLAS, CMS or ILD detector configurations:
 `delphes_card_ATLAS.tcl`, `delphes_card_CMS.tcl` and `delphes_card_ILD.tcl`. 
 
-To check the arguments ordering, please run the executable:
+But let's download the offical one:
 
+```bash
+wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Delphes/card_IDEA.tcl
+```
+
+To check the arguments ordering, please run the executable:
 
 ```bash
 DelphesPythia8_EDM4HEP
@@ -168,31 +108,18 @@ where the first argument is the delphes card, the second argument the configurat
 
 Before running we need to define the collections that we want to write. The first name for example ```GenParticleCollections``` is the type of output collection in EDM4hep (in this case ```GenParticleCollections``` is of type ```edm4hep::MCParticleCollection```) and the second argument for example ```Particle``` is the name of the collection in the Delphes card that will be used and stored in the EDM4Hep output file with the same name.
 
-- **edm4hep.tcl** 
-```python
-module EDM4HepOutput EDM4HepOutput {
-    add ReconstructedParticleCollections EFlowTrack EFlowPhoton EFlowNeutralHadron
-    add GenParticleCollections           Particle
-    add JetCollections                   Jet
-    add MuonCollections                  Muon
-    add ElectronCollections              Electron
-    add PhotonCollections                Photon
-    add MissingETCollections             MissingET
-    add ScalarHTCollections              ScalarHT
-    set RecoParticleCollectionName       ReconstructedParticles
-    set MCRecoAssociationCollectionName  MCRecoAssociations
- }
+
+We also download the official version of this file
+
+```bash
+wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Delphes/edm4hep_IDEA.tcl
 ```
 
 The following commands will run Pythia8 and Delphes and produce the relevant signal and background samples:
 
 
 ```bash
-DelphesPythia8_EDM4HEP $DELPHES/cards/delphes_card_IDEA.tcl edm4hep.tcl Pythia_ee_ZH_Zmumu_ecm240.cmd p8_ee_ZH_ecm240_edm4hep.root
-DelphesPythia8_EDM4HEP $DELPHES/cards/delphes_card_IDEA.tcl edm4hep.tcl Pythia_ee_ZZ_ecm240.cmd p8_ee_ZZ_ecm240_edm4hep.root
-DelphesPythia8_EDM4HEP $DELPHES/cards/delphes_card_IDEA.tcl edm4hep.tcl Pythia_ee_WW_ecm240.cmd p8_ee_WW_ecm240_edm4hep.root
+DelphesPythia8_EDM4HEP card_IDEA.tcl edm4hep_IDEA.tcl p8_noBES_ee_ZH_ecm240.cmd p8_ee_ZH_ecm240_edm4hep.root
+DelphesPythia8_EDM4HEP card_IDEA.tcl edm4hep_IDEA.tcl p8_noBES_ee_ZZ_ecm240.cmd p8_ee_ZZ_ecm240_edm4hep.root
+DelphesPythia8_EDM4HEP card_IDEA.tcl edm4hep_IDEA.tcl p8_noBES_ee_WW_ecm240.cmd p8_ee_WW_ecm240_edm4hep.root
 ```
-
-**Important final remark**
-
-The Delphes, edm4hep and Pythia8 configurations in this tutorial differ from [the official ones](https://github.com/HEP-FCC/FCC-config/tree/spring2021)
