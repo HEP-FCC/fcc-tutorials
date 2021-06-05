@@ -1,0 +1,34 @@
+
+name: publish
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Requirements
+      run: |
+        pip3 install -r requirements.txt
+    - name: Sphinx build
+      run: |
+        sphinx-build -M html . build
+    - name: Publish gh-pages
+      run: |
+        cd build/html
+        git init
+        git config user.name "Key4hep bot"
+        git config user.email "Key4hep.bot@example.com"
+        git remote add upstream https://vvolkl:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
+
+        touch .nojekyll
+        git add .nojekyll
+        git commit -m "Initial commit"
+        git branch -m gh-pages
+        touch .
+        git add -A .
+        git commit -m "Rebuild page at ${GITHUB_SHA}"
+        git push -f upstream gh-pages:gh-pages
