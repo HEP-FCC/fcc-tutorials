@@ -1,0 +1,5 @@
+git+https://github.com/chrisburr/recommonmark.git@patch-1
+starterkit-ci==0.0.12
+sphinx-copybutton==0.3.0
+sphinx-markdown-tables==0.0.15
+notedown==1.5.1
