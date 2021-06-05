@@ -35,7 +35,7 @@ linkcheck_ignore += [
     r'https://research\.cs\.wisc\.edu/htcondor/.*',
 ]
 
-def starterkit_ci_setup(app):
-    app.add_stylesheet('starterkit.css')
+#def starterkit_ci_setup(app):
+#    app.add_stylesheet('starterkit.css')
 
-setup.extra_setup_funcs += [starterkit_ci_setup]
+#setup.extra_setup_funcs += [starterkit_ci_setup]
