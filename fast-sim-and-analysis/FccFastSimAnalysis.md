@@ -20,7 +20,7 @@ We stay in the same directory where we have produced our samples with ```Delphes
 
 For this part we start by making sure we can use FCCAnalyses by checking we can load the library correctly:
 
-```bash
+```python
 python
 import ROOT
 ROOT.gSystem.Load("libFCCAnalyses")
