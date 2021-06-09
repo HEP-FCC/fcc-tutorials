@@ -42,6 +42,6 @@ jobs:
         export PATH=$HOME/.local/bin/:$PATH;\
         cat .github/scripts/yamlheader.md  ${{ matrix.PAGE }}.md > ${{ matrix.PAGE }}-test.md;\
         cd $(dirname ${{ matrix.page }});\
-        pagename = $(basename ${{ matrix.page}});\
+        pagename=$(basename ${{ matrix.page}});\
         jupytext ${pagename}-test.md -o ${pagename}.ipynb --execute;\
         '
