@@ -1,4 +1,6 @@
 _book
+__pycache__
+plots
 .ipynb_checkpoints
 *.ipynb
 
