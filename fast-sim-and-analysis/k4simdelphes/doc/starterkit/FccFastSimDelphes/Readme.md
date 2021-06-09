@@ -55,6 +55,7 @@ this is telling that you have sourced the `key4hep-stack` version `2021-06-02`.
 You can check all the packages associated to this release by using spack
 
 ```bash
+source /cvmfs/sw.hsf.org/contrib/spack/share/spack/setup-env.sh 
 spack find -p -d key4hep-stack@2021-06-02
 ```
 
