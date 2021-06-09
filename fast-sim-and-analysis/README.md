@@ -21,7 +21,6 @@ If you have any problems or questions, you can [open an issue][lessons-issues] o
     :caption: Contents:
 
     FccFastSimGeneration.md
-    FccFastSimDelphes.md
     k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.md
     fccanalyses/doc/starterkit/FccFastSimAnalyses/Readme.md
     FccFastSimParticleMultiplicity.md
