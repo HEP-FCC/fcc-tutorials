@@ -1,3 +1,4 @@
+
 # FCC: Getting started with simulating events in Delphes
 
 {% objectives "Learning Objectives" %}
@@ -14,7 +15,7 @@ This tutorial will teach you how to:
 
 First login to to a fresh shell on lxplus, on OSG, or in one of the virtual machine that could be provided on open stack. Usage of bash shell is highly recommended. Create a working directory and go inside
 
-```bash
+```
 mkdir mytutorial
 cd mytutorial
 ```
@@ -34,7 +35,7 @@ source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 
 When sourcing the stack, you should see a message like:
 
-```bash
+```
  ...  Key4HEP release: key4hep-stack/2021-06-02
  ... Use the following command to reproduce the current environment: 
  ... 
@@ -43,7 +44,7 @@ When sourcing the stack, you should see a message like:
  ... done. 
 ```
 
-this is telling that you have sourced the ```key4hep-stack``` version ```2021-06-02```.
+this is telling that you have sourced the `key4hep-stack` version `2021-06-02`.
 
 You can check all the packages associated to this release by using spack
 
@@ -51,7 +52,7 @@ You can check all the packages associated to this release by using spack
 spack find -p -d key4hep-stack@2021-06-02
 ```
 
-for example to check the version of ```Key4SimDelphes``` installed in  version ```2021-06-02```:
+for example to check the version of `k44SimDelphes` installed in  version `2021-06-02`:
 
 ```bash
 spack find -p -d key4hep-stack@2021-06-02 | grep k4simdelphes
@@ -90,13 +91,13 @@ wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Delph
 
 To check the arguments ordering, please run the executable:
 
-```bash
-DelphesPythia8_EDM4HEP
+```
+DelphesPythia8_EDM4HEP -h
 ```
 
 it should produce the following message:
 
-```bash
+```
 Usage: DelphesPythia8config_file output_config_file pythia_card output_file
 config_file - configuration file in Tcl format,
 output_config_file - configuration file steering the content of the edm4hep output in Tcl format,
@@ -106,10 +107,10 @@ output_file - output file in ROOT format.
 
 where the first argument is the delphes card, the second argument the configuration file for the edm4hep output (see later) the third argument is the pythia card and last argument is the output file name.
 
-Before running we need to define the collections that we want to write. The first name for example ```GenParticleCollections``` is the type of output collection in EDM4hep (in this case ```GenParticleCollections``` is of type ```edm4hep::MCParticleCollection```) and the second argument for example ```Particle``` is the name of the collection in the Delphes card that will be used and stored in the EDM4Hep output file with the same name.
+Before running we need to define the collections that we want to write. The first name for example `GenParticleCollections` is the type of output collection in EDM4hep (in this case `GenParticleCollections` is of type `edm4hep::MCParticleCollection`) and the second argument for example `Particle` is the name of the collection in the Delphes card that will be used and stored in the EDM4Hep output file with the same name.
 
 
-We also download the official version of this file
+We also download the official version of this file:
 
 ```bash
 wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Delphes/edm4hep_IDEA.tcl
