@@ -1,10 +1,3 @@
----
-jupyter:
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
----
 
 # FCC: Getting started with simulating events in Delphes
 
