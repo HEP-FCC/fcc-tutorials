@@ -238,7 +238,7 @@ legend['ZZ'] = 'ZZ'
 legend['VV'] = 'VV boson'
 ```
 
-And run the plots (the line below is temporary, will be updated once we properly link the env var) 
+Run the plotting script with the command:
 
 ```bash
 python $FCCANALYSES/config/doPlots.py plots.py 
