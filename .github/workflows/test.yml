@@ -10,8 +10,8 @@ jobs:
       matrix:
         PAGE: ['software-basics/exploring-fcc-files',
                'software-basics/fccsw',
-               'fast-sim-and-analysis/FccFastSimAnalysis',
-               'fast-sim-and-analysis/FccFastSimDelphes',
+               'fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme',
+               'fast-sim-and-analysis/k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme',
                'fast-sim-and-analysis/FccFastSimGeneration',
                'fast-sim-and-analysis/FccFastSimParticleMultiplicity',
                'full-detector-simulations/FccCaloPerformance/FccCaloPerformance',
@@ -41,5 +41,7 @@ jobs:
         source ${{ matrix.SETUP }};\
         export PATH=$HOME/.local/bin/:$PATH;\
         cat .github/scripts/yamlheader.md  ${{ matrix.PAGE }}.md > ${{ matrix.PAGE }}-test.md;\
-        jupytext ${{ matrix.PAGE }}-test.md -o ${{ matrix.PAGE }}.ipynb --execute;\
+        cd $(dirname ${{ matrix.page }});\
+        pagename=$(basename ${{ matrix.page}});\
+        jupytext ${pagename}-test.md -o ${pagename}.ipynb --execute;\
         '
