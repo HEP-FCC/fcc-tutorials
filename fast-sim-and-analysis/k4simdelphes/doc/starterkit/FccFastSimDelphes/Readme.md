@@ -29,7 +29,8 @@ which DelphesPythia8_EDM4HEP
 
 If the above command fails without printing a path like `/cvmfs/sw.hsf.org/spackages/linux-centos7-broadwell/gcc-8.3.0/edm4hep-master-kopc27l5fhxopkwfblet2xrwh6dbd322/bin/DelphesPythia8_EDM4HEP`, you need to setup the FCC software stack 
 
-```source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
+```
+source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```
 
 When sourcing the stack, you should see a message like:
