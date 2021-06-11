@@ -9,13 +9,12 @@ FCC: Getting started with event generation
 
 * To configure your environment for the FCC software, just do:
 
-```bash
-source /cvmfs/fcc.cern.ch/sw/latest/setup-lcg.sh
+```
+source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```
 
-<!--for the LCG stack installed version.
-While the version should be equivalent in most of the aspects, some packages may be available only 
-in one of the builds. This will be highlighted when relevant.-->
+More generators are available in the LCG stacks - while the version should be equivalent in most of the aspects, some packages may be available only 
+in one of the builds. This will be highlighted when relevant.
 
 Builds exist on CernVM-FS for CentOS7 (this is the system run on `lxplus`) using gcc8. LCG buils exist also
 for Ubuntu 20.04 LTS.
@@ -65,7 +64,7 @@ which whizard
 
 Whizard is run as this:
 
-```bash
+```
 whizard <process_config>.sin
 ```
 
