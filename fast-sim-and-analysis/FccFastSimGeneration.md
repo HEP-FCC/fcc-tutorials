@@ -185,10 +185,14 @@ which KKMCee
 ```
 /cvmfs/sft.cern.ch/lcg/views/LCG_97a_FCC_4/x86_64-centos7-gcc8-opt/bin/KKMCee
 ```
-An help function is available
+
+A help function is available:
 
 ```bash
 KKMCee -h
+```
+
+```
 
 +++ Wrapper around the KKMCee/ProdMC.exe executable +++
 
@@ -210,8 +214,11 @@ KKMCee -c kkmc_ditau.input
 
 Configuration example files are available under
 
-```bash
-$ ls /cvmfs/sft.cern.ch/lcg/views/LCG_97a_FCC_4/x86_64-centos7-gcc8-opt/share/KKMCee/examples/
+```
+ls /cvmfs/sft.cern.ch/lcg/views/LCG_97a_FCC_4/x86_64-centos7-gcc8-opt/share/KKMCee/examples/
+```
+
+```
 Beast.input  Bottom.input  Down.input  Inclusive.input  Mu.input  Tau.input  Up.input
 ```
 
@@ -220,9 +227,10 @@ To generate a sample of dimuon events using the example files, do the following
 ```bash
 KKMCee -c /cvmfs/sft.cern.ch/lcg/views/LCG_97a_FCC_4/x86_64-centos7-gcc8-opt/share/KKMCee/examples/Mu.input
 ```
-The output should something like this
 
-```bash
+The output should look something like this:
+
+```
 Seeds: 29318493 48191772
   29318493      IJKLIN= 29318493  48191772
          0      NTOTIN= 0
