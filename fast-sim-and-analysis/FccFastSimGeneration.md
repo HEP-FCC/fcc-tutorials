@@ -77,7 +77,7 @@ or at `https://gitlab.tp.nt.uni-siegen.de/whizard/public/-/tree/master/share/exa
 
 Some examples more specific to FCC can be found under
 
-```bash
+```
 ls /eos/project-f/fccsw-web/www/share/gen/whizard/
 ```
 or browsing `https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/`, if EOS is not available.
