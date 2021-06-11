@@ -88,9 +88,9 @@ It is advised to work in a separate directory for each process. For example, for
  mkdir test_whizard/Z_mumu; cd test_whizard/Z_mumu
  wget https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/Z_mumu.sin
  whizard Z_mumu.sin
- ```
+```
 
- ```
+```
 | Writing log to 'whizard.log'
 |=============================================================================|
 |                                                                             |
@@ -143,6 +143,7 @@ Warning: Encountered events with excess weight: 6 events (  0.600 %)
 | WHIZARD run finished.
 |=============================================================================|
 ```
+
 The file `z_mumu.lhe` contains 100 e<sup>+</sup>e<sup>-</sup> &#8594; mu<sup>+</sup>mu<sup>-</sup>(gamma) events in LHEF 3.0 format .
 
 
