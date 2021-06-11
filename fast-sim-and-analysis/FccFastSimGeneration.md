@@ -188,7 +188,7 @@ which KKMCee
 
 A help function is available:
 
-```bash
+```
 KKMCee -h
 ```
 
