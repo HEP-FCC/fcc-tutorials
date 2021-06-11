@@ -13,7 +13,6 @@ jobs:
                'fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme',
                'fast-sim-and-analysis/k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme',
                'fast-sim-and-analysis/FccFastSimGeneration',
-               'fast-sim-and-analysis/FccFastSimParticleMultiplicity',
                'full-detector-simulations/FccCaloPerformance/FccCaloPerformance',
                'full-detector-simulations/FCCeeDriftChamber/FCCeeDriftChamber',
                'full-detector-simulations/FCCeeGuineaPigIRBackgrounds/README',
