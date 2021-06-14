@@ -1,0 +1,480 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Replace a mass hypothesis &mdash; FCC Starterkit Lessons  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/panels.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/starterkit.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FCC Starterkit Lessons
+          
+
+          
+            
+            <img src="../_static/starterkit.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">First  Steps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/prerequisites.html">Pre-workshop checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/introduction-to-course.html">Goals of the course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/fccsw.html">An introduction to FCC Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/bookkeeping.html">Finding data in the Bookkeeping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/exploring-fcc-files.html">Inspecting an FCC data file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-events-tree">The <code class="docutils literal notranslate"><span class="pre">events</span></code> tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-metadata-tree">The <code class="docutils literal notranslate"><span class="pre">metadata</span></code> tree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/asking-questions.html">Asking good questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fast-sim-and-analysis/README.html">Generators, Fast Simulation and Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html">FCC: Getting started with the production and analysis of fast-simulated events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#installation">Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#set-up-your-working-directory">Set up your working directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#getting-started-with-delphes">Getting started with Delphes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-fccsw-with-pythia8-delphes">Run FCCSW with Pythia8+Delphes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-the-analysis-in-heppy">Run the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#make-plots">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#cutflow">CutFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#legacy-using-the-papas-tool-for-fcc-ee">Legacy: using the Papas tool (for FCC-ee)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id1">Set up your working directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#generate-events-with-pythia8">Generate events with pythia8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-papas-and-the-analysis-in-heppy">Run papas and the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id2">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#more-information">More information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html">FCC-hh: Pythia, Delphes, Heppy Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-i-generate-and-simulate-events-with-fccsw">Part I: Generate and simulate Events with FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-ii-analyze-the-output-with-heppy">Part II: Analyze the output with Heppy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iii-produce-plots">Part III: Produce plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iv-homework">Part IV: Homework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#other-documentation">Other documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html">FCC-ee: Getting started with analysing simulated physics events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#instructions">Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#exercices">Exercices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">Full Detector Simulations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html">FCC Calorimeter Performance Studies Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#using-the-dd4hep-detector-model-in-fcc-software">Using the DD4hep detector model in FCC Software.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#running-geant4-within-the-fcc-software-framework">Running Geant4 within the FCC Software Framework</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#obtaining-and-plotting-the-energy-resolution">Obtaining and Plotting the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#extracting-and-plotting-the-resolution">Extracting and Plotting the Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-parametrizing-the-energy-resolution">Further Topics: Parametrizing the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-calculating-the-sampling-fraction-and-using-it-in-simulation">Further Topics: Calculating the Sampling Fraction and using it in Simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html">FCCee: Full Simulation of IDEA Driftchamber</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-i-simulations-with-the-idea-detector-model-in-fccsw">Part I: Simulations with the IDEA detector model in  FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-ii-user-task-basic-reconstruction-with-a-hough-transform">Part II User Task: Basic Reconstruction with a Hough-Transform</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">Developing FCCSW</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html">Github workflow and contribution guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#first-time-setup-of-git">First time setup of git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#generate-and-set-up-ssh-keys-for-github">Generate and set up ssh keys for github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#improving-your-git-experience">Improving your git experience</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#development-workflow">Development workflow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#keeping-your-local-repository-up-to-date">Keeping your local repository up to date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#contributing-code">Contributing code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#general-recommendations">General recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#commit-comments">Commit comments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#cleaning-history">Cleaning history</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#pull-requests">Pull requests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#trouble-shooting">Trouble-shooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#when-i-try-to-push-to-the-repository-i-get-an-authentication-error">When I try to push to the repository, I get an authentication error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#i-have-cloned-with-https-and-now-i-can-t-push-my-changes-what-do-i-do">I have cloned with https and now I can’t push my changes, what do I do?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#need-help">Need help?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html">CMake guide for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#quick-start-into-building-fccsw">Quick start into building FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-example-packages">CMake example packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-in-the-fcc-software-framework">CMake in the FCC software framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#ctest-in-fccsw">CTest in FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-internal-library">Using an internal library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#building-a-new-gaudi-module">Building a new Gaudi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-external-library">Using an external library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#customizing-how-cmake-is-run">Customizing how CMake is run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html">Writing documentation for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#where-to-put-documentation">Where to put documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#when-and-how-is-the-documentation-page-updated">When and how is the documentation page updated?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#structure-of-the-content">Structure of the content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#running-website-generation-locally">Running website generation locally</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#about-jekyll">About jekyll</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#for-website-admins">For website admins</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CONDUCT.html">Contributor Code of Conduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html">Instructional Material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html#software">Software</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://lhcb.github.io/starterkit">LHCb starterkit</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Starterkit Lessons</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Replace a mass hypothesis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/second-analysis-steps/switch-mass-hypo.md" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="replace-a-mass-hypothesis">
+<h1>Replace a mass hypothesis<a class="headerlink" href="#replace-a-mass-hypothesis" title="Permalink to this headline">¶</a></h1>
+<div class="panel panel-objectives docutils container">
+<div class="panel-header open docutils container">
+<p id="learning-objectives"><i class="fa fa-line-chart"></i> Learning Objectives</p>
+</div>
+<div class="panel-body docutils container">
+<ul class="simple">
+<li><p>Create a new selection starting from the stripping line output</p></li>
+<li><p>Change the particle hypothesis made by the stripping line</p></li>
+</ul>
+</div>
+</div>
+<p>There are many situations where you want to repurpose a stripping line to look for a new decay that is similar in topology but distinct from what was put into the stripping line. The easiest thing to do is to change some of the hypothesis on particle IDs made in the stripping. This lesson will show you how to do that.</p>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="reinterpreting-stripping-selections"><i class="fa fa-info-circle"></i> Reinterpreting stripping selections</p>
+</div>
+<div class="panel-body docutils container">
+<p>Note that with this method you can never find more candidates than the
+stripping has already found.  However, you can reinterpret parts of the decay
+to look for new decay modes.</p>
+</div>
+</div>
+<p>As an example we will switch the decays of the D0 from (K- K+) to (K- pi+).</p>
+<p>There is an algorithm that allows us to replace parts of the decay descriptor called <code class="docutils literal notranslate"><span class="pre">SubstitutePID</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># configure an algorithm to substitute the K+ (resp. the K-)</span>
+<span class="c1"># in the D0 (resp the D~0) decay by a pion </span>
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">SubstitutePID</span>
+<span class="n">subs</span> <span class="o">=</span> <span class="n">SubstitutePID</span><span class="p">(</span>
+    <span class="s1">&#39;MakeD02Kpi&#39;</span><span class="p">,</span>
+    <span class="n">Code</span> <span class="o">=</span> <span class="s2">&quot;DECTREE(&#39;[D*(2010)+ -&gt; (D0 -&gt; K- K+) pi+]CC&#39;)&quot;</span><span class="p">,</span>
+    <span class="c1"># note that SubstitutePID can&#39;t handle automatic CC</span>
+    <span class="n">Substitutions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Charm -&gt; (D0 -&gt; K- ^K+) Meson&#39;</span><span class="p">:</span> <span class="s1">&#39;pi+&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Charm -&gt; (D~0 -&gt; K+ ^K-) Meson&#39;</span><span class="p">:</span> <span class="s1">&#39;pi-&#39;</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The algorithm is configured with a name <code class="docutils literal notranslate"><span class="pre">MakeD02Kpi</span></code>. In the <code class="docutils literal notranslate"><span class="pre">Code</span></code> argument we need to specify the initial selection. This is done by using LoKi functors. Since we know we will be using an already prepared selection, we can simply use the <code class="docutils literal notranslate"><span class="pre">DECTREE</span></code> functor to search for candidates fulfilling this decay structure. See the <a class="reference external" href="../first-analysis-steps/loki-functors">lesson on LoKi</a> for more info on what you can do here.</p>
+<p>Now we are ready to specify which hypotheses to change. <code class="docutils literal notranslate"><span class="pre">Substitutions</span></code> is a dictionary where the keys are decay descriptors and the values are the names of the replacement particles. The particle that should be replaced is marked with a <code class="docutils literal notranslate"><span class="pre">^</span></code>. So in the example above</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;Charm -&gt; (D0 -&gt; K- ^K+) Meson&#39;</span><span class="p">:</span> <span class="s1">&#39;pi+&#39;</span>
+</pre></div>
+</div>
+<p>means: Look for a decay of a Charm-particle into D0 plus any meson, where the D0 decays to (K- K+) and replace the K+ with a pi+.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">SubstitutePID</span></code> does not automatically handle complex conjugation via the <code class="docutils literal notranslate"><span class="pre">CC</span></code> operator. Therefore you have to specify all substitutions explicitely.</p>
+<p>Next we have to handle the input and output of this algorithm. This is accomplished using <a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/LHCb/ParticleSelection">particle selections</a>. The input to our substitution algorithm will be the candidates produced by the stripping. In order to make them look like a selection we can use the <code class="docutils literal notranslate"><span class="pre">DataOnDemand</span></code> service:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PhysSelPython.Wrappers</span> <span class="kn">import</span> <span class="n">Selection</span>
+<span class="kn">from</span> <span class="nn">PhysSelPython.Wrappers</span> <span class="kn">import</span> <span class="n">SelectionSequence</span>
+<span class="kn">from</span> <span class="nn">PhysSelPython.Wrappers</span> <span class="kn">import</span> <span class="n">DataOnDemand</span>
+
+<span class="c1"># Stream and stripping line we want to use</span>
+<span class="n">stream</span> <span class="o">=</span> <span class="s1">&#39;AllStreams&#39;</span>
+<span class="n">line</span> <span class="o">=</span> <span class="s1">&#39;D2hhPromptDst2D2KKLine&#39;</span>
+<span class="n">tesLoc</span> <span class="o">=</span> <span class="s1">&#39;/Event/</span><span class="si">{0}</span><span class="s1">/Phys/</span><span class="si">{1}</span><span class="s1">/Particles&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+
+<span class="c1"># get the selection(s) created by the stripping</span>
+<span class="n">strippingSels</span> <span class="o">=</span> <span class="p">[</span><span class="n">DataOnDemand</span><span class="p">(</span><span class="n">Location</span><span class="o">=</span><span class="n">tesLoc</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>The output of the algorithm has to be packaged into a new selection:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a selection using the substitution algorithm</span>
+<span class="n">selSub</span> <span class="o">=</span> <span class="n">Selection</span><span class="p">(</span>
+    <span class="s1">&#39;Dst2D0pi_D02Kpi_Sel&#39;</span><span class="p">,</span>
+    <span class="n">Algorithm</span><span class="o">=</span><span class="n">subs</span><span class="p">,</span>
+    <span class="n">RequiredSelections</span><span class="o">=</span><span class="n">strippingSels</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Note how the input stripping selection is daisy-chained to the output selection through the <code class="docutils literal notranslate"><span class="pre">RequiredSelections</span></code> (it has to be a list of selections) argument. The new selection is added into a <code class="docutils literal notranslate"><span class="pre">SelectionSequence</span></code> for further use by DaVinci:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">selSeq</span> <span class="o">=</span> <span class="n">SelectionSequence</span><span class="p">(</span><span class="s1">&#39;SelSeq&#39;</span><span class="p">,</span> <span class="n">TopSelection</span><span class="o">=</span><span class="n">selSub</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We are now ready to produce an ntuple on our newly created selection. As usual we configure a <code class="docutils literal notranslate"><span class="pre">DecayTreeTuple</span></code>, which now is looking for the candidates, which have the redefined D0 decay:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">DecayTreeTuple</span>
+
+<span class="c1"># Create an ntuple to capture D*+ decays from the new selection</span>
+<span class="n">dtt</span> <span class="o">=</span> <span class="n">DecayTreeTuple</span><span class="p">(</span><span class="s1">&#39;TupleDstToD0pi_D0ToKpi&#39;</span><span class="p">)</span>
+<span class="n">dtt</span><span class="o">.</span><span class="n">Inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">selSeq</span><span class="o">.</span><span class="n">outputLocation</span><span class="p">()]</span>
+<span class="c1"># note the redefined decay of the D0</span>
+<span class="n">dtt</span><span class="o">.</span><span class="n">Decay</span> <span class="o">=</span> <span class="s1">&#39;[D*(2010)+ -&gt; ^(D0 -&gt; ^K- ^pi+) ^pi+]CC&#39;</span>
+</pre></div>
+</div>
+<p>The input to the <code class="docutils literal notranslate"><span class="pre">DecayTreeTuple</span></code> is taken as the <code class="docutils literal notranslate"><span class="pre">outputLocations</span></code> of the <code class="docutils literal notranslate"><span class="pre">SelectionSequence</span></code> we just created.</p>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="why-use-davinci-selections?"><i class="fa fa-info-circle"></i> Why use DaVinci selections?</p>
+</div>
+<div class="panel-body docutils container">
+<p>Selections and SelectionSequences are an elegant way to organize the required
+algorithms that perform the job of selecting data.
+The <a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/LHCb/ParticleSelection">particle selection toolkit</a> uses python tricks to make the management of even complicated sequences of selections rather straight forward. In particular the toolkit ensures that all necessary algorithms are run in the correct order to produce the desired selections. It is therefore mainly a tool to manage dependencies. For technical details, have a look at the <a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/LHCb/ParticleSelection">TWiki page</a>.</p>
+</div>
+</div>
+<p>Finally we add the <code class="docutils literal notranslate"><span class="pre">SelectionSequence</span></code> and the <code class="docutils literal notranslate"><span class="pre">DecayTreeTuple</span></code> to the DaVinci application. Since we are adding more than one algorithm we need a <code class="docutils literal notranslate"><span class="pre">GaudiSequencer</span></code> that takes care of calling everything in the right order:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">GaudiSequencer</span><span class="p">,</span> <span class="n">DaVinci</span>
+
+<span class="c1"># add our new selection and the tuple into the sequencer</span>
+<span class="n">seq</span> <span class="o">=</span> <span class="n">GaudiSequencer</span><span class="p">(</span><span class="s1">&#39;MyTupleSeq&#39;</span><span class="p">)</span>
+<span class="n">seq</span><span class="o">.</span><span class="n">Members</span> <span class="o">+=</span> <span class="p">[</span><span class="n">selSeq</span><span class="o">.</span><span class="n">sequence</span><span class="p">()]</span>
+<span class="n">seq</span><span class="o">.</span><span class="n">Members</span> <span class="o">+=</span> <span class="p">[</span><span class="n">dtt</span><span class="p">]</span>
+<span class="n">DaVinci</span><span class="p">()</span><span class="o">.</span><span class="n">appendToMainSequence</span><span class="p">([</span><span class="n">seq</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The solution to this exercise <code class="docutils literal notranslate"><span class="pre">ntuple_switchHypo.py</span></code>, is <a class="reference download internal" download="" href="../_downloads/dd8860d83b28badac2d309f06430088a/ntuple_switchHypo.py"><code class="xref download docutils literal notranslate"><span class="pre">available</span>
+<span class="pre">here</span></code></a>.</p>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="think-about-it"><i class="fa fa-info-circle"></i> Think about it</p>
+</div>
+<div class="panel-body docutils container">
+<p>Why can’t we use this method to look for D* decaying to D0+photon ?</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, FCC Starterkit
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

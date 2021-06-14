@@ -1,0 +1,558 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using git to develop LHCb software &mdash; FCC Starterkit Lessons  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/panels.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/starterkit.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> FCC Starterkit Lessons
+          
+
+          
+            
+            <img src="../_static/starterkit.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">First  Steps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/prerequisites.html">Pre-workshop checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/introduction-to-course.html">Goals of the course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/fccsw.html">An introduction to FCC Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/bookkeeping.html">Finding data in the Bookkeeping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/exploring-fcc-files.html">Inspecting an FCC data file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-events-tree">The <code class="docutils literal notranslate"><span class="pre">events</span></code> tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../software-basics/exploring-fcc-files.html#the-metadata-tree">The <code class="docutils literal notranslate"><span class="pre">metadata</span></code> tree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../software-basics/asking-questions.html">Asking good questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fast-sim-and-analysis/README.html">Generators, Fast Simulation and Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html">FCC: Getting started with the production and analysis of fast-simulated events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#installation">Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#set-up-your-working-directory">Set up your working directory</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#getting-started-with-delphes">Getting started with Delphes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-fccsw-with-pythia8-delphes">Run FCCSW with Pythia8+Delphes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-the-analysis-in-heppy">Run the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#make-plots">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#cutflow">CutFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#legacy-using-the-papas-tool-for-fcc-ee">Legacy: using the Papas tool (for FCC-ee)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id1">Set up your working directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#generate-events-with-pythia8">Generate events with pythia8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#run-papas-and-the-analysis-in-heppy">Run papas and the analysis in heppy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#id2">Make plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fast-sim-and-analysis/FccSoftwareGettingStartedFastSim.html#more-information">More information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html">FCC-hh: Pythia, Delphes, Heppy Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-i-generate-and-simulate-events-with-fccsw">Part I: Generate and simulate Events with FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-ii-analyze-the-output-with-heppy">Part II: Analyze the output with Heppy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iii-produce-plots">Part III: Produce plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#part-iv-homework">Part IV: Homework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FccFullAnalysis.html#other-documentation">Other documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html">FCC-ee: Getting started with analysing simulated physics events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#instructions">Instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fast-sim-and-analysis/FcceeAnalysis.html#exercices">Exercices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">Full Detector Simulations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html">FCC Calorimeter Performance Studies Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#using-the-dd4hep-detector-model-in-fcc-software">Using the DD4hep detector model in FCC Software.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#running-geant4-within-the-fcc-software-framework">Running Geant4 within the FCC Software Framework</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#obtaining-and-plotting-the-energy-resolution">Obtaining and Plotting the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#extracting-and-plotting-the-resolution">Extracting and Plotting the Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-parametrizing-the-energy-resolution">Further Topics: Parametrizing the Energy Resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../full-detector-simulations/FccCaloPerformance.html#further-topics-calculating-the-sampling-fraction-and-using-it-in-simulation">Further Topics: Calculating the Sampling Fraction and using it in Simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html">FCCee: Full Simulation of IDEA Driftchamber</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-i-simulations-with-the-idea-detector-model-in-fccsw">Part I: Simulations with the IDEA detector model in  FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../full-detector-simulations/FCCeeDriftChamber.html#part-ii-user-task-basic-reconstruction-with-a-hough-transform">Part II User Task: Basic Reconstruction with a Hough-Transform</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">Developing FCCSW</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html">Github workflow and contribution guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#first-time-setup-of-git">First time setup of git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#generate-and-set-up-ssh-keys-for-github">Generate and set up ssh keys for github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#improving-your-git-experience">Improving your git experience</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#development-workflow">Development workflow</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#keeping-your-local-repository-up-to-date">Keeping your local repository up to date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#contributing-code">Contributing code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#general-recommendations">General recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#commit-comments">Commit comments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#cleaning-history">Cleaning history</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#pull-requests">Pull requests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#trouble-shooting">Trouble-shooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#when-i-try-to-push-to-the-repository-i-get-an-authentication-error">When I try to push to the repository, I get an authentication error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#i-have-cloned-with-https-and-now-i-can-t-push-my-changes-what-do-i-do">I have cloned with https and now I can’t push my changes, what do I do?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccSoftwareGit.html#need-help">Need help?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html">CMake guide for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#quick-start-into-building-fccsw">Quick start into building FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-example-packages">CMake example packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#cmake-in-the-fcc-software-framework">CMake in the FCC software framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#ctest-in-fccsw">CTest in FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-internal-library">Using an internal library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#building-a-new-gaudi-module">Building a new Gaudi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#using-an-external-library">Using an external library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccCMakeGuide.html#customizing-how-cmake-is-run">Customizing how CMake is run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html">Writing documentation for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#where-to-put-documentation">Where to put documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#when-and-how-is-the-documentation-page-updated">When and how is the documentation page updated?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#structure-of-the-content">Structure of the content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#running-website-generation-locally">Running website generation locally</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#about-jekyll">About jekyll</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developing-fcc-software/FccDocPage.html#for-website-admins">For website admins</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../CONDUCT.html">Contributor Code of Conduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html">Instructional Material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LICENSE.html#software">Software</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://lhcb.github.io/starterkit">LHCb starterkit</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Starterkit Lessons</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Using git to develop LHCb software</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/second-analysis-steps/lb-git.md" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="using-git-to-develop-lhcb-software">
+<h1>Using git to develop LHCb software<a class="headerlink" href="#using-git-to-develop-lhcb-software" title="Permalink to this headline">¶</a></h1>
+<div class="panel panel-objectives docutils container">
+<div class="panel-header open docutils container">
+<p id="learning-objectives"><i class="fa fa-line-chart"></i> Learning Objectives</p>
+</div>
+<div class="panel-body docutils container">
+<ul class="simple">
+<li><p>Learn how to clone specific LHCb packages to a local development directory</p></li>
+<li><p>Learn how to make changes and upload them to be reviewed by others</p></li>
+</ul>
+</div>
+</div>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="prerequisites"><i class="fa fa-info-circle"></i> Prerequisites</p>
+</div>
+<div class="panel-body docutils container">
+<p>Before starting, you should have a basic understanding of how to use <code class="docutils literal notranslate"><span class="pre">git</span></code>,
+similar to what has been taught during the starterkit.</p>
+</div>
+</div>
+<p>In this lesson, we’ll show you a complete workflow for developing the LHCb software
+using the <code class="docutils literal notranslate"><span class="pre">git</span></code> version control system.
+At LHCb, we use GitLab to manage our git repositories.
+Among other features, GitLab allows you to browse the source code for each project,
+and to review new changes (called <em>merge requests</em>) in a convenient web interface.
+You can find the CERN GitLab instance at <a class="reference external" href="https://gitlab.cern.ch">https://gitlab.cern.ch</a>.</p>
+<p>In principle, there are multiple ways of interacting with the LHCb software repositories:</p>
+<ol class="simple">
+<li><p>A vanilla git workflow using only the standard git commands.
+This requires you to <code class="docutils literal notranslate"><span class="pre">clone</span></code> and compile an entire LHCb project at a time.
+This approach is recommended when your development is expected to last
+multiple days or more or if you collaborate with others.</p></li>
+<li><p>An LHCb-specific workflow using a set of <code class="docutils literal notranslate"><span class="pre">lb-*</span></code> subcommands.
+This allows you to check out individual packages inside a project, and
+streamlines the modification of a few packages at a time.
+This approach is mostly appropriate for quick and isolated changes.
+(This is closer to the previously used <code class="docutils literal notranslate"><span class="pre">getpack</span></code> command.)</p></li>
+</ol>
+<p>Here, we want to focus on the second workflow.</p>
+<p>Before jumping in by creating a project in GitLab, you should make sure that
+your local git configuration and your settings on GitLab are sufficiently set up:</p>
+<p>Your name and email address should be set up in your local <code class="docutils literal notranslate"><span class="pre">git</span></code> configuration.
+To ensure that this is the case, run</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ git config --global user.name &quot;Your Name&quot;
+$ git config --global user.email &quot;Your Name &lt;your.name@cern.ch&gt;&quot;
+</pre></div>
+</div>
+<p>and put in your information.</p>
+<p>Next, connect to <a class="reference external" href="https://gitlab.cern.ch">https://gitlab.cern.ch</a> and log in
+with your CERN credentials.</p>
+<p>Visit <a class="reference external" href="https://gitlab.cern.ch/profile/keys">https://gitlab.cern.ch/profile/keys</a> and add an SSH key.</p>
+<p>Run this LHCb-specific configuration command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git config --global lb-use.protocol ssh
+</pre></div>
+</div>
+<p>This makes sure the LHCb commands use the ssh protocol instead of https.</p>
+<p>In the GitLab web interface, create a new project by clicking on the “New project” button.
+Give your project the name “LHCbSK”.</p>
+<p>We will now set up a local LHCb development area that is connected to the git
+repository you just created.
+In order to create a new dev environment, run</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ lb-dev --list LHCb
+</pre></div>
+</div>
+<p>to see which versions of the LHCb project are available.
+Pick the newest one and run</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ lb-dev --name LHCbSK LHCb/&lt;version&gt;
+</pre></div>
+</div>
+<p>where you need to insert the version you picked earlier.
+This will automatically run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> to create a new git repository with some initial files (<code class="docutils literal notranslate"><span class="pre">Makefile</span></code>, <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>, etc.).
+In order to connect your repository with the remote one, run</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd LHCbSK
+git remote add origin ssh://git@gitlab.cern.ch:7999/&lt;username&gt;/LHCbSK.git
+</pre></div>
+</div>
+<p>where you need to substitute your username.
+Run</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git push -u origin master
+</pre></div>
+</div>
+<p>once to define <code class="docutils literal notranslate"><span class="pre">master</span></code> as the remote branch that we should push to by default.</p>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="pushing-your-dev-project-to-gitlab"><i class="fa fa-info-circle"></i> Pushing your dev project to GitLab</p>
+</div>
+<div class="panel-body docutils container">
+<p>You don’t necessarily need to create a remote git repository on GitLab for your
+local dev project, especially if its lifetime will be short.
+However, in case you plan to collaborate with someone, a remote repo where you
+can synchronize your work is a must.
+Pushing to GitLab is also good practice if you use this dev project for ganga’s
+<code class="docutils literal notranslate"><span class="pre">GaudiExec</span></code>.</p>
+</div>
+</div>
+<p>For the purpose of this tutorial, we’ve set up an <code class="docutils literal notranslate"><span class="pre">SKTest</span></code> project containing
+the package <code class="docutils literal notranslate"><span class="pre">TheTestPackage</span></code>.
+In order to be able to work on parts of the <code class="docutils literal notranslate"><span class="pre">SKTest</span></code> project, first run</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git lb-use SKTest
+</pre></div>
+</div>
+<p>This will define a remote <code class="docutils literal notranslate"><span class="pre">SKTest</span></code> and fetch the git repository from GitLab.</p>
+<p>You can then run</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git lb-checkout SKTest/master TheTestPackage
+</pre></div>
+</div>
+<p>to check out the files inside the <code class="docutils literal notranslate"><span class="pre">SKTest</span></code> project that belong to the
+<code class="docutils literal notranslate"><span class="pre">TheTestPackage</span></code> package.
+This performs <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code> under the hood and commits the files into the
+local (synthetic) branch.
+You can check how this looks in the history with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>.</p>
+<p>You can now run</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make
+</pre></div>
+</div>
+<p>to build the project, make some changes, run <code class="docutils literal notranslate"><span class="pre">make</span></code> again, etc.
+You can also use</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make test
+</pre></div>
+</div>
+<p>to run the tests.
+Once you’re happy with the changes, run</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git add &lt;your-changed-files&gt;
+</pre></div>
+</div>
+<p>where you have to specify all files with changes that you want to store,
+and</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git commit
+</pre></div>
+</div>
+<p>to store them in a new commit.
+This will open up a text editor that will allow you to type in a commit message.</p>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="committing-often"><i class="fa fa-info-circle"></i> Committing often</p>
+</div>
+<div class="panel-body docutils container">
+<p>There’s no cost to committing often.
+You should try to make a new commit every time you’ve made
+modifications that can be considered a single unit of changes.</p>
+</div>
+</div>
+<p>Now push your changes to your newly created GitLab project</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git push
+</pre></div>
+</div>
+<p>and check that they appear on the website.</p>
+<p>Once you want to upload your commits to the SKTest project for review, run</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git lb-push SKTest &lt;username&gt;-new-feature
+</pre></div>
+</div>
+<p>to create a new <code class="docutils literal notranslate"><span class="pre">&lt;username&gt;-new-feature</span></code> branch on the main GitLab repository
+and upload your commits to it.
+This will calculate the changes between your local dev repository and the
+remote project repository, and create corresponding commits for the remote
+project.
+You can now create a merge request by going to
+<a class="reference external" href="https://gitlab.cern.ch/LHCb-SVN-mirrors/SKTest/merge_requests/new">https://gitlab.cern.ch/LHCb-SVN-mirrors/SKTest/merge_requests/new</a>,
+selecting the <code class="docutils literal notranslate"><span class="pre">&lt;username&gt;-new-feature</span></code> branch as the source and <code class="docutils literal notranslate"><span class="pre">master</span></code> as the target.
+Add a title for your merge request and explain what you’ve done in the main text.</p>
+<div class="panel panel-challenge docutils container">
+<div class="panel-header open docutils container">
+<p id="merge-conflicts"><i class="fa fa-square-o"></i> Merge conflicts</p>
+</div>
+<div class="panel-body docutils container">
+<ul class="simple">
+<li><p>Working with a partner, try to create a merge conflict by making changes to
+the same file.
+If you don’t have someone else to work with, you can simulate this by creating a second development area.</p></li>
+<li><p>Now, try to resolve the merge conflict.
+This is a bit complicated because of the way the local repository is set up.
+Take a look at <a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/LHCb/Git4LHCb#Replacement_for_svn_update_in_lo">https://twiki.cern.ch/twiki/bin/view/LHCb/Git4LHCb#Replacement_for_svn_update_in_lo</a> for pointers.</p></li>
+</ul>
+</div>
+</div>
+<div class="panel panel-callout docutils container">
+<div class="panel-header open docutils container">
+<p id="working-with-entire-projects"><i class="fa fa-info-circle"></i> Working with entire projects</p>
+</div>
+<div class="panel-body docutils container">
+<p>Working with entire projects is just as simple, but requires a little more
+care with the environment.
+Most importantly, be prepared that the project repo clones and the build
+products may need a few GB of disk space and that the compilation may take a
+long time.
+A step-by-step guide is available at <a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/LHCb/Git4LHCb#Building_everything_locally_exam">https://twiki.cern.ch/twiki/bin/view/LHCb/Git4LHCb#Building_everything_locally_exam</a>.
+A more integrated approach that automatically takes care of the environment is <a class="reference external" href="https://gitlab.cern.ch/lhcb/upgrade-hackathon-setup">https://gitlab.cern.ch/lhcb/upgrade-hackathon-setup</a> and a variation of it that lets you use some of the nightly builds
+to spare compiling many projects is at <a class="reference external" href="https://gitlab.cern.ch/lhcb-HLT/trigger-dev">https://gitlab.cern.ch/lhcb-HLT/trigger-dev</a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, FCC Starterkit
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
