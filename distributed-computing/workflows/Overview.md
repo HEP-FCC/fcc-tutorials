@@ -4,7 +4,7 @@ Command line submission to DIRAC is performed using python scripts instantiating
 The general structure of the script is the following:
 1. Instantiation of the interface to DIRAC;
 1. Creation of a Job manager instance, inclusing input and output sandbox, and all relevant config and data files; 
-1. Creation and configuration of the application to be run and their registration to the job manager instance;
+3. Creation and configuration of the application to be run and their registration to the job manager instance;
 1. Job submission
 
 The script may contain or import all the code relevant to the correct definition of the various steps above.
@@ -145,4 +145,3 @@ Proxies uploaded:
 ```
 
 [fccdirac]: https://github.com/HEP-FCC/FCCDIRAC
-
