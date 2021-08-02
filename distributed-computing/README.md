@@ -6,7 +6,7 @@ through [iLCDirac][ilcdirac], the extension developed by the Linear Collider com
 The procedure to be enabled to use the FCC resources through DIRAC is first described. Additional information about the use of
 iLCDirac can be found in the [CLIC][wikiclic] and [ILC][wikiilc] dedicated Wiki pages.
 
-Unless specified, in the rest of this section the word `DIRAC` refers to the `iLCDirac` extension introduced above..
+Unless specified, in the rest of this section the word `DIRAC` refers to the `iLCDirac` extension introduced above.
 
 [dirac]: https://dirac.readthedocs.io/en/latest/
 [ilcdirac]: https://iopscience.iop.org/article/10.1088/1742-6596/513/3/032077/meta
