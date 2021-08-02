@@ -3,7 +3,7 @@
 Command line submission to DIRAC is performed using python scripts instantiating the relevant classes.
 The general structure of the script is the following:
 1. Instantiation of the interface to DIRAC;
-1. Creation of a Job manager instance, inclusing input and output sandbox, and all relevant config and data files; 
+2. Creation of a Job manager instance, including input and output sandbox, and all relevant config and data files; 
 3. Creation and configuration of the application to be run and their registration to the job manager instance;
 1. Job submission
 
