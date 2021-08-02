@@ -5,7 +5,7 @@ The general structure of the script is the following:
 1. Instantiation of the interface to DIRAC;
 2. Creation of a Job manager instance, including input and output sandbox, and all relevant config and data files; 
 3. Creation and configuration of the application to be run and their registration to the job manager instance;
-1. Job submission
+4. Job submission
 
 The script may contain or import all the code relevant to the correct definition of the various steps above.
 DIRAC also provides some standard tooling for parsing arguments and homogenize the submission script experience. 
