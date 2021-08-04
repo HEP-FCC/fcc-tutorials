@@ -2,6 +2,7 @@
 
 Command line submission to DIRAC is performed using python scripts instantiating the relevant classes.
 The general structure of the script is the following:
+
 1. Instantiation of the interface to DIRAC;
 2. Creation of a Job manager instance, including input and output sandbox, and all relevant config and data files; 
 3. Creation and configuration of the application to be run and their registration to the job manager instance;
@@ -12,7 +13,8 @@ DIRAC also provides some standard tooling for parsing arguments and homogenize t
 
 The parser is defined the DIRAC core, is part of the generic definition of [Script][script] and provides a callback for
 customizing the actions. Typical usage looks like this:
-```
+
+```python
 from DIRAC import S_OK, S_ERROR
 from DIRAC.Core.Base import Script
 
@@ -39,18 +41,21 @@ servicesList = Script.getPositionalArgs()
 
 The DIRAC interface is controlled by the API interface class `DiracILC`, which derives from the upstream [DIRAC API][diracapi].
 Typical usage is the following:
-```
+
+```python
 from ILCDIRAC.Interfaces.API.DiracILC import DiracILC
 ...
 dIlc = DiracILC()
 ```
+
 The returned `dILc` variable contais the API context to be used when relevant.
 
 [diracapi]: https://raw.githubusercontent.com/DIRACGrid/DIRAC/integration/src/DIRAC/Interfaces/API/Dirac.py
 
 The job manager is an instance of `UserJob` - which derives from [Job][job] - is instantiated next.
 Typical usage is the following:
-```
+
+```python
 from ILCDIRAC.Interfaces.API.NewInterface.UserJob import UserJob
 ...
 job = UserJob()
@@ -72,7 +77,8 @@ job.setInputSandbox(['./' + delphescard, './' + edm4hepoutdef, './' + pythiacard
 
 Applications are created, configured and added to the job manager in the order of running:
 An example is the following:
-```
+
+```python
 from ILCDIRAC.Interfaces.API.NewInterface.Applications import KKMC
 ...
 kkmc = KKMC()
@@ -92,7 +98,8 @@ Available applications defined in [here][diracapp].
 [diracapp]: https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/-/tree/Rel-v31r0/Interfaces/API/NewInterface
 
 Finally the job is submitted:
-```
+
+```python
 print job.submit(dIlc, mode='wms')
 # Use wms='local' for running on the local computer
 ```
@@ -105,7 +112,8 @@ The example scripts described in these pages, together with the relevant setup s
 [FCCDIRAC][fccdirac] repository.
 
 The following steps must be executed (only once!) before trying to execute any of the workflows:
-```
+
+```bash
 $ git clone https://github.com/HEP-FCC/FCCDIRAC
 $ cd FCCDIRAC
 

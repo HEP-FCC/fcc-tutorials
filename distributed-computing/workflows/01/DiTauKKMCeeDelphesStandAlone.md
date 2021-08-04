@@ -7,26 +7,30 @@ Demonstrate the use of DIRAC generate 10000 tau+tau- events @91.2 GeV with KKMC 
 ## Output files
 
 **Local mode**<br>
-The output file is located under a sub-directory name `Local_<hash>_JobDir` created under the current directory.  
+The output file is located under a sub-directory name `Local_<hash>_JobDir` created under the current directory.
 
 **WMS mode**<br>
 In WMS mode the file will be located under
+
 ```
 <chosen-storage-element>/fcc/user/<first-username-letter>/<username>/<year>_<month>/<first-5-numbers-of-jobID>/<jobID>/edm4hep_test_output.root
 ```
+
 e.g. at CERN (storage element `CERN-DST-EOS`):
+
 ```
 /eos/experiment/fcc/prod/fcc/user/g/ganis/2021_07/59821/59821752/edm4hep_test_output.root
 ```
 
 ## DIRAC components involved
 
-This exercise constist of two steps, the event geenration with `KKMCee` and the `Delphes` simulation.
+This exercise constist of two steps, the event generation with `KKMCee` and the `Delphes` simulation.
 
 For the first step we need the `KKMC` DIRAC application which we configure with the process, the number of events, the energy and
 the nale of the output file.
 
-The second step consists in running the `DelphesPythia8_EDM4HEP` standalone application with argumens
+The second step consists in running the `DelphesPythia8_EDM4HEP` standalone application with arguments
+
 1. The `Delphes` card implementing the IDEA detector concept;
 2. The definition of the EDM4hep output;
 3. The pythia card reading LHE file formats;
@@ -38,8 +42,12 @@ For this we use the generic application DIRAC interface.
 
 The submission script for this workflow is called [FCC_Dirac_Workflow1.py][workflow1-py].
 The script accepts one argument to control where the job is executed:
+
 ```
-$ python FCC_Dirac_Workflow1.py -h
+python FCC_Dirac_Workflow1.py -h
+```
+
+```
 
 Usage:
 
@@ -61,8 +69,9 @@ Options:
 
 [workflow1-py]: https://raw.githubusercontent.com/HEP-FCC/FCCDIRAC/master/workflows/1/FCC_Dirac_Workflow1.py
 
-**The utility function**<br>
-```
+### The utility function
+
+```python
 # Create sandbox files
 import os
 from shutil import copy2
@@ -91,9 +100,9 @@ def copywithreplace(filein, fileout, repls):
     fout.close()
 ```
 
-**Adding the `--wms` switch**<br>
+### Adding the `--wms` switch
 
-```
+```python
 from DIRAC import S_OK, S_ERROR
 from DIRAC.Core.Base import Script
 
@@ -114,15 +123,17 @@ servicesList = Script.getPositionalArgs()
 print servicesList
 ```
 
-**The DIRAC API instance**<br>
-```
+### The DIRAC API instance
+
+```python
 from ILCDIRAC.Interfaces.API.DiracILC import DiracILC
 
 dIlc = DiracILC()
 ```
 
-**The DIRAC Job manager**<br>
-```
+### The DIRAC Job manager
+
+```python
 from ILCDIRAC.Interfaces.API.NewInterface.UserJob import UserJob
 
 job = UserJob()
@@ -135,8 +146,9 @@ job.setName( "KKMC_EDM4HEP" )
 job.setLogLevel("DEBUG")
 ```
 
-**The `KKMC` application instance**<br>
-```
+### The `KKMC` application instance
+
+```python
 from ILCDIRAC.Interfaces.API.NewInterface.Applications import KKMC
 
 kkmc = KKMC()
@@ -151,8 +163,9 @@ kkmc.setOutputFile(outputfile)
 job.append(kkmc)
 ```
 
-**The steering files for `Delphes`**<br>
-```
+### The steering files for `Delphes`
+
+```python
 # Delphes card
 delphescardpath=os.path.expandvars('$DELPHES/cards/delphes_card_IDEA.tcl')
 delphescard=os.path.basename(delphescardpath)
@@ -168,14 +181,17 @@ replacements = [['Main:numberOfEvents = 100','Main:numberOfEvents = ' + str(nevt
                 ['Beams:LHEF = Generation/data/events.lhe','Beams:LHEF = ' + outputfile]]
 copywithreplace(pythiacardpath, pythiacard, replacements)
 ```
-**Completing the sandbox for `Delphes`**<br>
-```
+
+### Completing the sandbox for `Delphes`
+
+```python
 # Set the sandbox content
 job.setInputSandbox(['./' + delphescard, './' + edm4hepoutdef, './' + pythiacard])
 ```
 
-**Standalone `Delphes` using the DIRAC generic application**<br> 
-```
+### Standalone `Delphes` using the DIRAC generic application 
+
+```python
 from ILCDIRAC.Interfaces.API.NewInterface.Applications import GenericApplication
 
 ga = GenericApplication()
@@ -186,8 +202,9 @@ ga.setArguments(delphescard + ' ' + edm4hepoutdef + ' ' + pythiacard + ' ' + out
 job.append(ga)
 ```
 
-**Submitting the job to the chosen WMS**<br>
-```
+### Submitting the job to the chosen WMS
+
+```python
 submitmode='wms'
 if len(servicesList) > 0:
     submitmode= servicesList[0]
@@ -198,14 +215,19 @@ print job.submit(dIlc, mode=submitmode)
 
 Suggestion is, after having cloned the repository and initialized the environment, to go to the workflow sub-directory, created a 'run' sub-directory and run
 from there:
+
 ```
 $ cd workflow/1
 $ mkdir run; cd run
 ```
 
-**Local submission**<br>
-```
+### Local submission
+
+```bash
 $ python ../FCC_Dirac_Workflow1.py --wms local
+```
+
+```
 ['local']
 kkmc Key4hep-2021-04-30
 Attribute list :
@@ -234,16 +256,22 @@ Proceed and submit job(s)? y/[n] : y
 2021-07-28 16:27:53 UTC dirac-jobexec DEBUG: Workflow execution successful, exiting
 {'OK': True, 'Value': 'Execution completed successfully'}
 ```
+
 The local sandbox should contain the following:
+
 ```
 $ ls -lt
+```
+```
 total 32
 drwx------. 2 ganis sf  2048 Jul 28 18:27 Local_pQl06k_JobDir
 -rw-r--r--. 1 ganis sf  1483 Jul 28 18:25 Pythia_LHEinput.cmd
 -rw-r--r--. 1 ganis sf   587 May 10 15:31 edm4hep_output_config.tcl
 -rw-r--r--. 1 ganis sf 27219 Apr 30 14:50 delphes_card_IDEA.tcl
 ```
+
 and the output directory:
+
 ```
 $ ls -lt Local_pQl06k_JobDir/kktautau*
 -rw-r--r--. 1 ganis sf  9642099 Jul 28 18:27 Local_pQl06k_JobDir/kktautau_delphes_edm4hep_output.root
@@ -254,23 +282,36 @@ $ ls -lt Local_pQl06k_JobDir/*.log
 -rw-r--r--. 1 ganis sf 900532 Jul 28 18:27 Local_pQl06k_JobDir/localEnv.log
 ```
 
-**WMS submission**<br>
+### WMS submission
+
+```bash
+python ../FCC_Dirac_Workflow1.py --wms local
 ```
-$ python ../FCC_Dirac_Workflow1.py --wms local
+
+```
 ...
 Proceed and submit job(s)? y/[n] :
 y
 ...
 'Value': 59838136, 'JobID': 59838136}
 ```
+
 The `JobID` defines uniquely the job and can be used for any operation, for example to check the status:
+
 ```
-$ dirac-wms-job-status 59838136
+dirac-wms-job-status 59838136
+```
+
+```
 JobID=59838136 Status=Waiting; MinorStatus=Pilot Agent Submission; Site=ANY;
 ```
+
 or, when the job is finished,  get the job files:
+
 ```
 $ dirac-wms-job-get-output 59838136
+```
+```
 Job output sandbox retrieved in /afs/cern.ch/user/g/ganis/local/dirac/GIT/FCCDIRAC/workflows/1/run/59838136/
 $ ls -lt 59838136/
 total 1295
@@ -284,16 +325,23 @@ total 1295
 -rw-r--r--. 1 ganis sf  19080 Jan  1  1970 jobDescription.xml
 ```
 or get the output data:
+
 ```
 $ dirac-wms-job-get-output-data 59838136
+```
+
+```
 Job 59838136 output data retrieved
 $ ls -lt kktautau_delphes_edm4hep_output.root
 -rwxr-xr-x. 1 ganis sf 9652641 Jul 29 11:30 kktautau_delphes_edm4hep_output.root
 ```
 
 The output data are also available on storage element:
+
 ```
 $ ls -lt /eos/experiment/fcc/prod/fcc/user/g/ganis/2021_07/59838/59838136/
+```
+```
 total 9427
 -rw-r--r--. 1 fcc001 fcc-cg 9652641 Jul 28 19:13 kktautau_delphes_edm4hep_output.root
 ```
@@ -301,6 +349,8 @@ total 9427
 The job id of the user jobs get also be retrieved with the `dirac-wms-select-jobs` command, e.g.
 ```
 $ dirac-wms-select-jobs --Date=2021-07-28 --Owner="ganis"
+```
+```
 ==> Selected 1 jobs with conditions: Date = 2021-07-28, Owner = ganis
 59838136
 ```
