@@ -285,7 +285,7 @@ $ ls -lt Local_pQl06k_JobDir/*.log
 ### WMS submission
 
 ```bash
-python ../FCC_Dirac_Workflow1.py --wms local
+python ../FCC_Dirac_Workflow1.py
 ```
 
 ```
