@@ -133,7 +133,7 @@ A configuration that runs all of this is distributed with FCCSW and can be run w
 
 
 ```bash
- fccrun  $FCCSWBASEDIR/share/FCCSW/RecFCCeeCalorimeter/options/runCaloSim.py  \
+ fccrun  $FCCSW/share/FCCSW/RecFCCeeCalorimeter/options/runCaloSim.py  \
           --filename fccee_idea_LAr_pgun.root \
           -n 500 
 ```
