@@ -8,13 +8,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        PAGE: ['software-basics/exploring-fcc-files',
-               'software-basics/fccsw',
-               'fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme',
-               'fast-sim-and-analysis/k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme',
-               'fast-sim-and-analysis/FccFastSimGeneration',
-               'full-detector-simulations/FccCaloPerformance/FccCaloPerformance',
-              ]
         SETUP: ['/cvmfs/sw.hsf.org/key4hep/setup.sh', '/cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh']
     steps:
     - uses: actions/checkout@v2
@@ -25,20 +18,15 @@ jobs:
     - name: Setup container
       run: |
         docker exec CI_container /bin/bash -c ' ln -s /usr/lib64/liblzma.so.5.2.2 /usr/lib64/liblzma.so;\
-        source ${{ matrix.SETUP }};\
-        pip3 install jupytext;\
-        pip3 install --upgrade jupyter;\
-        python -m ipykernel install --name python3;\
-        python -m ipykernel install --name bash;\
         '
 
-    - name: RunPage
+    - name: RunTests
       run: |
         docker exec CI_container /bin/bash -c 'cd ./Package;\
         source ${{ matrix.SETUP }};\
-        export PATH=$HOME/.local/bin/:$PATH;\
-        cat .github/scripts/yamlheader.md  ${{ matrix.PAGE }}.md > ${{ matrix.PAGE }}-test.md;\
-        cd $(dirname ${{ matrix.page }});\
-        pagename=$(basename ${{ matrix.page}});\
-        jupytext ${pagename}-test.md -o ${pagename}.ipynb --execute;\
+        mkdir build;\
+        cd build;\
+        cmake ..;\
+        make;\
+        make test;
         '
