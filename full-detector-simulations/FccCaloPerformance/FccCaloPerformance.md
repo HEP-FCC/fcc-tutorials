@@ -68,7 +68,7 @@ geantservice = SimG4Svc("SimG4Svc")
 
 from Configurables import GeoToGdmlDumpSvc
 geodumpservice = GeoToGdmlDumpSvc("GeoDump") 
-geodumpservice.gdml="FCCee_IDEA.gdml"
+geodumpservice.gdml="DetFCCeeCLD.gdml"
 
 from Configurables import ApplicationMgr
 ApplicationMgr( TopAlg = [], 
@@ -84,25 +84,28 @@ ApplicationMgr( TopAlg = [],
 A job with this configuration can be executed with 
 
 ```bash
-fccrun dumpGeo_fccee.py
+# if you want to use your local job options file:
+#fccrun dumpGeo_fccee.py
+
+fccrun $FCCSW/Examples/options/export_detector_gdml.py
 ```
 
 Note the printout of the GeoSvc and make sure the information is as expected. If there is something unclear or missing make sure to open an [issue](https://github.com/HEP-FCC/FCCSW/issues)!
 Take a look at the resulting gdml file. Although it is text-based it is not really human-readable for a geometry of this size, but you can check the number of lines and volume names if you are familiar with the geometry.
 
 ```bash
-tail FCCee_IDEA.gdml
+tail DetFCCeeCLD.gdml
 ```
 
 ```bash
 # count occurences of "physvol"
-grep -c "<physvol" FCCee_IDEA.gdml
+grep -c "<physvol" DetFCCeeCLD.gdml
 ```
 
 
 The geometry can also be visualised:
 
-```python
+```
 # load the dd4hep detector model
 import ROOT
 import dd4hep
@@ -133,9 +136,8 @@ A configuration that runs all of this is distributed with FCCSW and can be run w
 
 
 ```bash
- fccrun  $FCCSW/share/FCCSW/RecFCCeeCalorimeter/options/runCaloSim.py  \
-          --filename fccee_idea_LAr_pgun.root \
-          -n 500 
+# Momenta in MeV
+ k4run  $K4RECCALORIMETER/RecFCCeeCalorimeter/tests/options/runCaloSim.py  --filename fccee_idea_LAr_pgun.root  --GenAlg.MomentumRangeParticleGun.MomentumMax 5000 --GenAlg.MomentumRangeParticleGun.MomentumMin 5000  -n 500 
 ```
 
 The output of this job is `fccee_idea_LAr_pgun.root`, a ROOT file containing the simulation products of 500 single particle events (5 Gev e-) in the FCC event data model.
@@ -147,7 +149,7 @@ f = ROOT.TFile("fccee_idea_LAr_pgun.root")
 events = f.Get("events")
 c = ROOT.TCanvas("canvas1", "",600, 400)
 h = ROOT.TH1F("h_GenParticles_P", ";Primary particle Momentum P; Events", 100, 0 ,100)
-events.Draw("sqrt(pow(GenParticles.core.p4.px,2) + pow(GenParticles.core.p4.py,2) +pow(GenParticles.core.p4.pz,2))>>h_GenParticles_P")
+events.Draw("sqrt(pow(GenParticles.momentum.x,2) + pow(GenParticles.momentum.y,2) +pow(GenParticles.momentum.z,2))>>h_GenParticles_P")
 c.Draw()
 
 ```
@@ -161,7 +163,7 @@ events = f.Get("events")
 
 c = ROOT.TCanvas("c_ECalBarrelPositions_xy", "", 700, 600)
 # draw hits for first five events
-events.Draw("ECalBarrelPositions.position.y:ECalBarrelPositions.position.x", "", "", 5, 0)
+events.Draw("ECalBarrelPositionedCells.position.y:ECalBarrelPositionedCells.position.x", "", "", 5, 0)
 c.Draw()
 ```
 
@@ -171,11 +173,8 @@ c.Draw()
 Now that the detector response is simulated, it is time to reconstruct the signals. FCCSW includes another configuration to run a Sliding Window reconstruction:
 
 ```bash
-fccrun $FCCSWBASEDIR/share/FCCSW/RecFCCeeCalorimeter/options/runFullCaloSystem_ReconstructionSW_noiseFromFile.py \
-       -n 100 \
-       --input fccee_idea_LAr_pgun.root \
-       --noiseFileName http://fccsw.web.cern.ch/fccsw/testsamples/elecNoise_ecalBarrelFCCee_50Ohm_traces1_4shieldWidth.root \
-       --filename output_allCalo_reco_noise.root
+
+k4run $K4RECCALORIMETER/RecFCCeeCalorimeter/tests/options/runFullCaloSystem_ReconstructionSW_noiseFromFile.py  -n 50  --input.EventDataSvc fccee_idea_LAr_pgun.root --noiseFileName http://fccsw.web.cern.ch/fccsw/testsamples/elecNoise_ecalBarrelFCCee_50Ohm_traces1_4shieldWidth.root --filename output_allCalo_reco_noise.root
 ```
 
 This configuration inludes electronics noise especially calculated for this detector geometry. which is overlayed on the branch `ECalBarrelCells` containing information on all cells in the ECal Barrel.
@@ -189,7 +188,7 @@ events = f.Get("events")
 c = ROOT.TCanvas("c_ECalBarrelCellsNoise_energy", "", 700, 600)
 
 h = ROOT.TH1F("h_ECalBarrelCells_energy", ";ECal Barrel Cells Energy [GeV]; Cells", 80, -0.2 ,1)
-events.Draw("ECalBarrelCells.core.energy >> h_ECalBarrelCells_energy", "", "", 10, 0)
+events.Draw("ECalBarrelCells.energy >> h_ECalBarrelCells_energy", "", "", 10, 0)
 h.GetYaxis().SetRangeUser(0.2, 8*10**6)
 
 
@@ -201,7 +200,7 @@ c2 = ROOT.TCanvas("c_ECalBarrelCells_energy", "", 700, 600)
 #h2 = ROOT.TH1F("h_ECalBarrelCellsNoise_energy", ";ECall Barrel Cells Energy with Noise [GeV]; Events", 80, -0.2 ,1)
 h2 = h.Clone("h_ECalBarrelCellsNoise_energy")
 h2.SetTitle(";ECal Barrel Cells Energy with Noise [GeV]; Cells")
-events.Draw("ECalBarrelCellsNoise.core.energy>> h_ECalBarrelCellsNoise_energy", "", "", 10, 0)
+events.Draw("ECalBarrelCellsNoise.energy>> h_ECalBarrelCellsNoise_energy", "", "", 10, 0)
 h2.GetYaxis().SetRangeUser(0.2, 8*10**6)
 h2.SetLineColor(ROOT.kBlack)
 
@@ -224,7 +223,7 @@ events = f.Get("events")
 
 c = ROOT.TCanvas("c_CaloClusters_energy", "", 700, 600)
 hEn = ROOT.TH1F("h_CaloClusters_energy", ";ECal Calo Cluster Energy [GeV]; # Clusters", 120, 0 ,8)
-events.Draw("CaloClusters.core.energy >> h_CaloClusters_energy")
+events.Draw("CaloClustersFinal.energy >> h_CaloClusters_energy")
 
 c.Draw()
 
@@ -240,7 +239,7 @@ events = f.Get("events")
 
 c = ROOT.TCanvas("c_CaloClusters_energyFit", "", 700, 600)
 hEn = ROOT.TH1F("h_CaloClusters_energy", ";ECal Calo Cluster Energy [GeV]; # Clusters", 120, 0 ,8)
-events.Draw("CaloClusters.core.energy >> h_CaloClusters_energy")
+events.Draw("CaloClustersFinal.energy >> h_CaloClusters_energy")
 
 fitPre = ROOT.TF1("fitPre","gaus", hEn.GetMean() - 1. * hEn.GetRMS(), hEn.GetMean() + 1. * hEn.GetRMS())
 resultPre = hEn.Fit(fitPre, "SQRN")
@@ -250,8 +249,8 @@ mean = result.Get().Parameter(1)
 sigma = result.Get().Parameter(2)
 dMean = result.Get().Error(1)
 dSigma = result.Get().Error(2)
-print "mean:", round(mean,2), "[GeV]"
-print "sigma:", round(sigma  ,2), "[GeV]"
+print("mean:", round(mean,2), "[GeV]")
+print("sigma:", round(sigma  ,2), "[GeV]")
 fit.Draw("SAME")
 c.Draw()
 

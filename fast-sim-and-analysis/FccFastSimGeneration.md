@@ -164,7 +164,7 @@ which mg5_aMC
 
 Herwig is available as standalone program:
 
-```bash
+```
 which Herwig
 ```
 
