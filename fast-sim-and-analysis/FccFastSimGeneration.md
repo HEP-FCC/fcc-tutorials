@@ -29,10 +29,9 @@ which fccrun
 # the output might differ, but shouldn't be empty
 /cvmfs/sw.hsf.org/spackages/linux-centos7-broadwell/gcc-8.3.0/fccsw-develop-q57ahua7lm65fvxnzekozih4mgvzptlx/scripts/fccrun
 ```
-
-**You will need to source this script everytime you want to use the
-software.**
-
+{% important "Reminder" %}
+You will need to source the /cvmfs/fcc.cern.ch/sw/latest/setup.sh script everytime you want to use the software.
+{% endimportant %}
 
 
 ## Generators
