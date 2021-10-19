@@ -177,14 +177,14 @@ which Herwig
 
 `KKMCee` is an adaptation of the `KKMC` Monte Carlo generator (the latest version of the `Koral` generetors) to the
 case of FCC-ee. 
-KKMCee is available as standalone program when using the `LCG` installaton of FCCSW version 0.15 or higher:
+KKMCee is available as standalone program when using the key4hep stack:
 
 ```bash
 which KKMCee
 ```
 
 ```
-/cvmfs/sft.cern.ch/lcg/views/LCG_97a_FCC_4/x86_64-centos7-gcc8-opt/bin/KKMCee
+/cvmfs/sw.hsf.org/spackages2/kkmcee/4.30/x86_64-centos7-gcc8.3.0-opt/liobnk6fwgwzkyapgxfefgmbrmnmyn67/bin/KKMCee
 ```
 
 A help function is available:
@@ -205,18 +205,25 @@ Options:
   -f, --flavour flavour 	Flavour to be generated (Mu|Tau|UDS|C|B|Hadrons)
   -e, --ecms energy 		Center of Mass energy in GeV
   -n, --nevts energy 		Number of events to be generated
+  -b, --bessig bessig 		Beam-Energy-Spread of both beams (or of the first beam, if bessig2<0.)
+                      		[fraction of Ecms/2, default -1. (no spread)]
+  -g, --bessig2 bessig2 	Beam-Energy-Spread of the second beam if different from the first beam; fraction of Ecms/2.
+                      		[fraction of Ecms/2, default -1. (no spread or equal to first beam)]
+  -r, --besrho rho 		Beam-Energy-Spread correlation [default 0.]
   -o, --outfile file 		File with the generated events in LHE format
   -s, --seedfile file 		File to be used for seeding (randomly generated, if missing)
 
 Examples:
-KKMCee -f Mu -e 91.2 -n 10000 -o kkmu_10000.LHE
+KKMCee -f Mu -e 91.2 -n 10000 -o kkmu_10000.LHE -b 0.001
 KKMCee -c kkmc_ditau.input
 ```
+
+Note that the BES (Beam Energy Spread) options are only available in version 4.32.01 and higher.
 
 Configuration example files are available under
 
 ```
-ls /cvmfs/sft.cern.ch/lcg/views/LCG_97a_FCC_4/x86_64-centos7-gcc8-opt/share/KKMCee/examples/
+ls `dirname $( which KKMCee )`/../share/KKMCee/examples
 ```
 
 ```
@@ -226,7 +233,8 @@ Beast.input  Bottom.input  Down.input  Inclusive.input  Mu.input  Tau.input  Up.
 To generate a sample of dimuon events using the example files, do the following
 
 ```bash
-KKMCee -c /cvmfs/sft.cern.ch/lcg/views/LCG_97a_FCC_4/x86_64-centos7-gcc8-opt/share/KKMCee/examples/Mu.input
+cp -rp `dirname $( which KKMCee )`/../share/KKMCee/examples/Mu.input .
+KKMCee -c Mu.input
 ```
 
 The output should look something like this:
