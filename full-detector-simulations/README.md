@@ -12,6 +12,7 @@ If you have any problems or questions, you can [open an issue][lessons-issues] o
 .. toctree::
     :caption: Contents:
 
+    FcceeCLD.md
     FccCaloPerformance/FccCaloPerformance.md
     FCCeeDriftChamber/FCCeeDriftChamber.md
     FCCeeGuineaPigIRBackgrounds/README.md
