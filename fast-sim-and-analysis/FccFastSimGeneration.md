@@ -360,3 +360,49 @@ Additional switches (for experts only):
   				KEYRAD = 1000*KEYZET + 100*KEYUPD + 10*KEYMOD + KEYPIA
   (Contact BHLUMI authors for details, e.g. through https://github.com/KrakowHEPSoft/BHLUMI)
 ```
+
+###  BabaYaga
+
+`BabaYaga` is a Monte Carlo generator of two-photons events used at LEP.
+BabaYaga is available as standalone program when using the key4hep stack:
+
+```bash
+which babayaga
+```
+```
+/cvmfs/sw.hsf.org/spackages4/babayaga/fcc-1.0.0/x86_64-centos7-gcc8.3.0-opt/jsgdir7/bin/babayaga
+```
+A help function is available:
+
+```
+babayaga -h
+```
+
+```
+
++++ Wrapper around the babayaga-fcc.exe executable +++
+
++++ Process: e+e- -> gamma gamma
+
+Usage: 	babayaga -e Ecms -n Nevts -f Thmin -t Thmax -x epscms -o output_file [-s seed]
+       	babayaga -c config_file [-s seed]
+
+Switches:
+  -c, --config file 		Path to configuration file
+  -e, --ecms energy 		Center of Mass energy in GeV
+  -n, --nevts energy 		Number of events to be generated
+  -f, --Thmin angle 		Minimum theta [deg]
+  -t, --Thmax angle 		Maximum theta [deg]
+  -a, --acolmax angle 		Max acollinearity [deg]
+  -m, --emin energy 		Min energy in GeV
+  -x, --eps fraction 		Soft-photon cut-off
+  -o, --outfile file 		File with the generated events in LHE format
+  -w, --outdir path 		Path with working space (and residual files)
+  -s, --seed number 		Number used for seeding (randomly generated, if missing)
+  -d, --debug number 		Debug level (0, 1, 2, ...)
+
+Examples:
+babayaga -f 15. -t 165. -e 91.2 -n 10000 -o bbyg_10000.LHE
+babayaga -c babayaga.input -o bbyg.LHE
+
+```
