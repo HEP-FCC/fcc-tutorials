@@ -175,7 +175,7 @@ which Herwig
 
 ###  KKMCee
 
-`KKMCee` is an adaptation of the `KKMC` Monte Carlo generator (the latest version of the `Koral` generetors) to the
+`KKMCee` is an adaptation of the `KKMC` Monte Carlo generator (the latest version of the `Koral` generators) to the
 case of FCC-ee. 
 KKMCee is available as standalone program when using the key4hep stack:
 
@@ -184,7 +184,7 @@ which KKMCee
 ```
 
 ```
-/cvmfs/sw.hsf.org/spackages2/kkmcee/4.30/x86_64-centos7-gcc8.3.0-opt/liobnk6fwgwzkyapgxfefgmbrmnmyn67/bin/KKMCee
+/cvmfs/sw.hsf.org/spackages4/kkmcee/4.32.01/x86_64-centos7-gcc8.3.0-opt/mp3l7zs/bin/KKMCee
 ```
 
 A help function is available:
@@ -316,4 +316,47 @@ The same can be obtained on the command line:
 ```bash
 KKMCee -f Mu -e 91.2 -n 1000 -o LHE_OUT_1.LHE
 ```
+###  BHLUMI
 
+`BHLUMI` is a Monte Carlo generator of Bhabha events used at LEP for luminosity studies.
+BHLUMI is available as standalone program when using the key4hep stack:
+
+```bash
+which BHLUMI
+```
+```
+/cvmfs/sw.hsf.org/spackages4/bhlumi/4.04-linuxLHE/x86_64-centos7-gcc8.3.0-opt/o7rmcus/bin/BHLUMI
+```
+A help function is available:
+
+```
+BHLUMI -h
+```
+
+```
++++ Wrapper around the BHLUMI.exe executable +++
+
+Usage: 	BHLUMI -e Ecms -n Nevts -f Thmin -t Thmax -x epscms -o output_file [-s seed_file]
+       	BHLUMI -c config_file [-s seed_file]
+
+Switches:
+  -c, --config file 		Path to configuration file
+  -e, --ecms energy 		Center of Mass energy in GeV
+  -n, --nevts energy 		Number of events to be generated
+  -f, --Thmin theta 		Minimum theta [rad]
+  -t, --Thmax theta 		Maximum theta [rad]
+  -x, --epscms fraction 	Energy cut-off in  fraction of Ecms
+  -o, --outfile file 		File with the generated events in LHE format
+  -s, --seedfile file 		File to be used for seeding (randomly generated, if missing)
+
+Examples:
+BHLUMI -f 0.022 -t 0.082 -x 0.001 -e 91.2 -n 10000 -o kkmu_10000.LHE
+BHLUMI -c bhlumi.input
+
+Additional switches (for experts only):
+  -k, --keyopt KEYOPT 		Technical parameters switch [default 3021]
+  				KEYOPT = 1000*KEYGEN + 100*KEYREM + 10*KEYWGT + KEYRND
+  -r, --keyrad KEYRAD 		Physics parameters switch [default 1021]
+  				KEYRAD = 1000*KEYZET + 100*KEYUPD + 10*KEYMOD + KEYPIA
+  (Contact BHLUMI authors for details, e.g. through https://github.com/KrakowHEPSoft/BHLUMI)
+```
