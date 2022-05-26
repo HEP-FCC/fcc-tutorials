@@ -104,9 +104,9 @@ And run the analysis stage 1 on previously produced samples:
 TESTSAMPLEDIR=https://fccsw.web.cern.ch/testsamples/tutorial/
 # if you want to use the previously produced samples, uncomment:
 # TESTSAMPLEDIR=$PWD
-python $FCCANALYSES/config/FCCAnalysisRun.py analysis_stage1.py --output p8_ee_ZH_ecm240.root --files-list $TESTSAMPLEDIR/p8_ee_ZH_ecm240_edm4hep.root
-python $FCCANALYSES/config/FCCAnalysisRun.py analysis_stage1.py --output p8_ee_ZZ_ecm240.root --files-list $TESTSAMPLEDIR/p8_ee_ZZ_ecm240_edm4hep.root
-python $FCCANALYSES/config/FCCAnalysisRun.py analysis_stage1.py --output p8_ee_WW_ecm240.root --files-list $TESTSAMPLEDIR/p8_ee_WW_ecm240_edm4hep.root
+fccanalysis run analysis_stage1.py --output p8_ee_ZH_ecm240.root --files-list $TESTSAMPLEDIR/p8_ee_ZH_ecm240_edm4hep.root
+fccanalysis run analysis_stage1.py --output p8_ee_ZZ_ecm240.root --files-list $TESTSAMPLEDIR/p8_ee_ZZ_ecm240_edm4hep.root
+fccanalysis run analysis_stage1.py --output p8_ee_WW_ecm240.root --files-list $TESTSAMPLEDIR/p8_ee_WW_ecm240_edm4hep.root
 ```
 
 this will produce small ntuples pre-selection files with only variables you are interested in.
@@ -175,7 +175,7 @@ class RDFanalysis():
 And run the analysis stage 2 on previously produced samples in stage 1:
 
 ```bash
-python $FCCANALYSES/config/FCCAnalysisRun.py analysis_stage2.py
+fccanalysis run analysis_stage2.py
 ```
 
 lets now run the final selection on the pre-selection files, for that create a `analysis_final.py` file:
@@ -225,7 +225,7 @@ histoList = {
 and run
 
 ```bash
-python $FCCANALYSES/config/FCCAnalysisRun.py analysis_final.py --final
+fccanalysis run analysis_final.py --final
 ```
 
 this will produce 2 files for each sample and each selection, one with final tree with variables of interest, and one with histograms.
@@ -286,7 +286,7 @@ legend['VV'] = 'VV boson'
 Run the plotting script with the command:
 
 ```bash
-python $FCCANALYSES/config/FCCAnalysisRun.py analysis_plots.py --plots
+fccanalysis run analysis_plots.py --plots
 ```
 
 
@@ -306,37 +306,34 @@ Please note that the event statistics is not great because we only produced on 1
 4) **This part can only be on lxplus and for people having the access rights to eos and the analysis dictonary**
 In order to produce plots with more statistics using centrally produced samples, we could use already processed large statistics samples.
 To do so we re-run the pre-selection over 10 percent of the total statistics [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA.php).
-create a `preSel.py` file
+Add to your a `analysis_stage1.py` file
 
 ```{python active="", eval=FALSE}
-basedir="https://fcc-physics-events.web.cern.ch/fcc-physics-events/sharedFiles/FCCee/yaml/FCCee/spring2021/IDEA/"
-outdir="output_spring2021"
-
-import multiprocessing
-NUM_CPUS = int(multiprocessing.cpu_count()-2)
-
-process_list=['p8_ee_ZZ_ecm240','p8_ee_WW_ecm240','p8_ee_ZH_ecm240']
-fraction=0.1
-
-import config.runDataFrame as rdf
-myana=rdf.runDataFrame(basedir,process_list)
-myana.run(ncpu=NUM_CPUS,fraction=fraction,outDir=outdir)
+processList = {
+    'p8_ee_ZZ_ecm240':{'fraction':0.1},
+    'p8_ee_WW_ecm240':{'fraction':0.1},
+    'p8_ee_ZH_ecm240':{'fraction':0.1}
+}
+prodTag     = "FCCee/spring2021/IDEA/"
 ```
 
+and run
+
 ```{bash active="", eval=FALSE}
- python preSel.py
+fccanalysis run analysis_stage1.py
 ```
 
-and as before run the final selection and plots:
+and as before run the stage 2, final selection and plots:
 
 ```{bash active="", eval=FALSE}
-python finalSel.py
-python $FCCANALYSES/config/doPlots.py examples/FCCee/higgs/mH-recoil/mumu/plots.py
+fccanalysis run analysis_stage2.py
+fccanalysis run analysis_final.py --final
+fccanalysis run analysis_final.py --plots
 ```
 
 and look at the new plots in `plots/`.
 
-To further increase the event statistics, increase the value (up to 1) of the parameter `fraction` in `preSel.py`
+To further increase the event statistics, increase the value (up to 1) of the parameter `fraction` in `analysis_stage1` (no value mean 1)
 
 
 {% endchallenge %}
