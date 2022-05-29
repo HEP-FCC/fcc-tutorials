@@ -327,8 +327,8 @@ and as before run the stage 2, final selection and plots:
 
 ```{bash active="", eval=FALSE}
 fccanalysis run analysis_stage2.py
-fccanalysis final analysis_final.py --final
-fccanalysis plots analysis_plots.py --plots
+fccanalysis final analysis_final.py
+fccanalysis plots analysis_plots.py
 ```
 
 and look at the new plots in `plots/`.
