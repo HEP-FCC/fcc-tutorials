@@ -225,7 +225,7 @@ histoList = {
 and run
 
 ```bash
-fccanalysis run analysis_final.py --final
+fccanalysis final analysis_final.py
 ```
 
 this will produce 2 files for each sample and each selection, one with final tree with variables of interest, and one with histograms.
@@ -286,7 +286,7 @@ legend['VV'] = 'VV boson'
 Run the plotting script with the command:
 
 ```bash
-fccanalysis run analysis_plots.py --plots
+fccanalysis plots analysis_plots.py
 ```
 
 
@@ -327,8 +327,8 @@ and as before run the stage 2, final selection and plots:
 
 ```{bash active="", eval=FALSE}
 fccanalysis run analysis_stage2.py
-fccanalysis run analysis_final.py --final
-fccanalysis run analysis_plots.py --plots
+fccanalysis final analysis_final.py --final
+fccanalysis plots analysis_plots.py --plots
 ```
 
 and look at the new plots in `plots/`.
