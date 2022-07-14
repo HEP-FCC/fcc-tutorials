@@ -5,7 +5,8 @@ from starterkit_ci.sphinx_config import *  # NOQA
 project = 'FCC Starterkit Lessons'
 copyright = '2020, FCC Starterkit'
 author = 'FCC Starterkit'
-html_logo = 'starterkit.png'
+html_logo = 'fcc-logo-dark.png'
+html_favicon = 'favicon.ico'
 
 exclude_patterns += [
     'archive',
