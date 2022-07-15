@@ -30,10 +30,10 @@ html_context = {
 }
 
 extensions = [
-    'sphinx_copybutton',
     'myst_parser',
     'sphinx_rtd_theme',
-    'sphinx_togglebutton'
+    'sphinx_togglebutton',
+    'sphinx_copybutton'
 ]
 
 myst_enable_extensions = [

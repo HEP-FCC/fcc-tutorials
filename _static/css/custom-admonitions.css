@@ -1,5 +1,16 @@
 /* Custom admonitions inspired by LHCb Starterkit*/
 
+.rst-content .admonition button.toggle-button {
+  top: .15em;
+  right: 0.4em;
+}
+
+.rst-content .admonition button.toggle-button:before {
+  top: -0.5em;
+  position: relative;
+}
+
+
 /* Prerequisite admonition */
 .rst-content .prereq.admonition {
     background-color: inherit;
@@ -19,8 +30,6 @@
 }
 
 .rst-content .prereq.admonition button.toggle-button {
-  top: .15em;
-  right: 0;
   color: #8a6d3b;
 }
 
@@ -45,8 +54,6 @@
 }
 
 .rst-content .callout.admonition button.toggle-button {
-  top: .15em;
-  right: 0;
   color: #fff;
 }
 
@@ -72,8 +79,6 @@
 }
 
 .rst-content .challenge.admonition button.toggle-button {
-  top: .15em;
-  right: 0;
   color: #3c763d;
 }
 
@@ -97,8 +102,6 @@
 }
 
 .rst-content .objectives.admonition button.toggle-button {
-  top: .15em;
-  right: 0;
   color: #a94442;
 }
 
@@ -122,8 +125,6 @@
 }
 
 .rst-content .objectives.admonition button.toggle-button {
-  top: .15em;
-  right: 0;
   color: #8a6d3b;
 }
 
@@ -147,8 +148,6 @@
 }
 
 .rst-content .keypoints.admonition button.toggle-button {
-  top: .15em;
-  right: 0;
   color: #3c763d;
 }
 
@@ -172,7 +171,5 @@
 }
 
 .rst-content .discussion.admonition button.toggle-button {
-  top: .15em;
-  right: 0;
   color: #31708f;
 }
