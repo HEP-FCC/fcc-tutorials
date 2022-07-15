@@ -11,7 +11,6 @@ exclude_patterns = [
     '.github',
     'README.md',
     'CONDUCT.md',
-    'CONTRIBUTING.md',
     'LICENSE.md',
     'archive'
 ]

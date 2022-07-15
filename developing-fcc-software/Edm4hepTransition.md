@@ -4,7 +4,7 @@ For the studies of the Conceptual Design Report, FCC software used its own datam
 The technical implementation was based on a novel library called [PODIO](https://github.com/aidasoft/podio), and tries to use "Plain Old Data" to achieve thread safety and general ease of use.
 
 While FCCEDM has served its purpose, continued use has revealed some minor issues, inconsistencies and impracticalities (see [here](https://github.com/HEP-FCC/fcc-edm/issues?q=is%3Aissue+) and [here](https://fccsw-forum.web.cern.ch/t/event-data-model-discussion/32)).
-Since then, FCC has joined a common software effort with other Future Collider Communities, and decided to base the common software ([Key4HEP](cern.ch/key4hep)) on a new, common datamodel ([EDM4HEP](https://github.com/key4hep/edm4hep)). 
+Since then, FCC has joined a common software effort with other Future Collider Communities, and decided to base the common software ([Key4HEP](https://cern.ch/key4hep)) on a new, common datamodel ([EDM4HEP](https://github.com/key4hep/edm4hep)). 
 
 The types defined by EDM4HEP are somewhat closer to [LCIO](https://github.com/ilcsoft/lcio), but like FCCEDM it is implemented with PODIO.
 In any case, the transition, while time-intensive, is no major technical challenge, and provides the basis for a common experiment software beyond FCC.
