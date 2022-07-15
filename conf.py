@@ -6,8 +6,8 @@ import sphinx_rtd_theme
 project = 'FCC Starterkit Lessons'
 copyright = '2020, FCC Starterkit'
 author = 'FCC Starterkit'
-html_logo = 'fcc-logo-dark.png'
-html_favicon = 'favicon.ico'
+html_logo = '_static/img/fcc-logo-light.png'
+html_favicon = '_static/img/favicon.ico'
 html_theme = 'sphinx_rtd_theme'
 
 exclude_patterns = [
