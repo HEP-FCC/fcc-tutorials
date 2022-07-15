@@ -2,7 +2,8 @@
 # FCC Calorimeter Performance Studies Workflow
 
 
-{% discussion "Run this page as a Notebook on SWAN" %}
+:::{admonition} Run this page as a Notebook on SWAN
+:class: discussion dropdown
 
 This page can be run as a notebook on the SWAN service at CERN (or any ipython notebook server that can run fcc software). Use the following link
 
@@ -19,21 +20,17 @@ When first starting a new notebook in this environment, SWAN may fail to select 
 To fix this, click:  `KERNEL > Change kernel > Python2` in the top menu.
 
 See <https://github.com/swan-cern/help> for more details on SWAN.
+:::
 
-
-{% enddiscussion %}
-
-{% objectives "Learning Objectives" %}
+:::{admonition} Learning Objectives
+:class: objectives
 
 This tutorial will teach you how to:
 
 * **simulate** the single particle response of the calorimeter detector system
 * **reconstruct** physics object from raw signals
 * produce **plots** of energy resolutions and other quantities.
-
-{% endobjectives %}
-
-
+:::
 
 
 First, make sure your setup of the FCC software is working. 

@@ -7,11 +7,12 @@
 - Slightly higher level documentation on usage of a piece of software is usually put directly in the corresponding repository.
 - Long-form documentations  that introduce users to a piece of software belong in [fcc-tutorials](https://hep-fcc.github.io/fcc-tutorials/).
 
-{% callout "Where to put documentation" %}
+:::{admonition} Where to put documentation
+:class: callout
 
- It is sometimes difficult to decide between the last two. In those cases either will be great.
+It is sometimes difficult to decide between the last two. In those cases either will be great.
+:::
 
-{% endcallout %}
 
 ## When and how is the documentation page updated?
 

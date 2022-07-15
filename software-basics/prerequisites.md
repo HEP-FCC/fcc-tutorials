@@ -1,10 +1,11 @@
 # Pre-workshop checklist
 
-{% objectives "Learning Objectives" %}
+:::{admonition} Learning Objectives
+:class: objectives
 
 * You will be ready for the workshop!
+:::
 
-{% endobjectives %}
 
 * Follow this guide before arriving; we will do a quick introduction to environment setup
 but we will not have much time to help you with problems on these issues during the workshop.

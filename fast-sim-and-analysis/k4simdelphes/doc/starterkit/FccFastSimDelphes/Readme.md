@@ -1,7 +1,8 @@
 
 # FCC: Getting started with simulating events in Delphes
 
-{% objectives "Learning Objectives" %}
+:::{admonition} Learning Objectives
+:class: objectives
 
 This tutorial will teach you how to:
 
@@ -10,8 +11,7 @@ This tutorial will teach you how to:
 -   apply an **event selection** on those samples with **FCCAnalyses**
 -   produce **flat ntuples** with observables of interest with **FCCAnalyses**
 -   produce plots with **FCCAnalyses**
-
-{% endobjectives %}
+:::
 
 First login to to a fresh shell on lxplus, on OSG, or in one of the virtual machine that could be provided on open stack. Usage of bash shell is highly recommended. Create a working directory and go inside
 

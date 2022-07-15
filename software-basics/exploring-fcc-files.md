@@ -1,10 +1,11 @@
 # Inspecting an FCC data file
 
-{% objectives "Learning Objectives" %}
+:::{admonition} Learning Objectives
+:class: objectives
 
 * Get to know FCC data files and the tools to inspect them
+:::
 
-{% endobjectives %} 
 
 ## The `events` tree
 
@@ -31,7 +32,8 @@ In configuring jobs with the FCC software framework, users can choose the Branch
 
 
 
-{% challenge "Inspecting a [ROOT file](https://root.cern/manual/storing_root_objects/)"%} 
+:::{admonition} Inspecting a [ROOT file](https://root.cern/manual/storing_root_objects/)
+:class: challenge
 
 Let's take a look at an example: `root://eospublic.cern.ch//eos/experiment/fcc/hh/tutorials/fccee_idea_pgun.root`. 
 (For machines without eos access, this is mirrored at <https://fccsw.web.cern.ch/fccsw/testsamples/tutorial/fccee_idea_pgun.root>)
@@ -43,9 +45,8 @@ Open the file with ROOT and determine:
 * What particle type is being simulated?
 * What is the energy of the primary particle?
 * How many hits were recorded (averaged over the run) in the Tracker? And in the calorimeter? What is the event with the maximum number of hits?
+:::
 
-
-{% endchallenge %}
 
 ## The `metadata` tree
 

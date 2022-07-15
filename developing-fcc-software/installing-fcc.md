@@ -14,11 +14,11 @@ The packages that are supported for local usage are [fcc-physics](https://github
 
 ### Setup a development area:
 
-~~~{.sh}
+```sh
 mkdir FCC
 cd FCC
 export FCC=${PWD}
-~~~
+```
 
 You need to install the **external** dependencies, check the [fcc-physics README](https://github.com/HEP-FCC/fcc-physics#installing-required-software):
 
@@ -30,7 +30,7 @@ You can copy the instructions below into a file and (after making it executable)
 
 > Be sure to have set the `$FCC` environment variable before you execute.
 
-~~~{.sh}
+```sh
 cd $FCC # your local development area
 # get all the sources
 declare -a repos=("podio" "fcc-edm" "fcc-physics" "heppy")
@@ -45,7 +45,7 @@ echo "export FCCEDM=$FCC/fcc-install;export PODIO=$FCC/fcc-install;export FCCPHY
 echo source $FCC/fcc-install/init_fcc_stack.sh >> setup.sh
 curl https://raw.githubusercontent.com/HEP-FCC/fcc-spi/master/init_fcc_stack.sh -o $FCC/fcc-install/init_fcc_stack.sh
 source setup.sh
-~~~
+```
 
 Now you have all repository sources in your `$FCC` directory. If you do `ls` you should see them. To compile you need to
 go through the list in this order:
@@ -56,10 +56,10 @@ go through the list in this order:
 
 For each of them go into the build directory: `cd $FCC/<name>/build` and do:
 
-~~~{.sh}
+```sh
 cmake -DCMAKE_INSTALL_PREFIX=$FCC/fcc-install/ ..
 make install
-~~~
+```
 
 If you encounter errors check the README of the corresponding repository.
 

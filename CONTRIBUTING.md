@@ -55,7 +55,7 @@ You can see your local version by using a web-browser to navigate to `http://loc
 [gh-fork-pull]: https://reflectoring.io/github-fork-and-pull/
 
 
-```eval_rst
+```{eval-rst}
 .. toctree::
     :hidden:
 

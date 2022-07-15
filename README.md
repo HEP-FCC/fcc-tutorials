@@ -9,7 +9,7 @@ If you'd just like to learn about how to use the FCC software, [read on](softwar
 [first-analysis-steps]: https://hep-fcc.github.io/fcc-tutorials/software-basics/
 
 
-```eval_rst
+```{eval-rst}
 .. toctree::
     :numbered:
     :maxdepth: 3

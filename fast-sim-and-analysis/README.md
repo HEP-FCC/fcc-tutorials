@@ -16,7 +16,7 @@ If you have any problems or questions, you can [open an issue][lessons-issues] o
 [lessons-issues]: https://github.com/HEP-FCC/starterkit-lessons/issues
 [lessons-repo]: https://github.com/HEP-FCC/starterkit-lessons
 
-```eval_rst
+```{eval-rst}
 .. toctree::
     :caption: Contents:
 

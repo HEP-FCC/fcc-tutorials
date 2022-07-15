@@ -7,7 +7,7 @@ The python scripts discussed in these pages are available at [https://github.com
 [dirac]: https://dirac.readthedocs.io/en/latest/
 [fccdirac]: https://github.com/HEP-FCC/FCCDIRAC
 
-```eval_rst
+```{eval-rst}
 .. toctree::
     :caption: Contents:
 
