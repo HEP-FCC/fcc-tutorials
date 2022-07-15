@@ -72,3 +72,51 @@ Administrators controlling access to the webspace need to be members of the e-gr
 
 If you want to have write-access you need to request membership in
 `cernbox-project-fccsw-web-writers`. If you are the main responsible for these activities, you should own the service account `fccsweos` that has admin rights for both the physics data EOS space and the web EOS space.
+
+
+## Custom Admonitions
+
+The `fcc-tutorial` makes use of custom admonition classes:
+
+* prereq
+* callout
+* challenge
+* solution
+* objectives
+* keypoints
+* discussion
+
+Example of an admonition:
+```markdown
+:::{admonition} Custom admonition
+:class: solution
+
+Text of a custom admonition.
+:::
+```
+
+:::{admonition} Custom admonition
+:class: solution
+
+Text of a custom admonition.
+:::
+
+To create collapsible admonition add additional classes:
+* To create collapsible admonition closed by default add only `dropdown` class.
+* To create collapsible admonition open by default add two classes `dropdown` and
+  `toggle-shown`.
+
+Example of collapsible admonition:
+```markdown
+:::{admonition} Collapsable admonition
+:class: prereq dropdown toggle-shown
+
+Text of a collapsable admonition.
+:::
+```
+
+:::{admonition} Collapsable admonition
+:class: prereq dropdown toggle-shown
+
+Text of a collapsable admonition.
+:::
