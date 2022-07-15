@@ -3,9 +3,8 @@
 # from starterkit_ci.sphinx_config import *  # NOQA
 import sphinx_rtd_theme
 
-project = 'FCC Starterkit Lessons'
-copyright = '2020, FCC Starterkit'
-author = 'FCC Starterkit'
+project = 'FCC Tutorials'
+copyright = '2020, CERN'
 html_logo = '_static/img/fcc-logo-light.png'
 html_favicon = '_static/img/favicon.ico'
 html_theme = 'sphinx_rtd_theme'
