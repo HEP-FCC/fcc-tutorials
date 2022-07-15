@@ -1,6 +1,3 @@
-# You should normally never do wildcard imports
-# Here it is useful to allow the configuration to be maintained elsewhere
-# from starterkit_ci.sphinx_config import *  # NOQA
 import sphinx_rtd_theme
 
 project = 'FCC Tutorials'
@@ -52,8 +49,3 @@ linkcheck_ignore = [
     # FIXME: The URLs have changed
     r'https://research\.cs\.wisc\.edu/htcondor/.*',
 ]
-
-#def starterkit_ci_setup(app):
-#    app.add_stylesheet('starterkit.css')
-
-#setup.extra_setup_funcs += [starterkit_ci_setup]
