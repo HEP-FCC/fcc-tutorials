@@ -4,3 +4,5 @@ starterkit-ci==0.0.12
 sphinx-copybutton==0.3.0
 sphinx-markdown-tables==0.0.15
 notedown==1.5.1
+sphinx_rtd_theme
+sphinx-togglebutton

@@ -1,0 +1,178 @@
+/* Custom admonitions inspired by LHCb Starterkit*/
+
+/* Prerequisite admonition */
+.rst-content .prereq.admonition {
+    background-color: inherit;
+    border: 1px solid;
+    border-color: #faebcc;
+}
+
+.rst-content .prereq.admonition .admonition-title {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-bottom: 1px solid;
+    border-color: inherit;
+}
+
+.rst-content .prereq.admonition .admonition-title:before {
+    content: "\f135"; /* rocket */
+}
+
+.rst-content .prereq.admonition button.toggle-button {
+  top: .15em;
+  right: 0;
+  color: #8a6d3b;
+}
+
+
+/* Callout admonition */
+.rst-content .callout.admonition {
+    background-color: inherit;
+    border: 1px solid;
+    border-color: #337ab7;
+}
+
+.rst-content .callout.admonition .admonition-title {
+    color: #fff;
+    background-color: #337ab7;
+    border-bottom: 1px solid;
+    border-color: inherit;
+}
+
+.rst-content .callout.admonition .admonition-title:before {
+    /* content: "\f05a"; /* info-circle */
+    content: "\f129"; /* info */
+}
+
+.rst-content .callout.admonition button.toggle-button {
+  top: .15em;
+  right: 0;
+  color: #fff;
+}
+
+
+/* Challenge admonition */
+.rst-content .challenge.admonition {
+    background-color: inherit;
+    border: 1px solid;
+    border-color: #d6e9c6;
+}
+
+.rst-content .challenge.admonition .admonition-title {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-bottom: 1px solid;
+    border-color: inherit;
+}
+
+.rst-content .challenge.admonition .admonition-title:before {
+    /* content: "\f456"; /* flag-pennant */
+    /* content: "\f11e"; /* flag-checkered */
+    content: "\f024"; /* flag */
+}
+
+.rst-content .challenge.admonition button.toggle-button {
+  top: .15em;
+  right: 0;
+  color: #3c763d;
+}
+
+
+/* Solution admonition */
+.rst-content .solution.admonition {
+    background-color: inherit;
+    border: 1px solid;
+    border-color: #ebccd1;
+}
+
+.rst-content .solution.admonition .admonition-title {
+    color: #a94442;
+    background-color: #f2dede;
+    border-bottom: 1px solid;
+    border-color: inherit;
+}
+
+.rst-content .solution.admonition .admonition-title:before {
+    content: "\f00c"; /* check */
+}
+
+.rst-content .objectives.admonition button.toggle-button {
+  top: .15em;
+  right: 0;
+  color: #a94442;
+}
+
+
+/* Objectives admonition */
+.rst-content .objectives.admonition {
+    background-color: inherit;
+    border: 1px solid;
+    border-color: #faebcc;
+}
+
+.rst-content .objectives.admonition .admonition-title {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-bottom: 1px solid;
+    border-color: inherit;
+}
+
+.rst-content .objectives.admonition .admonition-title:before {
+    content: "\f201"; /* chart-line */
+}
+
+.rst-content .objectives.admonition button.toggle-button {
+  top: .15em;
+  right: 0;
+  color: #8a6d3b;
+}
+
+
+/* Keypoints admonition */
+.rst-content .keypoints.admonition {
+    background-color: inherit;
+    border: 1px solid;
+    border-color: #d6e9c6;
+}
+
+.rst-content .keypoints.admonition .admonition-title {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-bottom: 1px solid;
+    border-color: inherit;
+}
+
+.rst-content .keypoints.admonition .admonition-title:before {
+    content: "\f084"; /* key */
+}
+
+.rst-content .keypoints.admonition button.toggle-button {
+  top: .15em;
+  right: 0;
+  color: #3c763d;
+}
+
+
+/* Discussion admonition */
+.rst-content .discussion.admonition {
+    background-color: inherit;
+    border: 1px solid;
+    border-color: #bce8f1;
+}
+
+.rst-content .discussion.admonition .admonition-title {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-bottom: 1px solid;
+    border-color: inherit;
+}
+
+.rst-content .discussion.admonition .admonition-title:before {
+    content: "\f0f3"; /* bell */
+}
+
+.rst-content .discussion.admonition button.toggle-button {
+  top: .15em;
+  right: 0;
+  color: #31708f;
+}
