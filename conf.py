@@ -10,8 +10,6 @@ exclude_patterns = [
     'venv',
     '.github',
     'README.md',
-    'CONDUCT.md',
-    'LICENSE.md',
     'archive'
 ]
 
@@ -35,6 +33,8 @@ myst_enable_extensions = [
     'colon_fence',
     'html_admonition'
 ]
+
+myst_heading_anchors = 3
 
 html_static_path = [
     '_static'
