@@ -1,15 +1,15 @@
 # Writing Gaudi Algorithms
 
 
-{% objectives "Learning Objectives" %}
+:::{admonition} Learning Objectives
+:class: objectives
 
 This tutorial will teach you how to:
 
 * write an algorithm for FCCSW
 * interact with the cmake based build system 
 * use other Gaudi components in the algorithms 
-
-{% endobjectives %}
+:::
 
 
 ## Getting Started

@@ -1,11 +1,11 @@
 # FCCee Interaction Region Backgrounds
 
-{% objectives "Learning objectives" %}
+:::{admonition} Learning objectives
+:class: objectives
 
 * get to know tools to  study FCCee interaction region backgrounds
 * know how to setup and use GuineaPig
-
-{% endobjectives %}
+:::
 
 
 ## Using Guinea-Pig to generate interaction region backgrounds 

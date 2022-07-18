@@ -30,11 +30,12 @@ which fccrun
 /cvmfs/sw.hsf.org/spackages/linux-centos7-broadwell/gcc-8.3.0/fccsw-develop-q57ahua7lm65fvxnzekozih4mgvzptlx/scripts/fccrun
 ```
 
-{% callout "Nota Bene" %}
+:::{admonition} Nota Bene
+:class: callout
 
 You will need to source the /cvmfs/fcc.cern.ch/sw/latest/setup.sh script everytime you want to use the software.
+:::
 
-{% endcallout %}
 
 ## Generators
 
