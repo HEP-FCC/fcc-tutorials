@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8)
 
-project(FCCTutorials)
+project(FCCTutorials LANGUAGES NONE)
 
 include(CTest)
 
@@ -16,7 +16,7 @@ function(add_nb_test testpage)
   message(${_testpage_dir})
   execute_process(COMMAND jupytext ${CMAKE_SOURCE_DIR}/${testpage}-test.md -o ${CMAKE_SOURCE_DIR}/${testpage}.ipynb)
   add_test(NAME ${testpage}
-           COMMAND jupytext ${CMAKE_SOURCE_DIR}/${testpage}-test.md -o ${CMAKE_SOURCE_DIR}/${testpage}-executed.ipynb --execute 
+           COMMAND jupytext ${CMAKE_SOURCE_DIR}/${testpage}.ipynb -o ${CMAKE_SOURCE_DIR}/${testpage}-executed.ipynb --execute
            WORKING_DIRECTORY ${_testpage_dir})
 endfunction()
 
