@@ -19,7 +19,7 @@ html_context = {
     'display_github': True,
     'github_user': 'HEP-FCC',
     'github_repo': 'fcc-tutorials',
-    'github_version': 'master',
+    'github_version': 'master/',
 }
 
 extensions = [
