@@ -17,7 +17,11 @@ jobs:
         docker run -it --name CI_container -v ${GITHUB_WORKSPACE}:/Package -v /cvmfs:/cvmfs:shared -d ghcr.io/aidasoft/centos7:latest /bin/bash
     - name: RunTests
       run: |
-        docker exec CI_container /bin/bash -c 'cd ./Package;\
+        docker exec CI_container /bin/bash -c \
+        'curl -LO https://github.com/jgm/pandoc/releases/download/2.18/pandoc-2.18-linux-amd64.tar.gz;\
+        tar -xzf pandoc-2.18-linux-amd64.tar.gz;\
+        cp pandoc-2.18/bin/pandoc /usr/local/bin/;\
+        cd ./Package;\
         source ${{ matrix.SETUP }};\
         mkdir build;\
         cd build;\
