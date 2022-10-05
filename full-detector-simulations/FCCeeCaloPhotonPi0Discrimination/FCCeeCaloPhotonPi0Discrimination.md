@@ -13,16 +13,44 @@ This tutorial will teach you how to:
 * produce discrimination **plots** single photons/pi0
 :::
 
+## Installation of FCCAnalyses
+For this tutorial we will need to develop some code inside FCCAnalyses, thus we need to install it locally.
+Go inside the area that you have setup for the tutorials and get the FCCAnalyses code:
 
-First, make sure your setup of the FCC software is working.
-You can check that the command to run jobs in the Gaudi framework is available on the command line:
-
-```bash
-which fccrun
 ```
-**Change link below, does not work**
-If you don't see a valid path like `/usr/local/bin/fccrun`  you should consult [the documentation page on FCCSW setup](https://github.com/vvolkl/fcc-tutorials/blob/master/FccSoftwareGettingStarted.md)
+git clone https://github.com/HEP-FCC/FCCAnalyses.git
+```
 
-## Usin
+Go inside the directory and run
 
-T
+```
+source ./setup.sh
+mkdir build install
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=../install
+make install
+cd ..
+```
+
+## First MVA evaluation
+
+Here we evaluate the so called sub-optimal.
+Need to add the defines from calo ntupleizer here, and point to weaver example to implement the first MVA with basic variables
+https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/test/weaver_inference.py
+
+User need to create his own ```analysis.py``` with the basic variables and output the mva score
+
+```
+fccanalysis run caloanalysis.py --output photons_MVA1.root --files-list where the photons files are
+fccanalysis run caloanalysis.py --output pi0_MVA1.root --files-list where the pi0s files are
+```
+
+Run a marco to make a plot to compare performance
+
+## Adding new variables
+
+In order to add new variables, we need to develop inside FCCAnalyses. For that let us create a dedicated working directory:
+
+```
+fccanalysis init --standalone --output-dir tutorial tutorialAnalysis
+```
