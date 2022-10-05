@@ -22,11 +22,11 @@ Please refer to [this tutorial](https://git-scm.com/book/en/v2/Getting-Started-F
 
 When working on lxplus we recommend to clone github repositories via SSH, especially if you want to contribute code. For this to work, you need to generate ssh keys for authentication. See the corresponding github [help-page](https://help.github.com/articles/generating-an-ssh-key/).
 
-{% callout "Generate and set up ssh keys for github" %}
+:::{admonition} Generate and set up ssh keys for github
+:class: callout
 
  If you only want to use the software it may be easier to use https. In that case you don't need to generate the keys but have to replace `git@github:` with `https://github.com/` in all the instructions. Note that you'll not be able to push to your repository when you are on lxplus. You can also start using https for now and later re-add your repository with ssh authentication, see the [trouble shooting section](#trouble-shooting)
-
-{% endcallout %}
+:::
 
 
 ## Improving your git experience

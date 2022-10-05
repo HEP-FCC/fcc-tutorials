@@ -8,13 +8,12 @@ groups such as 'Delphes Events', ‘Full detector simulation’, and according t
 After this, a tree of various application and processing versions will 
 eventually lead to the data you need.
 
-{% objectives "Learning Objectives" %}
+:::{admonition} Learning Objectives
+:class: objectives
 
 * Find FCC data in the central storage
 * Store FCC data in the central storage
-
-{% endobjectives %}
-
+:::
 
 ## Gaining access permissions
 
@@ -86,8 +85,10 @@ On lxplus `eos` is mounted as a standard directory and you can use standard bash
 However, using eos like this is not recommended to transfer actual data (we speak from experience) and also not possible on machines where eos has not been mounted. The right tool here is `xrdcp`, which uses the xrootd protocol. It works like   `cp` (minus some features) but all paths must be prefixed by the URL `root://eospublic.cern.ch/`.
 
 
-{% challenge "Write a file to the FCC eos directory" %}
+:::{admonition} Write a file to the FCC eos directory
+:class: challenge
 
-To check that your permissions have been set up correctly, try to write a file called `<user>.txt` to the test directory `root://eospublic.cern.ch//eos/experiment/fcc/hh/tests/`
-
-{% endchallenge %}
+To check that your permissions have been set up correctly, try to write a file
+called `<user>.txt` to the test directory
+`root://eospublic.cern.ch//eos/experiment/fcc/hh/tests/`
+:::

@@ -1,10 +1,11 @@
 # Goals of the course
 
-{% objectives "Learning Objectives" %}
+:::{admonition} Learning Objectives
+:class: objectives
 
 * Understand what we'll be doing, and why we'll be doing it.
+:::
 
-{% endobjectives %} 
 
 The first FCC Starterkit is all about getting you the data  and tools you need to do your studies.
 

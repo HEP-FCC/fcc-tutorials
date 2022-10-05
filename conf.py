@@ -1,41 +1,50 @@
-# You should normally never do wildcard imports
-# Here it is useful to allow the configuration to be maintained elsewhere
-from starterkit_ci.sphinx_config import *  # NOQA
+import sphinx_rtd_theme
 
-project = 'FCC Starterkit Lessons'
-copyright = '2020, FCC Starterkit'
-author = 'FCC Starterkit'
-html_logo = 'starterkit.png'
+project = 'FCC Tutorials'
+copyright = '2022, CERN'
+html_logo = '_static/img/fcc-logo-light.png'
+html_favicon = '_static/img/favicon.ico'
+html_theme = 'sphinx_rtd_theme'
 
-exclude_patterns += [
-    'archive',
+exclude_patterns = [
+    'venv',
+    '.github',
     'README.md',
+    'archive'
 ]
+
+html_theme = "sphinx_rtd_theme"
 
 html_context = {
     'display_github': True,
     'github_user': 'HEP-FCC',
     'github_repo': 'fcc-tutorials',
-    'github_version': 'master',
-    'conf_py_path': '/',
+    'github_version': 'master/',
 }
 
 extensions = [
-    'sphinx_copybutton',
-    'sphinx_markdown_tables',
-    'recommonmark',
+    'myst_parser',
+    'sphinx_rtd_theme',
+    'sphinx_togglebutton',
+    'sphinx_copybutton'
 ]
 
-html_static_path += [
-    f'_static',
+myst_enable_extensions = [
+    'colon_fence',
+    'html_admonition'
 ]
 
-linkcheck_ignore += [
+myst_heading_anchors = 3
+
+html_static_path = [
+    '_static'
+]
+
+html_css_files = [
+    'css/custom-admonitions.css'
+]
+
+linkcheck_ignore = [
     # FIXME: The URLs have changed
     r'https://research\.cs\.wisc\.edu/htcondor/.*',
 ]
-
-#def starterkit_ci_setup(app):
-#    app.add_stylesheet('starterkit.css')
-
-#setup.extra_setup_funcs += [starterkit_ci_setup]

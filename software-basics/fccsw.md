@@ -1,12 +1,12 @@
 
 # An introduction to FCC Software
 
-{% objectives "Learning Objectives" %}
+:::{admonition} Learning Objectives
+:class: objectives
 
-* Learn the key concepts needed to work with the FCC software
-* Learn how to launch the FCC software with `fccrun`
-
-{% endobjectives %} 
+- Learn the key concepts needed to work with the FCC software
+- Learn how to launch the FCC software with `fccrun`
+:::
 
 Imagine you want to design and run a new particle detector.
 Apart from organizing a collaboration, creating the design and specification, and several other tasks, you will also have to find solutions to many computational challenges.
@@ -108,22 +108,22 @@ You can then look components up on [github](https://github.com/HEP-FCC/FCCSW) to
 However, it is advised to follow this tutorial, as many of the components are introduced here and used in example jobs.
 
 
-{% callout "fccrun and command line arguments" %}
+:::{admonition} `fccrun` and command line arguments
+:class: callout
 
 `fccrun` is a wrapper around a gaudi script called `gaudirun.py`. `fccrun` makes it easier to configure jobs on the command line. It is a dynamic script, i.e. it command line options depend on the options file and let you modify `options.py` without opening an editor.
 Take a look at the example job to run Pythia8:
 
-```
+```shell
 less $FCCSW/Examples/options/pythia.py
 ```
 and compare it with the command line options for fccrun:
-```bash
+```shell
 fccrun $FCCSW/Examples/options/pythia.py -h
 ```
 And note that you have to give an `options.py` as the first argument to `fccrun` in order for this to work:
 
-```bash
+```shell
 fccrun -h
-``` 
-{% endcallout %}
-
+```
+:::

@@ -13,7 +13,7 @@ Unless specified, in the rest of this section the word `DIRAC` refers to the `iL
 [wikiclic]: https://twiki.cern.ch/twiki/bin/view/CLIC/DiracForUsers
 [wikiilc]: https://flcwiki.desy.de/ILCDirac
 
-```eval_rst
+```{eval-rst}
 .. toctree::
     :caption: Contents:
 

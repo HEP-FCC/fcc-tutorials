@@ -1,10 +1,11 @@
 # Pre-workshop checklist
 
-{% objectives "Learning Objectives" %}
+:::{admonition} Learning Objectives
+:class: objectives
 
 * You will be ready for the workshop!
+:::
 
-{% endobjectives %}
 
 * Follow this guide before arriving; we will do a quick introduction to environment setup
 but we will not have much time to help you with problems on these issues during the workshop.
@@ -26,7 +27,7 @@ access the internet.
 * The FCCSW has been developed on Linux and the main platform supported is the default platform on CERN lxplus, i.e. CentOS7 .
   Experimental support for other Linux systems (e.g. Ubuntu 20.04 LTS) and MacOxS is provided as is. There is no support for Windows.
 
-### Checking the chosen resources
+## Checking the chosen resources
 
 Please try the following steps with the computer you will use at the workshop (the example is given for lxplus, but should hold for the other resources as well):
 
@@ -44,7 +45,7 @@ Please try the following steps with the computer you will use at the workshop (t
 If you can successfully execute all of the above steps, you are ready to go for
 the workshop!
 
-### Enabling the FCCSW software installation from `cvmfs`
+## Enabling the FCCSW software installation from `cvmfs`
 
 There is a complete installation of FCC software provided on `cvmfs`, which can be set up using:
 ```

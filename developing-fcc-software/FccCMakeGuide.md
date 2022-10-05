@@ -167,12 +167,12 @@ An environment variable is used to forward command line arguments to the cmake c
 CMAKEFLAGS='--trace' make
 ```
 
-{% callout "How do I check compilation flags?" %}
+:::{admonition} How do I check compilation flags?
+:class: callout
 
-Instead of running `  make` , run:
+Instead of running `make`, run:
 
- ```{.bash}
- make VERBOSE=1 
- ```
-
-{% endcallout %}
+```shell
+make VERBOSE=1
+```
+:::

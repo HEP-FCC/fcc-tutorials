@@ -2,7 +2,8 @@
 # FCC: Getting started with analysing simulated events
 
 
-{% objectives "Learning Objectives" %}
+:::{admonition} Learning Objectives
+:class: objectives
 
 This tutorial will teach you how to:
 
@@ -10,9 +11,7 @@ This tutorial will teach you how to:
 -   produce **flat ntuples** with observables of interest with **FCCAnalyses**
 -   produce plots with **FCCAnalyses**
 -   compare distributions produced with different generators
-
-{% endobjectives %}
-
+:::
 
 
 ## Part II: Analyse with FCCAnalyses
@@ -295,7 +294,8 @@ and look at them in `plots/`.
 Please note that the event statistics is not great because we only produced on 10 000 events in the `k4SimDelphes` step.
 
 
-{% challenge "Exercises" %}
+:::{admonition} Exercises
+:class: challenge
 
 1) Modify `plots.py` to include the muon tracks (look at the output file `_edm4hep.root` or to `analysis.py` to check the name.
 
@@ -334,6 +334,4 @@ fccanalysis plots analysis_plots.py
 and look at the new plots in `plots/`.
 
 To further increase the event statistics, increase the value (up to 1) of the parameter `fraction` in `analysis_stage1` (no value mean 1)
-
-
-{% endchallenge %}
+:::
