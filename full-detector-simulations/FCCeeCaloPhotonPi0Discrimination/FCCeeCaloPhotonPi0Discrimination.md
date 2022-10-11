@@ -141,7 +141,41 @@ fccanalysis init my_tutorial_analysis --output-dir ${OUTPUT_DIR} --standalone
 
 We now have a new directory ```tutorial_analysis``` that contains a ```DummyAnalysis``` within ```my_tutorial_analysis``` namespace.
 
-Now you need to add in ```tutorial_analysis/include/DummyAnalysis.h``` and ```tutorial_analysis/src/DummyAnalysis.cc``` the descriptions of the variables to be added to the MVA. You will also need to add them in the python (new ```Define```s) create a new weaver to evaluate with all the variables.
+Now you need to add in ```tutorial_analysis/include/DummyAnalysis.h``` and ```tutorial_analysis/src/DummyAnalysis.cc``` the description of one variable, that is the energy in the second layer divided by the cluster energy.
+
+In the header file, the function should look like
+```cpp
+rv::RVec<float> get_energyInLayerOverClusterEnergy(const rv::RVec<edm4hep::ClusterData>& in,
+               const rv::RVec<edm4hep::CalorimeterHitData>& cells,
+               const int layer);
+```
+
+Do not forget to add the relevant ```edm4hep``` includes!
+
+and in the source file, the starting point is:
+
+// total energy in a layer divided by cluster energy (sensitive to the longitudinal shower development useful for e.g. high energy pi0/gamma separation where transverse shape become similar)
+```cpp
+rv::RVec<float> get_energyInLayerOverClusterEnergy (const rv::RVec<edm4hep::ClusterData>& in, const rv::RVec<edm4hep::CalorimeterHitData>& cells, const int layer) {
+  static const int layer_idx = m_decoder->index("layer");
+  ROOT::VecOps::RVec<float> result;
+  for (const auto & c: in) {
+    float cluster_energy = c.energy;
+    float energy_in_layer = 0;
+    for (auto i = c.hits_begin; i < c.hits_end; i++) {
+      int cell_layer = m_decoder->get(cells[i].cellID, layer_idx);
+      if(cell_layer == layer){
+          energy_in_layer += cells[i].energy;
+      }
+    }
+    result.push_back(energy_in_layer/cluster_energy);
+  }
+  return result;
+}
+
+energyInLayerOverClusterEnergy
+
+ to be added to the MVA. You will also need to add them in the python (new ```Define```s) create a new weaver to evaluate with all the variables.
 
 Last thing, do not forget to compile before
 
