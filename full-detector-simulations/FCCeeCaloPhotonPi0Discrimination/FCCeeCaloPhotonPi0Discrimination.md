@@ -98,7 +98,7 @@ fccanalysis run --help
 
 **HIDE**
 ```shell
-fccanalysis run analysis_tutorial_mva.py --nevents--output pion_MVA1.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_111_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
+fccanalysis run analysis_tutorial_mva.py --nevents--output pions_MVA1.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_111_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
 ```
 Note that if you have already produced full simulation pions and photons with the calorimeter tutorial earlier this morning, you can change the file to point to your files.
 
@@ -178,7 +178,7 @@ Let's give it a try on a few events as last time.
 
 **HIDE**
 ```shell
-fccanalysis run analysis_tutorial_mva.py --nevents--output pion_MVA1.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_111_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
+fccanalysis run analysis_tutorial_mva.py --nevents--output pions_MVA1.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_111_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
 ```
 
 Now we add the weaver part at the beginning of the ```analysers``` function:
@@ -211,15 +211,48 @@ and the get the weights:
 Finally add the newly defined variable to the ```branchList``` in the ```output``` function and run over the full statistics
 
 ```shell
-fccanalysis run analysis_tutorial_mva.py --output pion_MVA1.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_111_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
-fccanalysis run analysis_tutorial_mva.py --output pion_MVA1.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_22_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
+fccanalysis run analysis_tutorial_mva.py --output pions_MVA1.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_111_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
+fccanalysis run analysis_tutorial_mva.py --output photons_MVA1.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_22_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
 ```
 
 Run a marco to make a plot to compare performance (NEED TO WRITE SOMETHING??)
 
 ## Removing the last layers
 
-In this section we will
+In this section we will remove the last layers of the calorimeter and evaluate the same MVA model with less layers. First let's have a look at one the output file and try to find how many layers we have in the calorimeter. For that plot the number of layers for a few events and look at the histogram
+
+**HIDE**
+```shell
+events->Draw("maxEnergyCluster_cells_layer","","",10)
+```
+
+Now you produce new file removing the last layer of the calorimeter adding a ```Filter``` after all the ```Define```
+
+**HIDE***
+```python
+.Filter("maxEnergyCluster_cells_layer<11")
+```
+
+**HIDE***
+```shell
+fccanalysis run analysis_tutorial_mva.py --output pions_MVA2.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_111_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
+fccanalysis run analysis_tutorial_mva.py --output photons_MVA2.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_22_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
+```
+
+Compare the performance of the two MVAs and comment.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 **THIS WILL MOVE TO vertexing tutorial**
