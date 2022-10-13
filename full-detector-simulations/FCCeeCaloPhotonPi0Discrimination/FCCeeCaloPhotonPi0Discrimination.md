@@ -59,7 +59,7 @@ At the top of the file, we need to define special variables needed to load the D
 ```python
 # get the environment variable FCCDETECTORS
 from os import getenv
-FCCDetectors = getenv("FCCDETECTORS")
+FCCDETECTORS = getenv("FCCDETECTORS")
 # define geometryFile and readoutName to load a DD4Hep detector and readout
 geometryFile = FCCDETECTORS + "/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectMaster.xml"
 readoutName  = "ECalBarrelPhiEta"
