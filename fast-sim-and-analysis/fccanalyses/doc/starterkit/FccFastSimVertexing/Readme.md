@@ -13,6 +13,84 @@ This tutorial will teach you how to:
 :::
 
 
-## FCCAnalyses
+## Installation of FCCAnalyses
+For this tutorial we will need to develop some code inside FCCAnalyses, thus we need to install it locally. If not already done, you need to clone and install it.
+Go inside the area that you have setup for the tutorials and get the FCCAnalyses code:
 
+```shell
+git clone https://github.com/HEP-FCC/FCCAnalyses.git
+```
+
+Go inside the directory and run
+
+```shell
+source ./setup.sh
+mkdir build install
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=../install
+make install
+cd ..
+```
+
+
+## Builing a custom sub-package in FCCAnalyses
+
+In order to add new code, we need to develop inside FCCAnalyses. For that let us first define the output directory and properly add it to the environment variables
+
+```shell
+OUTPUT_DIR=${LOCAL_DIR}/tutorial_analysis
+LD_LIBRARY_PATH=${LOCAL_DIR}/install:${LD_LIBRARY_PATH}
+PYTHONPATH=${LOCAL_DIR}:${PYTHONPATH}
+PATH=${LOCAL_DIR}/bin:${LOCAL_DIR}:${PATH}
+ROOT_INCLUDE_PATH=${LOCAL_DIR}/install:${ROOT_INCLUDE_PATH}
+OLDPWD=${PWD}
+mkdir -p ${OUTPUT_DIR}/build
+```
+
+Now we set it up
+
+```shell
+fccanalysis init my_tutorial_analysis --output-dir ${OUTPUT_DIR} --name myAnalysis --standalone
+```
+
+We now have a new directory ```tutorial_analysis``` that contains a ```myAnalysis``` within ```my_tutorial_analysis``` namespace.
+
+Now you need to add in ```tutorial_analysis/include/myAnalysis.h``` and ```tutorial_analysis/src/myAnalysis.cc``` the description of the missing energy variable
+
+In the header file, the function should look like
+
+```cpp
+rv::RVec<float> get_missingEnergy(const rv::RVec<edm4hep::ReconstructedParticleData>& in);
+```
+
+Do not forget to add the relevant ```edm4hep``` includes!
+
+and in the source file, the starting point is:
+
+```cpp
+rv::RVec<float> get_missingEnergy(const rv::RVec<edm4hep::ReconstructedParticleData>& in){
+  rv::RVec<float> result;
+
+  ...
+
+  return result;
+}
+```
+
+In your python analysis, you can now call you newly defined function, don't forget it is inside a namespace!
+
+:::{admonition} Suggested answer
+:class: toggle
+```python
+.Define("missingEnergy","my_tutorial_analysis::get_missingEnergy(ReconstructedParticle)")
+```
 :::
+
+
+Last thing, do not forget to compile before
+
+```shell
+cd ${OUTPUT_DIR}/build
+cmake .. && make && make install
+cd ${OLDPWD}
+```

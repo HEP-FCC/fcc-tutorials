@@ -12,7 +12,7 @@ This tutorial will teach you how to:
 :::
 
 ## Installation of FCCAnalyses
-For this tutorial we will need to develop some code inside FCCAnalyses, thus we need to install it locally.
+For this tutorial we will need to develop some code inside FCCAnalyses, thus we need to install it locally. If not already done, you need to clone and install it.
 Go inside the area that you have setup for the tutorials and get the FCCAnalyses code:
 
 ```shell
@@ -73,19 +73,23 @@ Let's now define new columns to the RootDataFrame object ```df2``` inside the fu
 
 Similarly, define the index in the collection ```CaloClusters``` of the cluster with minimum energy, the total number of clusters in the event and the cluster energy.
 
-**HIDE**
+:::{admonition} Suggested answer
+:class: toggle
 ```python
 .Define("minEnergyCluster_index","std::distance(CaloClusters.energy.begin(),std::min_element(CaloClusters.energy.begin(), CaloClusters.energy.end()))")
 .Define("clusters_n","CaloClusters.energy.size()")
 .Define("clusters_energy","CaloClusters.energy")
 ```
+:::
 
 Now we need to add all the variables that we have defined to the ```branchList``` of the ```output``` function of the same ```RDFanalysis``` class.
 
-**HIDE**
+:::{admonition} Suggested answer
+:class: toggle
 ```python
 "maxEnergyCluster_index","minEnergyCluster_index","clusters_n","clusters_energy"
 ```
+:::
 
 And let's run on a few events to check that everything is fine **NEED TO CHANGE THE INPUT FILE**.
 To find the options to configure the code to run on a few (10) events using as input file ```pathtorootfile``` and to store an output file ```pion_MVA1.root``` using the command:
@@ -94,27 +98,34 @@ To find the options to configure the code to run on a few (10) events using as i
 fccanalysis run --help
 ```
 
-**HIDE**
+:::{admonition} Suggested answer
+:class: toggle
 ```shell
 fccanalysis run analysis_tutorial_mva.py --nevents 10 --output pions_MVA1.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_111_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
 ```
+:::
+
 Note that if you have already produced full simulation pions and photons with the calorimeter tutorial earlier this morning, you can change the file to point to your files.
 
 Open the produced root file ```pions_MVA1.root``` and inspect it with ```Scan``` for example check that the index we have calculated indeed correspond to the clusters of maximum/minimum energy:
 
-**HIDE**
+:::{admonition} Suggested answer
+:class: toggle
 ```shell
 root -l pions_MVA1.root
 events->Scan("maxEnergyCluster_index:minEnergyCluster_index:clusters_n:clusters_energy")
 ```
+:::
 
 We now need to obtain the index of the first and last cells of the maximum energy cluster. For that we need to select the ```maxEnergyCluster_index``` in the ```CaloClusters``` collection and evaluate ```hits_begin``` and ```hits_end```:
 
-**HIDE**
+:::{admonition} Suggested answer
+:class: toggle
 ```python
 .Define("maxEnergyCluster_firstCell_index","CaloClusters[maxEnergyCluster_index].hits_begin")
 .Define("maxEnergyCluster_lastCell_index" ,"CaloClusters[maxEnergyCluster_index].hits_end")
 ```
+:::
 
 Using the positions of the first and last cells in the ```PositionedCaloClusterCells``` collection we now need to create a sub-collection from the full collection between the two indices. To achieve this with the ROOT version in this tutorial, we need to declare some extra code at the beginning of our analysis file:
 
@@ -140,14 +151,17 @@ Take(vec, Range(id_end - id_begin) + id_begin)
 ```
 Now you can create the sub-collection ```maxEnergyCluster_Cells``` from the input collection ```PositionedCaloClusterCells``` from ```maxEnergyCluster_firstCell_index``` to ```maxEnergyCluster_lastCell_index``` using the newly defined ```myRange``` function:
 
-**HIDE**
+:::{admonition} Suggested answer
+:class: toggle
 ```python
 .Define("maxEnergyCluster_cells", "myRange(PositionedCaloClusterCells, maxEnergyCluster_firstCell_index, maxEnergyCluster_lastCell_index)")
 ```
+:::
 
 Using the newly defined collection ```maxEnergyCluster_cells```, create new variables of their energies, phi, theta, layer and number of cells, using functions like [here](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/FCCAnalyses/CaloNtupleizer.h#L23#L33)
 
-**HIDE**
+:::{admonition} Suggested answer
+:class: toggle
 ```python
 .Define("maxEnergyCluster_cells_energy", "CaloNtupleizer::getCaloHit_energy(maxEnergyCluster_cells)" )
 .Define("maxEnergyCluster_cells_phi",    "CaloNtupleizer::getCaloHit_phi(maxEnergyCluster_cells)" )
@@ -155,29 +169,37 @@ Using the newly defined collection ```maxEnergyCluster_cells```, create new vari
 .Define("maxEnergyCluster_cells_layer" , "CaloNtupleizer::getCaloHit_layer(maxEnergyCluster_cells)" )
 .Define("maxEnergyCluster_cells_n" ,     "maxEnergyCluster_cells.size()" )
 ```
+:::
 
 The last variable to add is the radius of the cell position, you can compute it inline defining first collections ```maxEnergyCluster_cells_x``` and ```maxEnergyCluster_cells_y```. Hint you need to use the ```myRange``` function ```PositionedCaloClusterCells``` and the ```position``` attribute of the collection which is of type ```edm4hep::CalorimeterHitData``` [see here](https://edm4hep.web.cern.ch/classedm4hep_1_1_calorimeter_hit_data.html) and you need to calculate the radius as usual with ```x``` and ```y```.
 
 
-**HIDE**
+:::{admonition} Suggested answer
+:class: toggle
 ```python
 .Define("maxEnergyCluster_cells_x", "myRange(PositionedCaloClusterCells.position.x, maxEnergyCluster_firstCell_index, maxEnergyCluster_lastCell_index)")
 .Define("maxEnergyCluster_cells_y", "myRange(PositionedCaloClusterCells.position.y, maxEnergyCluster_firstCell_index, maxEnergyCluster_lastCell_index)")
 .Define("maxEnergyCluster_cells_radius", "sqrt(pow(maxEnergyCluster_cells_x,2)+pow(maxEnergyCluster_cells_y,2))")
 ```
+:::
 
 Do not forget to add all the newly defined variables to the output ```branchList```.
-**HIDE**
+
+:::{admonition} Suggested answer
+:class: toggle
 ```python
 "maxEnergyCluster_cells_energy","maxEnergyCluster_cells_phi","maxEnergyCluster_cells_theta","maxEnergyCluster_cells_layer","maxEnergyCluster_cells_n","maxEnergyCluster_cells_radius"
 ```
+:::
 
 Let's give it a try on a few events as last time.
 
-**HIDE**
+:::{admonition} Suggested answer
+:class: toggle
 ```shell
 fccanalysis run analysis_tutorial_mva.py --nevents 10 --output pions_MVA1.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_111_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
 ```
+:::
 
 Now we add the weaver part at the beginning of the ```analysers``` function:
 
@@ -219,108 +241,28 @@ Run a marco to make a plot to compare performance (NEED TO WRITE SOMETHING??)
 
 In this section we will remove the last layers of the calorimeter and evaluate the same MVA model with less layers. First let's have a look at one the output file and try to find how many layers we have in the calorimeter. For that plot the number of layers for a few events and look at the histogram
 
-:::{admonition} Answer :class: toggle
+:::{admonition} Suggested answer
+:class: toggle
 ```shell
 events->Draw("maxEnergyCluster_cells_layer","","",10)
 ```
 :::
+
 Now you produce new file removing the last layer of the calorimeter adding a ```Filter``` after all the ```Define```
 
-**HIDE***
+:::{admonition} Suggested answer
+:class: toggle
 ```python
 .Filter("maxEnergyCluster_cells_layer<11")
 ```
+:::
 
-**HIDE***
+:::{admonition} Suggested answer
+:class: toggle
 ```shell
 fccanalysis run analysis_tutorial_mva.py --output pions_MVA2.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_111_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
 fccanalysis run analysis_tutorial_mva.py --output photons_MVA2.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_22_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
 ```
+:::
 
 Compare the performance of the two MVAs and comment.
-
-
-
-
-
-
-
-
-
-
-
-
-
-**========================================================================**
-**PLEASE DISCARD FROM HERE**
-**THIS WILL MOVE TO vertexing tutorial**
-
-In order to add new variables, we need to develop inside FCCAnalyses. For that let us first define the output directory and properly add it to the environemnt variables
-
-```shell
-OUTPUT_DIR=${LOCAL_DIR}/tutorial_analysis
-LD_LIBRARY_PATH=${LOCAL_DIR}/install:${LD_LIBRARY_PATH}
-PYTHONPATH=${LOCAL_DIR}:${PYTHONPATH}
-PATH=${LOCAL_DIR}/bin:${LOCAL_DIR}:${PATH}
-ROOT_INCLUDE_PATH=${LOCAL_DIR}/install:${ROOT_INCLUDE_PATH}
-```
-
-Now we set it up
-
-```shell
-fccanalysis init my_tutorial_analysis --output-dir ${OUTPUT_DIR} --standalone
-```
-
-We now have a new directory ```tutorial_analysis``` that contains a ```DummyAnalysis``` within ```my_tutorial_analysis``` namespace.
-
-Now you need to add in ```tutorial_analysis/include/DummyAnalysis.h``` and ```tutorial_analysis/src/DummyAnalysis.cc``` the description of one variable, that is the energy in the second layer divided by the cluster energy.
-
-In the header file, the function should look like
-```cpp
-rv::RVec<float> get_energyInLayerOverClusterEnergy(const rv::RVec<edm4hep::ClusterData>& in,
-               const rv::RVec<edm4hep::CalorimeterHitData>& cells,
-               const int layer);
-```
-
-Do not forget to add the relevant ```edm4hep``` includes!
-
-and in the source file, the starting point is:
-
-// total energy in a layer divided by cluster energy (sensitive to the longitudinal shower development useful for e.g. high energy pi0/gamma separation where transverse shape become similar)
-```cpp
-rv::RVec<float> get_energyInLayerOverClusterEnergy (const rv::RVec<edm4hep::ClusterData>& in, const rv::RVec<edm4hep::CalorimeterHitData>& cells, const int layer) {
-  static const int layer_idx = m_decoder->index("layer");
-  ROOT::VecOps::RVec<float> result;
-  for (const auto & c: in) {
-    float cluster_energy = c.energy;
-    float energy_in_layer = 0;
-    for (auto i = c.hits_begin; i < c.hits_end; i++) {
-      int cell_layer = m_decoder->get(cells[i].cellID, layer_idx);
-      if(cell_layer == layer){
-          energy_in_layer += cells[i].energy;
-      }
-    }
-    result.push_back(energy_in_layer/cluster_energy);
-  }
-  return result;
-}
-
-energyInLayerOverClusterEnergy
-
- to be added to the MVA. You will also need to add them in the python (new ```Define```s) create a new weaver to evaluate with all the variables.
-
-Last thing, do not forget to compile before
-
-```
-OLDPWD=${PWD}
-mkdir -p ${OUTPUT_DIR}/build && cd ${OUTPUT_DIR}/build
-cmake .. && make && make install
-cd ${OLDPWD}
-```
-
-and run again
-
-```
-fccanalysis run caloanalysis.py --output photons_MVA1.root --files-list where the photons files are
-fccanalysis run caloanalysis.py --output pi0_MVA1.root --files-list where the pi0s files are
-```
