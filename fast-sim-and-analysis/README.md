@@ -5,7 +5,7 @@ If you want to get started with generation and  analysis of fast-simulated
 events, you're at the right place.
 
 Fast simulation is currently supported through the Delphes approach. Support for the Papas approach, initially used for FCC-ee, is
-discontinued. 
+discontinued.
 
 An analysis ntuple will be produced with ROOT's RDataFrame, a simple modular event processing framework for high energy physics.
 
@@ -23,4 +23,5 @@ If you have any problems or questions, you can [open an issue][lessons-issues] o
     FccFastSimGeneration.md
     k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.md
     fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.md
+    fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.md
 ```
