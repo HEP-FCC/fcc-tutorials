@@ -35,10 +35,10 @@ cd ..
 We start by creating a file named ```analysis_tutorial_mva.py``` (or any other name you prefer to use) with the following information.
 
 ```python
-#Mandatory: RDFanalysis class where the use defines the operations on the TTree
+# Mandatory: RDFanalysis class where the user defines the operations on the TTree
 class RDFanalysis():
     #__________________________________________________________
-    #Mandatory: analysers function to define the analysers to process, please make sure you return the last dataframe, in this example it is df2
+    # Mandatory: analysers function to define the analysers to process, please make sure you return the last dataframe, in this example it is df2
     def analysers(df):
         df2 = (df
 
@@ -46,7 +46,7 @@ class RDFanalysis():
         return df2
 
     #__________________________________________________________
-    #Mandatory: output function, please make sure you return the branchlist as a python list
+    # Mandatory: output function, please make sure you return the branchlist as a python list
     def output():
         branchList = [
 
@@ -54,21 +54,21 @@ class RDFanalysis():
         return branchList
 ```
 
-At the top of the file, we need define special variables needed to load the DD4Hep geometry, but first we need to get the path where they are located from the python code:
+At the top of the file, we need to define special variables needed to load the DD4Hep geometry, but first we need to get the path where they are located from the python code:
 
 ```python
-#get the environemnt variable FCCDETECTORS
+# get the environment variable FCCDETECTORS
 from os import getenv
-FCCDetectors=getenv("FCCDETECTORS")
-#define geometryFile and readoutName to load a DD4Hep detector and readout
-geometryFile = FCCDETECTORS+"/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectMaster.xml"
+FCCDetectors = getenv("FCCDETECTORS")
+# define geometryFile and readoutName to load a DD4Hep detector and readout
+geometryFile = FCCDETECTORS + "/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectMaster.xml"
 readoutName  = "ECalBarrelPhiEta"
 ```
 
 Let's now define new columns to the RootDataFrame object ```df2``` inside the function ```analysers``` of the class ```RDFanalysis```. We start by defining the index in the collection ```CaloClusters``` of the cluster with maximum energy:
 
 ```python
-.Define("maxEnergyCluster_index","std::distance(CaloClusters.energy.begin(),std::max_element(CaloClusters.energy.begin(), CaloClusters.energy.end()))")
+.Define("maxEnergyCluster_index", "std::distance(CaloClusters.energy.begin(), std::max_element(CaloClusters.energy.begin(), CaloClusters.energy.end()))")
 ```
 
 Similarly, define the index in the collection ```CaloClusters``` of the cluster with minimum energy, the total number of clusters in the event and the cluster energy.
@@ -76,9 +76,9 @@ Similarly, define the index in the collection ```CaloClusters``` of the cluster 
 :::{admonition} Suggested answer
 :class: toggle
 ```python
-.Define("minEnergyCluster_index","std::distance(CaloClusters.energy.begin(),std::min_element(CaloClusters.energy.begin(), CaloClusters.energy.end()))")
-.Define("clusters_n","CaloClusters.energy.size()")
-.Define("clusters_energy","CaloClusters.energy")
+.Define("minEnergyCluster_index", "std::distance(CaloClusters.energy.begin(), std::min_element(CaloClusters.energy.begin(), CaloClusters.energy.end()))")
+.Define("clusters_n", "CaloClusters.energy.size()")
+.Define("clusters_energy", "CaloClusters.energy")
 ```
 :::
 
@@ -87,7 +87,7 @@ Now we need to add all the variables that we have defined to the ```branchList``
 :::{admonition} Suggested answer
 :class: toggle
 ```python
-"maxEnergyCluster_index","minEnergyCluster_index","clusters_n","clusters_energy"
+"maxEnergyCluster_index", "minEnergyCluster_index", "clusters_n", "clusters_energy"
 ```
 :::
 
@@ -122,8 +122,8 @@ We now need to obtain the index of the first and last cells of the maximum energ
 :::{admonition} Suggested answer
 :class: toggle
 ```python
-.Define("maxEnergyCluster_firstCell_index","CaloClusters[maxEnergyCluster_index].hits_begin")
-.Define("maxEnergyCluster_lastCell_index" ,"CaloClusters[maxEnergyCluster_index].hits_end")
+.Define("maxEnergyCluster_firstCell_index", "CaloClusters[maxEnergyCluster_index].hits_begin")
+.Define("maxEnergyCluster_lastCell_index", "CaloClusters[maxEnergyCluster_index].hits_end")
 ```
 :::
 
