@@ -1,8 +1,6 @@
 
 # FCC-ee photon/pi0 discrimination using noble liquid calorimeter
 
-
-
 :::{admonition} Learning Objectives
 :class: objectives
 
@@ -102,11 +100,11 @@ fccanalysis run analysis_tutorial_mva.py --nevents--output pions_MVA1.root --fil
 ```
 Note that if you have already produced full simulation pions and photons with the calorimeter tutorial earlier this morning, you can change the file to point to your files.
 
-Open the produced root file ```pion_MVA1.root``` and inspect it with ```Scan``` for example check that the index we have calculated indeed correspond to the clusters of maximum/minimum energy:
+Open the produced root file ```pions_MVA1.root``` and inspect it with ```Scan``` for example check that the index we have calculated indeed correspond to the clusters of maximum/minimum energy:
 
 **HIDE**
 ```shell
-root -l
+root -l pions_MVA1.root
 events->Scan("maxEnergyCluster_index:minEnergyCluster_index:clusters_n:clusters_energy")
 ```
 
