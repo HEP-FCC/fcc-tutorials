@@ -4,13 +4,13 @@ import ROOT
 # prevent ROOT to display anything
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
-
 f = ROOT.TFile(sys.argv[1])
 events = f.Get("events")
 
 c = ROOT.TCanvas("c_energyResolution", "")
 
-h = ROOT.TH1F("h_energyResolution", ";ECal Barrel Cluster Energy [GeV]; Number of Clusters", 80, 5, 15)
+h = ROOT.TH1F("h_energyResolution", ";ECal Barrel Cluster Energy [GeV]; Number of Clusters", 50, 5, 15)
+#events.Draw("CorrectedCaloClusters.energy >> h_energyResolution")
 events.Draw("CaloClusters.energy >> h_energyResolution")
 fit_range_min = h.GetXaxis().GetBinCenter(h.GetMaximumBin()) - 2 * h.GetRMS()
 fit_range_max = h.GetXaxis().GetBinCenter(h.GetMaximumBin()) + 2 * h.GetRMS()

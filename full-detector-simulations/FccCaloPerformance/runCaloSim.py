@@ -241,32 +241,29 @@ createEcalBarrelPositionedCaloClusterCells.hits.Path = "CaloClusterCells"
 createEcalBarrelPositionedCaloClusterCells.positionedHits.Path = "PositionedCaloClusterCells"
 
 # Create a new collection of cluster with dead material correction applied
-from Configurables import CorrectCaloClusters
-correctCaloClusters = CorrectCaloClusters("correctCaloClusters",
-                                          inClusters = createClusters.clusters.Path,
-                                          outClusters = "Corrected"+createClusters.clusters.Path,
-                                          numLayers = [12],
-                                          firstLayerIDs = [0],
-                                          lastLayerIDs = [11],
-                                          readoutNames = [ecalBarrelReadoutNamePhiEta],
-                                          upstreamParameters = [[0.09959407679400918, -10.509139028589276, -141.62311185316685, 2.8931723031040435, -397.6783011336018, -317.53288225142427]],
-                                          upstreamFormulas = [['[0]+[1]/(x-[2])', '[0]+[1]/(x-[2])']],
-                                          downstreamParameters = [[0.002296666086130359, 0.004644766599619741, 1.4031343062273582, -1.8105436592714355, -0.02976924247722723, 12.875501324136625]],
-                                          downstreamFormulas = [['[0]+[1]*x', '[0]+[1]/sqrt(x)', '[0]+[1]/x']],
-                                          OutputLevel = INFO
-                                          )
+#from Configurables import CorrectCaloClusters
+#correctCaloClusters = CorrectCaloClusters("correctCaloClusters",
+#                                          inClusters = createClusters.clusters.Path,
+#                                          outClusters = "Corrected"+createClusters.clusters.Path,
+#                                          numLayers = [12],
+#                                          firstLayerIDs = [0],
+#                                          lastLayerIDs = [11],
+#                                          readoutNames = [ecalBarrelReadoutNamePhiEta],
+#                                          upstreamParameters = [[0.09737335230414161, -10.387181371085651, -146.34314022178035, 1.8135025646800507, -1.3729969471683934, -0.6449866228721779]],
+#                                          upstreamFormulas = [['[0]+[1]/(x-[2])', '[0]+[1]/(x-[2])']],
+#                                          downstreamParameters = [[0.0005295508692700276, 0.005906234225977198, 1.0551521001079711, -1.88609690802949, -0.11356707602430005, 17.525300224679565]],
+#                                          downstreamFormulas = [['[0]+[1]*x', '[0]+[1]/sqrt(x)', '[0]+[1]/x']],
+#                                          OutputLevel = INFO
+#                                          )
 
 ################ Output
 from Configurables import PodioOutput
 out = PodioOutput("out",
                   OutputLevel=INFO)
-#out.outputCommands = ["drop *", "keep genParticle", "keep ECalBarrelPositionedCells", "keep CaloClusters", "keep CorrectedCaloClusters", "keep PositionedCaloClusterCells"]
-out.outputCommands = ["drop *", "keep genParticle", "keep CaloClusters", "keep CorrectedCaloClusters", "keep PositionedCaloClusterCells"]
-#out.outputCommands = ["drop *", "keep genParticle", "keep ECalBarrelPositionedCells", "keep CaloClusters", "keep PositionedCaloClusterCells"]
-#out.outputCommands = ["drop *", "keep genParticle", "keep CaloClusters", "keep CorrectedCaloClusters"]
+out.outputCommands = ["drop *", "keep genParticles", "keep ECalBarrelPositionedCells", "keep CaloClusters", "keep CorrectedCaloClusters", "keep PositionedCaloClusterCells"]
 
 import uuid
-out.filename = "output_fullCalo_simAndDigi_"+str(momentum)+"GeV_pdgId_"+str(pdgCode)+"_noise"+str(addNoise)+".root"
+out.filename = "output_fullCalo_simAndDigi_"+str(momentum)+"GeV_pdgId_"+str(pdgCode)+"_noise"+str(addNoise)+"_LKr.root"
 
 #CPU information
 from Configurables import AuditorSvc, ChronoAuditor
@@ -280,7 +277,7 @@ createEcalBarrelCellsStep1.AuditExecute = True
 resegmentEcalBarrel.AuditExecute = True
 createEcalBarrelCells.AuditExecute = True
 createClusters.AuditExecute = True
-correctCaloClusters.AuditExecute = True
+#correctCaloClusters.AuditExecute = True
 out.AuditExecute = True
 
 from Configurables import EventCounter
@@ -300,11 +297,10 @@ ApplicationMgr(
               createemptycells,
               createClusters,
               createEcalBarrelPositionedCaloClusterCells,
-              correctCaloClusters,
               out
               ],
     EvtSel = 'NONE',
-    EvtMax   = 1000,
+    EvtMax   = 200,
     ExtSvc = [geoservice, podioevent, geantservice, audsvc],
     StopOnSignal = True,
  )
