@@ -108,7 +108,7 @@ Example plots: run the ROOT macro plots_primary_vertex.x
 
 ### Exercises:
 - add variables to the ntuple: the number of primary and secondary tracks, obtained when matching the tracks to the MC-truth, and obtained from the algorithm
-- add the total p or pT that is carried by the primary and secondary tracks. This requires some simple analysis code to be written and compiled.
+- add the total pT that is carried by the primary tracks. This requires some simple analysis code to be written and compiled. Hint: use the "updated_track_momentum_at_vertex" that is contained in VertexingUtils::FCCAnalysesVertex (contains a TVector3 for each track used in the vertex fit).
 - compare these distributions in Z -> uds events and in Z -> bb events
 
 
