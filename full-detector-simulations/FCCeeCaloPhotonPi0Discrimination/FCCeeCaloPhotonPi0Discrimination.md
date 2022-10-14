@@ -144,11 +144,12 @@ ROOT::VecOps::RVec<T> myRange(ROOT::VecOps::RVec<T>& vec, std::size_t begin, std
 """)
 ```
 
-Note, With the root version used for this tutorial (**ADD ROOT VERSION**) it is not possible to do this inline, while from ```ROOT v6.28``` it will be possible using ```Take``` and ```Range```:
+Note, With the root version used for this tutorial (```ROOT v6.26```) it is not possible to do this inline, while from ```ROOT v6.28``` it will be possible using ```Take``` and ```Range```:
 
 ```python
 Take(vec, Range(id_end - id_begin) + id_begin)
 ```
+
 Now you can create the sub-collection ```maxEnergyCluster_Cells``` from the input collection ```PositionedCaloClusterCells``` from ```maxEnergyCluster_firstCell_index``` to ```maxEnergyCluster_lastCell_index``` using the newly defined ```myRange``` function:
 
 :::{admonition} Suggested answer

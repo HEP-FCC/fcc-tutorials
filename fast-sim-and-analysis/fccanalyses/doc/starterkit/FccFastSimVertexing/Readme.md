@@ -35,35 +35,20 @@ cd ..
 
 ## Builing a custom sub-package in FCCAnalyses
 
-In order to add new code, we need to develop inside FCCAnalyses. For that let us first define the output directory and properly add it to the environment variables
-
+In order to add new code, we need to develop inside FCCAnalyses. For that we setup a dedicated area to work using this setup script.
 ```shell
-OUTPUT_DIR=${LOCAL_DIR}/tutorial_analysis
-LD_LIBRARY_PATH=${LOCAL_DIR}/install:${LD_LIBRARY_PATH}
-PYTHONPATH=${LOCAL_DIR}:${PYTHONPATH}
-PATH=${LOCAL_DIR}/bin:${LOCAL_DIR}:${PATH}
-ROOT_INCLUDE_PATH=${LOCAL_DIR}/install:${ROOT_INCLUDE_PATH}
-OLDPWD=${PWD}
-mkdir -p ${OUTPUT_DIR}/build
+source ./setupUserCode.sh myAnalysis
 ```
 
-Now we set it up
+We now have a new directory ```myAnalysis``` that contains both include and source files ```myAnalysis/include/myAnalysis.h``` and ```myAnalysis/src/myAnalysis.cc``` within the ```myAnalysis``` namespace.
 
-```shell
-fccanalysis init my_tutorial_analysis --output-dir ${OUTPUT_DIR} --name myAnalysis --standalone
-```
-
-We now have a new directory ```tutorial_analysis``` that contains a ```myAnalysis``` within ```my_tutorial_analysis``` namespace.
-
-Now you need to add in ```tutorial_analysis/include/myAnalysis.h``` and ```tutorial_analysis/src/myAnalysis.cc``` the description of the missing energy variable
+Now you need to write some code in the header and source file to describe the missing energy.
 
 In the header file, the function should look like
 
 ```cpp
 rv::RVec<float> get_missingEnergy(const rv::RVec<edm4hep::ReconstructedParticleData>& in);
 ```
-
-Do not forget to add the relevant ```edm4hep``` includes!
 
 and in the source file, the starting point is:
 
@@ -77,20 +62,22 @@ rv::RVec<float> get_missingEnergy(const rv::RVec<edm4hep::ReconstructedParticleD
 }
 ```
 
+Do not forget to add the relevant ```edm4hep``` includes in case you are using other input collections!
+
 In your python analysis, you can now call you newly defined function, don't forget it is inside a namespace!
 
 :::{admonition} Suggested answer
 :class: toggle
 ```python
-.Define("missingEnergy","my_tutorial_analysis::get_missingEnergy(ReconstructedParticle)")
+.Define("missingEnergy","myAnalysis::get_missingEnergy(ReconstructedParticles)")
 ```
 :::
 
 
-Last thing, do not forget to compile before
+Last thing, do not forget to compile before running.
 
 ```shell
 cd ${OUTPUT_DIR}/build
 cmake .. && make && make install
-cd ${OLDPWD}
+cd ${LOCAL_DIR}
 ```
