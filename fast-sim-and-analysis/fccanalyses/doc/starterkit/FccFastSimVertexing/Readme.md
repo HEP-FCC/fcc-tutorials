@@ -621,4 +621,19 @@ You can also add the total visible energy into your ntuple:
 ```
 
         
+5. We now have a simple analyser that can be used to process the signal and background samples, and plot the mass of the tau -> 3mu candidates:
+This produces flat ntuples:
+```shell
+fccanalysis run analysis_Tau3Mu_stage1.py --output-dir Tau3Mu
+```
+This produces histograms of selected variables, with some selection :
+```shell
+fccanalysis final analysis_Tau3Mu_final.py
+```
+and finally, this makes some plots :
+```shell
+fccanalysis plots analysis_Tau3Mu_plots.py
+```
+
+
 
