@@ -181,7 +181,10 @@ and add them to the branches:
                 "n_SecondaryTracks_v2",
         ]
  ```
-2. add the total pT that is carried by the primary tracks. This requires some simple analysis code to be written and compiled. Hint: use the "updated_track_momentum_at_vertex" that is contained in VertexingUtils::FCCAnalysesVertex (contains a TVector3 for each track used in the vertex fit).
+2. add the total pT that is carried by the primary tracks. This requires some simple analysis code to be written and compiled. Hint: use the "updated_track_momentum_at_vertex" that is contained in VertexingUtils::FCCAnalysesVertex (contains a TVector3 for each track used in the vertex fit) and use this implementation:
+```cpp
+ double sum_momentum_tracks( const VertexingUtils::FCCAnalysesVertex&  vertex );
+```
       - solution : Create a file MyAnalysis.cc with :
 ```cpp
 #include "FCCAnalyses/MyAnalysis.h"
