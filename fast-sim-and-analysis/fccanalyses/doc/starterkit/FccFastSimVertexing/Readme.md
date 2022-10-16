@@ -308,6 +308,10 @@ The root macro plots_Bs2JsiPhi.x produces various plots showing the vertex chi2,
 ```shell
 cp analysis_Bs2JpsiPhi_MCseeded.py analysis_Tau3Mu_MCseeded.py
 ```
+and edit to change the testfile:
+```python
+testFile= "/eos/experiment/fcc/ee/generation/DelphesEvents/spring2021/IDEA/p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2MuMuMu/events_189205650.root"
+```
    - solution: one just need to retrieve properly the indices of the decay of interest:
  ```python
  .Define("indices",  "MCParticle::get_indices( 15, {-13,13,13}, true, true, true, false) ( Particle, Particle1)" )
@@ -358,10 +362,263 @@ and add this to your analysis_Tau3Mu_MCseeded.py:
 ```
 and add the new variables to the list of branches.
 
-4. So far, everything was done using "Monte-Carlo seeding", which gives the resolutions that we expect, in the absence of possible combinatoric issues. The next step is to write a new analysis.py which starts from the reconstructed muons.
-   - select combinations of three muons with total charge = +/- 1
-   - fit the three muons to a common vertex and reconstruct the tau mass
-5. Look at the tau -> 3 pi nu background. 
+3. So far, everything was done using "Monte-Carlo seeding", which gives the resolutions that we expect, in the absence of possible combinatoric issues. The next step is to write a new analysis.py which starts from the reconstructed muons.
+```shell
+cp analysis_Tau3Mu_MCseeded.py  analysis_Tau3Mu.py
+```
+remove the "core" of the analyser:
+```python
+class RDFanalysis():
+
+    #__________________________________________________________
+    #Mandatory: analysers funtion to define the analysers to process, please make sure you return the last dataframe, in this example it is df2
+    def analysers(df):
+        df2 = (
+            df
+        )
+        return df2
+```
+and insert:
+```python
+ # Use the "AllMuons" collection, which contains also non-isolated muons (in contrast to the "Muons" collection)
+ #    Actually, "Muon" or ("AllMuon") just contain pointers (indices) to the RecoParticle collections,
+ #    hence one needs to first retrieve the RecoParticles corresponding to these muons.
+ #    ( for more detail about the collections, see https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics  )
+ .Alias("Muon0", "AllMuon#0.index")
+ .Define("muons",  "ReconstructedParticle::get(Muon0, ReconstructedParticles)")
+ .Define("n_muons",  "ReconstructedParticle::get_n( muons ) ")
+```
+
+We now want to write a method that builds muon triplets - actually, since the MC files produced for this tutorial only forced the decay of the tau-, we are interestedin triplets with total charge = -1.
+**Exercise:** code a function in your MyAnalysis :
+```cpp
+  ROOT::VecOps::RVec< ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> > build_triplets(
+                        const   ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>&  in , float total_charge) ;
+
+```
+that returns all combinations of 3-muons.
+
+    - solution:
+    
+```cpp
+    ROOT::VecOps::RVec< ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> > build_triplets
+               ( const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>& in , float total_charge ) {
+
+    ROOT::VecOps::RVec< ROOT::VecOps::RVec< edm4hep::ReconstructedParticleData> >  results;
+    float charge =0;
+    int n = in.size();
+    if ( n < 3 ) return results;
+
+    for (int i=0; i < n; i++) {
+       edm4hep::ReconstructedParticleData pi = in[i];
+       float charge_i = pi.charge ;
+
+       for (int j=i+1; j < n; j++) {
+        edm4hep::ReconstructedParticleData pj = in[j];
+        float charge_j = pj.charge ;
+
+        for (int k=j+1; k < n; k++) {
+                edm4hep::ReconstructedParticleData pk = in[k];
+                float charge_k = pk.charge ;
+                float charge_tot = charge_i + charge_j + charge_k;
+                if ( charge_tot == total_charge ) {
+                    ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> a_triplet;
+                    a_triplet.push_back( pi );
+                    a_triplet.push_back( pj );
+                    a_triplet.push_back( pk );
+                    results.push_back( a_triplet );
+                }
+
+        }
+
+    }
+
+ }
+ return results;
+}
+```
+    
+ You can then use it in your analysis_Tau3Mu.py :
+ ```python
+  # Build triplets of muons.
+  # We are interested in tau- -> mu- mu- mu+ (the MC files produced for this tutorial
+  # only forced the decay of the tau- , not the tau+ ).
+  # Hence we look for triples of total charge = -1 :
+  .Define("triplets_m",  "MyAnalysis::build_triplets( muons, -1. )")   # returns a vector of triplets, i.e. of vectors of 3 RecoParticles
+  .Define("n_triplets_m",  "return triplets_m.size() ; " )
+  .Filter( "n_triplets_m > 0" )
+ ```
+ where the latter line will filter out events for which no triplet has been found.
+ 
+ NB: the efficiency for having the three muons from the tau decay that fall within the tracker acceptance is about 95%. However, a track will reach the muon detector only if its momentum is larger than about 2 GeV (in Delphes, the efficiency for muons below 2 GeV is set to zero). When adding the requirement that the three muons have p > 2 GeV, the efficiency drops to about 75%. You can check that using the MC information, starting e.g. from analysis_Tau3Mu_MCseeded.py. Consequently: out of 1000 signal events, only ~ 750 events are selected by the above Filter.
+ 
+ It is then simple to build a tau candidate from the first triplet that has been found, e.g. :
+ ```python
+  # ----------------------------------------------------
+  # Simple: consider only the 1st triplet :
+
+  .Define("the_muons_candidate_0",  "return triplets_m[0] ; ")  # the_muons_candidates = a vector of 3 RecoParticles
+
+  # get the corresponding tracks:
+  .Define("the_muontracks_candidate_0",  "ReconstructedParticle2Track::getRP2TRK( the_muons_candidate_0, EFlowTrack_1)")
+  # and fit them to a common vertex :
+  .Define("TauVertexObject_candidate_0",   "VertexFitterSimple::VertexFitter_Tk( 2, the_muontracks_candidate_0)" )
+  # Now we can get the mass of this candidate, as before :
+  .Define("TauMass_candidate_0",   "MyAnalysis::tau3mu_vertex_mass( TauVertexObject_candidate_0 )" )
+
+ ```
+ but we would like to retrieve all tau candidates.
+ **Exercise:**  code the following methods in your MyAnalysis:
+ ```cpp
+   ROOT::VecOps::RVec< VertexingUtils::FCCAnalysesVertex > build_AllTauVertexObject(
+            const ROOT::VecOps::RVec< ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> >&  triplets,
+            const ROOT::VecOps::RVec<edm4hep::TrackState>& allTracks ) ;
+
+  ROOT::VecOps::RVec<  double > build_AllTauMasses( const ROOT::VecOps::RVec< VertexingUtils::FCCAnalysesVertex>&  vertices ) ;
+
+ ```
+       - solution :
+ ```cpp
+       ROOT::VecOps::RVec< VertexingUtils::FCCAnalysesVertex > build_AllTauVertexObject(
+                        const ROOT::VecOps::RVec< ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> >&  triplets,
+                        const ROOT::VecOps::RVec<edm4hep::TrackState>& allTracks )  {
+      ROOT::VecOps::RVec< VertexingUtils::FCCAnalysesVertex >  results;
+      int ntriplets = triplets.size();
+      for (int i=0; i < ntriplets; i++) {
+          ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> legs = triplets[i];
+
+          ROOT::VecOps::RVec<edm4hep::TrackState> the_tracks = ReconstructedParticle2Track::getRP2TRK( legs, allTracks );
+          VertexingUtils::FCCAnalysesVertex vertex = VertexFitterSimple::VertexFitter_Tk( 2, the_tracks );
+          results.push_back( vertex );
+      }
+ return results;
+}
+
+
+ROOT::VecOps::RVec<  double > build_AllTauMasses( const ROOT::VecOps::RVec< VertexingUtils::FCCAnalysesVertex>&  vertices ) {
+  ROOT::VecOps::RVec<  double >  results;
+  for ( auto& v: vertices) {
+     double mass =  tau3mu_vertex_mass( v );
+     results.push_back( mass  );
+  }
+ return results;
+}
+
+ ```
+ which you then use in your analyser:
+ ```python
+   # ----------------------------------------------------
+   # Now consider all triplets :
+
+   .Define("TauVertexObject_allCandidates",  "MyAnalysis::build_AllTauVertexObject( triplets_m , EFlowTrack_1 ) ")
+   .Define("TauMass_allCandidates",   "MyAnalysis::build_AllTauMasses( TauVertexObject_allCandidates )" )
+
+ ```
+ and you add the mass of all candidates in your ntuple:
+ ```python
+   branchList = [
+                "n_muons",
+                "n_triplets_m",
+                "TauMass_allCandidates"
+  ]
+
+ ```
+ 
+4. We now want to look at the background. 
+Copy your analysis_Tau3Mu.py:
+```shell
+cp analysis_Tau3Mu.py analysis_Tau3Mu_stage1.py
+
+```
+The main background is expected to come from tau -> 3 pi nu decays, when the charged pions are misidentified as muons. But there is no "fakes" in Delphes: all the "Muon" objects that you have on the edm4hep file do originate from genuine muons (which may, of course, come from a hadron decay). To alleviate this limitation, we first select the RecoParticles that are matched to a stable, charged hadron :
+```python
+ # -----------------------------------------
+ # Add fake muons from pi -> mu
+
+ # This selects the charged hadrons :
+ .Alias("MCRecoAssociations0", "MCRecoAssociations#0.index")
+ .Alias("MCRecoAssociations1", "MCRecoAssociations#1.index")
+ .Define("ChargedHadrons", "ReconstructedParticle2MC::selRP_ChargedHadrons( MCRecoAssociations0,
+        MCRecoAssociations1,ReconstructedParticles,Particle)")
+        
+```
+and further select the ones that are above 2 GeV - since only particles above 2 GeV will make it to the muon detector:
+```python
+  # Only the ones with  p > 2 GeV could be selected as muons :
+  .Define("ChargedHadrons_pgt2",  "ReconstructedParticle::sel_p(2.) ( ChargedHadrons )")
+
+```
+
+Now we want to apply a "flat" fake rate, i.e. accept a random fraction of the above particles as muons.
+**Exercise:** code a method in your MyAnalysis that does that :
+```cpp
+#include <random>
+#include <chrono>
+...
+struct selRP_Fakes {
+  selRP_Fakes( float arg_fakeRate, float arg_mass );
+  float m_fakeRate = 1e-3;
+  float m_mass = 0.106;  // muon mass
+  std::default_random_engine m_generator;
+  std::uniform_real_distribution<float> m_flat;
+  std::vector<edm4hep::ReconstructedParticleData>  operator() (ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> in);
+};
+```
+
+     - solution:
+     
+```cpp
+     
+     selRP_Fakes::selRP_Fakes( float arg_fakeRate, float  arg_mass ) : m_fakeRate(arg_fakeRate), m_mass( arg_mass)  {
+        unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+        std::default_random_engine generator (seed);
+        m_generator = generator;
+        std::uniform_real_distribution<float> flatdis(0.,1.);
+        m_flat.param( flatdis.param() );
+     };
+
+    std::vector<edm4hep::ReconstructedParticleData> selRP_Fakes::operator() (ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> in) {
+         std::vector<edm4hep::ReconstructedParticleData> result;
+         for (size_t i = 0; i < in.size(); ++i) {
+         auto & p = in[i];
+         float arandom =  m_flat (m_generator );
+         if ( arandom <= m_fakeRate) {
+         edm4hep::ReconstructedParticleData reso = p;
+         // overwrite the mass:
+         reso.mass = m_mass;
+         result.push_back( reso );
+    }
+  }
+  return result;
+}
+
+ ```
+
+We then use this method in the analyser :
+```python
+  # Build fake muons based on a flat fake rate (random selection) :
+  .Define("fakeMuons_5em2", "MyAnalysis::selRP_Fakes( 5e-2, 0.106)(ChargedHadrons_pgt2)" )
+
+  # Now we marge the collection of fake muons with the genuine muons :
+  .Define("muons_with_fakes",  "ReconstructedParticle::merge( muons, fakeMuons_5em2 )")
+  # and we use this collection later on, instead of "muons" :
+  .Alias("theMuons", "muons_with_fakes")
+  .Define("n_muons_withFakes",  "ReconstructedParticle::get_n( theMuons )")
   
+```
+and we just need to replace the muon collection when building the triplets :
+```python
+  .Define("triplets_m",  "MyAnalysis::build_triplets( theMuons, -1. )")   # returns a vector of triplets, i.e. of vectors of 3 RecoParticles
+
+```
+
+You can also add the total visible energy into your ntuple:
+
+```python
+             # Total visible energy in the event :
+             .Define("RecoPartEnergies",  "ReconstructedParticle::get_e( ReconstructedParticles )")
+             .Define("visible_energy",  "Sum( RecoPartEnergies )")
+```
+
         
 
