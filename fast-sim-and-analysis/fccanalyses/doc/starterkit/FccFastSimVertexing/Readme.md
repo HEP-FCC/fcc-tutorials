@@ -228,9 +228,21 @@ namespace MyAnalysis {
 
 #endif
 ```
+and add the variable in your analyser:
+```python
+               # Total pT carried by the primary tracks:
+               .Define("sum_pt_primaries",   "MyAnalysis::sum_momentum_tracks( PrimaryVertexObject )")
+               ....
+               branchList = [
+                #
+                ....
+                "sum_pt_primaries",
+                ]
+
+```
 3. compare these distributions in Z -> uds events and in Z -> bb events: edit the file analysis_primary_vertex.py, search for "testFile" and replace the Zuds file by the Zbb file (currently commented).
 4. To go beyond:
-   - implementation of LCFI+ 
+   - The reconstruction of all secondary vertices following the LCFI+ has been implemented (Kunal Gautam, Armin Ilg). The Pull request is ready and will bemerged soon: https://github.com/HEP-FCC/FCCAnalyses/pull/206
 
 
 ## Reconstruction of displaced vertices in an exclusive decay chain: starting example
@@ -390,6 +402,7 @@ and insert:
 ```
 
 We now want to write a method that builds muon triplets - actually, since the MC files produced for this tutorial only forced the decay of the tau-, we are interestedin triplets with total charge = -1.
+
 **Exercise:** code a function in your MyAnalysis :
 ```cpp
   ROOT::VecOps::RVec< ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> > build_triplets(
@@ -468,6 +481,7 @@ that returns all combinations of 3-muons.
 
  ```
  but we would like to retrieve all tau candidates.
+ 
  **Exercise:**  code the following methods in your MyAnalysis:
  ```cpp
    ROOT::VecOps::RVec< VertexingUtils::FCCAnalysesVertex > build_AllTauVertexObject(
@@ -550,6 +564,7 @@ and further select the ones that are above 2 GeV - since only particles above 2 
 ```
 
 Now we want to apply a "flat" fake rate, i.e. accept a random fraction of the above particles as muons.
+
 **Exercise:** code a method in your MyAnalysis that does that :
 ```cpp
 #include <random>
