@@ -10,25 +10,29 @@ FCC: Getting started with event generation
 * To configure your environment for the FCC software, just do:
 
 ```
+source /cvmfs/sw.hsf.org/key4hep/setup.sh
+```
+:::{admonition} Nota Bene
+:class: callout
+For legacy reasons the following is still provided, fully equivalent to the above
+```
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```
+:::
 
-More generators are available in the LCG stacks - while the version should be equivalent in most of the aspects, some packages may be available only 
-in one of the builds. This will be highlighted when relevant.
+Builds exist on CernVM-FS for CentOS7 (this is the Operating System run on `lxplus`) using gcc11.
 
-Builds exist on CernVM-FS for CentOS7 (this is the system run on `lxplus`) using gcc8. LCG buils exist also
-for Ubuntu 20.04 LTS.
-
-The `fccrun` steering application should be available at this point:
+The `k4run` steering application should be available at this point:
 
 ```bash
-which fccrun
+which k4run
 ```
 
 ```
 # the output might differ, but shouldn't be empty
-/cvmfs/sw.hsf.org/spackages/linux-centos7-broadwell/gcc-8.3.0/fccsw-develop-q57ahua7lm65fvxnzekozih4mgvzptlx/scripts/fccrun
+/cvmfs/sw.hsf.org/spackages6/k4fwcore/1.0pre15/x86_64-centos7-gcc11.2.0-opt/2q37t/bin/k4run
 ```
+The application `fccrun` is till provided, fully equivalent to `k4run`.
 
 :::{admonition} Nota Bene
 :class: callout
