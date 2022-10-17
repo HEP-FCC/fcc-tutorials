@@ -14,6 +14,7 @@ source /cvmfs/sw.hsf.org/key4hep/setup.sh
 ```
 :::{admonition} Nota Bene
 :class: callout
+
 For legacy reasons the following is still provided, fully equivalent to the above
 ```
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
@@ -45,8 +46,9 @@ You will need to source the /cvmfs/fcc.cern.ch/sw/latest/setup.sh script everyti
 
 ### Overview
 
-The physics generators available for FCC typically come from the underlying LCG stack. However, any generator
-able to generate events in one of the understood formats, e.g. HepMC or LHEf, can be used in standalone.
+The physics generators available for FCC typically come from the underlying stack. However, any generator
+able to generate events in one of the understood formats, e.g. HepMC or EDM4hep or LHEf, can be used in standalone.
+The recommended formats are `HepMC3` and `EDM4hep`.
 This pages intend to illustrate the use of a few general purpose generators available when enabling FCCSW:
 pythia8, whizard, MadGraph5, Herwig.
 
@@ -65,7 +67,7 @@ which whizard
 ```
 
 ```
-/cvmfs/sw.hsf.org/spackages/linux-centos7-broadwell/gcc-8.3.0/whizard-2.8.4-nxnm6ntaaduopm5ff22xr6p35r23euz6/bin/whizard
+/cvmfs/sw.hsf.org/spackages6/whizard/3.0.1/x86_64-centos7-gcc11.2.0-opt/pmm4s/bin/whizard
 ```
 
 Whizard is run as this:
@@ -77,7 +79,7 @@ whizard <process_config>.sin
 Example of process configuration files are found under
 
 ``` bash
-ls /cvmfs/sw.hsf.org/spackages/linux-centos7-broadwell/gcc-8.3.0/whizard-2.8.4-nxnm6ntaaduopm5ff22xr6p35r23euz6/share/whizard/examples/
+ls /cvmfs/sw.hsf.org/spackages6/whizard/3.0.1/x86_64-centos7-gcc11.2.0-opt/pmm4s/share/whizard/examples/
 ```
 or at `https://gitlab.tp.nt.uni-siegen.de/whizard/public/-/tree/master/share/examples` .
 
@@ -91,7 +93,7 @@ or browsing `https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/`, if EOS i
 It is advised to work in a separate directory for each process. For example, for Z_mumu, we have:
 
 ```bash
- mkdir test_whizard/Z_mumu; cd test_whizard/Z_mumu
+ mkdir -p test_whizard/Z_mumu; cd test_whizard/Z_mumu
  wget https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/Z_mumu.sin
  whizard Z_mumu.sin
 ```
@@ -111,22 +113,21 @@ It is advised to work in a separate directory for each process. For example, for
 ...
 
 |=============================================================================|
-|                               WHIZARD 2.8.2
+|                               WHIZARD 3.0.1
 |=============================================================================|
-| Reading model file '/cvmfs/sft.cern.ch/lcg/releases/LCG_97a_FCC_2/MCGenerators/whizard/2.8.2/x86_64-centos7-gcc8-opt/share/whizard/models/SM.mdl'
+| Reading model file '/cvmfs/sw.hsf.org/spackages6/whizard/3.0.1/x86_64-centos7-gcc11.2.0-opt/pmm4s/share/whizard/models/SM.mdl'
 | Preloaded model: SM
 | Process library 'default_lib': initialized
 | Preloaded library: default_lib
-| Reading model file '/cvmfs/sft.cern.ch/lcg/releases/LCG_97a_FCC_2/MCGenerators/whizard/2.8.2/x86_64-centos7-gcc8-opt/share/whizard/models/SM_hadrons.mdl'
+| Reading model file '/cvmfs/sw.hsf.org/spackages6/whizard/3.0.1/x86_64-centos7-gcc11.2.0-opt/pmm4s/share/whizard/models/SM_hadrons.mdl'
 | Reading commands from file 'Z_mumu.sin'
 | Switching to model 'SM', scheme 'default'
 
 ...
 
-$description = "A WHIZARD 2.8 Example.
+$description = "A WHIZARD 3.0 Example.
    Z -> mumu @ 91.2 events for FCC ee."
 $y_label = "$N_{\textrm{events}}$"
-$lhef_version = "3.0"
 $sample = "z_mumu"
 | Starting simulation for process 'zmumu'
 | Simulate: using integration grids from file 'zmumu.m1.vg'
@@ -134,7 +135,7 @@ $sample = "z_mumu"
 | RNG: Setting seed for random-number generator to 22345
 | Simulation: requested number of events = 1000
 |             corr. to luminosity [fb-1] =   6.6285E-04
-| Events: writing to LHEF file 'z_mumu.lhe'
+| Events: writing to HepMC file 'z_mumu.hepmc'
 | Events: writing to raw file 'z_mumu.evx'
 | Events: generating 1000 unweighted, unpolarized events ...
 | Events: event normalization mode '1'
@@ -143,14 +144,14 @@ $sample = "z_mumu"
 Warning: Encountered events with excess weight: 6 events (  0.600 %)
 | Maximum excess weight = 2.465E+00
 | Average excess weight = 4.511E-03
-| Events: closing LHEF file 'z_mumu.lhe'
+| Events: closing HepMC file 'z_mumu.hepmc'
 | Events: closing raw file 'z_mumu.evx'
 | There were no errors and    2 warning(s).
 | WHIZARD run finished.
 |=============================================================================|
 ```
 
-The file `z_mumu.lhe` contains 100 e<sup>+</sup>e<sup>-</sup> &#8594; mu<sup>+</sup>mu<sup>-</sup>(gamma) events in LHEF 3.0 format .
+The file `z_mumu.hepmc` contains 100 e<sup>+</sup>e<sup>-</sup> &#8594; mu<sup>+</sup>mu<sup>-</sup>(gamma) events in HepMC 3 format .
 
 
 ###  MadGraph5
@@ -162,7 +163,7 @@ which mg5_aMC
 ```
 
 ```
-/cvmfs/fcc.cern.ch/sw/views/releases/fccsw/0.13/LCG_97a_FCC_2/x86_64-centos7-gcc8-opt/bin/mg5_aMC
+/cvmfs/sw.hsf.org/spackages6/madgraph5amc/2.8.1/x86_64-centos7-gcc11.2.0-opt/3tclk/bin/mg5_aMC
 ```
 
 
@@ -175,7 +176,7 @@ which Herwig
 ```
 
 ```
-/cvmfs/fcc.cern.ch/sw/views/releases/fccsw/0.13/LCG_97a_FCC_2/x86_64-centos7-gcc8-opt/bin/Herwig
+/cvmfs/sw.hsf.org/spackages6/herwig3/7.2.3/x86_64-centos7-gcc11.2.0-opt/5d2cb/bin/Herwig
 ```
 
 ###  KKMCee
@@ -189,7 +190,7 @@ which KKMCee
 ```
 
 ```
-/cvmfs/sw.hsf.org/spackages4/kkmcee/4.32.01/x86_64-centos7-gcc8.3.0-opt/mp3l7zs/bin/KKMCee
+/cvmfs/sw.hsf.org/spackages6/kkmcee/5.00.02/x86_64-centos7-gcc11.2.0-opt/eodg6/bin/KKMCee
 ```
 
 A help function is available:
@@ -200,46 +201,56 @@ KKMCee -h
 
 ```
 
-+++ Wrapper around the KKMCee/ProdMC.exe executable +++
++++ Wrapper around the KKMCee executable  +++
 
-Usage: \tKKMCee -f Mu|Tau|UDS|C|B|Hadrons -e Ecms -n Nevts -o output_file [-s seed_file] [OPTIONS]
-       \tKKMCee -c config_file [-s seed_file]
+Usage: \tKKMCee -f Mu|Tau|UDS|C|B|Hadrons -e Ecms -n Nevts -o output_file [-s initial_seed] [OPTIONS]
+       \tKKMCee -c config_file [-s initial_seed]
 
 Options:
   -c, --config file 		Path to configuration file
   -f, --flavour flavour 	Flavour to be generated (Mu|Tau|UDS|C|B|Hadrons)
   -e, --ecms energy 		Center of Mass energy in GeV
-  -n, --nevts energy 		Number of events to be generated
+  -n, --nevts events 		Number of events to be generated
+  -o, --outfile file 		File with the generated events in HEPMCv3 format [kkmcee.hepmc]
+  -s, --initialseed 		Long number to be used for initial seeding (randomly generated, if missing)
   -b, --bessig bessig 		Beam-Energy-Spread of both beams (or of the first beam, if bessig2<0.)
                       		[fraction of Ecms/2, default -1. (no spread)]
   -g, --bessig2 bessig2 	Beam-Energy-Spread of the second beam if different from the first beam; fraction of Ecms/2.
                       		[fraction of Ecms/2, default -1. (no spread or equal to first beam)]
   -r, --besrho rho 		Beam-Energy-Spread correlation [default 0.]
-  -o, --outfile file 		File with the generated events in LHE format
-  -s, --seedfile file 		File to be used for seeding (randomly generated, if missing)
+  -d, --debug lvl 		 PrintOut Level 0,1,2 [default 1]
+
+Special options for taus only:
+  -t, --taudec t1*1000+t2 	decay channel for the first (t1) and second tau (t2)
+                      		 0        Inclusive
+                      		 1,2,3    electron,mu,pi
+                      		 4,5,6,7  rho,a1,K,K*
+                      		 8,9,10,11,12,13  3pip0,pi3pi0,3pi2pi0,5pi,5pip0,3pi3p0
+                      		 14, ... (other rare decays see tauola++)
+  --tauopt file 		File with tau options (see Tauola section in KKMCee_defaults)
+                      		 the file is included as it is and overwrites other settings
 
 Examples:
-KKMCee -f Mu -e 91.2 -n 10000 -o kkmu_10000.LHE -b 0.001
+KKMCee -f Mu -e 91.2 -n 10000 -o kkmu_10000.hepmc -b 0.001
 KKMCee -c kkmc_ditau.input
+KKMCee -f B -e 91.2 -n 1000 -o kkbb_1000.hepmc
+
+  NB: (1) This wrapper works only for KKMCee versions 5 or newer
+      (2) Output is HEPMC v3
 ```
 
 Note that the BES (Beam Energy Spread) options are only available in version 4.32.01 and higher.
 
-Configuration example files are available under
+A configuration example file for taus is available under at
 
 ```
-ls `dirname $( which KKMCee )`/../share/KKMCee/examples
-```
-
-```
-Beast.input  Bottom.input  Down.input  Inclusive.input  Mu.input  Tau.input  Up.input
+ls `dirname $( which KKMCee )`/../share/KKMCee/examples/kkmc-tauola.input
 ```
 
 To generate a sample of dimuon events using the example files, do the following
 
 ```bash
-cp -rp `dirname $( which KKMCee )`/../share/KKMCee/examples/Mu.input .
-KKMCee -c Mu.input
+KKMCee -f Mu -e 91.2 -n 1000 -o kkmu_1000.hepmc
 ```
 
 The output should look something like this:
@@ -314,12 +325,12 @@ user	0m3.777s
 sys	0m0.085s
 ```
 
-and a file `LHE_OUT.LHE` created.
+and a file `kkmu_1000.hepmc` created.
 
-The same can be obtained on the command line:
+The same can be obtained with an input file: look for the file `*/pro.input` created by the previous run and do
 
 ```bash
-KKMCee -f Mu -e 91.2 -n 1000 -o LHE_OUT_1.LHE
+KKMCee -c <prev_run_dir>/pro.input
 ```
 ###  BHLUMI
 
