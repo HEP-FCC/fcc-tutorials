@@ -422,3 +422,16 @@ babayaga -f 15. -t 165. -e 91.2 -n 10000 -o bbyg_10000.LHE
 babayaga -c babayaga.input -o bbyg.LHE
 
 ```
+
+## Case study: ditau events with KKMCee and Pythia8
+
+### Generating ditaus with KKMCee
+
+### Generating ditaus with Pythia8
+
+#### Looking at the produced files: the MCParticle class
+
+#### Filtering a specific final state: double single pion decay
+
+#### Comparing distributions
+
