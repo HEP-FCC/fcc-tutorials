@@ -40,41 +40,30 @@ In order to add new code, we need to develop inside FCCAnalyses. For that we set
 source ./setupUserCode.sh myAnalysis
 ```
 
-We now have a new directory ```myAnalysis``` that contains both include and source files ```myAnalysis/include/myAnalysis.h``` and ```myAnalysis/src/myAnalysis.cc``` within the ```myAnalysis``` namespace.
-
-Now you need to write some code in the header and source file to describe the missing energy.
-
-In the header file, the function should look like
+We now have a new directory ```myAnalysis``` that contains both include ```myAnalysis/include/myAnalysis.h``` and source ```myAnalysis/src/myAnalysis.cc``` files within the ```myAnalysis``` namespace. In the following of this tutorial, when new code needs to be added, it should be done in those two files. An example is given below:
 
 ```cpp
-rv::RVec<float> get_missingEnergy(const rv::RVec<edm4hep::ReconstructedParticleData>& in);
-```
+#in the header file
+rv::RVec<float> dummy_collection(const rv::RVec<edm4hep::ReconstructedParticleData>&);
 
-and in the source file, the starting point is:
-
-```cpp
-rv::RVec<float> get_missingEnergy(const rv::RVec<edm4hep::ReconstructedParticleData>& in){
-  rv::RVec<float> result;
-
-  ...
-
-  return result;
+#in the source file
+rv::RVec<float> dummy_collection(const rv::RVec<edm4hep::ReconstructedParticleData>& parts) {
+  rv::RVec<float> output;
+  for (size_t i = 0; i < parts.size(); ++i)
+    output.emplace_back(parts.at(i).momentum.x);
+  return output;
 }
 ```
 
-Do not forget to add the relevant ```edm4hep``` includes in case you are using other input collections!
+Finally, in your python analysis script, you can now call you newly defined function, don't forget it is inside a namespace!
 
-In your python analysis, you can now call you newly defined function, don't forget it is inside a namespace!
-
-:::{admonition} Suggested answer
-:class: toggle
 ```python
-.Define("missingEnergy","myAnalysis::get_missingEnergy(ReconstructedParticles)")
+.Define("dummy_collection", "myAnalysis::dummy_collection(ReconstructedParticles)")
 ```
-:::
 
+It takes as argument the collection named in our ROOT files ```ReconstructedParticles```, which is a vector of ```edm4hep::ReconstructedParticleData``` [see here](https://edm4hep.web.cern.ch/classedm4hep_1_1_reconstructed_particle_data.html) and also add the newly defined column ```dummy_collection``` to the list of output variables, this can be seen in ```myAnalysis/scripts/analysis_cfg.py```
 
-Last thing, do not forget to compile before running.
+Last thing, do not forget to compile before running to use your new code.
 
 ```shell
 cd ${OUTPUT_DIR}/build
@@ -82,17 +71,19 @@ cmake .. && make && make install
 cd ${LOCAL_DIR}
 ```
 
-## Generalities and references
 
 ## Reconstruction of the primary vertex and of primary tracks
 
+Let's start by running primary vertex reconstruction on a few events of one test file:
+
 ```shell
-fccanalysis run analysis_primary_vertex.py --test --nevents 1000 --output primary_Zuds.root
+fccanalysis run examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py --test --nevents 1000 --output primary_Zuds.root
 ```
 
-The resulting ntuple contains the MC event vertex (MC_PrimaryVertex), the reconstructed primary vertex (PrimaryVertex).
-Snippet of analysis_primary_vertex.py:
+The resulting ntuple ```primary_Zuds.root``` contains the MC event vertex ```MC_PrimaryVertex```, and the reconstructed primary vertex ```PrimaryVertex```.
 
+:::{admonition} Snippet of analysis_primary_vertex.py
+:class: toggle
 ```python
   # MC event primary vertex
   .Define("MC_PrimaryVertex",  "FCCAnalyses::MCParticle::get_EventPrimaryVertex(21)( Particle )" )
@@ -105,12 +96,12 @@ Snippet of analysis_primary_vertex.py:
   #        std::int32_t primary{}; ///< boolean flag, if vertex is the primary vertex of the event
   #        float chi2{}; ///< chi-squared of the vertex fit
   #        ::edm4hep::Vector3f position{}; ///< [mm] position of the vertex.
-  #        std::array<float, 6> covMatrix{}; ///< covariance matrix of the position 
+  #        std::array<float, 6> covMatrix{}; ///< covariance matrix of the position
   #           (stored as lower triangle matrix, i.e. cov(xx),cov(y,x),cov(z,x),cov(y,y),... )
   # - ROOT::VecOps::RVec<float> reco_chi2 : the contribution to the chi2 of all tracks used in the fit
-  # - ROOT::VecOps::RVec< TVector3 >  updated_track_momentum_at_vertex : the post-fit (px, py, pz ) 
+  # - ROOT::VecOps::RVec< TVector3 >  updated_track_momentum_at_vertex : the post-fit (px, py, pz )
   #         of the tracks, at the vertex (and not at their d.c.a.)
-  
+
   .Define("VertexObject_allTracks",  "VertexFitterSimple::VertexFitter_Tk ( 1, EFlowTrack_1, true, 4.5, 20e-3, 300)")
 
   # EFlowTrack_1 is the collection of all tracks (the fitting method can of course be applied to a subset of tracks (see later)).
@@ -124,7 +115,7 @@ Snippet of analysis_primary_vertex.py:
   .Define("Vertex_allTracks",  "VertexingUtils::get_VertexData( VertexObject_allTracks )")   # primary vertex, in mm
 
 
-  # This is not a good estimate of the primary vertex: even in a Z -> uds event, there 
+  # This is not a good estimate of the primary vertex: even in a Z -> uds event, there
   # are displaced tracks (e.g. Ks, Lambdas), which would bias the fit.
   # Below, we determine the "primary tracks" using an iterative algorithm - cf LCFI+.
   .Define("RecoedPrimaryTracks",  "VertexFitterSimple::get_PrimaryTracks( VertexObject_allTracks, EFlowTrack_1, true, 4.5, 20e-3, 300, 0., 0., 0., 0)")
@@ -133,55 +124,72 @@ Snippet of analysis_primary_vertex.py:
   .Define("PrimaryVertexObject",   "VertexFitterSimple::VertexFitter_Tk ( 1, RecoedPrimaryTracks, true, 4.5, 20e-3, 300) ")
   .Define("PrimaryVertex",   "VertexingUtils::get_VertexData( PrimaryVertexObject )")
 
-  # It is often useful to retrieve the secondary (i.e. non-primary) tracks, for example to search for secondary vertices. 
+  # It is often useful to retrieve the secondary (i.e. non-primary) tracks, for example to search for secondary vertices.
   # The method below simply "subtracts" the primary tracks from the full collection :
   .Define("SecondaryTracks",   "VertexFitterSimple::get_NonPrimaryTracks( EFlowTrack_1,  RecoedPrimaryTracks )")
+```
+:::
 
-```
-Example plots: run the ROOT macro plots_primary_vertex.x
+
+To produce some example plots, just run the ROOT macro ```examples/FCCee/tutorials/vertexing/plots_primary_vertex.x```
+
+:::{admonition} Suggested answer
+:class: toggle
 ```shell
-root
-root [0] .x plots_primary_vertex.x
+root -l
+.x examples/FCCee/tutorials/vertexing/plots_primary_vertex.x
 ```
-This shows the normalised chi2 of the primary vertex fit, the resolutions in x, y, z, and the pulls of the fitted vertex position.
+:::
+
+This produces normalised $\chi^2$ of the primary vertex fit, the resolutions in ```x, y, z```, and the pulls of the fitted vertex position.
 
 ### Exercises:
-1. add the number of primary and secondary tracks into the ntuple
-   - Solution:
+1. add the number of primary and secondary tracks into the ntuple using the function ```ReconstructedParticle2Track::getTK_n(ROOT::VecOps::RVec<edm4hep::TrackState> x)``` [see here](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/FCCAnalyses/ReconstructedParticle2Track.h#L111)
+
+:::{admonition} Suggested answer
+:class: toggle
 ```python
-               # Number of primary and secondary tracks :
-               .Define("n_RecoedPrimaryTracks",  "ReconstructedParticle2Track::getTK_n( RecoedPrimaryTracks )")
-               .Define("n_SecondaryTracks",  "ReconstructedParticle2Track::getTK_n( SecondaryTracks )" )
-               # equivalent : (this is to show that a simple C++ statement can be included in a ".Define")
-               .Define("n_SecondaryTracks_v2", " return ntracks - n_RecoedPrimaryTracks ; " )
+# Number of primary and secondary tracks :
+.Define("n_RecoedPrimaryTracks",  "ReconstructedParticle2Track::getTK_n( RecoedPrimaryTracks )")
+.Define("n_SecondaryTracks",  "ReconstructedParticle2Track::getTK_n( SecondaryTracks )" )
+# equivalent : (this is to show that a simple C++ statement can be included in a ".Define")
+.Define("n_SecondaryTracks_v2", " return ntracks - n_RecoedPrimaryTracks ; " )
 ```
-and add them to the branches:
+:::
+
+and add the corresponding collection to the ```branchList```:
+
+:::{admonition} Suggested answer
+:class: toggle
  ```python
-         branchList = [
-                #
-                "MC_PrimaryVertex",
-                "ntracks",
-                "Vertex_allTracks",
-                "PrimaryVertex",
-                "n_RecoedPrimaryTracks",
-                "n_SecondaryTracks",
-                "n_SecondaryTracks_v2",
-        ]
+branchList = [
+  "MC_PrimaryVertex",
+  "ntracks",
+  "Vertex_allTracks",
+  "PrimaryVertex",
+  "n_RecoedPrimaryTracks",
+  "n_SecondaryTracks",
+  "n_SecondaryTracks_v2",
+  ]
  ```
-2. add the total pT that is carried by the primary tracks. This requires some simple analysis code to be written and compiled. Hint: use the "updated_track_momentum_at_vertex" that is contained in VertexingUtils::FCCAnalysesVertex (contains a TVector3 for each track used in the vertex fit) and use this implementation:
+:::
+
+2. Add the total $p_T$ that is carried by the primary tracks. This requires some simple analysis code to be written and compiled. Hint: use the ```updated_track_momentum_at_vertex``` that is contained in ```VertexingUtils::FCCAnalysesVertex``` (contains a ```TVector3``` for each track used in the vertex fit) and use this function implementation:
+
 ```cpp
- double sum_momentum_tracks( const VertexingUtils::FCCAnalysesVertex&  vertex );
+double sum_momentum_tracks(const VertexingUtils::FCCAnalysesVertex&  vertex);
 ```
-      - solution : Create a file MyAnalysis.cc with :
+
+:::{admonition} Suggested answer
+:class: toggle
+Add inside ```myAnalysis/include/myAnalysis.h```
 ```cpp
-#include "FCCAnalyses/MyAnalysis.h"
-#include <iostream>
+double sum_momentum_tracks(const VertexingUtils::FCCAnalysesVertex&  vertex);
+```
 
-namespace FCCAnalyses{
-
-namespace MyAnalysis {
-
- double sum_momentum_tracks( const VertexingUtils::FCCAnalysesVertex&  vertex) {
+Add inside ```myAnalysis/include/myAnalysis.cc```
+```cpp
+ double sum_momentum_tracks(const VertexingUtils::FCCAnalysesVertex&  vertex) {
    double sum = 0;
    ROOT::VecOps::RVec< TVector3 > momenta = vertex.updated_track_momentum_at_vertex ;
    int n = momenta.size();
@@ -195,44 +203,29 @@ namespace MyAnalysis {
   return sum;
  }
 ```
-and a MyAnalysis.h :
-```cpp
-#ifndef  MYANALYSIS_ANALYZERS_H
-#define  MYANALYSIS_ANALYZERS_H
 
-#include <cmath>
-#include <vector>
-
-#include "ROOT/RVec.hxx"
-
-#include "VertexingUtils.h"
-
-namespace FCCAnalyses{
-
-namespace MyAnalysis {
-
- double sum_momentum_tracks( const VertexingUtils::FCCAnalysesVertex&  vertex );
-}//end NS MyAnalysis
-
-}//end NS FCCAnalyses
-
-#endif
-```
-and add the variable in your analyser:
+and add the variable in your analyser (both definition and in the branchList)```examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py```
 ```python
-               # Total pT carried by the primary tracks:
-               .Define("sum_pt_primaries",   "MyAnalysis::sum_momentum_tracks( PrimaryVertexObject )")
-               ....
-               branchList = [
-                #
-                ....
-                "sum_pt_primaries",
-                ]
-
+# Total pT carried by the primary tracks:
+.Define("sum_pt_primaries",   "myAnalysis::sum_momentum_tracks( PrimaryVertexObject )")
+[...]
+branchList = [
+#
+[...]
+"sum_pt_primaries",
+]
 ```
-3. compare these distributions in Z -> uds events and in Z -> bb events: edit the file analysis_primary_vertex.py, search for "testFile" and replace the Zuds file by the Zbb file (currently commented).
+:::
+
+3. Compare these distributions in Z -> uds events and in Z -> bb events.
+
+:::{admonition} Suggested answer
+:class: toggle
+Edit the file ```examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py```, search for ```testFile``` and replace the ```Zuds``` file by the ```Zbb``` file (currently commented).
+:::
+
 4. To go beyond:
-   - The reconstruction of all secondary vertices following the LCFI+ has been implemented (Kunal Gautam, Armin Ilg). The Pull request is ready and will bemerged soon: https://github.com/HEP-FCC/FCCAnalyses/pull/206
+The reconstruction of all secondary vertices following the LCFI+ has been implemented (Kunal Gautam, Armin Ilg). The Pull request is ready and will be merged soon: https://github.com/HEP-FCC/FCCAnalyses/pull/206
 
 
 ## Reconstruction of displaced vertices in an exclusive decay chain: starting example
@@ -244,7 +237,7 @@ We want to reconstruct the Bs decay vertex and determine the resolution on the p
 fccanalysis run analysis_Bs2JpsiPhi_MCseeded.py  --test --nevents 1000 --output Bs2JpsiPhi_MCseeded.root
 ```
 
-The ntuple contains the MC decay vertex of the Bs, and the reconstructed decay vertex. 
+The ntuple contains the MC decay vertex of the Bs, and the reconstructed decay vertex.
 
 Snippet of the code:
 ```python
@@ -258,7 +251,7 @@ Snippet of the code:
  #             explored recursively if needed.
  #        2nd: chargeConjugateMother
  #        3rd: chargeConjugateDaughters
- #        4th: inclusiveDecay: when set to false, if a mother is found, that decays 
+ #        4th: inclusiveDecay: when set to false, if a mother is found, that decays
  #             into the particles specified in the list plus other particle(s), this decay is not selected.
  # If the event contains more than one such decays,only the first one is kept.
  .Define("Bs2MuMuKK_indices",  "MCParticle::get_indices( 531, {-13,13,321,-321}, true, true, true, false) ( Particle, Particle1)" )
@@ -275,7 +268,7 @@ Snippet of the code:
  # The size of this collection is always 4 provided that Bs2MuMuKK_indices is not empty,
  # possibly including "dummy" particles in case one of the legs did not make a RecoParticle
  # (e.g. because it is outsice the tracker acceptance).
- # This is done on purpose, in order to maintain the mapping with the indices - i.e. the 1st particle in 
+ # This is done on purpose, in order to maintain the mapping with the indices - i.e. the 1st particle in
  # the list BsRecoParticles is the mu+, then the mu-, etc.
  # (selRP_matched_to_list ignores the unstable MC particles that are in the input list of indices
  # hence the mother particle, which is the [0] element of the Bs2MuMuKK_indices vector).
@@ -306,7 +299,7 @@ The root macro plots_Bs2JsiPhi.x produces various plots showing the vertex chi2,
 
 ## Exercise: analysis of tau -> 3 mu
 
-1. Start from analysis_Bs2JpsiPhi.py and adapt it to the decay tau -> 3 mu. 
+1. Start from analysis_Bs2JpsiPhi.py and adapt it to the decay tau -> 3 mu.
 ```shell
 cp analysis_Bs2JpsiPhi_MCseeded.py analysis_Tau3Mu_MCseeded.py
 ```
@@ -319,8 +312,8 @@ testFile= "/eos/experiment/fcc/ee/generation/DelphesEvents/spring2021/IDEA/p8_no
  .Define("indices",  "MCParticle::get_indices( 15, {-13,13,13}, true, true, true, false) ( Particle, Particle1)" )
  ```
  and replace subsequently "Bs2MuMuKK_indices" into "indices" - and, to have meaningful variable names, "Bsxxx" into "Tauxxx". The file can be found in the Exercises directory.
-   
-   
+
+
 2. Add the reconstructed tau mass to the ntuple (you will need to write new code). Check that the mass resolution is improved when it is determined from the track momenta **at the tau decay vertex**, compared to a blunt 3-muon mass determined from the default track momenta (taken at theis distance of closest approach).
    - solution : This needs to be added to your MyAnalysis.cc :
 ```cpp
@@ -402,7 +395,7 @@ We now want to write a method that builds muon triplets - actually, since the MC
 that returns all combinations of 3-muons.
 
     - solution:
-    
+
 ```cpp
     ROOT::VecOps::RVec< ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> > build_triplets
                ( const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>& in , float total_charge ) {
@@ -440,7 +433,7 @@ that returns all combinations of 3-muons.
  return results;
 }
 ```
-    
+
  You can then use it in your analysis_Tau3Mu.py :
  ```python
   # Build triplets of muons.
@@ -452,9 +445,9 @@ that returns all combinations of 3-muons.
   .Filter( "n_triplets_m > 0" )
  ```
  where the latter line will filter out events for which no triplet has been found.
- 
+
  NB: the efficiency for having the three muons from the tau decay that fall within the tracker acceptance is about 95%. However, a track will reach the muon detector only if its momentum is larger than about 2 GeV (in Delphes, the efficiency for muons below 2 GeV is set to zero). When adding the requirement that the three muons have p > 2 GeV, the efficiency drops to about 75%. You can check that using the MC information, starting e.g. from analysis_Tau3Mu_MCseeded.py. Consequently: out of 1000 signal events, only ~ 750 events are selected by the above Filter.
- 
+
  It is then simple to build a tau candidate from the first triplet that has been found, e.g. :
  ```python
   # ----------------------------------------------------
@@ -471,7 +464,7 @@ that returns all combinations of 3-muons.
 
  ```
  but we would like to retrieve all tau candidates.
- 
+
  **Exercise:**  code the following methods in your MyAnalysis:
  ```cpp
    ROOT::VecOps::RVec< VertexingUtils::FCCAnalysesVertex > build_AllTauVertexObject(
@@ -527,8 +520,8 @@ ROOT::VecOps::RVec<  double > build_AllTauMasses( const ROOT::VecOps::RVec< Vert
   ]
 
  ```
- 
-4. We now want to look at the background. 
+
+4. We now want to look at the background.
 Copy your analysis_Tau3Mu.py:
 ```shell
 cp analysis_Tau3Mu.py analysis_Tau3Mu_stage1.py
@@ -544,7 +537,7 @@ The main background is expected to come from tau -> 3 pi nu decays, when the cha
  .Alias("MCRecoAssociations1", "MCRecoAssociations#1.index")
  .Define("ChargedHadrons", "ReconstructedParticle2MC::selRP_ChargedHadrons( MCRecoAssociations0,
         MCRecoAssociations1,ReconstructedParticles,Particle)")
-        
+
 ```
 and further select the ones that are above 2 GeV - since only particles above 2 GeV will make it to the muon detector:
 ```python
@@ -571,9 +564,9 @@ struct selRP_Fakes {
 ```
 
      - solution:
-     
+
 ```cpp
-     
+
      selRP_Fakes::selRP_Fakes( float arg_fakeRate, float  arg_mass ) : m_fakeRate(arg_fakeRate), m_mass( arg_mass)  {
         unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
         std::default_random_engine generator (seed);
@@ -609,7 +602,7 @@ We then use this method in the analyser :
   # and we use this collection later on, instead of "muons" :
   .Alias("theMuons", "muons_with_fakes")
   .Define("n_muons_withFakes",  "ReconstructedParticle::get_n( theMuons )")
-  
+
 ```
 and we just need to replace the muon collection when building the triplets :
 ```python
@@ -625,7 +618,7 @@ You can also add the total visible energy into your ntuple:
              .Define("visible_energy",  "Sum( RecoPartEnergies )")
 ```
 
-        
+
 5. We now have a simple analyser that can be used to process the signal and background samples, and plot the mass of the tau -> 3mu candidates:
 This produces flat ntuples:
 ```shell
@@ -639,6 +632,3 @@ and finally, this makes some plots :
 ```shell
 fccanalysis plots analysis_Tau3Mu_plots.py
 ```
-
-
-

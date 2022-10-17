@@ -65,7 +65,7 @@ geometryFile = FCCDETECTORS + "/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectMast
 readoutName  = "ECalBarrelPhiEta"
 ```
 
-Let's now define new columns to the RootDataFrame object ```df2``` inside the function ```analysers``` of the class ```RDFanalysis```. We start by defining the index in the collection ```CaloClusters``` of the cluster with maximum energy:
+Let's now define new columns to the RootDataFrame object ```df2``` inside the function ```analysers``` of the class ```RDFanalysis```. We start by defining the index in the collection ```CaloClusters``` which is of type [ClusterData](https://edm4hep.web.cern.ch/_cluster_data_8h_source.html) of the cluster with maximum energy:
 
 ```python
 .Define("maxEnergyCluster_index", "std::distance(CaloClusters.energy.begin(), std::max_element(CaloClusters.energy.begin(), CaloClusters.energy.end()))")
