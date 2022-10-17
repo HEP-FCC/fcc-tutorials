@@ -40,7 +40,7 @@ In order to add new code, we need to develop inside FCCAnalyses. For that we set
 source ./setupUserCode.sh myAnalysis
 ```
 
-We now have a new directory ```myAnalysis``` that contains both include ```myAnalysis/include/myAnalysis.h``` and source ```myAnalysis/src/myAnalysis.cc``` files within the ```myAnalysis``` namespace. In the following of this tutorial, when new code needs to be added, it should be done in those two files. An example is given below:
+We now have a new directory `myAnalysis` that contains both include `myAnalysis/include/myAnalysis.h` and source `myAnalysis/src/myAnalysis.cc` files within the `myAnalysis` namespace. In the following of this tutorial, when new code needs to be added, it should be done in those two files. An example is given below:
 
 ```cpp
 #in the header file
@@ -61,7 +61,7 @@ Finally, in your python analysis script, you can now call you newly defined func
 .Define("dummy_collection", "myAnalysis::dummy_collection(ReconstructedParticles)")
 ```
 
-It takes as argument the collection named in our ROOT files ```ReconstructedParticles```, which is a vector of ```edm4hep::ReconstructedParticleData``` [see here](https://edm4hep.web.cern.ch/classedm4hep_1_1_reconstructed_particle_data.html) and also add the newly defined column ```dummy_collection``` to the list of output variables, this can be seen in ```myAnalysis/scripts/analysis_cfg.py```
+It takes as argument the collection named in our ROOT files `ReconstructedParticles`, which is a vector of `edm4hep::ReconstructedParticleData` [see here](https://edm4hep.web.cern.ch/classedm4hep_1_1_reconstructed_particle_data.html) and also add the newly defined column `dummy_collection` to the list of output variables, this can be seen in `myAnalysis/scripts/analysis_cfg.py`
 
 Last thing, do not forget to compile before running to use your new code.
 
@@ -80,7 +80,7 @@ Let's start by running primary vertex reconstruction on a few events of one test
 fccanalysis run examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py --test --nevents 1000 --output primary_Zuds.root
 ```
 
-The resulting ntuple ```primary_Zuds.root``` contains the MC event vertex ```MC_PrimaryVertex```, and the reconstructed primary vertex ```PrimaryVertex```.
+The resulting ntuple `primary_Zuds.root` contains the MC event vertex `MC_PrimaryVertex`, and the reconstructed primary vertex `PrimaryVertex`.
 
 :::{admonition} Snippet of analysis_primary_vertex.py
 :class: toggle
@@ -141,10 +141,10 @@ root -l
 ```
 :::
 
-This produces normalised $\chi^2$ of the primary vertex fit, the resolutions in ```x, y, z```, and the pulls of the fitted vertex position.
+This produces normalised $\chi^2$ of the primary vertex fit, the resolutions in `x, y, z`, and the pulls of the fitted vertex position.
 
 ### Exercises:
-1. add the number of primary and secondary tracks into the ntuple using the function ```ReconstructedParticle2Track::getTK_n(ROOT::VecOps::RVec<edm4hep::TrackState> x)``` [see here](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/FCCAnalyses/ReconstructedParticle2Track.h#L111)
+1. add the number of primary and secondary tracks into the ntuple using the function `ReconstructedParticle2Track::getTK_n(ROOT::VecOps::RVec<edm4hep::TrackState> x)` [see here](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/FCCAnalyses/ReconstructedParticle2Track.h#L111)
 
 :::{admonition} Suggested answer
 :class: toggle
@@ -157,7 +157,7 @@ This produces normalised $\chi^2$ of the primary vertex fit, the resolutions in 
 ```
 :::
 
-and add the corresponding collection to the ```branchList```:
+and add the corresponding collection to the `branchList`:
 
 :::{admonition} Suggested answer
 :class: toggle
@@ -174,7 +174,7 @@ branchList = [
  ```
 :::
 
-2. Add the total $p_T$ that is carried by the primary tracks. This requires some simple analysis code to be written and compiled. Hint: use the ```updated_track_momentum_at_vertex``` that is contained in ```VertexingUtils::FCCAnalysesVertex``` (contains a ```TVector3``` for each track used in the vertex fit) and use this function implementation:
+2. Add the total $p_T$ that is carried by the primary tracks. This requires some simple analysis code to be written and compiled. Hint: use the `updated_track_momentum_at_vertex` that is contained in `VertexingUtils::FCCAnalysesVertex` (contains a `TVector3` for each track used in the vertex fit) and use this function implementation:
 
 ```cpp
 double sum_momentum_tracks(const VertexingUtils::FCCAnalysesVertex&  vertex);
@@ -182,12 +182,12 @@ double sum_momentum_tracks(const VertexingUtils::FCCAnalysesVertex&  vertex);
 
 :::{admonition} Suggested answer
 :class: toggle
-Add inside ```myAnalysis/include/myAnalysis.h```
+Add inside `myAnalysis/include/myAnalysis.h`
 ```cpp
 double sum_momentum_tracks(const VertexingUtils::FCCAnalysesVertex&  vertex);
 ```
 
-Add inside ```myAnalysis/include/myAnalysis.cc```
+Add inside `myAnalysis/include/myAnalysis.cc`
 ```cpp
  double sum_momentum_tracks(const VertexingUtils::FCCAnalysesVertex&  vertex) {
    double sum = 0;
@@ -204,7 +204,7 @@ Add inside ```myAnalysis/include/myAnalysis.cc```
  }
 ```
 
-and add the variable in your analyser (both definition and in the branchList)```examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py```
+and add the variable in your analyser (both definition and in the branchList) `examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py`
 ```python
 # Total pT carried by the primary tracks:
 .Define("sum_pt_primaries",   "myAnalysis::sum_momentum_tracks( PrimaryVertexObject )")
@@ -217,11 +217,11 @@ branchList = [
 ```
 :::
 
-3. Compare these distributions in Z -> uds events and in Z -> bb events.
+3. Compare these distributions in $Z \rightarrow uds$ events and in $Z \rightarrow b\bar{b}$ events.
 
 :::{admonition} Suggested answer
 :class: toggle
-Edit the file ```examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py```, search for ```testFile``` and replace the ```Zuds``` file by the ```Zbb``` file (currently commented).
+Edit the file `examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py`, search for `testFile` and replace the `Zuds` file by the `Zbb` file (currently commented).
 :::
 
 4. To go beyond:
