@@ -30,6 +30,8 @@ extensions = [
 ]
 
 myst_enable_extensions = [
+    "dollarmath",
+    "amsmath",
     'colon_fence',
     'html_admonition'
 ]

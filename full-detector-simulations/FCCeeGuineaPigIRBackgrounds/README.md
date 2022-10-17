@@ -110,9 +110,9 @@ cmake -C $ILCSOFT/ILCSoft.cmake ..
 make install
 ```
 
-### GP production of `$\gamma\gamma$`hadrons
+### GP production of $\gamma\gamma$ hadrons
 
-In order to produce `$\gamma\gamma$` to hadrons with GP, we need to add the following commands inside the configuration file acc.dat
+In order to produce $\gamma\gamma$ to hadrons with GP, we need to add the following commands inside the configuration file acc.dat
 
 ```bash
 hadron_ratio=100000;
