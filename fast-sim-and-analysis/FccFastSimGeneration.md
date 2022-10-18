@@ -507,10 +507,10 @@ KKMCee -f Tau -e 91.2 -n 10000 -o kk_tautau_10000.hepmc
 
 :::
 
-The `HepMC` output is an ASCII format and can browsed with for example `more`:
-
-:::{admonition} Expand to see an example 
+:::{admonition} Expand to see the example of the produced `HepMC` output 
 :class: toggle
+
+The `HepMC` output is an ASCII format and can browsed with for example `more`:
 
 ```bash
 $ more kk_tautau_10000.hepmc
@@ -576,6 +576,51 @@ A close-up look at the listing rasing two questions
     2. The number of vertices does not seem to correspond to what found in the listing. The number of vertices, for example 4 in the first listing, correponds to the collision plus the decays one: the collision one is indicated by `V`, the other 3 are not indicated explicitely, but can be infered by looking at the particles having the same non-null parent ID: the decays of the Z boson (PDG id = 23), of Tau- (  
 
 :::
+
+The remaining output files from the run are found in the `KKMCee-<date>-<time>` directory. In particular the file `pro.output` contains at the end information about the process cross-section. 
+
+In this example 
+```
+$ tail -37 KKMCee-<date>-<time>/pro.output
+   *****************************
+   ****   KKMCee   Finalize ****
+   *****************************
+********************************************************************************
+*                                                                              *
+*                   ****************************************                   *
+*                   ******      KKMCee::Finalize      ******                   *
+*                   ****************************************                   *
+*   f_NevGen =      10000 =                          No. of generated events   *
+*   XsPrimPb =       2700.8373   =                   Primary from Foam [pb]    *
+*  FoamInteg =       1713.9085   =                   Crude from FOAM   [pb]    *
+*         +- =    0.0015374453   =                   error                     *
+*                   ****************************************                   *
+*   <WtMain> =       0.5480549   =                   average WtMain            *
+*         +- =    0.0014250983   =                   error abs.                *
+*     XsMain =       1480.2071   =                   Xsection main [pb]        *
+*         +- =    0.0070229434   =                   error absolute            *
+*         +- =    0.0026002838   =                   error relative            *
+*                   ********** More from WtMainMonit *******                   *
+*      AveWt =       0.5480549   =                   average <WtMain>          *
+*      ERela =    0.0026002838   =                   relative error            *
+*      sigma =      0.38497968   =                   dispersion of WtMain      *
+*   DB_WTmax =               4   =                   input WTmax               *
+*      WtMax =       4.2012103   =                   maximum  WTmain           *
+*      WtMin =               0   =                   mainimum WTmain           *
+*      AvUnd =               0   =                   underflow                 *
+*      AvOve =   5.5091102e-06   =                   overflow                  *
+* AvOve/<Wt> =   1.0052114e-05   =                   relative: AvOve/AveWt     *
+*       Ntot =           72977   =                   Ntot primary events       *
+*       Nacc =           10000   =                   accepted events           *
+*  Nacc/Ntot =      0.13702948   =                   acceptance rate           *
+*       Nneg =               0   =                   WT<0 events               *
+*       Nove =               2   =                   WT>WTmax events           *
+*  Nove/Ntot =   2.7405895e-05   =                   Nove/Ntot                 *
+*       Nzer =            1201   =                   WT=0 events               *
+*                                                                              *
+********************************************************************************
+```
+i.e the total ditau cross-section at 91.2 GeV from `KKMCee` is 1480.2 +- 7.0 pb . 
 
 #### `HepMC` to `EDM4hep` conversion
 
@@ -702,6 +747,31 @@ k4run pythia.py -n 10000 --out.filename p8_tautau_10000.d4h.root --Pythia8.Pythi
 
 :::
 
+Running will take a few minutes. Among the last lines of the output there should be the total cross-section for the process:
+```
+ *-------  PYTHIA Event and Cross Section Statistics  -------------------------------------------------------------*
+ |                                                                                                                 |
+ | Subprocess                                    Code |            Number of events       |      sigma +- delta    |
+ |                                                    |       Tried   Selected   Accepted |     (estimated) (mb)   |
+ |                                                    |                                   |                        |
+ |-----------------------------------------------------------------------------------------------------------------|
+ |                                                    |                                   |                        |
+ | f fbar -> gamma*/Z0                            221 |      140682      10000      10000 |   1.458e-06  7.715e-09 |
+ |                                                    |                                   |                        |
+ | sum                                                |      140682      10000      10000 |   1.458e-06  7.715e-09 |
+ |                                                                                                                 |
+ *-------  End PYTHIA Event and Cross Section Statistics ----------------------------------------------------------*
+```
+i.e. 1458.0 +- 7.7 pb.
+
+Q: How the cross-sections compare?
+
+:::{admonition} Answer
+:class: toggle
+
+The differences of teh corss-section calculated by `KKMCee` and `Pythia8` is (1480.2 - 1458.0) pb = 22.2 pb ; the errors have a statistical and systematic component. Assuming half and half for statistical and systematics, and the systematics fully correlated, the error on the difference is about 8.5 pb, i.e. the two calculatons differ by 2.6 standard deviations. What would you check first?
+
+:::
 
 #### Looking at the produced files: the MCParticle class
 
