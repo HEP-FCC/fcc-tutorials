@@ -88,7 +88,7 @@ Let's start by running primary vertex reconstruction on a few events of one test
 fccanalysis run examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py --test --nevents 1000 --output primary_Zuds.root
 ```
 
-Note: with the option `--test`, we process the file that is hard-coded under `testFile` inside `analysis_primary_vertex.py`. In this case, it is a file of $Z \rightarrow q \bar{q}$ with $ q=u,d,s$.
+Note: with the option `--test`, we process the file that is hard-coded under `testFile` inside `analysis_primary_vertex.py`. In this case, it is a file of $Z \rightarrow q \bar{q}$ with $q=u,d,s$.
 
 The resulting ntuple `primary_Zuds.root` contains the MC event vertex `MC_PrimaryVertex`, and the reconstructed primary vertex `PrimaryVertex`.
 
@@ -538,9 +538,8 @@ ROOT::VecOps::RVec< ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> > bui
   .Define("triplets_m",  "myAnalysis::build_triplets( muons, -1. )")   # returns a vector of triplets, i.e. of vectors of 3 RecoParticles
   .Define("n_triplets_m",  "return triplets_m.size() ; " )
  ```
- where the latter line will filter out events for which no triplet has been found.
 
- NB: the efficiency for having the three muons from the tau decay that fall within the tracker acceptance is about 95%. However, a track will reach the muon detector only if its momentum is larger than about 2 GeV (in Delphes, the efficiency for muons below 2 GeV is set to zero). When adding the requirement that the three muons have p > 2 GeV, the efficiency drops to about 75%. You can check that using the MC information, starting e.g. from analysis_Tau3Mu_MCseeded.py. Consequently: out of 1000 signal events, only ~ 750 events are selected by the above Filter.
+ NB: the efficiency for having the three muons from the tau decay that fall within the tracker acceptance is about 95%. However, a track will reach the muon detector only if its momentum is larger than about 2 GeV (in Delphes, the efficiency for muons below 2 GeV is set to zero). When adding the requirement that the three muons have p > 2 GeV, the efficiency drops to about 75%. You can check that using the MC information, starting e.g. from analysis_Tau3Mu_MCseeded.py. Consequently: out of 1000 signal events, only ~  a triplet is found in 750 events only.
 
  It is then simple to build a tau candidate from the first triplet that has been found, e.g. :
  ```python
@@ -781,6 +780,8 @@ fccanalysis run examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_stage1.py --t
 
 :::
 
+The files `analysis_Tau3Mu_stage1.py`, `myAnalysis.h` and `myAnalysis.cc` with all the changes discussed above can be found in the `examples/FCCee/tutorials/vertexing/Exercises/` directory of FCCAnalyses.
+
 5. We now have a simple analyser that can be used to process the signal and background samples, and plot the mass of the $\tau \rightarrow 3\mu$ candidates. For that we need to process the full statistics.
 
 All samples that have been centrally produced can be found [on this web page](http://fcc-physics-events.web.cern.ch/fcc-physics-events/FCCee/index.php). We use `spring2021` samples (in `Production tags`), and the files made with `IDEA`. If you enter `TauMinus2MuMuMu` and `TauMinus2PiPiPinus` in the search field, you will see the datasets produced for the signal anf the $\tau \rightarrow 3\pi \nu$ background. The first column shows the dataset names, in this case `p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2MuMuMu` and `p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2PiPiPinu`. 
@@ -847,7 +848,7 @@ histoList = {
 ```
 :::
 
-This produces three histograms, for three sets of selections. The histogram files appear in the `TauMu/final` directory. There are now 6 files (2 processes, 3 sets of cuts). The histograms are normalised to a luminosity of 1~$pb^{-1}$.
+This produces three histograms, for three sets of selections. The histogram files appear in the `TauMu/final` directory. There are now 6 files (2 processes, 3 sets of cuts). The histograms are normalised to a luminosity of one inverse pb.
 
 
 Finally, this makes some plots :
@@ -856,7 +857,7 @@ Finally, this makes some plots :
 fccanalysis plots examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_plots.py
 ```
 
-which appear in the `Tau3Mu/plots` directory. Look for example at the plot `mTaTau3Mu_nostack_log` in `Tau3Mu/plots/sel1`. The candidates in the background sample, corresponding to $\tau \rightarrow 3 \pi \nu$ decays, are reconstructed at a mass that is usually below the $\tau$ mass due to the presence of the neutrino. Note that the background sample corresponds to a very low statistics (50M have been produced, we expect 14B) and we see fluctuations. The signal cross-section used here correponds to $B( \tau \rightarrow 3 \mu) = 2 10^{-8}$, which is roughly the current upper limit. The luminosity for these final plots is entered in analysis_Tau3Mu_plots.py.
+which appear in the `Tau3Mu/plots` directory. Look for example at the plot `mTaTau3Mu_nostack_log` in `Tau3Mu/plots/sel1`. The candidates in the background sample, corresponding to $\tau \rightarrow 3 \pi \nu$ decays, are reconstructed at a mass that is usually below the $\tau$ mass due to the presence of the neutrino. Note that the background sample corresponds to a very low statistics (50M have been produced, we expect 14B) and we see fluctuations. The signal cross-section used here correponds to $B( \tau \rightarrow 3 \mu) = 2 \times 10^{-8}$, which is roughly the current upper limit. The luminosity for these final plots is entered in analysis_Tau3Mu_plots.py.
 
 
 
