@@ -119,6 +119,10 @@ ls /eos/project-f/fccsw-web/www/share/gen/whizard/
 ```
 or browsing `https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/`, if EOS is not available.
 
+
+:::{admonition} Show dimuon example
+:class: toggle
+
 It is advised to work in a separate directory for each process. For example, for Z_mumu, we have:
 
 ```bash
@@ -126,9 +130,6 @@ It is advised to work in a separate directory for each process. For example, for
  wget https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/Z_mumu.sin
  whizard Z_mumu.sin
 ```
-
-:::{admonition} Show log
-:class: toggle
 
 ```
 | Writing log to 'whizard.log'
@@ -233,7 +234,7 @@ A help function is available:
 KKMCee -h
 ```
 
-:::{admonition} Show help
+:::{admonition} Show help function output
 :class: toggle
 
 ```
@@ -285,6 +286,9 @@ A configuration example file for taus is available under at
 ls `dirname $( which KKMCee )`/../share/KKMCee/examples/kkmc-tauola.input
 ```
 
+:::{admonition} Show dimuon example
+:class: toggle
+
 To generate a sample of dimuon events using the example files, do the following
 
 ```bash
@@ -292,9 +296,6 @@ KKMCee -f Mu -e 91.2 -n 1000 -o kkmu_1000.hepmc
 ```
 
 The output should look something like this:
-
-:::{admonition} Show output
-:class: toggle
 
 ```
 Seeds: 29318493 48191772
@@ -399,7 +400,7 @@ A help function is available:
 BHLUMI -h
 ```
 
-:::{admonition} Show help
+:::{admonition} Show help function output
 :class: toggle
 
 ```
@@ -449,7 +450,7 @@ A help function is available:
 babayaga -h
 ```
 
-:::{admonition} Show help
+:::{admonition} Show help function output
 :class: toggle
 
 ```
@@ -489,7 +490,7 @@ In this section we describe, with exercises, the generation of an equivalent sam
 `KKMCee` and `Pythia8`. The process chosen is e<sup>-</sup>e<sup>+</sup> &rarr; <sup>tau</sup>tau<sup>+</sup> (hereafter referred to as _ditaus_) at a centre of mass energy of 91.2 GeV. In both cases 10000 will be generated and saved in `ROOT` files in `EDM4hep` format.
 
 ### Generating ditaus with KKMCee
-As shown in the dedicated section above, event generation with the `KKMCee` is controlled through a configuration file. The interface available in `key4hep` allowd a generation of the configuration file through command line switches. Starting from the command line switches is therefore always a good option when no confguration file is available.
+As shown in the [KKMCee section](#kkmcee), event generation with the `KKMCee` is controlled through a configuration file. The interface available in `key4hep` allowd a generation of the configuration file through command line switches. Starting from the command line switches is therefore always a good option when no confguration file is available.
 
 `KKMCee` does not have currently the option to save directly the events in `EDM4hep` format. In order to get there we need first to generate the events in `HepMC` format.
 
