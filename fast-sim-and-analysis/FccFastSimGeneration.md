@@ -542,7 +542,7 @@ $ k4run hepmc2edm.py -h
 :::{admonition} Expand
 :class: toggle
 
-The tool that we need is [HepMCFileReader](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCFileReader.h), which is a `GaudiTool`, not a `GaudiAlgorithm`, which is used as a signal provider (such as a Monte Carlo generator) within the [Generator Algorithm (GenAlg)](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/GenAlg.h). This is done in thsi part of the code:
+The tool that we need is [HepMCFileReader](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCFileReader.h), which is a `GaudiTool`, not a `GaudiAlgorithm`, which is used as a signal provider (such as a Monte Carlo generator) within the [Generator Algorithm (GenAlg)](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/GenAlg.h). This is done in this part of the code:
 ```python
 from Configurables import HepMCFileReader
 hepmcreader = HepMCFileReader()
@@ -584,7 +584,7 @@ ApplicationMgr().TopAlg += [out]
 
 ##### Running `hepmc2edm.py`
 
-Among the `hepmc2edm` relevant for the purpose are those controling input an output files:
+Among the `hepmc2edm` switches relevant for the purpose are those controling input an output files:
 ```
 $ k4run hepmc2edm.py -h
 ...
@@ -605,6 +605,44 @@ k4run hepmc2edm.py -n 10000 --GenAlg.HepMCFileReader.Filename kk_tautau_10000.he
 ```
 
 :::
+
+Q: Can you explain why we need to pass the `-n 10000` switch and how you could modify `hepmc2edm.py` to avoid that?
+
+:::{admonition} Check answer
+:class: toggle
+
+Because `hepmc2edm.py` contains this piece of code:
+```python
+from Configurables import ApplicationMgr
+ApplicationMgr(
+               EvtSel='NONE',
+               EvtMax=1,
+               OutputLevel=INFO,
+```
+The setting `EvtMax=1` is overwritten by `-n <n_evts>`. To avoid this one could set `EvtMax=10000` inside `hepmc2edm.py` (try!)
+
+:::
+
+Note _en passant_ that the `EDM4hep` file is much smaller than the `HepMC` one:
+```
+$ ls -lt
+total 43032
+-rw-r--r-- 1 ganis vboxsf  3661630 Oct 18  2022 kk_tautau_10000.e4h.root
+-rw-r--r-- 1 ganis vboxsf     1232 Oct 18  2022 hepmc2edm.py
+drwxr-xr-x 1 ganis vboxsf      288 Oct 18 16:12 KKMCee-18Oct2022-161012
+-rw-r--r-- 1 ganis vboxsf 19584017 Oct 18 16:12 kk_tautau_10000.hepmc
+```
+
+Q: Can you explain why?
+
+:::{admonition} Check answer
+:class: toggle
+
+Because `kk_tautau_10000.e4h.root` is a `ROOT` file, which binary and compressed.
+
+:::
+
+
 
 ### Generating ditaus with Pythia8
 
