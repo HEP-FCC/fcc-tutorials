@@ -54,9 +54,38 @@ pythia8, whizard, MadGraph5, Herwig, KKMCee, BHLUMI, BabaYaga.
 
 ###  Pythia8
 
-Pythia8 is fully intergrated in FCCSW and it provides diverse functionality in addition to event generation,
+Pythia8 is fully intergrated in `Key4hep` software stack and it provides diverse functionality in addition to event generation,
 including capability to read events in LHEF format.
 
+To use Pythia8 we need a Gaudi steering file and a configuration file. Examples of configuration files can be obtained from the [FCC-config](https://github.com/HEP-FCC/FCC-config/tree/main/FCCee/Generator/Pythia8) repository.
+
+The Gaudi steering file needs to activate the `GaudiAlgorithm` that runs Pythia8; the algorithm is available from the `k4Gen` repository and it is called [PythiaInterface](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/PythiaInterface.h).
+
+An example of steering file can be found at [https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/options/pythia.py](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/options/pythia.py). The steering file runs the miniaml set of algorithms to run Pythia8 and produce an output in `EDM4hep` format:
+```
+$ wget https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py
+$ k4run pythia.py -h
+ -->  Pythia8 -->  HepMCToEDMConverter -->  StableParticles -->  out
+...
+  -n NUM_EVENTS, --num-events NUM_EVENTS
+                        Number of events to run
+...
+  --out.filename [OUT.FILENAME], --filename.out [OUT.FILENAME]
+                        Name of the file to create [PodioOutput]
+...
+  --Pythia8.PythiaInterface.pythiacard [PYTHIA8.PYTHIAINTERFACE.PYTHIACARD], --pythiacard.Pythia8.PythiaInterface [PYTHIA8.PYTHIAINTERFACE.PYTHIACARD]
+                        [PythiaInterface]
+...
+
+```
+For example, to generate 500  e<sup>+</sup>e<sup>-</sup> &#8594; mu<sup>+</sup>mu<sup>-</sup> at 91.2 GeV, we can do the following: download the configuration file:
+```
+$ wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/main/FCCee/Generator/Pythia8/p8_ee_Zmumu_ecm91.cmd
+```
+and run
+```
+k4run pythia.py -n 500 --out.filename p8_mumu_500.e4h.root --Pythia8.PythiaInterface.pythiacard p8_ee_Zmumu_ecm91.cmd
+```
 
 ###  Whizard
 
@@ -97,6 +126,9 @@ It is advised to work in a separate directory for each process. For example, for
  wget https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/Z_mumu.sin
  whizard Z_mumu.sin
 ```
+
+:::{admonition} Show log
+:class: toggle
 
 ```
 | Writing log to 'whizard.log'
@@ -151,6 +183,8 @@ Warning: Encountered events with excess weight: 6 events (  0.600 %)
 |=============================================================================|
 ```
 
+:::
+
 The file `z_mumu.hepmc` contains 100 e<sup>+</sup>e<sup>-</sup> &#8594; mu<sup>+</sup>mu<sup>-</sup>(gamma) events in HepMC 3 format .
 
 
@@ -199,8 +233,10 @@ A help function is available:
 KKMCee -h
 ```
 
-```
+:::{admonition} Show help
+:class: toggle
 
+```
 +++ Wrapper around the KKMCee executable  +++
 
 Usage: \tKKMCee -f Mu|Tau|UDS|C|B|Hadrons -e Ecms -n Nevts -o output_file [-s initial_seed] [OPTIONS]
@@ -239,6 +275,8 @@ KKMCee -f B -e 91.2 -n 1000 -o kkbb_1000.hepmc
       (2) Output is HEPMC v3
 ```
 
+:::
+
 Note that the BES (Beam Energy Spread) options are only available in version 4.32.01 and higher.
 
 A configuration example file for taus is available under at
@@ -254,6 +292,9 @@ KKMCee -f Mu -e 91.2 -n 1000 -o kkmu_1000.hepmc
 ```
 
 The output should look something like this:
+
+:::{admonition} Show output
+:class: toggle
 
 ```
 Seeds: 29318493 48191772
@@ -325,6 +366,8 @@ user	0m3.777s
 sys	0m0.085s
 ```
 
+:::
+
 and a file `kkmu_1000.hepmc` created.
 
 `KKMCee` creates several files during its run. These are saved into a folder called `KKMCee-<date>-<time>`, for example `KKMCee-12Oct2022-191047`.
@@ -356,6 +399,9 @@ A help function is available:
 BHLUMI -h
 ```
 
+:::{admonition} Show help
+:class: toggle
+
 ```
 +++ Wrapper around the BHLUMI.exe executable +++
 
@@ -384,6 +430,8 @@ Additional switches (for experts only):
   (Contact BHLUMI authors for details, e.g. through https://github.com/KrakowHEPSoft/BHLUMI)
 ```
 
+:::
+
 ###  BabaYaga
 
 `BabaYaga` is a Monte Carlo generator of two-photons events used at LEP.
@@ -400,6 +448,9 @@ A help function is available:
 ```
 babayaga -h
 ```
+
+:::{admonition} Show help
+:class: toggle
 
 ```
 
@@ -429,6 +480,8 @@ babayaga -f 15. -t 165. -e 91.2 -n 10000 -o bbyg_10000.LHE
 babayaga -c babayaga.input -o bbyg.LHE
 
 ```
+
+:::
 
 ## Case study: ditau events with KKMCee and Pythia8
 
@@ -642,9 +695,10 @@ Because `kk_tautau_10000.e4h.root` is a `ROOT` file, which binary and compressed
 
 :::
 
-
-
 ### Generating ditaus with Pythia8
+
+To use Pythia8 we need a configuration file 
+
 
 #### Looking at the produced files: the MCParticle class
 
