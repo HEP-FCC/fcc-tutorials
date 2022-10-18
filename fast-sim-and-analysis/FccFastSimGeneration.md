@@ -327,11 +327,18 @@ sys	0m0.085s
 
 and a file `kkmu_1000.hepmc` created.
 
-The same can be obtained with an input file: look for the file `*/pro.input` created by the previous run and do
-
-```bash
-KKMCee -c <prev_run_dir>/pro.input
+`KKMCee` creates several files during its run. These are saved into a folder called `KKMCee-<date>-<time>`, for example `KKMCee-12Oct2022-191047`.
+This folder contains the files:
 ```
+$ ls KKMCee-12Oct2022-191047
+DIZET-table1  TabMain77.output  TabMainC.output  mcgen.root  pro.input  pro.output  pro77.output
+```
+The file `pro.input` contains the configuration options and can be used to repeat the run
+```bash
+KKMCee -c KKMCee-12Oct2022-191047/pro.input
+```
+and, of course, as base configuration file example for further variations.
+
 ###  BHLUMI
 
 `BHLUMI` is a Monte Carlo generator of Bhabha events used at LEP for luminosity studies.
@@ -425,7 +432,12 @@ babayaga -c babayaga.input -o bbyg.LHE
 
 ## Case study: ditau events with KKMCee and Pythia8
 
+In this section we describe, with exercises, the generation of an equivalent sample of Monte Carlo events with two diffent generators,
+`KKMCee` and `Pythia8`. The process chosen is e<sup>-</sup>e<sup>+</sup> &rarr; <sup>tau</sup>tau<sup>+</sup> (hereafter referred to as _ditaus_) at a centre of mass energy of 91.2 GeV. In both cases the events will be saved an `ROOT` file in `EDM4hep` format.
+
 ### Generating ditaus with KKMCee
+As shown in the dedicated section above, event generation with the `KKMCee` is controlled through a configuration file. The interface available in `key4hep` allowd a geration of the configuration file through command line switches. Starting from the command line switches is therefore always a good option when no confguration file is available. 
+
 
 ### Generating ditaus with Pythia8
 
