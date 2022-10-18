@@ -38,7 +38,7 @@ The application `fccrun` is still provided, fully equivalent to `k4run`.
 :::{admonition} Nota Bene
 :class: callout
 
-You will need to source the /cvmfs/sw.hsf.org/key4hep/setup.sh script everytime you want to use the software.
+You will need to source the `/cvmfs/sw.hsf.org/key4hep/setup.sh` script everytime you want to use the software.
 :::
 
 
@@ -442,13 +442,13 @@ As shown in the dedicated section above, event generation with the `KKMCee` is c
 
 #### Generating `HepMC` events
 
-What are the command like option to generate 10000 ditau events ane saved them into the file kktau_10000.hepmc ? 
+What are the command like option to generate 10000 ditau events ane saved them into the file kk_tautau_10000.hepmc ? 
 
 :::{admonition} Suggested answer
 :class: toggle
 
 ```bash
-KKMCee -f Tau -e 91.2 -n 10000 -o kktau_10000.hepmc
+KKMCee -f Tau -e 91.2 -n 10000 -o kk_tautau_10000.hepmc
 ```
 
 :::
@@ -459,7 +459,7 @@ The `HepMC` output is an ASCII format and can browsed with for example `more`:
 :class: toggle
 
 ```bash
-$ more kktau_10000.hepmc
+$ more kk_tautau_10000.hepmc
 HepMC::Version 3.02.04
 HepMC::Asciiv3-START_EVENT_LISTING
 E 0 4 11
@@ -525,8 +525,86 @@ A close-up look at the listing rasing two questions
 
 #### `HepMC` to `EDM4hep` conversion
 
-In order to get the events in `EDM4hep` format, we will use `Gaudi` and the tools available in `k4FWCore`
+In order to get the events in `EDM4hep` format, we will use `Gaudi` and the tools available in [k4FWCore](https://github.com/key4hep/k4FWCore) and [k4Gen](https://github.com/HEP-FCC/k4Gen/). We need a Gaudi steering file that reads the `HepMC` file and writes out the `EDM4hep` file.
+A minimal version of such a steering code is available on the tutorial reference page:
+```
+wget http://fccsw.web.cern.ch/tutorials/october2020/tutorial1/hepmc2edm.py .
+```
+Let's see what it does: that is shown by the first line of the help function
+```
+$ k4run hepmc2edm.py -h
+ -->  GenAlg -->  HepMCDumper --> HepMCToEDMConverter --> HepMCFileWriter  -->  out
+...
+```
 
+##### Dissection of `hepmc2edm.py`
+
+:::{admonition} Expand
+:class: toggle
+
+The tool that we need is [HepMCFileReader](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCFileReader.h), which is a `GaudiTool`, not a `GaudiAlgorithm`, which is used as a signal provider (such as a Monte Carlo generator) within the [Generator Algorithm (GenAlg)](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/GenAlg.h). This is done in thsi part of the code:
+```python
+from Configurables import HepMCFileReader
+hepmcreader = HepMCFileReader()
+
+from Configurables import GenAlg
+reader = GenAlg()
+reader.SignalProvider = hepmcreader
+reader.hepmc.Path = "hepmc"
+ApplicationMgr().TopAlg += [reader]
+```
+Then we want to see if what we read makes sense, dumping some events with the [HepMCDumper](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCDumper.h) algorithm:
+```
+from Configurables import HepMCDumper
+dumper = HepMCDumper()
+dumper.hepmc.Path="hepmc"
+ApplicationMgr().TopAlg += [dumper]
+```
+Then we convert the event from `HepMC` to `EDM4hep` with the [HepMCToEDMConverter](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCToEDMConverter.h):
+```
+from Configurables import HepMCToEDMConverter
+hepmc_converter = HepMCToEDMConverter()
+hepmc_converter.hepmc.Path="hepmc"
+hepmc_converter.GenParticles.Path = "GenParticles"
+ApplicationMgr().TopAlg += [hepmc_converter]
+```
+Finally we write out the converted events into a file with the [HepMCFileWriter](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCFileWriter.h) and [PodioOutput](https://github.com/key4hep/k4FWCore/blob/master/k4FWCore/components/PodioOutput.h) algorithms:
+```
+from Configurables import HepMCFileWriter
+writer = HepMCFileWriter()
+writer.hepmc.Path="hepmc"
+ApplicationMgr().TopAlg += [writer]
+
+from Configurables import PodioOutput
+out = PodioOutput("out", filename = "hepmc2edm_output.root")
+out.outputCommands = ["keep *"]
+ApplicationMgr().TopAlg += [out]
+```
+:::
+
+##### Running `hepmc2edm.py`
+
+Among the `hepmc2edm` relevant for the purpose are those controling input an output files:
+```
+$ k4run hepmc2edm.py -h
+...
+  --GenAlg.HepMCFileReader.Filename [GENALG.HEPMCFILEREADER.FILENAME], --Filename.GenAlg.HepMCFileReader [GENALG.HEPMCFILEREADER.FILENAME]
+                        Name of the HepMC file to read [HepMCFileReader]
+...
+  --out.filename [OUT.FILENAME], --filename.out [OUT.FILENAME]
+                        Name of the file to create [PodioOutput]
+...
+```
+We would like the output file to be called `kk_tautau_10000.e4h.root` . Which command should we use for that?
+
+:::{admonition} Check answer
+:class: toggle
+
+```bash
+k4run hepmc2edm.py -n 10000 --GenAlg.HepMCFileReader.Filename kk_tautau_10000.hepmc --out.filename kk_tautau_10000.e4h.root
+```
+
+:::
 
 ### Generating ditaus with Pythia8
 
