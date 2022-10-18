@@ -433,10 +433,85 @@ babayaga -c babayaga.input -o bbyg.LHE
 ## Case study: ditau events with KKMCee and Pythia8
 
 In this section we describe, with exercises, the generation of an equivalent sample of Monte Carlo events with two diffent generators,
-`KKMCee` and `Pythia8`. The process chosen is e<sup>-</sup>e<sup>+</sup> &rarr; <sup>tau</sup>tau<sup>+</sup> (hereafter referred to as _ditaus_) at a centre of mass energy of 91.2 GeV. In both cases the events will be saved an `ROOT` file in `EDM4hep` format.
+`KKMCee` and `Pythia8`. The process chosen is e<sup>-</sup>e<sup>+</sup> &rarr; <sup>tau</sup>tau<sup>+</sup> (hereafter referred to as _ditaus_) at a centre of mass energy of 91.2 GeV. In both cases 10000 will be generated and saved in `ROOT` files in `EDM4hep` format.
 
 ### Generating ditaus with KKMCee
-As shown in the dedicated section above, event generation with the `KKMCee` is controlled through a configuration file. The interface available in `key4hep` allowd a geration of the configuration file through command line switches. Starting from the command line switches is therefore always a good option when no confguration file is available. 
+As shown in the dedicated section above, event generation with the `KKMCee` is controlled through a configuration file. The interface available in `key4hep` allowd a generation of the configuration file through command line switches. Starting from the command line switches is therefore always a good option when no confguration file is available.
+
+`KKMCee` does not have currently the option to save directly the events in `EDM4hep` format. In order to get there we need first to generate the events in `HepMC` format.
+
+What are the command like option to generate 10000 ditau events ane saved them into the file kktau_10000.hepmc ? 
+:::{admonition} Suggested answer
+:class: toggle
+```bash
+KKMCee -f Tau -e 91.2 -n 10000 -o kktau_10000.hepmc
+```
+:::
+
+The `HepMC` output is an ASCII format and can browsed with for example `more`:
+```bash
+$ more kktau_10000.hepmc
+HepMC::Version 3.02.04
+HepMC::Asciiv3-START_EVENT_LISTING
+E 0 4 11
+U GEV MM
+A 4 spin 0.056005 -0.954208 0.293856
+A 5 spin 0.862823 0.105210 0.494436
+P 1 0 11 0.0000000000000000e+00 0.0000000000000000e+00 4.5599999997136848e+01 4.5600000000000001e+01 5.1099859770630950e-04 4
+P 2 0 -11 0.0000000000000000e+00 0.0000000000000000e+00 -4.5599999997136848e+01 4.5600000000000001e+01 5.1099859770630950e-04 4
+V -1 0 [1,2]
+P 3 -1 23 0.0000000000000000e+00 0.0000000000000000e+00 0.0000000000000000e+00 9.1200000000000003e+01 9.1200000000000003e+01 2
+P 4 3 15 7.5634198134957833e+00 1.9208578260382165e+01 -4.0620528002933362e+01 4.5600000000000001e+01 1.7770499999998681e+00 2
+P 5 3 -15 -7.5634198134957833e+00 -1.9208578260382165e+01 4.0620528002933362e+01 4.5600000000000001e+01 1.7770499999998681e+00 2
+P 6 4 16 1.5520648658275604e-01 1.3736795186996460e+00 -3.0399644374847412e+00 3.3395311832427979e+00 0.0000000000000000e+00 1
+P 7 4 13 3.3498418331146240e+00 7.8049712181091309e+00 -1.7384153366088867e+01 1.9348358154296875e+01 1.0565830000000000e-01 1
+P 8 4 -14 4.0583715438842773e+00 1.0029928207397461e+01 -2.0196411132812500e+01 2.2912111282348633e+01 0.0000000000000000e+00 1
+P 9 5 -16 -3.4257166385650635e+00 -9.4930477142333984e+00 2.1268466949462891e+01 2.3541477203369141e+01 0.0000000000000000e+00 1
+P 10 5 211 -9.6522146463394165e-01 -2.8242239952087402e+00 5.9299035072326660e+00 6.6401152610778809e+00 1.3957587329547499e-01 1
+P 11 5 111 -3.1724817752838135e+00 -6.8913059234619141e+00 1.3422157287597656e+01 1.5418406486511230e+01 1.3496067957561880e-01 1
+E 0 7 22
+U GEV MM
+A 10 spin -0.526312 -0.653062 0.544523
+A 11 spin 0.124883 0.876618 -0.464700
+P 1 0 -11 0.0000000000000000e+00 0.0000000000000000e+00 -4.5599999997136848e+01 4.5600000000000001e+01 5.1099859770630950e-04 4
+P 2 1 -11 2.3989162307273351e-04 3.2683144961857383e-05 -4.5053509135514268e+01 4.5053509084747823e+01 -2.1524472631665264e-03 2
+P 3 1 22 -2.3989162307273351e-04 -3.2683144961857383e-05 -5.4649086162257743e-01 5.4649091525218030e-01 -1.2904784139758924e-08 1
+P 4 0 11 0.0000000000000000e+00 0.0000000000000000e+00 4.5599999997136848e+01 4.5600000000000001e+01 5.1099859770630950e-04 4
+P 5 4 11 -3.4272383325468539e-06 3.9756556219599252e-05 4.5471392649338441e+01 4.5471392646010933e+01 -5.5154828810563322e-04 2
+P 6 4 22 3.4272383325468539e-06 -3.9756556219599252e-05 1.2860734779840696e-01 1.2860735398907067e-01 -3.2261960349397309e-09 1
+P 7 2 -11 2.3978439291629699e-04 3.1121498922239849e-05 -4.4998932825148202e+01 4.4998932774359304e+01 -2.1515941974735880e-03 2
+P 8 2 22 1.0723015643652809e-07 1.5616460396175375e-06 -5.4576310366068984e-02 5.4576310388516784e-02 -6.5854450798271929e-10 1
+V -4 0 [5,7]
+P 9 -4 23 2.3635715458375012e-04 7.0878055141839101e-05 4.7245982419023846e-01 9.0470325420370244e+01 9.0469091756916228e+01 2
+P 10 9 15 -1.0567709246763060e+01 -4.0260638458492809e-01 4.4181853045814989e+01 4.5464630383293809e+01 1.7770500000003799e+00 2
+P 11 9 -15 1.0567945603917645e+01 4.0267726264006992e-01 -4.3709393221624751e+01 4.5005695037076428e+01 1.7770500000001239e+00 2
+P 12 10 16 -4.2494945526123047e+00 5.3450322151184082e-01 1.7407199859619141e+01 1.7926362991333008e+01 0.0000000000000000e+00 1
+P 13 10 -211 -3.2984399795532227e+00 -2.7310401201248169e-01 1.5218788146972656e+01 1.5575150489807129e+01 1.3967110514153336e-01 1
+P 14 10 111 -3.0197749137878418e+00 -6.6400557756423950e-01 1.1555866241455078e+01 1.1963118553161621e+01 1.3497032866486386e-01 1
+P 15 11 -16 1.3823601500654497e+00 5.8997208178366942e-02 -6.8109338674845024e+00 6.9500518568222240e+00 0.0000000000000000e+00 1
+P 16 11 211 1.1306452151024036e+00 9.9405550031272910e-02 -3.6136840095621445e+00 3.7903071607421510e+00 1.3955710658047393e-01 1
+P 17 11 211 2.9148939828773184e+00 3.3597977559671632e-01 -1.0436451119833281e+01 1.0841977637941852e+01 1.3956283150401572e-01 1
+P 18 11 -211 3.4269614119923486e+00 6.2251535093063998e-02 -1.5263612213083412e+01 1.5644337452123484e+01 1.3963076888122616e-01 1
+P 19 11 111 1.5460559488251355e+00 -1.1916317312948667e-01 -6.7685473667467502e+00 6.9452098898073880e+00 1.3497443778768972e-01 1
+P 20 11 22 1.3380509514620450e-04 -1.0323115492598167e-05 -3.8742519765868233e-04 4.1001055350006228e-04 0.0000000000000000e+00 1
+P 21 11 22 6.4753176789756372e-05 3.6976379858981743e-06 -2.6864524513974572e-04 2.7636373526067825e-04 0.0000000000000000e+00 1
+P 22 11 22 1.6683033237367961e-01 -3.4786968976788998e-02 -8.1550790025724251e-01 8.3312401741426301e-01 0.0000000000000000e+00 1
+...
+```
+The detailed description of the ASCII `HepMC` output can be found in Section 3.4 of [HepMC3 writeup](https://arxiv.org/abs/1912.08005).
+The first two line indicate the version of `HepMC` (here 3.02.04) and the type of output, i.e. `Asciiv3` (`HepMC` supports also binary formats as output).
+The block for each event starts with a line `E`, indicating the event number, the number of vertices and the number of particles. The line staring with `U` gives the adopted units for energy and distances. The lines starting with `P` are the particle lines: the first integer is the particle number in the list, the second the particle number of the parent particle, the third the `PDG` particle ID, then we have the 3-momentum, the nergy and the mass; finally the status, with `status==1` labelling _stable_ particles entering leaving the interaction point and entering the detector. The lines starting with `A` indicate additional attributes: the can be per run, per event or per element of the listing. In this case they are used to provide helicity information for the two taus: the first number is the particle number, the second the name of the attribute, the rest the helicity information.  
+
+Q: What can be conidered _strange_ in the above listing ? 
+:::{admonition} Suggested answer
+:class: toggle
+A close-up look at the listing rasing two questions 
+    1. The number of the second event is still 0. This is due to a bug in the `HepMC` interface of `KKMCee`; it has no influence
+       in the following processing, since not really used.
+    2. The number of vertices does not seem to correspond to what found in the listing. The number of vertices, for example 4 in the first listing, correponds to the collision plus the decays one: the collision one is indicated by `V`, the other 3 are not indicated explicitely, but can be infered by looking at the particles having the same non-null parent ID: the decays of the Z boson (PDG id = 23), of Tau- (  
+
+:::
+
 
 
 ### Generating ditaus with Pythia8
