@@ -587,7 +587,7 @@ wget http://fccsw.web.cern.ch/tutorials/october2020/tutorial1/hepmc2edm.py .
 Let's see what it does: that is shown by the first line of the help function
 ```
 $ k4run hepmc2edm.py -h
- -->  GenAlg -->  HepMCDumper --> HepMCToEDMConverter --> HepMCFileWriter  -->  out
+ -->  GenAlg  -->  HepMCToEDMConverter  -->  out
 ...
 ```
 
@@ -607,13 +607,6 @@ reader.SignalProvider = hepmcreader
 reader.hepmc.Path = "hepmc"
 ApplicationMgr().TopAlg += [reader]
 ```
-Then we want to see if what we read makes sense, dumping some events with the [HepMCDumper](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCDumper.h) algorithm:
-```
-from Configurables import HepMCDumper
-dumper = HepMCDumper()
-dumper.hepmc.Path="hepmc"
-ApplicationMgr().TopAlg += [dumper]
-```
 Then we convert the event from `HepMC` to `EDM4hep` with the [HepMCToEDMConverter](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCToEDMConverter.h):
 ```
 from Configurables import HepMCToEDMConverter
@@ -622,13 +615,8 @@ hepmc_converter.hepmc.Path="hepmc"
 hepmc_converter.GenParticles.Path = "GenParticles"
 ApplicationMgr().TopAlg += [hepmc_converter]
 ```
-Finally we write out the converted events into a file with the [HepMCFileWriter](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCFileWriter.h) and [PodioOutput](https://github.com/key4hep/k4FWCore/blob/master/k4FWCore/components/PodioOutput.h) algorithms:
+Finally we write out the converted events into a file with the [PodioOutput](https://github.com/key4hep/k4FWCore/blob/master/k4FWCore/components/PodioOutput.h) algorithm:
 ```
-from Configurables import HepMCFileWriter
-writer = HepMCFileWriter()
-writer.hepmc.Path="hepmc"
-ApplicationMgr().TopAlg += [writer]
-
 from Configurables import PodioOutput
 out = PodioOutput("out", filename = "hepmc2edm_output.root")
 out.outputCommands = ["keep *"]
@@ -698,7 +686,19 @@ Because `kk_tautau_10000.e4h.root` is a `ROOT` file, which binary and compressed
 
 ### Generating ditaus with Pythia8
 
-To use Pythia8 we need a configuration file 
+As explained in the dedicated [Pythia8 section](#pythia8), to use `Pythia8` we need a configuration file. To generate ditau events we will use the file
+[p8_ee_Ztautau_ecm91.cmd](https://github.com/HEP-FCC/FCC-config/blob/main/FCCee/Generator/Pythia8/p8_ee_Ztautau_ecm91.cmd):
+```
+$ wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/main/FCCee/Generator/Pythia8/p8_ee_Ztautau_ecm91.cmd
+```
+Q: How will we run it? (hint: check specific section)
+
+:::{admonition} Answer
+:class: toggle
+
+k4run pythia.py -n 10000 --out.filename p8_tautau_10000.d4h.root --Pythia8.PythiaInterface.pythiacard p8_ee_Ztautau_ecm91.cmd
+
+:::
 
 
 #### Looking at the produced files: the MCParticle class
