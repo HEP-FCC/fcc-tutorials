@@ -696,7 +696,9 @@ Q: How will we run it? (hint: check specific section)
 :::{admonition} Answer
 :class: toggle
 
+```
 k4run pythia.py -n 10000 --out.filename p8_tautau_10000.d4h.root --Pythia8.PythiaInterface.pythiacard p8_ee_Ztautau_ecm91.cmd
+```
 
 :::
 
