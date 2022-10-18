@@ -30,15 +30,15 @@ which k4run
 ```
 
 ```
-# the output might differ, but shouldn't be empty
+# The output might differ, but shouldn't be empty and the structure should be similar
 /cvmfs/sw.hsf.org/spackages6/k4fwcore/1.0pre15/x86_64-centos7-gcc11.2.0-opt/2q37t/bin/k4run
 ```
-The application `fccrun` is till provided, fully equivalent to `k4run`.
+The application `fccrun` is still provided, fully equivalent to `k4run`.
 
 :::{admonition} Nota Bene
 :class: callout
 
-You will need to source the /cvmfs/fcc.cern.ch/sw/latest/setup.sh script everytime you want to use the software.
+You will need to source the /cvmfs/sw.hsf.org/key4hep/setup.sh script everytime you want to use the software.
 :::
 
 
@@ -50,7 +50,7 @@ The physics generators available for FCC typically come from the underlying stac
 able to generate events in one of the understood formats, e.g. HepMC or EDM4hep or LHEf, can be used in standalone.
 The recommended formats are `HepMC3` and `EDM4hep`.
 This pages intend to illustrate the use of a few general purpose generators available when enabling FCCSW:
-pythia8, whizard, MadGraph5, Herwig.
+pythia8, whizard, MadGraph5, Herwig, KKMCee, BHLUMI, BabaYaga.
 
 ###  Pythia8
 
@@ -440,15 +440,24 @@ As shown in the dedicated section above, event generation with the `KKMCee` is c
 
 `KKMCee` does not have currently the option to save directly the events in `EDM4hep` format. In order to get there we need first to generate the events in `HepMC` format.
 
+#### Generating `HepMC` events
+
 What are the command like option to generate 10000 ditau events ane saved them into the file kktau_10000.hepmc ? 
+
 :::{admonition} Suggested answer
 :class: toggle
+
 ```bash
 KKMCee -f Tau -e 91.2 -n 10000 -o kktau_10000.hepmc
 ```
+
 :::
 
 The `HepMC` output is an ASCII format and can browsed with for example `more`:
+
+:::{admonition} Expand to see an example 
+:class: toggle
+
 ```bash
 $ more kktau_10000.hepmc
 HepMC::Version 3.02.04
@@ -503,8 +512,10 @@ The first two line indicate the version of `HepMC` (here 3.02.04) and the type o
 The block for each event starts with a line `E`, indicating the event number, the number of vertices and the number of particles. The line staring with `U` gives the adopted units for energy and distances. The lines starting with `P` are the particle lines: the first integer is the particle number in the list, the second the particle number of the parent particle, the third the `PDG` particle ID, then we have the 3-momentum, the nergy and the mass; finally the status, with `status==1` labelling _stable_ particles entering leaving the interaction point and entering the detector. The lines starting with `A` indicate additional attributes: the can be per run, per event or per element of the listing. In this case they are used to provide helicity information for the two taus: the first number is the particle number, the second the name of the attribute, the rest the helicity information.  
 
 Q: What can be conidered _strange_ in the above listing ? 
+
 :::{admonition} Suggested answer
 :class: toggle
+
 A close-up look at the listing rasing two questions 
     1. The number of the second event is still 0. This is due to a bug in the `HepMC` interface of `KKMCee`; it has no influence
        in the following processing, since not really used.
@@ -512,6 +523,9 @@ A close-up look at the listing rasing two questions
 
 :::
 
+#### `HepMC` to `EDM4hep` conversion
+
+In order to get the events in `EDM4hep` format, we will use `Gaudi` and the tools available in `k4FWCore`
 
 
 ### Generating ditaus with Pythia8
