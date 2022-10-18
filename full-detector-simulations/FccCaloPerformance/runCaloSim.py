@@ -86,7 +86,6 @@ particle_converter.GenParticles.Path = "genParticles"
 from Configurables import SimG4Alg
 geantsim = SimG4Alg("SimG4Alg",
                        outputs= ["SimG4SaveCalHits/saveECalBarrelHits",
-                                 #"SimG4SaveCalHits/saveHCalBarrelHits",
                        ],
                        eventProvider=particle_converter,
                        OutputLevel=0)
@@ -95,8 +94,8 @@ geantsim = SimG4Alg("SimG4Alg",
 # EM scale calibration (sampling fraction)
 from Configurables import CalibrateInLayersTool
 calibEcalBarrel = CalibrateInLayersTool("CalibrateECalBarrel",
-        # sampling fraction obtained using SamplingFractionInLayers
-                                   samplingFraction = [0.36504678560781667] * 1 + [0.09974087165838573] * 1 + [0.12392336840429007] * 1 + [0.1413266332223572] * 1 + [0.15415123193238958] * 1 + [0.1639900875460671] * 1 + [0.17156597031962592] * 1 + [0.17810674932424356] * 1 + [0.18340048249397345] * 1 + [0.18855877603870688] * 1 + [0.19307873042890955] * 1 + [0.21746137329706489] * 1,
+                                   # sampling fraction obtained using SamplingFractionInLayers
+                                   samplingFraction = [0.3674030774913384, 0.09847833302358869, 0.12571104392015559, 0.1435269034800326, 0.15562338401911247, 0.16433369501246228, 0.17101382906715829, 0.17706510179843604, 0.18179714100755953, 0.1854827654246184, 0.188358333708253, 0.2118603901819323],
                                    readoutName = ecalBarrelReadoutName,
                                    layerFieldName = "layer")
 
@@ -260,10 +259,10 @@ createEcalBarrelPositionedCaloClusterCells.positionedHits.Path = "PositionedCalo
 from Configurables import PodioOutput
 out = PodioOutput("out",
                   OutputLevel=INFO)
-out.outputCommands = ["drop *", "keep genParticles", "keep ECalBarrelPositionedCells", "keep CaloClusters", "keep CorrectedCaloClusters", "keep PositionedCaloClusterCells"]
+out.outputCommands = ["drop *", "keep genParticles", "keep ECalBarrelPositionedCells", "keep CaloClusters", "keep PositionedCaloClusterCells"]
 
 import uuid
-out.filename = "output_fullCalo_simAndDigi_"+str(momentum)+"GeV_pdgId_"+str(pdgCode)+"_noise"+str(addNoise)+"_LKr.root"
+out.filename = "output_caloFullSim_"+str(momentum)+"GeV_pdgId_"+str(pdgCode)+"_noise"+str(addNoise)+".root"
 
 #CPU information
 from Configurables import AuditorSvc, ChronoAuditor
@@ -277,7 +276,6 @@ createEcalBarrelCellsStep1.AuditExecute = True
 resegmentEcalBarrel.AuditExecute = True
 createEcalBarrelCells.AuditExecute = True
 createClusters.AuditExecute = True
-#correctCaloClusters.AuditExecute = True
 out.AuditExecute = True
 
 from Configurables import EventCounter
