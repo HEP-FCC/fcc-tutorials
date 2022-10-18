@@ -4,10 +4,116 @@
 
 [Phoenix](https://github.com/HSF/phoenix) is a web based event display for High
 Energy Physics. To visualize FCC events one needs to provide detector geometry
-and generated events.
+and generated events --- event data.
+
+In this tutorial we will be working with files stored on two computers. First
+computer will be the one which can source FCCSW stack, e.g. `lxplus` and second
+one will be yours with the recent web browser. We will call the first one the
+_remote machine_ and the second one the _local machine_.
 
 
-### Detector Geometry
+## Event Data
+
+### CLD Reconstructed Events
+
+Let's start with the visualization of the event data in the established detector
+design CLD, which started its life as the detector designed for the CLIC linear
+collider concept. The detectors in FCCSW are described in
+[DD4hep](https://dd4hep.web.cern.ch/dd4hep/) compact files. The compact files
+are written in XML and expose configuration options for the detector.
+
+Example CLD compact file can be examined after sourcing of the FCCSW stack on
+the remote machine
+```sh
+source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
+```
+like so
+```sh
+less ${FCCDETECTORS}/Detector/DetFCCeeCLD/compact/FCCee_o2_v02/FCCee_o2_v02.xml
+```
+This is a copy of the
+[FCCDetectors](https://github.com/HEP-FCC/FCCDetectors/blob/main/doc/DD4hepInFCCSW.md#visualisation)
+repository, which stores FCC detector designs.
+
+The Phoenix web application already showcases the CLD detector
+[here](https://fccsw.web.cern.ch/fccsw/phoenix/#/fccee-cld/) and we will
+simulate few events in order to visualize them there.
+
+On the remote machine we will need to clone the
+[CLICPerformance](https://github.com/iLCSoft/CLICPerformance) repository
+```sh
+git clone https://github.com/iLCSoft/CLICPerformance
+cd CLICPerformance/fcceeConfig
+```
+
+run the simulation
+```sh
+ddsim --compactFile $LCGEO/FCCee/compact/FCCee_o1_v04/FCCee_o1_v04.xml \
+      --outputFile tops_edm4hep.root \
+      --steeringFile fcc_steer.py \
+      --inputFiles ../Tests/yyxyev_000.stdhep \
+      --numberOfEvents 7
+```
+
+and after that, run the reconstruction with the help of
+[this](./fccRec_e4h_input.py) steering file
+```sh
+wget https://hep-fcc.github.io/fcc-tutorials/_downloads/e88cc1443945cfce03b3957f319c2288/fccRec_e4h_input.py
+k4run fccRec_e4h_input.py
+```
+
+There should be a file called `tops_cld.root` in your working
+directory.
+
+In order to visualize the events from this file we need co convert the
+[EDM4hep](https://edm4hep.web.cern.ch/) ROOT file into intermediate JSON format
+with the command:
+```ssh
+edm4hep2json tops_cld.root
+```
+
+:::{admonition} EDM4hep Collections
+:class: callout
+One should specify a list collections to be exported with the `-l` flag. The
+default ones are:
+* `GenParticles`
+* `BuildUpVertices`
+* `SiTracks`
+* `PandoraClusters`
+* `VertexJets`
+* `EventHeader`
+:::
+
+Now we download the obtained file from the remote machine into our local one.
+Most easily done with `scp`
+```sh
+scp lxplus.cern.ch:CLICPerformance/fcceeConfig/tops_cld.edm4hep.json .
+```
+
+To load the EDM4hep JSON file into the
+[Phoenix](https://fccsw.web.cern.ch/fccsw/phoenix/#/fccee-cld/) use the upload
+button in the lover right corner of the web page
+
+```{image} phoenix_upload.png
+:align: center
+```
+
+The detector and event data might look similar to this screenshot
+
+![](./phoenix_cld.png)
+
+:::{admonition} EDM4hep JSON File
+:class: solution dropdown
+The obtained EDM4hep JSON file should look similar to
+[this one](./tops_cld.edm4hep.json) [Right click to download].
+:::
+
+
+## Delphes Full Simulation
+
+TBA
+
+## Detector Geometry
 
 There are several ways how to import FCC detector geometry into Phoenix.
 Currently the most preferred method is to convert compact DD4hep file(s) to
@@ -103,23 +209,3 @@ Already converted geometry for the FCCee LAr Calorimeter imported into Phoenix
 application can be found [here](https://kjvbrt.github.io/fcc-viewer/).
 
 
-## [WIP] Event data
-
-First one needs to have some events generated:
-```
-fccrun Reconstruction/RecFCCeeCalorimeter/options/runCaloSim.py  \
-       --filename fccee_LAr_idea_pgun.root \
-       -n 10
-```
-
-and then using `edm4hep2json` converter convert EDM4hep `.root` file into
-`.json` file which can be uploaded to the Phoenix application. Converter is
-WIP and is currently hosted in the EDM4hep fork
-[here](https://github.com/kjvbrt/EDM4hep/tree/edm4hep2json). After compilation
-of the `edm4hep2json` branch you should be able to run the converter using
-```
-./build/tools/edm4hep2json -i input_edm4hep.root
-```
-
-After successful conversion one can use upload button in Phoenix interface and
-upload event data to be displayed.
