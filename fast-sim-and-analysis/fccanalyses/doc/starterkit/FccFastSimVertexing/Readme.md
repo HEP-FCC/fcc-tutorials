@@ -12,7 +12,7 @@ This tutorial will teach you how to:
 -   produce **flat ntuples** with observables of interest with **FCCAnalyses**
 -   build your own algorithm inside **FCCAnalyses**
 
-For the vertex fitter, we make use of the code developed by Franco Bedeschi, [see this talk](https://indico.cern.ch/event/1003610/contributions/4214579/attachments/2187815/3696958/Bedeschi_Vertexing_Feb2021.pdf). 
+For the vertex fitter, we make use of the code developed by Franco Bedeschi, [see this talk](https://indico.cern.ch/event/1003610/contributions/4214579/attachments/2187815/3696958/Bedeschi_Vertexing_Feb2021.pdf).
 The [subsequent updates presented in July 2022](https://indico.cern.ch/event/1180976/contributions/4960968/attachments/2481467/4259924/Bedeschi_Vertexing_Jul2022.pdf) offer possibilities for complex reconstructions, but they are not yet ready to use in the public FCCAnalyses version (coming soon).
 
 To reconstruct the primary vertex and the primary tracks, we follow the LCFI+ algorithm (T. Suehara,T. Tanabe), described in [arXiv:1506.08371](https://arxiv.org/pdf/1506.08371.pdf).
@@ -425,7 +425,7 @@ Add the call to your `examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_MCseede
  .Define("RawMass",  "myAnalysis::tau3mu_raw_mass( TauRecoParticles ) ")
 ```
 and add the new variables to the list of branches `branchList` as usual.
-Moreover, in order to be able to run the local code from `myAnalysis`, don't forget to add 
+Moreover, in order to be able to run the local code from `myAnalysis`, don't forget to add
 ```python
 analysesList = ['myAnalysis']
 ```
@@ -469,7 +469,7 @@ class RDFanalysis():
         return df2
 ```
 
-clear out the `branchList`, 
+clear out the `branchList`,
 and insert new `Define`s:
 ```python
  # Use the "AllMuons" collection, which contains also non-isolated muons (in contrast to the "Muons" collection)
@@ -782,9 +782,9 @@ fccanalysis run examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_stage1.py --t
 
 The files `analysis_Tau3Mu_stage1.py`, `myAnalysis.h` and `myAnalysis.cc` with all the changes discussed above can be found in the `examples/FCCee/tutorials/vertexing/Exercises/` directory of FCCAnalyses.
 
-5. We now have a simple analyser that can be used to process the signal and background samples, and plot the mass of the $\tau \rightarrow 3\mu$ candidates. For that we need to process the full statistics.
+5. We now have a simple analyser that can be used to process the signal and background samples, and plot the mass of the $\tau \rightarrow 3\mu$ candidates. For that we need to process the full statistics. In order for you to have access to `/afs/cern.ch/work/f/fccsw/public/FCCDicts/`, we need to add you CERN login to an afs group. If not already provided, please do so.
 
-All samples that have been centrally produced can be found [on this web page](http://fcc-physics-events.web.cern.ch/fcc-physics-events/FCCee/index.php). We use `spring2021` samples (in `Production tags`), and the files made with `IDEA`. If you enter `TauMinus2MuMuMu` and `TauMinus2PiPiPinus` in the search field, you will see the datasets produced for the signal anf the $\tau \rightarrow 3\pi \nu$ background. The first column shows the dataset names, in this case `p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2MuMuMu` and `p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2PiPiPinu`. 
+All samples that have been centrally produced can be found [on this web page](http://fcc-physics-events.web.cern.ch/fcc-physics-events/FCCee/index.php). We use `spring2021` samples (in `Production tags`), and the files made with `IDEA`. If you enter `TauMinus2MuMuMu` and `TauMinus2PiPiPinus` in the search field, you will see the datasets produced for the signal anf the $\tau \rightarrow 3\pi \nu$ background. The first column shows the dataset names, in this case `p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2MuMuMu` and `p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2PiPiPinu`.
 
 To run fccanalyses over these datasets (and not anymore over one test file), the list of datasets to be processed should be inserted in your `examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_stage1.py` :
 
@@ -799,7 +799,7 @@ processList = {
 }
 ```
 
-as well as 
+as well as
 ```python
 #Mandatory: Production tag when running over EDM4Hep centrally produced events, this points to the yaml files for getting sample statistics
 prodTag     = "FCCee/spring2021/IDEA/"
@@ -815,7 +815,7 @@ outputDir    = "Tau3Mu"
 This produces flat ntuples:
 
 ```shell
-fccanalysis run examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_stage1.py 
+fccanalysis run examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_stage1.py
 ```
 
 After a few minutes, you will see two ntuples, one for the signal, the other for the background, in the `TauMu` directory.
@@ -867,4 +867,3 @@ which appear in the `Tau3Mu/plots` directory. Look for example at the plot `mTaT
 Interested in studying the FCC-ee sensitivity to $\tau \rightarrow 3 \mu$ ? Please contact <alberto.lusiani@pi.infn.it> and <monteil@in2p3.fr>.
 
 Note that the samples used here are just low statistics, test samples. Larger samples that are more accurate (KKMC instead of Pythia) will be produced if someone is interested.
-
