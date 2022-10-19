@@ -17,5 +17,5 @@ If you have any problems or questions, you can [open an issue][lessons-issues] o
     FCCeeDriftChamber/FCCeeDriftChamber.md
     FCCeeGuineaPigIRBackgrounds/README.md
     FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.md
-
+    FccCaloPerformance/2021_version/FccCaloPerformance.md
 ```
