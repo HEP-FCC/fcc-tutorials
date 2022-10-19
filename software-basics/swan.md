@@ -36,3 +36,5 @@ ls
 Setting environment variables will be only effective for the current cell though.
 
 
+Plots can be drawn directly in the notebooks, see for example
+<https://cern.ch/swanserver/cgi-bin/go?projurl=https://root.cern.ch/doc/master/notebooks/fillrandom.py.nbconvert.ipynb>
