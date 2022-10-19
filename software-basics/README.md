@@ -24,6 +24,7 @@ The [analysis essentials course](https://hsf-training.github.io/analysis-essenti
     fccsw.md
     bookkeeping.md
     exploring-fcc-files.md
+    tips-trick.md
     asking-questions.md
     contributing-lesson.md
 ```
