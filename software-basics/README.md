@@ -19,10 +19,12 @@ The [analysis essentials course](https://hsf-training.github.io/analysis-essenti
     :caption: Contents:
 
     prerequisites.md
+    swan.md
     introduction-to-course.md
     fccsw.md
     bookkeeping.md
     exploring-fcc-files.md
+    tips-trick.md
     asking-questions.md
     contributing-lesson.md
 ```
