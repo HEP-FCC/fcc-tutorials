@@ -363,6 +363,12 @@ The resulting visualization will be similar to the following screenshot
 Example reconstructed event in CLD detector
 ```
 
+:::{admonition} GLtf File
+:class: solution dropdown
+The obtained GLtf file should look similar to
+[this one](./fccee_lar.gltf) [Right click to download].
+:::
+
 :::{admonition} LAr Clusters
 :class: challenge
 
