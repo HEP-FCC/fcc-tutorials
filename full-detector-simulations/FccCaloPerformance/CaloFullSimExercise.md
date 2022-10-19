@@ -1,11 +1,12 @@
-# Welcome to the Calorimeter Full Simulation Exercise!
+# Noble Liquid Calorimeter Full Simulation Exercise
 
+:::{admonition} Learning Objectives :class: objectives
 In this tutorial, you will learn how to run the full simulation of the FCC-ee High Granularity Noble Liquid Calorimeter. Among other topics, this exercise covers:
 * the **generation** of particle gun events with $\pi^0$'s and $\gamma$'s  
 * the **reconstruction** of calorimeter data, including calibration, clustering and noise
 * the energy resolution **performance evaluation** 
 * the modification of the **detector geometry**
-
+:::
 Let's get started!
 
 ## Setting up your environment
@@ -26,7 +27,7 @@ which should print a path similar to `/cvmfs/sw.hsf.org/spackages6/fccsw/1.0pre0
 
 All good? Ok, let's do some physics then!
 
-## Exercise 1: Get familiar with the detector geometry
+## Getting familiar with the detector geometry
 
 The Geant4 detector geometry which is used for the full simulation is not written directly, but generated with the DD4hep library. The detector description in this library consists of two parts:
 * a compiled C++ library that constructs the geometry: [ECalBarrelInclined_geo.cpp](https://github.com/HEP-FCC/FCCDetectors/blob/main/Detector/DetFCChhECalInclined/src/ECalBarrelInclined_geo.cpp)   
@@ -54,7 +55,7 @@ NB: R&D is ongoing to design a carbon fiber cryostat which features lower materi
 The thickness of each layer is set under the `layer` tag (mind that a layer can be 'repeated'): **12**
 :::
 
-## Exercise 2: Run simple simulation and evaluate performance
+## Running simple simulation and evaluating performance
 
 FCCSW is based on the [Gaudi](https://gaudi-framework.readthedocs.io/en/latest/) framework. The different steps of your simulation are defined in a python configuration file where you arrange various Gaudi `Algorithms` and `Tools` to get the desired behavior. Open the file `runCaloSim.py` and briefly browse it to get familiar with the `Gaudi` syntax. NB: everything defined as a `Gaudi::Property` in the C++ implementation (e.g. `MomentumMin` from `MomentumRangeParticleGun`) can be set at run time in command line arguments. The complete list of parameters that can be modified is displayed with `fccrun runCaloSim.py -h`.   
 
@@ -73,7 +74,7 @@ This is defined by the `EvtMax` parameter of the `ApplicationMgr`
 - why is there one sampling fraction per longitudinal layers (physics-wise)?
 :::{admonition} Answer
 :class: toggle
-This is due to the geometry: the absorbers have a rectangular shape and the circumference is smaller at the inner radius than at the outer radius. The sensitive media is thus wider (compared to the non-sensitive media) when going to higher radius which is why the sampling fraction grows. Note that the first layer, called the pre-sampler, has a large sampling fraction because the absorbers are made of a material way lighter than Lead there. We do this to improve the quality of the upstream material correction discussed in exercise 4.
+This is due to the geometry: the absorbers have a rectangular shape and the circumference is smaller at the inner radius than at the outer radius. The sensitive media is thus wider (compared to the non-sensitive media) when going to higher radius which is why the sampling fraction grows. Note that the first layer, called the pre-sampler, has a large sampling fraction because the absorbers are made of a material way lighter than Lead there. We do this to improve the quality of the upstream material correction discussed later.
 :::
 
 The above command generated 200 events with 10 GeV photon gun and ran the calorimeter reconstruction on it.
@@ -95,7 +96,7 @@ $a = 0.098 \text{ Gev}^\frac{1}{2}$
 NB: this is of course not the exact value of the sampling term since the noise and constant term should be considered and a fit on a large energy spectrum should be performed, see e.g. [here](https://indico.desy.de/event/33640/contributions/128389/attachments/77680/100499/20221006_Brieuc_Francois_Noble_Liquid_Calorimetry_forFCCee_ECFA_Workshop_DESY.pdf#page=3).
 :::
 
-## Exercise 3: Change the geometry
+## Changing the geometry
 
 In this exercise, we will run the same simulation but with liquid Krypton instead of liquid Argon. To do so, you will have to modify the detector geometry xml living in the `FCCDetectors` git repository:
 ```bash
@@ -122,9 +123,9 @@ Open `runCaloSim.py` and change the output root file name (`out.filename`) to av
 Run the simulation again, reproduce the performance plot using the new sample and look at the width of the Gaussian:
 
 - How did the energy resolution change? Can you explain this behavior?
- :::{admonition} Answer
+:::{admonition} Answer
 :class: toggle
-The energy resolution improved because we have now a higher ratio between sensitive and non-sensitive material budget. NB: the undershoot of the reconstructed energy also grew bigger because part of the noble liquid is not sensitive (before the readout electrode actually start). This is discussed in the next exercise.  
+The energy resolution improved because we have now a higher ratio between sensitive and non-sensitive material budget. NB: the undershoot of the reconstructed energy also grew bigger because part of the noble liquid is not sensitive (before the readout electrode actually start). This indicates that, if the LKr option is chosen, these non-sensitive regions have to be filled by something lighter than the noble liquid such as helium balloons but this is not yet implemented in the geometry. This is further discussed in the next exercise.  
 :::
 - compute again the sampling term assuming a null noise and constant term
 :::{admonition} Answer
@@ -139,7 +140,7 @@ git checkout runCaloSim.py
 export FCCDETECTORS=$CENTRALFCCDETECTORS
 ```
 
-## Exercise 4: Apply energy corrections
+## Applying energy corrections
 
 As you may have noticed in the previous exercises, the reconstructed energy is on average below the generated energy. This is due to the fact that some energy is deposited in part of the detector which are not sensitive such as the cryostat walls or the services. We could simply apply a scale to get the expected average but hopefully we can do better! There is a strong correlation between the energy which is deposited before(after) the sensitive part of the calorimeter and the energy we measure in the first(last) longitudinal layer. This correction is derived with [EnergyInCaloLayers](https://github.com/HEP-FCC/k4SimGeant4/blob/main/Detector/DetStudies/src/components/EnergyInCaloLayers.h) plus a few scripts in [DetStudies](https://github.com/HEP-FCC/k4SimGeant4/tree/main/Detector/DetStudies/scripts)  and applied with [CorrectCaloClusters](https://github.com/HEP-FCC/k4RecCalorimeter/blob/main/RecCalorimeter/src/components/CorrectCaloClusters.h).
 
@@ -155,12 +156,12 @@ Since you are now more familiar with the framework, no recipe will be provided f
 - what do you notice?
 :::{admonition} Answer
 :class: toggle
-    - There are no more outliers on the left hand side of the distribution
-    - The average of the reconstructed energy is now well centered on the generated particle energy
-    - **The energy resolution improved!** This is thanks to the correlation between the energy deposited in early/final layers and the energy deposited before/after the sensitive calorimeter. The stochastic nature of the amount of energy deposited in dead materials smears the energy response if we apply just a simple scaling. This smearing is partially recovered   
+- There are no more outliers on the left hand side of the distribution
+- The average of the reconstructed energy is now well centered on the generated particle energy
+- The energy resolution improved! As explained earlier, this correction is not just a scaling, it is a per event dynamic estimation of the energy deposited in the dead material. 
 :::
 
-## Exercise 5: Simulate the noise
+## Adding noise
 
 A further important step in having an accurate description of the detector response is to add electronics noise (pile-up noise can safely be ignored at FCC-ee). Generally speaking, the noise can depend on many factors such as the detector cell capacitance (and every cell can potentially have different shapes) or the readout channel it corresponds to. The noise tools foresee thus the possibility to have a single noise value per cell. For simplicity, we provided a Gaudi config with a flag to easily switch on the noise:
 - switch `addNoise` to True
@@ -169,7 +170,7 @@ A further important step in having an accurate description of the detector respo
 - what do you observe?
 
 
-## Exercise 6: prepare the next tutorial
+## Preparing for the next tutorial
 
 Open a new terminal, go to the Full Sim tutorial repository `fcc-tutorials/full-detector-simulations/FccCaloPerformance/`, set your environment with `source /cvmfs/sw.hsf.org/key4hep/setup.sh`, make sure the noise flag (`addNoise`) is set to `False` in `runCaloSim.py` and launch a production of 1000 photons events (you have to change `EvtMax`). Open another terminal, do the same procedure and produce 1000 events with neutral pions (you have to set the `pdgCode` to 111).
 
@@ -193,3 +194,5 @@ Compare the longitudinal shower profile for photons and neutral pions.
 For a given cluster energy, the single photon showers deposit their energy deeper in the calorimeter than the showers from neutral pions. This is due to the fact that the latter correspond to two close-by photon showers with smaller energy. 
 :::
  
+
+
