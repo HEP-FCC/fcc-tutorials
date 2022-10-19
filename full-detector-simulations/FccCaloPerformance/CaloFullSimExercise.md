@@ -123,7 +123,7 @@ Open `runCaloSim.py` and change the output root file name (`out.filename`) to av
 Run the simulation again, reproduce the performance plot using the new sample and look at the width of the Gaussian:
 
 - How did the energy resolution change? Can you explain this behavior?
- :::{admonition} Answer
+:::{admonition} Answer
 :class: toggle
 The energy resolution improved because we have now a higher ratio between sensitive and non-sensitive material budget. NB: the undershoot of the reconstructed energy also grew bigger because part of the noble liquid is not sensitive (before the readout electrode actually start). This indicates that, if the LKr option is chosen, these non-sensitive regions have to be filled by something lighter than the noble liquid such as helium balloons but this is not yet implemented in the geometry. This is further discussed in the next exercise.  
 :::
@@ -156,9 +156,9 @@ Since you are now more familiar with the framework, no recipe will be provided f
 - what do you notice?
 :::{admonition} Answer
 :class: toggle
-    - There are no more outliers on the left hand side of the distribution
-    - The average of the reconstructed energy is now well centered on the generated particle energy
-    - The energy resolution improved! As explained earlier, this correction is not just a scaling, it is a per event dynamic estimation of the energy deposited in the dead material. 
+- There are no more outliers on the left hand side of the distribution
+- The average of the reconstructed energy is now well centered on the generated particle energy
+- The energy resolution improved! As explained earlier, this correction is not just a scaling, it is a per event dynamic estimation of the energy deposited in the dead material. 
 :::
 
 ## Adding noise
@@ -193,3 +193,6 @@ Compare the longitudinal shower profile for photons and neutral pions.
 :class: toggle
 For a given cluster energy, the single photon showers deposit their energy deeper in the calorimeter than the showers from neutral pions. This is due to the fact that the latter correspond to two close-by photon showers with smaller energy. 
 :::
+ 
+
+
