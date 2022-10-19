@@ -97,9 +97,9 @@ To create and use a CernVM virtual machine for the FCC tutorials please follow t
 
 Once you have all this you can create the VM with this command:
 ```
-$ cernvm-launch create --name fcc-tutorial --cpus 4 --memory 8000 --disk 20000 fcc-tutorial.context
+$ cernvm-launch create --name fcc-tutorial --cpus 4 --memory 8000 --disk 40000 --sharedFolder /Users/ganis/fcc/tutorial fcc-tutorial.context
 ```
-You an choose how many CPU cores to use, the memory and the disk space. Good rules of thumb are to use half the cores of your machine, at least 2 GB memory per core, and enough disk for your job. The above command should oepn a window with VirtualBox and produce on the screen an output like this
+You an choose how many CPU cores to use, the memory and the disk space; advise is to use the half of what your host machine has in terms of CPU cores and RAM, while for the disk 40000 should be enough. Good rules of thumb are to use half the cores of your machine, at least 2 GB memory per core, and enough disk for your job. The above command should open a window with VirtualBox and produce on the screen an output like this
 ```
 Using user data file: fcc-tutorial.context
 Parameters used for the machine creation:
@@ -107,10 +107,10 @@ Parameters used for the machine creation:
         cpus: 4
         memory: 8000
         disk: 20000
-        cernvmVersion: 2020.07-1
-        sharedFolder: /Users/ganis
+        cernvmVersion: 2021.05-1
+        sharedFolder: /Users/ganis/fcc/tutorial
 ```
-You see in partcular that your `$HOME` area is shared with the VM, so you can exchange files between the VM and the host machine very conveniently.
+It is advised to choose to share the folder where you have our tutorial files, so that you can interchange the VM and the host machine very conveniently.
 
 From now on you can either work in the VirtualBox window or ssh to the machine with
 ```
