@@ -206,27 +206,36 @@ Now we add the weaver part at the beginning of the ```analysers``` function:
 
 **TO BE UPDATED WITH GENERIC INTERFACE**
 ```python
-from ROOT import JetFlavourUtils
+from ROOT import WeaverUtils
 from os import getenv
-test_inputs_path = getenv('TEST_INPUT_DATA_DIR', '/afs/cern.ch/work/s/selvaggi/public/4Laurent/ONNX')
-weaver = JetFlavourUtils.setup_weaver(test_inputs_path + '/fccee_flavtagging_dummy.onnx',
-                                      test_inputs_path + '/preprocess.json',
-                                      ('pfcand_e', 'pfcand_theta', 'pfcand_phi', 'pfcand_pid', 'pfcand_charge'))
+test_inputs_path = getenv('TEST_INPUT_DATA_DIR', '/eos/experiment/fcc/ee/tutorial/PNet_pi0Gamma/test')
+weaver = WeaverUtils.setup_weaver(test_inputs_path + '/fccee_pi_vs_gamma_test.onnx',
+                                      test_inputs_path + '/preprocess_fccee_pi_vs_gamma_test.json',
+                                      ('recocells_e', 'recocells_theta', 'recocells_phi', 'recocells_radius', 'recocells_layer'))
+
+
+
 ```
 
 and the evaluation after the definition of the variables:
 
-```python
-.Define("MVAVec", "JetFlavourUtils::get_weights(JC_e, JC_theta, JC_phi, JC_pid, JC_charge)")
-```
 
 and the get the weights:
 ```python
-.Define("Jet_isG", "JetFlavourUtils::get_weight(MVAVec, 0)")
-.Define("Jet_isQ", "JetFlavourUtils::get_weight(MVAVec, 1)")
-.Define("Jet_isS", "JetFlavourUtils::get_weight(MVAVec, 2)")
-.Define("Jet_isC", "JetFlavourUtils::get_weight(MVAVec, 3)")
-.Define("Jet_isB", "JetFlavourUtils::get_weight(MVAVec, 4)")
+# retrieve all information about jet constituents for each jet in collection
+.Define("cells_e",         "ROOT::VecOps::RVec<ROOT::VecOps::RVec<float>> v; v.push_back(maxEnergyCluster_cells_energy); return v;")
+.Define("cells_theta",     "ROOT::VecOps::RVec<ROOT::VecOps::RVec<float>> v; v.push_back(maxEnergyCluster_cells_theta); return v;")
+.Define("cells_phi",       "ROOT::VecOps::RVec<ROOT::VecOps::RVec<float>> v; v.push_back(maxEnergyCluster_cells_phi); return v;")
+.Define("cells_radius",    "ROOT::VecOps::RVec<ROOT::VecOps::RVec<float>> v; v.push_back(maxEnergyCluster_cells_radius); return v;")
+.Define("cells_layer",     "ROOT::VecOps::RVec<ROOT::VecOps::RVec<float>> v; v.push_back(maxEnergyCluster_cells_layer); return v;")
+
+
+
+ .Define("MVAVec", "JetFlavourUtils::get_weights(cells_e, cells_theta, cells_phi, cells_radius, cells_layer)")
+
+ .Define("Cluster_isPhoton", "WeaverUtils::get_weight(MVAVec, 0)")
+ .Define("Cluster_isPi0", "WeaverUtils::get_weight(MVAVec, 1)")
+
 ```
 
 Finally add the newly defined variable to the ```branchList``` in the ```output``` function and run over the full statistics
