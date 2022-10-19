@@ -12,7 +12,7 @@ This tutorial will teach you how to:
 :::
 
 ## Installation of FCCAnalyses
-For this tutorial we will need to develop some code inside FCCAnalyses, thus we need to install it locally. If not already done, you need to clone and install it.
+For this tutorial we will need to use FCCAnalyses. We can either use it from the stack, or if you have it installed locally use it. If you want to install it, you need to clone and install it.
 Go inside the area that you have setup for the tutorials and get the FCCAnalyses code:
 
 ```shell
@@ -30,7 +30,7 @@ make install
 cd ..
 ```
 
-## First MVA evaluation
+## Build FCCAnalyses skeleton
 
 We start by creating a file named ```analysis_tutorial_mva.py``` (or any other name you prefer to use) with the following information.
 
@@ -65,6 +65,8 @@ geometryFile = FCCDETECTORS + "/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectMast
 readoutName  = "ECalBarrelPhiEta"
 ```
 
+## Get the highest energetic cluster
+
 Let's now define new columns to the RootDataFrame object ```df2``` inside the function ```analysers``` of the class ```RDFanalysis```. We start by defining the index in the collection ```CaloClusters``` which is of type [ClusterData](https://edm4hep.web.cern.ch/_cluster_data_8h_source.html) of the cluster with maximum energy:
 
 ```python
@@ -91,8 +93,8 @@ Now we need to add all the variables that we have defined to the ```branchList``
 ```
 :::
 
-And let's run on a few events to check that everything is fine **NEED TO CHANGE THE INPUT FILE**.
-To find the options to configure the code to run on a few (10) events using as input file ```pathtorootfile``` and to store an output file ```pion_MVA1.root``` using the command:
+And let's run on a few events to check that everything is fine.
+To find the options to configure the code to run on a few (10) events using as input file ```pathtorootfile``` and to store an output file ```photons_MVA1.root``` using the command:
 
 ```shell
 fccanalysis run --help
@@ -101,21 +103,22 @@ fccanalysis run --help
 :::{admonition} Suggested answer
 :class: toggle
 ```shell
-fccanalysis run analysis_tutorial_mva.py --nevents 10 --output pions_MVA1.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_111_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
+fccanalysis run analysis_tutorial_mva.py --nevents 10 --output photons_MVA1.root --files-list <PATHTOROOTFILE>
 ```
+Where `<PATHTOFILE>` is the path to the file you produced from the full simulation calorimeter tutorial. In case you do not have this file available, you can use files in here `/eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat_centralDetectorGeometry/`
 :::
 
-Note that if you have already produced full simulation pions and photons with the calorimeter tutorial earlier this morning, you can change the file to point to your files.
-
-Open the produced root file ```pions_MVA1.root``` and inspect it with ```Scan``` for example check that the index we have calculated indeed correspond to the clusters of maximum/minimum energy:
+Open the produced root file ```photons_MVA1.root``` and inspect it with ```Scan``` for example check that the index we have calculated indeed correspond to the clusters of maximum/minimum energy:
 
 :::{admonition} Suggested answer
 :class: toggle
 ```shell
-root -l pions_MVA1.root
+root -l photons_MVA1.root
 events->Scan("maxEnergyCluster_index:minEnergyCluster_index:clusters_n:clusters_energy")
 ```
 :::
+
+## Get the list of cells from the cluster
 
 We now need to obtain the index of the first and last cells of the maximum energy cluster. For that we need to select the ```maxEnergyCluster_index``` in the ```CaloClusters``` collection and evaluate ```hits_begin``` and ```hits_end```:
 
@@ -123,9 +126,11 @@ We now need to obtain the index of the first and last cells of the maximum energ
 :class: toggle
 ```python
 .Define("maxEnergyCluster_firstCell_index", "CaloClusters[maxEnergyCluster_index].hits_begin")
-.Define("maxEnergyCluster_lastCell_index", "CaloClusters[maxEnergyCluster_index].hits_end")
+.Define("maxEnergyCluster_lastCell_index",  "CaloClusters[maxEnergyCluster_index].hits_end")
 ```
 :::
+
+## Create sub-collection of cells
 
 Using the positions of the first and last cells in the ```PositionedCaloClusterCells``` collection we now need to create a sub-collection from the full collection between the two indices. To achieve this with the ROOT version in this tutorial, we need to declare some extra code at the beginning of our analysis file:
 
@@ -158,6 +163,8 @@ Now you can create the sub-collection ```maxEnergyCluster_Cells``` from the inpu
 .Define("maxEnergyCluster_cells", "myRange(PositionedCaloClusterCells, maxEnergyCluster_firstCell_index, maxEnergyCluster_lastCell_index)")
 ```
 :::
+
+## Create collection of cells observables
 
 Using the newly defined collection ```maxEnergyCluster_cells```, create new variables of their energies, phi, theta, layer and number of cells, using functions like [here](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/FCCAnalyses/CaloNtupleizer.h#L23#L33)
 
@@ -198,41 +205,44 @@ Let's give it a try on a few events as last time.
 :::{admonition} Suggested answer
 :class: toggle
 ```shell
-fccanalysis run analysis_tutorial_mva.py --nevents 10 --output pions_MVA1.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_111_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
+fccanalysis run analysis_tutorial_mva.py --nevents 10 --output photons_MVA1.root --files-list <PATHTOROOTFILE>
 ```
 :::
 
+## Adding the MVA inference
+
 Now we add the weaver part at the beginning of the ```analysers``` function:
 
-**TO BE UPDATED WITH GENERIC INTERFACE**
+
 ```python
 from ROOT import WeaverUtils
 from os import getenv
-test_inputs_path = getenv('TEST_INPUT_DATA_DIR', '/eos/experiment/fcc/ee/tutorial/PNet_pi0Gamma/test')
-weaver = WeaverUtils.setup_weaver(test_inputs_path + '/fccee_pi_vs_gamma_test.onnx',
-                                      test_inputs_path + '/preprocess_fccee_pi_vs_gamma_test.json',
+test_inputs_path = getenv('TEST_INPUT_DATA_DIR', '/eos/experiment/fcc/ee/tutorial/PNet_pi0Gamma/v1')
+weaver = WeaverUtils.setup_weaver(test_inputs_path + '/fccee_pi_vs_gamma_v1.onnx',
+                                      test_inputs_path + '/preprocess_fccee_pi_vs_gamma_v1.json',
                                       ('recocells_e', 'recocells_theta', 'recocells_phi', 'recocells_radius', 'recocells_layer'))
-
-
 
 ```
 
-and the evaluation after the definition of the variables:
+We need to transform our collection of cells observables in a vector as we might want to evaluate several cluster in the same event:
 
-
-and the get the weights:
 ```python
 # retrieve all information about jet constituents for each jet in collection
-.Define("cells_e",         "ROOT::VecOps::RVec<ROOT::VecOps::RVec<float>> v; v.push_back(maxEnergyCluster_cells_energy); return v;")
-.Define("cells_theta",     "ROOT::VecOps::RVec<ROOT::VecOps::RVec<float>> v; v.push_back(maxEnergyCluster_cells_theta); return v;")
-.Define("cells_phi",       "ROOT::VecOps::RVec<ROOT::VecOps::RVec<float>> v; v.push_back(maxEnergyCluster_cells_phi); return v;")
-.Define("cells_radius",    "ROOT::VecOps::RVec<ROOT::VecOps::RVec<float>> v; v.push_back(maxEnergyCluster_cells_radius); return v;")
-.Define("cells_layer",     "ROOT::VecOps::RVec<ROOT::VecOps::RVec<float>> v; v.push_back(maxEnergyCluster_cells_layer); return v;")
+.Define("cells_e",         "Utils::as_vector(maxEnergyCluster_cells_energy)")
+.Define("cells_theta",     "Utils::as_vector(maxEnergyCluster_cells_theta)")
+.Define("cells_phi",       "Utils::as_vector(maxEnergyCluster_cells_phi)")
+.Define("cells_radius",    "Utils::as_vector(maxEnergyCluster_cells_radius)")
+.Define("cells_layer",     "Utils::as_vector(maxEnergyCluster_cells_layer)")
+```
 
-
-
+Then we evaluate the network:
+```python
  .Define("MVAVec", "JetFlavourUtils::get_weights(cells_e, cells_theta, cells_phi, cells_radius, cells_layer)")
+```
 
+and retrieve the weights
+
+```python
  .Define("Cluster_isPhoton", "WeaverUtils::get_weight(MVAVec, 0)")
  .Define("Cluster_isPi0", "WeaverUtils::get_weight(MVAVec, 1)")
 
@@ -241,11 +251,9 @@ and the get the weights:
 Finally add the newly defined variable to the ```branchList``` in the ```output``` function and run over the full statistics
 
 ```shell
-fccanalysis run analysis_tutorial_mva.py --output pions_MVA1.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_111_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
-fccanalysis run analysis_tutorial_mva.py --output photons_MVA1.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_22_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
+fccanalysis run analysis_tutorial_mva.py --output pions_MVA1.root --files-list <PATHTOROOTFILE>
+fccanalysis run analysis_tutorial_mva.py --output photons_MVA1.root --files-list <PATHTOROOTFILE>
 ```
-
-Run a marco to make a plot to compare performance (NEED TO WRITE SOMETHING??)
 
 ## Removing the last layers
 
@@ -270,8 +278,8 @@ Now you produce new file removing the last layer of the calorimeter adding a ```
 :::{admonition} Suggested answer
 :class: toggle
 ```shell
-fccanalysis run analysis_tutorial_mva.py --output pions_MVA2.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_111_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
-fccanalysis run analysis_tutorial_mva.py --output photons_MVA2.root --files-list /eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat/fccsw_output_pdgID_22_pMin_1000_pMax_100000_thetaMin_50_thetaMax_130.root
+fccanalysis run analysis_tutorial_mva.py --output pions_MVA2.root --files-list <PATHTOROOTFILE>
+fccanalysis run analysis_tutorial_mva.py --output photons_MVA2.root --files-list <PATHTOROOTFILE>
 ```
 :::
 
