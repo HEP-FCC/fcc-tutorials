@@ -13,7 +13,7 @@ This means you will end up watching instead of participating.
 
 * This will be an interactive workshop. In all cases (in-person or virtual tutorials) you will need to use
 your own computer (for in-person events there will be no machines for you to use in the room).
-You will use your own computer to connect to resources available for the tutorial (check the event
+You will use __your own computer__ to connect to resources available for the tutorial (check the event
 announcement for the available options).
 
 * Follow all the steps using the computer you plan to bring, not
@@ -24,8 +24,8 @@ your desktop or someone else's computer.
 access the internet.
    * Do not forget to bring your power supply, as well as the relevant plug adaptor, e.g., for CERN, to Swiss and European plugs.
 
-* The FCCSW has been developed on Linux and the main platform supported is the default platform on CERN lxplus, i.e. CentOS7 .
-  Experimental support for other Linux systems (e.g. Ubuntu 20.04 LTS) and MacOxS is provided as is. There is no support for Windows.
+* The FCCSW ecosystment is based on the Key4hep software stack has been developed on Linux and the main platform supported is the default platform on CERN lxplus, i.e. CentOS7 .
+  Experimental support for other Linux systems (e.g. Ubuntu 20.04 LTS) is provided as is. Solutions for running on MacOxS are also available and will be presented at the workshop. There is no support for Windows.
 
 ## Checking the chosen resources
 
@@ -45,13 +45,18 @@ Please try the following steps with the computer you will use at the workshop (t
 If you can successfully execute all of the above steps, you are ready to go for
 the workshop!
 
-## Enabling the FCCSW software installation from `cvmfs`
+## Enabling the FCC software ecosystem from `cvmfs`
 
-There is a complete installation of FCC software provided on `cvmfs`, which can be set up using:
+As mentioned above the FCC software ecosystem is now based and included on the Key4hep software stack which
+is available on `cvmfs` and can be set up using:
+```
+source /cvmfs/sw.hsf.org/key4hep/setup.sh
+```
+For compatibility reasons, the previous way of setting up the software
 ```
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```
-
+is still available.
 
 ## Special notes or alternative cases / settings
 ### Bash shell
@@ -92,9 +97,9 @@ To create and use a CernVM virtual machine for the FCC tutorials please follow t
 
 Once you have all this you can create the VM with this command:
 ```
-$ cernvm-launch create --name fcc-tutorial --cpus 4 --memory 8000 --disk 20000 fcc-tutorial.context
+$ cernvm-launch create --name fcc-tutorial --cpus 4 --memory 8000 --disk 40000 --sharedFolder /Users/ganis/fcc/tutorial fcc-tutorial.context
 ```
-You an choose how many CPU cores to use, the memory and the disk space. Good rules of thumb are to use half the cores of your machine, at least 2 GB memory per core, and enough disk for your job. The above command should oepn a window with VirtualBox and produce on the screen an output like this
+You an choose how many CPU cores to use, the memory and the disk space; advise is to use the half of what your host machine has in terms of CPU cores and RAM, while for the disk 40000 should be enough. Good rules of thumb are to use half the cores of your machine, at least 2 GB memory per core, and enough disk for your job. The above command should open a window with VirtualBox and produce on the screen an output like this
 ```
 Using user data file: fcc-tutorial.context
 Parameters used for the machine creation:
@@ -102,10 +107,10 @@ Parameters used for the machine creation:
         cpus: 4
         memory: 8000
         disk: 20000
-        cernvmVersion: 2020.07-1
-        sharedFolder: /Users/ganis
+        cernvmVersion: 2021.05-1
+        sharedFolder: /Users/ganis/fcc/tutorial
 ```
-You see in partcular that your `$HOME` area is shared with the VM, so you can exchange files between the VM and the host machine very conveniently.
+It is advised to choose to share the folder where you have our tutorial files, so that you can interchange the VM and the host machine very conveniently.
 
 From now on you can either work in the VirtualBox window or ssh to the machine with
 ```
