@@ -1,5 +1,4 @@
- 
-ble Liquid Calorimeter Full Simulation Exercise
+# Noble Liquid Calorimeter Full Simulation Exercise
 
 :::{admonition} Learning Objectives :class: objectives
 In this tutorial, you will learn how to run the full simulation of the FCC-ee High Granularity Noble Liquid Calorimeter. Among other topics, this exercise covers:
