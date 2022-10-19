@@ -62,6 +62,7 @@ spack find -p -d key4hep-stack@2021-06-02 | grep k4simdelphes
 of course, if you are setting up the lastest software, the version number has to be changed to the one you actually sourced.
 
 
+(delphesedm4hep)=
 ## Part I: Generate and simulate Events with DelphesEDM4Hep
 
 For this tutorial we will consider the following **physics processes**:
