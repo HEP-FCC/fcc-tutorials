@@ -24,7 +24,7 @@ your desktop or someone else's computer.
 access the internet.
    * Do not forget to bring your power supply, as well as the relevant plug adaptor, e.g., for CERN, to Swiss and European plugs.
 
-* The FCCSW ecosystment is based on the Key4hep software stack has been developed on Linux and the main platform supported is the default platform on CERN lxplus, i.e. CentOS7 .
+* The FCCSW is part of the Key4hep software ecosystem has been developed on Linux and the main platform supported is the default platform on CERN lxplus, i.e. CentOS7 .
   Experimental support for other Linux systems (e.g. Ubuntu 20.04 LTS) is provided as is. Solutions for running on MacOxS are also available and will be presented at the workshop. There is no support for Windows.
 
 ## Checking the chosen resources
