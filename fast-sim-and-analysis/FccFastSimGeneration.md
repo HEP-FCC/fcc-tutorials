@@ -775,7 +775,6 @@ The differences of teh corss-section calculated by `KKMCee` and `Pythia8` is (14
 
 ### Looking at the produced files: the MCParticle class
 
-### Filtering a specific final state: double single pion decay
 
 ### Comparing distributions
 
