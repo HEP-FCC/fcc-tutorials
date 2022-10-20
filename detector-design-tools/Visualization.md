@@ -130,7 +130,7 @@ following steps.
 
 First download Pythia card
 ```sh
-wget wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Generator/Pythia8/p8_noBES_ee_ZH_ecm240.cmd
+wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Generator/Pythia8/p8_noBES_ee_ZH_ecm240.cmd
 ```
 
 and then Delphes cards. One for the detector response
