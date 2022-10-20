@@ -42,7 +42,7 @@ simulate few events in order to visualize them there.
 On the remote machine we will need to clone the
 [CLICPerformance](https://github.com/iLCSoft/CLICPerformance) repository
 ```sh
-git clone https://github.com/iLCSoft/CLICPerformance
+git clone https://github.com/iLCSoft/CLICPerformance.git
 cd CLICPerformance/fcceeConfig
 ```
 
@@ -130,7 +130,7 @@ following steps.
 
 First download Pythia card
 ```sh
-wget wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Generator/Pythia8/p8_noBES_ee_ZH_ecm240.cmd
+wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Generator/Pythia8/p8_noBES_ee_ZH_ecm240.cmd
 ```
 
 and then Delphes cards. One for the detector response
@@ -215,7 +215,7 @@ The obtained EDM4hep JSON file should look similar to
 
 There are several ways how to import FCC detector geometry into Phoenix.
 Currently the preferred method is to convert compact DD4hep file(s) to
-ROOT files and from ROOT files to GLtf files. The first conversion
+ROOT files and from ROOT files to glTF files. The first conversion
 (`.xml` -> `.root`) is straightforward and can be done using script like
 [this](dd4hep2root). With the most important part being the building of the
 detector geometry from the compact file
@@ -281,11 +281,11 @@ to run it also on the remote machine over SSH with XWindowing enabled.
 
 Let's start with cloning the converter repository
 ```sh
-git clone git@github.com:HSF/root_cern-To_gltf-Exporter.git
+git clone https://github.com/HSF/root_cern-To_gltf-Exporter.git
 cd root_cern-To_gltf-Exporter
 ```
 
-then, we create new file `fccee_lar_conversion.hml` and use, for example, the
+then, we create new file `fccee_lar_conversion.html` and use, for example, the
 following configuration for the FCCee Noble Liquid Calorimeter:
 ```html
 <html>
@@ -344,7 +344,7 @@ In the web browser we should see directory listing similar to this one:
 ```
 
 clicking on the `fccee_lar_conversion.html` starts the conversion. At the end of
-it the automatic download pop-up should appear in the browser window. The GLtf
+it the automatic download pop-up should appear in the browser window. The glTF
 file can be uploaded into Playground section of the
 [Phoenix](https://fccsw.web.cern.ch/fccsw/phoenix/#/playground) application by
 selecting the correct geometry file format:
@@ -363,9 +363,9 @@ The resulting visualization will be similar to the following screenshot
 Example reconstructed event in CLD detector
 ```
 
-:::{admonition} GLtf File
+:::{admonition} glTF File
 :class: solution dropdown
-The obtained GLtf file should look similar to
+The obtained glTF file should look similar to
 [this one](./fccee_lar.gltf) [Right click to download].
 :::
 

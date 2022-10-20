@@ -274,6 +274,7 @@ events->Draw("maxEnergyCluster_cells_layer","","",10)
 Now you produce new file removing the last 2 layers of the calorimeter adding a filer on the cells.
 Need to comment one the definition of the cells collection and add the two lines below
 
+
 ```python
 #.Define("maxEnergyCluster_cells", "myRange(PositionedCaloClusterCells, maxEnergyCluster_firstCell_index, maxEnergyCluster_lastCell_index)")
 .Define("maxEnergyCluster_cellsFull", "myRange(PositionedCaloClusterCells, maxEnergyCluster_firstCell_index, maxEnergyCluster_lastCell_index)")
