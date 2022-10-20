@@ -126,7 +126,7 @@ Run the simulation again, reproduce the performance plot using the new sample an
 - How did the energy resolution change? Can you explain this behavior?
 :::{admonition} Answer
 :class: toggle
-The energy resolution improved because we have now a higher ratio between sensitive and non-sensitive material budget. 
+The energy resolution improved because we have now a higher ratio between sensitive and non-sensitive material budget.
 :::
 - compute again the sampling term assuming a null noise and constant term
 :::{admonition} Answer
@@ -158,13 +158,8 @@ Since you are now more familiar with the framework, no recipe will be provided f
 :::{admonition} Answer
 :class: toggle
 - There are no more outliers on the left hand side of the distribution
-<<<<<<< HEAD
-- The average of the reconstructed energy is now well centered on the generated particle energy
-- The energy resolution improved! As explained earlier, this correction is not just a scaling, it is a per event dynamic estimation of the energy deposited in the dead material.
-=======
 - The average of the reconstructed energy is now closer to the generated particle energy
 - The energy resolution slightly improved. As explained earlier, this correction is not just a scaling, it is a per event dynamic estimation of the energy deposited in the dead material.
->>>>>>> master
 :::
 
 ## Adding noise
@@ -172,18 +167,18 @@ Since you are now more familiar with the framework, no recipe will be provided f
 A further important step in having an accurate description of the detector response is to add electronics noise (pile-up noise can safely be ignored at FCC-ee). Generally speaking, the noise can depend on many factors such as the detector cell capacitance (and every cell can potentially have different shapes) or the readout channel it corresponds to. The noise tools foresee thus the possibility to have a single noise value per cell. For simplicity, we provided a Gaudi config with a flag to easily switch on the noise:
 - revert to the version of the code without upstream energy correction: `git checkout runCaloSim.py`, `git checkout plot_energy_resolution.py`
 - switch `addNoise` to True in `runCaloSim.py`
-- remove cell collections from the output (`ECalBarrelPositionedCells` and `PositionedCaloClusterCells`) to keep the weight of the rootfile small 
+- remove cell collections from the output (`ECalBarrelPositionedCells` and `PositionedCaloClusterCells`) to keep the weight of the rootfile small
 - run the simulation. Simulating with noise takes longer (every single cell now has an energy deposit), jump thus now to the other exercises and do the following once the simulation is over.  
 - produce the performance plot and compare it to the one without noise
 - what do you observe?
 :::{admonition} Answer
-:class: toggle 
-- The resolution barely changed (it actually got slightly better). This is partially due to the lack of statistics but also to the fact that the noise impact is small because this version of the calorimeter has been optimized to feature a low noise and at 10 GeV we are already dominated by the sampling term. 
+:class: toggle
+- The resolution barely changed (it actually got slightly better). This is partially due to the lack of statistics but also to the fact that the noise impact is small because this version of the calorimeter has been optimized to feature a low noise and at 10 GeV we are already dominated by the sampling term.
 :::
 
 ## Preparing for the next tutorial
 
-Open a new terminal, go to the Full Sim tutorial repository `fcc-tutorials/full-detector-simulations/FccCaloPerformance/`, set your environment with `source /cvmfs/sw.hsf.org/key4hep/setup.sh`, revert to the original config version with `git checkout runCaloSim.py`, set `pgun.PhiMax` to `0` (for technical reasons) and launch a production of 1000 photons events (you have to change `EvtMax`). Open another terminal, and launch another 1000 events with neutral pions (you have to set the `pdgCode` to `111` and don't forget to also source the environment in this new terminal). 
+Open a new terminal, go to the Full Sim tutorial repository `fcc-tutorials/full-detector-simulations/FccCaloPerformance/`, set your environment with `source /cvmfs/sw.hsf.org/key4hep/setup.sh`, revert to the original config version with `git checkout runCaloSim.py`, set `pgun.PhiMax` to `0` (for technical reasons) and launch a production of 1000 photons events (you have to change `EvtMax`). Open another terminal, and launch another 1000 events with neutral pions (you have to set the `pdgCode` to `111` and don't forget to also source the environment in this new terminal).
 
 ## Bonus exercise
 
