@@ -203,4 +203,3 @@ def drawTGraph(graphs, name, xLabel="", yLabel="", legend=None, leftText="", rig
             mg.GetYaxis().SetRangeUser(logRange[1][0], logRange[1][1])
         pads["hist"].SetLogx()
         printCanvas(pads["canvas"], name + "_logX", formats, dir)
-[helsens@lxplus789]:~/FCCsoft/HEP-FCC/FCCAnalyses$
