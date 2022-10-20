@@ -105,7 +105,7 @@ fccanalysis run --help
 ```shell
 fccanalysis run analysis_tutorial_mva.py --nevents 10 --output photons_MVA1.root --files-list <PATHTOROOTFILE>
 ```
-Where `<PATHTOFILE>` is the path to the file you produced from the full simulation calorimeter tutorial. In case you do not have this file available, you can use files in here `/eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat_centralDetectorGeometry/`
+Where `<PATHTOFILE>` is the path to the file you produced from the full simulation calorimeter tutorial. In case you do not have this file available, you can use files in here `/eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat_smallSampleNotUsedForTraining/`
 :::
 
 Open the produced root file ```photons_MVA1.root``` and inspect it with ```Scan``` for example check that the index we have calculated indeed correspond to the clusters of maximum/minimum energy:
@@ -237,14 +237,14 @@ We need to transform our collection of cells observables in a vector as we might
 
 Then we evaluate the network:
 ```python
- .Define("MVAVec", "JetFlavourUtils::get_weights(cells_e, cells_theta, cells_phi, cells_radius, cells_layer)")
+ .Define("MVAVec", "WeaverUtils::get_weights(cells_e, cells_theta, cells_phi, cells_radius, cells_layer)")
 ```
 
 and retrieve the weights
 
 ```python
  .Define("Cluster_isPhoton", "WeaverUtils::get_weight(MVAVec, 0)")
- .Define("Cluster_isPi0", "WeaverUtils::get_weight(MVAVec, 1)")
+ .Define("Cluster_isPi0",    "WeaverUtils::get_weight(MVAVec, 1)")
 
 ```
 
@@ -266,7 +266,7 @@ events->Draw("maxEnergyCluster_cells_layer","","",10)
 ```
 :::
 
-Now you produce new file removing the last layer of the calorimeter adding a ```Filter``` after all the ```Define```
+Now you produce new file removing the last 2 layers of the calorimeter adding a ```Filter``` after all the ```Define```
 
 :::{admonition} Suggested answer
 :class: toggle

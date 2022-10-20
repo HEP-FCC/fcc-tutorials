@@ -4,7 +4,7 @@
 In this tutorial, you will learn how to run the full simulation of the FCC-ee High Granularity Noble Liquid Calorimeter. Among other topics, this exercise covers:
 * the **generation** of particle gun events with $\pi^0$'s and $\gamma$'s  
 * the **reconstruction** of calorimeter data, including calibration, clustering and noise
-* the energy resolution **performance evaluation** 
+* the energy resolution **performance evaluation**
 * the modification of the **detector geometry**
 :::
 Let's get started!
@@ -46,8 +46,8 @@ This is defined by the variable `CryoThicknessFront`: **5 cm**
 * what is the cryostat made of in this version of the detector?
 :::{admonition} Answer
 :class: toggle
-This is defined by the variable `material` under the `cryostat` tag: **Aluminum**. 
-NB: R&D is ongoing to design a carbon fiber cryostat which features lower material budget (~5% vs 50% of $X_0$) and will thus improve the detector performance. 
+This is defined by the variable `material` under the `cryostat` tag: **Aluminum**.
+NB: R&D is ongoing to design a carbon fiber cryostat which features lower material budget (~5% vs 50% of $X_0$) and will thus improve the detector performance.
 :::
 * how many longitudinal layers has this calorimeter?
 :::{admonition} Answer
@@ -81,7 +81,7 @@ The above command generated 200 events with 10 GeV photon gun and ran the calori
 - Looking at the end of prompt output when running `runCaloSim.py`, what algorithm takes most of the computing time? What do you think this algorithm does?
 :::{admonition} Answer
 :class: toggle
-The algorithm taking most of the computation time is `SimG4Alg:Execute`. It deals with the propagation of particles through matter and is especially dominated by the development of the electromagnetic shower which features a lot of secondary particles. NB: an alternative to this 'first principle' approach would be to develop the shower from a more empirical point of view through e.g. machine learning but this is not easy and goes beyond the scope of this tutorial. 
+The algorithm taking most of the computation time is `SimG4Alg:Execute`. It deals with the propagation of particles through matter and is especially dominated by the development of the electromagnetic shower which features a lot of secondary particles. NB: an alternative to this 'first principle' approach would be to develop the shower from a more empirical point of view through e.g. machine learning but this is not easy and goes beyond the scope of this tutorial.
 :::
 
 Produce the energy resolution plot with `python plot_energy_resolution.py output_caloFullSim_10GeV_pdgId_22_noiseFalse.root` and display it with `display output_caloFullSim_10GeV_pdgId_22_noiseFalse_energyResolution.png`.
@@ -105,13 +105,13 @@ git clone https://github.com/HEP-FCC/FCCDetectors
 ```
 Open `FCCDetectors/Detector/DetFCCeeECalInclined/compact/FCCee_ECalBarrel.xml` with your favorite editor and modify line 102 to fill the calorimeter with liquid Krypton (`LKr`) instead of liquid Argon (`LAr`).
 
-In order to make sure `fccrun` uses your local version of the geometry you have to set the environment variable `FCCDETECTORS` so that it points to the right location (but first, we will save the current path so that we can re-use it later). 
+In order to make sure `fccrun` uses your local version of the geometry you have to set the environment variable `FCCDETECTORS` so that it points to the right location (but first, we will save the current path so that we can re-use it later).
 ```bash
 export CENTRALFCCDETECTORS=$FCCDETECTORS
 export FCCDETECTORS=$PWD/FCCDetectors
 ```
 
-Now, let's go back to the tutorial repository and set the sampling fraction corresponding to the liquid Krypton scenario (liquid Krypton is denser than liquid Argon). NB: for simplicity, the new sampling fractions are given to you but they can be derived for any new geometry with the Gaudi algorithm [SamplingFractionInLayers](https://github.com/HEP-FCC/k4SimGeant4/blob/main/Detector/DetStudies/src/components/SamplingFractionInLayers.h) by switching the absorbers as `sensitive` in [FCCee_ECalBarrel.xml](https://github.com/HEP-FCC/FCCDetectors/blob/main/Detector/DetFCCeeECalInclined/compact/FCCee_ECalBarrel.xml). 
+Now, let's go back to the tutorial repository and set the sampling fraction corresponding to the liquid Krypton scenario (liquid Krypton is denser than liquid Argon). NB: for simplicity, the new sampling fractions are given to you but they can be derived for any new geometry with the Gaudi algorithm [SamplingFractionInLayers](https://github.com/HEP-FCC/k4SimGeant4/blob/main/Detector/DetStudies/src/components/SamplingFractionInLayers.h) by switching the absorbers as `sensitive` in [FCCee_ECalBarrel.xml](https://github.com/HEP-FCC/FCCDetectors/blob/main/Detector/DetFCCeeECalInclined/compact/FCCee_ECalBarrel.xml).
 
 Run the following:
 ```bash
@@ -126,7 +126,7 @@ Run the simulation again, reproduce the performance plot using the new sample an
 - How did the energy resolution change? Can you explain this behavior?
 :::{admonition} Answer
 :class: toggle
-The energy resolution improved because we have now a higher ratio between sensitive and non-sensitive material budget. 
+The energy resolution improved because we have now a higher ratio between sensitive and non-sensitive material budget.
 :::
 - compute again the sampling term assuming a null noise and constant term
 :::{admonition} Answer
@@ -150,7 +150,7 @@ Since you are now more familiar with the framework, no recipe will be provided f
 - uncomment the code snippet corresponding to the cluster correction (`correctCaloClusters`)
 - add this Gaudi algorithm to the `TopAlg` sequence (the order of the algorithms matters!)
 - add a `keep` statement to `out.outputCommands` in order to save the new collection (`CorrectedCaloClusters`) in the output rootfile
-- modify the output file name to avoid overwriting the previous files 
+- modify the output file name to avoid overwriting the previous files
 - run again the simulation
 - open `plot_energy_resolution.py`, modify the line `events.Draw("CaloClusters.energy >> h_energyResolution")` to use the clusters with correction applied (the output picture name is based on the input rootfile name so you should not have to change it).
 - produce the energy resolution plot and compare it to the one without energy correction applied (in the LAr scenario)
@@ -167,18 +167,18 @@ Since you are now more familiar with the framework, no recipe will be provided f
 A further important step in having an accurate description of the detector response is to add electronics noise (pile-up noise can safely be ignored at FCC-ee). Generally speaking, the noise can depend on many factors such as the detector cell capacitance (and every cell can potentially have different shapes) or the readout channel it corresponds to. The noise tools foresee thus the possibility to have a single noise value per cell. For simplicity, we provided a Gaudi config with a flag to easily switch on the noise:
 - revert to the version of the code without upstream energy correction: `git checkout runCaloSim.py`, `git checkout plot_energy_resolution.py`
 - switch `addNoise` to True in `runCaloSim.py`
-- remove cell collections from the output (`ECalBarrelPositionedCells` and `PositionedCaloClusterCells`) to keep the weight of the rootfile small 
+- remove cell collections from the output (`ECalBarrelPositionedCells` and `PositionedCaloClusterCells`) to keep the weight of the rootfile small
 - run the simulation. Simulating with noise takes longer (every single cell now has an energy deposit), jump thus now to the other exercises and do the following once the simulation is over.  
 - produce the performance plot and compare it to the one without noise
 - what do you observe?
 :::{admonition} Answer
-:class: toggle 
-- The resolution barely changed (it actually got slightly better). This is partially due to the lack of statistics but also to the fact that the noise impact is small because this version of the calorimeter has been optimized to feature a low noise and at 10 GeV we are already dominated by the sampling term. 
+:class: toggle
+- The resolution barely changed (it actually got slightly better). This is partially due to the lack of statistics but also to the fact that the noise impact is small because this version of the calorimeter has been optimized to feature a low noise and at 10 GeV we are already dominated by the sampling term.
 :::
 
 ## Preparing for the next tutorial
 
-Open a new terminal, go to the Full Sim tutorial repository `fcc-tutorials/full-detector-simulations/FccCaloPerformance/`, set your environment with `source /cvmfs/sw.hsf.org/key4hep/setup.sh`, revert to the original config version with `git checkout runCaloSim.py`, set `pgun.PhiMax` to `0` (for technical reasons) and launch a production of 1000 photons events (you have to change `EvtMax`). Open another terminal, and launch another 1000 events with neutral pions (you have to set the `pdgCode` to `111` and don't forget to also source the environment in this new terminal). 
+Open a new terminal, go to the Full Sim tutorial repository `fcc-tutorials/full-detector-simulations/FccCaloPerformance/`, set your environment with `source /cvmfs/sw.hsf.org/key4hep/setup.sh`, revert to the original config version with `git checkout runCaloSim.py`, set `pgun.PhiMax` to `0` (for technical reasons) and launch a production of 1000 photons events (you have to change `EvtMax`). Open another terminal, and launch another 1000 events with neutral pions (you have to set the `pdgCode` to `111` and don't forget to also source the environment in this new terminal).
 
 ## Bonus exercise
 
@@ -188,7 +188,7 @@ Write a macro that plots the longitudinal profile of the electromagnetic shower 
 :class: toggle
 - use a TProfile
 - the radial extent of the sensitive calorimeter is 2160 mm to 2560 mm
-- there are 12 longitudinal layers, the first one is 15 mm thick while the other ones are 35 mm thick 
+- there are 12 longitudinal layers, the first one is 15 mm thick while the other ones are 35 mm thick
 - radius can be obtained from $\sqrt{x^2 + y^2}$, $x$ and $y$ are obtained with `PositionedCaloClusterCells.position.x/y`, in mm
 - For each event, sum the energy from cells in a given layer and normalize it to the cluster energy
 :::
@@ -197,5 +197,5 @@ Compare the longitudinal shower profile for photons and neutral pions.
 - What do you observe?
 :::{admonition} Answer
 :class: toggle
-For a given cluster energy, the single photon showers deposit their energy deeper in the calorimeter than the showers from neutral pions. This is due to the fact that the latter correspond to two close-by photon showers with smaller energy. 
+For a given cluster energy, the single photon showers deposit their energy deeper in the calorimeter than the showers from neutral pions. This is due to the fact that the latter correspond to two close-by photon showers with smaller energy.
 :::
