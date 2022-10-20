@@ -484,7 +484,7 @@ babayaga -c babayaga.input -o bbyg.LHE
 
 :::
 
-## Case study: ditau events with KKMCee, Pythia8 and Whizard
+## Hands-on case study: ditau events with KKMCee, Pythia8 and Whizard
 
 In this section we describe, with exercises, the generation of an equivalent sample of Monte Carlo events with three diffent generators,
 `KKMCee`, `Pythia8` and `Whizard`. The process chosen is e<sup>-</sup>e<sup>+</sup> &rarr; tau<sup>-</sup>tau<sup>+</sup> (hereafter referred to as _ditaus_) at a centre of mass energy of 91.2 GeV. In the three cases 10000 will be generated and saved in `ROOT` files in `EDM4hep` format.
