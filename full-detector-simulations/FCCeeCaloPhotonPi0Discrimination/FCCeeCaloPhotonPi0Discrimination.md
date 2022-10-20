@@ -65,6 +65,13 @@ geometryFile = FCCDETECTORS + "/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectMast
 readoutName  = "ECalBarrelPhiEta"
 ```
 
+At the top of the file, also add `tesFile=` to point to where your files are located from the calorimeter full simulation tutorial. If you do not have those files, you can use those two:
+
+```shell
+testFile='/eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat_smallSampleNotUsedForTraining/output_caloFullSim_10GeV_pdgId_22_noiseFalse.root'
+#testFile='/eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat_smallSampleNotUsedForTraining/output_caloFullSim_10GeV_pdgId_111_noiseFalse.root'
+```
+
 ## Get the highest energetic cluster
 
 Let's now define new columns to the RootDataFrame object ```df2``` inside the function ```analysers``` of the class ```RDFanalysis```. We start by defining the index in the collection ```CaloClusters``` which is of type [ClusterData](https://edm4hep.web.cern.ch/_cluster_data_8h_source.html) of the cluster with maximum energy:
@@ -94,7 +101,7 @@ Now we need to add all the variables that we have defined to the ```branchList``
 :::
 
 And let's run on a few events to check that everything is fine.
-To find the options to configure the code to run on a few (10) events using as input file ```pathtorootfile``` and to store an output file ```photons_MVA1.root``` using the command:
+To find the options to configure the code to run on a few (10) events using as input file the test file in the python `testFile` and to store an output file ```photons.root``` using the command:
 
 ```shell
 fccanalysis run --help
@@ -103,17 +110,16 @@ fccanalysis run --help
 :::{admonition} Suggested answer
 :class: toggle
 ```shell
-fccanalysis run analysis_tutorial_mva.py --nevents 10 --output photons_MVA1.root --files-list <PATHTOROOTFILE>
+fccanalysis run analysis_tutorial_mva.py --nevents 10 --output photons.root --test
 ```
-Where `<PATHTOFILE>` is the path to the file you produced from the full simulation calorimeter tutorial. In case you do not have this file available, you can use files in here `/eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat_smallSampleNotUsedForTraining/`
 :::
 
-Open the produced root file ```photons_MVA1.root``` and inspect it with ```Scan``` for example check that the index we have calculated indeed correspond to the clusters of maximum/minimum energy:
+Open the produced root file ```photons.root``` and inspect it with ```Scan``` for example check that the index we have calculated indeed correspond to the clusters of maximum/minimum energy:
 
 :::{admonition} Suggested answer
 :class: toggle
 ```shell
-root -l photons_MVA1.root
+root -l photons.root
 events->Scan("maxEnergyCluster_index:minEnergyCluster_index:clusters_n:clusters_energy")
 ```
 :::
@@ -132,10 +138,9 @@ We now need to obtain the index of the first and last cells of the maximum energ
 
 ## Create sub-collection of cells
 
-Using the positions of the first and last cells in the ```PositionedCaloClusterCells``` collection we now need to create a sub-collection from the full collection between the two indices. To achieve this with the ROOT version in this tutorial, we need to declare some extra code at the beginning of our analysis file:
+Using the positions of the first and last cells in the ```PositionedCaloClusterCells``` collection we now need to create a sub-collection from the full collection between the two indices. To achieve this with the ROOT version in this tutorial, we need to declare some extra code after the definition of the `analysers` function:
 
 ```python
-import ROOT
 ROOT.gInterpreter.Declare("""
 template<typename T>
 ROOT::VecOps::RVec<T> myRange(ROOT::VecOps::RVec<T>& vec, std::size_t begin, std::size_t end)
@@ -205,7 +210,7 @@ Let's give it a try on a few events as last time.
 :::{admonition} Suggested answer
 :class: toggle
 ```shell
-fccanalysis run analysis_tutorial_mva.py --nevents 10 --output photons_MVA1.root --files-list <PATHTOROOTFILE>
+fccanalysis run analysis_tutorial_mva.py --nevents 10 --output photons.root --test
 ```
 :::
 
@@ -248,11 +253,11 @@ and retrieve the weights
 
 ```
 
-Finally add the newly defined variable to the ```branchList``` in the ```output``` function and run over the full statistics
+Finally add the newly defined variable to the ```branchList``` in the ```output``` function and run over the full statistics. Do not forget to change the `testFile` when switching pi0, photon
 
 ```shell
-fccanalysis run analysis_tutorial_mva.py --output pions_MVA1.root --files-list <PATHTOROOTFILE>
-fccanalysis run analysis_tutorial_mva.py --output photons_MVA1.root --files-list <PATHTOROOTFILE>
+fccanalysis run analysis_tutorial_mva.py --output pi0s.root --test
+fccanalysis run analysis_tutorial_mva.py --output photons.root --test
 ```
 
 ## Removing the last layers
@@ -266,21 +271,61 @@ events->Draw("maxEnergyCluster_cells_layer","","",10)
 ```
 :::
 
-Now you produce new file removing the last 2 layers of the calorimeter adding a ```Filter``` after all the ```Define```
+Now you produce new file removing the last 2 layers of the calorimeter adding a filer on the cells.
+Need to comment one the definition of the cells collection and add the two lines below
 
-:::{admonition} Suggested answer
-:class: toggle
+
 ```python
-.Filter("maxEnergyCluster_cells_layer<11")
+#.Define("maxEnergyCluster_cells", "myRange(PositionedCaloClusterCells, maxEnergyCluster_firstCell_index, maxEnergyCluster_lastCell_index)")
+.Define("maxEnergyCluster_cellsFull", "myRange(PositionedCaloClusterCells, maxEnergyCluster_firstCell_index, maxEnergyCluster_lastCell_index)")
+.Define("maxEnergyCluster_cells", ROOT.CaloNtupleizer.sel_layers(0, 10),["maxEnergyCluster_cellsFull"])
 ```
-:::
 
+and we run again (don't forget to switch the testFile)
 :::{admonition} Suggested answer
 :class: toggle
 ```shell
-fccanalysis run analysis_tutorial_mva.py --output pions_MVA2.root --files-list <PATHTOROOTFILE>
-fccanalysis run analysis_tutorial_mva.py --output photons_MVA2.root --files-list <PATHTOROOTFILE>
+fccanalysis run analysis_tutorial_mva.py --output pi0s_10layers.root --test
+fccanalysis run analysis_tutorial_mva.py --output photons_10layers.root --test
 ```
 :::
 
-Compare the performance of the two MVAs and comment.
+## Compare the performance
+
+We get the following plotting scripts
+```shell
+wget https://raw.githubusercontent.com/HEP-FCC/fcc-tutorials/master/full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/draw_rocCurve_pi0_gamma_GNN.py
+wget https://raw.githubusercontent.com/HEP-FCC/fcc-tutorials/master/full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/rocCurveFacility.py
+```
+
+Edit `draw_rocCurve_pi0_gamma_GNN.py` and edit the following:
+```python
+#Where your files are
+input_file_path = ""
+#name of your files
+pi0_file = os.path.join(input_file_path, "pi0s.root")
+photon_file = os.path.join(input_file_path, "photons.root")
+#output name
+output_string_suffix = ""
+```
+
+and run first with the full layers
+```shell
+python draw_rocCurve_pi0_gamma_GNN.py
+```
+
+change the name to use the 10 layers files
+```python
+#name of your files
+pi0_file = os.path.join(input_file_path, "pi0s_10layers.root")
+photon_file = os.path.join(input_file_path, "photons_10layers.root")
+#output name
+output_string_suffix = "_10layers"
+```
+
+and run again with only 10 layers
+```shell
+python draw_rocCurve_pi0_gamma_GNN.py
+```
+
+look at the produced plot and compare the performance.
