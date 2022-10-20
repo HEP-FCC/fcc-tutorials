@@ -1,6 +1,6 @@
 # Noble Liquid Calorimeter Full Simulation Exercise
 
-:::{admonition} Learning Objectives :class: objectives
+:::{admonition} Learning Objectives
 In this tutorial, you will learn how to run the full simulation of the FCC-ee High Granularity Noble Liquid Calorimeter. Among other topics, this exercise covers:
 * the **generation** of particle gun events with $\pi^0$'s and $\gamma$'s  
 * the **reconstruction** of calorimeter data, including calibration, clustering and noise
@@ -88,11 +88,11 @@ Produce the energy resolution plot with `python plot_energy_resolution.py output
 - Assuming there is no noise nor constant term, derive the sampling term of this version of the calorimeter based on the width of the Gaussian fit from the plot.
 :::{admonition} Hint
 :class: toggle
-$\frac{\sigma_E}{E} = \frac{a}{\sqrt E},  \sigma_E = 0.31 \text{ GeV}, E = 10 \text{ GeV}, a = ?$
+$\frac{\sigma_E}{E} = \frac{a}{\sqrt E},  \sigma_E = 0.33 \text{ GeV}, E = 10 \text{ GeV}, a = ?$
 :::
 :::{admonition} Answer
 :class: toggle
-$a = 0.098 \text{ Gev}^\frac{1}{2}$
+$a = 0.10 \text{ Gev}^\frac{1}{2}$
 NB: this is of course not the exact value of the sampling term since the noise and constant term should be considered and a fit on a large energy spectrum should be performed, see e.g. [here](https://indico.desy.de/event/33640/contributions/128389/attachments/77680/100499/20221006_Brieuc_Francois_Noble_Liquid_Calorimetry_forFCCee_ECFA_Workshop_DESY.pdf#page=3).
 :::
 
@@ -116,6 +116,7 @@ Now, let's go back to the tutorial repository and set the sampling fraction corr
 Run the following:
 ```bash
 cd fcc-tutorials/full-detector-simulations/FccCaloPerformance/
+# this sed command will change the sampling fraction to match the LKr scenario
 sed -i 's/samplingFraction =.*,/samplingFraction = [0.43409357593, 0.1547424461, 0.193381391453, 0.217112491538, 0.232641970166, 0.243824523984, 0.252601621016, 0.259608181095, 0.266145090772, 0.270853520501, 0.275895174626, 0.308837752573],/' runCaloSim.py
 ```
 Open `runCaloSim.py` and change the output root file name (`out.filename`) to avoid overwriting the previous sample (e.g. by adding `_LKr` before `.root`).
@@ -125,12 +126,12 @@ Run the simulation again, reproduce the performance plot using the new sample an
 - How did the energy resolution change? Can you explain this behavior?
 :::{admonition} Answer
 :class: toggle
-The energy resolution improved because we have now a higher ratio between sensitive and non-sensitive material budget. NB: the undershoot of the reconstructed energy also grew bigger because part of the noble liquid is not sensitive (before the readout electrode actually start). This indicates that, if the LKr option is chosen, these non-sensitive regions have to be filled by something lighter than the noble liquid such as helium balloons but this is not yet implemented in the geometry. This is further discussed in the next exercise.  
+The energy resolution improved because we have now a higher ratio between sensitive and non-sensitive material budget. 
 :::
 - compute again the sampling term assuming a null noise and constant term
 :::{admonition} Answer
 :class: toggle
- $a = 0.06 \text{ Gev}^\frac{1}{2}$
+ $a = 0.076 \text{ Gev}^\frac{1}{2}$
  NB: this is of course not the exact value of the sampling term since the noise and constant term should be considered and a fit on a large energy spectrum should be performed, see e.g. [here](https://indico.desy.de/event/33640/contributions/128389/attachments/77680/100499/20221006_Brieuc_Francois_Noble_Liquid_Calorimetry_forFCCee_ECFA_Workshop_DESY.pdf#page=4).
 :::
 
@@ -146,33 +147,43 @@ As you may have noticed in the previous exercises, the reconstructed energy is o
 
 Since you are now more familiar with the framework, no recipe will be provided for this exercise. Try to do the following to apply the dead material energy correction:
 
--  uncomment the code snippet corresponding to the cluster correction (`correctCaloClusters`)
+- uncomment the code snippet corresponding to the cluster correction (`correctCaloClusters`)
 - add this Gaudi algorithm to the `TopAlg` sequence (the order of the algorithms matters!)
 - add a `keep` statement to `out.outputCommands` in order to save the new collection (`CorrectedCaloClusters`) in the output rootfile
 - modify the output file name to avoid overwriting the previous files
 - run again the simulation
 - open `plot_energy_resolution.py`, modify the line `events.Draw("CaloClusters.energy >> h_energyResolution")` to use the clusters with correction applied (the output picture name is based on the input rootfile name so you should not have to change it).
-- produce the energy resolution plot and compare it to the one without energy correction applied
+- produce the energy resolution plot and compare it to the one without energy correction applied (in the LAr scenario)
 - what do you notice?
 :::{admonition} Answer
 :class: toggle
 - There are no more outliers on the left hand side of the distribution
+<<<<<<< HEAD
 - The average of the reconstructed energy is now well centered on the generated particle energy
 - The energy resolution improved! As explained earlier, this correction is not just a scaling, it is a per event dynamic estimation of the energy deposited in the dead material.
+=======
+- The average of the reconstructed energy is now closer to the generated particle energy
+- The energy resolution slightly improved. As explained earlier, this correction is not just a scaling, it is a per event dynamic estimation of the energy deposited in the dead material.
+>>>>>>> master
 :::
 
 ## Adding noise
 
 A further important step in having an accurate description of the detector response is to add electronics noise (pile-up noise can safely be ignored at FCC-ee). Generally speaking, the noise can depend on many factors such as the detector cell capacitance (and every cell can potentially have different shapes) or the readout channel it corresponds to. The noise tools foresee thus the possibility to have a single noise value per cell. For simplicity, we provided a Gaudi config with a flag to easily switch on the noise:
-- switch `addNoise` to True
+- revert to the version of the code without upstream energy correction: `git checkout runCaloSim.py`, `git checkout plot_energy_resolution.py`
+- switch `addNoise` to True in `runCaloSim.py`
+- remove cell collections from the output (`ECalBarrelPositionedCells` and `PositionedCaloClusterCells`) to keep the weight of the rootfile small 
 - run the simulation. Simulating with noise takes longer (every single cell now has an energy deposit), jump thus now to the other exercises and do the following once the simulation is over.  
 - produce the performance plot and compare it to the one without noise
 - what do you observe?
-
+:::{admonition} Answer
+:class: toggle 
+- The resolution barely changed (it actually got slightly better). This is partially due to the lack of statistics but also to the fact that the noise impact is small because this version of the calorimeter has been optimized to feature a low noise and at 10 GeV we are already dominated by the sampling term. 
+:::
 
 ## Preparing for the next tutorial
 
-Open a new terminal, go to the Full Sim tutorial repository `fcc-tutorials/full-detector-simulations/FccCaloPerformance/`, set your environment with `source /cvmfs/sw.hsf.org/key4hep/setup.sh`, make sure the noise flag (`addNoise`) is set to `False` in `runCaloSim.py` and launch a production of 1000 photons events (you have to change `EvtMax`). Open another terminal, do the same procedure and produce 1000 events with neutral pions (you have to set the `pdgCode` to 111).
+Open a new terminal, go to the Full Sim tutorial repository `fcc-tutorials/full-detector-simulations/FccCaloPerformance/`, set your environment with `source /cvmfs/sw.hsf.org/key4hep/setup.sh`, revert to the original config version with `git checkout runCaloSim.py`, set `pgun.PhiMax` to `0` (for technical reasons) and launch a production of 1000 photons events (you have to change `EvtMax`). Open another terminal, and launch another 1000 events with neutral pions (you have to set the `pdgCode` to `111` and don't forget to also source the environment in this new terminal). 
 
 ## Bonus exercise
 
