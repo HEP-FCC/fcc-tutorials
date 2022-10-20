@@ -843,11 +843,16 @@ fccanalysis run make_flat.py --test --output kk_tautau_10000.flat.root
 ```
 and the same the other files.
 
-Exercise: add a variable `invmass` with the inverain mass of the two taus.
+Exercise: add a variable `invmass` with the invariant mass of the two taus.
 
 #### Comparing distributions
 
 This is the final exercise: write a `ROOT` macro, in `Python` or `C++`, to compare the global event variables `acol`, `n_charged`
-and `cthetauminus`. Hint: look at `ROOT` `RDataFrame`, `TTree` and `Hist` tutorial examples.
+and `cthetauminus`, and perhaps also `invmass`.
+
+:::{admonition} Hint
+:class: toggle
+
+Look at teh `ROOT` tutorials for `RDataFrame`, `TTree` and `Hist`.
 
 What can you say from the comparison?
