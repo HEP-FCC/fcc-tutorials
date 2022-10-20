@@ -484,10 +484,10 @@ babayaga -c babayaga.input -o bbyg.LHE
 
 :::
 
-## Case study: ditau events with KKMCee and Pythia8
+## Hands-on case study: ditau events with KKMCee, Pythia8 and Whizard
 
-In this section we describe, with exercises, the generation of an equivalent sample of Monte Carlo events with two diffent generators,
-`KKMCee` and `Pythia8`. The process chosen is e<sup>-</sup>e<sup>+</sup> &rarr; <sup>tau</sup>tau<sup>+</sup> (hereafter referred to as _ditaus_) at a centre of mass energy of 91.2 GeV. In both cases 10000 will be generated and saved in `ROOT` files in `EDM4hep` format.
+In this section we describe, with exercises, the generation of an equivalent sample of Monte Carlo events with three diffent generators,
+`KKMCee`, `Pythia8` and `Whizard`. The process chosen is e<sup>-</sup>e<sup>+</sup> &rarr; tau<sup>-</sup>tau<sup>+</sup> (hereafter referred to as _ditaus_) at a centre of mass energy of 91.2 GeV. In the three cases 10000 will be generated and saved in `ROOT` files in `EDM4hep` format.
 
 ### Generating ditaus with KKMCee
 As shown in the [KKMCee section](#kkmcee), event generation with the `KKMCee` is controlled through a configuration file. The interface available in `key4hep` allowd a generation of the configuration file through command line switches. Starting from the command line switches is therefore always a good option when no confguration file is available.
@@ -773,8 +773,94 @@ The differences of teh corss-section calculated by `KKMCee` and `Pythia8` is (14
 
 :::
 
+
+### Generating ditaus with Whizard
+
+As explained in the dedicated [Whizard section](#whizard), to use `whizard` we need a `Sindarin` configuration file. To generate ditau events we will use the file
+[Z_tautau.sin](http://fccsw.web.cern.ch/tutorials/october2020/tutorial1/Z_tautau.sin):
+```
+$ wget http://fccsw.web.cern.ch/tutorials/october2020/tutorial1/Z_tautau.sin
+```
+and run it in a dedicate directory to not pollute the working one withe the many files produced:
+```
+$ mkdir -p whizard/tautau; cd whizard/tautau;
+$ whizard ../../Z_tautau.sin
+```
+The output created by `whizard` is `LHEf` (Les Houches Event format); this is because the curent build does not support writing `HepMC`; this may change in the future.
+
+Exercise: look at produced `LHEf` file `z_tautau.lhe`: what di we notice?
+
+:::{admonition} Answer
+:class: toggle
+
+The taus are not decayed. Investigate if a Sindarin option to decay taus exists.
+
+:::
+
+The first lines of the `LHEf` file give the total cross-section: 1502 +- 2 pb, which seems dfinetly higher than the othesr.
+
+#### `LHEf` to `EDM4hep` conversion
+
+In order to get the events in `EDM4hep` format, we eploit the fact that `Pythia` provides `LHEf` reader functionality. To activate that we will use `Gaudi` and special `.cmd` file the consider the input `LHEf` input file as a `Beam`. This special `.cmd` is called `Pythia_LHEinput.cmd` and it is available under the directory pointed by `$K4GEN`:
+```
+S cp -rp $K4GEN/Pythia_LHEinput.cmd
+```
+Please note the lines
+```
+! 4) Read-in Les Houches Event file - alternative beam and process selection.
+Beams:frameType = 4                      ! read info from a LHEF
+Beams:LHEF = Generation/data/events.lhe ! the LHEF to read from
+```
+This file needs to be edited to enter the exact locaton of the input file (it could also be a symlink to avoid always editng the file.
+
+As steering we will use the file [lhe2edm.py](http://fccsw.web.cern.ch/tutorials/october2020/tutorial1/lhe2edm.py) which run the following sequence:
+```
+$ wget http://fccsw.web.cern.ch/tutorials/october2020/tutorial1/lhe2edm.py
+$ k4run lhe2edm.py -h
+ -->  Pythia8 -->  HepMCToEDMConverter -->  HepMCFileWriter -->  StableParticles -->  out
+```
+The `HepMCFileWriter` step is redundant and only serves at converting also in `HepMC` for controls.
+The conversion is run by the usual comand:
+```
+$ k4run lhe2edm.py -n 10000 --out.filename wz_tautau_10000.e4h.root --HepMCFileWriter.Filename wz_tautau_10000.hepmc 
+```
+
 ### Looking at the produced files: the MCParticle class
 
+Despite being ROOT files, the `EDM4hep` files are not easily usable, beaue they contain information in EDM4hep classes.
+A good practie is to use some helper function available in FCAnalyses to create `flat` ntuple, much more readable.
 
-### Comparing distributions
+#### Creating flat ntuples with FCCAnalyses
 
+To create flat ntuples using FCCAnalyses we need a `Python` script to be feed into the framework.
+An example is available in [make_flat.py](http://fccsw.web.cern.ch/tutorials/october2020/tutorial1/make_flat.py).
+
+You should have a lok and try to understand what it does. It adds a few event varialbe whihc would be useful to compare.
+
+In order to run it with `FCCAnalyses` we have to call it like this:
+```
+fccanalysis run make_flat.py --test --output kk_tautau_10000.flat.root
+```
+and the same the other files.
+
+Exercise: add a variable `invmass` with the invariant mass of the two taus.
+
+:::{admonition} Hint
+:class: toggle
+
+Look at the the `scalarProdNorm`.
+
+:::
+
+#### Comparing distributions
+
+This is the final exercise: write a `ROOT` macro, in `Python` or `C++`, to compare the global event variables `acol`, `n_charged`
+and `cthetauminus`, and perhaps also `invmass`.
+
+:::{admonition} Hint
+:class: toggle
+
+:::
+Look at the `ROOT` tutorials for `RDataFrame`, `TTree` and `Hist`.
+
+What can you say from the comparison?
