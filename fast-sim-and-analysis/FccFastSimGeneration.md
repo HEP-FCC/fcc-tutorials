@@ -825,9 +825,29 @@ The conversion is run by the usual comand:
 $ k4run lhe2edm.py -n 10000 --out.filename wz_tautau_10000.e4h.root --HepMCFileWriter.Filename wz_tautau_10000.hepmc 
 ```
 
-
 ### Looking at the produced files: the MCParticle class
 
+Despite being ROOT files, the `EDM4hep` files are not easily usable, beaue they contain information in EDM4hep classes.
+A good practie is to use some helper function available in FCAnalyses to create `flat` ntuple, much more readable.
 
-### Comparing distributions
+#### Creating flat ntuples with FCCAnalyses
 
+To create flat ntuples using FCCAnalyses we need a `Python` script to be feed into the framework.
+An example is available in [make_flat.py](http://fccsw.web.cern.ch/tutorials/october2020/tutorial1/make_flat.py).
+
+You should have a lok and try to understand what it does. It adds a few event varialbe whihc would be useful to compare.
+
+In order to run it with `FCCAnalyses` we have to call it like this:
+```
+fccanalysis run make_flat.py --test --output kk_tautau_10000.flat.root
+```
+and the same the other files.
+
+Exercise: add a variable `invmass` with the inverain mass of the two taus.
+
+#### Comparing distributions
+
+This is the final exercise: write a `ROOT` macro, in `Python` or `C++`, to compare the global event variables `acol`, `n_charged`
+and `cthetauminus`. Hint: look at `ROOT` `RDataFrame`, `TTree` and `Hist` tutorial examples.
+
+What can you say from the comparison?
