@@ -271,7 +271,7 @@ events->Draw("maxEnergyCluster_cells_layer","","",10)
 ```
 :::
 
-Now you produce new file removing the last 2 layers of the calorimeter adding a filer on the cells.
+Now you produce new file removing the last 2 layers of the calorimeter adding a filter on the cells.
 Need to comment one the definition of the cells collection and add the two lines below
 
 
