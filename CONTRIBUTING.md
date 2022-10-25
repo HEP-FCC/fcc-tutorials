@@ -15,29 +15,64 @@ You also agree to abide by our [contributor code of conduct][conduct].
 1.  We use the [fork and pull][gh-fork-pull] model to manage changes.
     More information about [forking a repository][gh-fork] and [making a Pull Request][gh-pull].
 
-2.  To build the lessons please install the [dependencies](#dependencies).
-
 2.  For our lessons, you should branch from and submit pull requests against the `master` branch.
 
 3.  When editing lesson pages, you need only commit changes to the Markdown source files.
 
-4.  If you're looking for things to work on, please see [the list of issues for this repository][issues].
+4.  To build the lessons please follow the [instructions](#building-the-lessons).
+
+5.  If you're looking for things to work on, please see [the list of issues for this repository][issues].
     Comments on issues and reviews of pull requests are equally welcome.
 
-## Dependencies
+## Building the lessons
+
+### Using `venv` (recommended)
+
+#### Requirements
+Make sure you have `venv` (virtual environment) in your working directory
+```
+$ python3 -m venv venv
+```
+Activate it in the shell and install the requirements
+```
+$ source venv/bin/activate
+pip3 install -r requirements.txt
+```
+Your shell prompt will be augmented by the `(venv)` prefix, e.g.
+```
+(venv) mylaptop:~/fcc/fcc-tutorials
+```
+
+#### Building
+The pages are build by executing
+```
+$ sphinx-build -b html . build
+```
+
+#### Browsing the result
+Open in your browser the file
+```
+$PWD/build/index.html
+```
+
+### Using `starterkit_ci`
+
+#### Requirements
 
 To build the lessons locally, install the following:
 
 1. [starterkit-ci](https://pypi.org/project/starterkit-ci/)
 
-Then build the pages:
+#### Building
+Build the pages:
 
 ```shell
 $ starterkit_ci build --allow-warnings
 $ starterkit_ci check --allow-warnings
 ```
 
-and start a web server to host them:
+#### Browsing the result
+Start a web server to host them:
 
 ```shell
 $ cd build
