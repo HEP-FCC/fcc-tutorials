@@ -38,7 +38,7 @@ Activate it in the shell and install the requirements
 $ source venv/bin/activate
 pip3 install -r requirements.txt
 ```
-Your shell prompt wiil be augmented by the `(venv)` prefix, e.g.
+Your shell prompt will be augmented by the `(venv)` prefix, e.g.
 ```
 (venv) mylaptop:~/fcc/fcc-tutorials
 ```
