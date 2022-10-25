@@ -25,5 +25,5 @@ add_nb_test("software-basics/exploring-fcc-files")
 add_nb_test("fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme")
 add_nb_test("fast-sim-and-analysis/k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme")
 add_nb_test("fast-sim-and-analysis/FccFastSimGeneration")
-add_nb_test("full-detector-simulations/FccCaloPerformance/FccCaloPerformance")
+add_nb_test("full-detector-simulations/FccCaloPerformance/2021_version/FccCaloPerformance")
 
