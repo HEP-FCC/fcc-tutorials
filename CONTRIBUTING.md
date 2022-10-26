@@ -52,6 +52,9 @@ In case the Python from FCCSW stack is being used, it is recommended to clear
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 export PYTHONPATH=
 ```
+
+Sourcing of the FCCSW stack might be needed in cases when the Python provided by
+the OS is too old, currently this is the case for CentOS 7.
 :::
 
 #### Building
