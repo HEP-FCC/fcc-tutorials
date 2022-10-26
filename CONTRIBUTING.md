@@ -54,7 +54,7 @@ export PYTHONPATH=
 ```
 
 Sourcing of the FCCSW stack might be needed in cases when the Python provided by
-the OS is too old, currently this is the case for CentOS 7.
+the OS is too old, currently this is the case for CentOS 7 (`lxplus`).
 :::
 
 #### Building
