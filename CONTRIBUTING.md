@@ -43,6 +43,17 @@ Your shell prompt will be augmented by the `(venv)` prefix, e.g.
 (venv) mylaptop:~/fcc/fcc-tutorials
 ```
 
+:::{admonition} Building `fcc-tutorials` in FCCSW stack
+:class: solution
+
+In case the Python from FCCSW stack is being used, it is recommended to clear
+`PYTHONPATH` environment variable after sourcing of the stack
+```
+source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
+export PYTHONPATH=
+```
+:::
+
 #### Building
 The pages are build by executing
 ```
