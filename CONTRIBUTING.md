@@ -29,16 +29,16 @@ You also agree to abide by our [contributor code of conduct][conduct].
 ### Using `venv` (recommended)
 
 #### Requirements
-Make sure you have `venv` (virtual environment) in your working directory
+Make sure you have `venv` (virtual environment) in your working directory. It can be created with the following command:
 ```
 $ python3 -m venv venv
 ```
-Activate it in the shell and install the requirements
+Activate it in the shell and install the requirements, which are gathered in a file provided by the repository. 
 ```
 $ source venv/bin/activate
 pip3 install -r requirements.txt
 ```
-Your shell prompt will be augmented by the `(venv)` prefix, e.g.
+After sourcing, your shell prompt will be augmented by the `(venv)` prefix, e.g.
 ```
 (venv) mylaptop:~/fcc/fcc-tutorials
 ```
@@ -46,11 +46,11 @@ Your shell prompt will be augmented by the `(venv)` prefix, e.g.
 :::{admonition} Building `fcc-tutorials` in FCCSW stack
 :class: solution
 
-In case the Python from FCCSW stack is being used, it is recommended to clear
+In case the Python from FCCSW stack is being used, it is necessary to clear
 `PYTHONPATH` environment variable after sourcing of the stack
 ```
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
-export PYTHONPATH=
+unset PYTHONPATH
 ```
 
 Sourcing of the FCCSW stack might be needed in cases when the Python provided by
@@ -58,7 +58,7 @@ the OS is too old, currently this is the case for CentOS 7 (`lxplus`).
 :::
 
 #### Building
-The pages are build by executing
+The documentation pages are build by executing
 ```
 $ sphinx-build -b html . build
 ```
