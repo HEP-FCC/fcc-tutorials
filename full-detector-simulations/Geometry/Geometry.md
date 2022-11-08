@@ -13,7 +13,14 @@ This section is adapted from the [talk given by Andre Sailer](https://indico.cer
 
 ## Setup
 
-The first step is to setup a CentOS 7 machine with CVMFS. It can be a local machine, remote machine (e.g. [lxplus.cern.ch](https://lxplusdoc.web.cern.ch/)), virtual machine (e.g. [CernVM](https://cernvm.cern.ch/appliance/)) or containerized system (e.g. [Docker](https://linux.web.cern.ch/dockerimages/), Singularity). 
+The first step is to set up a CentOS 7 machine with CVMFS. It can be a local machine, a remote machine (e.g. [lxplus.cern.ch](https://lxplusdoc.web.cern.ch/)), a virtual machine (e.g. [CernVM](https://cernvm.cern.ch/appliance/)) or a containerized system (e.g. [Docker](https://linux.web.cern.ch/dockerimages/), or Apptainer). 
+
+Then, the stack with the FCC software can be sourced as 
+
+```shell
+source /cvmfs/fcc.cern.ch/sw/latest/setup.sh 
+unset PYTHONPATH
+```
 
 The following step is to create a working directory,
 
@@ -21,6 +28,11 @@ The following step is to create a working directory,
 mkdir mydd4heptutorial
 cd mydd4heptutorial
 cp -r $LCGEO/FCCee/compact/FCCee_o1_v05 .
+```
+
+In order to plot the histograms in the terminal, the uproot python package is used and it can be installed with the following command
+
+```shell
 pip install --user uproot3
 ```
 
@@ -34,7 +46,7 @@ drwxr-xr-x. 3 sailer zf 26 Oct 14 11:30 .
 drwxr-xr-x. 2 sailer zf 4096 Oct 14 11:30 FCCee_o1_v05
 ```
 
-Another ingredient is a script to plot the key information after the simulations. [This python script](showPlots.py) plots the energy deposition and position along Z axis during the simulation. Histograms are printed in the terminal to avoid the use of the graphical interface. Conventional ROOT plot can be used instead with small modifications of the script.
+Another ingredient is a script to plot some information after the simulations to show that the geometry really did change. [This python script](showPlots.py) plots the per hit energy deposition and position along Z axis in the ECal endcap. The histograms are printed in the terminal to avoid the use of a graphical interface. If a graphical system is available, one can also visualize the geometry with `geoDisplay` or the Geant4 visualizations.
 
 <details>
 
@@ -67,93 +79,18 @@ uFile["eHist"].show()
 <br/>
 
 
-In this section, detector geometry will be changed in every step. Geometry can be visualized using different tools, as it is explained extensively in a following section. 
+In this section, the detector geometry will be changed in every step. The geometry can be visualized using different tools, as it is explained in the next section. 
 
-:::{admonition} Click to show some methods to plot the geometry.
-:class: solution dropdown
-1. The geometry description of the detector in the `xml` file can be converted into ROOT using a python script. The usage of the script is the following: <code>./dd4hep2root -c description.xml -o out.root</code>. The outputfile can be accessed with ROOT, or directly with the ROOT tool `rootbrowse`.
-
-<details>
-
-<summary><b>Click to show the code of the python script <code>dd4hep2root.py</code>. </b></summary>
-
-```python
-#!/usr/bin/env python3
-
-import sys
-import argparse
-
-
-def main():
-    parser = argparse.ArgumentParser(description='Convert detector')
-    parser.add_argument('-c', '--compact', help='Compact file location(s)',
-                        required=True, type=str, nargs='+')
-    parser.add_argument('-o', '--out', help='Converted file path',
-                        default='detector.root', type=str)
-    args = vars(parser.parse_args())
-
-    convert(args['compact'], args['out'])
-
-
-def convert(compact_files, out_path):
-    print('INFO: Converting following compact file(s):')
-    for cfile in compact_files:
-        print('      ' + cfile)
-
-    import ROOT
-
-    ROOT.gSystem.Load('libDDCore')
-    description = ROOT.dd4hep.Detector.getInstance()
-    for cfile in compact_files:
-        description.fromXML(cfile)
-
-    ROOT.gGeoManager.SetVisLevel(9)
-    ROOT.gGeoManager.SetVisOption(0)
-    ROOT.gGeoManager.Export(out_path)
-
-
-if __name__ == '__main__':
-    main()
-
-```
-
-</details>
-
-<br/>
-
-2. Using Qt interface of Geant4, accesible via `runType` argument of `ddsim`
-
-<details>
-
-<summary><b> Click to show how to display the detector geometry using Geant4. </b></summary>
-
-```shell
-source /cvmfs/sft.cern.ch/lcg/views/dev4/latest/x86_64-centos7-gcc11-opt/setup.sh
-ddsim --compactFile description.xml --runType qt
-```
-
-After building internally the geometry, a window will open. The menu on the left gives access to the builtin Geant4 macros. In order to show the geometry, we have to type some commands:
-
-```
-# Use this open statement to create an OpenGL view:
-/vis/open OGL 600x600-0+0
-
-# Draw geometry:
-/vis/drawVolume
-
-# Specify view angle:
-/vis/viewer/set/lightsVector -1 0 0
-/vis/viewer/set/viewpointVector -1 0 0
-```
-
-
-</details>
-:::
-
-<br/>
 
 
 ## Simulate Muons in CLD detector
+
+:::{admonition} This step can take more than few minutes
+:class: challenge
+
+This step simulates the whole detector geometry and can take a long time to finish. If it takes more than a couple of minutes, the simulation can be terminated. The following step runs faster and its output can be used as reference instead.
+
+:::
 
 To simulate the interaction of 100 muons with the CLD detector, the following command is used inside the directory `mydd4heptutorial`. It takes some minutes to build the geometry and run the actual simulation. 
 
@@ -175,15 +112,17 @@ python showPlots.py Step1_edm4hep.root
 
 ## Removing an included XML file
 
-The detector geometry is complex, and takes a while to be built internally. To speed up the following steps, the Silicon Tracker can be removed. To do so, 
+The detector geometry is complex, and takes a while to be built. To speed up the following steps, the Silicon Tracker can be removed. To do so, 
 
 1. Open `FCCee_o1_v05/FCCee_o1_v05.xml`
-2. Find the following lines in the file, and replace/delete them
+2. Find the following lines in the file, and delete/comment them
 
 ```xml
 <include ref="InnerTracker_o2_v06_02.xml"/>
 <include ref="OuterTracker_o2_v06_02.xml"/>
 ```
+
+Remember that a comment in `xml` looks like `<!-- blablabla -->`.
 
 3. Comment out the plugins section `<plugins> ... </plugins>` in the same file. 
 
@@ -209,7 +148,7 @@ Whenever you change the geometry in a non-trivial way there are the possibilitie
 2. See point 1
 3. Run the overlap check
 
-Geant4 performs the overlap check of a given geometry. This action is available for `ddsim`. A a macro file with the Geant4 instructions has to be provided to `ddsim`. To do so, create a file named as *overlap.mac* and write these commands inside
+Geant4 can perform the overlap check of a given geometry. This action is available for `ddsim`. A macro file with the Geant4 instructions has to be provided to `ddsim`. To do so, create a file named as *overlap.mac* and write these commands inside
 
 ```
 /geometry/test/run
@@ -221,7 +160,7 @@ And then we run `ddsim` with this macro file, and dump the output to a text file
 ```shell
 ddsim --compactFile FCCee_o1_v05/FCCee_o1_v05.xml \
       --runType run \
-      --macroFile overlap.mac 2>&1 | tee overlapDump 
+      --macroFile overlap.mac > overlapDump &
 ```
 
 With the full detector model including the tracker this would take about 30 minutes. The output shows some exceptions:
@@ -239,15 +178,15 @@ In this section, it is shown how to change the number of layers and silicon thic
 2. Find this block:
 ```xml
 <layer repeat="40" vis="ECalLayerVis">
-<slice material = "TungstenDens24" thickness = "1.90*mm" vis="ECalAbsorberVis" radiator="yes"/>
-<slice material = "G10" thickness = "0.15*mm" vis="InvisibleNoDaughters"/>
-<slice material = "GroundOrHVMix" thickness = "0.10*mm" vis="ECalAbsorberVis"/>
-<slice material = "Silicon" thickness = "0.50*mm" sensitive="yes" limits="cal_limits"
-vis="ECalSensitiveVis"/>
-<slice material = "Air" thickness = "0.10*mm" vis="InvisibleNoDaughters"/>
-<slice material = "siPCBMix" thickness = "1.30*mm" vis="ECalAbsorberVis"/>
-<slice material = "Air" thickness = "0.25*mm" vis="InvisibleNoDaughters"/>
-<slice material = "G10" thickness = "0.75*mm" vis="InvisibleNoDaughters"/>
+    <slice material = "TungstenDens24" thickness = "1.90*mm" vis="ECalAbsorberVis" radiator="yes"/>
+    <slice material = "G10" thickness = "0.15*mm" vis="InvisibleNoDaughters"/>
+    <slice material = "GroundOrHVMix" thickness = "0.10*mm" vis="ECalAbsorberVis"/>
+    <slice material = "Silicon" thickness = "0.50*mm" sensitive="yes" limits="cal_limits"
+    vis="ECalSensitiveVis"/>
+    <slice material = "Air" thickness = "0.10*mm" vis="InvisibleNoDaughters"/>
+    <slice material = "siPCBMix" thickness = "1.30*mm" vis="ECalAbsorberVis"/>
+    <slice material = "Air" thickness = "0.25*mm" vis="InvisibleNoDaughters"/>
+    <slice material = "G10" thickness = "0.75*mm" vis="InvisibleNoDaughters"/>
 </layer>
 ```
 3. Change the number of layers from **40** to **20**, and the silicon thickness from `0.50*mm` to `1.00*mm`. 
@@ -258,15 +197,15 @@ vis="ECalSensitiveVis"/>
 
 ```xml
 <layer repeat="20" vis="ECalLayerVis">
-<slice material = "TungstenDens24" thickness = "1.90*mm" vis="ECalAbsorberVis" radiator="yes"/>
-<slice material = "G10" thickness = "0.15*mm" vis="InvisibleNoDaughters"/>
-<slice material = "GroundOrHVMix" thickness = "0.10*mm" vis="ECalAbsorberVis"/>
-<slice material = "Silicon" thickness = "1.00*mm" sensitive="yes" limits="cal_limits"
-vis="ECalSensitiveVis"/>
-<slice material = "Air" thickness = "0.10*mm" vis="InvisibleNoDaughters"/>
-<slice material = "siPCBMix" thickness = "1.30*mm" vis="ECalAbsorberVis"/>
-<slice material = "Air" thickness = "0.25*mm" vis="InvisibleNoDaughters"/>
-<slice material = "G10" thickness = "0.75*mm" vis="InvisibleNoDaughters"/>
+    <slice material = "TungstenDens24" thickness = "1.90*mm" vis="ECalAbsorberVis" radiator="yes"/>
+    <slice material = "G10" thickness = "0.15*mm" vis="InvisibleNoDaughters"/>
+    <slice material = "GroundOrHVMix" thickness = "0.10*mm" vis="ECalAbsorberVis"/>
+    <slice material = "Silicon" thickness = "1.00*mm" sensitive="yes" limits="cal_limits"
+    vis="ECalSensitiveVis"/>
+    <slice material = "Air" thickness = "0.10*mm" vis="InvisibleNoDaughters"/>
+    <slice material = "siPCBMix" thickness = "1.30*mm" vis="ECalAbsorberVis"/>
+    <slice material = "Air" thickness = "0.25*mm" vis="InvisibleNoDaughters"/>
+    <slice material = "G10" thickness = "0.75*mm" vis="InvisibleNoDaughters"/>
 </layer>
 ```
 
@@ -295,11 +234,10 @@ The type attribute of the detector tag tells DD4hep which detector constructor t
 
 ```xml
 <detector name="ECalEndcap"
-type="GenericCalEndcap_o1_v01"
-id="DetID_ECal_Endcap"
-readout="ECalEndcapCollection"
-vis="ECALVis" >
-<!-- more XML -->
+          type="GenericCalEndcap_o1_v01"
+          id="DetID_ECal_Endcap"
+          readout="ECalEndcapCollection"
+          vis="ECALVis" >
 </detector>
 ```
 DD4hep’s plugin service will look in the components files it finds via the `LD_LIBRARY_PATH` (or `DD4HEP_LIBRARY_PATH` on macOS because of SIP) environment variables, and load the library on-demand, and then instantiate the function.
@@ -454,10 +392,10 @@ with `mydetector.xml`. After every change in the geometry, the overlap check mus
 ```shell
 ddsim --compactFile FCCee_o1_v05/FCCee_o1_v05.xml \
       --runType run \
-      --macroFile overlap.mac 2>&1 | tee overlapDump2 
+      --macroFile overlap.mac  > overlapDump2 &
 ```
 
-If there are no conflict, we can continue. Now, we add some layers to the detector. First, we add a `layer` component inside the `<detector> ... </detector>` section of `FCCee_o1_v05/mydetector.xml` detector description file.
+If there are no exceptions, we can continue. Now, we add some layers to the detector. First, we add a `layer` component inside the `<detector> ... </detector>` section of `FCCee_o1_v05/mydetector.xml` detector description file.
 
 <details>
 
@@ -600,7 +538,7 @@ DECLARE_DETELEMENT(MyFirstDetector, create_detector)
 <br/>
 
 
-To take efect, the code has to be recompiled,
+To take effect, the code has to be recompiled,
 
 
 ```shell
@@ -614,7 +552,7 @@ After every change in the geometry, the overlap check must be run. To do so, go 
 ```shell
 ddsim --compactFile FCCee_o1_v05/FCCee_o1_v05.xml \
       --runType run \
-      --macroFile overlap.mac 2>&1 | tee overlapDump3
+      --macroFile overlap.mac  > overlapDump3 &
 ```
 
 The number of checks now increased, and if everything is done properly, no overlaps are found. Now the geometry is ready to go for a simulation. As it was done previously, we use `ddsim` to run a simulation of 100 muons in the geometry that has just been defined, as in the previous steps
@@ -646,8 +584,7 @@ if len(sys.argv) < 2:
 inputFile = sys.argv[1]; print("Reading:", inputFile)
 tfile = ROOT.TFile.Open(inputFile)
 myTree = tfile.Get("events")
-myTree.Draw("MyReadout.position.z>>zHist(100, 2300, 2510)",
-"MyReadout.position.z > 0")
+myTree.Draw("MyReadout.position.z>>zHist(100, 2300, 2510)", "MyReadout.position.z > 0")
 myTree.Draw("MyReadout.energy>>eHist(30, 0, 0.002)")
 zHist = tfile.Get("zHist")
 eHist = tfile.Get("eHist")
