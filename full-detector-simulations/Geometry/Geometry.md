@@ -27,6 +27,11 @@ The following step is to create a working directory,
 ```shell
 mkdir mydd4heptutorial
 cd mydd4heptutorial
+```
+
+Then, copy the CLD detector description into the working directory,
+
+```shell
 cp -r $LCGEO/FCCee/compact/FCCee_o1_v05 .
 ```
 
@@ -82,17 +87,23 @@ uFile["eHist"].show()
 In this section, the detector geometry will be changed in every step. The geometry can be visualized using different tools, as it is explained in the next section. 
 
 
+## Modify an existing XML file
 
-## Simulate Muons in CLD detector
+The detector geometry is complex, and takes a while to be built. To speed up the following steps, the Silicon Tracker can be removed. To do so, 
 
-:::{admonition} This step can take more than few minutes
-:class: challenge
+1. Open `FCCee_o1_v05/FCCee_o1_v05.xml`
+2. Find the following lines in the file, and delete/comment them
 
-This step simulates the whole detector geometry and can take a long time to finish. If it takes more than a couple of minutes, the simulation can be terminated. The following step runs faster and its output can be used as reference instead.
+```xml
+<include ref="InnerTracker_o2_v06_02.xml"/>
+<include ref="OuterTracker_o2_v06_02.xml"/>
+```
 
-:::
+Remember that a comment in `xml` looks like `<!-- blablabla -->`.
 
-To simulate the interaction of 100 muons with the CLD detector, the following command is used inside the directory `mydd4heptutorial`. It takes some minutes to build the geometry and run the actual simulation. 
+3. Comment out the plugins section `<plugins> ... </plugins>` in the same file. 
+
+To simulate the interaction of 100 muons with the CLD detector, the following command is used inside the directory `mydd4heptutorial`. It takes some minutes to build the geometry and run the actual simulation.
 
 ```shell
 ddsim --compactFile FCCee_o1_v05/FCCee_o1_v05.xml \
@@ -110,35 +121,8 @@ And now plot the distribution with `showPlots.py`
 python showPlots.py Step1_edm4hep.root
 ```
 
-## Removing an included XML file
 
-The detector geometry is complex, and takes a while to be built. To speed up the following steps, the Silicon Tracker can be removed. To do so, 
-
-1. Open `FCCee_o1_v05/FCCee_o1_v05.xml`
-2. Find the following lines in the file, and delete/comment them
-
-```xml
-<include ref="InnerTracker_o2_v06_02.xml"/>
-<include ref="OuterTracker_o2_v06_02.xml"/>
-```
-
-Remember that a comment in `xml` looks like `<!-- blablabla -->`.
-
-3. Comment out the plugins section `<plugins> ... </plugins>` in the same file. 
-
-If now the simulation is run again as in the previous step (changing the output filename), 
-
-```shell
-ddsim --compactFile FCCee_o1_v05/FCCee_o1_v05.xml \
-      --enableGun \
-      --gun.distribution uniform \
-      --gun.energy "10*GeV" \
-      --gun.particle mu- \
-      --numberOfEvents 100 \
-      --outputFile Step2_edm4hep.root
-```
-
-The simulation runs 20 times faster and the distributions have not noticeably changed.
+The simulation runs 20 times faster than the full geometry simulation and the distributions do not change.
 
 ## Overlap checking
 
@@ -223,10 +207,10 @@ ddsim --compactFile FCCee_o1_v05/FCCee_o1_v05.xml \
       --gun.energy "10*GeV" \
       --gun.particle mu- \
       --numberOfEvents 100 \
-      --outputFile Step3_edm4hep.root
+      --outputFile Step2_edm4hep.root
 ```
 
-Compare the histograms produced from `Step2_edm4hep.root` and `Step3_edm4hep.root`.
+Compare the histograms produced from `Step1_edm4hep.root` and `Step2_edm4hep.root`.
 
 ## Geometry driver modifications
 
@@ -564,7 +548,7 @@ ddsim --compactFile FCCee_o1_v05/FCCee_o1_v05.xml \
       --gun.energy "10*GeV" \
       --gun.particle mu- \
       --numberOfEvents 100 \
-      --outputFile Step4_edm4hep.root
+      --outputFile Step3_edm4hep.root
 ```
 
 Modify `showPlots.py` to display properties from this collection (MyReadout).
