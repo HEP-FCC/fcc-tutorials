@@ -1,4 +1,4 @@
-# FCCee Interaction Region Backgrounds
+# Using Guinea-Pig to generate interaction region backgrounds 
 
 :::{admonition} Learning objectives
 :class: objectives
@@ -8,9 +8,6 @@
 :::
 
 
-## Using Guinea-Pig to generate interaction region backgrounds 
-
-
 Guinea-Pig is included in releases of the FCC software and is developed at this repository: 
 
 <https://gitlab.cern.ch/clic-software/guinea-pig>
@@ -18,7 +15,7 @@ Guinea-Pig is included in releases of the FCC software and is developed at this 
 Issues and Pull Requests can be submitted there.
 
 
-### Generating e- e+ pairs 
+## Generating e- e+ pairs with Guinea-Pig 
 
 In order to run Guinea-Pig (hereafter GP) and generate e- e+ pair background, one should provide the relevant accelerator (beam) parameters, plus some steering parameters to run the software. Those parameters are set in the file acc.dat.
 Currently, one can find the four following accelerators, where the beam parameters correspond to the values considered for FCC CDR (2019).
@@ -47,9 +44,8 @@ guinea FCCee_Z FCCee_Z output
 
 `output` it is the produced log file, and it can be given any name. Below we will try to explain the main GP configuration parameters. Each GP run corresponds to 1 bunch crossing.
 
-#### GP configuration parameters
 
-### Generating large amount of data with GP
+## Generating large amounts of data with Guinea-Pig
 
 One can use the script at:
 
@@ -99,9 +95,9 @@ The queueing in Condor is defined by the following line
 
 For the set of parameters FCCee_Z, featuring an estimating running time of few hours, a job flavour "workday" is recommended. For the  set of parameters FCCee_Top, job flavour "longlunch" should be enough.
 
-#### Analysing the data (only for ILCSOFT users)
+## Analysing the data (only for ILCSOFT users)
 
-Marlin processors used to analyse the simulated data. They were used for CDR results.
+Marlin processors can be used to analyse the simulated data. They were used for CDR results.
 In order to compile them: please initialise ILCSoft environment first.
 
 ```bash
@@ -110,7 +106,7 @@ cmake -C $ILCSOFT/ILCSoft.cmake ..
 make install
 ```
 
-### GP production of $\gamma\gamma$ hadrons
+## GP production of $\gamma\gamma$ hadrons
 
 In order to produce $\gamma\gamma$ to hadrons with GP, we need to add the following commands inside the configuration file acc.dat
 
