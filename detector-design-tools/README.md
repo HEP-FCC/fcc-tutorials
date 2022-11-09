@@ -7,9 +7,6 @@ available.
 ```{eval-rst}
 .. toctree::
     :caption: Contents:
-
+    
     Visualization.md
-    OverlapDetection.md
-    MaterialScans.md
-
 ```

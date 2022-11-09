@@ -39,7 +39,7 @@ spack find -p -d key4hep-stack@<version> | grep fccanalyses
 create a file called `analysis_stage1.py` containing
 
 
-```{python active="", eval=FALSE}
+```python
 #Mandatory: RDFanalysis class where the use defines the operations on the TTree
 class RDFanalysis():
 
@@ -112,7 +112,7 @@ this will produce small ntuples pre-selection files with only variables you are 
 
 This first analysis stage usually runs on large samples on batch, and the idea is to produce small ntuples with less variables. From those small ntuples we could consider running a second analysis stage, for example let us create a file called `analysis_stage2.py` containing:
 
-```{python active="", eval=FALSE}
+```python
 processList = {
     'p8_ee_ZZ_ecm240':{},
     'p8_ee_WW_ecm240':{},
@@ -179,7 +179,7 @@ fccanalysis run analysis_stage2.py
 
 lets now run the final selection on the pre-selection files, for that create a `analysis_final.py` file:
 
-```{python active="", eval=FALSE}
+```python
 #Input directory where the files produced at the pre-selection level are
 inputDir  = "stage2"
 
@@ -232,7 +232,7 @@ this will produce 2 files for each sample and each selection, one with final tre
 Now we can write the code to produce plots, in `analysis_plots.py`:
 
 
-```{python active="", eval=FALSE}
+```python
 import ROOT
 
 # global parameters
@@ -308,7 +308,7 @@ In order to produce plots with more statistics using centrally produced samples,
 To do so we re-run the pre-selection over 10 percent of the total statistics [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA.php).
 Add to your a `analysis_stage1.py` file
 
-```{python active="", eval=FALSE}
+```python
 processList = {
     'p8_ee_ZZ_ecm240':{'fraction':0.1},
     'p8_ee_WW_ecm240':{'fraction':0.1},
@@ -319,13 +319,13 @@ prodTag     = "FCCee/spring2021/IDEA/"
 
 and run
 
-```{bash active="", eval=FALSE}
+```bash
 fccanalysis run analysis_stage1.py
 ```
 
 and as before run the stage 2, final selection and plots:
 
-```{bash active="", eval=FALSE}
+```bash
 fccanalysis run analysis_stage2.py
 fccanalysis final analysis_final.py
 fccanalysis plots analysis_plots.py
