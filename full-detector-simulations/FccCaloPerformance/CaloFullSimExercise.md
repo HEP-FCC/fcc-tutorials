@@ -71,10 +71,10 @@ This is a particle gun property which is set by a parameter at the beginning of 
 :class: toggle
 This is defined by the `EvtMax` parameter of the `ApplicationMgr`
 :::
-- why is there one sampling fraction per longitudinal layers (physics-wise)?
+- how many different values do we have for the sampling fraction? Why is that (physics-wise)?
 :::{admonition} Answer
 :class: toggle
-This is due to the geometry: the absorbers have a rectangular shape and the circumference is smaller at the inner radius than at the outer radius. The sensitive media is thus wider (compared to the non-sensitive media) when going to higher radius which is why the sampling fraction grows. Note that the first layer, called the pre-sampler, has a large sampling fraction because the absorbers are made of a material way lighter than Lead there. We do this to improve the quality of the upstream material correction discussed later.
+We have 12 values for the sampling fraction, one per longitudinal layer. This is due to the geometry: the absorbers have a rectangular shape and the circumference is smaller at the inner radius than at the outer radius. The sensitive media is thus wider (compared to the non-sensitive media) when going to higher radius which is why the sampling fraction grows. Note that the first layer, called the pre-sampler, has a large sampling fraction because the absorbers are made of a material way lighter than Lead there. We do this to improve the quality of the upstream material correction discussed later.
 :::
 
 The above command generated 200 events with 10 GeV photon gun and ran the calorimeter reconstruction on it.
