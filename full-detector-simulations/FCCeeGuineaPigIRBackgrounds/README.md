@@ -15,7 +15,7 @@ Guinea-Pig is included in releases of the FCC software and is developed at this 
 Issues and Pull Requests can be submitted there.
 
 
-## Generating e- e+ pairs with Guinea-Pig 
+## Generating $e^{+} e^{-}$ pairs with Guinea-Pig 
 
 In order to run Guinea-Pig (hereafter GP) and generate e- e+ pair background, one should provide the relevant accelerator (beam) parameters, plus some steering parameters to run the software. Those parameters are set in the file acc.dat.
 Currently, one can find the four following accelerators, where the beam parameters correspond to the values considered for FCC CDR (2019).
