@@ -528,7 +528,7 @@ cd MyFirstDetector/build
 make install
 ```
 
-After every change in the geometry, the overlap check must be run. To do so, go to `FCCee_o1_v05` directory and run it as before
+After every change in the geometry, the overlap check must be run. To do so, go to the top working directory and run it as before
 
 
 ```shell
