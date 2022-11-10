@@ -23,6 +23,7 @@ If you'd just like to learn about how to use the FCC software, [read on](softwar
     detector-design-tools/README.md
     developing-fcc-software/README.md
     CONTRIBUTING.md
+    ClementLegacy/index.md
 
 .. toctree::
     :numbered:
