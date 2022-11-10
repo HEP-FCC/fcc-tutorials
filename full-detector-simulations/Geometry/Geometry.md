@@ -3,7 +3,7 @@
 The description of the componentes of a particle detector can be extremely complex. `DD4hep` exploits the properties of `xml` file format to store hierarchically the geometry and materials of each component of a given detector. Thus the detector description is given in one or more `xml` files.
 
  In this section, the following topics are covered:
-* how tow to simulate the existing detector model for `CLD` detector
+* how tow to simulate the existing detector model of the `CLD` detector
 * modify its XML files
 * check for overlaps with Geant4
 * get a better understand of what DD4hep does under the hood
