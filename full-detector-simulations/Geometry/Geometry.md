@@ -568,7 +568,7 @@ if len(sys.argv) < 2:
 inputFile = sys.argv[1]; print("Reading:", inputFile)
 tfile = ROOT.TFile.Open(inputFile)
 myTree = tfile.Get("events")
-myTree.Draw("MyReadout.position.z>>zHist(100, 2300, 2510)", "MyReadout.position.z > 0")
+myTree.Draw("sqrt(MyReadout.position.x*MyReadout.position.x+MyReadout.position.y*MyReadout.position.y)>>rHist(100, 2150, 2352)")
 myTree.Draw("MyReadout.energy>>eHist(30, 0, 0.002)")
 zHist = tfile.Get("zHist")
 eHist = tfile.Get("eHist")
