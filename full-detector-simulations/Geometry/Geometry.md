@@ -575,7 +575,7 @@ eHist = tfile.Get("eHist")
 oFile = ROOT.TFile.Open("temp.root", "RECREATE")
 eHist.Write(); zHist.Write(); oFile.Close()
 uFile = uproot.open("temp.root")
-uFile["zHist"].show()
+uFile["rHist"].show()
 uFile["eHist"].show()
 ```
 
