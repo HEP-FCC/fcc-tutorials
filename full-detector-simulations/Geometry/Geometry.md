@@ -238,7 +238,6 @@ Usually we would add our detector to an existing project, but because overwritin
 ```shell
 mkdir MyFirstDetector
 cd MyFirstDetector
-git init
 touch CMakeLists.txt
 mkdir src
 touch src/MyFirstDetector.cpp
