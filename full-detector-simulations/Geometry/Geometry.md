@@ -6,7 +6,7 @@ The description of the componentes of a particle detector can be extremely compl
 * how tow to simulate the existing detector model of the `CLD` detector
 * modify its XML files
 * check for overlaps with Geant4
-* get a better understand of what DD4hep does under the hood
+* get a better understanding of what DD4hep does under the hood
 * Write your own C++ detector constructor and run with it
 
 This section is adapted from the [talk given by Andre Sailer](https://indico.cern.ch/event/1182767/contributions/5093486/attachments/2532164/4356996/221020_soft_tutorial_dd4hep.pdf) in the *FCC Software Tutorial 2022*.
