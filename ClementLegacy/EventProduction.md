@@ -39,7 +39,7 @@ To send jobs starting from a gridpack that does not exist but that you have prod
 If the gridpack already exists and has been properly added to the correct `config/param_FCCee/hh.py`, then simply run:
 
 ```shell
-python bin/run.py --FCCee --LHE --send --condor --typelhe <gp> -p <process> -n <nevents> -N <njobs> -q <queue> --prodtag <prodtag> --detector <detector>
+python bin/run.py --FCCee --LHE --send --condor --typelhe gp_mg -p <process> -n <nevents> -N <njobs> -q <queue> --prodtag <prodtag> --detector <detector>
 ```
 
 example to send 10 jobs of 10 000 events of ZHH events at 365GeV using the longlunch queue of HTCondor for FCC--ee for the spring2021 production tag and the IDEA detector:
@@ -68,9 +68,25 @@ python bin/run.py --FCC --LHE --send --condor --typelhe mg -p mg_pp_hh_test --mg
 
 The options `--ncpus` and `--priority` can also be specified to increase the numbers of cpus on the cluster and to change the priority queue.
 
+## Generate STDHEP files directly from Whizard + Pythia6
 
+This section describe how to send Whizard + Pythia6 jobs and produce STDHEP files. The steps to be followed can be described as:
+1. Define process in `gridpacklist` in `config/param_FCCee/.py`.
+2. Write the Whizard sin card and put it in: `/eos/experiment/fcc/ee/generation/FCC-config/<prodtag>/FCCee/Generator/Whizard/<version>` by making a Pull Request to the corresponding production tag branch of [FCC-config](https://github.com/HEP-FCC/FCC-config/) for example `wzp6_ee_eeH_ecm240.sin`
+3. Once the Pull Request is approved and the file has appeared on the corresponding `<prodtag>` on `eos`
+4. Send jobs
 
-## Generate FCCSW files from the LHE and decay with Pyhtia8
+```shell
+python bin/run.py --FCCee --STDHEP --send --typestdhep wzp6 --condor -p <process> -N <njobs> -n <nevents> --prodtag <prodtag> -q <queue>
+```
+
+Example produce 1 job of 10000 events of mumuH at FCC-ee 240GeV
+
+```shell
+python bin/run.py --FCCee --STDHEP --send --typestdhep wzp6 --condor -p wzp6_ee_mumuH_ecm240  -N 1 -n 10000 --prodtag spring2021 -q longlunch
+```
+
+## Generate EDM4hep files from the LHE and decay with Pyhtia8
 
 1. If you want to let Pythia decay without specifying anything, you can use the default card, but if you have requested extra partons at matrix element, you might need to specify matching parameters to your pythia card
 2. If you want to use a specific decay, make sure that the decay you want is in `decaylist` and `branching_ratios` of the `config/param_FCCee/hh.py`
@@ -100,10 +116,25 @@ Please note that the decay in pythia is optional, and that there is no need to s
 The options `--ncpus` and `--priority` can also be specified to increase the numbers of cpus on the cluster and to change the priority queue.
 
 
-## Generate FCCSW files from Pythia8
+## Generate EDM4hep files from STDHEP
+
+To produce Delphes EDM4hep files from STDHEP, just run this kind of command
+
+```shell
+python bin/run.py --FCCee --reco --send --type stdhep --condor -p <process> -N <njobs> -q <queue> --prodtag <prodtag> --detector <detector>
+```
+
+For example to run over one STDHEP file of mumuH process:
+
+```shell
+python bin/run.py --FCCee --reco --send --type stdhep --condor -p wzp6_ee_mumuH_ecm240 -N 1 -q longlunch --prodtag spring2021_training --detector IDEA
+```
+
+
+## Generate EDM4hep files from Pythia8
 
 This section describe the way most of the events were produced, using Pythia directly. The steps to be followed can be described as:
-1. Define process in pythialist in the `config/param_FCCee/hh.py` corresponding to your FCC choice.
+1. Define process in `pythialist` in the `config/param_FCCee/hh.py` corresponding to your FCC choice.
 2. Write Pythia8 process card and put it in: `/eos/experiment/fcc/ee/generation/FCC-config/<prodtag>/FCCee/Generator/Pythia8` by making a Pull Request to the corresponding production tag branch of [FCC-config](https://github.com/HEP-FCC/FCC-config/) for example `p8_ee_Zbb_ecm91.cmd`
 3. Once the Pull Request is approved and the file has appeared on the corresponding `<prodtag>` on `eos`, send jobs
 
@@ -236,4 +267,39 @@ python bin/run.py --FCCee --reco --sample --prodtag spring2021
 
 ### All in One
 
-a script can be used
+a script can be used to do all the steps in one go, for example for LHE at FCC-ee:
+
+```shell
+./scripts/cronrun_LHE_FCCee.sh
+```
+
+and for Delphes events:
+
+```shell
+./scripts/cronrun_RECO_FCCee.sh <prodtag> <detector>
+```
+
+for example for Delphes events with `spring2021` production tag and `IDEA` detector:
+
+```shell
+./scripts/cronrun_RECO_FCCee.sh spring2021 IDEA
+```
+
+## Produce samples with EventProducer outside of official campaign
+
+This section explains how you can use the EventProducer to produce your own database of events.
+1. You first need to create three output directories with sufficient disk space. One where the samples could be written, for example on your CERN `eos`. An other public directory to store the database that is created and associate each job/file on eos, and one that can be browsed from the web, for example using your eos cern box for all:
+
+```shell
+For samples  /eos/home-<X>/<cernlogin>/generation/
+For public   /eos/home-<X>/<cernlogin>/public/FCCDicts/
+For web      /eos/home-<X>/<cernlogin>/www/data/FCCee/
+```
+
+2. Edit the file `config/param_FCCee.py`:
+    - Replace `webbasedir` by your directory `For web`
+    - Replace `pubbasedir` by your directory `For public`
+    - Replace `eosbaseoutputdir` by `For samples`
+    - If you want to use your own `FCC-config`, also replace `eosbaseinputdir` to point to where it is cloned.
+
+3. You should now be ready to send jobs using your own work areas, you will have to run the checks yourself, have a look at the [Expert mode](#expert-mode)
