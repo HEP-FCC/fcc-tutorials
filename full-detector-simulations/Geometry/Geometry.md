@@ -176,7 +176,7 @@ In this section, it is shown how to change the number of layers and silicon thic
 
 <details>
 
-<summary><b>Click to show the code of <code>FCCee_o1_v05/ECalEndcap_o2_v01_03.xml</code> </b></summary>
+<summary><b>Click to show that piece of code from <code>FCCee_o1_v05/ECalEndcap_o2_v01_03.xml</code> after the change </b></summary>
 
 ```xml
 <layer repeat="20" vis="ECalLayerVis">
