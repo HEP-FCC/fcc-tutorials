@@ -19,4 +19,7 @@ If you have any problems or questions, you can [open an issue][lessons-issues] o
 
     FccCaloPerformance/CaloFullSimExercise.md
     FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.md
+
+    Geometry/Geometry.md
+    
 ```
