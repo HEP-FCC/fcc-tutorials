@@ -305,7 +305,7 @@ DECLARE_DETELEMENT(MyFirstDetector, create_detector)
 
 
 
-Still inside `MyFirstDetector` directory, execute the following shell commands,
+Still inside the `MyFirstDetector` directory, execute the following shell commands,
 
 ```shell
 mkdir build install
