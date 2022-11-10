@@ -226,7 +226,7 @@ The type attribute of the detector tag tells DD4hep which detector constructor t
 ```
 DD4hep’s plugin service will look in the `*.components` files it finds via the `LD_LIBRARY_PATH` (or `DD4HEP_LIBRARY_PATH` on macOS because of SIP) environment variables, and load the library on-demand, and then instantiate the function.
 
-In order to now which library contains the GenericCalEndcap plugin
+For example, to know which library contains the GenericCalEndcap plugin
 
 
 ```shell
