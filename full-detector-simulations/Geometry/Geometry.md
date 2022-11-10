@@ -19,7 +19,6 @@ Then, the stack with the FCC software can be sourced as
 
 ```shell
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh 
-unset PYTHONPATH
 ```
 
 The following step is to create a working directory,
