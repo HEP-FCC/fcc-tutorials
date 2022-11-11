@@ -128,7 +128,7 @@ that `MCRecoAssociations#0` points to the `ReconstructedParticles`. While the co
 
 Their usage is best understood by looking into the code of [ReconstructedParticle2MC::getRP2MC_index](https://github.com/HEP-FCC/FCCAnalyses/blob/96c132c452469d4f66c8752c0397ba542d61cf75/analyzers/dataframe/src/ReconstructedParticle2MC.cc#L126-L136) reported below:
 
-```cpp
+```python
 ROOT::VecOps::RVec<int>
 ReconstructedParticle2MC::getRP2MC_index(const ROOT::VecOps::RVec<int>& recind,
 					 const ROOT::VecOps::RVec<int>& mcind,
@@ -226,9 +226,33 @@ To retrieve the **parents** of a Monte-Carlo particle: the logics is the same, o
 ## Writing your own function
 
 ### Inline
+With RDataFrame it is possible to define functions inline, like:
+```python
+.Define("myvec", "ROOT::VecOps::RVec<int> v; for (int i : { 1, 2, 3, 4, 5, 6, 7 }) v.push_back(i); return v;")
+.Define("myvecsize", "myvec.size()")
+```
 
+### Using ROOT gInterpreter
+It is also possible to define code using the ROOT gInterpreter
 
-### Using ROOT GInterpreter
+```cpp
+ROOT.gInterpreter.Declare("""
+template<typename T>
+ROOT::VecOps::RVec<T> myRange(ROOT::VecOps::RVec<T>& vec, std::size_t begin, std::size_t end)
+{
+   ROOT::VecOps::RVec<T> ret;
+   ret.reserve(end - begin);
+   for (auto i = begin; i < end; ++i)
+      ret.push_back(vec[i]);
+   return ret;
+}
+""")
+```
+
+and then call it in the `Define`
+```python
+.Define("mysubvec", "myRange(myvec, 2, 4)")
+```
 
 
 ### Writing your own class
