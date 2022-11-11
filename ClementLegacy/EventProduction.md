@@ -86,7 +86,7 @@ Example produce 1 job of 10000 events of mumuH at FCC-ee 240GeV
 python bin/run.py --FCCee --STDHEP --send --typestdhep wzp6 --condor -p wzp6_ee_mumuH_ecm240  -N 1 -n 10000 --prodtag spring2021 -q longlunch
 ```
 
-## Generate EDM4hep files from the LHE and decay with Pyhtia8
+## Generate EDM4hep files from the LHE and decay with Pythia8
 
 1. If you want to let Pythia decay without specifying anything, you can use the default card, but if you have requested extra partons at matrix element, you might need to specify matching parameters to your pythia card
 2. If you want to use a specific decay, make sure that the decay you want is in `decaylist` and `branching_ratios` of the `config/param_FCCee/hh.py`
