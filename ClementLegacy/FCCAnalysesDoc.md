@@ -223,7 +223,7 @@ Again, the first line is needed for RootDataFrame to interpret correctly the pou
 To retrieve the **parents** of a Monte-Carlo particle: the logics is the same, one should use `parents_begin` and `parents_end`, which point to the `Particle#0` collection.
 
 
-## Writing your own function
+## Writing a new function
 
 ### Inline
 With RDataFrame it is possible to define functions inline, like:
@@ -254,5 +254,147 @@ and then call it in the `Define`
 .Define("mysubvec", "myRange(myvec, 2, 4)")
 ```
 
+### Inside an existing FCCAnalyses namespace
+When you believe you need to develop a new function within an existing FCCAnalyses namespace, you should proceed as follow:
+In the corresponding header file in `analyzers/dataframe/FCCAnalyses` you should add the definition of your function, for example:
 
-### Writing your own class
+```cpp
+/// Get the invariant mass from a list of reconstructed particles
+float getMass(const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> & in);
+```
+
+In the corresponding source file in `analyzers/dataframe/src` you should add the implementation of your function, for example:
+
+```cpp
+float getMass(const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> & in){
+  ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double>> result;
+  for (auto & p: in) {
+    ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double>> tmp;
+    tmp.SetPxPyPzE(p.momentum.x, p.momentum.y, p.momentum.z, p.energy);
+    result+=tmp;
+  }
+  return result.M();
+}
+```
+
+Note that for efficiency, the arguments should be passed as const reference.
+
+If your code is simple enough, it can also be only added in the header file `inline` and even templated, for example:
+
+```cpp
+template<typename T> inline ROOT::VecOps::RVec<ROOT::VecOps::RVec<T> >  as_vector(const ROOT::VecOps::RVec<T>& in) {return ROOT::VecOps::RVec<ROOT::VecOps::RVec<T> >(1, in);};
+```
+
+## Writing a new struct
+When you believe you need to develop a new struct within an existing namespace, you should proceed as follow:
+In the header file in `analyzers/dataframe/FCCAnalyses` you should add a `struct` or a `class` like:
+```cpp
+/// Get the number of particles in a given hemisphere (defined by it's angle wrt to axis). Returns 3 values: total, charged, neutral multiplicity
+struct getAxisN {
+public:
+  getAxisN(bool arg_pos=0);
+  ROOT::VecOps::RVec<int> operator() (const ROOT::VecOps::RVec<float> & angle,
+                                      const ROOT::VecOps::RVec<float> & charge);
+private:
+  bool _pos; /// Which hemisphere to select, false/0=cosTheta<0 true/1=cosTheta>0. Default=0
+};
+```
+where the `public` members should contain the name of the function with the constructor arguments (in this example `getAxisN`) and the `operator()` that correspond to the function that will be evaluated for each event and return the output. The private section should contains members that will be needed at run time, usually the arguments of the constructor.
+
+
+In the corresponding source file in `analyzers/dataframe/src` you should add the implementation of your class, for example:
+```cpp
+getAxisN::getAxisN(bool arg_pos){
+	_pos=arg_pos;
+}
+ROOT::VecOps::RVec<int>  getAxisN::operator() (const ROOT::VecOps::RVec<float> & angle,
+	                                             const ROOT::VecOps::RVec<float> & charge){
+  ROOT::VecOps::RVec<int> result={0,0,0};
+  for (size_t i = 0; i < angle.size(); ++i) {
+    if (_pos==1 && angle[i]>0.){
+      result[0]+=1;
+      if (std::abs(charge[i])>0) result[1]+=1;
+      else result[2]+=1;
+    }
+    if (_pos==0 && angle[i]<0.){
+      result[0]+=1;
+      if (std::abs(charge[i])>0) result[1]+=1;
+      else result[2]+=1;
+    }
+  }
+  return result;
+}
+```
+where you separate the class construction and its implementation.
+
+
+## Writing a new namespace
+If you think new namespace is needed, create a new header file in `analyzers/dataframe/FCCAnalyses`, for example `myNamespace.h`. It should look like:
+```cpp
+#ifndef  MYNAMESPACE_ANALYZERS_H
+#define  MYNAMESPACE_ANALYZERS_H
+
+///Add here your defines
+
+namespace FCCAnalyses {
+  namespace myNamespace {
+
+///Add here your functions, structs
+  }
+}
+#endif
+```
+
+create a new source file in `analyzers/dataframe/src`, for example `myNamespace.cc`. It should look like:
+```cpp
+#include "FCCAnalyses/myNamespace.h"
+///Add here your defines
+
+namespace FCCAnalyses{
+  namespace myNamespace{
+    ///Add here your functions, structs
+
+  }
+}
+```
+
+## Writing your own analysis using the case-studies generator
+
+[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+
+For various physics case studies, standard RDF tools might not be sufficient and require a backing library of helper objects and static functions exposed to ROOT.
+
+An analysis package creation tool is developed to provide the minimal building blocks for such extensions and uniformise such developments.
+
+### Analysis package generation
+
+Two modes are currently supported for the linking of these extensions to the analysis framework:
+
+- scan at CMake+compilation time a _standard_ extensions directory (in `case-studies`) where the analysis package can be deployed. It requires an `includes` and `src` subdirectory, along with a `classes_def.xml` and `classes.h` files in the latter for the ROOT dictionary definition.
+- generate a _standalone_ package which can be compiled independently, given the path to this `FCCAnalyses` installation is found. It allows to generate a minimal set of files required to connect this extension to the RDF utilitaries.
+
+The generation of such a package can be done using the following recipe:
+
+```bash
+fccanalysis init [-h] [--name NAME] [--author AUTHOR] [--description DESCRIPTION] [--standalone] [--output-dir OUTPUT_DIR] package
+```
+where the mandatory parameter, `package`, refers to the analysis package name (along with the namespace it will define ; should be unique at runtime).
+Additionally, several optional parameters are handled:
+- `NAME` specifies the analyser helpers filename (where all static functions exposed to the RDF framework through the ROOT dictionary will be stored) ;
+- `AUTHOR`, preferably following the "`name <email@address>`" convention, and `DESCRIPTION`, will be added into the C++ files boilerplates to keep track of the author(s) and purpose(s) of this package ;
+- `--standalone` to switch to the standalone package described above. In combination with the `OUTPUT_DIR` parameter, it allows to store the minimal working example in a completely arbitrary path (instead of the standard `case-studies` subdirectory) with its own CMake directive.
+
+In the _standalone_ mode, the analysis package can be built using the standard CMake recipe, given the FCCAnalyses environment in `setup.sh` is properly sourced:
+
+```bash
+mkdir build && cd build
+cmake ${OUTPUT_DIR} && make
+make install
+```
+The latter ensures that the headers and shared library/ROOT translation dictionaries are installed in a location reachable by FCCAnalyses.
+
+### Analysis package exposure to RDF
+
+To allow an arbitrary multiplicity of analysis packages to be handled at the level of a configuration script runnable with "`fccanalysis run`", an additional (optional) `analysesList` list-type object can be parsed.
+
+On top of the usual `FCCAnalyses` shared object, includes, and corresponding dictionary, the custom case study analysis package name will be parsed, and automatically loaded in the ROOT runtime environment to be exposed to the RDF interface.
