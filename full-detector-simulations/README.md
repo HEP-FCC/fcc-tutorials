@@ -21,5 +21,6 @@ If you have any problems or questions, you can [open an issue][lessons-issues] o
     FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.md
 
     Geometry/Geometry.md
+    Visualization/Visualization.md
     
 ```

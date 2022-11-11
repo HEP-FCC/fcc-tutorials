@@ -1,5 +1,38 @@
 # Visualization
 
+Visualization is of paramount importance in order to easily understand the behaviour of the detector and simulation. In this section, several tools of visualizing the detector geometry and the particle tracks are provided.
+
+## Key4hep tool: geoDisplay
+
+The tool `geoDisplay` is available as part of `Key4hep` project. To use it, first we need to source it from `LCG`
+
+```shell
+source /cvmfs/sft.cern.ch/lcg/views/dev4/latest/x86_64-centos7-gcc11-opt/setup.sh 
+```
+
+To use it, just pass as first argument the `xml` file with the detector description, for example
+
+```shell
+geoDisplay $DD4hepINSTALL/DDDetectors/compact/SiD.xml
+```
+
+## Geant4 
+
+The `Geant 4` visualization capabilities can be accesed as
+
+```shell
+source /cvmfs/sft.cern.ch/lcg/views/dev4/latest/x86_64-centos7-gcc11-opt/setup.sh 
+ddsim --compactFile $DD4hepINSTALL/DDDetectors/compact/SiD.xml --runType vis
+```
+
+This version of `Geant 4` is built with `Qt` interface, and can be explicitly called as
+
+```shell
+ddsim --compactFile $DD4hepINSTALL/DDDetectors/compact/SiD.xml --runType qt
+```
+
+As in the previous step, the `LCG` version of `Key4hep` was sourced.
+
 ## Phoenix@FCC
 
 [Phoenix](https://github.com/HSF/phoenix) is a web based event display for High
@@ -12,9 +45,7 @@ second one will be yours with the recent web browser. We will call the first
 one the _remote machine_ and the second one the _local machine_.
 
 
-## Event Data
-
-### CLD Reconstructed Events
+### Event Data from CLD Reconstructed Events
 
 Let's start with the visualization of the event data in the established detector
 design CLD, which started its life as the detector designed for the CLIC linear
@@ -93,20 +124,20 @@ To upload the EDM4hep JSON file into the
 [Phoenix](https://fccsw.web.cern.ch/fccsw/phoenix/#/fccee-cld/) use the upload
 button in the lover right corner of the web page
 
-```{image} phoenix_upload.png
+```{image} https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_upload.png
 :align: center
 ```
 
 to bring up modal with our desired upload option
 
-```{image} phoenix_upload_edm4hepjson.png
+```{image} https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_upload_edm4hepjson.png
 :align: center
 :width: 300px
 ```
 
 The detector and event data might look similar to this screenshot
 
-```{figure} phoenix_cld.png
+```{figure} https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_cld.png
 :align: center
 :width: 600px
 
@@ -117,11 +148,11 @@ Example reconstructed event in CLD detector
 :::{admonition} EDM4hep JSON File
 :class: solution dropdown
 The obtained EDM4hep JSON file should look similar to
-[this one](./tops_cld.edm4hep.json) [Right click to download].
+[this one](https://fccsw.web.cern.ch/fccsw/tutorials/static/json/tops_cld.edm4hep.json) [Right click to download].
 :::
 
 
-## Delphes Fast Simulation
+### Event Data from Delphes Fast Simulation
 
 Starting the same way as in [](delphesedm4hep) we will first generate few
 events on the remote machine. One can reuse the files generated for that
@@ -205,13 +236,11 @@ of the IDEA detector.
 :::{admonition} EDM4hep JSON File
 :class: solution dropdown
 The obtained EDM4hep JSON file should look similar to
-[this one](./p8_ee_ZH_ecm240_edm4hep.edm4hep.json) [Right click to download].
+[this one](https://fccsw.web.cern.ch/fccsw/tutorials/static/json/p8_ee_ZH_ecm240_edm4hep.edm4hep.json) [Right click to download].
 :::
 
 
-## Detector Geometry
-
-### Detector for the Phoenix
+### Detector Geometry
 
 There are several ways how to import FCC detector geometry into Phoenix.
 Currently the preferred method is to convert compact DD4hep file(s) to
@@ -254,13 +283,13 @@ download it to the local machine with `scp` and then upload it into
 [JSROOT](https://root.cern/js/latest/). This way we don't have to have ROOT
 installed on our local machine.
 
-```{image} jsroot_upload.png
+```{image} https://fccsw.web.cern.ch/fccsw/tutorials/static/png/jsroot_upload.png
 :align: center
 ```
 
 Resulting in the following visualization
 
-```{figure} jsroot_lar.png
+```{figure} https://fccsw.web.cern.ch/fccsw/tutorials/static/png/jsroot_lar.png
 :align: center
 :width: 600px
 
@@ -339,7 +368,7 @@ http://127.0.0.1:8000
 
 In the web browser we should see directory listing similar to this one:
 
-```{image} gltfconv.png
+```{image} https://fccsw.web.cern.ch/fccsw/tutorials/static/png/gltfconv.png
 :align: center
 ```
 
@@ -349,14 +378,14 @@ file can be uploaded into Playground section of the
 [Phoenix](https://fccsw.web.cern.ch/fccsw/phoenix/#/playground) application by
 selecting the correct geometry file format:
 
-```{image} phoenix_playground_upload.png
+```{image} https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_playground_upload.png
 :align: center
 :width: 300px
 ```
 
 The resulting visualization will be similar to the following screenshot
 
-```{figure} phoenix_playground_lar.png
+```{figure} https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_playground_lar.png
 :align: center
 :width: 600px
 
@@ -366,7 +395,7 @@ Example reconstructed event in CLD detector
 :::{admonition} glTF File
 :class: solution dropdown
 The obtained glTF file should look similar to
-[this one](./fccee_lar.gltf) [Right click to download].
+[this one](https://fccsw.web.cern.ch/fccsw/tutorials/static/gltf/fccee_lar.gltf) [Right click to download].
 :::
 
 :::{admonition} LAr Clusters

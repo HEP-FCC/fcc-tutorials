@@ -20,7 +20,6 @@ If you'd just like to learn about how to use the FCC software, [read on](softwar
     fast-sim-and-analysis/README.md
     full-detector-simulations/README.md
     distributed-computing/README.md
-    detector-design-tools/README.md
     developing-fcc-software/README.md
     CONTRIBUTING.md
 
