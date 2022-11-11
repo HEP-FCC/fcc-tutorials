@@ -5,4 +5,6 @@
     :caption: Contents:
 
     EventProduction.md
+    FCCAnalyses.md
+    FCCAnalysesDoc.md
 ```
