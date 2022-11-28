@@ -87,9 +87,10 @@ ddsim --compactFile $LCGEO/FCCee/compact/FCCee_o1_v04/FCCee_o1_v04.xml \
 ```
 
 and after that, run the reconstruction with the help of
-[this](./fccRec_e4h_input.py) steering file
+[this](https://fccsw.web.cern.ch/fccsw/tutorials/static/python/fccRec_e4h_input.py)
+steering file
 ```sh
-wget https://hep-fcc.github.io/fcc-tutorials/_downloads/e88cc1443945cfce03b3957f319c2288/fccRec_e4h_input.py
+wget https://fccsw.web.cern.ch/fccsw/tutorials/static/python/fccRec_e4h_input.py
 k4run fccRec_e4h_input.py
 ```
 
@@ -243,11 +244,12 @@ The obtained EDM4hep JSON file should look similar to
 ### Detector Geometry
 
 There are several ways how to import FCC detector geometry into Phoenix.
-Currently the preferred method is to convert compact DD4hep file(s) to
-ROOT files and from ROOT files to glTF files. The first conversion
+Currently the preferred method is to convert compact DD4hep file(s) to ROOT
+files and from ROOT files to glTF files. The first conversion
 (`.xml` -> `.root`) is straightforward and can be done using script like
-[this](dd4hep2root). With the most important part being the building of the
-detector geometry from the compact file
+[this](https://fccsw.web.cern.ch/fccsw/tutorials/static/python/dd4hep2root).
+With the most important part being the building of the detector geometry from
+the compact file
 
 ```python
 import ROOT
@@ -265,7 +267,7 @@ ROOT.gGeoManager.Export(out_path)
 We will try to convert FCCee Noble Liquid Calorimeter. On the remote machine
 with FCCSW stack already sourced download the `dd4hep2root` script
 ```sh
-wget https://hep-fcc.github.io/fcc-tutorials/_downloads/377c138aa7fab03e92ec8acb44b30be7/dd4hep2root
+wget https://fccsw.web.cern.ch/fccsw/tutorials/static/python/dd4hep2root
 ```
 make it executable
 ```
