@@ -34,10 +34,10 @@ Then, copy the CLD detector description into the working directory,
 cp -r $LCGEO/FCCee/compact/FCCee_o1_v05 .
 ```
 
-In order to plot the histograms in the terminal, the uproot python package is used and it can be installed with the following command
+In order to plot the histograms in the terminal, the histoprint python package is used and it can be installed with the following command
 
 ```shell
-pip install --user uproot3
+pip install --user histoprint
 ```
 
 If everything goes as expected, the contents of your working directory shall look this:
@@ -58,24 +58,23 @@ Another ingredient is a script to plot some information after the simulations to
 
 ```python
 #!/bin/env python
-import sys, ROOT, uproot3 as uproot
-from ROOT import TFile, TTree
+import sys, ROOT
+from histoprint import print_hist
+
 ROOT.gROOT.SetBatch(True)
+
 if len(sys.argv) < 2:
-  print("Please specify input file"); sys.exit(1)
+    print("Please specify input file"); sys.exit(1)
 inputFile = sys.argv[1]; print("Reading:", inputFile)
+
 tfile = ROOT.TFile.Open(inputFile)
 myTree = tfile.Get("events")
 myTree.Draw("ECalEndcapCollection.position.z>>zHist(100, 2300, 2510)",
-"ECalEndcapCollection.position.z > 0")
+            "ECalEndcapCollection.position.z > 0")
 myTree.Draw("ECalEndcapCollection.energy>>eHist(30, 0, 0.002)")
-zHist = tfile.Get("zHist")
-eHist = tfile.Get("eHist")
-oFile = ROOT.TFile.Open("temp.root", "RECREATE")
-eHist.Write(); zHist.Write(); oFile.Close()
-uFile = uproot.open("temp.root")
-uFile["zHist"].show()
-uFile["eHist"].show()
+
+print_hist(tfile.Get("zHist"), title="Hits per Layer")
+print_hist(tfile.Get("eHist"), title="Energy per Hit")
 ```
 
 </details>
@@ -558,8 +557,8 @@ Modify `showPlots.py` to display properties from this collection (MyReadout).
 
 ```python
 #!/bin/env python
-import sys, ROOT, uproot3 as uproot
-from ROOT import TFile, TTree
+import sys, ROOT
+from histoprint import print_hist
 ROOT.gROOT.SetBatch(True)
 if len(sys.argv) < 2:
   print("Please specify input file"); sys.exit(1)
@@ -568,13 +567,9 @@ tfile = ROOT.TFile.Open(inputFile)
 myTree = tfile.Get("events")
 myTree.Draw("sqrt(MyReadout.position.x*MyReadout.position.x+MyReadout.position.y*MyReadout.position.y)>>rHist(100, 2150, 2352)")
 myTree.Draw("MyReadout.energy>>eHist(30, 0, 0.002)")
-rHist = tfile.Get("rHist")
-eHist = tfile.Get("eHist")
-oFile = ROOT.TFile.Open("temp.root", "RECREATE")
-eHist.Write(); rHist.Write(); oFile.Close()
-uFile = uproot.open("temp.root")
-uFile["rHist"].show()
-uFile["eHist"].show()
+print_hist(tfile.Get("rHist"), title="Hits per Layer")
+print_hist(tfile.Get("eHist"), title="Energy per Hit")
+
 ```
 
 </details>
