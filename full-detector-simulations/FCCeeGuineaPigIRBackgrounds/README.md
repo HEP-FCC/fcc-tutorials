@@ -106,6 +106,49 @@ cmake -C $ILCSOFT/ILCSoft.cmake ..
 make install
 ```
 
+
+## Tracking the pairs in the detector using Key4HEP
+
+The incoherent e+e- pairs produced by GP for a bunch crossing are stored in the file `pairs.dat`, which can be directly read as input for full simulation in Key4HEP using the `MDIReader` tool.
+This is used to boost the particles in the detector frame and shoot them in the detector using the particle gun.
+An example on how to call this in the Key4HEP steering file is the following:
+
+```
+... 
+
+from Configurables import MDIReader
+mdi_converter = MDIReader("Reader",MDIFilename="pairs.dat")
+mdi_converter.GenParticles.Path = "allGenParticles"
+mdi_converter.CrossingAngle = 0.015                     #crossing angle [rad]
+mdi_converter.LongitudinalCut = 0
+mdi_converter.InputType = "guineapig"                   #flag to read GP files
+mdi_converter.BeamEnergy = 182.5                        #beam energy [GeV]
+
+...
+
+particle_converter = SimG4PrimariesFromEdmTool("EdmConverter")
+particle_converter.GenParticles.Path = "allGenParticles"
+
+...
+
+geantsim = SimG4Alg("SimG4Alg",
+                    outputs = [
+		    #your_list_of_outputs
+		    ],
+                    eventProvider=particle_converter)
+                    
+...
+
+from Configurables import ApplicationMgr
+ApplicationMgr( TopAlg = [mdi_converter, geantsim, out],
+                EvtSel = 'NONE',
+                EvtMax   = 1,
+                ExtSvc = [podioevent, geoservice, geantservice],
+                OutputLevel=INFO
+               )
+```
+
+
 ## GP production of $\gamma\gamma$ hadrons
 
 In order to produce $\gamma\gamma$ to hadrons with GP, we need to add the following commands inside the configuration file acc.dat
