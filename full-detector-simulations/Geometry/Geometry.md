@@ -50,7 +50,7 @@ drwxr-xr-x. 3 sailer zf 26 Oct 14 11:30 .
 drwxr-xr-x. 2 sailer zf 4096 Oct 14 11:30 FCCee_o1_v05
 ```
 
-Another ingredient is a script to plot some information after the simulations to show that the geometry really did change. [This python script](showPlots.py) plots the per hit energy deposition and position along Z axis in the ECal endcap. The histograms are printed in the terminal to avoid the use of a graphical interface. If a graphical system is available, one can also visualize the geometry with `geoDisplay` or the Geant4 visualizations.
+Another ingredient is a script to plot some information after the simulations to show that the geometry really did change. The `showPlots.py` script plots the per hit energy deposition and position along Z axis in the ECal endcap. The histograms are printed in the terminal to avoid the use of a graphical interface. If a graphical system is available, one can also visualize the geometry with `geoDisplay` or the Geant4 visualizations.
 
 <details>
 
