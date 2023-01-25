@@ -490,13 +490,13 @@ In this section we describe, with exercises, the generation of an equivalent sam
 `KKMCee`, `Pythia8` and `Whizard`. The process chosen is e<sup>-</sup>e<sup>+</sup> &rarr; tau<sup>-</sup>tau<sup>+</sup> (hereafter referred to as _ditaus_) at a centre of mass energy of 91.2 GeV. In the three cases 10000 will be generated and saved in `ROOT` files in `EDM4hep` format.
 
 ### Generating ditaus with KKMCee
-As shown in the [KKMCee section](#kkmcee), event generation with the `KKMCee` is controlled through a configuration file. The interface available in `key4hep` allowd a generation of the configuration file through command line switches. Starting from the command line switches is therefore always a good option when no confguration file is available.
+As shown in the [KKMCee section](#kkmcee), event generation with the `KKMCee` is controlled through a configuration file. The interface available in `key4hep` allowed a generation of the configuration file through command line switches. Starting from the command line switches is therefore always a good option when no confguration file is available.
 
-`KKMCee` does not have currently the option to save directly the events in `EDM4hep` format. In order to get there we need first to generate the events in `HepMC` format.
+Currently, `KKMCee` does not have the option to save directly the events in `EDM4hep` format. In order to get there we need first to generate the events in `HepMC` format.
 
 #### Generating `HepMC` events
 
-What are the command like option to generate 10000 ditau events ane saved them into the file kk_tautau_10000.hepmc ? 
+What are the commands (options) to generate 10000 ditau events and saved them into the file kk_tautau_10000.hepmc ? 
 
 :::{admonition} Suggested answer
 :class: toggle
