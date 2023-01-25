@@ -13,7 +13,7 @@ This tutorial will teach you how to:
 -   produce plots with **FCCAnalyses**
 :::
 
-First login to to a fresh shell on lxplus, on OSG, or in one of the virtual machine that could be provided on open stack. Usage of bash shell is highly recommended. Create a working directory and go inside
+First login to a fresh shell on lxplus, on OSG, or in one of the virtual machines that could be provided on open stack. Usage of bash shell is highly recommended. Create a working directory and go inside
 
 ```
 mkdir mytutorial
@@ -44,7 +44,7 @@ When sourcing the stack, you should see a message like:
  ... done. 
 ```
 
-this is telling that you have sourced the `key4hep-stack` version `2021-06-02`.
+which means that the version `2021-06-02` of `key4hep-stack` is sourced.
 
 You can check all the packages associated to this release by using spack
 
@@ -81,11 +81,11 @@ wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Gener
 ```
 
 
-The detector response of the the baseline FCC-ee IDEA detector configuration is estimated with Delphes.
+The detector response of the baseline FCC-ee IDEA detector configuration is estimated with Delphes.
 Other detector cards can be found in the `$DELPHES_DIR/cards` directory, such as a ATLAS, CMS or ILD detector configurations:
 `delphes_card_ATLAS.tcl`, `delphes_card_CMS.tcl` and `delphes_card_ILD.tcl`. 
 
-But let's download the offical one:
+But let's download the official one:
 
 ```bash
 wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Delphes/card_IDEA.tcl
@@ -107,7 +107,7 @@ pythia_card - Pythia8 configuration file,
 output_file - output file in ROOT format.
 ```
 
-where the first argument is the delphes card, the second argument the configuration file for the edm4hep output (see later) the third argument is the pythia card and last argument is the output file name.
+where the first argument is the delphes card, the second argument the configuration file for the edm4hep output (see later), the third argument is the pythia card and the last argument is the output file name.
 
 Before running we need to define the collections that we want to write. The first name for example `GenParticleCollections` is the type of output collection in EDM4hep (in this case `GenParticleCollections` is of type `edm4hep::MCParticleCollection`) and the second argument for example `Particle` is the name of the collection in the Delphes card that will be used and stored in the EDM4Hep output file with the same name.
 
