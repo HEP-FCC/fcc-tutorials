@@ -193,7 +193,7 @@ processList = {
 }
 
 #Link to the dictonary that contains all the cross section informations etc...
-procDict = "https://fcc-physics-events.web.cern.ch/fcc-physics-events/sharedFiles/FCCee_procDict_spring2021_IDEA.json"
+procDict = "https://fcc-physics-events.web.cern.ch/fcc-physics-events/data/FCCDicts/FCCee_procDict_spring2021_IDEA.json"
 
 #produces ROOT TTrees, default is False
 doTree = True
