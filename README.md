@@ -22,6 +22,7 @@ If you'd just like to learn about how to use the FCC software, [read on](softwar
     distributed-computing/README.md
     developing-fcc-software/README.md
     CONTRIBUTING.md
+    ClementLegacy/index.md
 
 .. toctree::
     :numbered:
