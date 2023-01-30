@@ -1,7 +1,19 @@
-# Production of events
+# Central production of events
 
-The production of events for FCC physics studies is done using the [EventProducer](https://github.com/HEP-FCC/EventProducer) framework.
-In order to use it, please get in contact with the FCC software and computing coordinators as running central production of events specific rights [(see here)](https://hep-fcc.github.io/FCCSW/computing/computing.html). When samples produced by this framework they will appear on this [web-page](http://fcc-physics-events.web.cern.ch/)
+The central production of events for FCC physics studies is done using the
+[EventProducer](https://github.com/HEP-FCC/EventProducer) framework.
+
+:::{admonition} Get in touch with coordinators
+:class: prereq
+In order to use the [EventProducer](https://github.com/HEP-FCC/EventProducer),
+please get in contact with the FCC software and computing coordinators as
+running central production of events requires specific rights
+[(see here)](https://hep-fcc.github.io/FCCSW/computing/computing.html).
+
+When samples produced by the [EventProducer](https://github.com/HEP-FCC/EventProducer)
+framework are ready they will appear on this
+[web-page](http://fcc-physics-events.web.cern.ch/).
+:::
 
 
 ## Clone and initialisation
@@ -58,7 +70,12 @@ To send jobs directly from MG5, you need a configuration file (see in `mg5/examp
    - a `cuts.f` file (containing additional cuts)
    - a model (see in `models` directory for instance)
 
-**N.B.** At the moment no example is generated for FCC-ee this way. Below is an example for FCC-hh.
+:::{admonition} Nota Bene
+:class: callout
+
+At the moment no example is generated for FCC-ee this way. Below is an example
+for FCC-hh.
+:::
 
 As before, you need to add the process to the `config/param_FCChh.py` file. Then you can run with the following command:
 
@@ -97,7 +114,13 @@ For a given production tag <prodtag> of FCC-ee this directory is:
 /eos/experiment/fcc/ee/generation/FCC-config/<prodtag>/FCCee/Generator/Pythia8/
 ```
 
-**N.B.**: please do not write directly on eos. Cards should be added by making a documented pull request to the corresponding production tag branch in [FCC-config](https://github.com/HEP-FCC/FCC-config/)
+:::{admonition} Nota Bene
+:class: callout
+
+Please do not write directly on EOS. Cards should be added by making a
+documented pull request to the corresponding production tag branch in
+[FCC-config](https://github.com/HEP-FCC/FCC-config/).
+:::
 
 4. Send the jobs:
 
@@ -150,7 +173,13 @@ python bin/run.py --FCCee --reco --send --type p8 -p p8_ee_ZH_ecm240 -n 10000 -N
 
 The options `--ncpus` and `--priority` can also be specified to increase the numbers of cpus on the cluster and to change the priority queue.
 
-**Important**: If `--pycard` option not specified, this step will run with the default Pythia8 card (in this case `p8_ee_default.cmd`), that does not include specific decays nor specific matching/merging parameters.
+:::{admonition} Important
+:class: callout
+
+If `--pycard` option is not specified, this step will run with the default
+Pythia8 card (in this case `p8_ee_default.cmd`), that does not include specific
+decays nor specific matching/merging parameters.
+:::
 
 To assist you in writing your own Pythia8 configuration cards, the manual is available [here](http://home.thep.lu.se/~torbjorn/pythia81html/Welcome.html)
 

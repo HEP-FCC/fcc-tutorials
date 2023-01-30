@@ -1,6 +1,4 @@
-# FCCAnalyses documentation
-
-*This page is under development, please be kind in case of inaccuracies*
+# FCCAnalyses: Common problems and solutions
 
 This directory contains a number of examples each showcasing a specific functionality of the FCCAnalyses framework. It serves as a reference guide for how to implement specific common usecases or you can work through the examples one-by-one in order as a tutorial to familiarize yourself with the full functionality of the framework.
 
@@ -36,7 +34,7 @@ root[0] TBrowser b
 ```
 
 <br/><br/>
-```{figure} figs/browser_events.png
+```{figure} images/browser_events.png
 ---
 class: with-border
 ---
@@ -59,7 +57,7 @@ Indeed, the `Muon` collection itself contains nothing (see screenshot below): al
 together with `Muon#0`, just provides a convenient way to access, among the `ReconstructedParticles`, those that were identified as muons.
 
 <br/><br/>
-```{figure} figs/browser_Muon0.png
+```{figure} images/browser_Muon0.png
 ---
 class: with-border
 ---
@@ -69,7 +67,7 @@ class: with-border
 The same holds for the `Electron` and `Photon` collections. On the other hand, the `MissingET` collection is already a `ReconstructedParticle`, as can be seen by inspecting it in the browser:
 
 <br/><br/>
-```{figure} figs/browser_missingET.png
+```{figure} images/browser_missingET.png
 ---
 class: with-border
 ---
@@ -108,7 +106,7 @@ Below you can find an overview of the basic, most commonly required functions, t
 | PDG ID  | `get_pdg(object)`  | `MCParticle` |
 
 
-If you want to add your own function have a look at the [Writing your own function](#writing-your-own-function) section on this page.
+If you want to add your own function have a look at the [Writing a new function](#writing-a-new-function) section on this page.
 
 For the name of the object, in principle the names of the EDM4HEP collections are used - photons, muons and electrons are an exception where a few extra steps are required, as shown in the example here.
 
