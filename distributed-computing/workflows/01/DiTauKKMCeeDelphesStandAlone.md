@@ -27,7 +27,7 @@ e.g. at CERN (storage element `CERN-DST-EOS`):
 This exercise constist of two steps, the event generation with `KKMCee` and the `Delphes` simulation.
 
 For the first step we need the `KKMC` DIRAC application which we configure with the process, the number of events, the energy and
-the nale of the output file.
+the name of the output file.
 
 The second step consists in running the `DelphesPythia8_EDM4HEP` standalone application with arguments
 
