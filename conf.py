@@ -1,7 +1,7 @@
 import sphinx_rtd_theme
 
 project = 'FCC Tutorials'
-copyright = '2022, CERN'
+copyright = '2023, CERN'
 html_logo = '_static/img/fcc-logo-light.png'
 html_favicon = '_static/img/favicon.ico'
 html_theme = 'sphinx_rtd_theme'

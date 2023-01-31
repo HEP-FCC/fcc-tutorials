@@ -29,7 +29,8 @@ If you'd just like to learn about how to use the FCC software, [read on](softwar
     :includehidden:
     :caption: External links:
 
+    FCCSW main page <https://hep-fcc.github.io/FCCSW/>
+    FCCAnalyses reference documentation <https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html>
     Analysis essentials <https://hsf-training.github.io/analysis-essentials/>
-    LHCb starterkit <https://lhcb.github.io/starterkit>
     FCC software glossary <https://hep-fcc.github.io/glossary>
 ```
