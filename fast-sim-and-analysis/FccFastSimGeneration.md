@@ -860,7 +860,7 @@ and `cthetauminus`, and perhaps also `invmass`.
 :::{admonition} Hint
 :class: toggle
 
-:::
 Look at the `ROOT` tutorials for `RDataFrame`, `TTree` and `Hist`.
+:::
 
 What can you say from the comparison?
