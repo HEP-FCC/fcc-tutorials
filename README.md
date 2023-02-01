@@ -1,12 +1,14 @@
 # The FCC Starterkit  
 
-These are the lessons taught during the [FCC Starterkit][starterkit] (the format is heavily inspired by the LHCb starterkit!).
-If you'd like to join the next workshop, visit [the website](https://cern.ch/fccsw) to find out when that will how and how to sign up.
+These are the lessons taught during the [FCC Tutorials][tutorial] (the format is heavily inspired by the [LHCb starterkit][lhcb-starterkit]).
+If you'd like to join the next tutorial, visit [the FCCSW website][fccsw-website] to find out when it will happen and how to sign up.
 
-If you'd just like to learn about how to use the FCC software, [read on](software-basics/README)!
+If you'd just like to learn about how to use the FCC software, [read on][first-analysis-steps]!
 
-[starterkit]: https://hep-fcc.github.io/fcc-tutorials
-[first-analysis-steps]: https://hep-fcc.github.io/fcc-tutorials/software-basics/
+[fccsw-website]: https://cern.ch/fccsw
+[tutorial]: https://hep-fcc.github.io/fcc-tutorials
+[lhcb-starterkit]: https://lhcb.github.io/starterkit-lessons/index.html
+[first-analysis-steps]: https://hep-fcc.github.io/fcc-tutorials/software-basics/README.html
 
 
 ```{eval-rst}
