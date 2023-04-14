@@ -1,4 +1,4 @@
-import sphinx_rtd_theme
+# import sphinx_rtd_theme
 
 project = 'FCC Tutorials'
 copyright = '2023, CERN'
@@ -26,7 +26,8 @@ extensions = [
     'myst_parser',
     'sphinx_rtd_theme',
     'sphinx_togglebutton',
-    'sphinx_copybutton'
+    'sphinx_copybutton',
+    'sphinx_multiversion',
 ]
 
 myst_enable_extensions = [
@@ -45,6 +46,14 @@ html_static_path = [
 html_css_files = [
     'css/custom-admonitions.css'
 ]
+
+templates_path = [
+    '_templates',
+]
+
+smv_tag_whitelist = r'^(?!(v0.1.0|v0.2.0))$'
+smv_branch_whitelist = r'^(?!(HEAD|vvolkl-patch-|starterkit|gh-pages)).*$'
+smv_remote_whitelist = r'^(origin)$'
 
 linkcheck_ignore = [
     # FIXME: The URLs have changed
