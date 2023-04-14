@@ -37,16 +37,21 @@ hands-on stuff.
 These lessons have been put together over the years by a lot of people who are
 passionate about good software practices and demystifying code.
 Over the course of 2015, the first version of these lessons have been written on
-[GitHub](https://github.com), a code sharing and collaboration website.
-You can find the source code of these lessons in the
-[`HEP-FCC/fcc-tutorials`](https://github.com/hep-fcc/fcc-tutorials/)
+[GitHub][github], a code sharing and collaboration website. You can find the
+source code of these lessons in the [HEP-FCC/fcc-tutorials][fcc-tutorials]
 repository, and __you__ can contribute!
 
-Please [submit an issue](https://github.com/hep-fcc/fcc-tutorials/issues) if
-you spot a mistake or you think something isn't clear enough, or you can
-[make the changes yourself](contributing-lesson)
-and open a pull request.
-If you're not already familiar with git, you could check out the LHCb [analysis 
-essentials](https://lhcb.github.io/analysis-essentials/) course.
+Please [submit an issue][fcc-tutorials-issues] if you spot a mistake or you
+think something isn't clear enough, or you can
+[make the changes yourself](contributing-lesson) and open a pull request.
+
+If you're not already familiar with git, you could check out the HSF
+[Analysis essentials][analysis-essentials] course.
 
 So, enough with the introduction, let's dive in!
+
+
+[github]: https://github.com/
+[fcc-tutorials]: https://github.com/hep-fcc/fcc-tutorials/
+[fcc-tutorials-issues]: https://github.com/hep-fcc/fcc-tutorials/issues/
+[analysis-essentials]: https://hsf-training.github.io/analysis-essentials/
