@@ -1,3 +1,4 @@
+(contributing-lesson)=
 # Contributing
 
 [starterkit-lessons][repo] is an open source project, and we welcome contributions of all kinds:
