@@ -1,4 +1,4 @@
-# The FCC Starterkit  
+# The FCC Tutorials
 
 These are the lessons taught during the [FCC Tutorials][tutorial] (the format is heavily inspired by the [LHCb starterkit][lhcb-starterkit]).
 If you'd like to join the next tutorial, visit [the FCCSW website][fccsw-website] to find out when it will happen and how to sign up.
