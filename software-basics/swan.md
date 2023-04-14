@@ -23,12 +23,12 @@ Documentation on how to use notebooks is easy to find online (<https://jupyter-n
 
 The default kernel is running python3, but you can run general bash commands as well, either by prefixing a command with an exclamation mark
 
-```python
+```
 !ls
 ```
 or the bash cell magic (works for multiple files):
 
-```python
+```
 %%bash
 ls
 ```

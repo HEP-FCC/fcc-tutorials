@@ -1,4 +1,4 @@
-## Overview of the submission scripts
+# Overview of the submission scripts
 
 Command line submission to DIRAC is performed using python scripts instantiating the relevant classes.
 The general structure of the script is the following:
@@ -106,7 +106,7 @@ print job.submit(dIlc, mode='wms')
 
 Local submission can be used for testing.
 
-### Before starting: cloning of workflows repository
+## Before starting: cloning of workflows repository
 
 The example scripts described in these pages, together with the relevant setup scripts, are available from the
 [FCCDIRAC][fccdirac] repository.
