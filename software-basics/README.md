@@ -1,6 +1,6 @@
 # First  Steps
 
-This is the FCC Starterkit, a series of lessons for getting physicists working confidently with FCC data and software.
+This is the FCC Tutorials, a series of lessons for getting physicists working confidently with FCC data and software.
 The lessons are best approached one after the other, as most lessons build on the knowledge gained from the previous ones.
 
 If you have any problems or questions, you can [send an email to `fcc-experiments-sw-dev@cern.ch`](mailto:fcc-experiments-sw-dev@cern.ch).

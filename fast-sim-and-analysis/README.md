@@ -9,12 +9,13 @@ discontinued.
 
 An analysis ntuple will be produced with ROOT's RDataFrame, a simple modular event processing framework for high energy physics.
 
-If you have any problems or questions, you can [open an issue][lessons-issues] on the [GitHub repository where these lessons are developed][lessons-repo].
+If you have any problems or questions, you can
+[open an issue][fcc-tutorials-issues] on the
+[GitHub repository where these lessons are developed][fcc-tutorials-repo].
 
 
-[starterkit]: https://HEP-FCC.github.io/starterkit/
-[lessons-issues]: https://github.com/HEP-FCC/starterkit-lessons/issues
-[lessons-repo]: https://github.com/HEP-FCC/starterkit-lessons
+[fcc-tutorials-issues]: https://github.com/HEP-FCC/fcc-tutorials/issues
+[fcc-tutorials-repo]: https://github.com/HEP-FCC/fcc-tutorials
 
 ```{eval-rst}
 .. toctree::
