@@ -15,11 +15,11 @@ jobs:
         pip3 install -r requirements.txt
     - name: Sphinx build
       run: |
-        sphinx-build -M html . build
+        sphinx-multiversion . build
     - name: Publish gh-pages
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
       run: |
-        cd build/html
+        cd build
         git init
         git config user.name "Key4hep bot"
         git config user.email "Key4hep.bot@example.com"
@@ -30,6 +30,7 @@ jobs:
         git commit -m "Initial commit"
         git branch -m gh-pages
         touch .
+        cp ../.github/aux/gh-pages-redirect.html index.html
         git add -A .
         git commit -m "Rebuild page at ${GITHUB_SHA}"
         git push -f upstream gh-pages:gh-pages
