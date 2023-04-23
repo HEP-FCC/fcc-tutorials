@@ -627,7 +627,7 @@ i.e the total ditau cross-section at 91.2 GeV from `KKMCee` is 1480.2 +- 7.0 pb 
 In order to get the events in `EDM4hep` format, we will use `Gaudi` and the tools available in [k4FWCore](https://github.com/key4hep/k4FWCore) and [k4Gen](https://github.com/HEP-FCC/k4Gen/). We need a Gaudi steering file that reads the `HepMC` file and writes out the `EDM4hep` file.
 A minimal version of such a steering code is available on the tutorial reference page:
 ```
-wget http://fccsw.web.cern.ch/tutorials/october2020/tutorial1/hepmc2edm.py .
+wget http://fccsw.web.cern.ch/tutorials/october2020/tutorial1/hepmc2edm.py
 ```
 Let's see what it does: that is shown by the first line of the help function
 ```
@@ -742,7 +742,7 @@ Q: How will we run it? (hint: check specific section)
 :class: toggle
 
 ```
-k4run pythia.py -n 10000 --out.filename p8_tautau_10000.d4h.root --Pythia8.PythiaInterface.pythiacard p8_ee_Ztautau_ecm91.cmd
+k4run pythia.py -n 10000 --out.filename p8_tautau_10000.e4h.root --Pythia8.PythiaInterface.pythiacard p8_ee_Ztautau_ecm91.cmd
 ```
 
 :::
@@ -803,7 +803,7 @@ The first lines of the `LHEf` file give the total cross-section: 1502 +- 2 pb, w
 
 In order to get the events in `EDM4hep` format, we eploit the fact that `Pythia` provides `LHEf` reader functionality. To activate that we will use `Gaudi` and special `.cmd` file the consider the input `LHEf` input file as a `Beam`. This special `.cmd` is called `Pythia_LHEinput.cmd` and it is available under the directory pointed by `$K4GEN`:
 ```
-S cp -rp $K4GEN/Pythia_LHEinput.cmd
+S cp -rp $K4GEN/Pythia_LHEinput.cmd .
 ```
 Please note the lines
 ```
