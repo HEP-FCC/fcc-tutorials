@@ -27,7 +27,7 @@ Then, make sure your **setup of the FCC software** is working correctly. A quick
 which DelphesPythia8_EDM4HEP
 ```
 
-If the above command fails without printing a path like `/cvmfs/sw.hsf.org/spackages/linux-centos7-broadwell/gcc-8.3.0/edm4hep-master-kopc27l5fhxopkwfblet2xrwh6dbd322/bin/DelphesPythia8_EDM4HEP`, you need to setup the FCC software stack 
+If the above command fails without printing a path like `/cvmfs/sw.hsf.org/spackages7/k4simdelphes/00-03-01/x86_64-centos7-gcc11.2.0-opt/7he4m/bin/DelphesPythia8_EDM4HEP`, you need to setup the FCC software stack 
 
 ```
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
@@ -36,30 +36,15 @@ source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 When sourcing the stack, you should see a message like:
 
 ```
- ...  Key4HEP release: key4hep-stack/2021-06-02
+ ...  Key4HEP release: key4hep-stack/2023-04-08
  ... Use the following command to reproduce the current environment: 
  ... 
-         source /cvmfs/sw.hsf.org/spackages2/key4hep-stack/2021-06-02/x86_64-centos7-gcc8.3.0-opt/w6suthuzrwtg3mfan5xjglrv7pz6wvbc/setup.sh
+         source /cvmfs/sw.hsf.org/spackages7/key4hep-stack/2023-04-08/x86_64-centos7-gcc11.2.0-opt/urwcv/setup.sh
  ... 
  ... done. 
 ```
 
-which means that the version `2021-06-02` of `key4hep-stack` is sourced.
-
-You can check all the packages associated to this release by using spack
-
-```bash
-source /cvmfs/sw.hsf.org/contrib/spack/share/spack/setup-env.sh 
-spack find -p -d key4hep-stack@2021-06-02
-```
-
-for example to check the version of `k4simdelphes` installed in  version `2021-06-02`:
-
-```bash
-spack find -p -d key4hep-stack@2021-06-02 | grep k4simdelphes
-```
-
-of course, if you are setting up the lastest software, the version number has to be changed to the one you actually sourced.
+which means that the version `2023-04-08` of `key4hep-stack` is sourced.
 
 
 (delphesedm4hep)=
@@ -67,7 +52,7 @@ of course, if you are setting up the lastest software, the version number has to
 
 For this tutorial we will consider the following **physics processes**:
 
--   e+ e- -> ZH -> Z to mumu and H to anything
+-   e+ e- -> ZH -> Z and H to anything
 -   e+ e- -> ZZ -> Z to anything
 -   e+ e- -> WW -> W to anything
 
@@ -75,9 +60,9 @@ For this tutorial we will consider the following **physics processes**:
 Let's start by downloading the official pythia cards for the various processes:
 
 ```bash
-wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Generator/Pythia8/p8_noBES_ee_ZH_ecm240.cmd
-wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Generator/Pythia8/p8_noBES_ee_ZZ_ecm240.cmd
-wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Generator/Pythia8/p8_noBES_ee_WW_ecm240.cmd
+wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/winter2023/FCCee/Generator/Pythia8/p8_ee_ZH_ecm240.cmd
+wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/winter2023/FCCee/Generator/Pythia8/p8_ee_ZZ_ecm240.cmd
+wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/winter2023/FCCee/Generator/Pythia8/p8_ee_WW_ecm240.cmd
 ```
 
 
@@ -88,7 +73,7 @@ Other detector cards can be found in the `$DELPHES_DIR/cards` directory, such as
 But let's download the official one:
 
 ```bash
-wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Delphes/card_IDEA.tcl
+wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/winter2023/FCCee/Delphes/card_IDEA.tcl
 ```
 
 To check the arguments ordering, please run the executable:
@@ -115,14 +100,14 @@ Before running we need to define the collections that we want to write. The firs
 We also download the official version of this file:
 
 ```bash
-wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Delphes/edm4hep_IDEA.tcl
+wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/winter2023/FCCee/Delphes/edm4hep_IDEA.tcl
 ```
 
 The following commands will run Pythia8 and Delphes and produce the relevant signal and background samples:
 
 
 ```bash
-DelphesPythia8_EDM4HEP card_IDEA.tcl edm4hep_IDEA.tcl p8_noBES_ee_ZH_ecm240.cmd p8_ee_ZH_ecm240_edm4hep.root
-DelphesPythia8_EDM4HEP card_IDEA.tcl edm4hep_IDEA.tcl p8_noBES_ee_ZZ_ecm240.cmd p8_ee_ZZ_ecm240_edm4hep.root
-DelphesPythia8_EDM4HEP card_IDEA.tcl edm4hep_IDEA.tcl p8_noBES_ee_WW_ecm240.cmd p8_ee_WW_ecm240_edm4hep.root
+DelphesPythia8_EDM4HEP card_IDEA.tcl edm4hep_IDEA.tcl p8_ee_ZH_ecm240.cmd p8_ee_ZH_ecm240_edm4hep.root
+DelphesPythia8_EDM4HEP card_IDEA.tcl edm4hep_IDEA.tcl p8_ee_ZZ_ecm240.cmd p8_ee_ZZ_ecm240_edm4hep.root
+DelphesPythia8_EDM4HEP card_IDEA.tcl edm4hep_IDEA.tcl p8_ee_WW_ecm240.cmd p8_ee_WW_ecm240_edm4hep.root
 ```
