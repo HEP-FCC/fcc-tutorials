@@ -27,7 +27,7 @@ Builds exist on CernVM-FS for `CentOS7` (this is the Operating System run on `lx
 :::{admonition} Nota Bene
 :class: callout
 
-The combination of old `glibc` version availble on `CentOS7` with the backward compatibility attributes of glibc makes the provided stack in principle working for newer OSes, such as `CentOS8`, `AlmaLinux9` or `Fedora37`. This in general holds, though less core aspects, such graphics, might still be OS specific.
+The combination of old `glibc` version available on `CentOS7` with the backward compatibility attributes of glibc makes the provided stack in principle working for newer OSes, such as `CentOS8`, `AlmaLinux9` or `Fedora37`. This in general holds, though less core aspects, such graphics, might still be OS specific.
 :::
 
 The `gaudimain` steering application here is called `k4run` which should be available at this point:
@@ -65,7 +65,7 @@ To use Pythia8 we need a Gaudi steering file and a Pythia8 configuration file, u
 
 The Gaudi steering file needs to activate the `GaudiTool` that interfaces `Pythia8`, available from the `k4Gen` repository under the name [PythiaInterface](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/PythiaInterface.h).
 
-An example of steering file can be found at [pythia.py](https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py). The steering file runs the miniaml set of algorithms to run Pythia8 and produce an output in `EDM4hep` format:
+An example of steering file can be found at [pythia.py](https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py). The steering file runs the minimal set of algorithms to run Pythia8 and produce an output in `EDM4hep` format:
 ```
 $ wget https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py
 $ k4run pythia.py -h | head -n 1
@@ -446,7 +446,7 @@ babayaga -c babayaga.input -o bbyg.LHE
 
 ###  Herwig
 
-`Herwig` is another historical LEP generator proviidign a difefrent approach to hadronization wrt `Pythia8`. It is available as standalone program:
+`Herwig` is another historical LEP generator providing a difefrent approach to hadronization wrt `Pythia8`. It is available as standalone program:
 
 ```
 $ which Herwig
@@ -456,7 +456,7 @@ $ which Herwig
 
 ###  MadGraph5
 
-`MadGraph5` was develop for `LHC` but it is reality geenral purpose and can be used also for `FCC-ee`. It is available as standalone program:
+`MadGraph5` was developed for `LHC` but it is reality general purpose and can be used also for `FCC-ee`. It is available as standalone program:
 
 ```bashm
 $ which mg5_aMC
@@ -465,11 +465,12 @@ $ which mg5_aMC
 
 ## Hands-on case study: ditau events with Pythia8, Whizard and KKMCee
 
-In this section we describe, with exercises, the generation of an equivalent sample of Monte Carlo events with three diffent generators: `Pythia8`, `Whizard` and `KKMCee`. The process chosen is e<sup>-</sup>e<sup>+</sup> &rarr; tau<sup>-</sup>tau<sup>+</sup> (hereafter referred to as _ditaus_), with both _taus_ decaying leptonically with a _muon_ in the final state. The centre of mass energy of 91.2 GeV. In the three cases 10000 will be generated and saved in `ROOT` files in `EDM4hep` format: the steps to arrive at this results are however different.
+In this section we describe, with exercises, the generation of an equivalent sample of Monte Carlo events with three diffent generators: `Pythia8`, `Whizard` and `KKMCee`. The process chosen is $e^{-}e^{+} \rightarrow \tau^{-}\tau^{+}$
+ (hereafter referred to as _ditaus_), with both _taus_ decaying leptonically with a _muon_ in the final state. The centre of mass energy of 91.2 GeV. In the three cases 10000 will be generated and saved in `ROOT` files in `EDM4hep` format: the steps to arrive at this results are however different.
 
 ### Generating ditaus with Pythia8
 
-As explained in the dedicated [Pythia8 section](#pythia8), we need a `Pythia8` configuration file and a `Gauid` configuration file.
+As explained in the dedicated [Pythia8 section](#pythia8), we need a `Pythia8` configuration file and a `Gaudi` configuration file.
 For the former, to generate ditau events we will use the file
 [p8_ee_Ztautau_mumu_ecm91.cmd](https://github.com/HEP-FCC/FCC-config/blob/main/FCCee/Generator/Pythia8/p8_ee_Ztautau_mumu_ecm91.cmd). We create a sub-directory `cards` and we retrieve in it the file:
 ```
@@ -482,7 +483,7 @@ $ mkdir config; cd config
 $ wget https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py
 ```
 
-Before run it, we also create sub-directories `gen/<generator_tag>_tautau_ecm91` for the generator files in format `edm4hep`.
+Before running it, we also create sub-directories `gen/<generator_tag>_tautau_ecm91` for the generator files in format `edm4hep`.
 
 :::{admonition} Nota Bene
 :class: callout
@@ -542,7 +543,7 @@ The taus are not decayed. We need another solution for that.
 
 :::
 
-The first lines of the `LHEf` file give the total cross-section: 1502 +- 2 pb  1.508 +- 2 pb, which seems dfinetly higher than the othesr.
+The first lines of the `LHEf` file give the total cross-section: 1502 +- 2 pb  1.508 +- 2 pb, which seems definitely higher than the others.
 
 #### `LHEf` to `EDM4hep` conversion
 
@@ -833,11 +834,11 @@ The differences of the cross-section calculated by `KKMCee` and `Pythia8` is (14
 
 ### Looking at the produced files. Comparing distributions
 
-The idea here is to look at some distributions, typically key for generators (angles, momenta). We take as example: acollinearity (of the initial taus, of the decaying products), momenta and cosinus of polar angle sof the final 1-prompt products. 
+The idea here is to look at some distributions, typically key for generators (angles, momenta). We take as example: acollinearity (of the initial taus, of the decaying products), momenta and cosinus of polar angles of the final 1-prompt products. 
 
 #### Looking the MCParticle class
 
-Despite being ROOT files and the information store in `POD` (Plain Old Object), the `EDM4hep` files are not easily usable, because interpreting the PODs require sthe higher levl PODIO / EDM4hep classes.
+Despite being ROOT files and the information store in `POD` (Plain Old Object), the `EDM4hep` files are not easily usable, because interpreting the PODs requires the higher level PODIO / EDM4hep classes.
 This is what the helper functions available in FCCAnalyses, which depend of `EDM4hep`, do. They can be used to create `flat` ntuples, to be used for the analysis later on.
 
 #### Building FCCAnalyses
@@ -887,7 +888,7 @@ processList = {
 }
 ```
 
-The we need to define where the files are and wheere they to go:
+Then we need to define where the files are and where they will to go:
 ```
 # Define the input dir (optional)
 inputDir    = "gen/"
