@@ -37,7 +37,7 @@ $ python3 -m venv venv
 Activate it in the shell and install the requirements, which are gathered in a file provided by the repository. 
 ```
 $ source venv/bin/activate
-pip3 install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 After sourcing, your shell prompt will be augmented by the `(venv)` prefix, e.g.
 ```
