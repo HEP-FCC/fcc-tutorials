@@ -6,6 +6,17 @@
 * Get to know FCC data files and the tools to inspect them
 :::
 
+:::{admonition} Old data format
+:class: warning
+
+The following sections talk about the old dataformat `fcc-edm`.
+They are kept for historical reasons as there is large FCC-hh dataset already
+generated.
+
+To find out more about currently used data format: EDM4hep, click
+[here](structure-of-edm4hep-files).
+:::
+
 
 ## The `events` tree
 
@@ -13,7 +24,7 @@ FCC Data is generally stored in ROOT files. The layout of the file is determined
 
 The implementation of the event data model uses simple structs in order to keep the resulting file simple - it already has a "flat tree" structure.
 The definition of the structs can be found in the [`fcc-edm` repository](https://github.com/HEP-FCC/fcc-edm/blob/master/edm.yaml).
-You will see that the FCC ROOT files contain a branch for every member of theses structs. So  they can either be processed individually, or as a complete struct. The event data model also allows to store pointers to other objects - to use these it is best to use the provided [code](https://github.com/cbernet/fcc-edm/blob/master/examples/simplewrite.cc)
+You will see that the FCC ROOT files contain a branch for every member of theses structs. So  they can either be processed individually, or as a complete struct. The event data model also allows to store pointers to other objects - to use these it is best to use the provided [code](https://github.com/HEP-FCC/fcc-edm/blob/master/examples/simplewrite.cc)
 
 
 
