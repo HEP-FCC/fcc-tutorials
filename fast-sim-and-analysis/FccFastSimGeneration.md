@@ -838,7 +838,7 @@ The idea here is to look at some distributions, typically key for generators (an
 
 #### Looking the MCParticle class
 
-Despite being ROOT files and the information store in `POD` (Plain Old Object), the `EDM4hep` files are not easily usable, because interpreting the PODs requires the higher level PODIO / EDM4hep classes.
+Despite being ROOT files and the information stored in `POD` (Plain Old Data), the `EDM4hep` files are not easily usable, because interpreting the PODs requires the higher level PODIO / EDM4hep classes.
 This is what the helper functions available in FCCAnalyses, which depend of `EDM4hep`, do. They can be used to create `flat` ntuples, to be used for the analysis later on.
 
 #### Building FCCAnalyses
