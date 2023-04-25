@@ -11,7 +11,7 @@ Let's get started!
 
 ## Setting up your environment
 
-First, you have to log-in on LXPLUS, clone the repository if not already done, go to this exercise's folder and source the central KEY4hep environment script:
+First, you have to log-in on LXPLUS (or any machine with cvmfs mounted), clone the repository if not already done, go to this exercise's folder and source the central Key4hep environment:
 
 ```bash
 git clone https://github.com/HEP-FCC/fcc-tutorials
@@ -23,13 +23,13 @@ Make sure your setup of the FCC software is working with:
 ```bash
 which fccrun
 ```
-which should print a path similar to `/cvmfs/sw.hsf.org/spackages6/fccsw/1.0pre06/x86_64-centos7-gcc11.2.0-opt/26ihv/bin/fccrun`.  Ask for help if it is not the case.
+which should print a path similar to `/cvmfs/sw.hsf.org/spackages7/fccsw/1.0pre07/x86_64-centos7-gcc11.2.0-opt/gvetc/bin/fccrun`. Ask for help if it is not the case.
 
 All good? Ok, let's do some physics then!
 
 ## Getting familiar with the detector geometry
 
-The Geant4 detector geometry which is used for the full simulation is not written directly, but generated with the DD4hep library. The detector description in this library consists of two parts:
+The Geant4 detector geometry which is used for the full simulation is generated with the DD4hep framework. The detector description in this framework consists of two parts:
 * a compiled C++ library that constructs the geometry: [ECalBarrelInclined_geo.cpp](https://github.com/HEP-FCC/FCCDetectors/blob/main/Detector/DetFCChhECalInclined/src/ECalBarrelInclined_geo.cpp)   
 * an xml file that sets parameters read by the C++ geometry builder to make the detector configurable without the need to recompile: [FCCee_ECalBarrel.xml](https://github.com/HEP-FCC/FCCDetectors/blob/main/Detector/DetFCCeeECalInclined/compact/FCCee_ECalBarrel.xml)
 
@@ -38,35 +38,33 @@ The idea is to set as parameters the quantities that will often change throughou
 Take a few minutes to browse the above codes to get a glimpse of how things work.
 
 Looking at [FCCee_ECalBarrel.xml](https://github.com/HEP-FCC/FCCDetectors/blob/main/Detector/DetFCCeeECalInclined/compact/FCCee_ECalBarrel.xml), try to answer the following questions:
-* what is the thickness of the cryostat in front of the calorimeter?
+* what is the thickness of readout electrodes?
 :::{admonition} Answer
 :class: toggle
-This is defined by the variable `CryoThicknessFront`: **5 cm**
+This is defined by the variable `readout_thickness`: **1.2 mm**
 :::
-* what is the cryostat made of in this version of the detector?
+* how many longitudinal layers (i.e. radial segmentation) has this calorimeter?
 :::{admonition} Answer
 :class: toggle
-This is defined by the variable `material` under the `cryostat` tag: **Aluminum**. 
-NB: R&D is ongoing to design a carbon fiber cryostat which features lower material budget (~5% vs 50% of $X_0$) and will thus improve the detector performance. 
-:::
-* how many longitudinal layers has this calorimeter?
-:::{admonition} Answer
-:class: toggle
-The thickness of each layer is set under the `layer` tag (mind that a layer can be 'repeated'): **12**
+The radial extent of each layer is set under the `layer` tag (mind that a layer can be 'repeated'): **12**
 :::
 
 ## Running simple simulation and evaluating performance
 
-FCCSW is based on the [Gaudi](https://gaudi-framework.readthedocs.io/en/latest/) framework. The different steps of your simulation are defined in a python configuration file where you arrange various Gaudi `Algorithms` and `Tools` to get the desired behavior. Open the file `runCaloSim.py` and briefly browse it to get familiar with the `Gaudi` syntax. NB: everything defined as a `Gaudi::Property` in the C++ implementation (e.g. `MomentumMin` from `MomentumRangeParticleGun`) can be set at run time in command line arguments. The complete list of parameters that can be modified is displayed with `fccrun runCaloSim.py -h`.   
+Let's now run some simulation. The various FCCSW components are orchestrated with the [Gaudi](https://gaudi-framework.readthedocs.io/en/latest/) framework. 
+The different steps of your simulation are defined in a python configuration (aka 'steering') file where you arrange various Gaudi `Algorithms` and `Tools` to get the desired behavior. 
+Open the file `runCaloSim.py` and briefly browse it to get familiar with the `Gaudi` syntax. 
+NB: everything defined as a `Gaudi::Property` in the C++ implementation (e.g. `MomentumMin` from `MomentumRangeParticleGun`) can be set at run time in command line arguments. 
+The complete list of parameters that can be modified is displayed with `fccrun runCaloSim.py -h`.   
 
-Run the simulation with  `fccrun runCaloSim.py` (you can safely ignore the warnings). While this command runs, try to answer the following questions by browsing [runCaloSim.py](https://github.com/HEP-FCC/fcc-tutorials/blob/master/full-detector-simulations/FccCaloPerformance/runCaloSim.py):
+Run the simulation with  `fccrun runCaloSim.py` (you can safely ignore the warnings and the error about HistogramSvc). While this command runs, try to answer the following questions by browsing [runCaloSim.py](https://github.com/HEP-FCC/fcc-tutorials/blob/master/full-detector-simulations/FccCaloPerformance/runCaloSim.py):
 
 - how to change the type of particle you shoot in the detector?
 :::{admonition} Answer
 :class: toggle
 This is a particle gun property which is set by a parameter at the beginning of the file `pgun.PdgCodes = [pdgCode]`. NB: a mixture of particles can be used (it is a list).
 :::
-- how to modify the number of events?
+- how to modify the number of events that are generated?
 :::{admonition} Answer
 :class: toggle
 This is defined by the `EvtMax` parameter of the `ApplicationMgr`
@@ -88,11 +86,11 @@ Produce the energy resolution plot with `python plot_energy_resolution.py output
 - Assuming there is no noise nor constant term, derive the sampling term of this version of the calorimeter based on the width of the Gaussian fit from the plot.
 :::{admonition} Hint
 :class: toggle
-$\frac{\sigma_E}{E} = \frac{a}{\sqrt E},  \sigma_E = 0.33 \text{ GeV}, E = 10 \text{ GeV}, a = ?$
+$\frac{\sigma_E}{E} = \frac{a}{\sqrt E},  \sigma_E = 0.28 \text{ GeV}, E = 10 \text{ GeV}, a = ?$
 :::
 :::{admonition} Answer
 :class: toggle
-$a = 0.10 \text{ Gev}^\frac{1}{2}$
+$a = 0.09 \text{ Gev}^\frac{1}{2}$
 NB: this is of course not the exact value of the sampling term since the noise and constant term should be considered and a fit on a large energy spectrum should be performed, see e.g. [here](https://indico.desy.de/event/33640/contributions/128389/attachments/77680/100499/20221006_Brieuc_Francois_Noble_Liquid_Calorimetry_forFCCee_ECFA_Workshop_DESY.pdf#page=3).
 :::
 
@@ -103,7 +101,8 @@ In this exercise, we will run the same simulation but with liquid Krypton instea
 cd ../../../
 git clone https://github.com/HEP-FCC/FCCDetectors
 ```
-Open `FCCDetectors/Detector/DetFCCeeECalInclined/compact/FCCee_ECalBarrel.xml` with your favorite editor and modify line 102 to fill the calorimeter with liquid Krypton (`LKr`) instead of liquid Argon (`LAr`).
+Open `FCCDetectors/Detector/DetFCCeeECalInclined/compact/FCCee_ECalBarrel.xml` with your favorite editor and modify line 143 to fill the calorimeter with liquid Krypton (`LKr`) instead of liquid Argon (`LAr`).
+Open `FCCDetectors/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectMaster.xml` with your favorite editor and delete line 42 (just because this detector needs constructor not available centrally yet).
 
 In order to make sure `fccrun` uses your local version of the geometry you have to set the environment variable `FCCDETECTORS` so that it points to the right location (but first, we will save the current path so that we can re-use it later). 
 ```bash
@@ -131,7 +130,7 @@ The energy resolution improved because we have now a higher ratio between sensit
 - compute again the sampling term assuming a null noise and constant term
 :::{admonition} Answer
 :class: toggle
- $a = 0.076 \text{ Gev}^\frac{1}{2}$
+ $a = 0.07 \text{ Gev}^\frac{1}{2}$
  NB: this is of course not the exact value of the sampling term since the noise and constant term should be considered and a fit on a large energy spectrum should be performed, see e.g. [here](https://indico.desy.de/event/33640/contributions/128389/attachments/77680/100499/20221006_Brieuc_Francois_Noble_Liquid_Calorimetry_forFCCee_ECFA_Workshop_DESY.pdf#page=4).
 :::
 
@@ -140,27 +139,6 @@ Before to move to the next exercise, roll back to the previous liquid Argon set-
 git checkout runCaloSim.py
 export FCCDETECTORS=$CENTRALFCCDETECTORS
 ```
-
-## Applying energy corrections
-
-As you may have noticed in the previous exercises, the reconstructed energy is on average below the generated energy. This is due to the fact that some energy is deposited in part of the detector which are not sensitive such as the cryostat walls or the services. We could simply apply a scale to get the expected average but hopefully we can do better! There is a strong correlation between the energy which is deposited before(after) the sensitive part of the calorimeter and the energy we measure in the first(last) longitudinal layer. This correction is derived with [EnergyInCaloLayers](https://github.com/HEP-FCC/k4SimGeant4/blob/main/Detector/DetStudies/src/components/EnergyInCaloLayers.h) plus a few scripts in [DetStudies](https://github.com/HEP-FCC/k4SimGeant4/tree/main/Detector/DetStudies/scripts)  and applied with [CorrectCaloClusters](https://github.com/HEP-FCC/k4RecCalorimeter/blob/main/RecCalorimeter/src/components/CorrectCaloClusters.h).
-
-Since you are now more familiar with the framework, no recipe will be provided for this exercise. Try to do the following to apply the dead material energy correction:
-
-- uncomment the code snippet corresponding to the cluster correction (`correctCaloClusters`)
-- add this Gaudi algorithm to the `TopAlg` sequence (the order of the algorithms matters!)
-- add a `keep` statement to `out.outputCommands` in order to save the new collection (`CorrectedCaloClusters`) in the output rootfile
-- modify the output file name to avoid overwriting the previous files 
-- run again the simulation
-- open `plot_energy_resolution.py`, modify the line `events.Draw("CaloClusters.energy >> h_energyResolution")` to use the clusters with correction applied (the output picture name is based on the input rootfile name so you should not have to change it).
-- produce the energy resolution plot and compare it to the one without energy correction applied (in the LAr scenario)
-- what do you notice?
-:::{admonition} Answer
-:class: toggle
-- There are no more outliers on the left hand side of the distribution
-- The average of the reconstructed energy is now closer to the generated particle energy
-- The energy resolution slightly improved. As explained earlier, this correction is not just a scaling, it is a per event dynamic estimation of the energy deposited in the dead material.
-:::
 
 ## Adding noise
 
@@ -173,7 +151,7 @@ A further important step in having an accurate description of the detector respo
 - what do you observe?
 :::{admonition} Answer
 :class: toggle 
-- The resolution barely changed (it actually got slightly better). This is partially due to the lack of statistics but also to the fact that the noise impact is small because this version of the calorimeter has been optimized to feature a low noise and at 10 GeV we are already dominated by the sampling term. 
+The resolution barely changed. This is partially due to the lack of statistics but also to the fact that the noise impact is small because this version of the calorimeter has been optimized to feature a low noise and at 10 GeV we are already dominated by the sampling term. 
 :::
 
 ## Preparing for the next tutorial
@@ -189,7 +167,7 @@ Write a macro that plots the longitudinal profile of the electromagnetic shower 
 - use a TProfile
 - the radial extent of the sensitive calorimeter is 2160 mm to 2560 mm
 - there are 12 longitudinal layers, the first one is 15 mm thick while the other ones are 35 mm thick 
-- radius can be obtained from $\sqrt{x^2 + y^2}$, $x$ and $y$ are obtained with `PositionedCaloClusterCells.position.x/y`, in mm
+- radius can be obtained from $\sqrt{x^2 + y^2}$, $x$ and $y$ are obtained with `PositionedCaloClusterCells.position.x` and `PositionedCaloClusterCells.position.y`, in mm
 - For each event, sum the energy from cells in a given layer and normalize it to the cluster energy
 :::
 
