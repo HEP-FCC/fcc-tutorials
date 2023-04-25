@@ -1113,7 +1113,7 @@ fccanalysis plot plots_flavor.py
 :::{admonition} Exercises
 :class: challenge
 
-## Simple
+**Simple**
 
 1) Modify `histmaker_flavor.py` to require the two jets individually to be B-like, i.e requiring the B score is greater 0.5 for each jet. 
 
@@ -1121,7 +1121,7 @@ fccanalysis plot plots_flavor.py
 
 3) Produce plots with larger statistics by re-running `DelphesPythia8_EDM4HEP` with more events. In particular produce a ZZ inclusive sample using to include all Z decays. Rerun all the examples above.
 
-## Advanced
+**Advanced**
 
 1) To evaluate the impact of detector performance, smear the neutral hadron resolution in the `ReconstructedParticlesNoMuons` collection and check the impact on the dijet invariant mass resolution. An example can be found [here] (https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/smearing/smear_jets.py): 
 

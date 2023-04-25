@@ -458,7 +458,7 @@ $ which Herwig
 
 `MadGraph5` was developed for `LHC` but it is reality general purpose and can be used also for `FCC-ee`. It is available as standalone program:
 
-```bashm
+```bash
 $ which mg5_aMC
 /cvmfs/sw.hsf.org/spackages7/madgraph5amc/2.8.1/x86_64-centos7-gcc11.2.0-opt/nlauf/bin/mg5_aMC
 ```
@@ -568,17 +568,17 @@ Also note the lines:
 ```
 which will make decay the taus in `pythia8`
 
-As steering we will use the file `pythia.py`:
-```
-$ cd whizard
-k4run ../config/pythia.py -n 10000 --out.filename ../gen/wz_tautau_ecm91/events_1.root --Pythia8.PythiaInterface.pythiacard ../cards/p8_lhereader.cmd | tee wz_ee_Ztautau_mumu_ecm91.log
-```
+As steering we will use the file `pythia.py`.
 
 Q: how will we run it from the whizard sub-directory? (hint: think of the conversion file)
 
 :::{admonition} Answer
 :class: toggle
 
+```
+$ cd whizard
+$ k4run ../config/pythia.py -n 10000 --out.filename ../gen/wz_tautau_ecm91/events_1.root --Pythia8.PythiaInterface.pythiacard ../cards/p8_lhereader.cmd | tee wz_ee_Ztautau_mumu_ecm91.log
+```
 :::
 
 
