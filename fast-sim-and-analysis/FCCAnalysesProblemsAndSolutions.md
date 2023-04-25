@@ -178,7 +178,7 @@ and
 
 
 If you want to add your own function have a look at the
-[Writing a new function](#writing-a-new-function) section on this page.
+[Writing a new analyzer](#writing-a-new-analyzer) section on this page.
 
 For the name of the object, in principle the names of the EDM4hep collections
 are used --- photons, muons and electrons are an exception where a few extra
@@ -271,7 +271,7 @@ where `recind` refers to `MCRecoAssociations0`, `mcind` to `MCRecoAssociations1`
 and `reco` to `ReconstructedParticles`.
 
 
-## Navigation through the history of the MonteCarloParticles
+## Navigation through the history of the MC particles
 
 To retrieve the **daughters** of a Monte-Carlo particle (in the `Particle`
 collection), one should use the collection of references to daughters
@@ -402,21 +402,23 @@ In the corresponding source file in `analyzers/dataframe/src` you should add the
 implementation of your function, for example:
 
 ```cpp
-float getMass(const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> & in){
+float getMass(const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>& in) {
   ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double>> result;
+
   for (auto & p: in) {
     ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double>> tmp;
     tmp.SetPxPyPzE(p.momentum.x, p.momentum.y, p.momentum.z, p.energy);
     result+=tmp;
   }
+
   return result.M();
 }
 ```
 
 Note that for efficiency, the arguments should be passed as `const` reference.
 
-If your code is simple enough, it can also be only added in the header file
-`inline` and even templated, for example:
+If your code is simple enough, it can also add the function only to the header
+file and even templated, for example:
 
 ```cpp
 template<typename T>
@@ -426,12 +428,13 @@ inline ROOT::VecOps::RVec<ROOT::VecOps::RVec<T>> as_vector(const ROOT::VecOps::R
 ```
 
 
-### 
+## Writing a new struct
 
 When you believe you need to develop a new struct within an existing namespace,
 you should proceed as follow:
 In the header file in `analyzers/dataframe/FCCAnalyses` you should add a
 `struct` or a `class` like:
+
 ```cpp
 /// Get the number of particles in a given hemisphere (defined by it's angle wrt to axis). Returns 3 values: total, charged, neutral multiplicity
 struct getAxisN {
@@ -443,17 +446,24 @@ private:
   bool _pos; /// Which hemisphere to select, false/0=cosTheta<0 true/1=cosTheta>0. Default=0
 };
 ```
-where the `public` members should contain the name of the function with the constructor arguments (in this example `getAxisN`) and the `operator()` that correspond to the function that will be evaluated for each event and return the output. The private section should contains members that will be needed at run time, usually the arguments of the constructor.
+where the `public` members should contain the name of the function with the
+constructor arguments (in this example `getAxisN`) and the `operator()` that
+correspond to the function that will be evaluated for each event and return the
+output. The private section should contains members that will be needed at run
+time, usually the arguments of the constructor.
 
 
-In the corresponding source file in `analyzers/dataframe/src` you should add the implementation of your class, for example:
+In the corresponding source file in `analyzers/dataframe/src` you should add the
+implementation of your class, for example:
 ```cpp
-getAxisN::getAxisN(bool arg_pos){
-	_pos=arg_pos;
+getAxisN::getAxisN(bool arg_pos) {
+  _pos=arg_pos;
 }
-ROOT::VecOps::RVec<int>  getAxisN::operator() (const ROOT::VecOps::RVec<float> & angle,
-	                                             const ROOT::VecOps::RVec<float> & charge){
-  ROOT::VecOps::RVec<int> result={0,0,0};
+
+ROOT::VecOps::RVec<int> getAxisN::operator() (const ROOT::VecOps::RVec<float> & angle,
+                                              const ROOT::VecOps::RVec<float> & charge) {
+  ROOT::VecOps::RVec<int> result = {0, 0, 0};
+
   for (size_t i = 0; i < angle.size(); ++i) {
     if (_pos==1 && angle[i]>0.){
       result[0]+=1;
@@ -466,46 +476,58 @@ ROOT::VecOps::RVec<int>  getAxisN::operator() (const ROOT::VecOps::RVec<float> &
       else result[2]+=1;
     }
   }
+
   return result;
 }
 ```
 where you separate the class construction and its implementation.
 
 
-## Writing a new namespace
+## Writing a new module
 
-If you think new namespace is needed, create a new header file in `analyzers/dataframe/FCCAnalyses`, for example `myNamespace.h`. It should look like:
+If you think new module/namespace is needed, create a new header file in
+`analyzers/dataframe/FCCAnalyses`, for example `MyModule`. It should look like:
+
 ```cpp
-#ifndef  MYNAMESPACE_ANALYZERS_H
-#define  MYNAMESPACE_ANALYZERS_H
+#ifndef  MYMODULE_ANALYZERS_H
+#define  MYMODULE_ANALYZERS_H
 
-///Add here your defines
+// Add here your defines
 
 namespace FCCAnalyses {
-  namespace myNamespace {
+  namespace MyModule {
 
-///Add here your functions, structs
+// Add here your analyzers
   }
 }
 #endif
 ```
 
-create a new source file in `analyzers/dataframe/src`, for example `myNamespace.cc`. It should look like:
+create a new source file in `analyzers/dataframe/src`, for example `myModule.cc`.
+It should look like:
+
 ```cpp
 #include "FCCAnalyses/myNamespace.h"
-///Add here your defines
+// Add here your defines
 
-namespace FCCAnalyses{
-  namespace myNamespace{
-    ///Add here your functions, structs
+namespace FCCAnalyses {
+  namespace MyModule {
+    // Add here your functions, structs
 
   }
 }
 ```
 
+
 ## Writing your own analysis using the case-studies generator
 
-[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+
+:::{admonition} Experimental feature
+:class: danger
+
+The following feature is experimental and might not work as expected. Please,
+contact developers.
+:::
 
 For various physics case studies, standard RDF tools might not be sufficient and require a backing library of helper objects and static functions exposed to ROOT.
 
