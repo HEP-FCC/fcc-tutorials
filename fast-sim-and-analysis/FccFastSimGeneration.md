@@ -517,7 +517,7 @@ Running will take a few minutes. Among the last lines of the output there should
  |                                                                                                                 |
  *-------  End PYTHIA Event and Cross Section Statistics ----------------------------------------------------------*
 ```
-i.e. 1467.0 +- 7.8 (1458.0 +- 7.7) pb.
+i.e. 1458.0 +- 7.7 pb.
 
 
 ### Generating ditaus with Whizard
@@ -543,7 +543,7 @@ The taus are not decayed. We need another solution for that.
 
 :::
 
-The first lines of the `LHEf` file give the total cross-section: 1502 +- 2 pb  1.508 +- 2 pb, which seems definitely higher than the others.
+The first lines of the `LHEf` file give the total cross-section: 1.508 +- 2 pb, which seems definitely higher than the others.
 
 #### `LHEf` to `EDM4hep` conversion
 
@@ -712,7 +712,7 @@ $ tail -37 kk/KKMCee-24Apr2023-060444/pro.output
 ********************************************************************************
 
 ```
-i.e the total ditau cross-section at 91.2 GeV from `KKMCee` is 1485.2 +- 7.0 pb . 
+i.e the total ditau cross-section at 91.2 GeV from `KKMCee` is 1485.5 +- 0.007 pb . 
 
 #### `HepMC` to `EDM4hep` conversion
 
@@ -975,5 +975,5 @@ Think of your own. Expand for a possible one.
 :::{admonition} Hint
 :class: toggle
 
-The distributions show a lot of similarities, which means that for detector optimisation studies the choice of the generator probably won't matter. However, the total cross-section is significantly different, so for studies where exact calculations matter more, the `KKMCee`, which is expected to be the most accurate of the three, seems the choice to go. 
+The distributions show a lot of similarities, which means that for detector optimisation studies the choice of the generator probably won't matter. However, the total cross-section is significantly different, so for studies where exact calculations matter more, the `KKMCee` seems the choice to go, because it is the only one giving the total cross-section compatible with experiment (ALEPH at 91.197 GeV gave 1.4771 ± 0.0066± 0.0027 pb). 
 :::
