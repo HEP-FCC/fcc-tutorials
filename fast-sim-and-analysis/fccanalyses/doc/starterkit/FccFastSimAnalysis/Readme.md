@@ -4,7 +4,7 @@
 Let's first clone and build ```FCCAnalyses```. 
 
 ```bash
-git clone git@github.com:HEP-FCC/FCCAnalyses.git
+git clone https://github.com/HEP-FCC/FCCAnalyses.git
 cd FCCAnalyses
 source ./setup.sh
 mkdir build install && cd build
@@ -19,13 +19,13 @@ Copy the necessary files, either from the web or from some location where the fi
 ```bash
 mkdir localSamples && cd localSamples
 mkdir  p8_ee_WW_mumu_ecm240 && cd p8_ee_WW_mumu_ecm240
-wget https://fccsw.web.cern.ch/tutorials/apr2023/p8_ee_WW_mumu_ecm240_edm4hep.root
+wget https://fccsw.web.cern.ch/tutorials/apr2023/tutorial2/p8_ee_WW_mumu_ecm240_edm4hep.root
 cd ..
 mkdir p8_ee_ZZ_mumubb_ecm240 && cd p8_ee_ZZ_mumubb_ecm240
-wget https://fccsw.web.cern.ch/tutorials/apr2023/p8_ee_ZZ_mumubb_ecm240_edm4hep.root
+wget https://fccsw.web.cern.ch/tutorials/apr2023/tutorial2/p8_ee_ZZ_mumubb_ecm240_edm4hep.root
 cd ..
 mkdir p8_ee_ZH_Zmumu_ecm240  && cd p8_ee_ZH_Zmumu_ecm240
-wget https://fccsw.web.cern.ch/tutorials/apr2023/p8_ee_ZH_Zmumu_ecm240_edm4hep.root
+wget https://fccsw.web.cern.ch//tutorials/apr2023/tutorial2/p8_ee_ZH_Zmumu_ecm240_edm4hep.root
 cd ../..
 ```
 
@@ -615,7 +615,7 @@ hists["cosThetaMiss_cut4"] = {
 hists["cutFlow"] = {
     "output":   "cutFlow",
     "logy":     True,
-    "stack":    False,
+    "stack":    True,
     "xmin":     0,
     "xmax":     6,
     "ymin":     1e4,
@@ -1095,7 +1095,7 @@ hists["jj_m"] = {
 hists["scoresum_B"] = {
     "output": "scoresum_B",
     "logy": True,
-    "stack": False,
+    "stack": True,
     "rebin": 1,
     "xmin": 0,
     "xmax": 2.0,
@@ -1107,7 +1107,7 @@ hists["scoresum_B"] = {
 ```
 
 ```bash
-fccanalysis plot plots_flavor.py
+fccanalysis plots plots_flavor.py
 ```
 
 :::{admonition} Exercises
