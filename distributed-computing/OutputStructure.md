@@ -8,7 +8,7 @@ FCC Monte Carlo productions will be handled by the DIRAC system and stored at CE
 ```
 
 where `/eos/experiment/fcc/prod` is the mapped endpoint and `/fcc` is required to honour DIRAC request to start with `/<VO>`.
-The diractory `/eos/experiment/fcc/prod` is divided in two grand zones:
+The directory `/eos/experiment/fcc/prod` is divided in two grand zones:
 `/fcc/user/[u]/[username]` and `/fcc/[ee,hh,eh]`.
 
 The purpose of the user area is provide some temporary space for user private jobs.
