@@ -244,6 +244,231 @@ A next version will address this issue.
 :::
 
 
+:::{admonition} Show channel numbering
+:class: toggle
+```
+
+  Most common decays
+
+  #    Default BR                       Channel
+   1   0.17865208                      TAU-  -->   E-
+   2   0.17355204                      TAU-  -->  MU-
+ 159   0.11084167                      TAU-  --> PI-
+  88   0.25375551                      TAU-  --> RHO- -> PI- PI0
+  77   0.91783553E-01                  TAU-  --> PI0  PI0  PI-
+   4   0.12619076E-01                  TAU-  --> 3PI0,        PI-
+  78   0.91783553E-01                  TAU-  --> PI-  PI-  PI+
+   3   0.43654263E-01                  TAU-  --> 2PI-,  PI+,  PI0
+  35   0.50110305E-02                  TAU-  --> 2PI-, PI+, 2PI0 old
+  56   0.78900479E-03                  TAU-  --> 3PI-, 2PI+,
+  57   0.18300110E-03                  TAU-  --> 3PI-, 2PI+,  PI0
+  58   0.25100150E-03                  TAU-  --> 2PI-,  PI+, 3PI0
+ 
+  All decays
+
+  #    Default BR                       Channel
+   1   0.17865208                      TAU-  -->   E-
+   2   0.17355204                      TAU-  -->  MU-
+   3   0.43654263E-01                  TAU-  --> 2PI-,  PI+,  PI0
+   4   0.12619076E-01                  TAU-  --> 3PI0,        PI-
+   5    0.0000000                      TAU-  --> nu_e e- e- e+
+   6    0.0000000                      TAU-  --> nu_mu mu- mu- mu+
+   7    0.0000000                      TAU-  --> nu_e e- mu- mu+
+   8    0.0000000                      TAU-  --> nu_mu mu- e- e+
+   9    0.0000000                      TAU-  --> K- 3PI0
+  10    0.0000000                      TAU-  --> 2PI0 ETA K-
+  11    0.0000000                      TAU-  --> 2PI0 K0  PI-
+  12    0.0000000                      TAU-  --> PI0  K0  ETA PI-
+  13    0.0000000                      TAU-  --> PI0  PI- PI+ K-
+  14    0.0000000                      TAU-  --> K0   PI- PI+ PI-
+  15    0.0000000                      TAU-  --> 2PI0 ETA PI-
+  16    0.0000000                      TAU-  --> K0 K0B ETA PI-
+  17    0.0000000                      TAU-  --> K0 K0B PI0 PI-
+  18    0.0000000                      TAU-  --> K0 K0B K0  PI-
+  19    0.0000000                      TAU-  --> K0 PI0 PI0 K-
+  20    0.0000000                      TAU-  --> K0 K0B PI0 K-
+  21    0.0000000                      TAU-  --> PI0  K0  ETA K-
+  22    0.0000000                      TAU-  --> PI-PI+PI-  ETA
+  23    0.0000000                      TAU-  --> PI-K+ K-   PI0
+  24    0.0000000                      TAU-  --> K- K+ K-   PI0
+  25    0.0000000                      TAU-  --> K- K+ K-   K0
+  26    0.0000000                      TAU-  --> K- PI+PI-  K0
+  27    0.0000000                      TAU-  --> K- K+ PI-  K0
+  28    0.0000000                      TAU-  --> PI-PI+PI-  OMEGA
+  29    0.0000000                      reserved
+  30    0.0000000                      reserved
+  31    0.0000000                      reserved
+  32    0.0000000                      reserved
+  33    0.0000000                      reserved
+  34    0.0000000                      reserved
+  35   0.50110305E-02                  TAU-  --> 2PI-, PI+, 2PI0 old
+  36    0.0000000                      TAU-  --> a1 --> rho omega
+  37    0.0000000                      TAU-  --> benchmark curr
+  38    0.0000000                      TAU-  --> 2PI- PI+ 2PI0 app08
+  39    0.0000000                      TAU-  --> PI- 4PI0  app08
+  40    0.0000000                      TAU-  --> 3PI- 2PI+ app08
+  41    0.0000000                      TAU-  --> 2PI- 2PI+  K-
+  42    0.0000000                      TAU-  --> 2PI- PI+ PI0 K0
+  43    0.0000000                      TAU-  --> PI- 4PI0
+  44    0.0000000                      reserved
+  45    0.0000000                      reserved
+  46    0.0000000                      reserved
+  47    0.0000000                      reserved
+  48    0.0000000                      reserved
+  49    0.0000000                      reserved
+  50    0.0000000                      reserved
+  51    0.0000000                      reserved
+  52    0.0000000                      reserved
+  53    0.0000000                      reserved
+  54    0.0000000                      reserved
+  55    0.0000000                      reserved
+  56   0.78900479E-03                  TAU-  --> 3PI-, 2PI+,
+  57   0.18300110E-03                  TAU-  --> 3PI-, 2PI+,  PI0
+  58   0.25100150E-03                  TAU-  --> 2PI-,  PI+, 3PI0
+  59    0.0000000                      TAU-  --> 3pi- 2pi+ 2pi0
+  60    0.0000000                      TAU-  --> 4PI- 3PI+
+  61    0.0000000                      TAU-  --> 4PI- 3PI+  PI0
+  62    0.0000000                      TAU-  --> 2PI- 2PI+ K- PI0
+  63    0.0000000                      reserved
+  64    0.0000000                      reserved
+  65    0.0000000                      reserved
+  66    0.0000000                      reserved
+  67    0.0000000                      reserved
+  68    0.0000000                      reserved
+  69   0.15900095E-02                  TAU-  -->  K-, PI-,  K+
+  70   0.16720101E-02                  TAU-  -->  K0, PI-, K0B
+  71   0.15360093E-02                  TAU-  -->  K-,  PI0, K0
+  72   0.68000407E-03                  TAU-  --> PI0  PI0   K-
+  73   0.30090183E-02                  TAU-  -->  K-  PI-  PI+
+  74   0.37670226E-02                  TAU-  --> PI-  K0B  PI0
+  75   0.18300110E-02                  TAU-  --> ETA  PI-  PI0
+  76   0.80200483E-03                  TAU-  --> PI-  PI0  GAM
+  77   0.91783553E-01                  TAU-  --> PI0  PI0  PI-
+  78   0.91783553E-01                  TAU-  --> PI-  PI-  PI+
+  79    0.0000000                      TAU-  --> K-    K-   K+
+  80    0.0000000                      TAU-  --> K-    K0   K0
+  81    0.0000000                      TAU-  --> K-   ETA  PI0
+  82    0.0000000                      TAU-  --> K0   ETA  PI-
+  83    0.0000000                      TAU-  --> K-   K0   RHO0
+  84    0.0000000                      TAU-  --> PI-  PHI  PI0
+  85    0.0000000                      TAU-  --> K-   PHI  PI0
+  86    0.0000000                      TAU-  --> K0   ETA  K-
+  87    0.0000000                      reserved
+  88   0.25375551                      TAU-  -->  RHO- -> PI- PI0
+  89   0.90931449E-02                  TAU-  -->  PI- K0
+  90   0.45479368E-02                  TAU-  -->  K-  PI0
+  91   0.16510099E-02                  TAU-  -->  K-  K0
+  92    0.0000000                      TAU-  -->  mu-mu-mu+ !nu_tau
+  93    0.0000000                      TAU-  --> mu- mu- e+ !nu_tau
+  94    0.0000000                      TAU-  --> mu- e- mu+ !nu_tau
+  95    0.0000000                      TAU-  --> mu- e- e+  !nu_tau
+  96    0.0000000                      TAU-  --> mu+ e- e-  !nu_tau
+  97    0.0000000                      TAU-  --> e- e- e+   !nu_tau
+  98    0.0000000                      TAU-  --> e-pi+pi-  !nu_tau
+  99    0.0000000                      TAU-  --> mu-pi+pi-  !nu_tau
+ 100    0.0000000                      TAU-  --> e-pi+K-  !nu_tau
+ 101    0.0000000                      TAU-  --> mu-pi+K-  !nu_tau
+ 102    0.0000000                      TAU-  --> e-pi-K+  !nu_tau
+ 103    0.0000000                      TAU-  --> mu-pi-K+  !nu_tau
+ 104    0.0000000                      TAU-  --> e-K-K+  !nu_tau
+ 105    0.0000000                      TAU-  --> mu-K-K+  !nu_tau
+ 106    0.0000000                      TAU-  --> e-K0K0  !nu_tau
+ 107    0.0000000                      TAU-  --> mu-K0K0  !nu_tau
+ 108    0.0000000                      TAU-  --> e+pi-pi-  !nu_tau
+ 109    0.0000000                      TAU-  --> mu+pi-pi-  !nu_tau
+ 110    0.0000000                      TAU-  --> e+pi-K-  !nu_tau
+ 111    0.0000000                      TAU-  --> mu+pi-K-  !nu_tau
+ 112    0.0000000                      TAU-  --> e+K-K-  !nu_tau
+ 113    0.0000000                      TAU-  --> mu+K-K-  !nu_tau
+ 114    0.0000000                      TAU-  --> mu-mu- p+  !nu_tau
+ 115    0.0000000                      TAU-  --> mu-mu+ p-  !nu_tau
+ 116    0.0000000                      TAU-  -->  e - e- p+ !nu_tau
+ 117    0.0000000                      TAU-  -->  e - e+ p- !nu_tau
+ 118    0.0000000                      TAU-  --> eta k-
+ 119    0.0000000                      TAU-  --> eta pi-
+ 120    0.0000000                      TAU-  --> PI-  PHI
+ 121    0.0000000                      TAU-  -->  K-  PHI
+ 122    0.0000000                      TAU-  -->  PI- OMEGA
+ 123    0.0000000                      TAU-  -->  K-  OMEGA
+ 124    0.0000000                      TAU-  -->  PI- ETAprm
+ 125    0.0000000                      TAU-  -->  K-  ETAprm
+ 126    0.0000000                      TAU-  -->  e- mu+ p- !nu_tau
+ 127    0.0000000                      TAU-  -->  e+ mu- p- !nu_tau
+ 128    0.0000000                      TAU-  -->  e- mu- p+ !nu_tau
+ 129    0.0000000                      TAU-  --> e- PI0 PI0  !nu_tau
+ 130    0.0000000                      TAU-  --> mu- PI0 PI0 !nu_tau
+ 131    0.0000000                      TAU-  --> e- PI0 eta !nu_tau
+ 132    0.0000000                      TAU-  --> mu- PI0 eta !nu_tau
+ 133    0.0000000                      TAU-  -->  e- PI0 eta_p !nu_t
+ 134    0.0000000                      TAU-  --> mu- PI0 eta_p !nu_t
+ 135    0.0000000                      TAU-  --> e- eta eta  !nu_tau
+ 136    0.0000000                      TAU-  --> mu- eta eta !nu_tau
+ 137    0.0000000                      TAU-  --> e- eta eta_p !nu_t
+ 138    0.0000000                      TAU-  --> mu- eta eta_p !nu_t
+ 139    0.0000000                      TAU-  --> e- PI0 Ks  !nu_tau
+ 140    0.0000000                      TAU-  --> mu- PI0 Ks !nu_tau
+ 141    0.0000000                      TAU-  --> e- eta  Ks !nu_tau
+ 142    0.0000000                      TAU-  --> mu- eta Ks !nu_tau
+ 143    0.0000000                      TAU-  --> e- eta_p Ks !nu_tau
+ 144    0.0000000                      TAU-  --> mu- eta_p Ks !nu_t
+ 145    0.0000000                      TAU-  --> p- pi+ K- !nu_tau
+ 146    0.0000000                      TAU-  --> p+ pi- K-  !nu_tau
+ 147    0.0000000                      TAU-  --> p- K+ pi- !nu_tau
+ 148    0.0000000                      TAU-  --> p- pi0 pi0 !nu_tau
+ 149    0.0000000                      TAU-  --> p- pi0 eta !nu_tau
+ 150    0.0000000                      TAU-  --> p- pi0 Ks !nu_tau
+ 151    0.0000000                      reserved
+ 152    0.0000000                      reserved
+ 153    0.0000000                      reserved
+ 154    0.0000000                      reserved
+ 155    0.0000000                      reserved
+ 156    0.0000000                      reserved
+ 157    0.0000000                      reserved
+ 158    0.0000000                      reserved
+ 159   0.11084167                      TAU-  --> PI-
+ 160   0.69460417E-02                  TAU-  --> K-
+ 161    0.0000000                      TAU-  --> gamma e-   !nu_tau
+ 162    0.0000000                      TAU-  --> gamma mu-  !nu_tau
+ 163    0.0000000                      TAU-  --> PI0 e-     !nu_tau
+ 164    0.0000000                      TAU-  --> PI0 mu-    !nu_tau
+ 165    0.0000000                      TAU-  --> eta e-     !nu_tau
+ 166    0.0000000                      TAU-  --> eta mu-    !nu_tau
+ 167    0.0000000                      TAU-  --> e-  K0     !nu_tau
+ 168    0.0000000                      TAU-  --> mu- K0     !nu_tau
+ 169    0.0000000                      TAU-  --> e-  omega  !nu_tau
+ 170    0.0000000                      TAU-  --> mu- omega  !nu_tau
+ 171    0.0000000                      TAU-  --> e-  phi    !nu_tau
+ 172    0.0000000                      TAU-  --> mu- phi    !nu_tau
+ 173    0.0000000                      TAU-  --> e- rho0    !nu_tau
+ 174    0.0000000                      TAU-  --> mu- rho0   !nu_tau
+ 175    0.0000000                      TAU-  --> A0-
+ 176    0.0000000                      TAU-  --> B1-
+ 177    0.0000000                      TAU-  --> e- K0    !nu_tau
+ 178    0.0000000                      TAU-  --> mu- K0    !nu_tau
+ 179    0.0000000                      TAU-  -->  p gamma  !nu_tau
+ 180    0.0000000                      TAU-  --> p pi0     !nu_tau
+ 181    0.0000000                      TAU-  --> p eta    !nu_tau
+ 182    0.0000000                      TAU-  -->  p K0   !nu_tau
+ 183    0.0000000                      TAU-  --> e- eta_p  !nu_tau
+ 184    0.0000000                      TAU-  --> mu- eta_p !nu_tau
+ 185    0.0000000                      TAU-  --> pi- lambda !nu_tau
+ 186    0.0000000                      TAU-  --> pi- lmb_br !nu_tau
+ 187    0.0000000                      TAU-  --> K- lambda  !nu_tau
+ 188    0.0000000                      TAU-  --> K- lmb_bar !nu_tau
+ 189    0.0000000                      TAU-  --> e-  K*  !nu_tau
+ 190    0.0000000                      TAU-  --> e-  K*_bar !nu_tau
+ 191    0.0000000                      TAU-  --> mu- K*_bar !nu_tau
+ 192    0.0000000                      TAU-  --> mu-  K*  !nu_tau
+ 193    0.0000000                      TAU-  --> e- a0(980) !nu_tau
+ 194    0.0000000                      TAU-  --> mu- a0(980) !nu_tau
+ 195    0.0000000                      TAU-  --> e-  f0(980) !nu_tau
+ 196    0.0000000                      TAU-  --> mu- f0(980) !nu_tau
+ 197    0.0000000                      reserved
+ 198    0.0000000                      reserved
+```
+
+:::
+
 Note that the BES (Beam Energy Spread) options are only available in version 4.32.01 and higher.
 
 A configuration example file for taus is available under at
