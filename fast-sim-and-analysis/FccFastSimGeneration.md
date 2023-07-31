@@ -237,6 +237,13 @@ KKMCee -f B -e 91.2 -n 1000 -o kkbb_1000.hepmc
 
 :::
 
+:::{admonition} Nota Bene
+:class: callout
+Note that, due to a mangling issue internal to KKMCee, the channel numbering for decays channel with pions is not the one shown by the help function. The numbering follows the relative order found in the file pro77.output produced by a KKMMee run. In particular, the single pion channel is numbered 159.  
+A next version will address this issue.
+:::
+
+
 Note that the BES (Beam Energy Spread) options are only available in version 4.32.01 and higher.
 
 A configuration example file for taus is available under at
