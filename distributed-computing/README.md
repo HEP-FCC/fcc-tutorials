@@ -1,6 +1,6 @@
 # Distributed computing
 
-These pages provide - and dissect - examples of workflows to be run on distributed resources with the [DIRAC Interware system][dirac]
+These pages provide --- and dissect --- examples of workflows to be run on distributed resources with the [DIRAC Interware system][dirac]
 through [iLCDirac][ilcdirac], the extension developed by the Linear Collider community and used also by CALICE.
 
 The procedure to be enabled to use the FCC resources through DIRAC is first described. Additional information about the use of
