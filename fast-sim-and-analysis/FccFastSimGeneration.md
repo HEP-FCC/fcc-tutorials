@@ -68,8 +68,9 @@ The Gaudi steering file needs to activate the `GaudiTool` that interfaces `Pythi
 An example of steering file can be found at [pythia.py](https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py). The steering file runs the minimal set of algorithms to run Pythia8 and produce an output in `EDM4hep` format:
 ```
 $ wget https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py
-$ k4run pythia.py -h | head -n 1
+$ k4run pythia.py 
  -->  Pythia8 -->  HepMCToEDMConverter -->  StableParticles -->  out
+[...]
 ```
 For example, to generate 500  e<sup>+</sup>e<sup>-</sup> &#8594; mu<sup>+</sup>mu<sup>-</sup> at 91.2 GeV, we can do the following: download the configuration file:
 ```
