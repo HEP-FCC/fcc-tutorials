@@ -13,14 +13,9 @@ If you have any problems or questions, you can
 .. toctree::
     :caption: Contents:
 
-    FCCeeCLD/FCCeeCLD.md
-    FCCeeDriftChamber/FCCeeDriftChamber.md
+    FCCeeGeneralOverview/FCCeeGeneralOverview.md
     FCCeeGuineaPigIRBackgrounds/README.md
-
-    FccCaloPerformance/CaloFullSimExercise.md
-    FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.md
-
     Geometry/Geometry.md
     Visualization/Visualization.md
-    
+
 ```
