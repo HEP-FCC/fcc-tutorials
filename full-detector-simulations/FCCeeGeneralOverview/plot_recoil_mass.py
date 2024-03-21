@@ -1,8 +1,9 @@
+import sys
 from podio import root_io
 import ROOT
 ROOT.gROOT.SetBatch(True)
 
-input_file_path = "./wzp6_ee_mumuH_ecm240_CLD_RECO_moreStat.root"
+input_file_path = sys.argv[1]
 podio_reader = root_io.Reader(input_file_path)
 
 th1_recoil = ROOT.TH1F("Recoil Mass", "Recoil Mass", 100, 110, 160)
