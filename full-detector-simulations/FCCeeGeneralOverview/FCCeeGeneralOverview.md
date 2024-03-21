@@ -15,7 +15,7 @@ So, let's start playing with Full Sim!
 ssh -X username@submit-test.mit.edu
 # set-up the Key4hep environment
 source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
-# create a repository with the tutorial
+# create a repository for the tutorial
 mkdir FCC_Full_Sim_Tutorial
 cd FCC_Full_Sim_Tutorial
 git clone https://github.com/HEP-FCC/fcc-tutorials
@@ -56,7 +56,7 @@ k4run CLDReconstruction.py --inputFiles ../../fcc-tutorials/full-detector-simula
 cd ../../fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/
 ```
 
-This created an edm4hep ROOT file with a bunch of new RECO level collections, including `edm4hep::ReconstructedParticle` from Particle Flow (PandoraPFA). You can inspect the ROOT file content with
+This created an edm4hep ROOT file with a bunch of new DIGI/RECO level collections, including `edm4hep::ReconstructedParticle` from Particle Flow (PandoraPFA). You can inspect the ROOT file content with
 
 ```
 podio-dump wzp6_ee_mumuH_ecm240_CLD_RECO_edm4hep.root
@@ -69,7 +69,7 @@ NB: this step also produces a file named `wzp6_ee_mumuH_ecm240_CLD_RECO_aida.roo
 
 ### Plotting the Higgs recoil mass 
 
-Let's now use the reconstructed sample to produce some physics quantities. As an example, we will plot the Higgs recoil mass using the Python bindings of edm4hep. The following very simple script already does a decent job:
+Let's now use the reconstructed sample to produce some physics quantities. As an example, we will plot the Higgs recoil mass using the Python bindings of [PODIO](https://github.com/key4hep/key4hep-tutorials/blob/main/edm4hep_analysis/edm4hep_api_intro.md#reading-edm4hep-files). The following very simple script already does a decent job:
 
 <!-- Explain a bit the script -->
 ```
@@ -169,10 +169,11 @@ Now let's plot the energy resolution for raw clusters and MVA calibrated cluster
 
 ```
 python plot_calo_energy_resolution.py electron_gun_10GeV_ALLEGRO_RECO.root
-# display with your favorite png renderer
+display electron_gun_10GeV_ALLEGRO_RECO_clusterEnergyResolution.png
+
 ```
 
-Look at both distributions to see how the MVA calibration modifies the cluster energy. NB: we are in the middle of a transition for the Geant4 interface and we are here using the new version which is not yet fully validated, this explains the drop in energy.
+Look at both distributions to see how the MVA calibration improves the performance (both in terms of response and in terms of resolution). NB: we are in the middle of a transition for the Geant4 interface and we are here using the new workflow (ddsim) which is not yet fully validated. For instance, the low efficiency is under investigation.
 
 ### Changing Liquid Argon to Liquid Krypton
 
@@ -187,7 +188,7 @@ And to accomodate this change, we have to update the sampling fraction in the st
 
 ```
 vim run_ALLEGRO_RECO.py
-# comment out line 105 uncomment line 106
+# comment out line 105 and uncomment line 106
 ```
 The derivation of new sampling fractions upon geometry change is done by ECAL experts and is out of scope for this tutorial.
 
@@ -196,15 +197,38 @@ Let's now re-run the simulation with the modified detector:
 ddsim --enableGun --gun.distribution uniform --gun.energy "10*GeV" --gun.particle e- --numberOfEvents 100 --outputFile electron_gun_10GeV_ALLEGRO_LKr_SIM.root --random.enableEventSeed --random.seed 42 --compactFile $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v02/ALLEGRO_o1_v02.xml
 k4run run_ALLEGRO_RECO.py --EventDataSvc.input="electron_gun_10GeV_ALLEGRO_LKr_SIM.root" --out.filename="electron_gun_10GeV_ALLEGRO_LKr_RECO.root"
 python plot_calo_energy_resolution.py electron_gun_10GeV_ALLEGRO_LKr_RECO.root
+display electron_gun_10GeV_ALLEGRO_LKr_RECO_calibratedClusterEnergyResolution.png
 ```
 
-See how the resolution changed.
+You can see that the energy resolution did not improve. This can be due to multiple reasons: the derivation of the sampling fractions was done with little statistics for the LKr option, the MVA calibration was not re-trained, we plot only 100 events, ... But at least now you know how to change some of the detector free parameters :-)
 
 
 ## Towards IDEA tracking with the detailed Drift Chamber
 
+The IDEA tracking system Full Sim description is getting complete (we are just missing the Silicon Wrapper which will arrive soon) and we now have to design tracking algorithms. In this exercise we will produce a dataset containing Vertex and Drift Chamber digitized hits and which can therefore be used to devlop tracking algorithms.
+
+Let's run the IDEA simulation and digitization: 
+
 ```
 ddsim --enableGun --gun.distribution uniform --gun.energy "10*GeV" --gun.particle e- --numberOfEvents 100 --outputFile electron_gun_10GeV_IDEA_SIM.root --random.enableEventSeed --random.seed 42 --compactFile $K4GEO/FCCee/IDEA/compact/IDEA_o1_v02/IDEA_o1_v02.xml
+ k4run run_IDEA_DIGI.py --EventDataSvc.input="electron_gun_10GeV_IDEA_SIM.root" --out.filename="electron_gun_10GeV_IDEA_DIGI.root"
+```
+
+The following collections will be useful for tracking:
+```
+CDCHDigis                       extension::DriftChamberDigi
+VTXDDigis                       edm4hep::TrackerHit3D
+VTXIBDigis                      edm4hep::TrackerHit3D
+VTXOBDigis                      edm4hep::TrackerHit3D
+```
+Note that the drift chamber digitized hit has two positions (on the left or on the right of the wire) because the only accessible information from a drift chamber is the distance to the wire which is degenerated. This left/right ambiguity is alleviated in the tracking algorithm.
+
+You can now play with the digitized hits:
+```
+root electron_gun_10GeV_IDEA_DIGI.root
+events->Draw("leftHitSimHitDeltaDistToWire") // this is the difference of the distance to the wire between the left digi and the sim hit (only produced in debug mode)
+events->Draw("CDCHDigis.rightPosition.x:CDCHDigis.rightPosition.y:CDCHDigis.rightPosition.z") // you can see that there was no magnetic field in this simulation and you can see the secondaries created inside the tracking volume
+events->Draw("CDCHHits.eDep/CDCHHits.pathLength", "CDCHHits.eDep/CDCHHits.pathLength < 4e-7") // this shows the de/dx from the simHits
 ```
 
 
@@ -245,5 +269,4 @@ This tool is useful but not perfect and will not meet all the needs (especially 
  - [Key4hep tutorial](https://key4hep.github.io/key4hep-doc/setup-and-getting-started/README.html)
  - [FCC Full Sim webpage](https://fcc-ee-detector-full-sim.docs.cern.ch/)
  - Bi-weekly FCC Full Sim [working meeting](https://indico.cern.ch/category/16938/)
-
 
