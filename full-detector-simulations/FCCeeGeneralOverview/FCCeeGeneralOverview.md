@@ -50,9 +50,8 @@ Let's now apply the CLD reconstruction (from ILCSoft through the Gaudi wrappers 
 cd ../../../
 git clone https://github.com/key4hep/CLDConfig.git
 cd CLDConfig/CLDConfig
-k4run CLDReconstruction.py --inputFiles ../../fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/wzp6_ee_mumuH_ecm240_CLD_SIM.root --outputBasename ../../fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/wzp6_ee_mumuH_ecm240_CLD_RECO
-# Change the EvtMax variable if you want to run on more events (-1 means all events)
-# And do not forget to modify the geoservice.detectors variable if you do not use the central detector
+k4run CLDReconstruction.py --inputFiles ../../fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/wzp6_ee_mumuH_ecm240_CLD_SIM.root --outputBasename ../../fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/wzp6_ee_mumuH_ecm240_CLD_RECO --num-events -1 
+# Do not forget to modify the geoservice.detectors variable if you do not use the central detector
 cd ../../fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/
 ```
 
@@ -100,10 +99,9 @@ canvas_recoil.Print("recoil_mass.png")
 ```
 
 Let's run it on a sample with slightly more stat:
-
 ```
 wget https://fccsw.web.cern.ch/fccsw/tutorials/MIT2024/wzp6_ee_mumuH_ecm240_CLD_RECO_moreStat.root
-python plot_recoil_mass.py
+python plot_recoil_mass.py wzp6_ee_mumuH_ecm240_CLD_RECO_moreStat.root
 display recoil_mass.png
 ```
 
@@ -120,8 +118,6 @@ So far we have been using the 'central' version of the detector, as directly pro
 ```
 # go in a 'clean' place i.e. outside of the git repository in which you were before
 cd ../../../
-# load the Key4hep environment if not yet done so
-source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
 git clone https://github.com/key4hep/k4geo
 export K4GEO=$PWD/k4geo/
 ```
@@ -150,13 +146,13 @@ dd
 :wq
 ```
 
-### Runnning a first ALLEGRO ECAL simulation
+### Running a first ALLEGRO ECAL simulation
 
 Let's now run a first particle gun simulation:
 
 ```
 cd fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/
-ddsim --enableGun --gun.distribution uniform --gun.energy "10*GeV" --gun.particle e- --numberOfEvents 100 --outputFile electron_gun_10GeV_ALLEGRO_SIM.root --random.enableEventSeed --random.seed 42 --compactFile $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v02/ALLEGRO_o1_v02.xml
+ddsim --enableGun --gun.distribution uniform --gun.energy "10*GeV" --gun.particle e- --gun.thetaMin 55 --gun.thetaMax 125  --numberOfEvents 100 --outputFile electron_gun_10GeV_ALLEGRO_SIM.root --random.enableEventSeed --random.seed 42 --compactFile $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v02/ALLEGRO_o1_v02.xml
 ```
 
 And apply the ALLEGRO reconstruction, including an MVA based calibration:
@@ -170,10 +166,10 @@ Now let's plot the energy resolution for raw clusters and MVA calibrated cluster
 ```
 python plot_calo_energy_resolution.py electron_gun_10GeV_ALLEGRO_RECO.root
 display electron_gun_10GeV_ALLEGRO_RECO_clusterEnergyResolution.png
-
+display electron_gun_10GeV_ALLEGRO_RECO_calibratedClusterEnergyResolution.png
 ```
 
-Look at both distributions to see how the MVA calibration improves the performance (both in terms of response and in terms of resolution). NB: we are in the middle of a transition for the Geant4 interface and we are here using the new workflow (ddsim) which is not yet fully validated. For instance, the low efficiency is under investigation.
+Look at both distributions to see how the MVA calibration improves the performance (both in terms of response and in terms of resolution).
 
 ### Changing Liquid Argon to Liquid Krypton
 
@@ -205,7 +201,7 @@ You can see that the energy resolution did not improve. This can be due to multi
 
 ## Towards IDEA tracking with the detailed Drift Chamber
 
-The IDEA tracking system Full Sim description is getting complete (we are just missing the Silicon Wrapper which will arrive soon) and we now have to design tracking algorithms. In this exercise we will produce a dataset containing Vertex and Drift Chamber digitized hits and which can therefore be used to devlop tracking algorithms.
+The IDEA tracking system Full Sim description is getting complete (we are just missing the Silicon Wrapper which will arrive soon) and we now have to design tracking algorithms. In this exercise we will produce a dataset containing Vertex and Drift Chamber digitized hits and which can therefore be used to develop tracking algorithms.
 
 Let's run the IDEA simulation and digitization: 
 
@@ -231,9 +227,6 @@ events->Draw("CDCHDigis.rightPosition.x:CDCHDigis.rightPosition.y:CDCHDigis.righ
 events->Draw("CDCHHits.eDep/CDCHHits.pathLength", "CDCHHits.eDep/CDCHHits.pathLength < 4e-7") // this shows the de/dx from the simHits
 ```
 
-
-
-
 ## Detector visualization
 
 Displaying detector geometries is very useful to understand what is actually being simulated without having to enter the code. One example of tool (out of many) is described here, chosen for its simplicity together with the particular feature of hosting the needed data locally, leading to smooth performance of the visualization.
@@ -241,8 +234,6 @@ Displaying detector geometries is very useful to understand what is actually bei
 Let's first generate the files containing the geometry that will be used by the display tool.
 
 ```bash
-# connect to a machine with cvmfs mounted
-source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
 wget https://fccsw.web.cern.ch/fccsw/tutorials/static/python/dd4hep2root
 chmod +x dd4hep2root
 ./dd4hep2root -c $K4GEO/FCCee/CLD/compact/CLD_o2_v05/CLD_o2_v05.xml -o CLD_o2_v05_geom.root
