@@ -152,7 +152,7 @@ Let's now run a first particle gun simulation:
 
 ```
 cd fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/
-ddsim --enableGun --gun.distribution uniform --gun.energy "10*GeV" --gun.particle e- --gun.thetaMin 55 --gun.thetaMax 125  --numberOfEvents 100 --outputFile electron_gun_10GeV_ALLEGRO_SIM.root --random.enableEventSeed --random.seed 42 --compactFile $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v02/ALLEGRO_o1_v02.xml
+ddsim --enableGun --gun.distribution uniform --gun.energy "10*GeV" --gun.particle e- --gun.thetaMin "55*degree" --gun.thetaMax "125*degree"  --numberOfEvents 100 --outputFile electron_gun_10GeV_ALLEGRO_SIM.root --random.enableEventSeed --random.seed 42 --compactFile $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v02/ALLEGRO_o1_v02.xml
 ```
 
 And apply the ALLEGRO reconstruction, including an MVA based calibration:
@@ -169,7 +169,7 @@ display electron_gun_10GeV_ALLEGRO_RECO_clusterEnergyResolution.png
 display electron_gun_10GeV_ALLEGRO_RECO_calibratedClusterEnergyResolution.png
 ```
 
-Look at both distributions to see how the MVA calibration improves the performance (both in terms of response and in terms of resolution).
+Look at both distributions to see how the MVA calibration improves the performance, both in terms of response and resolution.
 
 ### Changing Liquid Argon to Liquid Krypton
 
