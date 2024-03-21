@@ -474,7 +474,7 @@ Note that the BES (Beam Energy Spread) options are only available in version 4.3
 A configuration example file for taus is available under at
 
 ```
-ls `dirname $( which KKMCee )`/../share/KKMCee/examples/kkmc-tauola.input
+ls `dirname $( which KKMCee )`/../share/KKMCee/kkmc-tauola.input
 ```
 
 :::{admonition} Show dimuon example
