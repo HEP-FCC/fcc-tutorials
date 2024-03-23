@@ -1,4 +1,4 @@
-# Full Detector Simulations
+# Full Simulation
 
 
 If you have any problems or questions, you can
