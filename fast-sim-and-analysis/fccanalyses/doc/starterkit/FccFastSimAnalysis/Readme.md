@@ -1,10 +1,10 @@
 
 # FCC: Analysing simulated events
 
-Let's first clone and build ```FCCAnalyses```. 
+Let's first clone and build `FCCAnalyses`.
 
 ```bash
-git clone https://github.com/HEP-FCC/FCCAnalyses.git
+git clone --branch v0.9.0 https://github.com/HEP-FCC/FCCAnalyses.git
 cd FCCAnalyses
 source ./setup.sh
 mkdir build install && cd build
@@ -710,8 +710,8 @@ def get_file_path(url, filename):
 weaver_preproc = get_file_path(url_preproc, local_preproc)
 weaver_model = get_file_path(url_model, local_model)
 
-from addons.ONNXRuntime.python.jetFlavourHelper import JetFlavourHelper
-from addons.FastJet.python.jetClusteringHelper import (
+from addons.ONNXRuntime.jetFlavourHelper import JetFlavourHelper
+from addons.FastJet.jetClusteringHelper import (
     ExclusiveJetClusteringHelper,
 )
 
