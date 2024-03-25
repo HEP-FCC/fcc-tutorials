@@ -16,7 +16,7 @@ For this tutorial we will need to use FCCAnalyses. We can either use it from the
 Go inside the area that you have setup for the tutorials and get the FCCAnalyses code:
 
 ```shell
-git clone https://github.com/HEP-FCC/FCCAnalyses.git
+git clone --branch v0.9.0 https://github.com/HEP-FCC/FCCAnalyses.git
 ```
 
 Go inside the directory and run
