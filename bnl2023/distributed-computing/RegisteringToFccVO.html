@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.1. Getting started with FCC distributed computing &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.2. FCC DIRAC example workflows" href="Workflows.html" />
+    <link rel="prev" title="4. Distributed computing" href="README.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fast-sim-and-analysis/README.html">2. Generators, Fast Simulation and Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">3. Full Detector Simulations</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">4. Distributed computing</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.1. Getting started with FCC distributed computing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#registering-to-the-fcc-vo">4.1.1. Registering to the FCC VO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enabling-dirac">4.1.2. Enabling DIRAC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-web-portal">4.1.3. The web portal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Workflows.html">4.2. FCC DIRAC example workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OutputStructure.html">4.3. Structure for /eos/experiment/fcc/prod</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="README.html"><span class="section-number">4. </span>Distributed computing</a> &raquo;</li>
+      <li><span class="section-number">4.1. </span>Getting started with FCC distributed computing</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/distributed-computing/RegisteringToFccVO.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="getting-started-with-fcc-distributed-computing">
+<h1><span class="section-number">4.1. </span>Getting started with FCC distributed computing<a class="headerlink" href="#getting-started-with-fcc-distributed-computing" title="Permalink to this heading"></a></h1>
+<section id="registering-to-the-fcc-vo">
+<h2><span class="section-number">4.1.1. </span>Registering to the FCC VO<a class="headerlink" href="#registering-to-the-fcc-vo" title="Permalink to this heading"></a></h2>
+<p>The <a class="reference external" href="https://voms2.cern.ch:8443/voms/fcc/aup/sign.action">standard Grid VO registration procedure</a>
+should be followed to be enable to use the resources connected with the FCC VO.</p>
+<div class="callout admonition">
+<p class="admonition-title">Note</p>
+<p>You need to use a browser where you have installed your certificate and the CERN
+CA certificates. Firefox usually works fine, Google Chrome usually does not
+work. Safari might also work.</p>
+</div>
+</section>
+<section id="enabling-dirac">
+<h2><span class="section-number">4.1.2. </span>Enabling DIRAC<a class="headerlink" href="#enabling-dirac" title="Permalink to this heading"></a></h2>
+<p>DIRAC available on CernVM-FS. To enable the relevant applications and scripts, the
+following setup script needs first to be sourced</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/clicdp.cern.ch/DIRAC/bashrc
+</pre></div>
+</div>
+<p>To submit jobs through DIRAC a proxy needs to be created and uploaded:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dirac-proxy-init<span class="w"> </span>-g<span class="w"> </span>fcc_user
+</pre></div>
+</div>
+<p>A successful creation looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Generating</span> <span class="n">proxy</span><span class="o">...</span>
+<span class="n">Enter</span> <span class="n">Certificate</span> <span class="n">password</span><span class="p">:</span>
+<span class="n">Added</span> <span class="n">VOMS</span> <span class="n">attribute</span> <span class="o">/</span><span class="n">fcc</span>
+<span class="n">Uploading</span> <span class="n">proxy</span><span class="o">..</span>
+<span class="n">Proxy</span> <span class="n">generated</span><span class="p">:</span>
+<span class="n">subject</span>      <span class="p">:</span> <span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">ch</span><span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">cern</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Organic</span> <span class="n">Units</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Users</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">ganis</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="mi">393971</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">Gerardo</span> <span class="n">Ganis</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="mi">2178341058</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="mi">3000266373</span>
+<span class="n">issuer</span>       <span class="p">:</span> <span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">ch</span><span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">cern</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Organic</span> <span class="n">Units</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Users</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">ganis</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="mi">393971</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">Gerardo</span> <span class="n">Ganis</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="mi">2178341058</span>
+<span class="n">identity</span>     <span class="p">:</span> <span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">ch</span><span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">cern</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Organic</span> <span class="n">Units</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Users</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">ganis</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="mi">393971</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">Gerardo</span> <span class="n">Ganis</span>
+<span class="n">timeleft</span>     <span class="p">:</span> <span class="mi">23</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="mi">58</span>
+<span class="n">DIRAC</span> <span class="n">group</span>  <span class="p">:</span> <span class="n">fcc_user</span>
+<span class="n">path</span>         <span class="p">:</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">x509up_u2759</span>
+<span class="n">username</span>     <span class="p">:</span> <span class="n">ganis</span>
+<span class="n">properties</span>   <span class="p">:</span> <span class="n">NormalUser</span>
+<span class="n">VOMS</span>         <span class="p">:</span> <span class="kc">True</span>
+<span class="n">VOMS</span> <span class="n">fqan</span>    <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;/fcc&#39;</span><span class="p">]</span>
+
+<span class="n">Proxies</span> <span class="n">uploaded</span><span class="p">:</span>
+ <span class="n">DN</span>                                                                           <span class="o">|</span> <span class="n">Group</span> <span class="o">|</span> <span class="n">Until</span> <span class="p">(</span><span class="n">GMT</span><span class="p">)</span>
+ <span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">ch</span><span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">cern</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Organic</span> <span class="n">Units</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Users</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">ganis</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="mi">393971</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">Gerardo</span> <span class="n">Ganis</span> <span class="o">|</span>  <span class="o">|</span> <span class="mi">2022</span><span class="o">/</span><span class="mi">05</span><span class="o">/</span><span class="mi">13</span> <span class="mi">12</span><span class="p">:</span><span class="mi">12</span>
+</pre></div>
+</div>
+<p>The last section shows the valid proxies upload to the DIRAC system. It can also be checked with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dirac-proxy-info<span class="w"> </span>-m
+</pre></div>
+</div>
+<p>with output similar to</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">subject</span>      <span class="p">:</span> <span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">ch</span><span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">cern</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Organic</span> <span class="n">Units</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Users</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">ganis</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="mi">393971</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">Gerardo</span> <span class="n">Ganis</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="mi">2178341058</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="mi">3000266373</span>
+<span class="n">issuer</span>       <span class="p">:</span> <span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">ch</span><span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">cern</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Organic</span> <span class="n">Units</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Users</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">ganis</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="mi">393971</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">Gerardo</span> <span class="n">Ganis</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="mi">2178341058</span>
+<span class="n">identity</span>     <span class="p">:</span> <span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">ch</span><span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">cern</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Organic</span> <span class="n">Units</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Users</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">ganis</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="mi">393971</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">Gerardo</span> <span class="n">Ganis</span>
+<span class="n">timeleft</span>     <span class="p">:</span> <span class="mi">23</span><span class="p">:</span><span class="mi">50</span><span class="p">:</span><span class="mi">40</span>
+<span class="n">DIRAC</span> <span class="n">group</span>  <span class="p">:</span> <span class="n">fcc_user</span>
+<span class="n">path</span>         <span class="p">:</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">x509up_u2759</span>
+<span class="n">username</span>     <span class="p">:</span> <span class="n">ganis</span>
+<span class="n">properties</span>   <span class="p">:</span> <span class="n">NormalUser</span>
+<span class="n">VOMS</span>         <span class="p">:</span> <span class="kc">True</span>
+<span class="n">VOMS</span> <span class="n">fqan</span>    <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;/fcc&#39;</span><span class="p">]</span>
+<span class="o">==</span> <span class="n">Proxies</span> <span class="n">uploaded</span> <span class="o">==</span>
+<span class="n">DN</span>                                                                           <span class="o">|</span> <span class="n">Group</span> <span class="o">|</span> <span class="n">Until</span> <span class="p">(</span><span class="n">GMT</span><span class="p">)</span>
+<span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">ch</span><span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">cern</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Organic</span> <span class="n">Units</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Users</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">ganis</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="mi">393971</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">Gerardo</span> <span class="n">Ganis</span> <span class="o">|</span>  <span class="o">|</span> <span class="mi">2022</span><span class="o">/</span><span class="mi">05</span><span class="o">/</span><span class="mi">13</span> <span class="mi">12</span><span class="p">:</span><span class="mi">12</span>
+</pre></div>
+</div>
+<p>If everything worked fine, your proxy should be mapped to the <code class="docutils literal notranslate"><span class="pre">fcc001</span></code> user. This can be checked this way:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">EOS_MGM_URL</span><span class="o">=</span>root://eospublic.cern.ch
+<span class="nv">XrdSecPROTOCOL</span><span class="o">=</span>gsi,unix<span class="w"> </span>eos<span class="w"> </span>whoami
+</pre></div>
+</div>
+<p>the result should look similar to this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Virtual</span> <span class="n">Identity</span><span class="p">:</span> <span class="n">uid</span><span class="o">=</span><span class="mi">140035</span> <span class="p">(</span><span class="mi">99</span><span class="p">,</span><span class="mi">140035</span><span class="p">)</span> <span class="n">gid</span><span class="o">=</span><span class="mi">2855</span> <span class="p">(</span><span class="mi">99</span><span class="p">,</span><span class="mi">2855</span><span class="p">)</span> <span class="p">[</span><span class="n">authz</span><span class="p">:</span><span class="n">gsi</span><span class="p">]</span> <span class="n">host</span><span class="o">=</span><span class="n">lxplus743</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span> <span class="n">domain</span><span class="o">=</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span> <span class="n">geo</span><span class="o">-</span><span class="n">location</span><span class="o">=</span><span class="mi">0513</span>
+</pre></div>
+</div>
+<p>At CERN the uid of <code class="docutils literal notranslate"><span class="pre">fcc001</span></code> is 140035.</p>
+</section>
+<section id="the-web-portal">
+<h2><span class="section-number">4.1.3. </span>The web portal<a class="headerlink" href="#the-web-portal" title="Permalink to this heading"></a></h2>
+<p>The <a class="reference external" href="https://voilcdiracwebapp2.cern.ch/DIRAC/?view=tabs&amp;theme=Crisp&amp;url_state=1%7C*DIRAC.JobMonitor.classes.JobMonitor">DIRAC web portal</a> is available to check the status of things. It shows all the jobs submmited and the
+files registered. Some example screenshot is shown below.</p>
+<div class="callout admonition">
+<p class="admonition-title">Note</p>
+<p>As for the VO registration, you need to use a browser where you have installed
+your certificate and the CERN CA certificates. Firefox usually works fine,
+Google Chrome usually does not work. Safari might also work.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="README.html" class="btn btn-neutral float-left" title="4. Distributed computing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Workflows.html" class="btn btn-neutral float-right" title="4.2. FCC DIRAC example workflows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: bnl2023
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../master/index.html">master</a></dd>
+      <dd><a href="RegisteringToFccVO.html">bnl2023</a></dd>
+      <dd><a href="../../cern2022/index.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

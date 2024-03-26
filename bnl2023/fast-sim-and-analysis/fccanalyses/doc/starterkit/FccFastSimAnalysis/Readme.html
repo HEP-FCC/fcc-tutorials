@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.3. FCC: Analysing simulated events &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="2.4. FCC: tracking and vertexing example using specific flavour decays" href="../FccFastSimVertexing/Readme.html" />
+    <link rel="prev" title="2.2. FCC: Getting started with simulating events in Delphes" href="../../../../k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../../../../../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../README.html">2. Generators, Fast Simulation and Analysis</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../FccFastSimGeneration.html">2.1. FCC: Getting started with event generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html">2.2. FCC: Getting started with simulating events in Delphes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.3. FCC: Analysing simulated events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#part-i-analyse-events-with-histmaker">2.3.1. Part I: Analyse events with histmaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#part-ii-produce-a-flat-tree-and-analyse-events">2.3.2. Part II: Produce a flat tree and analyse events</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../FccFastSimVertexing/Readme.html">2.4. FCC: tracking and vertexing example using specific flavour decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../FCCAnalysesProblemsAndSolutions.html">2.5. FCCAnalyses: Common problems and solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../EventProduction.html">2.6. Central production of events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../full-detector-simulations/README.html">3. Full Detector Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../../README.html"><span class="section-number">2. </span>Generators, Fast Simulation and Analysis</a> &raquo;</li>
+      <li><span class="section-number">2.3. </span>FCC: Analysing simulated events</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="fcc-analysing-simulated-events">
+<h1><span class="section-number">2.3. </span>FCC: Analysing simulated events<a class="headerlink" href="#fcc-analysing-simulated-events" title="Permalink to this heading"></a></h1>
+<p>Let’s first clone and build <code class="docutils literal notranslate"><span class="pre">FCCAnalyses</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/HEP-FCC/FCCAnalyses.git
+<span class="nb">cd</span><span class="w"> </span>FCCAnalyses
+<span class="nb">source</span><span class="w"> </span>./setup.sh
+mkdir<span class="w"> </span>build<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>../install
+make<span class="w"> </span>install<span class="w"> </span>-j<span class="w"> </span><span class="m">20</span>
+<span class="nb">cd</span><span class="w"> </span>..
+mkdir<span class="w"> </span>tutorial<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>tutorial
+</pre></div>
+</div>
+<p>Copy the necessary files, either from the web or from some location where the files were produced locally</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>localSamples<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>localSamples
+mkdir<span class="w">  </span>p8_ee_WW_mumu_ecm240<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>p8_ee_WW_mumu_ecm240
+wget<span class="w"> </span>https://fccsw.web.cern.ch/tutorials/apr2023/tutorial2/p8_ee_WW_mumu_ecm240_edm4hep.root
+<span class="nb">cd</span><span class="w"> </span>..
+mkdir<span class="w"> </span>p8_ee_ZZ_mumubb_ecm240<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>p8_ee_ZZ_mumubb_ecm240
+wget<span class="w"> </span>https://fccsw.web.cern.ch/tutorials/apr2023/tutorial2/p8_ee_ZZ_mumubb_ecm240_edm4hep.root
+<span class="nb">cd</span><span class="w"> </span>..
+mkdir<span class="w"> </span>p8_ee_ZH_Zmumu_ecm240<span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>p8_ee_ZH_Zmumu_ecm240
+wget<span class="w"> </span>https://fccsw.web.cern.ch//tutorials/apr2023/tutorial2/p8_ee_ZH_Zmumu_ecm240_edm4hep.root
+<span class="nb">cd</span><span class="w"> </span>../..
+</pre></div>
+</div>
+<p>This tutorial consists in two parts. Both parts will make use of ee-&gt;ZH (Z-&gt;mumu)events, with its relevant backgrounds ee-&gt;WW and ee-&gt;ZZ:</p>
+<ul class="simple">
+<li><p>in <strong>Part I</strong> you will construct the recoil mass observable and apply a list of pre-selection cuts.</p></li>
+<li><p>in <strong>Part II</strong> you will learn how to run an exclusive jet clustering algorithm. evaluate the various jet flavor probabilities and use them to select H-&gt;bb events.</p></li>
+</ul>
+<div class="objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<p>In this first example, you will learn how to:</p>
+<ul class="simple">
+<li><p>read the <strong>edm4hep</strong> data format and construct physics observable (such as the recoil mass)</p></li>
+<li><p>define C++ helper functions in a separate that will be compiled at run time</p></li>
+<li><p>apply an <strong>event selection</strong> and <strong>fill histograms</strong> in a single iteration using the <strong>histmaker</strong> option.</p></li>
+<li><p>produce <strong>flat ntuples</strong> with observables of interest with <strong>FCCAnalyses</strong></p></li>
+<li><p>produce plots with the <strong>plot</strong> option.</p></li>
+</ul>
+</div>
+<section id="part-i-analyse-events-with-histmaker">
+<h2><span class="section-number">2.3.1. </span>Part I: Analyse events with histmaker<a class="headerlink" href="#part-i-analyse-events-with-histmaker" title="Permalink to this heading"></a></h2>
+<p>Create a file called <code class="docutils literal notranslate"><span class="pre">functions.h</span></code>. This contains C++ helper functions that you will need to compute observables with RDataframe</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef ZHfunctions_H</span>
+<span class="cp">#define ZHfunctions_H</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TLorentzVector.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ROOT/RVec.hxx&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;edm4hep/ReconstructedParticleData.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;edm4hep/MCParticleData.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;edm4hep/ParticleIDData.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ReconstructedParticle2MC.h&quot;</span>
+
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">FCCAnalyses</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">ZHfunctions</span><span class="w"> </span><span class="p">{</span>
+
+
+<span class="c1">// build the Z resonance based on the available leptons. Returns the best lepton pair compatible with the Z mass and recoil at 125 GeV</span>
+<span class="c1">// technically, it returns a ReconstructedParticleData object with index 0 the di-lepton system, index and 2 the leptons of the pair</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">resonanceBuilder_mass_recoil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">m_resonance_mass</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">m_recoil_mass</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">chi2_recoil_frac</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">ecm</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">m_use_MC_Kinematics</span><span class="p">;</span>
+<span class="w">    </span><span class="n">resonanceBuilder_mass_recoil</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">arg_resonance_mass</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">arg_recoil_mass</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">arg_chi2_recoil_frac</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">arg_ecm</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">arg_use_MC_Kinematics</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Vec_rp</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="n">Vec_rp</span><span class="w"> </span><span class="n">legs</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_i</span><span class="w"> </span><span class="n">recind</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_i</span><span class="w"> </span><span class="n">mcind</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_rp</span><span class="w"> </span><span class="n">reco</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_mc</span><span class="w"> </span><span class="n">mc</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_i</span><span class="w"> </span><span class="n">parents</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_i</span><span class="w"> </span><span class="n">daugthers</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">resonanceBuilder_mass_recoil</span><span class="o">::</span><span class="n">resonanceBuilder_mass_recoil</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">arg_resonance_mass</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">arg_recoil_mass</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">arg_chi2_recoil_frac</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">arg_ecm</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">arg_use_MC_Kinematics</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="n">m_resonance_mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arg_resonance_mass</span><span class="p">,</span><span class="w"> </span><span class="n">m_recoil_mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arg_recoil_mass</span><span class="p">,</span><span class="w"> </span><span class="n">chi2_recoil_frac</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arg_chi2_recoil_frac</span><span class="p">,</span><span class="w"> </span><span class="n">ecm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arg_ecm</span><span class="p">,</span><span class="w"> </span><span class="n">m_use_MC_Kinematics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arg_use_MC_Kinematics</span><span class="p">;}</span>
+
+<span class="n">Vec_rp</span><span class="w"> </span><span class="n">resonanceBuilder_mass_recoil</span><span class="o">::</span><span class="n">resonanceBuilder_mass_recoil</span><span class="o">::</span><span class="k">operator</span><span class="p">()(</span><span class="n">Vec_rp</span><span class="w"> </span><span class="n">legs</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_i</span><span class="w"> </span><span class="n">recind</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_i</span><span class="w"> </span><span class="n">mcind</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_rp</span><span class="w"> </span><span class="n">reco</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_mc</span><span class="w"> </span><span class="n">mc</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_i</span><span class="w"> </span><span class="n">parents</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_i</span><span class="w"> </span><span class="n">daugthers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">Vec_rp</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">    </span><span class="n">result</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">pairs</span><span class="p">;</span><span class="w"> </span><span class="c1">// for each permutation, add the indices of the muons</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">legs</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<span class="w">  </span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span><span class="w"> </span><span class="c1">// helper variable for permutations</span>
+<span class="w">        </span><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pair</span><span class="p">;</span>
+<span class="w">            </span><span class="n">rp</span><span class="w"> </span><span class="n">reso</span><span class="p">;</span>
+<span class="w">            </span><span class="n">reso</span><span class="p">.</span><span class="n">charge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">TLorentzVector</span><span class="w"> </span><span class="n">reso_lv</span><span class="p">;</span><span class="w"> </span>
+<span class="w">            </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">pair</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">reso</span><span class="p">.</span><span class="n">charge</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">legs</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">charge</span><span class="p">;</span>
+<span class="w">                    </span><span class="n">TLorentzVector</span><span class="w"> </span><span class="n">leg_lv</span><span class="p">;</span>
+
+<span class="w">                    </span><span class="k">if</span><span class="p">(</span><span class="n">m_use_MC_Kinematics</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// MC kinematics</span>
+<span class="w">                        </span><span class="kt">int</span><span class="w"> </span><span class="n">track_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">legs</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">tracks_begin</span><span class="p">;</span><span class="w">   </span><span class="c1">// index in the Track array</span>
+<span class="w">                        </span><span class="kt">int</span><span class="w"> </span><span class="n">mc_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ReconstructedParticle2MC</span><span class="o">::</span><span class="n">getTrack2MC_index</span><span class="p">(</span><span class="n">track_index</span><span class="p">,</span><span class="w"> </span><span class="n">recind</span><span class="p">,</span><span class="w"> </span><span class="n">mcind</span><span class="p">,</span><span class="w"> </span><span class="n">reco</span><span class="p">);</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mc_index</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">mc_index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">mc</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="n">leg_lv</span><span class="p">.</span><span class="n">SetXYZM</span><span class="p">(</span><span class="n">mc</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">mc_index</span><span class="p">).</span><span class="n">momentum</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">mc</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">mc_index</span><span class="p">).</span><span class="n">momentum</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">mc</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">mc_index</span><span class="p">).</span><span class="n">momentum</span><span class="p">.</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">mc</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">mc_index</span><span class="p">).</span><span class="n">mass</span><span class="p">);</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// reco kinematics</span>
+<span class="w">                         </span><span class="n">leg_lv</span><span class="p">.</span><span class="n">SetXYZM</span><span class="p">(</span><span class="n">legs</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">momentum</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">legs</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">momentum</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">legs</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">momentum</span><span class="p">.</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">legs</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">mass</span><span class="p">);</span>
+<span class="w">                    </span><span class="p">}</span>
+
+<span class="w">                    </span><span class="n">reso_lv</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">leg_lv</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">reso</span><span class="p">.</span><span class="n">charge</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span><span class="w"> </span><span class="c1">// neglect non-zero charge pairs</span>
+<span class="w">            </span><span class="n">reso</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reso_lv</span><span class="p">.</span><span class="n">Px</span><span class="p">();</span>
+<span class="w">            </span><span class="n">reso</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reso_lv</span><span class="p">.</span><span class="n">Py</span><span class="p">();</span>
+<span class="w">            </span><span class="n">reso</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reso_lv</span><span class="p">.</span><span class="n">Pz</span><span class="p">();</span>
+<span class="w">            </span><span class="n">reso</span><span class="p">.</span><span class="n">mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reso_lv</span><span class="p">.</span><span class="n">M</span><span class="p">();</span>
+<span class="w">            </span><span class="n">result</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">reso</span><span class="p">);</span>
+<span class="w">            </span><span class="n">pairs</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pair</span><span class="p">);</span>
+
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">next_permutation</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">()));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;ERROR: resonanceBuilder_mass_recoil, at least two leptons required.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span>
+<span class="w">        </span><span class="n">Vec_rp</span><span class="w"> </span><span class="n">bestReso</span><span class="p">;</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">idx_min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">d_min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">9e9</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span>
+<span class="w">            </span><span class="c1">// calculate recoil</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">recoil_p4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TLorentzVector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ecm</span><span class="p">);</span>
+<span class="w">            </span><span class="n">TLorentzVector</span><span class="w"> </span><span class="n">tv1</span><span class="p">;</span>
+<span class="w">            </span><span class="n">tv1</span><span class="p">.</span><span class="n">SetXYZM</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">momentum</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">momentum</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">momentum</span><span class="p">.</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">mass</span><span class="p">);</span>
+<span class="w">            </span><span class="n">recoil_p4</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">tv1</span><span class="p">;</span>
+<span class="w">      </span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">recoil_fcc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="p">();</span>
+<span class="w">            </span><span class="n">recoil_fcc</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">recoil_p4</span><span class="p">.</span><span class="n">Px</span><span class="p">();</span>
+<span class="w">            </span><span class="n">recoil_fcc</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">recoil_p4</span><span class="p">.</span><span class="n">Py</span><span class="p">();</span>
+<span class="w">            </span><span class="n">recoil_fcc</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">recoil_p4</span><span class="p">.</span><span class="n">Pz</span><span class="p">();</span>
+<span class="w">            </span><span class="n">recoil_fcc</span><span class="p">.</span><span class="n">mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">recoil_p4</span><span class="p">.</span><span class="n">M</span><span class="p">();</span>
+<span class="w">            </span>
+<span class="w">            </span><span class="n">TLorentzVector</span><span class="w"> </span><span class="n">tg</span><span class="p">;</span>
+<span class="w">            </span><span class="n">tg</span><span class="p">.</span><span class="n">SetXYZM</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">momentum</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">momentum</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">momentum</span><span class="p">.</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">mass</span><span class="p">);</span>
+<span class="w">        </span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="n">boost</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tg</span><span class="p">.</span><span class="n">P</span><span class="p">();</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="n">mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">pow</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">mass</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">m_resonance_mass</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="c1">// mass</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="n">rec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">pow</span><span class="p">(</span><span class="n">recoil_fcc</span><span class="p">.</span><span class="n">mass</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">m_recoil_mass</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="c1">// recoil</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">chi2_recoil_frac</span><span class="p">)</span><span class="o">*</span><span class="n">mass</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">chi2_recoil_frac</span><span class="o">*</span><span class="n">rec</span><span class="p">;</span>
+<span class="w">            </span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">d_min</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">d_min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
+<span class="w">                </span><span class="n">idx_min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">     </span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">idx_min</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">            </span><span class="n">bestReso</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">idx_min</span><span class="p">));</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">l1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">legs</span><span class="p">[</span><span class="n">pairs</span><span class="p">[</span><span class="n">idx_min</span><span class="p">][</span><span class="mi">0</span><span class="p">]];</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">l2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">legs</span><span class="p">[</span><span class="n">pairs</span><span class="p">[</span><span class="n">idx_min</span><span class="p">][</span><span class="mi">1</span><span class="p">]];</span>
+<span class="w">            </span><span class="n">bestReso</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">l1</span><span class="p">);</span>
+<span class="w">            </span><span class="n">bestReso</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">l2</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;ERROR: resonanceBuilder_mass_recoil, no mininum found.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">            </span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">bestReso</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">l1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">legs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">l2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">legs</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="w">        </span><span class="n">result</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">l1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">result</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">l2</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span><span class="w">    </span>
+
+
+
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">sel_iso</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">sel_iso</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">arg_max_iso</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">m_max_iso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">.25</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Vec_rp</span><span class="w"> </span><span class="nf">operator</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="n">Vec_rp</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_f</span><span class="w"> </span><span class="n">iso</span><span class="p">);</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="n">sel_iso</span><span class="o">::</span><span class="n">sel_iso</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">arg_max_iso</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_max_iso</span><span class="p">(</span><span class="n">arg_max_iso</span><span class="p">)</span><span class="w"> </span><span class="p">{};</span>
+<span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;</span><span class="w">  </span><span class="n">sel_iso</span><span class="o">::</span><span class="k">operator</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="n">Vec_rp</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_f</span><span class="w"> </span><span class="n">iso</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Vec_rp</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">    </span><span class="n">result</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">iso</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">m_max_iso</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">result</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="w"> </span>
+<span class="c1">// compute the cone isolation for reco particles</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">coneIsolation</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">coneIsolation</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">arg_dr_min</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">arg_dr_max</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="nf">deltaR</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">eta1</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">phi1</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">eta2</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">phi2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">TMath</span><span class="o">::</span><span class="n">Sqrt</span><span class="p">(</span><span class="n">TMath</span><span class="o">::</span><span class="n">Power</span><span class="p">(</span><span class="n">eta1</span><span class="o">-</span><span class="n">eta2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">TMath</span><span class="o">::</span><span class="n">Power</span><span class="p">(</span><span class="n">phi1</span><span class="o">-</span><span class="n">phi2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)));</span><span class="w"> </span><span class="p">};</span>
+
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">dr_min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">dr_max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.4</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Vec_f</span><span class="w"> </span><span class="nf">operator</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="n">Vec_rp</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_rp</span><span class="w"> </span><span class="n">rps</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">coneIsolation</span><span class="o">::</span><span class="n">coneIsolation</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">arg_dr_min</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">arg_dr_max</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">dr_min</span><span class="p">(</span><span class="n">arg_dr_min</span><span class="p">),</span><span class="w"> </span><span class="n">dr_max</span><span class="p">(</span><span class="w"> </span><span class="n">arg_dr_max</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">};</span>
+<span class="n">Vec_f</span><span class="w"> </span><span class="nf">coneIsolation::coneIsolation::operator</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="n">Vec_rp</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_rp</span><span class="w"> </span><span class="n">rps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span>
+<span class="w">    </span><span class="n">Vec_f</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">    </span><span class="n">result</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">ROOT</span><span class="o">::</span><span class="n">Math</span><span class="o">::</span><span class="n">PxPyPzEVector</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lv_reco</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">ROOT</span><span class="o">::</span><span class="n">Math</span><span class="o">::</span><span class="n">PxPyPzEVector</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lv_charged</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">ROOT</span><span class="o">::</span><span class="n">Math</span><span class="o">::</span><span class="n">PxPyPzEVector</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lv_neutral</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">rps</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="n">ROOT</span><span class="o">::</span><span class="n">Math</span><span class="o">::</span><span class="n">PxPyPzEVector</span><span class="w"> </span><span class="n">tlv</span><span class="p">;</span>
+<span class="w">        </span><span class="n">tlv</span><span class="p">.</span><span class="n">SetPxPyPzE</span><span class="p">(</span><span class="n">rps</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">momentum</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">rps</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">momentum</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">rps</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">momentum</span><span class="p">.</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">rps</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">energy</span><span class="p">);</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">rps</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">charge</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">lv_neutral</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">tlv</span><span class="p">);</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="n">lv_charged</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">tlv</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="n">ROOT</span><span class="o">::</span><span class="n">Math</span><span class="o">::</span><span class="n">PxPyPzEVector</span><span class="w"> </span><span class="n">tlv</span><span class="p">;</span>
+<span class="w">        </span><span class="n">tlv</span><span class="p">.</span><span class="n">SetPxPyPzE</span><span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">momentum</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">momentum</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">momentum</span><span class="p">.</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">energy</span><span class="p">);</span>
+<span class="w">        </span><span class="n">lv_reco</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">tlv</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">// compute the isolation (see https://github.com/delphes/delphes/blob/master/modules/Isolation.cc#L154) </span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">lv_reco_</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">lv_reco</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">sumNeutral</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">sumCharged</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">        </span><span class="c1">// charged</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">lv_charged_</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">lv_charged</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span>
+<span class="w">            </span><span class="kt">double</span><span class="w"> </span><span class="n">dr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coneIsolation</span><span class="o">::</span><span class="n">deltaR</span><span class="p">(</span><span class="n">lv_reco_</span><span class="p">.</span><span class="n">Eta</span><span class="p">(),</span><span class="w"> </span><span class="n">lv_reco_</span><span class="p">.</span><span class="n">Phi</span><span class="p">(),</span><span class="w"> </span><span class="n">lv_charged_</span><span class="p">.</span><span class="n">Eta</span><span class="p">(),</span><span class="w"> </span><span class="n">lv_charged_</span><span class="p">.</span><span class="n">Phi</span><span class="p">());</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">dr</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">dr_min</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">dr</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dr_max</span><span class="p">)</span><span class="w"> </span><span class="n">sumCharged</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">lv_charged_</span><span class="p">.</span><span class="n">P</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="c1">// neutral</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">lv_neutral_</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">lv_neutral</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span>
+<span class="w">            </span><span class="kt">double</span><span class="w"> </span><span class="n">dr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coneIsolation</span><span class="o">::</span><span class="n">deltaR</span><span class="p">(</span><span class="n">lv_reco_</span><span class="p">.</span><span class="n">Eta</span><span class="p">(),</span><span class="w"> </span><span class="n">lv_reco_</span><span class="p">.</span><span class="n">Phi</span><span class="p">(),</span><span class="w"> </span><span class="n">lv_neutral_</span><span class="p">.</span><span class="n">Eta</span><span class="p">(),</span><span class="w"> </span><span class="n">lv_neutral_</span><span class="p">.</span><span class="n">Phi</span><span class="p">());</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">dr</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">dr_min</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">dr</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dr_max</span><span class="p">)</span><span class="w"> </span><span class="n">sumNeutral</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">lv_neutral_</span><span class="p">.</span><span class="n">P</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sumCharged</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sumNeutral</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">ratio</span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">lv_reco_</span><span class="p">.</span><span class="n">P</span><span class="p">();</span>
+<span class="w">        </span><span class="n">result</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">ratio</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="w"> </span>
+<span class="w"> </span>
+<span class="w"> </span>
+<span class="c1">// returns missing energy vector, based on reco particles</span>
+<span class="n">Vec_rp</span><span class="w"> </span><span class="nf">missingEnergy</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">ecm</span><span class="p">,</span><span class="w"> </span><span class="n">Vec_rp</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">p_cutoff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">px</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">py</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">pz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">y</span><span class="o">*</span><span class="n">p</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">p_cutoff</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">        </span><span class="n">px</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">        </span><span class="n">py</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+<span class="w">        </span><span class="n">pz</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
+<span class="w">        </span><span class="n">e</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">energy</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">Vec_rp</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rp</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="w">    </span><span class="n">res</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">px</span><span class="p">;</span>
+<span class="w">    </span><span class="n">res</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">py</span><span class="p">;</span>
+<span class="w">    </span><span class="n">res</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pz</span><span class="p">;</span>
+<span class="w">    </span><span class="n">res</span><span class="p">.</span><span class="n">energy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ecm</span><span class="o">-</span><span class="n">e</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ret</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">res</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// calculate the cosine(theta) of the missing energy vector</span>
+<span class="kt">float</span><span class="w"> </span><span class="nf">get_cosTheta_miss</span><span class="p">(</span><span class="n">Vec_rp</span><span class="w"> </span><span class="n">met</span><span class="p">){</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">costheta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">met</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="n">TLorentzVector</span><span class="w"> </span><span class="n">lv_met</span><span class="p">;</span>
+<span class="w">        </span><span class="n">lv_met</span><span class="p">.</span><span class="n">SetPxPyPzE</span><span class="p">(</span><span class="n">met</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">momentum</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">met</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">momentum</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">met</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">momentum</span><span class="p">.</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">met</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">energy</span><span class="p">);</span>
+<span class="w">        </span><span class="n">costheta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fabs</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="n">lv_met</span><span class="p">.</span><span class="n">Theta</span><span class="p">()));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">costheta</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="w"> </span>
+<span class="w"> </span>
+
+<span class="p">}}</span>
+
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<p>Create a file called <code class="docutils literal notranslate"><span class="pre">histmaker_recoil.py</span></code> containing the following. Make sure to modify the <code class="docutils literal notranslate"><span class="pre">inputDir</span></code> and point to where the samples previously produced are located.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of processes (mandatory)</span>
+<span class="n">processList</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">#&#39;p8_ee_ZZ_ecm240&#39;:{&#39;fraction&#39;:1},</span>
+    <span class="c1">#&#39;p8_ee_WW_ecm240&#39;:{&#39;fraction&#39;:1}, </span>
+    <span class="c1">#&#39;wzp6_ee_mumuH_ecm240&#39;:{&#39;fraction&#39;:1},</span>
+    <span class="s1">&#39;p8_ee_WW_mumu_ecm240&#39;</span><span class="p">:</span>    <span class="p">{</span><span class="s1">&#39;fraction&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;crossSection&#39;</span><span class="p">:</span> <span class="mf">0.25792</span><span class="p">},</span> 
+    <span class="s1">&#39;p8_ee_ZZ_mumubb_ecm240&#39;</span><span class="p">:</span>  <span class="p">{</span><span class="s1">&#39;fraction&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;crossSection&#39;</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">1.35899</span> <span class="o">*</span> <span class="mf">0.034</span> <span class="o">*</span> <span class="mf">0.152</span><span class="p">},</span>
+    <span class="s1">&#39;p8_ee_ZH_Zmumu_ecm240&#39;</span><span class="p">:</span>   <span class="p">{</span><span class="s1">&#39;fraction&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;crossSection&#39;</span><span class="p">:</span> <span class="mf">0.201868</span> <span class="o">*</span> <span class="mf">0.034</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="c1"># Production tag when running over EDM4Hep centrally produced events, this points to the yaml files for getting sample statistics (mandatory)</span>
+<span class="c1">#prodTag     = &quot;FCCee/winter2023/IDEA/&quot;</span>
+
+<span class="c1"># Link to the dictonary that contains all the cross section informations etc... (mandatory)</span>
+<span class="n">procDict</span> <span class="o">=</span> <span class="s2">&quot;FCCee_procDict_winter2023_IDEA.json&quot;</span>
+
+<span class="c1"># additional/custom C++ functions, defined in header files (optional)</span>
+<span class="n">includePaths</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;functions.h&quot;</span><span class="p">]</span>
+
+<span class="c1"># Define the input dir (optional)</span>
+<span class="c1">#inputDir    = &quot;outputs/FCCee/higgs/mH-recoil/mumu/stage1&quot;</span>
+<span class="n">inputDir</span>    <span class="o">=</span> <span class="s2">&quot;./localSamples/&quot;</span>
+
+<span class="c1">#Optional: output directory, default is local running directory</span>
+<span class="n">outputDir</span>   <span class="o">=</span> <span class="s2">&quot;./outputs/histmaker/recoil/&quot;</span>
+
+
+<span class="c1"># optional: ncpus, default is 4, -1 uses all cores available</span>
+<span class="n">nCPUS</span>       <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="c1"># scale the histograms with the cross-section and integrated luminosity</span>
+<span class="n">doScale</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">intLumi</span> <span class="o">=</span> <span class="mi">5000000</span> <span class="c1"># 5 /ab</span>
+
+
+<span class="c1"># define some binning for various histograms</span>
+<span class="n">bins_p_mu</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span> <span class="c1"># 100 MeV bins</span>
+<span class="n">bins_m_ll</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span> <span class="c1"># 100 MeV bins</span>
+<span class="n">bins_p_ll</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span> <span class="c1"># 100 MeV bins</span>
+<span class="n">bins_recoil</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span> <span class="c1"># 1 MeV bins </span>
+<span class="n">bins_cosThetaMiss</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">bins_theta</span> <span class="o">=</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">bins_eta</span> <span class="o">=</span> <span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">bins_phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="n">bins_count</span> <span class="o">=</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">bins_charge</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">bins_iso</span> <span class="o">=</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+
+
+<span class="c1"># build_graph function that contains the analysis logic, cuts and histograms (mandatory)</span>
+<span class="k">def</span> <span class="nf">build_graph</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
+    <span class="n">weightsum</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Sum</span><span class="p">(</span><span class="s2">&quot;weight&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># define some aliases to be used later on</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;Particle0&quot;</span><span class="p">,</span> <span class="s2">&quot;Particle#0.index&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;Particle1&quot;</span><span class="p">,</span> <span class="s2">&quot;Particle#1.index&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;MCRecoAssociations0&quot;</span><span class="p">,</span> <span class="s2">&quot;MCRecoAssociations#0.index&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;MCRecoAssociations1&quot;</span><span class="p">,</span> <span class="s2">&quot;MCRecoAssociations#1.index&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;Muon0&quot;</span><span class="p">,</span> <span class="s2">&quot;Muon#0.index&quot;</span><span class="p">)</span>
+
+
+    <span class="c1"># get all the leptons from the collection</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;muons_all&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get(Muon0, ReconstructedParticles)&quot;</span><span class="p">)</span>
+
+    
+    <span class="c1"># select leptons with momentum &gt; 20 GeV</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;muons&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::sel_p(20)(muons_all)&quot;</span><span class="p">)</span>
+    
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;muons_p&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_p(muons)&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;muons_theta&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_theta(muons)&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;muons_phi&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_phi(muons)&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;muons_q&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_charge(muons)&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;muons_no&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_n(muons)&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># compute the muon isolation and store muons with an isolation cut of 0.25 in a separate column muons_sel_iso</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;muons_iso&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ZHfunctions::coneIsolation(0.01, 0.5)(muons, ReconstructedParticles)&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;muons_sel_iso&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ZHfunctions::sel_iso(0.25)(muons, muons_iso)&quot;</span><span class="p">)</span>
+    
+        
+    <span class="c1"># baseline histograms, before any selection cuts (store with _cut0)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;muons_p_cut0&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_p_mu</span><span class="p">),</span> <span class="s2">&quot;muons_p&quot;</span><span class="p">))</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;muons_theta_cut0&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_theta</span><span class="p">),</span> <span class="s2">&quot;muons_theta&quot;</span><span class="p">))</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;muons_phi_cut0&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_phi</span><span class="p">),</span> <span class="s2">&quot;muons_phi&quot;</span><span class="p">))</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;muons_q_cut0&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_charge</span><span class="p">),</span> <span class="s2">&quot;muons_q&quot;</span><span class="p">))</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;muons_no_cut0&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_count</span><span class="p">),</span> <span class="s2">&quot;muons_no&quot;</span><span class="p">))</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;muons_iso_cut0&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_iso</span><span class="p">),</span> <span class="s2">&quot;muons_iso&quot;</span><span class="p">))</span>
+    
+
+    <span class="c1">#########</span>
+    <span class="c1">### CUT 0: all events</span>
+    <span class="c1">#########</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;cut0&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;cutFlow&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_count</span><span class="p">),</span> <span class="s2">&quot;cut0&quot;</span><span class="p">))</span>
+
+
+    <span class="c1">#########</span>
+    <span class="c1">### CUT 1: at least 1 muon with at least one isolated one</span>
+    <span class="c1">#########</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;muons_no &gt;= 1 &amp;&amp; muons_sel_iso.size() &gt; 0&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;cut1&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;cutFlow&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_count</span><span class="p">),</span> <span class="s2">&quot;cut1&quot;</span><span class="p">))</span>
+
+    
+    <span class="c1">#########</span>
+    <span class="c1">### CUT 2 :at least 2 opposite-sign (OS) leptons</span>
+    <span class="c1">#########</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;muons_no &gt;= 2 &amp;&amp; abs(Sum(muons_q)) &lt; muons_q.size()&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;cut2&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;cutFlow&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_count</span><span class="p">),</span> <span class="s2">&quot;cut2&quot;</span><span class="p">))</span>
+    
+    <span class="c1"># now we build the Z resonance based on the available leptons.</span>
+    <span class="c1"># the function resonanceBuilder_mass_recoil returns the best lepton pair compatible with the Z mass (91.2 GeV) and recoil at 125 GeV</span>
+    <span class="c1"># the argument 0.4 gives a weight to the Z mass and the recoil mass in the chi2 minimization</span>
+    <span class="c1"># technically, it returns a ReconstructedParticleData object with index 0 the di-lepton system, index and 2 the leptons of the pair</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;zbuilder_result&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ZHfunctions::resonanceBuilder_mass_recoil(91.2, 125, 0.4, 240, false)(muons, MCRecoAssociations0, MCRecoAssociations1, ReconstructedParticles, Particle, Particle0, Particle1)&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;zmumu&quot;</span><span class="p">,</span> <span class="s2">&quot;Vec_rp</span><span class="si">{zbuilder_result[0]}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="c1"># the Z</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;zmumu_muons&quot;</span><span class="p">,</span> <span class="s2">&quot;Vec_rp{zbuilder_result[1],zbuilder_result[2]}&quot;</span><span class="p">)</span> <span class="c1"># the leptons </span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;zmumu_m&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_mass(zmumu)[0]&quot;</span><span class="p">)</span> <span class="c1"># Z mass</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;zmumu_p&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_p(zmumu)[0]&quot;</span><span class="p">)</span> <span class="c1"># momentum of the Z</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;zmumu_recoil&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::recoilBuilder(240)(zmumu)&quot;</span><span class="p">)</span> <span class="c1"># compute the recoil based on the reconstructed Z</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;zmumu_recoil_m&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_mass(zmumu_recoil)[0]&quot;</span><span class="p">)</span> <span class="c1"># recoil mass</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;zmumu_muons_p&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_p(zmumu_muons)&quot;</span><span class="p">)</span> <span class="c1"># get the momentum of the 2 muons from the Z resonance</span>
+     
+
+
+    <span class="c1">#########</span>
+    <span class="c1">### CUT 3: Z mass window</span>
+    <span class="c1">#########  </span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;zmumu_m &gt; 86 &amp;&amp; zmumu_m &lt; 96&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;cut3&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;cutFlow&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_count</span><span class="p">),</span> <span class="s2">&quot;cut3&quot;</span><span class="p">))</span>
+
+    
+    <span class="c1">#########</span>
+    <span class="c1">### CUT 4: Z momentum</span>
+    <span class="c1">#########  </span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;zmumu_p &gt; 20 &amp;&amp; zmumu_p &lt; 70&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;cut4&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;cutFlow&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_count</span><span class="p">),</span> <span class="s2">&quot;cut4&quot;</span><span class="p">))</span>
+
+    
+    <span class="c1">#########</span>
+    <span class="c1">### CUT 5: cosThetaMiss</span>
+    <span class="c1">#########  </span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;missingEnergy&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ZHfunctions::missingEnergy(240., ReconstructedParticles)&quot;</span><span class="p">)</span>
+    <span class="c1">#df = df.Define(&quot;cosTheta_miss&quot;, &quot;FCCAnalyses::get_cosTheta_miss(missingEnergy)&quot;)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;cosTheta_miss&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ZHfunctions::get_cosTheta_miss(MissingET)&quot;</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;cosThetaMiss_cut4&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_cosThetaMiss</span><span class="p">),</span> <span class="s2">&quot;cosTheta_miss&quot;</span><span class="p">))</span> <span class="c1"># plot it before the cut</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;cosTheta_miss &lt; 0.98&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;cut5&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;cutFlow&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_count</span><span class="p">),</span> <span class="s2">&quot;cut5&quot;</span><span class="p">))</span>
+
+
+    <span class="c1">#########</span>
+    <span class="c1">### CUT 6: recoil mass window</span>
+    <span class="c1">#########  </span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;zmumu_recoil_m &lt; 140 &amp;&amp; zmumu_recoil_m &gt; 120&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;cut6&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;cutFlow&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_count</span><span class="p">),</span> <span class="s2">&quot;cut6&quot;</span><span class="p">))</span>
+    
+
+    <span class="c1">########################</span>
+    <span class="c1"># Final histograms</span>
+    <span class="c1">########################</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;zmumu_m&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_m_ll</span><span class="p">),</span> <span class="s2">&quot;zmumu_m&quot;</span><span class="p">))</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;zmumu_recoil_m&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_recoil</span><span class="p">),</span> <span class="s2">&quot;zmumu_recoil_m&quot;</span><span class="p">))</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;zmumu_p&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_p_ll</span><span class="p">),</span> <span class="s2">&quot;zmumu_p&quot;</span><span class="p">))</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;zmumu_muons_p&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_p_mu</span><span class="p">),</span> <span class="s2">&quot;zmumu_muons_p&quot;</span><span class="p">))</span>
+    
+
+    <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">weightsum</span>
+</pre></div>
+</div>
+<p>This script first defines the <code class="docutils literal notranslate"><span class="pre">inputDir</span></code> and <code class="docutils literal notranslate"><span class="pre">outputDir</span></code>. Then the scaling and binning for the various histograms are defined. In the <code class="docutils literal notranslate"><span class="pre">build_graph</span></code> function the <code class="docutils literal notranslate"><span class="pre">muon</span></code> collection is defined and isolated muons with <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">&gt;</span> <span class="pre">20</span> <span class="pre">GeV</span></code> are selected. Then successive cuts that aim at forming the Z mass candidate and reject the backgrounds.</p>
+<p>Now run the <strong>histmaker</strong> script on previously produced samples, to produce a root file containing TH1 histograms:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>histmaker_recoil.py
+</pre></div>
+</div>
+<p>Now produce the plotting script <code class="docutils literal notranslate"><span class="pre">plots_recoil.py</span></code> run the plotting script with the command:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ROOT</span>
+
+<span class="c1"># global parameters</span>
+<span class="n">intLumi</span>        <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">intLumiLabel</span>   <span class="o">=</span> <span class="s2">&quot;L = 5 ab^{-1}&quot;</span>
+<span class="n">ana_tex</span>        <span class="o">=</span> <span class="s1">&#39;e^{+}e^{-} #rightarrow ZH #rightarrow #mu^{+}#mu^{-} + X&#39;</span>
+<span class="n">delphesVersion</span> <span class="o">=</span> <span class="s1">&#39;3.4.2&#39;</span>
+<span class="n">energy</span>         <span class="o">=</span> <span class="mf">240.0</span>
+<span class="n">collider</span>       <span class="o">=</span> <span class="s1">&#39;FCC-ee&#39;</span>
+<span class="n">formats</span>        <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="s1">&#39;pdf&#39;</span><span class="p">]</span>
+
+<span class="n">outdir</span>         <span class="o">=</span> <span class="s1">&#39;./outputs/plots/recoil/&#39;</span> 
+<span class="n">inputDir</span>       <span class="o">=</span> <span class="s1">&#39;./outputs/histmaker/recoil/&#39;</span> 
+
+<span class="n">plotStatUnc</span>    <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">colors</span><span class="p">[</span><span class="s1">&#39;ZH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">kRed</span>
+<span class="n">colors</span><span class="p">[</span><span class="s1">&#39;WW&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">kBlue</span><span class="o">+</span><span class="mi">1</span>
+<span class="n">colors</span><span class="p">[</span><span class="s1">&#39;ZZ&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">kGreen</span><span class="o">+</span><span class="mi">2</span>
+
+<span class="c1">#procs = {}</span>
+<span class="c1">#procs[&#39;signal&#39;] = {&#39;ZH&#39;:[&#39;wzp6_ee_mumuH_ecm240&#39;]}</span>
+<span class="c1">#procs[&#39;backgrounds&#39;] =  {&#39;WW&#39;:[&#39;p8_ee_WW_ecm240&#39;], &#39;ZZ&#39;:[&#39;p8_ee_ZZ_ecm240&#39;]}</span>
+<span class="n">procs</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">procs</span><span class="p">[</span><span class="s1">&#39;signal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ZH&#39;</span><span class="p">:[</span><span class="s1">&#39;p8_ee_ZH_Zmumu_ecm240&#39;</span><span class="p">]}</span>
+<span class="c1">#procs[&#39;backgrounds&#39;] =  {&#39;WW&#39;:[&#39;p8_ee_WW_mumu_ecm240&#39;], &#39;ZZ&#39;:[&#39;p8_ee_ZZ_mumubb_ecm240&#39;]}</span>
+<span class="n">procs</span><span class="p">[</span><span class="s1">&#39;backgrounds&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="p">{</span><span class="s1">&#39;ZZ&#39;</span><span class="p">:[</span><span class="s1">&#39;p8_ee_ZZ_mumubb_ecm240&#39;</span><span class="p">]}</span>
+
+
+<span class="n">legend</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">legend</span><span class="p">[</span><span class="s1">&#39;ZH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ZH&#39;</span>
+<span class="n">legend</span><span class="p">[</span><span class="s1">&#39;WW&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;WW&#39;</span>
+<span class="n">legend</span><span class="p">[</span><span class="s1">&#39;ZZ&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ZZ&#39;</span>
+
+
+
+<span class="n">hists</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">hists</span><span class="p">[</span><span class="s2">&quot;zmumu_recoil_m&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;output&quot;</span><span class="p">:</span>   <span class="s2">&quot;zmumu_recoil_m&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;logy&quot;</span><span class="p">:</span>     <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;stack&quot;</span><span class="p">:</span>    <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;rebin&quot;</span><span class="p">:</span>    <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">&quot;xmin&quot;</span><span class="p">:</span>     <span class="mi">120</span><span class="p">,</span>
+    <span class="s2">&quot;xmax&quot;</span><span class="p">:</span>     <span class="mi">140</span><span class="p">,</span>
+    <span class="s2">&quot;ymin&quot;</span><span class="p">:</span>     <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;ymax&quot;</span><span class="p">:</span>     <span class="mi">2500</span><span class="p">,</span>
+    <span class="s2">&quot;xtitle&quot;</span><span class="p">:</span>   <span class="s2">&quot;Recoil (GeV)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ytitle&quot;</span><span class="p">:</span>   <span class="s2">&quot;Events / 100 MeV&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">hists</span><span class="p">[</span><span class="s2">&quot;zmumu_p&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;output&quot;</span><span class="p">:</span>   <span class="s2">&quot;zmumu_p&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;logy&quot;</span><span class="p">:</span>     <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;stack&quot;</span><span class="p">:</span>    <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;rebin&quot;</span><span class="p">:</span>    <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;xmin&quot;</span><span class="p">:</span>     <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;xmax&quot;</span><span class="p">:</span>     <span class="mi">80</span><span class="p">,</span>
+    <span class="s2">&quot;ymin&quot;</span><span class="p">:</span>     <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;ymax&quot;</span><span class="p">:</span>     <span class="mi">2000</span><span class="p">,</span>
+    <span class="s2">&quot;xtitle&quot;</span><span class="p">:</span>   <span class="s2">&quot;p(#mu^{#plus}#mu^{#minus}) (GeV)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ytitle&quot;</span><span class="p">:</span>   <span class="s2">&quot;Events &quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">hists</span><span class="p">[</span><span class="s2">&quot;zmumu_m&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;output&quot;</span><span class="p">:</span>   <span class="s2">&quot;zmumu_m&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;logy&quot;</span><span class="p">:</span>     <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;stack&quot;</span><span class="p">:</span>    <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;rebin&quot;</span><span class="p">:</span>    <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;xmin&quot;</span><span class="p">:</span>     <span class="mi">86</span><span class="p">,</span>
+    <span class="s2">&quot;xmax&quot;</span><span class="p">:</span>     <span class="mi">96</span><span class="p">,</span>
+    <span class="s2">&quot;ymin&quot;</span><span class="p">:</span>     <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;ymax&quot;</span><span class="p">:</span>     <span class="mi">3000</span><span class="p">,</span>
+    <span class="s2">&quot;xtitle&quot;</span><span class="p">:</span>   <span class="s2">&quot;m(#mu^{#plus}#mu^{#minus}) (GeV)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ytitle&quot;</span><span class="p">:</span>   <span class="s2">&quot;Events &quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">hists</span><span class="p">[</span><span class="s2">&quot;cosThetaMiss_cut4&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;output&quot;</span><span class="p">:</span>   <span class="s2">&quot;cosThetaMiss_cut4&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;logy&quot;</span><span class="p">:</span>     <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;stack&quot;</span><span class="p">:</span>    <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;rebin&quot;</span><span class="p">:</span>    <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;xmin&quot;</span><span class="p">:</span>     <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;xmax&quot;</span><span class="p">:</span>     <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;ymin&quot;</span><span class="p">:</span>     <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;ymax&quot;</span><span class="p">:</span>     <span class="mi">100000</span><span class="p">,</span>
+    <span class="s2">&quot;xtitle&quot;</span><span class="p">:</span>   <span class="s2">&quot;cos(#theta_</span><span class="si">{miss}</span><span class="s2">)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ytitle&quot;</span><span class="p">:</span>   <span class="s2">&quot;Events &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;extralab&quot;</span><span class="p">:</span> <span class="s2">&quot;Before cos(#theta_</span><span class="si">{miss}</span><span class="s2">) cut&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<span class="n">hists</span><span class="p">[</span><span class="s2">&quot;cutFlow&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;output&quot;</span><span class="p">:</span>   <span class="s2">&quot;cutFlow&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;logy&quot;</span><span class="p">:</span>     <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;stack&quot;</span><span class="p">:</span>    <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;xmin&quot;</span><span class="p">:</span>     <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;xmax&quot;</span><span class="p">:</span>     <span class="mi">6</span><span class="p">,</span>
+    <span class="s2">&quot;ymin&quot;</span><span class="p">:</span>     <span class="mf">1e4</span><span class="p">,</span>
+    <span class="s2">&quot;ymax&quot;</span><span class="p">:</span>     <span class="mf">1e11</span><span class="p">,</span>
+    <span class="s2">&quot;xtitle&quot;</span><span class="p">:</span>   <span class="p">[</span><span class="s2">&quot;All events&quot;</span><span class="p">,</span> <span class="s2">&quot;#geq 1 #mu^{#pm} + ISO&quot;</span><span class="p">,</span> <span class="s2">&quot;#geq 2 #mu^{#pm} + OS&quot;</span><span class="p">,</span> <span class="s2">&quot;86 &lt; m_{#mu^{+}#mu^{#minus}} &lt; 96&quot;</span><span class="p">,</span> <span class="s2">&quot;20 &lt; p_{#mu^{+}#mu^{#minus}} &lt; 70&quot;</span><span class="p">,</span> <span class="s2">&quot;|cos#theta_</span><span class="si">{miss}</span><span class="s2">| &lt; 0.98&quot;</span><span class="p">,</span> <span class="s2">&quot;120 &lt; m_</span><span class="si">{rec}</span><span class="s2"> &lt; 140&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;ytitle&quot;</span><span class="p">:</span>   <span class="s2">&quot;Events &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;scaleSig&quot;</span><span class="p">:</span> <span class="mi">10</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and the</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>plots<span class="w"> </span>plots_recoil.py
+</pre></div>
+</div>
+<p>and look at them in <code class="docutils literal notranslate"><span class="pre">plots/</span></code>.</p>
+<p>Please note that the event statistics is not great because we only produced on 10 000 events in the <code class="docutils literal notranslate"><span class="pre">k4SimDelphes</span></code> step.</p>
+</section>
+<section id="part-ii-produce-a-flat-tree-and-analyse-events">
+<h2><span class="section-number">2.3.2. </span>Part II: Produce a flat tree and analyse events<a class="headerlink" href="#part-ii-produce-a-flat-tree-and-analyse-events" title="Permalink to this heading"></a></h2>
+<div class="objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<p>In this second example, you will learn how to:</p>
+<ul class="simple">
+<li><p>read the <strong>edm4hep</strong> data format, produce jet collections and evaluate the ParticleNet jet tagger score and apply an an event <strong>preselection</strong></p></li>
+<li><p>produce <strong>flat ntuples</strong> with observables of interest with <strong>FCCAnalyses</strong></p></li>
+<li><p>apply an <strong>event selection</strong> and <strong>fill histograms</strong> in a single iteration using the <strong>histmaker</strong> option.</p></li>
+<li><p>produce plots with the <strong>plot</strong> option.</p></li>
+</ul>
+</div>
+<p>This first analysis stage usually runs on large samples on batch, and the idea is to produce small ntuples with less variables. Also, jet inference of the jet tagger is pretty slow, and usually has to be performed only once. We can then run thr <strong>histmaker</strong> in a second stage.</p>
+<p>Create a file called <code class="docutils literal notranslate"><span class="pre">treemaker_flavor.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">copy</span>
+
+<span class="c1"># list of processes</span>
+<span class="n">processList</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;p8_ee_ZH_Zmumu_ecm240&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;fraction&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;crossSection&quot;</span><span class="p">:</span> <span class="mf">0.201868</span> <span class="o">*</span> <span class="mf">0.034</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;p8_ee_ZZ_mumubb_ecm240&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;fraction&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;crossSection&quot;</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">1.35899</span> <span class="o">*</span> <span class="mf">0.034</span> <span class="o">*</span> <span class="mf">0.152</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="c1"># Production tag when running over EDM4Hep centrally produced events, this points to the yaml files for getting sample statistics (mandatory)</span>
+<span class="c1">#prodTag     = &quot;FCCee/winter2023/IDEA/&quot;</span>
+
+<span class="c1">#Optional: output directory, default is local running directory</span>
+<span class="n">outputDir</span>   <span class="o">=</span> <span class="s2">&quot;./outputs/treemaker/flavor/&quot;</span>
+
+<span class="c1"># Define the input dir (optional)</span>
+<span class="n">inputDir</span>    <span class="o">=</span> <span class="s2">&quot;./localSamples/&quot;</span>
+
+<span class="c1"># additional/costom C++ functions, defined in header files (optional)</span>
+<span class="n">includePaths</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;functions.h&quot;</span><span class="p">]</span>
+
+<span class="c1">## latest particle transformer model, trained on 9M jets in winter2023 samples</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;fccee_flavtagging_edm4hep_wc_v1&quot;</span>
+
+<span class="c1">## model files needed for unit testing in CI</span>
+<span class="n">url_model_dir</span> <span class="o">=</span> <span class="s2">&quot;https://fccsw.web.cern.ch/fccsw/testsamples/jet_flavour_tagging/winter2023/wc_pt_13_01_2022/&quot;</span>
+<span class="n">url_preproc</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">.json&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url_model_dir</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+<span class="n">url_model</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">.onnx&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url_model_dir</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+
+<span class="c1">## model files locally stored on /eos</span>
+<span class="n">model_dir</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;/eos/experiment/fcc/ee/jet_flavour_tagging/winter2023/wc_pt_13_01_2022/&quot;</span>
+<span class="p">)</span>
+<span class="n">local_preproc</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">.json&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+<span class="n">local_model</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">.onnx&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
+
+<span class="c1">## get local file, else download from url</span>
+<span class="k">def</span> <span class="nf">get_file_path</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+
+<span class="n">weaver_preproc</span> <span class="o">=</span> <span class="n">get_file_path</span><span class="p">(</span><span class="n">url_preproc</span><span class="p">,</span> <span class="n">local_preproc</span><span class="p">)</span>
+<span class="n">weaver_model</span> <span class="o">=</span> <span class="n">get_file_path</span><span class="p">(</span><span class="n">url_model</span><span class="p">,</span> <span class="n">local_model</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">addons.ONNXRuntime.python.jetFlavourHelper</span> <span class="kn">import</span> <span class="n">JetFlavourHelper</span>
+<span class="kn">from</span> <span class="nn">addons.FastJet.python.jetClusteringHelper</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ExclusiveJetClusteringHelper</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">jetFlavourHelper</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">jetClusteringHelper</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="c1"># Mandatory: RDFanalysis class where the use defines the operations on the TTree</span>
+<span class="k">class</span> <span class="nc">RDFanalysis</span><span class="p">:</span>
+
+    <span class="c1"># __________________________________________________________</span>
+    <span class="c1"># Mandatory: analysers funtion to define the analysers to process, please make sure you return the last dataframe, in this example it is df2</span>
+    <span class="k">def</span> <span class="nf">analysers</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+
+        <span class="c1"># __________________________________________________________</span>
+        <span class="c1"># Mandatory: analysers funtion to define the analysers to process, please make sure you return the last dataframe, in this example it is df2</span>
+
+        <span class="c1"># define some aliases to be used later on</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;Particle0&quot;</span><span class="p">,</span> <span class="s2">&quot;Particle#0.index&quot;</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;Particle1&quot;</span><span class="p">,</span> <span class="s2">&quot;Particle#1.index&quot;</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;MCRecoAssociations0&quot;</span><span class="p">,</span> <span class="s2">&quot;MCRecoAssociations#0.index&quot;</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;MCRecoAssociations1&quot;</span><span class="p">,</span> <span class="s2">&quot;MCRecoAssociations#1.index&quot;</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;Muon0&quot;</span><span class="p">,</span> <span class="s2">&quot;Muon#0.index&quot;</span><span class="p">)</span>
+        <span class="c1"># get all the leptons from the collection</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;muons_all&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get(Muon0, ReconstructedParticles)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># select leptons with momentum &gt; 20 GeV</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;muons&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::sel_p(20)(muons_all)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;muons_p&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_p(muons)&quot;</span>
+        <span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;muons_theta&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_theta(muons)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;muons_phi&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_phi(muons)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;muons_q&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_charge(muons)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;muons_no&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_n(muons)&quot;</span>
+        <span class="p">)</span>
+        <span class="c1"># compute the muon isolation and store muons with an isolation cut of 0df = df.25 in a separate column muons_sel_iso</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;muons_iso&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FCCAnalyses::ZHfunctions::coneIsolation(0.01, 0.5)(muons, ReconstructedParticles)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;muons_sel_iso&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FCCAnalyses::ZHfunctions::sel_iso(0.25)(muons, muons_iso)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1">#########</span>
+        <span class="c1">### CUT 1: at least 1 muon with at least one isolated one</span>
+        <span class="c1">#########</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;muons_no &gt;= 1 &amp;&amp; muons_sel_iso.size() &gt; 0&quot;</span><span class="p">)</span>
+        <span class="c1">#########</span>
+        <span class="c1">### CUT 2 :at least 2 opposite-sign (OS) leptons</span>
+        <span class="c1">#########</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;muons_no &gt;= 2 &amp;&amp; abs(Sum(muons_q)) &lt; muons_q.size()&quot;</span><span class="p">)</span>
+        <span class="c1"># now we build the Z resonance based on the available leptons.</span>
+        <span class="c1"># the function resonanceBuilder_mass_recoil returns the best lepton pair compatible with the Z mass (91.2 GeV) and recoil at 125 GeV</span>
+        <span class="c1"># the argument 0.4 gives a weight to the Z mass and the recoil mass in the chi2 minimization</span>
+        <span class="c1"># technically, it returns a ReconstructedParticleData object with index 0 the di-lepton system, index and 2 the leptons of the pair</span>
+
+        <span class="c1">## here cluster jets in the events but first remove muons from the list of</span>
+        <span class="c1">## reconstructed particles</span>
+
+        <span class="c1">## create a new collection of reconstructed particles removing muons with p&gt;20</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;ReconstructedParticlesNoMuons&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::remove(ReconstructedParticles,muons)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1">## perform N=2 jet clustering</span>
+        <span class="k">global</span> <span class="n">jetClusteringHelper</span>
+        <span class="k">global</span> <span class="n">jetFlavourHelper</span>
+
+        <span class="c1">## define jet and run clustering parameters</span>
+        <span class="c1">## name of collections in EDM root files</span>
+        <span class="n">collections</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;GenParticles&quot;</span><span class="p">:</span> <span class="s2">&quot;Particle&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;PFParticles&quot;</span><span class="p">:</span> <span class="s2">&quot;ReconstructedParticles&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;PFTracks&quot;</span><span class="p">:</span> <span class="s2">&quot;EFlowTrack&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;PFPhotons&quot;</span><span class="p">:</span> <span class="s2">&quot;EFlowPhoton&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;PFNeutralHadrons&quot;</span><span class="p">:</span> <span class="s2">&quot;EFlowNeutralHadron&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;TrackState&quot;</span><span class="p">:</span> <span class="s2">&quot;EFlowTrack_1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;TrackerHits&quot;</span><span class="p">:</span> <span class="s2">&quot;TrackerHits&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;CalorimeterHits&quot;</span><span class="p">:</span> <span class="s2">&quot;CalorimeterHits&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;dNdx&quot;</span><span class="p">:</span> <span class="s2">&quot;EFlowTrack_2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;PathLength&quot;</span><span class="p">:</span> <span class="s2">&quot;EFlowTrack_L&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Bz&quot;</span><span class="p">:</span> <span class="s2">&quot;magFieldBz&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">collections_nomuons</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">collections</span><span class="p">)</span>
+        <span class="n">collections_nomuons</span><span class="p">[</span><span class="s2">&quot;PFParticles&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ReconstructedParticlesNoMuons&quot;</span>
+
+        <span class="n">jetClusteringHelper</span> <span class="o">=</span> <span class="n">ExclusiveJetClusteringHelper</span><span class="p">(</span>
+            <span class="n">collections_nomuons</span><span class="p">[</span><span class="s2">&quot;PFParticles&quot;</span><span class="p">],</span> <span class="mi">2</span>
+        <span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">jetClusteringHelper</span><span class="o">.</span><span class="n">define</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+        <span class="c1">## define jet flavour tagging parameters</span>
+
+        <span class="n">jetFlavourHelper</span> <span class="o">=</span> <span class="n">JetFlavourHelper</span><span class="p">(</span>
+            <span class="n">collections_nomuons</span><span class="p">,</span>
+            <span class="n">jetClusteringHelper</span><span class="o">.</span><span class="n">jets</span><span class="p">,</span>
+            <span class="n">jetClusteringHelper</span><span class="o">.</span><span class="n">constituents</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1">## define observables for tagger</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">jetFlavourHelper</span><span class="o">.</span><span class="n">define</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+        <span class="c1">## tagger inference</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">jetFlavourHelper</span><span class="o">.</span><span class="n">inference</span><span class="p">(</span><span class="n">weaver_preproc</span><span class="p">,</span> <span class="n">weaver_model</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;zbuilder_result&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FCCAnalyses::ZHfunctions::resonanceBuilder_mass_recoil(91.2, 125, 0.4, 240, false)(muons, MCRecoAssociations0, MCRecoAssociations1, ReconstructedParticles, Particle, Particle0, Particle1)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;zmumu&quot;</span><span class="p">,</span> <span class="s2">&quot;Vec_rp</span><span class="si">{zbuilder_result[0]}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># the Z</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;zmumu_muons&quot;</span><span class="p">,</span> <span class="s2">&quot;Vec_rp{zbuilder_result[1],zbuilder_result[2]}&quot;</span>
+        <span class="p">)</span>  <span class="c1"># the leptons</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;zmumu_m&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_mass(zmumu)[0]&quot;</span><span class="p">,</span>
+        <span class="p">)</span>  <span class="c1"># Z mass</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;zmumu_p&quot;</span><span class="p">,</span> <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_p(zmumu)[0]&quot;</span>
+        <span class="p">)</span>  <span class="c1"># momentum of the Z</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;zmumu_recoil&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::recoilBuilder(240)(zmumu)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>  <span class="c1"># compute the recoil based on the reconstructed Z</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;zmumu_recoil_m&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_mass(zmumu_recoil)[0]&quot;</span><span class="p">,</span>
+        <span class="p">)</span>  <span class="c1"># recoil mass</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;zmumu_muons_p&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_p(zmumu_muons)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>  <span class="c1"># get the momentum of the 2 muons from the Z resonance</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;missingEnergy&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FCCAnalyses::ZHfunctions::missingEnergy(240., ReconstructedParticles)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># .Define(&quot;cosTheta_miss&quot;, &quot;FCCAnalyses::get_cosTheta_miss(missingEnergy)&quot;)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;cosTheta_miss&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FCCAnalyses::ZHfunctions::get_cosTheta_miss(MissingET)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;missing_p&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FCCAnalyses::ReconstructedParticle::get_p(MissingET)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1">#########</span>
+        <span class="c1">### CUT 3: Njets = 2</span>
+        <span class="c1">#########</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;event_njet &gt; 1&quot;</span><span class="p">)</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;jets_p4&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;JetConstituentsUtils::compute_tlv_jets(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">jetClusteringHelper</span><span class="o">.</span><span class="n">jets</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span>
+            <span class="s2">&quot;jj_m&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;JetConstituentsUtils::InvariantMass(jets_p4[0], jets_p4[1])&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">df</span>
+
+    <span class="c1"># __________________________________________________________</span>
+    <span class="c1"># Mandatory: output function, please make sure you return the branchlist as a python list</span>
+    <span class="k">def</span> <span class="nf">output</span><span class="p">():</span>
+        <span class="n">branchList</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;zmumu_m&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;zmumu_p&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;zmumu_recoil_m&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;cosTheta_miss&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;missing_p&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;jj_m&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="c1">##  outputs jet properties</span>
+        <span class="c1"># branchList += jetClusteringHelper.outputBranches()</span>
+
+        <span class="c1">## outputs jet scores and constituent breakdown</span>
+        <span class="n">branchList</span> <span class="o">+=</span> <span class="n">jetFlavourHelper</span><span class="o">.</span><span class="n">outputBranches</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">branchList</span>
+</pre></div>
+</div>
+<p>and run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>treemaker_flavor.py
+</pre></div>
+</div>
+<p>this will produce a root file for every process containing a flat tree <code class="docutils literal notranslate"><span class="pre">events</span></code> containning high-level variables. In addition to selecting muons as done in the previous example, this script create a new collection of <code class="docutils literal notranslate"><span class="pre">ReconstructedParticles</span></code> without the two high energy muons, and runs the jet clustering algorithm in exclusive N=2 mode of the new collection. In such a way, the two clustered jets form the H-&gt;jj jet candidates. The jet flavour algorithm is then evaluated on these two jets and the relevant scores are stored in the output tree.</p>
+<p>Now we can produce a <strong>histmaker</strong> script, that runs this time on a flat ntuple format instead of the edm4hep format <code class="docutils literal notranslate"><span class="pre">histmaker_flavor.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of processes (mandatory)</span>
+<span class="n">processList</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;p8_ee_ZH_Zmumu_ecm240&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;fraction&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;crossSection&quot;</span><span class="p">:</span> <span class="mf">0.201868</span> <span class="o">*</span> <span class="mf">0.034</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;p8_ee_ZZ_mumubb_ecm240&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;fraction&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;crossSection&quot;</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">1.35899</span> <span class="o">*</span> <span class="mf">0.034</span> <span class="o">*</span> <span class="mf">0.152</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="c1"># Production tag when running over EDM4Hep centrally produced events, this points to the yaml files for getting sample statistics (mandatory)</span>
+<span class="c1">#prodTag = &quot;FCCee/winter2023/IDEA/&quot;</span>
+
+<span class="c1"># Link to the dictonary that contains all the cross section informations etc... (mandatory)</span>
+<span class="n">procDict</span> <span class="o">=</span> <span class="s2">&quot;FCCee_procDict_winter2023_IDEA.json&quot;</span>
+
+<span class="c1"># Define the input dir (optional)</span>
+<span class="n">inputDir</span>    <span class="o">=</span> <span class="s2">&quot;./outputs/treemaker/flavor/&quot;</span>
+
+<span class="c1"># Optional: output directory, default is local running directory</span>
+<span class="n">outputDir</span> <span class="o">=</span> <span class="s2">&quot;./outputs/histmaker/flavor/&quot;</span>
+
+
+<span class="c1"># optional: ncpus, default is 4, -1 uses all cores available</span>
+<span class="n">nCPUS</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="c1"># scale the histograms with the cross-section and integrated luminosity</span>
+<span class="n">doScale</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">intLumi</span> <span class="o">=</span> <span class="mi">5000000</span>  <span class="c1"># 5 /ab</span>
+
+
+<span class="c1"># define some binning for various histograms</span>
+<span class="n">bins_p_mu</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># 100 MeV bins</span>
+<span class="n">bins_m_ll</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># 100 MeV bins</span>
+<span class="n">bins_p_ll</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># 100 MeV bins</span>
+<span class="n">bins_recoil</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># 1 MeV bins</span>
+<span class="n">bins_cosThetaMiss</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">bins_m_jj</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>  <span class="c1"># 1 GeV bins</span>
+<span class="n">bins_score</span> <span class="o">=</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>  <span class="c1">#</span>
+
+<span class="n">bins_theta</span> <span class="o">=</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">bins_eta</span> <span class="o">=</span> <span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">bins_phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="n">bins_count</span> <span class="o">=</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">bins_charge</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">bins_iso</span> <span class="o">=</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+
+<span class="c1"># build_graph function that contains the analysis logic, cuts and histograms (mandatory)</span>
+<span class="k">def</span> <span class="nf">build_graph</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
+    <span class="n">weightsum</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Sum</span><span class="p">(</span><span class="s2">&quot;weight&quot;</span><span class="p">)</span>
+
+    <span class="c1">#########</span>
+    <span class="c1">### CUT 4: Z mass window</span>
+    <span class="c1">#########</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;zmumu_m &gt; 86 &amp;&amp; zmumu_m &lt; 96&quot;</span><span class="p">)</span>
+
+    <span class="c1">#########</span>
+    <span class="c1">### CUT 5: Z momentum</span>
+    <span class="c1">#########</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;zmumu_p &gt; 20 &amp;&amp; zmumu_p &lt; 70&quot;</span><span class="p">)</span>
+
+    <span class="c1">#########</span>
+    <span class="c1">### CUT 6: recoil mass window</span>
+    <span class="c1">#########</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;zmumu_recoil_m &lt; 140 &amp;&amp; zmumu_recoil_m &gt; 120&quot;</span><span class="p">)</span>
+
+    <span class="c1">#########</span>
+    <span class="c1">### CUT 7: cut on the jet tagging score to select H-&gt;bb events</span>
+    <span class="c1">#########</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;scoresum_B&quot;</span><span class="p">,</span> <span class="s2">&quot;recojet_isB[0] + recojet_isB[1]&quot;</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;scoresum_B&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_score</span><span class="p">),</span> <span class="s2">&quot;scoresum_B&quot;</span><span class="p">))</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;scoresum_B &gt; 1.0&quot;</span><span class="p">)</span>
+
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;zmumu_m&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_m_ll</span><span class="p">),</span> <span class="s2">&quot;zmumu_m&quot;</span><span class="p">))</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;zmumu_recoil_m&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_recoil</span><span class="p">),</span> <span class="s2">&quot;zmumu_recoil_m&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;zmumu_p&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_p_ll</span><span class="p">),</span> <span class="s2">&quot;zmumu_p&quot;</span><span class="p">))</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;jj_m&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_m_jj</span><span class="p">),</span> <span class="s2">&quot;jj_m&quot;</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">weightsum</span>
+</pre></div>
+</div>
+<p>and run it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>histmaker_flavor.py
+</pre></div>
+</div>
+<p>This script takes the ntuples produced in the <strong>run</strong> stage, applies a similar selection as in the previous examples, but requires the jets to have a high probability to be B-like.</p>
+<p>Now we can write the code to produce plots, in <code class="docutils literal notranslate"><span class="pre">plots_flavor.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ROOT</span>
+
+<span class="c1"># global parameters</span>
+<span class="n">intLumi</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">intLumiLabel</span> <span class="o">=</span> <span class="s2">&quot;L = 5 ab^{-1}&quot;</span>
+<span class="n">ana_tex</span> <span class="o">=</span> <span class="s2">&quot;e^{+}e^{-} #rightarrow ZH #rightarrow #mu^{+}#mu^{-} b b&quot;</span>
+<span class="n">delphesVersion</span> <span class="o">=</span> <span class="s2">&quot;3.4.2&quot;</span>
+<span class="n">energy</span> <span class="o">=</span> <span class="mf">240.0</span>
+<span class="n">collider</span> <span class="o">=</span> <span class="s2">&quot;FCC-ee&quot;</span>
+<span class="n">formats</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;png&quot;</span><span class="p">,</span> <span class="s2">&quot;pdf&quot;</span><span class="p">]</span>
+
+<span class="n">outdir</span>         <span class="o">=</span> <span class="s1">&#39;./outputs/plots/flavor/&#39;</span> 
+<span class="n">inputDir</span>       <span class="o">=</span> <span class="s1">&#39;./outputs/histmaker/flavor/&#39;</span> 
+
+<span class="n">plotStatUnc</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">colors</span><span class="p">[</span><span class="s2">&quot;ZH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">kRed</span>
+<span class="n">colors</span><span class="p">[</span><span class="s2">&quot;ZZ&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">kGreen</span> <span class="o">+</span> <span class="mi">2</span>
+
+<span class="n">procs</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">procs</span><span class="p">[</span><span class="s2">&quot;signal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ZH&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;p8_ee_ZH_Zmumu_ecm240&quot;</span><span class="p">]}</span>
+<span class="n">procs</span><span class="p">[</span><span class="s2">&quot;backgrounds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ZZ&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;p8_ee_ZZ_mumubb_ecm240&quot;</span><span class="p">]}</span>
+
+<span class="n">legend</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">legend</span><span class="p">[</span><span class="s2">&quot;ZH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ZH&quot;</span>
+<span class="n">legend</span><span class="p">[</span><span class="s2">&quot;ZZ&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ZZ&quot;</span>
+
+<span class="n">hists</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">hists</span><span class="p">[</span><span class="s2">&quot;zmumu_recoil_m&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;zmumu_recoil_m&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;logy&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;stack&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;rebin&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">&quot;xmin&quot;</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span>
+    <span class="s2">&quot;xmax&quot;</span><span class="p">:</span> <span class="mi">140</span><span class="p">,</span>
+    <span class="s2">&quot;ymin&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;ymax&quot;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>
+    <span class="s2">&quot;xtitle&quot;</span><span class="p">:</span> <span class="s2">&quot;Recoil (GeV)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ytitle&quot;</span><span class="p">:</span> <span class="s2">&quot;Events / 100 MeV&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">hists</span><span class="p">[</span><span class="s2">&quot;jj_m&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;jj_m&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;logy&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;stack&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;rebin&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;xmin&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="s2">&quot;xmax&quot;</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
+    <span class="s2">&quot;ymin&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;ymax&quot;</span><span class="p">:</span> <span class="mi">4000</span><span class="p">,</span>
+    <span class="s2">&quot;xtitle&quot;</span><span class="p">:</span> <span class="s2">&quot;m_</span><span class="si">{jj}</span><span class="s2"> (GeV)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ytitle&quot;</span><span class="p">:</span> <span class="s2">&quot;Events / 2 GeV&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">hists</span><span class="p">[</span><span class="s2">&quot;scoresum_B&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;scoresum_B&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;logy&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;stack&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;rebin&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;xmin&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;xmax&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="s2">&quot;ymin&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;ymax&quot;</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span>
+    <span class="s2">&quot;xtitle&quot;</span><span class="p">:</span> <span class="s2">&quot;p_</span><span class="si">{1}</span><span class="s2">(B) + p_</span><span class="si">{2}</span><span class="s2">(B)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ytitle&quot;</span><span class="p">:</span> <span class="s2">&quot;Events&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>plots<span class="w"> </span>plots_flavor.py
+</pre></div>
+</div>
+<div class="challenge admonition">
+<p class="admonition-title">Exercises</p>
+<p class="rubric">Simple</p>
+<ol class="arabic simple">
+<li><p>Modify <code class="docutils literal notranslate"><span class="pre">histmaker_flavor.py</span></code> to require the two jets individually to be B-like, i.e requiring the B score is greater 0.5 for each jet.</p></li>
+<li><p>Selecting gluon-like jets instead. You will need to modify both the  <code class="docutils literal notranslate"><span class="pre">treemaker_flavor.py</span></code> and <code class="docutils literal notranslate"><span class="pre">histmaker_flavor.py</span></code> for this.)</p></li>
+<li><p>Produce plots with larger statistics by re-running <code class="docutils literal notranslate"><span class="pre">DelphesPythia8_EDM4HEP</span></code> with more events. In particular produce a ZZ inclusive sample using to include all Z decays. Rerun all the examples above.</p></li>
+</ol>
+<p class="rubric">Advanced</p>
+<ol class="arabic simple">
+<li><p>To evaluate the impact of detector performance, smear the neutral hadron resolution in the <code class="docutils literal notranslate"><span class="pre">ReconstructedParticlesNoMuons</span></code> collection and check the impact on the dijet invariant mass resolution. An example can be found [here] (https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/smearing/smear_jets.py):</p></li>
+<li><p>Now smear the impact parameter resolution and evaluate the imapct on the efficiency of selecting two B-tagged jets or two C-tagged jets.</p></li>
+<li><p><strong>This part can only be on lxplus and for people having the access rights to eos and the analysis dictonary</strong>
+In order to produce plots with more statistics using centrally produced samples, we could use already processed large statistics samples.
+To do so we re-run the pre-selection over 10 percent of the total statistics <a class="reference external" href="http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA.php">here</a>.
+Add to your a <code class="docutils literal notranslate"><span class="pre">analysis_stage1.py</span></code> file</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">processList</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;p8_ee_ZZ_ecm240&#39;</span><span class="p">:{</span><span class="s1">&#39;fraction&#39;</span><span class="p">:</span><span class="mf">0.1</span><span class="p">},</span>
+    <span class="s1">&#39;p8_ee_WW_ecm240&#39;</span><span class="p">:{</span><span class="s1">&#39;fraction&#39;</span><span class="p">:</span><span class="mf">0.1</span><span class="p">},</span>
+    <span class="s1">&#39;p8_ee_ZH_ecm240&#39;</span><span class="p">:{</span><span class="s1">&#39;fraction&#39;</span><span class="p">:</span><span class="mf">0.1</span><span class="p">}</span>
+<span class="p">}</span>
+<span class="n">prodTag</span>     <span class="o">=</span> <span class="s2">&quot;FCCee/winter2023/IDEA/&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../../../k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html" class="btn btn-neutral float-left" title="2.2. FCC: Getting started with simulating events in Delphes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../FccFastSimVertexing/Readme.html" class="btn btn-neutral float-right" title="2.4. FCC: tracking and vertexing example using specific flavour decays" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: bnl2023
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../../../../../master/index.html">master</a></dd>
+      <dd><a href="Readme.html">bnl2023</a></dd>
+      <dd><a href="../../../../../../cern2022/index.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

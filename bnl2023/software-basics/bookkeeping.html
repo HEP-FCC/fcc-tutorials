@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1.5. Finding data in the Bookkeeping &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.6. Inspecting an FCC data file" href="exploring-fcc-files.html" />
+    <link rel="prev" title="1.4. An introduction to FCC Software" href="fccsw.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">1. First  Steps</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html">1.1. Pre-workshop checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swan.html">1.2. Running the software in SWAN notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction-to-course.html">1.3. Goals of the course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fccsw.html">1.4. An introduction to FCC Software</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.5. Finding data in the Bookkeeping</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gaining-access-permissions">1.5.1. Gaining access permissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-data">1.5.2. Finding Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exploring-fcc-files.html">1.6. Inspecting an FCC data file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tips-tricks.html">1.7. Tips and tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asking-questions.html">1.8. Asking good questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fast-sim-and-analysis/README.html">2. Generators, Fast Simulation and Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">3. Full Detector Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="README.html"><span class="section-number">1. </span>First  Steps</a> &raquo;</li>
+      <li><span class="section-number">1.5. </span>Finding data in the Bookkeeping</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/software-basics/bookkeeping.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="finding-data-in-the-bookkeeping">
+<h1><span class="section-number">1.5. </span>Finding data in the Bookkeeping<a class="headerlink" href="#finding-data-in-the-bookkeeping" title="Permalink to this heading"></a></h1>
+<p>Knowing how data flows through the various Gaudi applications is crucial for
+knowing where to look for your data.</p>
+<p>Data are catalogued in ‘the bookkeeping’, and are initially sorted in broad
+groups such as ‘Delphes Events’, ‘Full detector simulation’, and according to the FCC flavor (ee, hh or eh).
+After this, a tree of various application and processing versions will
+eventually lead to the data you need.</p>
+<div class="objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<ul class="simple">
+<li><p>Find FCC data in the central storage</p></li>
+<li><p>Store FCC data in the central storage</p></li>
+</ul>
+</div>
+<section id="gaining-access-permissions">
+<h2><span class="section-number">1.5.1. </span>Gaining access permissions<a class="headerlink" href="#gaining-access-permissions" title="Permalink to this heading"></a></h2>
+<p>Read/write access to the shared filesystem is gained by subscribing to the relevant egroups <a class="reference external" href="https://e-groups.cern.ch/e-groups/EgroupsSearchForm.do">here</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fcc</span><span class="o">-</span><span class="n">eos</span><span class="o">-</span><span class="n">read</span><span class="o">-</span><span class="n">hh</span>
+<span class="n">fcc</span><span class="o">-</span><span class="n">eos</span><span class="o">-</span><span class="n">read</span><span class="o">-</span><span class="n">ee</span>
+<span class="n">fcc</span><span class="o">-</span><span class="n">eos</span><span class="o">-</span><span class="n">read</span><span class="o">-</span><span class="n">eh</span>
+
+<span class="n">fcc</span><span class="o">-</span><span class="n">eos</span><span class="o">-</span><span class="n">write</span><span class="o">-</span><span class="n">hh</span>
+<span class="n">fcc</span><span class="o">-</span><span class="n">eos</span><span class="o">-</span><span class="n">write</span><span class="o">-</span><span class="n">ee</span>
+<span class="n">fcc</span><span class="o">-</span><span class="n">eos</span><span class="o">-</span><span class="n">write</span><span class="o">-</span><span class="n">eh</span>
+</pre></div>
+</div>
+</section>
+<section id="finding-data">
+<h2><span class="section-number">1.5.2. </span>Finding Data<a class="headerlink" href="#finding-data" title="Permalink to this heading"></a></h2>
+<p>Browse the fcc directory on <code class="docutils literal notranslate"><span class="pre">eos</span></code>, the shared filesystem used by CERN.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tree<span class="w"> </span>/eos/experiment/fcc/<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+<p>You should see an output similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>/eos/experiment/fcc/
+├── ee
+│   ├── accelerator
+│   ├── analyses
+│   ├── datasets
+│   ├── generation
+│   ├── mdi
+│   ├── simulation
+│   ├── tutorial
+│   └── utils
+├── eh
+│   └── datasets
+├── helhc
+│   ├── analyses
+│   ├── generation
+│   ├── utils
+│   └── YR_summary
+├── hh
+│   ├── analyses
+│   ├── CDR_script
+│   ├── generation
+│   ├── hcal
+│   ├── simulation
+│   ├── tests
+│   ├── testsamples
+│   ├── tutorials
+│   └── utils
+</pre></div>
+</div>
+<p>The file paths on eos already give an indication where to find what kind of data. In some instances, the information is very detailed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/eos/experiment/fcc/ee/tutorial/
+</pre></div>
+</div>
+<p>But not all datasets follow this exact format. In case of questions simply contact the software team.</p>
+<p>On lxplus <code class="docutils literal notranslate"><span class="pre">eos</span></code> is mounted as a standard directory and you can use standard bash tools such as <code class="docutils literal notranslate"><span class="pre">ls</span></code>, <code class="docutils literal notranslate"><span class="pre">cp</span></code>, <code class="docutils literal notranslate"><span class="pre">mv</span></code> … to manipulate the files - Also to write them provided you have the correct permissions.</p>
+<p>However, using eos like this is not recommended to transfer actual data (we speak from experience) and also not possible on machines where eos has not been mounted. The right tool here is <code class="docutils literal notranslate"><span class="pre">xrdcp</span></code>, which uses the xrootd protocol. It works like   <code class="docutils literal notranslate"><span class="pre">cp</span></code> (minus some features) but all paths must be prefixed by the URL <code class="docutils literal notranslate"><span class="pre">root://eospublic.cern.ch/</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fccsw.html" class="btn btn-neutral float-left" title="1.4. An introduction to FCC Software" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="exploring-fcc-files.html" class="btn btn-neutral float-right" title="1.6. Inspecting an FCC data file" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: bnl2023
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../master/index.html">master</a></dd>
+      <dd><a href="bookkeeping.html">bnl2023</a></dd>
+      <dd><a href="../../cern2022/index.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

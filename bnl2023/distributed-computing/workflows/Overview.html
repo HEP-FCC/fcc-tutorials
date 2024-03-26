@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.2.1. Overview of the submission scripts &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.2.2. Workflow 1" href="01/DiTauKKMCeeDelphesStandAlone.html" />
+    <link rel="prev" title="4.2. FCC DIRAC example workflows" href="../Workflows.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fast-sim-and-analysis/README.html">2. Generators, Fast Simulation and Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../full-detector-simulations/README.html">3. Full Detector Simulations</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../README.html">4. Distributed computing</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../RegisteringToFccVO.html">4.1. Getting started with FCC distributed computing</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../Workflows.html">4.2. FCC DIRAC example workflows</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">4.2.1. Overview of the submission scripts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#before-starting-cloning-of-workflows-repository">4.2.1.1. Before starting: cloning of workflows repository</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="01/DiTauKKMCeeDelphesStandAlone.html">4.2.2. Workflow 1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../OutputStructure.html">4.3. Structure for /eos/experiment/fcc/prod</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../README.html"><span class="section-number">4. </span>Distributed computing</a> &raquo;</li>
+          <li><a href="../Workflows.html"><span class="section-number">4.2. </span>FCC DIRAC example workflows</a> &raquo;</li>
+      <li><span class="section-number">4.2.1. </span>Overview of the submission scripts</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/distributed-computing/workflows/Overview.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="overview-of-the-submission-scripts">
+<h1><span class="section-number">4.2.1. </span>Overview of the submission scripts<a class="headerlink" href="#overview-of-the-submission-scripts" title="Permalink to this heading"></a></h1>
+<p>Command line submission to DIRAC is performed using python scripts instantiating the relevant classes.
+The general structure of the script is the following:</p>
+<ol class="arabic simple">
+<li><p>Instantiation of the interface to DIRAC;</p></li>
+<li><p>Creation of a Job manager instance, including input and output sandbox, and all relevant config and data files;</p></li>
+<li><p>Creation and configuration of the application to be run and their registration to the job manager instance;</p></li>
+<li><p>Job submission</p></li>
+</ol>
+<p>The script may contain or import all the code relevant to the correct definition of the various steps above.
+DIRAC also provides some standard tooling for parsing arguments and homogenize the submission script experience.</p>
+<p>The parser is defined the DIRAC core, is part of the generic definition of <a class="reference external" href="https://dirac.readthedocs.io/en/latest/CodeDocumentation/Core/Base/Script.html">Script</a> and provides a callback for
+customizing the actions. Typical usage looks like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">DIRAC</span> <span class="kn">import</span> <span class="n">S_OK</span><span class="p">,</span> <span class="n">S_ERROR</span>
+<span class="kn">from</span> <span class="nn">DIRAC.Core.Base</span> <span class="kn">import</span> <span class="n">Script</span>
+
+<span class="c1"># Define a simple class to hold the script parameters</span>
+<span class="k">class</span> <span class="nc">Params</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">wms</span> <span class="o">=</span> <span class="s1">&#39;wms&#39;</span>
+  <span class="k">def</span> <span class="nf">setWMS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">wms</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="k">return</span> <span class="n">S_OK</span><span class="p">()</span>
+
+<span class="c1"># Instantiate the params class</span>
+<span class="n">cliParams</span> <span class="o">=</span> <span class="n">Params</span><span class="p">()</span>
+<span class="n">Script</span><span class="o">.</span><span class="n">registerSwitch</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;wms&#39;</span><span class="p">,</span> <span class="s2">&quot;WMS where to run&quot;</span><span class="p">,</span> <span class="n">cliParams</span><span class="o">.</span><span class="n">setWMS</span><span class="p">)</span>
+<span class="n">Script</span><span class="o">.</span><span class="n">parseCommandLine</span><span class="p">(</span><span class="n">ignoreErrors</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Get the list of services (the switch above appearer as servicesList[0])</span>
+<span class="n">servicesList</span> <span class="o">=</span> <span class="n">Script</span><span class="o">.</span><span class="n">getPositionalArgs</span><span class="p">()</span>
+<span class="c1"># The value for argument &#39;wms&#39; is the first entry in servicelist list</span>
+
+</pre></div>
+</div>
+<p>The DIRAC interface is controlled by the API interface class <code class="docutils literal notranslate"><span class="pre">DiracILC</span></code>, which derives from the upstream <a class="reference external" href="https://raw.githubusercontent.com/DIRACGrid/DIRAC/integration/src/DIRAC/Interfaces/API/Dirac.py">DIRAC API</a>.
+Typical usage is the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ILCDIRAC.Interfaces.API.DiracILC</span> <span class="kn">import</span> <span class="n">DiracILC</span>
+<span class="o">...</span>
+<span class="n">dIlc</span> <span class="o">=</span> <span class="n">DiracILC</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The returned <code class="docutils literal notranslate"><span class="pre">dILc</span></code> variable contais the API context to be used when relevant.</p>
+<p>The job manager is an instance of <code class="docutils literal notranslate"><span class="pre">UserJob</span></code> - which derives from <a class="reference external" href="https://dirac.readthedocs.io/en/latest/UserGuide/GettingStarted/UserJobs/">Job</a> - is instantiated next.
+Typical usage is the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ILCDIRAC.Interfaces.API.NewInterface.UserJob</span> <span class="kn">import</span> <span class="n">UserJob</span>
+<span class="o">...</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">UserJob</span><span class="p">()</span>
+<span class="n">job</span><span class="o">.</span><span class="n">setOutputSandbox</span><span class="p">([</span><span class="s1">&#39;*.log&#39;</span><span class="p">,</span> <span class="s1">&#39;*.sh&#39;</span><span class="p">,</span> <span class="s1">&#39;*.py&#39;</span><span class="p">,</span> <span class="s1">&#39;*.xml&#39;</span><span class="p">])</span>
+<span class="n">outputdatafile</span><span class="o">=</span><span class="s1">&#39;kktautau_delphes_edm4hep_output.root&#39;</span>
+<span class="n">job</span><span class="o">.</span><span class="n">setOutputData</span><span class="p">(</span><span class="n">outputdatafile</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;CERN-DST-EOS&#39;</span> <span class="p">)</span>
+<span class="n">job</span><span class="o">.</span><span class="n">setJobGroup</span><span class="p">(</span> <span class="s2">&quot;KKMC_EDM4HEP_Run&quot;</span> <span class="p">)</span>
+<span class="n">job</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span> <span class="s2">&quot;KKMC_EDM4HEP&quot;</span> <span class="p">)</span>
+<span class="n">job</span><span class="o">.</span><span class="n">setLogLevel</span><span class="p">(</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="c1"># Information can be added thorugh out the script </span>
+<span class="n">delphescard</span><span class="o">=</span><span class="s1">&#39;delphes_card_IDEA.tcl&#39;</span>
+<span class="o">...</span>
+<span class="c1"># Set the sandbox content</span>
+<span class="n">job</span><span class="o">.</span><span class="n">setInputSandbox</span><span class="p">([</span><span class="s1">&#39;./&#39;</span> <span class="o">+</span> <span class="n">delphescard</span><span class="p">,</span> <span class="s1">&#39;./&#39;</span> <span class="o">+</span> <span class="n">edm4hepoutdef</span><span class="p">,</span> <span class="s1">&#39;./&#39;</span> <span class="o">+</span> <span class="n">pythiacard</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Applications are created, configured and added to the job manager in the order of running:
+An example is the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ILCDIRAC.Interfaces.API.NewInterface.Applications</span> <span class="kn">import</span> <span class="n">KKMC</span>
+<span class="o">...</span>
+<span class="n">kkmc</span> <span class="o">=</span> <span class="n">KKMC</span><span class="p">()</span>
+<span class="n">kkmc</span><span class="o">.</span><span class="n">setVersion</span><span class="p">(</span><span class="s1">&#39;Key4hep-2021-04-30&#39;</span><span class="p">)</span>
+<span class="n">kkmc</span><span class="o">.</span><span class="n">setEvtType</span><span class="p">(</span><span class="s1">&#39;Tau&#39;</span><span class="p">)</span>
+<span class="n">kkmc</span><span class="o">.</span><span class="n">setEnergy</span><span class="p">(</span><span class="mf">91.2</span><span class="p">)</span>
+<span class="n">nevts</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">outputfile</span> <span class="o">=</span> <span class="s1">&#39;kktautau_delphes_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">nevts</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.LHE&#39;</span>
+<span class="n">kkmc</span><span class="o">.</span><span class="n">setNumberOfEvents</span><span class="p">(</span><span class="n">nevts</span><span class="p">)</span>
+<span class="n">kkmc</span><span class="o">.</span><span class="n">setOutputFile</span><span class="p">(</span><span class="n">outputfile</span><span class="p">)</span>
+
+<span class="n">job</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kkmc</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Available applications defined in <a class="reference external" href="https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/-/tree/Rel-v31r0/Interfaces/API/NewInterface">here</a>.</p>
+<p>Finally the job is submitted:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="n">job</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">dIlc</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;wms&#39;</span><span class="p">)</span>
+<span class="c1"># Use wms=&#39;local&#39; for running on the local computer</span>
+</pre></div>
+</div>
+<p>Local submission can be used for testing.</p>
+<section id="before-starting-cloning-of-workflows-repository">
+<h2><span class="section-number">4.2.1.1. </span>Before starting: cloning of workflows repository<a class="headerlink" href="#before-starting-cloning-of-workflows-repository" title="Permalink to this heading"></a></h2>
+<p>The example scripts described in these pages, together with the relevant setup scripts, are available from the
+<a class="reference external" href="https://github.com/HEP-FCC/FCCDIRAC">FCCDIRAC</a> repository.</p>
+<p>The following steps must be executed (only once!) before trying to execute any of the workflows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/HEP-FCC/FCCDIRAC
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>FCCDIRAC
+
+$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>init_fcc.sh
+Setting<span class="w"> </span>up<span class="w"> </span>the<span class="w"> </span>latest<span class="w"> </span>Key4HEP<span class="w"> </span>software<span class="w"> </span>stack<span class="w"> </span>from<span class="w"> </span>CVMFS<span class="w"> </span>...
+<span class="w"> </span>...<span class="w">  </span>Key4HEP<span class="w"> </span>release:<span class="w"> </span>key4hep-stack/2021-07-16
+<span class="w"> </span>...<span class="w"> </span>Use<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span><span class="nb">command</span><span class="w"> </span>to<span class="w"> </span>reproduce<span class="w"> </span>the<span class="w"> </span>current<span class="w"> </span>environment:
+<span class="w"> </span>...
+<span class="w">         </span><span class="nb">source</span><span class="w"> </span>/cvmfs/sw.hsf.org/spackages2/key4hep-stack/2021-07-16/x86_64-centos7-gcc8.3.0-opt/wxwfgu65rjnk7s6frj25qsoq5miay4ft/setup.sh
+<span class="w"> </span>...
+<span class="w"> </span>...<span class="w"> </span><span class="k">done</span>.
+
+$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>init_dirac.sh
+Setting<span class="w"> </span>the<span class="w"> </span>iLCDirac<span class="w"> </span>environment<span class="w"> </span>...
+
+$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>init_dirac_proxy.sh
+Initializing<span class="w"> </span>the<span class="w"> </span>DIRAC/Grid<span class="w"> </span>proxy<span class="w"> </span>...
+Generating<span class="w"> </span>proxy...
+Enter<span class="w"> </span>Certificate<span class="w"> </span>password:
+Added<span class="w"> </span>VOMS<span class="w"> </span>attribute<span class="w"> </span>/fcc
+Uploading<span class="w"> </span>proxy..
+Proxy<span class="w"> </span>generated:
+subject<span class="w">      </span>:<span class="w"> </span>/DC<span class="o">=</span>ch/DC<span class="o">=</span>cern/OU<span class="o">=</span>Organic<span class="w"> </span>Units/OU<span class="o">=</span>Users/CN<span class="o">=</span>ganis/CN<span class="o">=</span><span class="m">393971</span>/CN<span class="o">=</span>Gerardo<span class="w"> </span>Ganis/CN<span class="o">=</span><span class="m">2888907760</span>/CN<span class="o">=</span><span class="m">1791020771</span>
+issuer<span class="w">       </span>:<span class="w"> </span>/DC<span class="o">=</span>ch/DC<span class="o">=</span>cern/OU<span class="o">=</span>Organic<span class="w"> </span>Units/OU<span class="o">=</span>Users/CN<span class="o">=</span>ganis/CN<span class="o">=</span><span class="m">393971</span>/CN<span class="o">=</span>Gerardo<span class="w"> </span>Ganis/CN<span class="o">=</span><span class="m">2888907760</span>
+identity<span class="w">     </span>:<span class="w"> </span>/DC<span class="o">=</span>ch/DC<span class="o">=</span>cern/OU<span class="o">=</span>Organic<span class="w"> </span>Units/OU<span class="o">=</span>Users/CN<span class="o">=</span>ganis/CN<span class="o">=</span><span class="m">393971</span>/CN<span class="o">=</span>Gerardo<span class="w"> </span>Ganis
+timeleft<span class="w">     </span>:<span class="w"> </span><span class="m">23</span>:53:59
+DIRAC<span class="w"> </span>group<span class="w">  </span>:<span class="w"> </span>fcc_user
+path<span class="w">         </span>:<span class="w"> </span>/tmp/x509up_u2759
+username<span class="w">     </span>:<span class="w"> </span>ganis
+properties<span class="w">   </span>:<span class="w"> </span>NormalUser
+VOMS<span class="w">         </span>:<span class="w"> </span>True
+VOMS<span class="w"> </span>fqan<span class="w">    </span>:<span class="w"> </span><span class="o">[</span><span class="s1">&#39;/fcc&#39;</span><span class="o">]</span>
+
+Proxies<span class="w"> </span>uploaded:
+<span class="w"> </span>DN<span class="w">                                                                           </span><span class="p">|</span><span class="w"> </span>Group<span class="w"> </span><span class="p">|</span><span class="w"> </span>Until<span class="w"> </span><span class="o">(</span>GMT<span class="o">)</span>
+<span class="w"> </span>/DC<span class="o">=</span>ch/DC<span class="o">=</span>cern/OU<span class="o">=</span>Organic<span class="w"> </span>Units/OU<span class="o">=</span>Users/CN<span class="o">=</span>ganis/CN<span class="o">=</span><span class="m">393971</span>/CN<span class="o">=</span>Gerardo<span class="w"> </span>Ganis<span class="w"> </span><span class="p">|</span><span class="w">  </span><span class="p">|</span><span class="w"> </span><span class="m">2022</span>/05/13<span class="w"> </span><span class="m">12</span>:12
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Workflows.html" class="btn btn-neutral float-left" title="4.2. FCC DIRAC example workflows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="01/DiTauKKMCeeDelphesStandAlone.html" class="btn btn-neutral float-right" title="4.2.2. Workflow 1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: bnl2023
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../../master/index.html">master</a></dd>
+      <dd><a href="Overview.html">bnl2023</a></dd>
+      <dd><a href="../../../cern2022/index.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

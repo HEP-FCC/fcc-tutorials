@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.7. Visualization &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4. Distributed computing" href="../../distributed-computing/README.html" />
+    <link rel="prev" title="3.6. Changing geometry" href="../Geometry/Geometry.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fast-sim-and-analysis/README.html">2. Generators, Fast Simulation and Analysis</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../README.html">3. Full Detector Simulations</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeCLD/FCCeeCLD.html">3.1. FCCee: Full Simulation of CLD, the CLID detector for FCC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeDriftChamber/FCCeeDriftChamber.html">3.2. FCCee: Full Simulation of IDEA Driftchamber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeGuineaPigIRBackgrounds/README.html">3.3. Using Guinea-Pig to generate interaction region backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FccCaloPerformance/CaloFullSimExercise.html">3.4. Noble Liquid Calorimeter Full Simulation Exercise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html">3.5. FCC-ee photon/pi0 discrimination using noble liquid calorimeter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Geometry/Geometry.html">3.6. Changing geometry</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.7. Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#key4hep-tool-geodisplay">3.7.1. Key4hep tool: geoDisplay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#geant4">3.7.2. Geant4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#phoenix-fcc">3.7.3. Phoenix&#64;FCC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#event-data-from-cld-reconstructed-events">3.7.3.1. Event Data from CLD Reconstructed Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#event-data-from-delphes-fast-simulation">3.7.3.2. Event Data from Delphes Fast Simulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#detector-geometry">3.7.3.3. Detector Geometry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../README.html"><span class="section-number">3. </span>Full Detector Simulations</a> &raquo;</li>
+      <li><span class="section-number">3.7. </span>Visualization</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/full-detector-simulations/Visualization/Visualization.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="visualization">
+<h1><span class="section-number">3.7. </span>Visualization<a class="headerlink" href="#visualization" title="Permalink to this heading"></a></h1>
+<p>Visualization is of paramount importance in order to easily understand the behaviour of the detector and simulation. In this section, several tools of visualizing the detector geometry and the particle tracks are provided.</p>
+<section id="key4hep-tool-geodisplay">
+<h2><span class="section-number">3.7.1. </span>Key4hep tool: geoDisplay<a class="headerlink" href="#key4hep-tool-geodisplay" title="Permalink to this heading"></a></h2>
+<p>The tool <code class="docutils literal notranslate"><span class="pre">geoDisplay</span></code> is available as part of <code class="docutils literal notranslate"><span class="pre">Key4hep</span></code> project. To use it, first we need to source it from <code class="docutils literal notranslate"><span class="pre">LCG</span></code></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/sft.cern.ch/lcg/views/dev4/latest/x86_64-centos7-gcc11-opt/setup.sh<span class="w"> </span>
+</pre></div>
+</div>
+<p>To use it, just pass as first argument the <code class="docutils literal notranslate"><span class="pre">xml</span></code> file with the detector description, for example</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>geoDisplay<span class="w"> </span><span class="nv">$DD4hepINSTALL</span>/DDDetectors/compact/SiD.xml
+</pre></div>
+</div>
+</section>
+<section id="geant4">
+<h2><span class="section-number">3.7.2. </span>Geant4<a class="headerlink" href="#geant4" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Geant</span> <span class="pre">4</span></code> visualization capabilities can be accesed as</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/sft.cern.ch/lcg/views/dev4/latest/x86_64-centos7-gcc11-opt/setup.sh<span class="w"> </span>
+ddsim<span class="w"> </span>--compactFile<span class="w"> </span><span class="nv">$DD4hepINSTALL</span>/DDDetectors/compact/SiD.xml<span class="w"> </span>--runType<span class="w"> </span>vis
+</pre></div>
+</div>
+<p>This version of <code class="docutils literal notranslate"><span class="pre">Geant</span> <span class="pre">4</span></code> is built with <code class="docutils literal notranslate"><span class="pre">Qt</span></code> interface, and can be explicitly called as</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ddsim<span class="w"> </span>--compactFile<span class="w"> </span><span class="nv">$DD4hepINSTALL</span>/DDDetectors/compact/SiD.xml<span class="w"> </span>--runType<span class="w"> </span>qt
+</pre></div>
+</div>
+<p>As in the previous step, the <code class="docutils literal notranslate"><span class="pre">LCG</span></code> version of <code class="docutils literal notranslate"><span class="pre">Key4hep</span></code> was sourced.</p>
+</section>
+<section id="phoenix-fcc">
+<h2><span class="section-number">3.7.3. </span>Phoenix&#64;FCC<a class="headerlink" href="#phoenix-fcc" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://github.com/HSF/phoenix">Phoenix</a> is a web based event display for High
+Energy Physics. To visualize FCC events one needs to provide detector geometry
+and generated events — event data.</p>
+<p>In this tutorial we will be working with files/programs stored on two computers. First
+computer will be the one which can source FCCSW stack, e.g. <code class="docutils literal notranslate"><span class="pre">lxplus</span></code> and the
+second one will be yours with the recent web browser. We will call the first
+one the <em>remote machine</em> and the second one the <em>local machine</em>.</p>
+<section id="event-data-from-cld-reconstructed-events">
+<h3><span class="section-number">3.7.3.1. </span>Event Data from CLD Reconstructed Events<a class="headerlink" href="#event-data-from-cld-reconstructed-events" title="Permalink to this heading"></a></h3>
+<p>Let’s start with the visualization of the event data in the established detector
+design CLD, which started its life as the detector designed for the CLIC linear
+collider concept. The detectors in FCCSW are described in
+<a class="reference external" href="https://dd4hep.web.cern.ch/dd4hep/">DD4hep</a> compact files. The compact files
+are written in XML and expose configuration options for the detector.</p>
+<p>Example CLD compact file can be examined after sourcing of the FCCSW stack on
+the remote machine</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/fcc.cern.ch/sw/latest/setup.sh
+</pre></div>
+</div>
+<p>like so</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>less<span class="w"> </span><span class="si">${</span><span class="nv">FCCDETECTORS</span><span class="si">}</span>/Detector/DetFCCeeCLD/compact/FCCee_o2_v02/FCCee_o2_v02.xml
+</pre></div>
+</div>
+<p>This is a copy of the
+<a class="reference external" href="https://github.com/HEP-FCC/FCCDetectors/blob/main/doc/DD4hepInFCCSW.md#visualisation">FCCDetectors</a>
+repository, which stores FCC detector designs.</p>
+<p>The Phoenix web application already showcases the CLD detector
+<a class="reference external" href="https://fccsw.web.cern.ch/fccsw/phoenix/#/fccee-cld/">here</a> and we will
+simulate few events in order to visualize them there.</p>
+<p>On the remote machine we will need to clone the
+<a class="reference external" href="https://github.com/iLCSoft/CLICPerformance">CLICPerformance</a> repository</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/iLCSoft/CLICPerformance.git
+<span class="nb">cd</span><span class="w"> </span>CLICPerformance/fcceeConfig
+</pre></div>
+</div>
+<p>run the simulation</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ddsim<span class="w"> </span>--compactFile<span class="w"> </span><span class="nv">$LCGEO</span>/FCCee/compact/FCCee_o1_v04/FCCee_o1_v04.xml<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--outputFile<span class="w"> </span>tops_edm4hep.root<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--steeringFile<span class="w"> </span>fcc_steer.py<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--inputFiles<span class="w"> </span>../Tests/yyxyev_000.stdhep<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--numberOfEvents<span class="w"> </span><span class="m">7</span>
+</pre></div>
+</div>
+<p>and after that, run the reconstruction with the help of
+<a class="reference external" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/python/fccRec_e4h_input.py">this</a>
+steering file</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://fccsw.web.cern.ch/fccsw/tutorials/static/python/fccRec_e4h_input.py
+k4run<span class="w"> </span>fccRec_e4h_input.py
+</pre></div>
+</div>
+<p>There should be a file called <code class="docutils literal notranslate"><span class="pre">tops_cld.root</span></code> inside of our working directory.</p>
+<p>In order to visualize the events from this file we need co convert the
+<a class="reference external" href="https://edm4hep.web.cern.ch/">EDM4hep</a> ROOT file into intermediate JSON format
+with the command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>edm4hep2json<span class="w"> </span>tops_cld.root
+</pre></div>
+</div>
+<div class="callout admonition">
+<p class="admonition-title">EDM4hep Collections</p>
+<p>One should specify a list collections to be exported with the <code class="docutils literal notranslate"><span class="pre">-l</span></code> flag. The
+default ones are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GenParticles</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BuildUpVertices</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SiTracks</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PandoraClusters</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VertexJets</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EventHeader</span></code></p></li>
+</ul>
+</div>
+<p>Now we download the obtained file from the remote machine into our local one.
+Most easily done with <code class="docutils literal notranslate"><span class="pre">scp</span></code></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>scp<span class="w"> </span>lxplus.cern.ch:CLICPerformance/fcceeConfig/tops_cld.edm4hep.json<span class="w"> </span>.
+</pre></div>
+</div>
+<p>To upload the EDM4hep JSON file into the
+<a class="reference external" href="https://fccsw.web.cern.ch/fccsw/phoenix/#/fccee-cld/">Phoenix</a> use the upload
+button in the lover right corner of the web page</p>
+<img alt="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_upload.png" class="align-center" src="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_upload.png" />
+<p>to bring up modal with our desired upload option</p>
+<a class="reference internal image-reference" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_upload_edm4hepjson.png"><img alt="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_upload_edm4hepjson.png" class="align-center" src="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_upload_edm4hepjson.png" style="width: 300px;" /></a>
+<p>The detector and event data might look similar to this screenshot</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_cld.png"><img alt="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_cld.png" src="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_cld.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text">Example reconstructed event in CLD detector</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="solution dropdown admonition">
+<p class="admonition-title">EDM4hep JSON File</p>
+<p>The obtained EDM4hep JSON file should look similar to
+<a class="reference external" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/json/tops_cld.edm4hep.json">this one</a> [Right click to download].</p>
+</div>
+</section>
+<section id="event-data-from-delphes-fast-simulation">
+<h3><span class="section-number">3.7.3.2. </span>Event Data from Delphes Fast Simulation<a class="headerlink" href="#event-data-from-delphes-fast-simulation" title="Permalink to this heading"></a></h3>
+<p>Starting the same way as in <a class="reference internal" href="../../fast-sim-and-analysis/k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html#delphesedm4hep"><span class="std std-ref">Part I: Generate and simulate Events with DelphesEDM4Hep</span></a> we will first generate few
+events on the remote machine. One can reuse the files generated for that
+exercise e.g. <code class="docutils literal notranslate"><span class="pre">p8_ee_ZH_ecm240_edm4hep.root</span></code> or quickly generate them with the
+following steps.</p>
+<p>First download Pythia card</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Generator/Pythia8/p8_noBES_ee_ZH_ecm240.cmd
+</pre></div>
+</div>
+<p>and then Delphes cards. One for the detector response</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Delphes/card_IDEA.tcl
+</pre></div>
+</div>
+<p>and the other for the <a class="reference external" href="https://edm4hep.web.cern.ch/">EDM4hep</a> formated output</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Delphes/edm4hep_IDEA.tcl
+</pre></div>
+</div>
+<p>Finally, run the simulation with</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>DelphesPythia8_EDM4HEP<span class="w"> </span>card_IDEA.tcl<span class="w"> </span>edm4hep_IDEA.tcl<span class="w"> </span>p8_noBES_ee_ZH_ecm240.cmd<span class="w"> </span>p8_ee_ZH_ecm240_edm4hep.root
+</pre></div>
+</div>
+<p>Produced EDM4hep ROOT file needs to be converted into intermediate JSON format
+with the <code class="docutils literal notranslate"><span class="pre">edm4hep2json</span></code> converter. Let’s look at the file more closely, so we
+can decide what to keep/convert.</p>
+<p>Start root with</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>root<span class="w"> </span>p8_ee_ZH_ecm240_edm4hep.root
+</pre></div>
+</div>
+<p>and execute the <code class="docutils literal notranslate"><span class="pre">Show()</span></code> command on the <code class="docutils literal notranslate"><span class="pre">events</span></code> TTree</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">events</span><span class="o">-&gt;</span><span class="n">Show</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>this will show you all trees and branches, similar to this example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MCRecoAssociations</span> <span class="o">=</span> <span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="p">::</span><span class="n">MCRecoParticleAssociationData</span><span class="o">&gt;*</span><span class="p">)</span><span class="mh">0x5578924809e0</span>
+<span class="n">MCRecoAssociations</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span>
+<span class="n">MCRecoAssociations</span><span class="c1">#0 = (vector&lt;podio::ObjectID&gt;*)0x557890797c00</span>
+<span class="n">MCRecoAssociations</span><span class="c1">#0.index = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19</span>
+<span class="n">MCRecoAssociations</span><span class="c1">#0.collectionID = 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14</span>
+<span class="n">MCRecoAssociations</span><span class="c1">#1 = (vector&lt;podio::ObjectID&gt;*)0x5578925c1f00</span>
+<span class="n">MCRecoAssociations</span><span class="c1">#1.index = 133, 118, 117, 152, 153, 115, 164, 155, 138, 224, 217, 228, 165, 227, 218, 90, 230, 122, 87, 88</span>
+<span class="n">MCRecoAssociations</span><span class="c1">#1.collectionID = 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11</span>
+<span class="n">EFlowTrack</span>      <span class="o">=</span> <span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="p">::</span><span class="n">TrackData</span><span class="o">&gt;*</span><span class="p">)</span><span class="mh">0x557892a7d3a0</span>
+<span class="n">EFlowTrack</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">EFlowTrack</span><span class="o">.</span><span class="n">chi2</span> <span class="o">=</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span>
+<span class="n">EFlowTrack</span><span class="o">.</span><span class="n">ndf</span>  <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">EFlowTrack</span><span class="o">.</span><span class="n">dEdx</span> <span class="o">=</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span>
+<span class="n">EFlowTrack</span><span class="o">.</span><span class="n">dEdxError</span> <span class="o">=</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span><span class="p">,</span> <span class="mf">0.000000</span>
+<span class="n">EFlowTrack</span><span class="o">.</span><span class="n">radiusOfInnermostHit</span> <span class="o">=</span> <span class="mf">17.000000</span><span class="p">,</span> <span class="mf">17.000000</span><span class="p">,</span> <span class="mf">17.000000</span><span class="p">,</span> <span class="mf">17.000000</span><span class="p">,</span> <span class="mf">17.000000</span><span class="p">,</span> <span class="mf">17.000000</span><span class="p">,</span> <span class="mf">17.000000</span><span class="p">,</span> <span class="mf">17.000000</span><span class="p">,</span> <span class="mf">17.000000</span><span class="p">,</span> <span class="mf">17.000000</span><span class="p">,</span> <span class="mf">320.000000</span><span class="p">,</span> <span class="mf">655.494995</span><span class="p">,</span> <span class="mf">17.000000</span><span class="p">,</span> <span class="mf">655.494995</span><span class="p">,</span> <span class="mf">320.000000</span><span class="p">,</span> <span class="mf">17.000000</span><span class="p">,</span> <span class="mf">17.000000</span><span class="p">,</span> <span class="mf">17.000000</span><span class="p">,</span> <span class="mf">17.000000</span><span class="p">,</span> <span class="mf">17.000000</span>
+<span class="n">EFlowTrack</span><span class="o">.</span><span class="n">subDetectorHitNumbers_begin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">EFlowTrack</span><span class="o">.</span><span class="n">subDetectorHitNumbers_end</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">EFlowTrack</span><span class="o">.</span><span class="n">trackStates_begin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span>
+<span class="n">EFlowTrack</span><span class="o">.</span><span class="n">trackStates_end</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">20</span>
+<span class="n">EFlowTrack</span><span class="o">.</span><span class="n">dxQuantities_begin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span>
+<span class="n">EFlowTrack</span><span class="o">.</span><span class="n">dxQuantities_end</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">20</span>
+<span class="n">EFlowTrack</span><span class="o">.</span><span class="n">trackerHits_begin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">38</span>
+<span class="n">EFlowTrack</span><span class="o">.</span><span class="n">trackerHits_end</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">40</span>
+<span class="n">EFlowTrack</span><span class="o">.</span><span class="n">tracks_begin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">EFlowTrack</span><span class="o">.</span><span class="n">tracks_end</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>We select desired collections with <code class="docutils literal notranslate"><span class="pre">-l</span></code> flag and limit number of converted
+events to 10 with <code class="docutils literal notranslate"><span class="pre">-n</span></code> flag</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>edm4hep2json<span class="w"> </span>-l<span class="w"> </span>ReconstructedParticles,Jet,EFlowTrack,TrackerHits,Particle,MCRecoAssociations,MissingET<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>p8_ee_ZH_ecm240_edm4hep.root
+</pre></div>
+</div>
+<p>The resulting EDM4hep JSON file can now be downloaded with <code class="docutils literal notranslate"><span class="pre">scp</span></code> to the local
+machine and uploaded into
+<a class="reference external" href="https://fccsw.web.cern.ch/fccsw/phoenix/#/fccee-idea/">Phoenix</a> visualization
+of the IDEA detector.</p>
+<div class="solution dropdown admonition">
+<p class="admonition-title">EDM4hep JSON File</p>
+<p>The obtained EDM4hep JSON file should look similar to
+<a class="reference external" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/json/p8_ee_ZH_ecm240_edm4hep.edm4hep.json">this one</a> [Right click to download].</p>
+</div>
+</section>
+<section id="detector-geometry">
+<h3><span class="section-number">3.7.3.3. </span>Detector Geometry<a class="headerlink" href="#detector-geometry" title="Permalink to this heading"></a></h3>
+<p>There are several ways how to import FCC detector geometry into Phoenix.
+Currently the preferred method is to convert compact DD4hep file(s) to ROOT
+files and from ROOT files to glTF files. The first conversion
+(<code class="docutils literal notranslate"><span class="pre">.xml</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">.root</span></code>) is straightforward and can be done using script like
+<a class="reference external" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/python/dd4hep2root">this</a>.
+With the most important part being the building of the detector geometry from
+the compact file</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ROOT</span>
+
+<span class="n">ROOT</span><span class="o">.</span><span class="n">gSystem</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;libDDCore&#39;</span><span class="p">)</span>
+<span class="n">description</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">dd4hep</span><span class="o">.</span><span class="n">Detector</span><span class="o">.</span><span class="n">getInstance</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">cfile</span> <span class="ow">in</span> <span class="n">compact_files</span><span class="p">:</span>
+    <span class="n">description</span><span class="o">.</span><span class="n">fromXML</span><span class="p">(</span><span class="n">cfile</span><span class="p">)</span>
+
+<span class="n">ROOT</span><span class="o">.</span><span class="n">gGeoManager</span><span class="o">.</span><span class="n">SetVisLevel</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">ROOT</span><span class="o">.</span><span class="n">gGeoManager</span><span class="o">.</span><span class="n">SetVisOption</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ROOT</span><span class="o">.</span><span class="n">gGeoManager</span><span class="o">.</span><span class="n">Export</span><span class="p">(</span><span class="n">out_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We will try to convert FCCee Noble Liquid Calorimeter. On the remote machine
+with FCCSW stack already sourced download the <code class="docutils literal notranslate"><span class="pre">dd4hep2root</span></code> script</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://fccsw.web.cern.ch/fccsw/tutorials/static/python/dd4hep2root
+</pre></div>
+</div>
+<p>make it executable</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chmod</span> <span class="n">u</span><span class="o">+</span><span class="n">x</span> <span class="n">dd4hep2root</span>
+</pre></div>
+</div>
+<p>and run the conversion with</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./dd4hep2root<span class="w"> </span>-c<span class="w"> </span><span class="si">${</span><span class="nv">FCCDETECTORS</span><span class="si">}</span>/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectEmptyMaster.xml<span class="w"> </span><span class="se">\</span>
+<span class="w">                 </span><span class="si">${</span><span class="nv">FCCDETECTORS</span><span class="si">}</span>/Detector/DetFCCeeECalInclined/compact/FCCee_ECalBarrel.xml
+<span class="w">              </span>-o<span class="w"> </span>fccee_lar.root
+</pre></div>
+</div>
+<p>The resulting file <code class="docutils literal notranslate"><span class="pre">fccee_lar.root</span></code> can already be visualized with ROOT. Let’s
+download it to the local machine with <code class="docutils literal notranslate"><span class="pre">scp</span></code> and then upload it into
+<a class="reference external" href="https://root.cern/js/latest/">JSROOT</a>. This way we don’t have to have ROOT
+installed on our local machine.</p>
+<img alt="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/jsroot_upload.png" class="align-center" src="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/jsroot_upload.png" />
+<p>Resulting in the following visualization</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/jsroot_lar.png"><img alt="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/jsroot_lar.png" src="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/jsroot_lar.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text">Noble Liquid Calorimeter visualized with JSROOT</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Second conversion (<code class="docutils literal notranslate"><span class="pre">.root</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">.gltf</span></code>) requires additional configuration and
+can be done using the
+<a class="reference external" href="https://github.com/HSF/root_cern-To_gltf-Exporter">root_cern-To_gltf-Exporter</a>.
+We have to create menu items, suppress drawing of detector parts which are too
+detailed or can affect the performance.</p>
+<p>The
+<a class="reference external" href="https://github.com/HSF/root_cern-To_gltf-Exporter">root_cern-To_gltf-Exporter</a>
+converter runs in the browser and is configured with an HTML page. It is
+recommended to run the converter on the local machine, but it should be possible
+to run it also on the remote machine over SSH with XWindowing enabled.</p>
+<p>Let’s start with cloning the converter repository</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/HSF/root_cern-To_gltf-Exporter.git
+<span class="nb">cd</span><span class="w"> </span>root_cern-To_gltf-Exporter
+</pre></div>
+</div>
+<p>then, we create new file <code class="docutils literal notranslate"><span class="pre">fccee_lar_conversion.html</span></code> and use, for example, the
+following configuration for the FCCee Noble Liquid Calorimeter:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/three@0.139.1/build/three.js&quot;</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/three@0.139.1/examples/js/exporters/GLTFExporter.js&quot;</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://root.cern/js/latest/scripts/JSRoot.core.js&quot;</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;module&quot;</span><span class="p">&gt;</span>
+
+<span class="w">    </span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">convertGeometry</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./phoenixExport.js&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">hide_children</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;passive_&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;active_&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;PCB_&quot;</span>
+<span class="w">    </span><span class="p">];</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">subparts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;Cryo Front&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[[</span><span class="s2">&quot;ECAL_Cryo_front_0&quot;</span><span class="p">],</span><span class="w"> </span><span class="mf">.8</span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;Cryo Back&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[[</span><span class="s2">&quot;ECAL_Cryo_back_1&quot;</span><span class="p">],</span><span class="w"> </span><span class="mf">.8</span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;Cryo Sides&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[[</span><span class="s2">&quot;ECAL_Cryo_side_2&quot;</span><span class="p">],</span><span class="w"> </span><span class="mf">.8</span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;Services Front&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[[</span><span class="s2">&quot;services_front_3&quot;</span><span class="p">],</span><span class="w"> </span><span class="mf">.6</span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;Services Back&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[[</span><span class="s2">&quot;services_back_4&quot;</span><span class="p">],</span><span class="w"> </span><span class="mf">.6</span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;Bath&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[[</span><span class="s2">&quot;LAr_bath_5&quot;</span><span class="p">],</span><span class="w"> </span><span class="kc">true</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">convertGeometry</span><span class="p">(</span><span class="s2">&quot;./fccee_lar.root&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;fccee_lar.gltf&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="nx">subparts</span><span class="p">,</span><span class="w"> </span><span class="nx">hide_children</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">120</span><span class="p">);</span>
+<span class="w">  </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Last missing peace is the ROOT file containing the detector geometry
+<code class="docutils literal notranslate"><span class="pre">fccee_lar.root</span></code> which we should also copy into the converter directory.</p>
+<p>To start the converter do</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./run
+</pre></div>
+</div>
+<p>which will start the web server and show URL to which we can connect through
+the web browser</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Started</span> <span class="n">http</span> <span class="n">server</span> <span class="n">to</span> <span class="n">serve</span> <span class="n">requests</span> <span class="n">at</span><span class="p">:</span>
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">8000</span>
+</pre></div>
+</div>
+<p>In the web browser we should see directory listing similar to this one:</p>
+<img alt="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/gltfconv.png" class="align-center" src="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/gltfconv.png" />
+<p>clicking on the <code class="docutils literal notranslate"><span class="pre">fccee_lar_conversion.html</span></code> starts the conversion. At the end of
+it the automatic download pop-up should appear in the browser window. The glTF
+file can be uploaded into Playground section of the
+<a class="reference external" href="https://fccsw.web.cern.ch/fccsw/phoenix/#/playground">Phoenix</a> application by
+selecting the correct geometry file format:</p>
+<a class="reference internal image-reference" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_playground_upload.png"><img alt="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_playground_upload.png" class="align-center" src="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_playground_upload.png" style="width: 300px;" /></a>
+<p>The resulting visualization will be similar to the following screenshot</p>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_playground_lar.png"><img alt="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_playground_lar.png" src="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_playground_lar.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text">Example reconstructed event in CLD detector</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="solution dropdown admonition">
+<p class="admonition-title">glTF File</p>
+<p>The obtained glTF file should look similar to
+<a class="reference external" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/gltf/fccee_lar.gltf">this one</a> [Right click to download].</p>
+</div>
+<div class="challenge admonition">
+<p class="admonition-title">LAr Clusters</p>
+<p>Try to reconstruct calorimeter clusters in LAr Calorimeter and visualize them in
+the Phoenix Playground alongside with the detector.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Geometry/Geometry.html" class="btn btn-neutral float-left" title="3.6. Changing geometry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../distributed-computing/README.html" class="btn btn-neutral float-right" title="4. Distributed computing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: cern2022
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../../master/index.html">master</a></dd>
+      <dd><a href="../../../bnl2023/index.html">bnl2023</a></dd>
+      <dd><a href="Visualization.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

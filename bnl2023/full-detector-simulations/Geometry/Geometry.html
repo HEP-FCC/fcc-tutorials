@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.6. Changing geometry &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.7. Visualization" href="../Visualization/Visualization.html" />
+    <link rel="prev" title="3.5. FCC-ee photon/pi0 discrimination using noble liquid calorimeter" href="../FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fast-sim-and-analysis/README.html">2. Generators, Fast Simulation and Analysis</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../README.html">3. Full Detector Simulations</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeCLD/FCCeeCLD.html">3.1. FCCee: Full Simulation of CLD, the CLID detector for FCC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeDriftChamber/FCCeeDriftChamber.html">3.2. FCCee: Full Simulation of IDEA Driftchamber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeGuineaPigIRBackgrounds/README.html">3.3. Using Guinea-Pig to generate interaction region backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FccCaloPerformance/CaloFullSimExercise.html">3.4. Noble Liquid Calorimeter Full Simulation Exercise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html">3.5. FCC-ee photon/pi0 discrimination using noble liquid calorimeter</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.6. Changing geometry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup">3.6.1. Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modify-an-existing-xml-file">3.6.2. Modify an existing XML file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#overlap-checking">3.6.3. Overlap checking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modifying-the-ecal">3.6.4. Modifying the ECAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#geometry-driver-modifications">3.6.5. Geometry driver modifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#final-note">3.6.6. Final note</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Visualization/Visualization.html">3.7. Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../README.html"><span class="section-number">3. </span>Full Detector Simulations</a> &raquo;</li>
+      <li><span class="section-number">3.6. </span>Changing geometry</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/full-detector-simulations/Geometry/Geometry.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="changing-geometry">
+<h1><span class="section-number">3.6. </span>Changing geometry<a class="headerlink" href="#changing-geometry" title="Permalink to this heading"></a></h1>
+<p>The description of the componentes of a particle detector can be extremely complex. <code class="docutils literal notranslate"><span class="pre">DD4hep</span></code> exploits the properties of <code class="docutils literal notranslate"><span class="pre">xml</span></code> file format to store hierarchically the geometry and materials of each component of a given detector. Thus the detector description is given in one or more <code class="docutils literal notranslate"><span class="pre">xml</span></code> files.</p>
+<p>In this section, the following topics are covered:</p>
+<ul class="simple">
+<li><p>how tow to simulate the existing detector model of the <code class="docutils literal notranslate"><span class="pre">CLD</span></code> detector</p></li>
+<li><p>modify its XML files</p></li>
+<li><p>check for overlaps with Geant4</p></li>
+<li><p>get a better understanding of what DD4hep does under the hood</p></li>
+<li><p>Write your own C++ detector constructor and run with it</p></li>
+</ul>
+<p>This section is adapted from the <a class="reference external" href="https://indico.cern.ch/event/1182767/contributions/5093486/attachments/2532164/4356996/221020_soft_tutorial_dd4hep.pdf">talk given by Andre Sailer</a> in the <em>FCC Software Tutorial 2022</em>.</p>
+<section id="setup">
+<h2><span class="section-number">3.6.1. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this heading"></a></h2>
+<p>The first step is to set up a CentOS 7 machine with CVMFS. It can be a local machine, a remote machine (e.g. <a class="reference external" href="https://lxplusdoc.web.cern.ch/">lxplus.cern.ch</a>), a virtual machine (e.g. <a class="reference external" href="https://cernvm.cern.ch/appliance/">CernVM</a>) or a containerized system (e.g. <a class="reference external" href="https://linux.web.cern.ch/dockerimages/">Docker</a>, or Apptainer).</p>
+<p>Then, the stack with the FCC software can be sourced as</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/fcc.cern.ch/sw/latest/setup.sh<span class="w"> </span>
+</pre></div>
+</div>
+<p>The following step is to create a working directory,</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>mydd4heptutorial
+<span class="nb">cd</span><span class="w"> </span>mydd4heptutorial
+</pre></div>
+</div>
+<p>Then, copy the CLD detector description into the working directory,</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>-r<span class="w"> </span><span class="nv">$LCGEO</span>/FCCee/compact/FCCee_o1_v05<span class="w"> </span>.
+</pre></div>
+</div>
+<p>In order to plot the histograms in the terminal, the histoprint python package is used and it can be installed with the following command</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>histoprint
+</pre></div>
+</div>
+<p>If everything goes as expected, the contents of your working directory shall look this:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>-ltra
+total<span class="w"> </span><span class="m">8</span>
+drwxr-xr-x.<span class="w"> </span><span class="m">28</span><span class="w"> </span>sailer<span class="w"> </span>zf<span class="w"> </span><span class="m">4096</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">14</span><span class="w"> </span><span class="m">11</span>:29<span class="w"> </span>..
+drwxr-xr-x.<span class="w"> </span><span class="m">3</span><span class="w"> </span>sailer<span class="w"> </span>zf<span class="w"> </span><span class="m">26</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">14</span><span class="w"> </span><span class="m">11</span>:30<span class="w"> </span>.
+drwxr-xr-x.<span class="w"> </span><span class="m">2</span><span class="w"> </span>sailer<span class="w"> </span>zf<span class="w"> </span><span class="m">4096</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">14</span><span class="w"> </span><span class="m">11</span>:30<span class="w"> </span>FCCee_o1_v05
+</pre></div>
+</div>
+<p>Another ingredient is a script to plot some information after the simulations to show that the geometry really did change. The <code class="docutils literal notranslate"><span class="pre">showPlots.py</span></code> script plots the per hit energy deposition and position along Z axis in the ECal endcap. The histograms are printed in the terminal to avoid the use of a graphical interface. If a graphical system is available, one can also visualize the geometry with <code class="docutils literal notranslate"><span class="pre">geoDisplay</span></code> or the Geant4 visualizations.</p>
+<details>
+<summary><b>Click to show the code of the python script <code>showPlots.py</code> </b></summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/env python</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">ROOT</span>
+<span class="kn">from</span> <span class="nn">histoprint</span> <span class="kn">import</span> <span class="n">print_hist</span>
+
+<span class="n">ROOT</span><span class="o">.</span><span class="n">gROOT</span><span class="o">.</span><span class="n">SetBatch</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please specify input file&quot;</span><span class="p">);</span> <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">inputFile</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reading:&quot;</span><span class="p">,</span> <span class="n">inputFile</span><span class="p">)</span>
+
+<span class="n">tfile</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TFile</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">inputFile</span><span class="p">)</span>
+<span class="n">myTree</span> <span class="o">=</span> <span class="n">tfile</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">)</span>
+<span class="n">myTree</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;ECalEndcapCollection.position.z&gt;&gt;zHist(100, 2300, 2510)&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ECalEndcapCollection.position.z &gt; 0&quot;</span><span class="p">)</span>
+<span class="n">myTree</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;ECalEndcapCollection.energy&gt;&gt;eHist(30, 0, 0.002)&quot;</span><span class="p">)</span>
+
+<span class="n">print_hist</span><span class="p">(</span><span class="n">tfile</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s2">&quot;zHist&quot;</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Hits per Layer&quot;</span><span class="p">)</span>
+<span class="n">print_hist</span><span class="p">(</span><span class="n">tfile</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s2">&quot;eHist&quot;</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Energy per Hit&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</details>
+<br/>
+<p>In this section, the detector geometry will be changed in every step. The geometry can be visualized using different tools, as it is explained in the next section.</p>
+</section>
+<section id="modify-an-existing-xml-file">
+<h2><span class="section-number">3.6.2. </span>Modify an existing XML file<a class="headerlink" href="#modify-an-existing-xml-file" title="Permalink to this heading"></a></h2>
+<p>The detector geometry is complex, and takes a while to be built. To speed up the following steps, the Silicon Tracker can be removed. To do so,</p>
+<ol class="arabic simple">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">FCCee_o1_v05/FCCee_o1_v05.xml</span></code></p></li>
+<li><p>Find the following lines in the file, and delete/comment them</p></li>
+</ol>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;include</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;InnerTracker_o2_v06_02.xml&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;include</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;OuterTracker_o2_v06_02.xml&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>Remember that a comment in <code class="docutils literal notranslate"><span class="pre">xml</span></code> looks like <code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">blablabla</span> <span class="pre">--&gt;</span></code>.</p>
+<ol class="arabic simple" start="3">
+<li><p>Comment out the plugins section <code class="docutils literal notranslate"><span class="pre">&lt;plugins&gt;</span> <span class="pre">...</span> <span class="pre">&lt;/plugins&gt;</span></code> in the same file.</p></li>
+</ol>
+<p>To simulate the interaction of 100 muons with the CLD detector, the following command is used inside the directory <code class="docutils literal notranslate"><span class="pre">mydd4heptutorial</span></code>. It takes some minutes to build the geometry and run the actual simulation.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ddsim<span class="w"> </span>--compactFile<span class="w"> </span>FCCee_o1_v05/FCCee_o1_v05.xml<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--enableGun<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--gun.distribution<span class="w"> </span>uniform<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--gun.energy<span class="w"> </span><span class="s2">&quot;10*GeV&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--gun.particle<span class="w"> </span>mu-<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--numberOfEvents<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--outputFile<span class="w"> </span>Step1_edm4hep.root
+</pre></div>
+</div>
+<p>And now plot the distribution with <code class="docutils literal notranslate"><span class="pre">showPlots.py</span></code></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>showPlots.py<span class="w"> </span>Step1_edm4hep.root
+</pre></div>
+</div>
+<p>The simulation runs 20 times faster than the full geometry simulation and the distributions do not change.</p>
+</section>
+<section id="overlap-checking">
+<h2><span class="section-number">3.6.3. </span>Overlap checking<a class="headerlink" href="#overlap-checking" title="Permalink to this heading"></a></h2>
+<p>Whenever you change the geometry in a non-trivial way there are the possibilities of overlaps and the following things should be kept in mind</p>
+<ol class="arabic simple">
+<li><p>There are no trivial changes</p></li>
+<li><p>See point 1</p></li>
+<li><p>Run the overlap check</p></li>
+</ol>
+<p>Geant4 can perform the overlap check of a given geometry. This action is available for <code class="docutils literal notranslate"><span class="pre">ddsim</span></code>. A macro file with the Geant4 instructions has to be provided to <code class="docutils literal notranslate"><span class="pre">ddsim</span></code>. To do so, create a file named as <em>overlap.mac</em> and write these commands inside</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">geometry</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">run</span>
+<span class="n">exit</span>
+</pre></div>
+</div>
+<p>And then we run <code class="docutils literal notranslate"><span class="pre">ddsim</span></code> with this macro file, and dump the output to a text file for easy browsing:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ddsim<span class="w"> </span>--compactFile<span class="w"> </span>FCCee_o1_v05/FCCee_o1_v05.xml<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--runType<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--macroFile<span class="w"> </span>overlap.mac<span class="w"> </span>&gt;<span class="w"> </span>overlapDump<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p>With the full detector model including the tracker this would take about 30 minutes. The output shows some exceptions:</p>
+<ul class="simple">
+<li><p>The exceptions about the VertexEndcapModule are due to a too small envelope, and could be
+easily fixed</p></li>
+<li><p>The exceptions about the Boolean Volume are more vexing, let’s ignore those for now. The HOMAbsorber include can be dropped as well to silent these errors.</p></li>
+</ul>
+</section>
+<section id="modifying-the-ecal">
+<h2><span class="section-number">3.6.4. </span>Modifying the ECAL<a class="headerlink" href="#modifying-the-ecal" title="Permalink to this heading"></a></h2>
+<p>In this section, it is shown how to change the number of layers and silicon thicknesses of the ECal Endcap. To do so,</p>
+<ol class="arabic simple">
+<li><p>Open the file <code class="docutils literal notranslate"><span class="pre">FCCee_o1_v05/ECalEndcap_o2_v01_03.xml</span></code></p></li>
+<li><p>Find this block:</p></li>
+</ol>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;layer</span><span class="w"> </span><span class="na">repeat=</span><span class="s">&quot;40&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;ECalLayerVis&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material =</span><span class="w"> </span><span class="s">&quot;TungstenDens24&quot;</span><span class="w"> </span><span class="na">thickness =</span><span class="w"> </span><span class="s">&quot;1.90*mm&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;ECalAbsorberVis&quot;</span><span class="w"> </span><span class="na">radiator=</span><span class="s">&quot;yes&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material =</span><span class="w"> </span><span class="s">&quot;G10&quot;</span><span class="w"> </span><span class="na">thickness =</span><span class="w"> </span><span class="s">&quot;0.15*mm&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;InvisibleNoDaughters&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material =</span><span class="w"> </span><span class="s">&quot;GroundOrHVMix&quot;</span><span class="w"> </span><span class="na">thickness =</span><span class="w"> </span><span class="s">&quot;0.10*mm&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;ECalAbsorberVis&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material =</span><span class="w"> </span><span class="s">&quot;Silicon&quot;</span><span class="w"> </span><span class="na">thickness =</span><span class="w"> </span><span class="s">&quot;0.50*mm&quot;</span><span class="w"> </span><span class="na">sensitive=</span><span class="s">&quot;yes&quot;</span><span class="w"> </span><span class="na">limits=</span><span class="s">&quot;cal_limits&quot;</span>
+<span class="w">    </span><span class="na">vis=</span><span class="s">&quot;ECalSensitiveVis&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material =</span><span class="w"> </span><span class="s">&quot;Air&quot;</span><span class="w"> </span><span class="na">thickness =</span><span class="w"> </span><span class="s">&quot;0.10*mm&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;InvisibleNoDaughters&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material =</span><span class="w"> </span><span class="s">&quot;siPCBMix&quot;</span><span class="w"> </span><span class="na">thickness =</span><span class="w"> </span><span class="s">&quot;1.30*mm&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;ECalAbsorberVis&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material =</span><span class="w"> </span><span class="s">&quot;Air&quot;</span><span class="w"> </span><span class="na">thickness =</span><span class="w"> </span><span class="s">&quot;0.25*mm&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;InvisibleNoDaughters&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material =</span><span class="w"> </span><span class="s">&quot;G10&quot;</span><span class="w"> </span><span class="na">thickness =</span><span class="w"> </span><span class="s">&quot;0.75*mm&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;InvisibleNoDaughters&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/layer&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Change the number of layers from <strong>40</strong> to <strong>20</strong>, and the silicon thickness from <code class="docutils literal notranslate"><span class="pre">0.50*mm</span></code> to <code class="docutils literal notranslate"><span class="pre">1.00*mm</span></code>.</p></li>
+</ol>
+<details>
+<summary><b>Click to show that piece of code from <code>FCCee_o1_v05/ECalEndcap_o2_v01_03.xml</code> after the change </b></summary>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;layer</span><span class="w"> </span><span class="na">repeat=</span><span class="s">&quot;20&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;ECalLayerVis&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material =</span><span class="w"> </span><span class="s">&quot;TungstenDens24&quot;</span><span class="w"> </span><span class="na">thickness =</span><span class="w"> </span><span class="s">&quot;1.90*mm&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;ECalAbsorberVis&quot;</span><span class="w"> </span><span class="na">radiator=</span><span class="s">&quot;yes&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material =</span><span class="w"> </span><span class="s">&quot;G10&quot;</span><span class="w"> </span><span class="na">thickness =</span><span class="w"> </span><span class="s">&quot;0.15*mm&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;InvisibleNoDaughters&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material =</span><span class="w"> </span><span class="s">&quot;GroundOrHVMix&quot;</span><span class="w"> </span><span class="na">thickness =</span><span class="w"> </span><span class="s">&quot;0.10*mm&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;ECalAbsorberVis&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material =</span><span class="w"> </span><span class="s">&quot;Silicon&quot;</span><span class="w"> </span><span class="na">thickness =</span><span class="w"> </span><span class="s">&quot;1.00*mm&quot;</span><span class="w"> </span><span class="na">sensitive=</span><span class="s">&quot;yes&quot;</span><span class="w"> </span><span class="na">limits=</span><span class="s">&quot;cal_limits&quot;</span>
+<span class="w">    </span><span class="na">vis=</span><span class="s">&quot;ECalSensitiveVis&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material =</span><span class="w"> </span><span class="s">&quot;Air&quot;</span><span class="w"> </span><span class="na">thickness =</span><span class="w"> </span><span class="s">&quot;0.10*mm&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;InvisibleNoDaughters&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material =</span><span class="w"> </span><span class="s">&quot;siPCBMix&quot;</span><span class="w"> </span><span class="na">thickness =</span><span class="w"> </span><span class="s">&quot;1.30*mm&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;ECalAbsorberVis&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material =</span><span class="w"> </span><span class="s">&quot;Air&quot;</span><span class="w"> </span><span class="na">thickness =</span><span class="w"> </span><span class="s">&quot;0.25*mm&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;InvisibleNoDaughters&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material =</span><span class="w"> </span><span class="s">&quot;G10&quot;</span><span class="w"> </span><span class="na">thickness =</span><span class="w"> </span><span class="s">&quot;0.75*mm&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;InvisibleNoDaughters&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/layer&gt;</span>
+</pre></div>
+</div>
+</details>
+<br/>
+<p>Simulate again with the new ECal,</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ddsim<span class="w"> </span>--compactFile<span class="w"> </span>FCCee_o1_v05/FCCee_o1_v05.xml<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--enableGun<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--gun.distribution<span class="w"> </span>uniform<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--gun.energy<span class="w"> </span><span class="s2">&quot;10*GeV&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--gun.particle<span class="w"> </span>mu-<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--numberOfEvents<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--outputFile<span class="w"> </span>Step2_edm4hep.root
+</pre></div>
+</div>
+<p>Compare the histograms produced from <code class="docutils literal notranslate"><span class="pre">Step1_edm4hep.root</span></code> and <code class="docutils literal notranslate"><span class="pre">Step2_edm4hep.root</span></code>.</p>
+</section>
+<section id="geometry-driver-modifications">
+<h2><span class="section-number">3.6.5. </span>Geometry driver modifications<a class="headerlink" href="#geometry-driver-modifications" title="Permalink to this heading"></a></h2>
+<p>The type attribute of the detector tag tells DD4hep which detector constructor to load</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;detector</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ECalEndcap&quot;</span>
+<span class="w">          </span><span class="na">type=</span><span class="s">&quot;GenericCalEndcap_o1_v01&quot;</span>
+<span class="w">          </span><span class="na">id=</span><span class="s">&quot;DetID_ECal_Endcap&quot;</span>
+<span class="w">          </span><span class="na">readout=</span><span class="s">&quot;ECalEndcapCollection&quot;</span>
+<span class="w">          </span><span class="na">vis=</span><span class="s">&quot;ECALVis&quot;</span><span class="w"> </span><span class="nt">&gt;</span>
+<span class="nt">&lt;/detector&gt;</span>
+</pre></div>
+</div>
+<p>DD4hep’s plugin service will look in the <code class="docutils literal notranslate"><span class="pre">*.components</span></code> files it finds via the <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> (or <code class="docutils literal notranslate"><span class="pre">DD4HEP_LIBRARY_PATH</span></code> on macOS because of SIP) environment variables, and load the library on-demand, and then instantiate the function.</p>
+<p>For example, to know which library contains the GenericCalEndcap plugin</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span>DIR<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$LD_LIBRARY_PATH</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s2">&quot;:&quot;</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="k">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>
+<span class="w">    </span>grep<span class="w"> </span>GenericCalEndcap<span class="w"> </span><span class="nv">$DIR</span>/*.components<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null<span class="p">;</span><span class="w"> </span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<p>Usually we would add our detector to an existing project, but because overwriting existing libraries in the environment requires some work, we start with a new project. This requires two main steps, first creating a new detector constructor, and second creating the detector description in a <strong>xml file</strong>. Start by executing the following code inside the directory <code class="docutils literal notranslate"><span class="pre">mydd4heptutorial</span></code>, in order to create the detector constructor project</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>MyFirstDetector
+<span class="nb">cd</span><span class="w"> </span>MyFirstDetector
+touch<span class="w"> </span>CMakeLists.txt
+mkdir<span class="w"> </span>src
+touch<span class="w"> </span>src/MyFirstDetector.cpp
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file has to contain the following code</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.12</span><span class="w"> </span><span class="s">FATAL_ERROR</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">PackageName</span><span class="w"> </span><span class="s">MyFirstDetector</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="o">${</span><span class="nv">PackageName</span><span class="o">}</span><span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">DD4hep</span><span class="w"> </span><span class="s">REQUIRED</span><span class="w"> </span><span class="s">COMPONENTS</span><span class="w"> </span><span class="s">DDG4</span><span class="p">)</span>
+<span class="c"># our sources</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">sources</span><span class="w"> </span><span class="s">./src/MyFirstDetector.cpp</span><span class="p">)</span>
+<span class="c"># create our library and make the components file</span>
+<span class="nb">add_dd4hep_plugin</span><span class="p">(</span><span class="o">${</span><span class="nv">PackageName</span><span class="o">}</span><span class="w"> </span><span class="s">SHARED</span><span class="w"> </span><span class="o">${</span><span class="nv">sources</span><span class="o">}</span><span class="p">)</span>
+<span class="c"># link it with DDCore, or whatever you need</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">PackageName</span><span class="o">}</span><span class="w"> </span><span class="s">DD4hep::DDCore</span><span class="p">)</span>
+<span class="c"># Create this_package.sh file, and install</span>
+<span class="nb">dd4hep_instantiate_package</span><span class="p">(</span><span class="o">${</span><span class="nv">PackageName</span><span class="o">}</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And the <code class="docutils literal notranslate"><span class="pre">MyFirstDetector.cpp</span></code> file has to contain the following code</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;DD4hep/DetFactoryHelper.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;XML/Layering.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;XML/Utilities.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;DDRec/DetectorData.h&quot;</span>
+<span class="k">static</span><span class="w"> </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Ref_t</span><span class="w"> </span><span class="nf">create_detector</span><span class="p">(</span>
+<span class="w">    </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Detector</span><span class="w"> </span><span class="o">&amp;</span><span class="n">theDetector</span><span class="p">,</span>
+<span class="w">    </span><span class="n">xml_h</span><span class="w"> </span><span class="n">entities</span><span class="p">,</span>
+<span class="w">    </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">SensitiveDetector</span><span class="w"> </span><span class="n">sens</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// XML Detector Element (confusingly also XML::DetElement)</span>
+<span class="w">    </span><span class="n">xml_det_t</span><span class="w"> </span><span class="n">x_det</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entities</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// DetElement of our detector instance, attach additional information, sub-elements...</span>
+<span class="w">    </span><span class="c1">// uses name of detector and ID number as defined in the XML detector tag</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">detName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x_det</span><span class="p">.</span><span class="n">nameStr</span><span class="p">();</span>
+<span class="w">    </span><span class="n">sens</span><span class="p">.</span><span class="n">setType</span><span class="p">(</span><span class="s">&quot;calorimeter&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">DetElement</span><span class="w"> </span><span class="n">sdet</span><span class="p">(</span><span class="n">detName</span><span class="p">,</span><span class="w"> </span><span class="n">x_det</span><span class="p">.</span><span class="n">id</span><span class="p">());</span>
+<span class="w">    </span><span class="c1">// get the dimensions tag</span>
+<span class="w">    </span><span class="n">xml_dim_t</span><span class="w"> </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x_det</span><span class="p">.</span><span class="n">dimensions</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// read its attributes</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">rmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dim</span><span class="p">.</span><span class="n">rmin</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">rmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dim</span><span class="p">.</span><span class="n">rmax</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">zmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dim</span><span class="p">.</span><span class="n">zmax</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Make a Cylinder</span>
+<span class="w">    </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Tube</span><span class="w"> </span><span class="n">envelope</span><span class="p">(</span><span class="n">rmin</span><span class="p">,</span><span class="w"> </span><span class="n">rmax</span><span class="p">,</span><span class="w"> </span><span class="n">zmax</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Material</span><span class="w"> </span><span class="n">air</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">theDetector</span><span class="p">.</span><span class="n">air</span><span class="p">();</span>
+<span class="w">    </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Volume</span><span class="w"> </span><span class="n">envelopeVol</span><span class="p">(</span><span class="n">detName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;_envelope&quot;</span><span class="p">,</span>
+<span class="w">                               </span><span class="n">envelope</span><span class="p">,</span>
+<span class="w">                               </span><span class="n">air</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">PlacedVolume</span><span class="w"> </span><span class="n">physvol</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">theDetector</span><span class="p">.</span><span class="n">pickMotherVolume</span><span class="p">(</span><span class="n">sdet</span><span class="p">).</span><span class="n">placeVolume</span><span class="p">(</span><span class="n">envelopeVol</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// add system ID and identify as barrel (as opposed to endcap +/-1)</span>
+<span class="w">    </span><span class="n">physvol</span><span class="p">.</span><span class="n">addPhysVolID</span><span class="p">(</span><span class="s">&quot;system&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sdet</span><span class="p">.</span><span class="n">id</span><span class="p">()).</span><span class="n">addPhysVolID</span><span class="p">(</span><span class="n">_U</span><span class="p">(</span><span class="n">side</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sdet</span><span class="p">.</span><span class="n">setPlacement</span><span class="p">(</span><span class="n">physvol</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">sdet</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">DECLARE_DETELEMENT</span><span class="p">(</span><span class="n">MyFirstDetector</span><span class="p">,</span><span class="w"> </span><span class="n">create_detector</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Still inside the <code class="docutils literal notranslate"><span class="pre">MyFirstDetector</span></code> directory, execute the following shell commands,</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>build<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>-D<span class="w"> </span><span class="nv">CMAKE_INSTALL_PREFIX</span><span class="o">=</span><span class="nv">$PWD</span>/../install<span class="w"> </span>..
+make<span class="w"> </span>install
+<span class="nb">source</span><span class="w"> </span>../install/bin/thisMyFirstDetector.sh
+</pre></div>
+</div>
+<p>Look at <code class="docutils literal notranslate"><span class="pre">$PWD/../install</span></code> and note the content of the <code class="docutils literal notranslate"><span class="pre">bin</span></code> and <code class="docutils literal notranslate"><span class="pre">lib</span></code> directories, have a look at the <code class="docutils literal notranslate"><span class="pre">libMyFirstDetector.components</span></code> file.</p>
+<p>After creating the detector constructor project, a detector description has to be given as a <code class="docutils literal notranslate"><span class="pre">xml</span></code> file. In the <code class="docutils literal notranslate"><span class="pre">FCCee_o1_v05</span></code> directory, create a <code class="docutils literal notranslate"><span class="pre">mydetector.xml</span></code> file with the following content</p>
+<details>
+<summary><b>Click to show the code of <code>mydetector.xml</code> </b></summary>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;lccdd&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;define&gt;</span>
+<span class="w">        </span><span class="nt">&lt;constant</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ECal_cell_size&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;5.1*mm&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/define&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;readouts&gt;</span>
+<span class="w">        </span><span class="nt">&lt;readout</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MyReadout&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;segmentation</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;GridRPhiEta&quot;</span>
+<span class="w">                </span><span class="na">grid_size_eta=</span><span class="s">&quot;ECal_cell_size&quot;</span><span class="w"> </span><span class="na">phi_bins=</span><span class="s">&quot;360&quot;</span>
+<span class="w">                </span><span class="na">offset_r=</span><span class="s">&quot;ECalBarrel_inner_radius&quot;</span>
+<span class="w">                </span><span class="na">grid_size_r=</span><span class="s">&quot;1*cm&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;id&gt;</span>system:5,side:2,module:8,stave:4,layer:9,submodule:4,r:32:10,eta:-11,phi:-11<span class="nt">&lt;/id&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/readout&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/readouts&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;display&gt;</span>
+<span class="w">        </span><span class="nt">&lt;vis</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MyVis&quot;</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.1&quot;</span>
+<span class="w">            </span><span class="na">r=</span><span class="s">&quot;0.1&quot;</span><span class="w"> </span><span class="na">g=</span><span class="s">&quot;.5&quot;</span><span class="w"> </span><span class="na">b=</span><span class="s">&quot;.5&quot;</span>
+<span class="w">            </span><span class="na">showDaughters=</span><span class="s">&quot;true&quot;</span>
+<span class="w">            </span><span class="na">visible=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/display&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;detectors&gt;</span>
+<span class="w">        </span><span class="nt">&lt;detector</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MyDetectorName&quot;</span>
+<span class="w">            </span><span class="na">type=</span><span class="s">&quot;MyFirstDetector&quot;</span>
+<span class="w">            </span><span class="na">id=</span><span class="s">&quot;1234&quot;</span>
+<span class="w">            </span><span class="na">readout=</span><span class="s">&quot;MyReadout&quot;</span>
+<span class="w">            </span><span class="na">vis=</span><span class="s">&quot;MyVis&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;dimensions</span>
+<span class="w">                </span><span class="na">zmax=</span><span class="s">&quot;ECalBarrel_half_length&quot;</span>
+<span class="w">                </span><span class="na">rmin=</span><span class="s">&quot;ECalBarrel_inner_radius&quot;</span>
+<span class="w">                </span><span class="na">rmax=</span><span class="s">&quot;ECalBarrel_outer_radius&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/detector&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/detectors&gt;</span>
+<span class="w">    </span>
+<span class="nt">&lt;/lccdd&gt;</span>
+</pre></div>
+</div>
+</details>
+<br/>
+<p>Now, modify the <code class="docutils literal notranslate"><span class="pre">FCCee_o1_v05/FCCee_o1_v05.xml</span></code> and replace the include for the <code class="docutils literal notranslate"><span class="pre">ECalBarrel</span></code>
+with <code class="docutils literal notranslate"><span class="pre">mydetector.xml</span></code>. After every change in the geometry, the overlap check must be run inside <code class="docutils literal notranslate"><span class="pre">FCCee_o1_v05</span></code> directory</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ddsim<span class="w"> </span>--compactFile<span class="w"> </span>FCCee_o1_v05/FCCee_o1_v05.xml<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--runType<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--macroFile<span class="w"> </span>overlap.mac<span class="w">  </span>&gt;<span class="w"> </span>overlapDump2<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p>If there are no exceptions, we can continue. Now, we add some layers to the detector. First, we add a <code class="docutils literal notranslate"><span class="pre">layer</span></code> component inside the <code class="docutils literal notranslate"><span class="pre">&lt;detector&gt;</span> <span class="pre">...</span> <span class="pre">&lt;/detector&gt;</span></code> section of <code class="docutils literal notranslate"><span class="pre">FCCee_o1_v05/mydetector.xml</span></code> detector description file.</p>
+<details>
+<summary><b>Click to show the code of <code>mydetector.xml</code> </b></summary>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;lccdd&gt;</span>
+<span class="w">    </span><span class="nt">&lt;define&gt;</span>
+<span class="w">        </span><span class="nt">&lt;constant</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ECal_cell_size&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;5.1*mm&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/define&gt;</span>
+<span class="w">    </span><span class="nt">&lt;readouts&gt;</span>
+<span class="w">        </span><span class="nt">&lt;readout</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MyReadout&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;segmentation</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;GridRPhiEta&quot;</span>
+<span class="w">                </span><span class="na">grid_size_eta=</span><span class="s">&quot;ECal_cell_size&quot;</span><span class="w"> </span><span class="na">phi_bins=</span><span class="s">&quot;360&quot;</span>
+<span class="w">                </span><span class="na">offset_r=</span><span class="s">&quot;ECalBarrel_inner_radius&quot;</span>
+<span class="w">                </span><span class="na">grid_size_r=</span><span class="s">&quot;1*cm&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;id&gt;</span>system:5,side:2,module:8,stave:4,layer:9,submodule:4,r:32:10,eta:-11,phi:-11<span class="nt">&lt;/id&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/readout&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/readouts&gt;</span>
+<span class="w">    </span><span class="nt">&lt;display&gt;</span>
+<span class="w">        </span><span class="nt">&lt;vis</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MyVis&quot;</span><span class="w"> </span><span class="na">alpha=</span><span class="s">&quot;0.1&quot;</span>
+<span class="w">            </span><span class="na">r=</span><span class="s">&quot;0.1&quot;</span><span class="w"> </span><span class="na">g=</span><span class="s">&quot;.5&quot;</span><span class="w"> </span><span class="na">b=</span><span class="s">&quot;.5&quot;</span>
+<span class="w">            </span><span class="na">showDaughters=</span><span class="s">&quot;true&quot;</span>
+<span class="w">            </span><span class="na">visible=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/display&gt;</span>
+<span class="w">    </span><span class="nt">&lt;detectors&gt;</span>
+<span class="w">        </span><span class="nt">&lt;detector</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MyDetectorName&quot;</span>
+<span class="w">            </span><span class="na">type=</span><span class="s">&quot;MyFirstDetector&quot;</span>
+<span class="w">            </span><span class="na">id=</span><span class="s">&quot;1234&quot;</span>
+<span class="w">            </span><span class="na">readout=</span><span class="s">&quot;MyReadout&quot;</span>
+<span class="w">            </span><span class="na">vis=</span><span class="s">&quot;MyVis&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;dimensions</span>
+<span class="w">                </span><span class="na">zmax=</span><span class="s">&quot;ECalBarrel_half_length&quot;</span>
+<span class="w">                </span><span class="na">rmin=</span><span class="s">&quot;ECalBarrel_inner_radius&quot;</span>
+<span class="w">                </span><span class="na">rmax=</span><span class="s">&quot;ECalBarrel_outer_radius&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+
+<span class="w">            </span><span class="nt">&lt;layer</span><span class="w"> </span><span class="na">repeat=</span><span class="s">&quot;10&quot;</span><span class="w"> </span><span class="na">vis=</span><span class="s">&quot;MyVis&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material=</span><span class="s">&quot;Iron&quot;</span><span class="w"> </span><span class="na">thickness=</span><span class="s">&quot;1*cm&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material=</span><span class="s">&quot;G10&quot;</span><span class="w"> </span><span class="na">thickness=</span><span class="s">&quot;1*mm&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material=</span><span class="s">&quot;Silicon&quot;</span><span class="w"> </span><span class="na">thickness=</span><span class="s">&quot;1*mm&quot;</span><span class="w"> </span><span class="na">sensitive=</span><span class="s">&quot;true&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;slice</span><span class="w"> </span><span class="na">material=</span><span class="s">&quot;G10&quot;</span><span class="w"> </span><span class="na">thickness=</span><span class="s">&quot;1*mm&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/layer&gt;</span>
+
+<span class="w">        </span><span class="nt">&lt;/detector&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/detectors&gt;</span>
+<span class="nt">&lt;/lccdd&gt;</span>
+</pre></div>
+</div>
+</details>
+<br/>
+<p>In order to actually build the layers that were included in the detector description, we have to add the corresponding interpretation in the detector constructor defined in <code class="docutils literal notranslate"><span class="pre">MyFirstDetector.cpp</span></code>, which should look like the following:</p>
+<details>
+<summary><b>Click to show the code of <code>MyFirstDetector.cpp</code> </b></summary>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;DD4hep/DetFactoryHelper.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;DDRec/DetectorData.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;XML/Layering.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;XML/Utilities.h&quot;</span>
+<span class="k">static</span><span class="w"> </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Ref_t</span><span class="w"> </span><span class="nf">create_detector</span><span class="p">(</span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Detector</span><span class="w"> </span><span class="o">&amp;</span><span class="n">theDetector</span><span class="p">,</span>
+<span class="w">                                     </span><span class="n">xml_h</span><span class="w"> </span><span class="n">entities</span><span class="p">,</span>
+<span class="w">                                     </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">SensitiveDetector</span><span class="w"> </span><span class="n">sens</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1">// XML Detector Element (confusingly also XML::DetElement)</span>
+<span class="w">  </span><span class="n">xml_det_t</span><span class="w"> </span><span class="n">x_det</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entities</span><span class="p">;</span>
+<span class="w">  </span><span class="c1">// DetElement of our detector instance, attach additional information,</span>
+<span class="w">  </span><span class="c1">// sub-elements... uses name of detector and ID number as defined in the XML</span>
+<span class="w">  </span><span class="c1">// detector tag</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">detName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x_det</span><span class="p">.</span><span class="n">nameStr</span><span class="p">();</span>
+<span class="w">  </span><span class="n">sens</span><span class="p">.</span><span class="n">setType</span><span class="p">(</span><span class="s">&quot;calorimeter&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">DetElement</span><span class="w"> </span><span class="n">sdet</span><span class="p">(</span><span class="n">detName</span><span class="p">,</span><span class="w"> </span><span class="n">x_det</span><span class="p">.</span><span class="n">id</span><span class="p">());</span>
+
+<span class="w">  </span><span class="c1">// get the dimensions tag</span>
+<span class="w">  </span><span class="n">xml_dim_t</span><span class="w"> </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x_det</span><span class="p">.</span><span class="n">dimensions</span><span class="p">();</span>
+<span class="w">  </span><span class="c1">// read its attributes</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">rmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dim</span><span class="p">.</span><span class="n">rmin</span><span class="p">();</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">rmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dim</span><span class="p">.</span><span class="n">rmax</span><span class="p">();</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">zmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dim</span><span class="p">.</span><span class="n">zmax</span><span class="p">();</span>
+<span class="w">  </span><span class="c1">// Make a Cylinder</span>
+<span class="w">  </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Tube</span><span class="w"> </span><span class="n">envelope</span><span class="p">(</span><span class="n">rmin</span><span class="p">,</span><span class="w"> </span><span class="n">rmax</span><span class="p">,</span><span class="w"> </span><span class="n">zmax</span><span class="p">);</span>
+<span class="w">  </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Material</span><span class="w"> </span><span class="n">air</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">theDetector</span><span class="p">.</span><span class="n">air</span><span class="p">();</span>
+<span class="w">  </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Volume</span><span class="w"> </span><span class="n">envelopeVol</span><span class="p">(</span><span class="n">detName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;_envelope&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">envelope</span><span class="p">,</span><span class="w"> </span><span class="n">air</span><span class="p">);</span>
+<span class="w">  </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">PlacedVolume</span><span class="w"> </span><span class="n">physvol</span><span class="w"> </span><span class="o">=</span>
+<span class="w">      </span><span class="n">theDetector</span><span class="p">.</span><span class="n">pickMotherVolume</span><span class="p">(</span><span class="n">sdet</span><span class="p">).</span><span class="n">placeVolume</span><span class="p">(</span><span class="n">envelopeVol</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// add system ID and identify as barrel (as opposed to endcap +/-1)</span>
+<span class="w">  </span><span class="n">physvol</span><span class="p">.</span><span class="n">addPhysVolID</span><span class="p">(</span><span class="s">&quot;system&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sdet</span><span class="p">.</span><span class="n">id</span><span class="p">()).</span><span class="n">addPhysVolID</span><span class="p">(</span><span class="n">_U</span><span class="p">(</span><span class="n">side</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">  </span><span class="n">sdet</span><span class="p">.</span><span class="n">setPlacement</span><span class="p">(</span><span class="n">physvol</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Interpretation of layers: </span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">currentInnerRadius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rmin</span><span class="p">;</span><span class="w"> </span><span class="c1">// running inner radius</span>
+<span class="w">  </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Layering</span><span class="w"> </span><span class="n">layering</span><span class="p">(</span><span class="n">x_det</span><span class="p">);</span><span class="w"> </span><span class="c1">// convenience class</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">layerNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">xml_coll_t</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="n">x_det</span><span class="p">,</span><span class="w"> </span><span class="n">_U</span><span class="p">(</span><span class="n">layer</span><span class="p">));</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="o">++</span><span class="n">layerNum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">xml_comp_t</span><span class="w"> </span><span class="n">x_layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Layer</span><span class="w"> </span><span class="o">*</span><span class="n">lay</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">layering</span><span class="p">.</span><span class="n">layer</span><span class="p">(</span><span class="n">layerNum</span><span class="p">);</span><span class="w"> </span><span class="c1">// Get the layer from the layering engine.</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">layerThickness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lay</span><span class="o">-&gt;</span><span class="n">thickness</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// loop over the number of repetitions</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">repeat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x_layer</span><span class="p">.</span><span class="n">repeat</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">repeat</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="o">++</span><span class="n">layerNum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">layerName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">detName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">_toString</span><span class="p">(</span><span class="n">layerNum</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_layer%d&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="c1">// make a volume for the layer</span>
+<span class="w">      </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Tube</span><span class="w"> </span><span class="n">layerTube</span><span class="p">(</span><span class="n">currentInnerRadius</span><span class="p">,</span>
+<span class="w">                             </span><span class="n">currentInnerRadius</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">layerThickness</span><span class="p">,</span><span class="w"> </span><span class="n">zmax</span><span class="p">);</span>
+<span class="w">      </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Volume</span><span class="w"> </span><span class="n">layerVol</span><span class="p">(</span><span class="n">layerName</span><span class="p">,</span><span class="w"> </span><span class="n">layerTube</span><span class="p">,</span><span class="w"> </span><span class="n">air</span><span class="p">);</span>
+<span class="w">      </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">DetElement</span><span class="w"> </span><span class="n">layerElement</span><span class="p">(</span><span class="n">sdet</span><span class="p">,</span><span class="w"> </span><span class="n">layerName</span><span class="p">,</span><span class="w"> </span><span class="n">layerNum</span><span class="p">);</span>
+<span class="w">      </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">PlacedVolume</span><span class="w"> </span><span class="n">layerVolPlaced</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">envelopeVol</span><span class="p">.</span><span class="n">placeVolume</span><span class="p">(</span><span class="n">layerVol</span><span class="p">);</span>
+<span class="w">      </span><span class="n">layerVolPlaced</span><span class="p">.</span><span class="n">addPhysVolID</span><span class="p">(</span><span class="s">&quot;layer&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">layerNum</span><span class="p">);</span>
+<span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">sliceNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">xml_coll_t</span><span class="w"> </span><span class="n">slice</span><span class="p">(</span><span class="n">x_layer</span><span class="p">,</span><span class="w"> </span><span class="n">_U</span><span class="p">(</span><span class="n">slice</span><span class="p">));</span><span class="w"> </span><span class="n">slice</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">slice</span><span class="p">,</span><span class="w"> </span><span class="o">++</span><span class="n">sliceNum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">xml_comp_t</span><span class="w"> </span><span class="n">x_slice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slice</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">sliceThickness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x_slice</span><span class="p">.</span><span class="n">thickness</span><span class="p">();</span>
+<span class="w">        </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Material</span><span class="w"> </span><span class="n">sliceMat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">theDetector</span><span class="p">.</span><span class="n">material</span><span class="p">(</span><span class="n">x_slice</span><span class="p">.</span><span class="n">materialStr</span><span class="p">());</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">sliceName</span><span class="w"> </span><span class="o">=</span>
+<span class="w">            </span><span class="n">layerName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">_toString</span><span class="p">(</span><span class="n">sliceNum</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;slice%d&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Tube</span><span class="w"> </span><span class="n">sliceTube</span><span class="p">(</span><span class="n">currentInnerRadius</span><span class="p">,</span>
+<span class="w">                               </span><span class="n">currentInnerRadius</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sliceThickness</span><span class="p">,</span><span class="w"> </span><span class="n">zmax</span><span class="p">);</span>
+<span class="w">        </span><span class="n">dd4hep</span><span class="o">::</span><span class="n">Volume</span><span class="w"> </span><span class="n">sliceVol</span><span class="p">(</span><span class="n">sliceName</span><span class="p">,</span><span class="w"> </span><span class="n">sliceTube</span><span class="p">,</span><span class="w"> </span><span class="n">sliceMat</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x_slice</span><span class="p">.</span><span class="n">isSensitive</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="n">sliceVol</span><span class="p">.</span><span class="n">setSensitiveDetector</span><span class="p">(</span><span class="n">sens</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// place the slice in the layer</span>
+<span class="w">        </span><span class="n">layerVol</span><span class="p">.</span><span class="n">placeVolume</span><span class="p">(</span><span class="n">sliceVol</span><span class="p">);</span>
+<span class="w">        </span><span class="n">currentInnerRadius</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">sliceThickness</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="c1">// slices</span>
+<span class="w">    </span><span class="p">}</span><span class="w">   </span><span class="c1">// repetitions</span>
+<span class="w">  </span><span class="p">}</span><span class="w">     </span><span class="c1">// layers</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">sdet</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">DECLARE_DETELEMENT</span><span class="p">(</span><span class="n">MyFirstDetector</span><span class="p">,</span><span class="w"> </span><span class="n">create_detector</span><span class="p">)</span>
+</pre></div>
+</div>
+</details>
+<br/>
+<p>To take effect, the code has to be recompiled,</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>MyFirstDetector/build
+make<span class="w"> </span>install
+</pre></div>
+</div>
+<p>After every change in the geometry, the overlap check must be run. To do so, go to the top working directory and run it as before</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ddsim<span class="w"> </span>--compactFile<span class="w"> </span>FCCee_o1_v05/FCCee_o1_v05.xml<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--runType<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--macroFile<span class="w"> </span>overlap.mac<span class="w">  </span>&gt;<span class="w"> </span>overlapDump3<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p>The number of checks now increased, and if everything is done properly, no overlaps are found. Now the geometry is ready to go for a simulation. As it was done previously, we use <code class="docutils literal notranslate"><span class="pre">ddsim</span></code> to run a simulation of 100 muons in the geometry that has just been defined, as in the previous steps</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ddsim<span class="w"> </span>--compactFile<span class="w"> </span>FCCee_o1_v05/FCCee_o1_v05.xml<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--enableGun<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--gun.distribution<span class="w"> </span>uniform<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--gun.energy<span class="w"> </span><span class="s2">&quot;10*GeV&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--gun.particle<span class="w"> </span>mu-<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--numberOfEvents<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--outputFile<span class="w"> </span>Step3_edm4hep.root
+</pre></div>
+</div>
+<p>Modify <code class="docutils literal notranslate"><span class="pre">showPlots.py</span></code> to display properties from this collection (MyReadout).</p>
+<details>
+<summary><b>Click to show the code of the python script <code>showPlots.py</code> </b></summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/env python</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">ROOT</span>
+<span class="kn">from</span> <span class="nn">histoprint</span> <span class="kn">import</span> <span class="n">print_hist</span>
+<span class="n">ROOT</span><span class="o">.</span><span class="n">gROOT</span><span class="o">.</span><span class="n">SetBatch</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please specify input file&quot;</span><span class="p">);</span> <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">inputFile</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reading:&quot;</span><span class="p">,</span> <span class="n">inputFile</span><span class="p">)</span>
+<span class="n">tfile</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TFile</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">inputFile</span><span class="p">)</span>
+<span class="n">myTree</span> <span class="o">=</span> <span class="n">tfile</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">)</span>
+<span class="n">myTree</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;sqrt(MyReadout.position.x*MyReadout.position.x+MyReadout.position.y*MyReadout.position.y)&gt;&gt;rHist(100, 2150, 2352)&quot;</span><span class="p">)</span>
+<span class="n">myTree</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="s2">&quot;MyReadout.energy&gt;&gt;eHist(30, 0, 0.002)&quot;</span><span class="p">)</span>
+<span class="n">print_hist</span><span class="p">(</span><span class="n">tfile</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s2">&quot;rHist&quot;</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Hits per Layer&quot;</span><span class="p">)</span>
+<span class="n">print_hist</span><span class="p">(</span><span class="n">tfile</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s2">&quot;eHist&quot;</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Energy per Hit&quot;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</details>
+<br/>
+</section>
+<section id="final-note">
+<h2><span class="section-number">3.6.6. </span>Final note<a class="headerlink" href="#final-note" title="Permalink to this heading"></a></h2>
+<p>Changing geometries with DD4hep can range from trivial to sophisticated. The overlap checker shall be run after every change.</p>
+<p>Check the following links for further information and support:</p>
+<ol class="arabic simple">
+<li><p>Browse the <a class="reference external" href="https://dd4hep.web.cern.ch/dd4hep/">DD4hep documentation</a> and <a class="reference external" href="https://dd4hep.web.cern.ch/dd4hep/page/beginners-guide/">beginners guide</a></p></li>
+<li><p>Ask at <a class="reference external" href="https://github.com/aidasoft/dd4hep">https://github.com/aidasoft/dd4hep</a></p></li>
+<li><p>Post your questions or suggestions at FCC software <a class="reference external" href="https://fccsw-forum.web.cern.ch/">forum</a> or <a class="reference external" href="https://mattermost.web.cern.ch/fccsw/">Mattermost channel</a></p></li>
+</ol>
+<br/>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html" class="btn btn-neutral float-left" title="3.5. FCC-ee photon/pi0 discrimination using noble liquid calorimeter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Visualization/Visualization.html" class="btn btn-neutral float-right" title="3.7. Visualization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: bnl2023
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../../master/index.html">master</a></dd>
+      <dd><a href="Geometry.html">bnl2023</a></dd>
+      <dd><a href="../../../cern2022/index.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.2. CMake guide for the FCC software &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5.3. Writing Gaudi Algorithms" href="WritingAlgorithms.html" />
+    <link rel="prev" title="5.1. Github workflow and contribution guide" href="FccSoftwareGit.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fast-sim-and-analysis/README.html">2. Generators, Fast Simulation and Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">3. Full Detector Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">5. Developing FCCSW</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FccSoftwareGit.html">5.1. Github workflow and contribution guide</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.2. CMake guide for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">5.2.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quick-start-into-building-fccsw">5.2.2. Quick start into building FCCSW</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#set-up-the-environment">5.2.2.1. Set up the environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-top-level-makefile">5.2.2.2. Using the top-level Makefile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-plain-cmake">5.2.2.3. Using plain CMake</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cmake-example-packages">5.2.3. CMake example packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmake-in-the-fcc-software-framework">5.2.4. CMake in the FCC software framework</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#runtime-environment">5.2.4.1. Runtime Environment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ctest-in-fccsw">5.2.5. CTest in FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-an-internal-library">5.2.6. Using an internal library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-a-new-gaudi-module">5.2.7. Building a new Gaudi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-an-external-library">5.2.8. Using an external library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#customizing-how-cmake-is-run">5.2.8.1. Customizing how CMake is run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="WritingAlgorithms.html">5.3. Writing Gaudi Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DevelopingDD4hep.html">5.4. Developing DD4hep Detector models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Edm4hepTransition.html">5.5. Guide to the Transition of FCCSW to EDM4hep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FccDocPage.html">5.6. Writing documentation for the FCC software</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="README.html"><span class="section-number">5. </span>Developing FCCSW</a> &raquo;</li>
+      <li><span class="section-number">5.2. </span>CMake guide for the FCC software</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/developing-fcc-software/FccCMakeGuide.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="cmake-guide-for-the-fcc-software">
+<h1><span class="section-number">5.2. </span>CMake guide for the FCC software<a class="headerlink" href="#cmake-guide-for-the-fcc-software" title="Permalink to this heading"></a></h1>
+<section id="overview">
+<h2><span class="section-number">5.2.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>CMake is a tool for building software, which has become the de-facto
+standard outside HEP. In HEP, it is for example used by the ILC/CLIC
+communities and by the LHCb collaboration. For CMS people, CMake is the
+equivalent of scram. In FCCSW, CMake is used mainly via Gaudi macros, which are however fairly similar to plain CMake commands in syntax.</p>
+<p>This <a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/LHCb/GaudiCMakeConfiguration">LHCb Twiki</a> has some additional information on
+various Gaudi CMake functions.</p>
+</section>
+<section id="quick-start-into-building-fccsw">
+<h2><span class="section-number">5.2.2. </span>Quick start into building FCCSW<a class="headerlink" href="#quick-start-into-building-fccsw" title="Permalink to this heading"></a></h2>
+<section id="set-up-the-environment">
+<h3><span class="section-number">5.2.2.1. </span>Set up the environment<a class="headerlink" href="#set-up-the-environment" title="Permalink to this heading"></a></h3>
+<p>In case you are unsure, it is best to use the <code class="docutils literal notranslate"><span class="pre">init.sh</span></code> script provided with FCCSW:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>source ./init.sh`
+</pre></div>
+</div>
+<p>Note that mixing setup scripts (from another package, for example) may or may not work as intended - more likely not.
+For any requests to changes in the environment, feel free to contact the software team on the mailing list or any other channels.
+Developers may also look into <code class="docutils literal notranslate"><span class="pre">spack</span></code> to have more fine-grained control over the build dependencies.</p>
+</section>
+<section id="using-the-top-level-makefile">
+<h3><span class="section-number">5.2.2.2. </span>Using the top-level Makefile<a class="headerlink" href="#using-the-top-level-makefile" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>The software can be compiled in the root directory with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">-j8</span></code>.</p></li>
+<li><p>After adding new files, do <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">configure</span></code></p></li>
+<li><p>Building single packages: <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">packagename</span></code></p></li>
+<li><p>Cleaning up (rebuild from scratch): <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">purge</span></code></p></li>
+<li><p>To change the build-type (e.g. Release or Debug), set the <code class="docutils literal notranslate"><span class="pre">BUILDTYPE</span></code> variable (e.g. <code class="docutils literal notranslate"><span class="pre">BUILDTYPE=Debug</span> <span class="pre">make</span></code>)</p></li>
+</ul>
+</section>
+<section id="using-plain-cmake">
+<h3><span class="section-number">5.2.2.3. </span>Using plain CMake<a class="headerlink" href="#using-plain-cmake" title="Permalink to this heading"></a></h3>
+<p>The steps that the top-level Makefile does can also be done manually:</p>
+<ul class="simple">
+<li><p>Create a build directory: <code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">build;</span> <span class="pre">cd</span> <span class="pre">build</span></code></p></li>
+<li><p>Run CMake in the build directory: <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">..</span> </code></p></li>
+<li><p>Change any cmake options by rerunning cmake. For example: <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">..</span> <span class="pre">-DCMAKE_INSTALL_PREFIX=install</span></code>. Tools like ccmake may also be useful: <code class="docutils literal notranslate"><span class="pre">ccmake</span> <span class="pre">..</span></code></p></li>
+<li><p>Compile the software, using all the cpus available:    <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">-j</span> <span class="pre">`getconf</span> <span class="pre">_NPROCESSORS_ONLN`</span> </code></p></li>
+<li><p>Install by running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code></p></li>
+<li><p>In case any dependency is changed, most likely you need to remove all the contents of the build folder and rerun cmake and the compilation.</p></li>
+</ul>
+</section>
+</section>
+<section id="cmake-example-packages">
+<h2><span class="section-number">5.2.3. </span>CMake example packages<a class="headerlink" href="#cmake-example-packages" title="Permalink to this heading"></a></h2>
+<p>Colin provides <a class="reference external" href="https://github.com/cbernet/cmake-examples">a few simple CMake
+examples</a> independent from
+the FCC software framework. They are helpful to understand the basics of
+CMake.</p>
+<p>Get these packages:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/cbernet/cmake-examples.git
+cd cmake-examples
+</pre></div>
+</div>
+<p>Follow the instructions in
+<a class="reference external" href="https://github.com/cbernet/cmake-examples/blob/master/README.md">README.md</a>.</p>
+</section>
+<section id="cmake-in-the-fcc-software-framework">
+<h2><span class="section-number">5.2.4. </span>CMake in the FCC software framework<a class="headerlink" href="#cmake-in-the-fcc-software-framework" title="Permalink to this heading"></a></h2>
+<p>The FCC software framework is split into single packages <code class="docutils literal notranslate"><span class="pre">Generation</span></code>, <code class="docutils literal notranslate"><span class="pre">Examples</span></code>, <code class="docutils literal notranslate"><span class="pre">Simulation</span></code> , …. Each of these packages contains
+the file <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>, defining its content. To build the entire
+SW, a Makefile is provided in the top level directory, so <code class="docutils literal notranslate"><span class="pre">make</span></code> can be invoked there to build FCCSW. To rebuild a single package
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">packagename</span></code> is sufficient.</p>
+<p>Note that single subdirectory cannot be installed individually at the moment.
+If you need to install, it is best to compile everything in the beginning (which may take a while), and then work with the build folder. Any changes should only lead to the changed subdirectories being recompiled.</p>
+<p>When adding new source files to a package, the CMake build system needs
+to be made aware of them. Usually <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> contains a wildcard
+expression that adds all implementation files in a subfolder, e.g.
+<code class="docutils literal notranslate"><span class="pre">src/*.cpp</span></code> , so there is no need to explicitly add the names of the
+new files. To update the list of files, it is fastest to run
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">configure</span></code> .</p>
+<p>Note that when changing the name of a property of an algorithm or a
+tool, <code class="docutils literal notranslate"><span class="pre">make</span></code> (and not only <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">packagename</span></code> ) needs to be run for
+Gaudi to be aware of the change.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">make</span></code> command creates a directory <code class="docutils literal notranslate"><span class="pre">build.xxxx</span></code> where <code class="docutils literal notranslate"><span class="pre">xxxx</span></code> depends on your platform and compiler. All build files
+are writtin in that directory. There are situations where you need to clean this build folder before you can
+successfully build the software:</p>
+<ul class="simple">
+<li><p>The FCCSW environment changed (version change)</p></li>
+<li><p>Fetching changes from other users or the HEP-FCC repository with deleted files</p></li>
+</ul>
+<p>In those cases you’ll need to do <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">purge</span></code> (this target deletes the build and install directories) and rebuild the
+entire software.</p>
+<section id="runtime-environment">
+<h3><span class="section-number">5.2.4.1. </span>Runtime Environment<a class="headerlink" href="#runtime-environment" title="Permalink to this heading"></a></h3>
+<p>FCCSW consists of executables, headers, scripts, dynamic libraries, xmls  and special files describing gaudi components.
+In order to use these, some environment variables need to be set.
+FCCSW includes a setup script that is installed automatically and can be sourced to set up the required variables.</p>
+<p>Gaudi also offers the possibility to set up the environment via the <code class="docutils literal notranslate"><span class="pre">xenv</span></code> command. This is done by simply prefixing the command you want to run with the <code class="docutils literal notranslate"><span class="pre">run</span></code> script in the top level directory of FCCSW, or directly in the build directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./build/run<span class="w"> </span>fccrun<span class="w"> </span>Examples/options/pythia.py
+</pre></div>
+</div>
+<p>Sometimes it is convenient to run FCCSW directly from the binaries in the build directory without installing them.
+This can be done by using the <code class="docutils literal notranslate"><span class="pre">run</span></code> script in the build directory, or setting the environment variables as in <code class="docutils literal notranslate"><span class="pre">setup.sh</span></code> for the build folder.
+Note that the directories in the  build folder differ a bit. Mostly it is important the the LD_LIBRARY_PATH is pre-fixed with the library directories. The fccrun command should pick up the components from the build folder then.</p>
+</section>
+</section>
+<section id="ctest-in-fccsw">
+<h2><span class="section-number">5.2.5. </span>CTest in FCCSW<a class="headerlink" href="#ctest-in-fccsw" title="Permalink to this heading"></a></h2>
+<p>FCCSW also uses the cmake for integration tests.
+This is described in detail in the documentation page on <a class="reference external" href="https://github.com/HEP-FCC/FCCSW/blob/master/doc/AddingTestsToFCCSW.md">adding tests to FCCSW</a>.</p>
+</section>
+<section id="using-an-internal-library">
+<h2><span class="section-number">5.2.6. </span>Using an internal library<a class="headerlink" href="#using-an-internal-library" title="Permalink to this heading"></a></h2>
+<p>Libraries are the main tool to avoid code duplication, i.e. make pieces of code available in other parts of the framework.
+Once Gaudi is notified that a certain subdirectory is needed by invoking <code class="docutils literal notranslate"><span class="pre">gaudi_depends_on_subdir</span></code>, internal libraries defined in this subdirectory can be used by simply adding them to the list of <code class="docutils literal notranslate"><span class="pre">INCLUDE_DIRS</span></code> and <code class="docutils literal notranslate"><span class="pre">LINK_LIBRARIES</span></code>. An example would be the way the internal library <code class="docutils literal notranslate"><span class="pre">DetCommon</span></code> is used by the module  <a class="reference external" href="https://github.com/HEP-FCC/FCCSW/blob/master/Test/TestGeometry/CMakeLists.txt"><code class="docutils literal notranslate"><span class="pre">Test/TestGeometryPlugins</span></code></a>  in FCCSW.
+The required changes to use the <code class="docutils literal notranslate"><span class="pre">DetCommon</span></code> library are</p>
+<ul class="simple">
+<li><p>declare the dependency on the subdirectory <code class="docutils literal notranslate"><span class="pre">Detector/DetCommon</span></code></p></li>
+<li><p>add the <code class="docutils literal notranslate"><span class="pre">DetCommon</span></code> headers by adding <code class="docutils literal notranslate"><span class="pre">DetCommon</span></code> to the <code class="docutils literal notranslate"><span class="pre">INCLUDE_DIRS</span></code> line</p></li>
+<li><p>link the <code class="docutils literal notranslate"><span class="pre">DetCommon</span></code> libraries by adding <code class="docutils literal notranslate"><span class="pre">DetCommon</span></code> to the <code class="docutils literal notranslate"><span class="pre">LINK_LIBRARIES</span></code> line.</p></li>
+</ul>
+</section>
+<section id="building-a-new-gaudi-module">
+<h2><span class="section-number">5.2.7. </span>Building a new Gaudi module<a class="headerlink" href="#building-a-new-gaudi-module" title="Permalink to this heading"></a></h2>
+<p>A more general introduction to Gaudi modules and the differences with respect to libraries can be found in the <a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/LHCb/GaudiCMakeConfiguration#Building_a_Module_AKA_component">LHCb twiki</a>.
+The best way is to look at existing modules in FCCSW for inspiration. The syntax to declare the module <a class="reference external" href="https://github.com/HEP-FCC/FCCSW/blob/master/Test/TestGeometry/CMakeLists.txt"><code class="docutils literal notranslate"><span class="pre">TestGeometryPlugins</span></code></a>, for example, is:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">gaudi_add_module</span><span class="p">(</span><span class="s">TestGeometryPlugins</span>
+<span class="w">                 </span><span class="s">src/components/*.cpp</span>
+<span class="w">                 </span><span class="s">INCLUDE_DIRS</span><span class="w"> </span><span class="s">Geant4</span><span class="w"> </span><span class="s">FWCore</span><span class="w"> </span><span class="s">SimG4Interface</span><span class="w"> </span><span class="s">SimG4Common</span><span class="w"> </span><span class="s">DetInterface</span><span class="w"> </span><span class="s">DetCommon</span><span class="w"> </span><span class="s">TestGeometry</span>
+<span class="w">                 </span><span class="s">LINK_LIBRARIES</span><span class="w"> </span><span class="s">GaudiKernel</span><span class="w"> </span><span class="s">FWCore</span><span class="w"> </span><span class="s">Geant4</span><span class="w"> </span><span class="s">DetCommon</span><span class="w"> </span><span class="s">TestGeometry</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="using-an-external-library">
+<h2><span class="section-number">5.2.8. </span>Using an external library<a class="headerlink" href="#using-an-external-library" title="Permalink to this heading"></a></h2>
+<p>This can be done using the standard cmake command <a class="reference external" href="https://cmake.org/cmake/help/v3.0/command/find_package.html">find_package</a>. See <a class="reference external" href="https://github.com/cbernet/cmake-examples">Colins CMake examples</a> for details.</p>
+<p>Sometimes external libraries require special treatment, and their documentation needs to be consulted. One known case is DD4hep, for which in some cases the CMake variable <code class="docutils literal notranslate"><span class="pre">${DD4hep_COMPONENT_LIBRARIES}</span></code> needs to be used in the <code class="docutils literal notranslate"><span class="pre">LINK_LIBRARIES</span></code> line (if the DDRec or DDSegmentation package is used). Example:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">gaudi_add_library</span><span class="p">(</span><span class="s">DetCommon</span>
+<span class="w">                 </span><span class="s">src/*.cpp</span>
+<span class="w">                 </span><span class="s">INCLUDE_DIRS</span><span class="w"> </span><span class="s">DD4hep</span><span class="w"> </span><span class="s">ROOT</span><span class="w"> </span><span class="s">Geant4</span><span class="w"> </span><span class="s">DetSegmentation</span>
+<span class="w">                 </span><span class="s">LINK_LIBRARIES</span><span class="w"> </span><span class="s">GaudiKernel</span><span class="w"> </span><span class="s">DD4hep</span><span class="w"> </span><span class="s">ROOT</span><span class="w"> </span><span class="s">Geant4</span><span class="w"> </span><span class="s">DetSegmentation</span><span class="w"> </span><span class="o">${</span><span class="nv">DD4hep_COMPONENT_LIBRARIES</span><span class="o">}</span>
+<span class="w">                 </span><span class="s">PUBLIC_HEADERS</span><span class="w"> </span><span class="s">DetCommon</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>ROOT is needed in many modules of FCCSW. More information how to use it in a CMake-based project is available on the <a class="reference external" href="https://root.cern.ch/how/integrate-root-my-project-cmake">ROOT website</a>.</p>
+<section id="customizing-how-cmake-is-run">
+<h3><span class="section-number">5.2.8.1. </span>Customizing how CMake is run<a class="headerlink" href="#customizing-how-cmake-is-run" title="Permalink to this heading"></a></h3>
+<p>An environment variable is used to forward command line arguments to the cmake command, for example to run cmake with the <code class="docutils literal notranslate"><span class="pre">trace</span></code> option:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CMAKEFLAGS</span><span class="o">=</span><span class="s1">&#39;--trace&#39;</span> <span class="n">make</span>
+</pre></div>
+</div>
+<div class="callout admonition">
+<p class="admonition-title">How do I check compilation flags?</p>
+<p>Instead of running <code class="docutils literal notranslate"><span class="pre">make</span></code>, run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nv">VERBOSE</span><span class="o">=</span><span class="m">1</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="FccSoftwareGit.html" class="btn btn-neutral float-left" title="5.1. Github workflow and contribution guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="WritingAlgorithms.html" class="btn btn-neutral float-right" title="5.3. Writing Gaudi Algorithms" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: bnl2023
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../master/index.html">master</a></dd>
+      <dd><a href="FccCMakeGuide.html">bnl2023</a></dd>
+      <dd><a href="../../cern2022/index.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

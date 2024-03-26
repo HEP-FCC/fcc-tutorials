@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.4. Noble Liquid Calorimeter Full Simulation Exercise &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.5. FCC-ee photon/pi0 discrimination using noble liquid calorimeter" href="../FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html" />
+    <link rel="prev" title="3.3. Using Guinea-Pig to generate interaction region backgrounds" href="../FCCeeGuineaPigIRBackgrounds/README.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fast-sim-and-analysis/README.html">2. Generators, Fast Simulation and Analysis</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../README.html">3. Full Detector Simulations</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeCLD/FCCeeCLD.html">3.1. FCCee: Full Simulation of CLD, the CLID detector for FCC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeDriftChamber/FCCeeDriftChamber.html">3.2. FCCee: Full Simulation of IDEA Driftchamber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeGuineaPigIRBackgrounds/README.html">3.3. Using Guinea-Pig to generate interaction region backgrounds</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.4. Noble Liquid Calorimeter Full Simulation Exercise</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-your-environment">3.4.1. Setting up your environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-familiar-with-the-detector-geometry">3.4.2. Getting familiar with the detector geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-simple-simulation-and-evaluating-performance">3.4.3. Running simple simulation and evaluating performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changing-the-geometry">3.4.4. Changing the geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#applying-energy-corrections">3.4.5. Applying energy corrections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-noise">3.4.6. Adding noise</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preparing-for-the-next-tutorial">3.4.7. Preparing for the next tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bonus-exercise">3.4.8. Bonus exercise</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html">3.5. FCC-ee photon/pi0 discrimination using noble liquid calorimeter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Geometry/Geometry.html">3.6. Changing geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Visualization/Visualization.html">3.7. Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../README.html"><span class="section-number">3. </span>Full Detector Simulations</a> &raquo;</li>
+      <li><span class="section-number">3.4. </span>Noble Liquid Calorimeter Full Simulation Exercise</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/full-detector-simulations/FccCaloPerformance/CaloFullSimExercise.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="noble-liquid-calorimeter-full-simulation-exercise">
+<h1><span class="section-number">3.4. </span>Noble Liquid Calorimeter Full Simulation Exercise<a class="headerlink" href="#noble-liquid-calorimeter-full-simulation-exercise" title="Permalink to this heading"></a></h1>
+<div class="admonition-learning-objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<p>In this tutorial, you will learn how to run the full simulation of the FCC-ee High Granularity Noble Liquid Calorimeter. Among other topics, this exercise covers:</p>
+<ul class="simple">
+<li><p>the <strong>generation</strong> of particle gun events with <span class="math notranslate nohighlight">\(\pi^0\)</span>’s and <span class="math notranslate nohighlight">\(\gamma\)</span>’s</p></li>
+<li><p>the <strong>reconstruction</strong> of calorimeter data, including calibration, clustering and noise</p></li>
+<li><p>the energy resolution <strong>performance evaluation</strong></p></li>
+<li><p>the modification of the <strong>detector geometry</strong></p></li>
+</ul>
+</div>
+<p>Let’s get started!</p>
+<section id="setting-up-your-environment">
+<h2><span class="section-number">3.4.1. </span>Setting up your environment<a class="headerlink" href="#setting-up-your-environment" title="Permalink to this heading"></a></h2>
+<p>First, you have to log-in on LXPLUS, clone the repository if not already done, go to this exercise’s folder and source the central KEY4hep environment script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/HEP-FCC/fcc-tutorials
+<span class="nb">cd</span><span class="w"> </span>fcc-tutorials/full-detector-simulations/FccCaloPerformance/
+<span class="nb">source</span><span class="w"> </span>/cvmfs/sw.hsf.org/key4hep/setup.sh
+</pre></div>
+</div>
+<p>Make sure your setup of the FCC software is working with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>which<span class="w"> </span>fccrun
+</pre></div>
+</div>
+<p>which should print a path similar to <code class="docutils literal notranslate"><span class="pre">/cvmfs/sw.hsf.org/spackages6/fccsw/1.0pre06/x86_64-centos7-gcc11.2.0-opt/26ihv/bin/fccrun</span></code>.  Ask for help if it is not the case.</p>
+<p>All good? Ok, let’s do some physics then!</p>
+</section>
+<section id="getting-familiar-with-the-detector-geometry">
+<h2><span class="section-number">3.4.2. </span>Getting familiar with the detector geometry<a class="headerlink" href="#getting-familiar-with-the-detector-geometry" title="Permalink to this heading"></a></h2>
+<p>The Geant4 detector geometry which is used for the full simulation is not written directly, but generated with the DD4hep library. The detector description in this library consists of two parts:</p>
+<ul class="simple">
+<li><p>a compiled C++ library that constructs the geometry: <a class="reference external" href="https://github.com/HEP-FCC/FCCDetectors/blob/main/Detector/DetFCChhECalInclined/src/ECalBarrelInclined_geo.cpp">ECalBarrelInclined_geo.cpp</a></p></li>
+<li><p>an xml file that sets parameters read by the C++ geometry builder to make the detector configurable without the need to recompile: <a class="reference external" href="https://github.com/HEP-FCC/FCCDetectors/blob/main/Detector/DetFCCeeECalInclined/compact/FCCee_ECalBarrel.xml">FCCee_ECalBarrel.xml</a></p></li>
+</ul>
+<p>The idea is to set as parameters the quantities that will often change throughout the Detector R&amp;D campaign (such as the geometrical extent or the material of a given component) and/or the one that have to be optimized. In order to build a complete detector, DD4hep also allows you to call multiple xml’s corresponding to different sub-detectors which keeps things well factorized and provides a flexible plug-and-play approach. Even though we will deal only with calorimetric data in this exercise, the geometry we will use (<a class="reference external" href="https://github.com/HEP-FCC/FCCDetectors/blob/main/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectMaster.xml">DetFCCeeIDEA-LAr</a>) includes also a drift chamber, an HCAL, etc.</p>
+<p>Take a few minutes to browse the above codes to get a glimpse of how things work.</p>
+<p>Looking at <a class="reference external" href="https://github.com/HEP-FCC/FCCDetectors/blob/main/Detector/DetFCCeeECalInclined/compact/FCCee_ECalBarrel.xml">FCCee_ECalBarrel.xml</a>, try to answer the following questions:</p>
+<ul class="simple">
+<li><p>what is the thickness of the cryostat in front of the calorimeter?</p></li>
+</ul>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<p>This is defined by the variable <code class="docutils literal notranslate"><span class="pre">CryoThicknessFront</span></code>: <strong>5 cm</strong></p>
+</div>
+<ul class="simple">
+<li><p>what is the cryostat made of in this version of the detector?</p></li>
+</ul>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<p>This is defined by the variable <code class="docutils literal notranslate"><span class="pre">material</span></code> under the <code class="docutils literal notranslate"><span class="pre">cryostat</span></code> tag: <strong>Aluminum</strong>.
+NB: R&amp;D is ongoing to design a carbon fiber cryostat which features lower material budget (~5% vs 50% of <span class="math notranslate nohighlight">\(X_0\)</span>) and will thus improve the detector performance.</p>
+</div>
+<ul class="simple">
+<li><p>how many longitudinal layers has this calorimeter?</p></li>
+</ul>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<p>The thickness of each layer is set under the <code class="docutils literal notranslate"><span class="pre">layer</span></code> tag (mind that a layer can be ‘repeated’): <strong>12</strong></p>
+</div>
+</section>
+<section id="running-simple-simulation-and-evaluating-performance">
+<h2><span class="section-number">3.4.3. </span>Running simple simulation and evaluating performance<a class="headerlink" href="#running-simple-simulation-and-evaluating-performance" title="Permalink to this heading"></a></h2>
+<p>FCCSW is based on the <a class="reference external" href="https://gaudi-framework.readthedocs.io/en/latest/">Gaudi</a> framework. The different steps of your simulation are defined in a python configuration file where you arrange various Gaudi <code class="docutils literal notranslate"><span class="pre">Algorithms</span></code> and <code class="docutils literal notranslate"><span class="pre">Tools</span></code> to get the desired behavior. Open the file <code class="docutils literal notranslate"><span class="pre">runCaloSim.py</span></code> and briefly browse it to get familiar with the <code class="docutils literal notranslate"><span class="pre">Gaudi</span></code> syntax. NB: everything defined as a <code class="docutils literal notranslate"><span class="pre">Gaudi::Property</span></code> in the C++ implementation (e.g. <code class="docutils literal notranslate"><span class="pre">MomentumMin</span></code> from <code class="docutils literal notranslate"><span class="pre">MomentumRangeParticleGun</span></code>) can be set at run time in command line arguments. The complete list of parameters that can be modified is displayed with <code class="docutils literal notranslate"><span class="pre">fccrun</span> <span class="pre">runCaloSim.py</span> <span class="pre">-h</span></code>.</p>
+<p>Run the simulation with  <code class="docutils literal notranslate"><span class="pre">fccrun</span> <span class="pre">runCaloSim.py</span></code> (you can safely ignore the warnings). While this command runs, try to answer the following questions by browsing <a class="reference external" href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/full-detector-simulations/FccCaloPerformance/runCaloSim.py">runCaloSim.py</a>:</p>
+<ul class="simple">
+<li><p>how to change the type of particle you shoot in the detector?</p></li>
+</ul>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<p>This is a particle gun property which is set by a parameter at the beginning of the file <code class="docutils literal notranslate"><span class="pre">pgun.PdgCodes</span> <span class="pre">=</span> <span class="pre">[pdgCode]</span></code>. NB: a mixture of particles can be used (it is a list).</p>
+</div>
+<ul class="simple">
+<li><p>how to modify the number of events?</p></li>
+</ul>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<p>This is defined by the <code class="docutils literal notranslate"><span class="pre">EvtMax</span></code> parameter of the <code class="docutils literal notranslate"><span class="pre">ApplicationMgr</span></code></p>
+</div>
+<ul class="simple">
+<li><p>how many different values do we have for the sampling fraction? Why is that (physics-wise)?</p></li>
+</ul>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<p>We have 12 values for the sampling fraction, one per longitudinal layer. This is due to the geometry: the absorbers have a rectangular shape and the circumference is smaller at the inner radius than at the outer radius. The sensitive media is thus wider (compared to the non-sensitive media) when going to higher radius which is why the sampling fraction grows. Note that the first layer, called the pre-sampler, has a large sampling fraction because the absorbers are made of a material way lighter than Lead there. We do this to improve the quality of the upstream material correction discussed later.</p>
+</div>
+<p>The above command generated 200 events with 10 GeV photon gun and ran the calorimeter reconstruction on it.</p>
+<ul class="simple">
+<li><p>Looking at the end of prompt output when running <code class="docutils literal notranslate"><span class="pre">runCaloSim.py</span></code>, what algorithm takes most of the computing time? What do you think this algorithm does?</p></li>
+</ul>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<p>The algorithm taking most of the computation time is <code class="docutils literal notranslate"><span class="pre">SimG4Alg:Execute</span></code>. It deals with the propagation of particles through matter and is especially dominated by the development of the electromagnetic shower which features a lot of secondary particles. NB: an alternative to this ‘first principle’ approach would be to develop the shower from a more empirical point of view through e.g. machine learning but this is not easy and goes beyond the scope of this tutorial.</p>
+</div>
+<p>Produce the energy resolution plot with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">plot_energy_resolution.py</span> <span class="pre">output_caloFullSim_10GeV_pdgId_22_noiseFalse.root</span></code> and display it with <code class="docutils literal notranslate"><span class="pre">display</span> <span class="pre">output_caloFullSim_10GeV_pdgId_22_noiseFalse_energyResolution.png</span></code>.</p>
+<ul class="simple">
+<li><p>Assuming there is no noise nor constant term, derive the sampling term of this version of the calorimeter based on the width of the Gaussian fit from the plot.</p></li>
+</ul>
+<div class="toggle admonition">
+<p class="admonition-title">Hint</p>
+<p><span class="math notranslate nohighlight">\(\frac{\sigma_E}{E} = \frac{a}{\sqrt E},  \sigma_E = 0.33 \text{ GeV}, E = 10 \text{ GeV}, a = ?\)</span></p>
+</div>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(a = 0.10 \text{ Gev}^\frac{1}{2}\)</span>
+NB: this is of course not the exact value of the sampling term since the noise and constant term should be considered and a fit on a large energy spectrum should be performed, see e.g. <a class="reference external" href="https://indico.desy.de/event/33640/contributions/128389/attachments/77680/100499/20221006_Brieuc_Francois_Noble_Liquid_Calorimetry_forFCCee_ECFA_Workshop_DESY.pdf#page=3">here</a>.</p>
+</div>
+</section>
+<section id="changing-the-geometry">
+<h2><span class="section-number">3.4.4. </span>Changing the geometry<a class="headerlink" href="#changing-the-geometry" title="Permalink to this heading"></a></h2>
+<p>In this exercise, we will run the same simulation but with liquid Krypton instead of liquid Argon. To do so, you will have to modify the detector geometry xml living in the <code class="docutils literal notranslate"><span class="pre">FCCDetectors</span></code> git repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>../../../
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/HEP-FCC/FCCDetectors
+</pre></div>
+</div>
+<p>Open <code class="docutils literal notranslate"><span class="pre">FCCDetectors/Detector/DetFCCeeECalInclined/compact/FCCee_ECalBarrel.xml</span></code> with your favorite editor and modify line 102 to fill the calorimeter with liquid Krypton (<code class="docutils literal notranslate"><span class="pre">LKr</span></code>) instead of liquid Argon (<code class="docutils literal notranslate"><span class="pre">LAr</span></code>).</p>
+<p>In order to make sure <code class="docutils literal notranslate"><span class="pre">fccrun</span></code> uses your local version of the geometry you have to set the environment variable <code class="docutils literal notranslate"><span class="pre">FCCDETECTORS</span></code> so that it points to the right location (but first, we will save the current path so that we can re-use it later).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CENTRALFCCDETECTORS</span><span class="o">=</span><span class="nv">$FCCDETECTORS</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">FCCDETECTORS</span><span class="o">=</span><span class="nv">$PWD</span>/FCCDetectors
+</pre></div>
+</div>
+<p>Now, let’s go back to the tutorial repository and set the sampling fraction corresponding to the liquid Krypton scenario (liquid Krypton is denser than liquid Argon). NB: for simplicity, the new sampling fractions are given to you but they can be derived for any new geometry with the Gaudi algorithm <a class="reference external" href="https://github.com/HEP-FCC/k4SimGeant4/blob/main/Detector/DetStudies/src/components/SamplingFractionInLayers.h">SamplingFractionInLayers</a> by switching the absorbers as <code class="docutils literal notranslate"><span class="pre">sensitive</span></code> in <a class="reference external" href="https://github.com/HEP-FCC/FCCDetectors/blob/main/Detector/DetFCCeeECalInclined/compact/FCCee_ECalBarrel.xml">FCCee_ECalBarrel.xml</a>.</p>
+<p>Run the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>fcc-tutorials/full-detector-simulations/FccCaloPerformance/
+<span class="c1"># this sed command will change the sampling fraction to match the LKr scenario</span>
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/samplingFraction =.*,/samplingFraction = [0.43409357593, 0.1547424461, 0.193381391453, 0.217112491538, 0.232641970166, 0.243824523984, 0.252601621016, 0.259608181095, 0.266145090772, 0.270853520501, 0.275895174626, 0.308837752573],/&#39;</span><span class="w"> </span>runCaloSim.py
+</pre></div>
+</div>
+<p>Open <code class="docutils literal notranslate"><span class="pre">runCaloSim.py</span></code> and change the output root file name (<code class="docutils literal notranslate"><span class="pre">out.filename</span></code>) to avoid overwriting the previous sample (e.g. by adding <code class="docutils literal notranslate"><span class="pre">_LKr</span></code> before <code class="docutils literal notranslate"><span class="pre">.root</span></code>).</p>
+<p>Run the simulation again, reproduce the performance plot using the new sample and look at the width of the Gaussian:</p>
+<ul class="simple">
+<li><p>How did the energy resolution change? Can you explain this behavior?</p></li>
+</ul>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<p>The energy resolution improved because we have now a higher ratio between sensitive and non-sensitive material budget.</p>
+</div>
+<ul class="simple">
+<li><p>compute again the sampling term assuming a null noise and constant term</p></li>
+</ul>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(a = 0.076 \text{ Gev}^\frac{1}{2}\)</span>
+NB: this is of course not the exact value of the sampling term since the noise and constant term should be considered and a fit on a large energy spectrum should be performed, see e.g. <a class="reference external" href="https://indico.desy.de/event/33640/contributions/128389/attachments/77680/100499/20221006_Brieuc_Francois_Noble_Liquid_Calorimetry_forFCCee_ECFA_Workshop_DESY.pdf#page=4">here</a>.</p>
+</div>
+<p>Before to move to the next exercise, roll back to the previous liquid Argon set-up:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>runCaloSim.py
+<span class="nb">export</span><span class="w"> </span><span class="nv">FCCDETECTORS</span><span class="o">=</span><span class="nv">$CENTRALFCCDETECTORS</span>
+</pre></div>
+</div>
+</section>
+<section id="applying-energy-corrections">
+<h2><span class="section-number">3.4.5. </span>Applying energy corrections<a class="headerlink" href="#applying-energy-corrections" title="Permalink to this heading"></a></h2>
+<p>As you may have noticed in the previous exercises, the reconstructed energy is on average below the generated energy. This is due to the fact that some energy is deposited in part of the detector which are not sensitive such as the cryostat walls or the services. We could simply apply a scale to get the expected average but hopefully we can do better! There is a strong correlation between the energy which is deposited before(after) the sensitive part of the calorimeter and the energy we measure in the first(last) longitudinal layer. This correction is derived with <a class="reference external" href="https://github.com/HEP-FCC/k4SimGeant4/blob/main/Detector/DetStudies/src/components/EnergyInCaloLayers.h">EnergyInCaloLayers</a> plus a few scripts in <a class="reference external" href="https://github.com/HEP-FCC/k4SimGeant4/tree/main/Detector/DetStudies/scripts">DetStudies</a>  and applied with <a class="reference external" href="https://github.com/HEP-FCC/k4RecCalorimeter/blob/main/RecCalorimeter/src/components/CorrectCaloClusters.h">CorrectCaloClusters</a>.</p>
+<p>Since you are now more familiar with the framework, no recipe will be provided for this exercise. Try to do the following to apply the dead material energy correction:</p>
+<ul class="simple">
+<li><p>uncomment the code snippet corresponding to the cluster correction (<code class="docutils literal notranslate"><span class="pre">correctCaloClusters</span></code>)</p></li>
+<li><p>add this Gaudi algorithm to the <code class="docutils literal notranslate"><span class="pre">TopAlg</span></code> sequence (the order of the algorithms matters!)</p></li>
+<li><p>add a <code class="docutils literal notranslate"><span class="pre">keep</span></code> statement to <code class="docutils literal notranslate"><span class="pre">out.outputCommands</span></code> in order to save the new collection (<code class="docutils literal notranslate"><span class="pre">CorrectedCaloClusters</span></code>) in the output rootfile</p></li>
+<li><p>modify the output file name to avoid overwriting the previous files</p></li>
+<li><p>run again the simulation</p></li>
+<li><p>open <code class="docutils literal notranslate"><span class="pre">plot_energy_resolution.py</span></code>, modify the line <code class="docutils literal notranslate"><span class="pre">events.Draw(&quot;CaloClusters.energy</span> <span class="pre">&gt;&gt;</span> <span class="pre">h_energyResolution&quot;)</span></code> to use the clusters with correction applied (the output picture name is based on the input rootfile name so you should not have to change it).</p></li>
+<li><p>produce the energy resolution plot and compare it to the one without energy correction applied (in the LAr scenario)</p></li>
+<li><p>what do you notice?</p></li>
+</ul>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<ul class="simple">
+<li><p>There are no more outliers on the left hand side of the distribution</p></li>
+<li><p>The average of the reconstructed energy is now closer to the generated particle energy</p></li>
+<li><p>The energy resolution slightly improved. As explained earlier, this correction is not just a scaling, it is a per event dynamic estimation of the energy deposited in the dead material.</p></li>
+</ul>
+</div>
+</section>
+<section id="adding-noise">
+<h2><span class="section-number">3.4.6. </span>Adding noise<a class="headerlink" href="#adding-noise" title="Permalink to this heading"></a></h2>
+<p>A further important step in having an accurate description of the detector response is to add electronics noise (pile-up noise can safely be ignored at FCC-ee). Generally speaking, the noise can depend on many factors such as the detector cell capacitance (and every cell can potentially have different shapes) or the readout channel it corresponds to. The noise tools foresee thus the possibility to have a single noise value per cell. For simplicity, we provided a Gaudi config with a flag to easily switch on the noise:</p>
+<ul class="simple">
+<li><p>revert to the version of the code without upstream energy correction: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">runCaloSim.py</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">plot_energy_resolution.py</span></code></p></li>
+<li><p>switch <code class="docutils literal notranslate"><span class="pre">addNoise</span></code> to True in <code class="docutils literal notranslate"><span class="pre">runCaloSim.py</span></code></p></li>
+<li><p>remove cell collections from the output (<code class="docutils literal notranslate"><span class="pre">ECalBarrelPositionedCells</span></code> and <code class="docutils literal notranslate"><span class="pre">PositionedCaloClusterCells</span></code>) to keep the weight of the rootfile small</p></li>
+<li><p>run the simulation. Simulating with noise takes longer (every single cell now has an energy deposit), jump thus now to the other exercises and do the following once the simulation is over.</p></li>
+<li><p>produce the performance plot and compare it to the one without noise</p></li>
+<li><p>what do you observe?</p></li>
+</ul>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<ul class="simple">
+<li><p>The resolution barely changed (it actually got slightly better). This is partially due to the lack of statistics but also to the fact that the noise impact is small because this version of the calorimeter has been optimized to feature a low noise and at 10 GeV we are already dominated by the sampling term.</p></li>
+</ul>
+</div>
+</section>
+<section id="preparing-for-the-next-tutorial">
+<h2><span class="section-number">3.4.7. </span>Preparing for the next tutorial<a class="headerlink" href="#preparing-for-the-next-tutorial" title="Permalink to this heading"></a></h2>
+<p>Open a new terminal, go to the Full Sim tutorial repository <code class="docutils literal notranslate"><span class="pre">fcc-tutorials/full-detector-simulations/FccCaloPerformance/</span></code>, set your environment with <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">/cvmfs/sw.hsf.org/key4hep/setup.sh</span></code>, revert to the original config version with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">runCaloSim.py</span></code>, set <code class="docutils literal notranslate"><span class="pre">pgun.PhiMax</span></code> to <code class="docutils literal notranslate"><span class="pre">0</span></code> (for technical reasons) and launch a production of 1000 photons events (you have to change <code class="docutils literal notranslate"><span class="pre">EvtMax</span></code>). Open another terminal, and launch another 1000 events with neutral pions (you have to set the <code class="docutils literal notranslate"><span class="pre">pdgCode</span></code> to <code class="docutils literal notranslate"><span class="pre">111</span></code> and don’t forget to also source the environment in this new terminal).</p>
+</section>
+<section id="bonus-exercise">
+<h2><span class="section-number">3.4.8. </span>Bonus exercise<a class="headerlink" href="#bonus-exercise" title="Permalink to this heading"></a></h2>
+<p>Write a macro that plots the longitudinal profile of the electromagnetic shower energy deposits and run it on both the photon and neutral pion samples.</p>
+<div class="toggle admonition">
+<p class="admonition-title">Hint</p>
+<ul class="simple">
+<li><p>use a TProfile</p></li>
+<li><p>the radial extent of the sensitive calorimeter is 2160 mm to 2560 mm</p></li>
+<li><p>there are 12 longitudinal layers, the first one is 15 mm thick while the other ones are 35 mm thick</p></li>
+<li><p>radius can be obtained from <span class="math notranslate nohighlight">\(\sqrt{x^2 + y^2}\)</span>, <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are obtained with <code class="docutils literal notranslate"><span class="pre">PositionedCaloClusterCells.position.x/y</span></code>, in mm</p></li>
+<li><p>For each event, sum the energy from cells in a given layer and normalize it to the cluster energy</p></li>
+</ul>
+</div>
+<p>Compare the longitudinal shower profile for photons and neutral pions.</p>
+<ul class="simple">
+<li><p>What do you observe?</p></li>
+</ul>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<p>For a given cluster energy, the single photon showers deposit their energy deeper in the calorimeter than the showers from neutral pions. This is due to the fact that the latter correspond to two close-by photon showers with smaller energy.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../FCCeeGuineaPigIRBackgrounds/README.html" class="btn btn-neutral float-left" title="3.3. Using Guinea-Pig to generate interaction region backgrounds" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html" class="btn btn-neutral float-right" title="3.5. FCC-ee photon/pi0 discrimination using noble liquid calorimeter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: cern2022
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../../master/index.html">master</a></dd>
+      <dd><a href="../../../bnl2023/index.html">bnl2023</a></dd>
+      <dd><a href="CaloFullSimExercise.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

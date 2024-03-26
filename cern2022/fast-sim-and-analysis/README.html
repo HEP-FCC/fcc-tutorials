@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. Generators, Fast Simulation and Analysis &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.1. FCC: Getting started with event generation" href="FccFastSimGeneration.html" />
+    <link rel="prev" title="1.8. Asking good questions" href="../software-basics/asking-questions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Generators, Fast Simulation and Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="FccFastSimGeneration.html">2.1. FCC: Getting started with event generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html">2.2. FCC: Getting started with simulating events in Delphes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.html">2.3. FCC: Getting started with analysing simulated events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html">2.4. FCC: tracking and vertexing example using specific flavour decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html">2.5. FCCAnalyses: Common problems and solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EventProduction.html">2.6. Central production of events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">3. Full Detector Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">2. </span>Generators, Fast Simulation and Analysis</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/fast-sim-and-analysis/README.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="generators-fast-simulation-and-analysis">
+<h1><span class="section-number">2. </span>Generators, Fast Simulation and Analysis<a class="headerlink" href="#generators-fast-simulation-and-analysis" title="Permalink to this heading"></a></h1>
+<p>If you want to get started with generation and  analysis of fast-simulated
+events, you’re at the right place.</p>
+<p>Fast simulation is currently supported through the Delphes approach. Support for the Papas approach, initially used for FCC-ee, is
+discontinued.</p>
+<p>An analysis ntuple will be produced with ROOT’s RDataFrame, a simple modular event processing framework for high energy physics.</p>
+<p>If you have any problems or questions, you can <a class="reference external" href="https://github.com/HEP-FCC/starterkit-lessons/issues">open an issue</a> on the <a class="reference external" href="https://github.com/HEP-FCC/starterkit-lessons">GitHub repository where these lessons are developed</a>.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="FccFastSimGeneration.html">2.1. FCC: Getting started with event generation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="FccFastSimGeneration.html#overview">2.1.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FccFastSimGeneration.html#enabling-fccsw">2.1.2. Enabling FCCSW</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FccFastSimGeneration.html#generators">2.1.3. Generators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="FccFastSimGeneration.html#id1">2.1.3.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccFastSimGeneration.html#pythia8">2.1.3.2. Pythia8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccFastSimGeneration.html#whizard">2.1.3.3. Whizard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccFastSimGeneration.html#madgraph5">2.1.3.4. MadGraph5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccFastSimGeneration.html#herwig">2.1.3.5. Herwig</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccFastSimGeneration.html#kkmcee">2.1.3.6. KKMCee</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccFastSimGeneration.html#bhlumi">2.1.3.7. BHLUMI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccFastSimGeneration.html#babayaga">2.1.3.8. BabaYaga</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FccFastSimGeneration.html#hands-on-case-study-ditau-events-with-kkmcee-pythia8-and-whizard">2.1.4. Hands-on case study: ditau events with KKMCee, Pythia8 and Whizard</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="FccFastSimGeneration.html#generating-ditaus-with-kkmcee">2.1.4.1. Generating ditaus with KKMCee</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="FccFastSimGeneration.html#generating-hepmc-events">2.1.4.1.1. Generating <code class="docutils literal notranslate"><span class="pre">HepMC</span></code> events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FccFastSimGeneration.html#hepmc-to-edm4hep-conversion">2.1.4.1.2. <code class="docutils literal notranslate"><span class="pre">HepMC</span></code> to <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code> conversion</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="FccFastSimGeneration.html#dissection-of-hepmc2edm-py">2.1.4.1.2.1. Dissection of <code class="docutils literal notranslate"><span class="pre">hepmc2edm.py</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="FccFastSimGeneration.html#running-hepmc2edm-py">2.1.4.1.2.2. Running <code class="docutils literal notranslate"><span class="pre">hepmc2edm.py</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="FccFastSimGeneration.html#generating-ditaus-with-pythia8">2.1.4.2. Generating ditaus with Pythia8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FccFastSimGeneration.html#generating-ditaus-with-whizard">2.1.4.3. Generating ditaus with Whizard</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="FccFastSimGeneration.html#lhef-to-edm4hep-conversion">2.1.4.3.1. <code class="docutils literal notranslate"><span class="pre">LHEf</span></code> to <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code> conversion</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="FccFastSimGeneration.html#looking-at-the-produced-files-the-mcparticle-class">2.1.4.4. Looking at the produced files: the MCParticle class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="FccFastSimGeneration.html#creating-flat-ntuples-with-fccanalyses">2.1.4.4.1. Creating flat ntuples with FCCAnalyses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FccFastSimGeneration.html#comparing-distributions">2.1.4.4.2. Comparing distributions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html">2.2. FCC: Getting started with simulating events in Delphes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html#part-i-generate-and-simulate-events-with-delphesedm4hep">2.2.1. Part I: Generate and simulate Events with DelphesEDM4Hep</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.html">2.3. FCC: Getting started with analysing simulated events</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.html#part-ii-analyse-with-fccanalyses">2.3.1. Part II: Analyse with FCCAnalyses</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html">2.4. FCC: tracking and vertexing example using specific flavour decays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html#installation-of-fccanalyses">2.4.1. Installation of FCCAnalyses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html#building-a-custom-sub-package-in-fccanalyses">2.4.2. Building a custom sub-package in FCCAnalyses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html#reconstruction-of-the-primary-vertex-and-of-primary-tracks">2.4.3. Reconstruction of the primary vertex and of primary tracks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html#exercises">2.4.3.1. Exercises:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html#reconstruction-of-displaced-vertices-in-an-exclusive-decay-chain-starting-example">2.4.4. Reconstruction of displaced vertices in an exclusive decay chain: starting example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html#exercise-analysis-of-tau-rightarrow-3-mu">2.4.5. Exercise: analysis of <span class="math notranslate nohighlight">\(\tau \rightarrow 3 \mu\)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html">2.5. FCCAnalyses: Common problems and solutions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html#prerequisites">2.5.1. Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html#edm4hep-event-model">2.5.1.1. EDM4HEP event model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html#structure-of-edm4hep-files">2.5.1.2. Structure of EDM4HEP files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html#overall-organisation-of-analysis-code-c">2.5.2. Overall organisation of analysis code (C++)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html#reading-objects-from-edm4hep">2.5.3. Reading objects from EDM4HEP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html#association-between-recoparticles-and-montecarloparticles">2.5.4. Association between RecoParticles and MonteCarloParticles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html#navigation-through-the-history-of-the-montecarloparticles">2.5.5. Navigation through the history of the MonteCarloParticles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html#writing-a-new-function">2.5.6. Writing a new function</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html#inline">2.5.6.1. Inline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html#using-root-ginterpreter">2.5.6.2. Using ROOT gInterpreter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html#inside-an-existing-fccanalyses-namespace">2.5.6.3. Inside an existing FCCAnalyses namespace</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html#writing-a-new-struct">2.5.7. Writing a new struct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html#writing-a-new-namespace">2.5.8. Writing a new namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html#writing-your-own-analysis-using-the-case-studies-generator">2.5.9. Writing your own analysis using the case-studies generator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html#analysis-package-generation">2.5.9.1. Analysis package generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html#analysis-package-exposure-to-rdf">2.5.9.2. Analysis package exposure to RDF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="EventProduction.html">2.6. Central production of events</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="EventProduction.html#clone-and-initialisation">2.6.1. Clone and initialisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EventProduction.html#generate-lhe-files-from-gripacks">2.6.2. Generate LHE files from gripacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EventProduction.html#generate-lhe-files-directly-from-mg5">2.6.3. Generate LHE files directly from MG5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EventProduction.html#generate-stdhep-files-directly-from-whizard-pythia6">2.6.4. Generate STDHEP files directly from Whizard + Pythia6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EventProduction.html#generate-edm4hep-files-from-the-lhe-and-decay-with-pythia8">2.6.5. Generate EDM4hep files from the LHE and decay with Pythia8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EventProduction.html#generate-edm4hep-files-from-stdhep">2.6.6. Generate EDM4hep files from STDHEP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EventProduction.html#generate-edm4hep-files-from-pythia8">2.6.7. Generate EDM4hep files from Pythia8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EventProduction.html#expert-mode">2.6.8. Expert mode</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="EventProduction.html#updating-the-database">2.6.8.1. Updating the database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="EventProduction.html#cleaning-bad-jobs">2.6.8.2. Cleaning bad jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="EventProduction.html#update-the-webpage">2.6.8.3. Update the webpage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="EventProduction.html#create-the-sample-list-for-analyses">2.6.8.4. Create the sample list for analyses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="EventProduction.html#all-in-one">2.6.8.5. All in One</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="EventProduction.html#produce-samples-with-eventproducer-outside-of-official-campaign">2.6.9. Produce samples with EventProducer outside of official campaign</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../software-basics/asking-questions.html" class="btn btn-neutral float-left" title="1.8. Asking good questions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="FccFastSimGeneration.html" class="btn btn-neutral float-right" title="2.1. FCC: Getting started with event generation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: cern2022
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../master/index.html">master</a></dd>
+      <dd><a href="../../bnl2023/index.html">bnl2023</a></dd>
+      <dd><a href="README.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

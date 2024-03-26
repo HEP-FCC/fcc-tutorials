@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The FCC Tutorials &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1. First Steps" href="software-basics/README.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> FCC Tutorials
+            <img src="_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fast-sim-and-analysis/README.html">2. Generators, Fast Simulation and Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="full-detector-simulations/README.html">3. Full Detector Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li>The FCC Tutorials</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/index.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="the-fcc-tutorials">
+<h1>The FCC Tutorials<a class="headerlink" href="#the-fcc-tutorials" title="Permalink to this heading"></a></h1>
+<p>These are the lessons taught during the <a class="reference external" href="https://hep-fcc.github.io/fcc-tutorials">FCC Tutorials</a> (the format is heavily inspired by the <a class="reference external" href="https://lhcb.github.io/starterkit-lessons/index.html">LHCb starterkit</a>).
+If you’d like to join the next tutorial, visit <a class="reference external" href="https://cern.ch/fccsw">the FCCSW website</a> to find out when it will happen and how to sign up.</p>
+<p>If you’d just like to learn about how to use the FCC software, <a class="reference external" href="https://hep-fcc.github.io/fcc-tutorials/software-basics/README.html">read on</a>!</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="software-basics/README.html">1. First  Steps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="software-basics/prerequisites.html">1.1. Pre-workshop checklist</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="software-basics/prerequisites.html#checking-the-chosen-resources">1.1.1. Checking the chosen resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-basics/prerequisites.html#enabling-the-fcc-software-ecosystem-from-cvmfs">1.1.2. Enabling the FCC software ecosystem from <code class="docutils literal notranslate"><span class="pre">cvmfs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-basics/prerequisites.html#special-notes-or-alternative-cases-settings">1.1.3. Special notes or alternative cases / settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="software-basics/swan.html">1.2. Running the software in SWAN notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="software-basics/introduction-to-course.html">1.3. Goals of the course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="software-basics/fccsw.html">1.4. An introduction to FCC Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="software-basics/bookkeeping.html">1.5. Finding data in the Bookkeeping</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="software-basics/bookkeeping.html#gaining-access-permissions">1.5.1. Gaining access permissions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-basics/bookkeeping.html#finding-data">1.5.2. Finding Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="software-basics/exploring-fcc-files.html">1.6. Inspecting an FCC data file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="software-basics/exploring-fcc-files.html#the-events-tree">1.6.1. The <code class="docutils literal notranslate"><span class="pre">events</span></code> tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="software-basics/exploring-fcc-files.html#the-metadata-tree">1.6.2. The <code class="docutils literal notranslate"><span class="pre">metadata</span></code> tree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="software-basics/tips-tricks.html">1.7. Tips and tricks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="software-basics/tips-tricks.html#autocompletion-using-bash-history">1.7.1. Autocompletion using bash history</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="software-basics/asking-questions.html">1.8. Asking good questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fast-sim-and-analysis/README.html">2. Generators, Fast Simulation and Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fast-sim-and-analysis/FccFastSimGeneration.html">2.1. FCC: Getting started with event generation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/FccFastSimGeneration.html#overview">2.1.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/FccFastSimGeneration.html#enabling-fccsw">2.1.2. Enabling FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/FccFastSimGeneration.html#generators">2.1.3. Generators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/FccFastSimGeneration.html#hands-on-case-study-ditau-events-with-pythia8-whizard-and-kkmcee">2.1.4. Hands-on case study: ditau events with Pythia8, Whizard and KKMCee</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fast-sim-and-analysis/k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html">2.2. FCC: Getting started with simulating events in Delphes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html#part-i-generate-and-simulate-events-with-delphesedm4hep">2.2.1. Part I: Generate and simulate Events with DelphesEDM4Hep</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.html">2.3. FCC: Analysing simulated events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.html#part-i-analyse-events-with-histmaker">2.3.1. Part I: Analyse events with histmaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.html#part-ii-produce-a-flat-tree-and-analyse-events">2.3.2. Part II: Produce a flat tree and analyse events</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html">2.4. FCC: tracking and vertexing example using specific flavour decays</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html#installation-of-fccanalyses">2.4.1. Installation of FCCAnalyses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html#building-a-custom-sub-package-in-fccanalyses">2.4.2. Building a custom sub-package in FCCAnalyses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html#reconstruction-of-the-primary-vertex-and-of-primary-tracks">2.4.3. Reconstruction of the primary vertex and of primary tracks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html#reconstruction-of-displaced-vertices-in-an-exclusive-decay-chain-starting-example">2.4.4. Reconstruction of displaced vertices in an exclusive decay chain: starting example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html#exercise-analysis-of-tau-rightarrow-3-mu">2.4.5. Exercise: analysis of <span class="math notranslate nohighlight">\(\tau \rightarrow 3 \mu\)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fast-sim-and-analysis/FCCAnalysesProblemsAndSolutions.html">2.5. FCCAnalyses: Common problems and solutions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/FCCAnalysesProblemsAndSolutions.html#prerequisites">2.5.1. Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/FCCAnalysesProblemsAndSolutions.html#overall-organisation-of-analysis-code-c">2.5.2. Overall organisation of analysis code (C++)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/FCCAnalysesProblemsAndSolutions.html#reading-objects-from-edm4hep">2.5.3. Reading objects from EDM4hep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/FCCAnalysesProblemsAndSolutions.html#association-between-recoparticles-and-montecarloparticles">2.5.4. Association between <code class="docutils literal notranslate"><span class="pre">RecoParticles</span></code> and <code class="docutils literal notranslate"><span class="pre">MonteCarloParticles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/FCCAnalysesProblemsAndSolutions.html#navigation-through-the-history-of-the-mc-particles">2.5.5. Navigation through the history of the MC particles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/FCCAnalysesProblemsAndSolutions.html#writing-a-new-analyzer">2.5.6. Writing a new analyzer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/FCCAnalysesProblemsAndSolutions.html#writing-a-new-struct">2.5.7. Writing a new struct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/FCCAnalysesProblemsAndSolutions.html#writing-a-new-module">2.5.8. Writing a new module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/FCCAnalysesProblemsAndSolutions.html#writing-your-own-analysis-using-the-case-studies-generator">2.5.9. Writing your own analysis using the case-studies generator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fast-sim-and-analysis/EventProduction.html">2.6. Central production of events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/EventProduction.html#clone-and-initialisation">2.6.1. Clone and initialisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/EventProduction.html#generate-lhe-files-from-gripacks">2.6.2. Generate LHE files from gripacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/EventProduction.html#generate-lhe-files-directly-from-mg5">2.6.3. Generate LHE files directly from MG5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/EventProduction.html#generate-stdhep-files-directly-from-whizard-pythia6">2.6.4. Generate STDHEP files directly from Whizard + Pythia6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/EventProduction.html#generate-edm4hep-files-from-the-lhe-and-decay-with-pythia8">2.6.5. Generate EDM4hep files from the LHE and decay with Pythia8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/EventProduction.html#generate-edm4hep-files-from-stdhep">2.6.6. Generate EDM4hep files from STDHEP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/EventProduction.html#generate-edm4hep-files-from-pythia8">2.6.7. Generate EDM4hep files from Pythia8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/EventProduction.html#expert-mode">2.6.8. Expert mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fast-sim-and-analysis/EventProduction.html#produce-samples-with-eventproducer-outside-of-official-campaign">2.6.9. Produce samples with EventProducer outside of official campaign</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="full-detector-simulations/README.html">3. Full Detector Simulations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="full-detector-simulations/FCCeeCLD/FCCeeCLD.html">3.1. FCCee: Full Simulation of CLD, the CLID detector for FCC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FCCeeCLD/FCCeeCLD.html#setting-up-the-environment">3.1.1. Setting up the environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FCCeeCLD/FCCeeCLD.html#generate-some-signal-to-process-taus-from-the-particle-gun">3.1.2. Generate some signal to process: taus from the particle gun</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="full-detector-simulations/FCCeeDriftChamber/FCCeeDriftChamber.html">3.2. FCCee: Full Simulation of IDEA Driftchamber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="full-detector-simulations/FCCeeGuineaPigIRBackgrounds/README.html">3.3. Using Guinea-Pig to generate interaction region backgrounds</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FCCeeGuineaPigIRBackgrounds/README.html#generating-e-e-pairs-with-guinea-pig">3.3.1. Generating <span class="math notranslate nohighlight">\(e^{+} e^{-}\)</span> pairs with Guinea-Pig</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FCCeeGuineaPigIRBackgrounds/README.html#generating-large-amounts-of-data-with-guinea-pig">3.3.2. Generating large amounts of data with Guinea-Pig</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FCCeeGuineaPigIRBackgrounds/README.html#analysing-the-data-only-for-ilcsoft-users">3.3.3. Analysing the data (only for ILCSOFT users)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FCCeeGuineaPigIRBackgrounds/README.html#tracking-the-pairs-in-the-detector-using-key4hep">3.3.4. Tracking the pairs in the detector using Key4HEP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FCCeeGuineaPigIRBackgrounds/README.html#gp-production-of-gamma-gamma-hadrons">3.3.5. GP production of <span class="math notranslate nohighlight">\(\gamma\gamma\)</span> hadrons</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="full-detector-simulations/FccCaloPerformance/CaloFullSimExercise.html">3.4. Noble Liquid Calorimeter Full Simulation Exercise</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FccCaloPerformance/CaloFullSimExercise.html#setting-up-your-environment">3.4.1. Setting up your environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FccCaloPerformance/CaloFullSimExercise.html#getting-familiar-with-the-detector-geometry">3.4.2. Getting familiar with the detector geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FccCaloPerformance/CaloFullSimExercise.html#running-simple-simulation-and-evaluating-performance">3.4.3. Running simple simulation and evaluating performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FccCaloPerformance/CaloFullSimExercise.html#changing-the-geometry">3.4.4. Changing the geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FccCaloPerformance/CaloFullSimExercise.html#adding-noise">3.4.5. Adding noise</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FccCaloPerformance/CaloFullSimExercise.html#preparing-for-the-next-tutorial">3.4.6. Preparing for the next tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FccCaloPerformance/CaloFullSimExercise.html#bonus-exercise">3.4.7. Bonus exercise</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html">3.5. FCC-ee photon/pi0 discrimination using noble liquid calorimeter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#installation-of-fccanalyses">3.5.1. Installation of FCCAnalyses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#build-fccanalyses-skeleton">3.5.2. Build FCCAnalyses skeleton</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#get-the-highest-energetic-cluster">3.5.3. Get the highest energetic cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#get-the-list-of-cells-from-the-cluster">3.5.4. Get the list of cells from the cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#create-sub-collection-of-cells">3.5.5. Create sub-collection of cells</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#create-collection-of-cells-observables">3.5.6. Create collection of cells observables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#adding-the-mva-inference">3.5.7. Adding the MVA inference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#removing-the-last-layers">3.5.8. Removing the last layers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#compare-the-performance">3.5.9. Compare the performance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="full-detector-simulations/Geometry/Geometry.html">3.6. Changing geometry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/Geometry/Geometry.html#setup">3.6.1. Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/Geometry/Geometry.html#modify-an-existing-xml-file">3.6.2. Modify an existing XML file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/Geometry/Geometry.html#overlap-checking">3.6.3. Overlap checking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/Geometry/Geometry.html#modifying-the-ecal">3.6.4. Modifying the ECAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/Geometry/Geometry.html#geometry-driver-modifications">3.6.5. Geometry driver modifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/Geometry/Geometry.html#final-note">3.6.6. Final note</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="full-detector-simulations/Visualization/Visualization.html">3.7. Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/Visualization/Visualization.html#key4hep-tool-geodisplay">3.7.1. Key4hep tool: geoDisplay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/Visualization/Visualization.html#geant4">3.7.2. Geant4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="full-detector-simulations/Visualization/Visualization.html#phoenix-fcc">3.7.3. Phoenix&#64;FCC</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="distributed-computing/README.html">4. Distributed computing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="distributed-computing/RegisteringToFccVO.html">4.1. Getting started with FCC distributed computing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="distributed-computing/RegisteringToFccVO.html#registering-to-the-fcc-vo">4.1.1. Registering to the FCC VO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="distributed-computing/RegisteringToFccVO.html#enabling-dirac">4.1.2. Enabling DIRAC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="distributed-computing/RegisteringToFccVO.html#the-web-portal">4.1.3. The web portal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="distributed-computing/Workflows.html">4.2. FCC DIRAC example workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="distributed-computing/workflows/Overview.html">4.2.1. Overview of the submission scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="distributed-computing/workflows/01/DiTauKKMCeeDelphesStandAlone.html">4.2.2. Workflow 1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="distributed-computing/OutputStructure.html">4.3. Structure for /eos/experiment/fcc/prod</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="distributed-computing/OutputStructure.html#overview">4.3.1. Overview</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developing-fcc-software/README.html">5. Developing FCCSW</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developing-fcc-software/FccSoftwareGit.html">5.1. Github workflow and contribution guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccSoftwareGit.html#overview">5.1.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccSoftwareGit.html#first-time-setup-of-git">5.1.2. First time setup of git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccSoftwareGit.html#generate-and-set-up-ssh-keys-for-github">5.1.3. Generate and set up ssh keys for github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccSoftwareGit.html#improving-your-git-experience">5.1.4. Improving your git experience</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccSoftwareGit.html#development-workflow">5.1.5. Development workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccSoftwareGit.html#recommendations">5.1.6. Recommendations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccSoftwareGit.html#trouble-shooting">5.1.7. Trouble-shooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccSoftwareGit.html#need-help">5.1.8. Need help?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developing-fcc-software/FccCMakeGuide.html">5.2. CMake guide for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccCMakeGuide.html#overview">5.2.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccCMakeGuide.html#quick-start-into-building-fccsw">5.2.2. Quick start into building FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccCMakeGuide.html#cmake-example-packages">5.2.3. CMake example packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccCMakeGuide.html#cmake-in-the-fcc-software-framework">5.2.4. CMake in the FCC software framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccCMakeGuide.html#ctest-in-fccsw">5.2.5. CTest in FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccCMakeGuide.html#using-an-internal-library">5.2.6. Using an internal library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccCMakeGuide.html#building-a-new-gaudi-module">5.2.7. Building a new Gaudi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccCMakeGuide.html#using-an-external-library">5.2.8. Using an external library</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developing-fcc-software/WritingAlgorithms.html">5.3. Writing Gaudi Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/WritingAlgorithms.html#getting-started">5.3.1. Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/WritingAlgorithms.html#exercise-adding-an-algorithm">5.3.2. Exercise: Adding an Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developing-fcc-software/DevelopingDD4hep.html">5.4. Developing DD4hep Detector models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developing-fcc-software/Edm4hepTransition.html">5.5. Guide to the Transition of FCCSW to EDM4hep</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/Edm4hepTransition.html#technical-information">5.5.1. Technical Information</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developing-fcc-software/FccDocPage.html">5.6. Writing documentation for the FCC software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccDocPage.html#where-to-put-documentation">5.6.1. Where to put documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccDocPage.html#when-and-how-is-the-documentation-page-updated">5.6.2. When and how is the documentation page updated?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccDocPage.html#structure-of-the-content-of-the-main-page">5.6.3. Structure of the content of the main page</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccDocPage.html#running-website-generation-locally">5.6.4. Running website generation locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccDocPage.html#for-website-admins">5.6.5. For website admins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developing-fcc-software/FccDocPage.html#custom-admonitions">5.6.6. Custom Admonitions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">6. Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CONTRIBUTING.html#getting-started">6.1. Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CONTRIBUTING.html#building-the-lessons">6.2. Building the lessons</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CONTRIBUTING.html#using-venv-recommended">6.2.1. Using <code class="docutils literal notranslate"><span class="pre">venv</span></code> (recommended)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CONTRIBUTING.html#using-starterkit-ci">6.2.2. Using <code class="docutils literal notranslate"><span class="pre">starterkit_ci</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="software-basics/README.html" class="btn btn-neutral float-right" title="1. First Steps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: bnl2023
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../master/index.html">master</a></dd>
+      <dd><a href="index.html">bnl2023</a></dd>
+      <dd><a href="../cern2022/index.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

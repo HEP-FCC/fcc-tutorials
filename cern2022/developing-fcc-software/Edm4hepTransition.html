@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.5. Guide to the Transition of FCCSW to EDM4hep &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5.6. Writing documentation for the FCC software" href="FccDocPage.html" />
+    <link rel="prev" title="5.4. Developing DD4hep Detector models" href="DevelopingDD4hep.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fast-sim-and-analysis/README.html">2. Generators, Fast Simulation and Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">3. Full Detector Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">5. Developing FCCSW</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FccSoftwareGit.html">5.1. Github workflow and contribution guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FccCMakeGuide.html">5.2. CMake guide for the FCC software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WritingAlgorithms.html">5.3. Writing Gaudi Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DevelopingDD4hep.html">5.4. Developing DD4hep Detector models</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.5. Guide to the Transition of FCCSW to EDM4hep</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#technical-information">5.5.1. Technical Information</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#build-system">5.5.1.1. Build System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#component-source-code">5.5.1.2. Component source Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#job-options">5.5.1.3. Job options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FccDocPage.html">5.6. Writing documentation for the FCC software</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="README.html"><span class="section-number">5. </span>Developing FCCSW</a> &raquo;</li>
+      <li><span class="section-number">5.5. </span>Guide to the Transition of FCCSW to EDM4hep</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/developing-fcc-software/Edm4hepTransition.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="guide-to-the-transition-of-fccsw-to-edm4hep">
+<h1><span class="section-number">5.5. </span>Guide to the Transition of FCCSW to EDM4hep<a class="headerlink" href="#guide-to-the-transition-of-fccsw-to-edm4hep" title="Permalink to this heading"></a></h1>
+<p>For the studies of the Conceptual Design Report, FCC software used its own datamodel, <a class="reference external" href="https://github.com/hep-fcc/fccedm">FCCEDM</a>.
+The technical implementation was based on a novel library called <a class="reference external" href="https://github.com/aidasoft/podio">PODIO</a>, and tries to use “Plain Old Data” to achieve thread safety and general ease of use.</p>
+<p>While FCCEDM has served its purpose, continued use has revealed some minor issues, inconsistencies and impracticalities (see <a class="reference external" href="https://github.com/HEP-FCC/fcc-edm/issues?q=is%3Aissue+">here</a> and <a class="reference external" href="https://fccsw-forum.web.cern.ch/t/event-data-model-discussion/32">here</a>).
+Since then, FCC has joined a common software effort with other Future Collider Communities, and decided to base the common software (<a class="reference external" href="https://cern.ch/key4hep">Key4HEP</a>) on a new, common datamodel (<a class="reference external" href="https://github.com/key4hep/edm4hep">EDM4HEP</a>).</p>
+<p>The types defined by EDM4HEP are somewhat closer to <a class="reference external" href="https://github.com/ilcsoft/lcio">LCIO</a>, but like FCCEDM it is implemented with PODIO.
+In any case, the transition, while time-intensive, is no major technical challenge, and provides the basis for a common experiment software beyond FCC.</p>
+<p>This document should guide users and developers through the transition.</p>
+<p>EDM4HEP and FCCEDM can coexist, but for a frictionless transition, FCCEDM should be replaced completely as soon as possible.</p>
+<p>The following sections focus on the Gaudi-based framework FCCSW and explain how to transition the components of the datamodel.
+The latest developments can be found on <a class="reference external" href="https://github.com/HEP-FCC/FCCSW/tree/edm4hep">this branch</a> (PRs welcome).</p>
+<section id="technical-information">
+<h2><span class="section-number">5.5.1. </span>Technical Information<a class="headerlink" href="#technical-information" title="Permalink to this heading"></a></h2>
+<section id="build-system">
+<h3><span class="section-number">5.5.1.1. </span>Build System<a class="headerlink" href="#build-system" title="Permalink to this heading"></a></h3>
+<p>EDM4HEP ships a CMake configuration (in uppercase: <code class="docutils literal notranslate"><span class="pre">EDM4HEPConfig.cmake</span></code>) that defines CMake Targets (in lowercase: <code class="docutils literal notranslate"><span class="pre">EDM4HEP::edm4hep</span></code>).
+To include and link edm4hep, it is sufficient to add the following to the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> of an example project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="n">find_package</span><span class="p">(</span><span class="n">EDM4HEP</span><span class="p">)</span>
+
+ <span class="n">gaudi_add_module</span><span class="p">(</span><span class="n">ExampleModule</span>
+                  <span class="n">src</span><span class="o">/</span><span class="n">components</span><span class="o">/*.</span><span class="n">cpp</span>
+                  <span class="n">INCLUDE_DIRS</span> <span class="c1"># nothing needs to be added here, the target defines the includes</span>
+                  <span class="n">LINK_LIBRARIES</span> <span class="n">EDM4HEP</span><span class="p">::</span><span class="n">edm4hep</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="component-source-code">
+<h3><span class="section-number">5.5.1.2. </span>Component source Code<a class="headerlink" href="#component-source-code" title="Permalink to this heading"></a></h3>
+<p>The code now can be adapted changing any mention of <code class="docutils literal notranslate"><span class="pre">datamodel</span></code> to <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code> and converting the types:</p>
+<section id="generation-mcparticles">
+<h4><span class="section-number">5.5.1.2.1. </span>Generation / MCParticles<a class="headerlink" href="#generation-mcparticles" title="Permalink to this heading"></a></h4>
+<p>FCCEDM had several types to describe particles at the Generator Level: <code class="docutils literal notranslate"><span class="pre">GenParticle</span></code>, <code class="docutils literal notranslate"><span class="pre">GenVertex</span></code> and <code class="docutils literal notranslate"><span class="pre">GenJet</span></code>.
+The mother/daughter relationship was encoded in the vertices; A particle and its decay product were supposed to share one vertex object (the mother particle as its endvertex, the daughter particle as its startvertex). A library for creating directed acyclic graphs was supposed to help deal with this slightly cumbersome system, but was not really used in practice.</p>
+<p>EDM4HEP replaces this by the single type <code class="docutils literal notranslate"><span class="pre">MCParticle</span></code>. This contains the vertex information, and Jets are generally treated as particles in EDM4hep.</p>
+<p>The correspondence is fairly direct:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>EDM4HEP</p></td>
+<td><p>FCCEDM</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCParticle</p></td>
+<td><p>MCParticle/GenVertex/GenJet</p></td>
+</tr>
+<tr class="row-even"><td><p>PDG</p></td>
+<td><p>core.pdgId</p></td>
+</tr>
+<tr class="row-odd"><td><p>generatorStatus</p></td>
+<td><p>core.status</p></td>
+</tr>
+<tr class="row-even"><td><p>charge</p></td>
+<td><p>charge</p></td>
+</tr>
+<tr class="row-odd"><td><p>time</p></td>
+<td><p>startVertex.ctau # Note the unit differences!</p></td>
+</tr>
+<tr class="row-even"><td><p>vertex</p></td>
+<td><p>startVertex.position</p></td>
+</tr>
+<tr class="row-odd"><td><p>endpoint</p></td>
+<td><p>endVertex.position</p></td>
+</tr>
+<tr class="row-even"><td><p>momentum, mass</p></td>
+<td><p>core.p4</p></td>
+</tr>
+<tr class="row-odd"><td><p>momentumAtEndpoint</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>spin</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>colorFlow</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="job-options">
+<h3><span class="section-number">5.5.1.3. </span>Job options<a class="headerlink" href="#job-options" title="Permalink to this heading"></a></h3>
+<p>As the GenVertex type is no longer an independent type in edm4hep, any components that used to write GenParticles and GenVertices need to be adapted (the opportunity was used to also update the spelling from <code class="docutils literal notranslate"><span class="pre">genparticles</span></code> to <code class="docutils literal notranslate"><span class="pre">GenParticles</span></code> for the Gaudi data property):</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">- hepmc_converter.genparticles.Path=&quot;allGenParticles&quot;</span>
+<span class="gd">- hepmc_converter.genvertices.Path=&quot;allGenVertices&quot;</span>
+<span class="gi">+ hepmc_converter.GenParticles.Path=&quot;allGenParticles&quot;</span>
+</pre></div>
+</div>
+<p>The configuration for the SimG4SaveSmearedParticles tool needs to be adapted in the following way:</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">- from Configurables import SimG4SaveSmearedParticles</span>
+<span class="gd">- saveparticlestool = SimG4SaveSmearedParticles(&quot;saveSmearedParticles&quot;)</span>
+<span class="gd">- saveparticlestool.particles.Path = &quot;smearedParticles&quot;</span>
+<span class="gd">- saveparticlestool.particlesMCparticles.Path = &quot;particleMCparticleAssociation&quot;</span>
+<span class="gi">+ saveparticlestool.RecParticles.Path = &quot;smearedParticles&quot;</span>
+<span class="gi">+ saveparticlestool.MCRecoParticleAssoc.Path = &quot;particleMCparticleAssociation&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">- particle_converter = SimG4PrimariesFromEdmTool(&quot;EdmConverter&quot;)</span>
+<span class="gd">- particle_converter.genParticles.Path = &quot;allGenParticles&quot;</span>
+<span class="gi">+ particle_converter.GenParticles.Path = &quot;allGenParticles&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="DevelopingDD4hep.html" class="btn btn-neutral float-left" title="5.4. Developing DD4hep Detector models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="FccDocPage.html" class="btn btn-neutral float-right" title="5.6. Writing documentation for the FCC software" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: cern2022
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../master/index.html">master</a></dd>
+      <dd><a href="../../bnl2023/index.html">bnl2023</a></dd>
+      <dd><a href="Edm4hepTransition.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

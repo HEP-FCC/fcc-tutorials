@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.5. FCCAnalyses: Common problems and solutions &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.6. Central production of events" href="EventProduction.html" />
+    <link rel="prev" title="2.4. FCC: tracking and vertexing example using specific flavour decays" href="fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">2. Generators, Fast Simulation and Analysis</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FccFastSimGeneration.html">2.1. FCC: Getting started with event generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html">2.2. FCC: Getting started with simulating events in Delphes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.html">2.3. FCC: Getting started with analysing simulated events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html">2.4. FCC: tracking and vertexing example using specific flavour decays</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.5. FCCAnalyses: Common problems and solutions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">2.5.1. Prerequisites</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#edm4hep-event-model">2.5.1.1. EDM4HEP event model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#structure-of-edm4hep-files">2.5.1.2. Structure of EDM4HEP files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#overall-organisation-of-analysis-code-c">2.5.2. Overall organisation of analysis code (C++)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-objects-from-edm4hep">2.5.3. Reading objects from EDM4HEP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#association-between-recoparticles-and-montecarloparticles">2.5.4. Association between RecoParticles and MonteCarloParticles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#navigation-through-the-history-of-the-montecarloparticles">2.5.5. Navigation through the history of the MonteCarloParticles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-a-new-function">2.5.6. Writing a new function</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#inline">2.5.6.1. Inline</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-root-ginterpreter">2.5.6.2. Using ROOT gInterpreter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inside-an-existing-fccanalyses-namespace">2.5.6.3. Inside an existing FCCAnalyses namespace</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-a-new-struct">2.5.7. Writing a new struct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-a-new-namespace">2.5.8. Writing a new namespace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-your-own-analysis-using-the-case-studies-generator">2.5.9. Writing your own analysis using the case-studies generator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#analysis-package-generation">2.5.9.1. Analysis package generation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#analysis-package-exposure-to-rdf">2.5.9.2. Analysis package exposure to RDF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="EventProduction.html">2.6. Central production of events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">3. Full Detector Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="README.html"><span class="section-number">2. </span>Generators, Fast Simulation and Analysis</a> &raquo;</li>
+      <li><span class="section-number">2.5. </span>FCCAnalyses: Common problems and solutions</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/fast-sim-and-analysis/FCCAnalysesProblemsAndSolutions.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="fccanalyses-common-problems-and-solutions">
+<h1><span class="section-number">2.5. </span>FCCAnalyses: Common problems and solutions<a class="headerlink" href="#fccanalyses-common-problems-and-solutions" title="Permalink to this heading"></a></h1>
+<p>This directory contains a number of examples each showcasing a specific functionality of the FCCAnalyses framework. It serves as a reference guide for how to implement specific common usecases or you can work through the examples one-by-one in order as a tutorial to familiarize yourself with the full functionality of the framework.</p>
+<p>Each example is a stand-alone script for demonstration purposes, and does not make assumptions on a specific physics case. To understand how to write a full analysis with the FCCAnalyses framework please have a look at (insert a link to documentation about code class-structure) - the examples here only illustrate specific technical functionalities.</p>
+<p>By calling <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">&lt;example&gt;.py</span></code> you can run the specific example over the integrated test file found (add the testdata directory), and it will create a new directory in your current working directory with the name of the example to write the output to. If you prefer to run over your own input file or a different output directory you can run with options:</p>
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">&lt;example&gt;.py</span> <span class="pre">-i</span> <span class="pre">&lt;path_to_your_inputfile&gt;</span> <span class="pre">-o</span> <span class="pre">&lt;path_to_your_outputdir&gt;</span></code></p>
+<p>Certain examples may have additional options, you can always check what options are available with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">&lt;example&gt;.py</span> <span class="pre">-h</span></code>.</p>
+<section id="prerequisites">
+<h2><span class="section-number">2.5.1. </span>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
+<p>The FCCAnalyses framework is based on the <a class="reference external" href="https://root.cern/doc/master/classROOT_1_1RDataFrame.html">RDataFrame</a> interface which allows fast and efficient analysis of <a class="reference external" href="https://root.cern/doc/master/classTTree.html">ROOT’s TTrees</a> and on samples following the <a class="reference external" href="https://edm4hep.web.cern.ch/">EDM4HEP event data model</a>. Some brief explanations and links to further material on the two are given below, a basic understanding of both is necessary for using this framework to write your own analysis code.</p>
+<section id="edm4hep-event-model">
+<h3><span class="section-number">2.5.1.1. </span>EDM4HEP event model<a class="headerlink" href="#edm4hep-event-model" title="Permalink to this heading"></a></h3>
+<p><a class="reference external" href="https://edm4hep.web.cern.ch/namespaceedm4hep.html">Link to EDM4HEP class overview</a></p>
+<p>(to add brief intro/pointers)</p>
+</section>
+<section id="structure-of-edm4hep-files">
+<h3><span class="section-number">2.5.1.2. </span>Structure of EDM4HEP files<a class="headerlink" href="#structure-of-edm4hep-files" title="Permalink to this heading"></a></h3>
+<p>The content of an EDM4HEP file can be seen by opening it in ROOT, and by inspecting the content of the “events” tree with a TBrowser.
+Example with  a file from the “spring2021” campaign :</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>root<span class="w"> </span>-l<span class="w"> </span>/eos/experiment/fcc/ee/generation/DelphesEvents/spring2021/IDEA/wzp6_ee_mumuH_ecm240/events_012879310.root
+root<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>TBrowser<span class="w"> </span>b
+</pre></div>
+</div>
+<p><br/><br/></p>
+<figure class="align-default">
+<img alt="../_images/browser_events.png" class="with-border" src="../_images/browser_events.png" />
+</figure>
+<p><br/><br/></p>
+<p>As shown in the screenshot above, there are two types of branches:</p>
+<ol class="arabic simple">
+<li><p>Branches without a pound <code class="docutils literal notranslate"><span class="pre">#</span></code> in their name like:  <code class="docutils literal notranslate"><span class="pre">Electron</span></code>, <code class="docutils literal notranslate"><span class="pre">Muon</span></code>. They refer to collections of objects.</p></li>
+</ol>
+<div class="callout admonition">
+<p class="admonition-title">Nota Bene</p>
+<p><code class="docutils literal notranslate"><span class="pre">Particle</span></code> denotes the collection of Monte-Carlo particles. <code class="docutils literal notranslate"><span class="pre">Muon</span></code> contains the isolated muons, while <code class="docutils literal notranslate"><span class="pre">AllMuon</span></code> contains all muons, isolated or not.</p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Branches with a pound in their name:  Each of the object collections listed above, e.g. <code class="docutils literal notranslate"><span class="pre">Collection</span></code>, has up to six associated collections of references, i.e. indices that point to another or to the same object collection. They are labeled <code class="docutils literal notranslate"><span class="pre">Collection#i</span></code>, with <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">0</span> <span class="pre">...</span> <span class="pre">5</span></code>. For example, the <code class="docutils literal notranslate"><span class="pre">Muon</span></code> collection has one single associated collection of references, <code class="docutils literal notranslate"><span class="pre">Muon#0</span></code>.</p></li>
+</ol>
+<p>To figure out which collection is pointed to by <code class="docutils literal notranslate"><span class="pre">Muon#0</span></code> (or by any other collection of references), one can look at the value of <code class="docutils literal notranslate"><span class="pre">Muon#0.collectionID</span></code> (see screenshot below).
+The <code class="docutils literal notranslate"><span class="pre">collectionID</span></code> of <code class="docutils literal notranslate"><span class="pre">Muon#0</span></code> is the collection number 7 (in the example file used here), which, in the list of “object collections” above, corresponds to the collection of <code class="docutils literal notranslate"><span class="pre">ReconstructedParticles</span></code>.
+Indeed, the <code class="docutils literal notranslate"><span class="pre">Muon</span></code> collection itself contains nothing (see screenshot below): all the information is contained in the <code class="docutils literal notranslate"><span class="pre">ReconstructedParticles</span></code>. The <code class="docutils literal notranslate"><span class="pre">Muon</span></code> collection,
+together with <code class="docutils literal notranslate"><span class="pre">Muon#0</span></code>, just provides a convenient way to access, among the <code class="docutils literal notranslate"><span class="pre">ReconstructedParticles</span></code>, those that were identified as muons.</p>
+<p><br/><br/></p>
+<figure class="align-default">
+<img alt="../_images/browser_Muon0.png" class="with-border" src="../_images/browser_Muon0.png" />
+</figure>
+<p><br/><br/></p>
+<p>The same holds for the <code class="docutils literal notranslate"><span class="pre">Electron</span></code> and <code class="docutils literal notranslate"><span class="pre">Photon</span></code> collections. On the other hand, the <code class="docutils literal notranslate"><span class="pre">MissingET</span></code> collection is already a <code class="docutils literal notranslate"><span class="pre">ReconstructedParticle</span></code>, as can be seen by inspecting it in the browser:</p>
+<p><br/><br/></p>
+<figure class="align-default">
+<img alt="../_images/browser_missingET.png" class="with-border" src="../_images/browser_missingET.png" />
+</figure>
+<p><br/><br/></p>
+<p>The “Particle” collection corresponds to the Monte-Carlo particles. It has two associated collections of references, Particle#0 and Particle#1. As can
+be seen by looking at their collectionID, they both point to collection number 5, i.e.  to the Particle collection itself. Particle#0 and
+Particle#1 contain, respectively, links to the parents and to the daughters of the MC particles - as can be seen in the <a class="reference external" href="https://github.com/key4hep/EDM4hep/blob/master/edm4hep.yaml#L118-L119">edm4hep yaml description here</a>.
+Examples will be given below, showing how to navigate through the Monte-Carlo record using Particle, Particle#0 and Particle#1.</p>
+</section>
+</section>
+<section id="overall-organisation-of-analysis-code-c">
+<h2><span class="section-number">2.5.2. </span>Overall organisation of analysis code (C++)<a class="headerlink" href="#overall-organisation-of-analysis-code-c" title="Permalink to this heading"></a></h2>
+<p>All the common code lives in <code class="docutils literal notranslate"><span class="pre">FCCAnalyses</span></code> namespace which is by default loaded when running <code class="docutils literal notranslate"><span class="pre">fccanalysis</span></code>. Then each class has his dedicated namespace, thus to call a given function from a given class it should look like <code class="docutils literal notranslate"><span class="pre">FCCAnalyses::&lt;ClassName&gt;::&lt;FunctionName&gt;</span></code> but <code class="docutils literal notranslate"><span class="pre">&lt;ClassName&gt;::&lt;FunctionName&gt;</span></code> should also work. For example, to call <code class="docutils literal notranslate"><span class="pre">get_px</span></code> from the <code class="docutils literal notranslate"><span class="pre">ReconstructedParticle</span></code> class <code class="docutils literal notranslate"><span class="pre">ReconstructedParticle::get_px(&lt;BranchName&gt;)</span></code></p>
+</section>
+<section id="reading-objects-from-edm4hep">
+<h2><span class="section-number">2.5.3. </span>Reading objects from EDM4HEP<a class="headerlink" href="#reading-objects-from-edm4hep" title="Permalink to this heading"></a></h2>
+<p>The example <a class="reference external" href="https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/basics/read_EDM4HEP.py">read_EDM4HEP.py</a> shows you how to access the different objects such as jets, electrons, muons, missing ET etc. from the EDM4HEP files. Generally a new variable is calculated with a statement inside the <code class="docutils literal notranslate"><span class="pre">analysers(df)</span></code> function of the <code class="docutils literal notranslate"><span class="pre">RDFanalysis</span></code> class like
+<code class="docutils literal notranslate"><span class="pre">dataframe.Define(&quot;&lt;your_variable&gt;&quot;,</span> <span class="pre">&quot;&lt;accessor_fct</span> <span class="pre">(&lt;name_object&gt;)&gt;&quot;)</span></code>
+which creates a column in the RDataFrame named <code class="docutils literal notranslate"><span class="pre">&lt;your_variable&gt;</span></code> and filled with the return value of the <code class="docutils literal notranslate"><span class="pre">&lt;accessor_fct&gt;</span></code> for the given object.</p>
+<p>Here, accessor functions are the functions found in the C++ analyzers code that return a certain variable. Since the analyzers code defines a specific namespace for each module, such as ReconstructedParticle or MCParticle, the full accessor function call looks like <code class="docutils literal notranslate"><span class="pre">&lt;namespace&gt;::&lt;function_name&gt;(object)</span></code>. To access the pT of a reconstructed object you would therefore call <code class="docutils literal notranslate"><span class="pre">ReconstructedParticle::get_pt(object)</span></code> and for a MC-particle the call would be <code class="docutils literal notranslate"><span class="pre">MCParticle::get_pt(object)</span></code>. The namespace corresponds to the file name of the C++ code, making it clear where to look for the source code if you have a question about the internal workings of one such functions.</p>
+<p>Below you can find an overview of the basic, most commonly required functions, to illustrate the naming conventions. This is not an exhaustive list, if you want to find out all functions that are available please take a look in the respective analyzers code itself - <a class="reference external" href="https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/FCCAnalyses/ReconstructedParticle.h">here for reconstructed particles</a> and <a class="reference external" href="https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/FCCAnalyses/MCParticle.h">here for MC particles</a>.</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Function name</p></th>
+<th class="head"><p>Available for</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Transverse momentum</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_pt(object)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MCParticle</span></code>, <code class="docutils literal notranslate"><span class="pre">ReconstructedParticle</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Pseudorapidity</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_eta(object)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MCParticle</span></code>, <code class="docutils literal notranslate"><span class="pre">ReconstructedParticle</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Energy</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_e(object)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MCParticle</span></code>, <code class="docutils literal notranslate"><span class="pre">ReconstructedParticle</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Mass</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_mass(object)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MCParticle</span></code>, <code class="docutils literal notranslate"><span class="pre">ReconstructedParticle</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Charge</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_charge(object)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MCParticle</span></code>, <code class="docutils literal notranslate"><span class="pre">ReconstructedParticle</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Number (in event)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_n(object)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MCParticle</span></code>, <code class="docutils literal notranslate"><span class="pre">ReconstructedParticle</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>PDG ID</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_pdg(object)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MCParticle</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>If you want to add your own function have a look at the <a class="reference internal" href="#writing-a-new-function"><span class="std std-doc">Writing a new function</span></a> section on this page.</p>
+<p>For the name of the object, in principle the names of the EDM4HEP collections are used - photons, muons and electrons are an exception where a few extra steps are required, as shown in the example here.</p>
+<p>This example also shows how to apply object selection cuts, for example selecting only reconstructed objects with a transverse momentum pT larger than a given threshold by using the <code class="docutils literal notranslate"><span class="pre">ReconstructedParticle::sel_pt(&lt;threshold&gt;)(&lt;name_object&gt;)</span></code> function.</p>
+<p>In the end of the example you can see how the selected variables are written to branches of the output n-tuple, using the <code class="docutils literal notranslate"><span class="pre">dataframe.Snapshot(&quot;&lt;tree_name&gt;&quot;,</span> <span class="pre">&lt;branch_list&gt;</span> <span class="pre">)</span></code>, where in all examples here the name of the output-tree is always <code class="docutils literal notranslate"><span class="pre">events</span></code> and the branch_list is defined as a <code class="docutils literal notranslate"><span class="pre">ROOT.vector('string')</span></code> as demonstrated in the example. Note that branches of variables that exist multiple times per event, i.e. anything derived from a collection such as the pT of jets, result in vector branches. This is also true for some quantities that in principle only exist once per event, but are collections in the EDM4HEP format, such as the missing transverse energy.</p>
+</section>
+<section id="association-between-recoparticles-and-montecarloparticles">
+<h2><span class="section-number">2.5.4. </span>Association between RecoParticles and MonteCarloParticles<a class="headerlink" href="#association-between-recoparticles-and-montecarloparticles" title="Permalink to this heading"></a></h2>
+<p>By design, the association between the reconstructed particles and the Monte-Carlo particles proceeds via the <code class="docutils literal notranslate"><span class="pre">MCRecoAssociations</span></code> collection, and its two
+associated  collections of references, <code class="docutils literal notranslate"><span class="pre">MCRecoAssociations#0</span></code> and <code class="docutils literal notranslate"><span class="pre">MCRecoAssociations#1</span></code>, all of the same size. The collectionID of <code class="docutils literal notranslate"><span class="pre">MCRecoAssociations#0</span></code> is equal to 7 in the example file used here (see above, “Structure of EDM4Hep files”), which means
+that <code class="docutils literal notranslate"><span class="pre">MCRecoAssociations#0</span></code> points to the <code class="docutils literal notranslate"><span class="pre">ReconstructedParticles</span></code>. While the collectionID of <code class="docutils literal notranslate"><span class="pre">MCRecoAssociations#1</span></code> is equal to 5, i.e.
+<code class="docutils literal notranslate"><span class="pre">MCRecoAssociations#1</span></code> points to the Particle collection (i.e. the Monte-Carlo particles).</p>
+<p>Their usage is best understood by looking into the code of <a class="reference external" href="https://github.com/HEP-FCC/FCCAnalyses/blob/96c132c452469d4f66c8752c0397ba542d61cf75/analyzers/dataframe/src/ReconstructedParticle2MC.cc#L126-L136">ReconstructedParticle2MC::getRP2MC_index</a> reported below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ROOT</span><span class="p">::</span><span class="n">VecOps</span><span class="p">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span>
+<span class="n">ReconstructedParticle2MC</span><span class="p">::</span><span class="n">getRP2MC_index</span><span class="p">(</span><span class="n">const</span> <span class="n">ROOT</span><span class="p">::</span><span class="n">VecOps</span><span class="p">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;&amp;</span> <span class="n">recind</span><span class="p">,</span>
+					 <span class="n">const</span> <span class="n">ROOT</span><span class="p">::</span><span class="n">VecOps</span><span class="p">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;&amp;</span> <span class="n">mcind</span><span class="p">,</span>
+					 <span class="n">const</span> <span class="n">ROOT</span><span class="p">::</span><span class="n">VecOps</span><span class="p">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="p">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;&amp;</span> <span class="n">reco</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">ROOT</span><span class="p">::</span><span class="n">VecOps</span><span class="p">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>
+  <span class="n">result</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">reco</span><span class="o">.</span><span class="n">size</span><span class="p">(),</span><span class="o">-</span><span class="mf">1.</span><span class="p">);</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">recind</span><span class="o">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">result</span><span class="p">[</span><span class="n">recind</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="n">mcind</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>	<span class="c1"># recind.at(i) is the index of a reco&#39;ed particle in the ReconstructedParticles collection</span>
+					<span class="c1"># mcind.at(i) is the index of its associated MC particle, in the Particle collection</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>which, in a FCCAnalyses configuration file, will be called via :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;MCRecoAssociations0&quot;</span><span class="p">,</span> <span class="s2">&quot;MCRecoAssociations#0.index&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;MCRecoAssociations1&quot;</span><span class="p">,</span> <span class="s2">&quot;MCRecoAssociations#1.index&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s1">&#39;RP_MC_index&#39;</span><span class="p">,</span>        <span class="s2">&quot;ReconstructedParticle2MC::getRP2MC_index(MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(the first two <code class="docutils literal notranslate"><span class="pre">Alias</span></code> lines are needed for <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> to understand the pound <code class="docutils literal notranslate"><span class="pre">#</span></code> sign).</p>
+<p>The method <code class="docutils literal notranslate"><span class="pre">getRP2MC_index</span></code> creates a vector that maps the reconstructed particles and the MC particles:
+<code class="docutils literal notranslate"><span class="pre">RP_MC_index[</span> <span class="pre">ireco</span> <span class="pre">]</span> <span class="pre">=</span> <span class="pre">imc</span></code> ,  where <code class="docutils literal notranslate"><span class="pre">ireco</span></code> is the index of a reco’ed particle in the ReconstructedParticle collection, and imc is the index, in the Particle collection, of its associated MC particle.</p>
+<p><strong>Careful:</strong> as can be seen from the code, the method <code class="docutils literal notranslate"><span class="pre">getRP2MC_index</span></code> must be passed <strong>the full collection</strong>, ReconstructedParticles, and <strong>not</strong> a subset of reco’ed particles.
+To retrieve the associated MC particle of one reco’ed particle, or of a subset of reco’ed particles, one should have kept track of the indices of these
+particles in the <code class="docutils literal notranslate"><span class="pre">ReconstructedParticles</span></code> collection. It can be a good practise to design analyses that primarily use indices of RecoParticles, instead of the RecoParticles themselves.
+However, for a charged reco’ed particle RecoPart, one can also use the following workaround:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">track_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RecoPart</span><span class="p">.</span><span class="n">tracks_begin</span><span class="w"> </span><span class="p">;</span><span class="w">   </span><span class="c1">// index in the Track array</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">mc_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ReconstructedParticle2MC</span><span class="o">::</span><span class="n">getTrack2MC_index</span><span class="p">(</span><span class="w"> </span><span class="n">track_index</span><span class="p">,</span><span class="w"> </span><span class="n">recind</span><span class="p">,</span><span class="w"> </span><span class="n">mcind</span><span class="p">,</span><span class="w"> </span><span class="n">reco</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">recind</span></code> refers to <code class="docutils literal notranslate"><span class="pre">MCRecoAssociations0</span></code>, <code class="docutils literal notranslate"><span class="pre">mcind</span></code> to <code class="docutils literal notranslate"><span class="pre">MCRecoAssociations1</span></code>, and <code class="docutils literal notranslate"><span class="pre">reco</span></code> to <code class="docutils literal notranslate"><span class="pre">ReconstructedParticles</span></code>.</p>
+</section>
+<section id="navigation-through-the-history-of-the-montecarloparticles">
+<h2><span class="section-number">2.5.5. </span>Navigation through the history of the MonteCarloParticles<a class="headerlink" href="#navigation-through-the-history-of-the-montecarloparticles" title="Permalink to this heading"></a></h2>
+<p>To retrieve the <strong>daughters</strong> of a Monte-Carlo particle (in the <code class="docutils literal notranslate"><span class="pre">Particle</span></code> collection), one should use the
+collection of references to daughters (<code class="docutils literal notranslate"><span class="pre">Particle#1</span></code>, which points to <code class="docutils literal notranslate"><span class="pre">Particles</span></code>), together with the <code class="docutils literal notranslate"><span class="pre">Particle</span></code> collection itself.</p>
+<p>Each particle in the <code class="docutils literal notranslate"><span class="pre">Particle</span></code> collection contains two integers, <code class="docutils literal notranslate"><span class="pre">daughters_begin</span></code> and <code class="docutils literal notranslate"><span class="pre">daughter_end</span></code>.
+The indices, in the <code class="docutils literal notranslate"><span class="pre">Particle</span></code> collection, of the daughters of the particle are stored in <code class="docutils literal notranslate"><span class="pre">Particle#1</span></code>, between
+<code class="docutils literal notranslate"><span class="pre">daughters_begin</span></code> and <code class="docutils literal notranslate"><span class="pre">daughter_end</span></code>. This is illustrated in the code of <a class="reference external" href="https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/src/MCParticle.cc#L481">MCParticle::get_list_of_daughters_from_decay</a> reported below:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MCParticle</span><span class="o">::</span><span class="n">get_list_of_particles_from_decay</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span>
+<span class="w">                                                              </span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">MCParticleData</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">in</span><span class="p">,</span>
+<span class="w">                                                              </span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">ind</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// i = index of a MC particle in the Particle block</span>
+<span class="w">  </span><span class="c1">// in = the Particle collection</span>
+<span class="w">  </span><span class="c1">// ind = the block with the indices for the daughters, Particle#1.index</span>
+
+<span class="w">  </span><span class="c1">// returns a vector with the indices (in the Particle block) of the daughters of the particle i</span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">daughters_begin</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">daughters_end</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w">  </span><span class="p">(</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span><span class="w">   </span><span class="c1">// particle is stable</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="p">;</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">de</span><span class="p">;</span><span class="w"> </span><span class="n">id</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="w"> </span><span class="n">ind</span><span class="p">[</span><span class="n">id</span><span class="p">]</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This returns the “first branching” daughters. For example, if we have a Higgs that decays into ZZ*, with both Z’s decaying into muons, the method <code class="docutils literal notranslate"><span class="pre">get_list_of_daughters_from_decay</span></code>, applied to i = the index of the Higgs, returns the indices of the two Z’s in the Particle collection.
+In order to retrieve the indices of the four muons, use instead <a class="reference external" href="https://github.com/HEP-FCC/FCCAnalyses/blob/9937fe77e5702b30d53b5e364b3fa6a4b134197c/analyzers/dataframe/src/MCParticle.cc#L447">MCParticle::get_list_of_stable_daughters_from_decay</a></p>
+<p>These functions are not meant to be called directly from the python configuration file, but from some other function that will determine the value of the argument “i”. See an example <a class="reference external" href="https://github.com/HEP-FCC/FCCeePhysicsPerformance/blob/069b633ab06126546daa0b0ba4719342096a9a4a/case-studies/flavour/VertexExamples/analysis_Bs2DsK.py#L63">here</a> in FCCeePhysicsPerformance, the important lines being:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;Particle1&quot;</span><span class="p">,</span> <span class="s2">&quot;Particle#1.index&quot;</span><span class="p">)</span>
+<span class="c1"># MC indices of the decay Bs -&gt; Ds+ K-</span>
+<span class="c1"># In the file I process, only the Bs0 (not the Bsbar) has been forced to decay into Ds+ K-</span>
+<span class="c1"># Look for (Ds+ K-) in the list of unstable decays of a Bs - hence oscillations are</span>
+<span class="c1"># not accounted for. So there should be at most one such decay per event. In any case,</span>
+<span class="c1"># would there be &gt; 1, the method gives the first one encountered.</span>
+<span class="c1"># Returns the indices of : mother Bs, Ds+, K-</span>
+
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;Bs2DsK_indices&quot;</span><span class="p">,</span> <span class="s2">&quot;MCParticle::get_indices_ExclusiveDecay( -531, {431, -321}, false, false) ( Particle, Particle1)&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Again, the first line is needed for RootDataFrame to interpret correctly the pound sign.</p>
+<p>To retrieve the <strong>parents</strong> of a Monte-Carlo particle: the logics is the same, one should use <code class="docutils literal notranslate"><span class="pre">parents_begin</span></code> and <code class="docutils literal notranslate"><span class="pre">parents_end</span></code>, which point to the <code class="docutils literal notranslate"><span class="pre">Particle#0</span></code> collection.</p>
+</section>
+<section id="writing-a-new-function">
+<h2><span class="section-number">2.5.6. </span>Writing a new function<a class="headerlink" href="#writing-a-new-function" title="Permalink to this heading"></a></h2>
+<section id="inline">
+<h3><span class="section-number">2.5.6.1. </span>Inline<a class="headerlink" href="#inline" title="Permalink to this heading"></a></h3>
+<p>With RDataFrame it is possible to define functions inline, like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;myvec&quot;</span><span class="p">,</span> <span class="s2">&quot;ROOT::VecOps::RVec&lt;int&gt; v; for (int i : { 1, 2, 3, 4, 5, 6, 7 }) v.push_back(i); return v;&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;myvecsize&quot;</span><span class="p">,</span> <span class="s2">&quot;myvec.size()&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="using-root-ginterpreter">
+<h3><span class="section-number">2.5.6.2. </span>Using ROOT gInterpreter<a class="headerlink" href="#using-root-ginterpreter" title="Permalink to this heading"></a></h3>
+<p>It is also possible to define code using the ROOT gInterpreter</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ROOT</span><span class="p">.</span><span class="n">gInterpreter</span><span class="p">.</span><span class="n">Declare</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">myRange</span><span class="p">(</span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">vec</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">end</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="w">   </span><span class="n">ret</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">begin</span><span class="p">);</span>
+<span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">begin</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">end</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">      </span><span class="n">ret</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="s">&quot;&quot;&quot;)</span>
+</pre></div>
+</div>
+<p>and then call it in the <code class="docutils literal notranslate"><span class="pre">Define</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;mysubvec&quot;</span><span class="p">,</span> <span class="s2">&quot;myRange(myvec, 2, 4)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="inside-an-existing-fccanalyses-namespace">
+<h3><span class="section-number">2.5.6.3. </span>Inside an existing FCCAnalyses namespace<a class="headerlink" href="#inside-an-existing-fccanalyses-namespace" title="Permalink to this heading"></a></h3>
+<p>When you believe you need to develop a new function within an existing FCCAnalyses namespace, you should proceed as follow:
+In the corresponding header file in <code class="docutils literal notranslate"><span class="pre">analyzers/dataframe/FCCAnalyses</span></code> you should add the definition of your function, for example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">/// Get the invariant mass from a list of reconstructed particles</span>
+<span class="kt">float</span><span class="w"> </span><span class="nf">getMass</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">in</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In the corresponding source file in <code class="docutils literal notranslate"><span class="pre">analyzers/dataframe/src</span></code> you should add the implementation of your function, for example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="nf">getMass</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">in</span><span class="p">){</span>
+<span class="w">  </span><span class="n">ROOT</span><span class="o">::</span><span class="n">Math</span><span class="o">::</span><span class="n">LorentzVector</span><span class="o">&lt;</span><span class="n">ROOT</span><span class="o">::</span><span class="n">Math</span><span class="o">::</span><span class="n">PxPyPzE4D</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">p</span><span class="o">:</span><span class="w"> </span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ROOT</span><span class="o">::</span><span class="n">Math</span><span class="o">::</span><span class="n">LorentzVector</span><span class="o">&lt;</span><span class="n">ROOT</span><span class="o">::</span><span class="n">Math</span><span class="o">::</span><span class="n">PxPyPzE4D</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span>
+<span class="w">    </span><span class="n">tmp</span><span class="p">.</span><span class="n">SetPxPyPzE</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">momentum</span><span class="p">.</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">energy</span><span class="p">);</span>
+<span class="w">    </span><span class="n">result</span><span class="o">+=</span><span class="n">tmp</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">M</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that for efficiency, the arguments should be passed as const reference.</p>
+<p>If your code is simple enough, it can also be only added in the header file <code class="docutils literal notranslate"><span class="pre">inline</span></code> and even templated, for example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w">  </span><span class="n">as_vector</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">in</span><span class="p">);};</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="writing-a-new-struct">
+<h2><span class="section-number">2.5.7. </span>Writing a new struct<a class="headerlink" href="#writing-a-new-struct" title="Permalink to this heading"></a></h2>
+<p>When you believe you need to develop a new struct within an existing namespace, you should proceed as follow:
+In the header file in <code class="docutils literal notranslate"><span class="pre">analyzers/dataframe/FCCAnalyses</span></code> you should add a <code class="docutils literal notranslate"><span class="pre">struct</span></code> or a <code class="docutils literal notranslate"><span class="pre">class</span></code> like:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">/// Get the number of particles in a given hemisphere (defined by it&#39;s angle wrt to axis). Returns 3 values: total, charged, neutral multiplicity</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">getAxisN</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="n">getAxisN</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">arg_pos</span><span class="o">=</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">  </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="k">operator</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">angle</span><span class="p">,</span>
+<span class="w">                                      </span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">charge</span><span class="p">);</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">_pos</span><span class="p">;</span><span class="w"> </span><span class="c1">/// Which hemisphere to select, false/0=cosTheta&lt;0 true/1=cosTheta&gt;0. Default=0</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>where the <code class="docutils literal notranslate"><span class="pre">public</span></code> members should contain the name of the function with the constructor arguments (in this example <code class="docutils literal notranslate"><span class="pre">getAxisN</span></code>) and the <code class="docutils literal notranslate"><span class="pre">operator()</span></code> that correspond to the function that will be evaluated for each event and return the output. The private section should contains members that will be needed at run time, usually the arguments of the constructor.</p>
+<p>In the corresponding source file in <code class="docutils literal notranslate"><span class="pre">analyzers/dataframe/src</span></code> you should add the implementation of your class, for example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getAxisN</span><span class="o">::</span><span class="n">getAxisN</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">arg_pos</span><span class="p">){</span>
+<span class="w">	</span><span class="n">_pos</span><span class="o">=</span><span class="n">arg_pos</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w">  </span><span class="n">getAxisN</span><span class="o">::</span><span class="k">operator</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">angle</span><span class="p">,</span>
+<span class="w">	                                             </span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">charge</span><span class="p">){</span>
+<span class="w">  </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">};</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">angle</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_pos</span><span class="o">==</span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">angle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.</span><span class="p">){</span>
+<span class="w">      </span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="n">charge</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">      </span><span class="k">else</span><span class="w"> </span><span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_pos</span><span class="o">==</span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">angle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="mf">0.</span><span class="p">){</span>
+<span class="w">      </span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="n">charge</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">      </span><span class="k">else</span><span class="w"> </span><span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>where you separate the class construction and its implementation.</p>
+</section>
+<section id="writing-a-new-namespace">
+<h2><span class="section-number">2.5.8. </span>Writing a new namespace<a class="headerlink" href="#writing-a-new-namespace" title="Permalink to this heading"></a></h2>
+<p>If you think new namespace is needed, create a new header file in <code class="docutils literal notranslate"><span class="pre">analyzers/dataframe/FCCAnalyses</span></code>, for example <code class="docutils literal notranslate"><span class="pre">myNamespace.h</span></code>. It should look like:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef  MYNAMESPACE_ANALYZERS_H</span>
+<span class="cp">#define  MYNAMESPACE_ANALYZERS_H</span>
+
+<span class="c1">///Add here your defines</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">FCCAnalyses</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">namespace</span><span class="w"> </span><span class="nn">myNamespace</span><span class="w"> </span><span class="p">{</span>
+
+<span class="c1">///Add here your functions, structs</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<p>create a new source file in <code class="docutils literal notranslate"><span class="pre">analyzers/dataframe/src</span></code>, for example <code class="docutils literal notranslate"><span class="pre">myNamespace.cc</span></code>. It should look like:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FCCAnalyses/myNamespace.h&quot;</span>
+<span class="c1">///Add here your defines</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">FCCAnalyses</span><span class="p">{</span>
+<span class="w">  </span><span class="k">namespace</span><span class="w"> </span><span class="nn">myNamespace</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">///Add here your functions, structs</span>
+
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-your-own-analysis-using-the-case-studies-generator">
+<h2><span class="section-number">2.5.9. </span>Writing your own analysis using the case-studies generator<a class="headerlink" href="#writing-your-own-analysis-using-the-case-studies-generator" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="http://github.com/badges/stability-badges"><img alt="experimental" src="http://badges.github.io/stability-badges/dist/experimental.svg" /></a></p>
+<p>For various physics case studies, standard RDF tools might not be sufficient and require a backing library of helper objects and static functions exposed to ROOT.</p>
+<p>An analysis package creation tool is developed to provide the minimal building blocks for such extensions and uniformise such developments.</p>
+<section id="analysis-package-generation">
+<h3><span class="section-number">2.5.9.1. </span>Analysis package generation<a class="headerlink" href="#analysis-package-generation" title="Permalink to this heading"></a></h3>
+<p>Two modes are currently supported for the linking of these extensions to the analysis framework:</p>
+<ul class="simple">
+<li><p>scan at CMake+compilation time a <em>standard</em> extensions directory (in <code class="docutils literal notranslate"><span class="pre">case-studies</span></code>) where the analysis package can be deployed. It requires an <code class="docutils literal notranslate"><span class="pre">includes</span></code> and <code class="docutils literal notranslate"><span class="pre">src</span></code> subdirectory, along with a <code class="docutils literal notranslate"><span class="pre">classes_def.xml</span></code> and <code class="docutils literal notranslate"><span class="pre">classes.h</span></code> files in the latter for the ROOT dictionary definition.</p></li>
+<li><p>generate a <em>standalone</em> package which can be compiled independently, given the path to this <code class="docutils literal notranslate"><span class="pre">FCCAnalyses</span></code> installation is found. It allows to generate a minimal set of files required to connect this extension to the RDF utilitaries.</p></li>
+</ul>
+<p>The generation of such a package can be done using the following recipe:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>init<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>--name<span class="w"> </span>NAME<span class="o">]</span><span class="w"> </span><span class="o">[</span>--author<span class="w"> </span>AUTHOR<span class="o">]</span><span class="w"> </span><span class="o">[</span>--description<span class="w"> </span>DESCRIPTION<span class="o">]</span><span class="w"> </span><span class="o">[</span>--standalone<span class="o">]</span><span class="w"> </span><span class="o">[</span>--output-dir<span class="w"> </span>OUTPUT_DIR<span class="o">]</span><span class="w"> </span>package
+</pre></div>
+</div>
+<p>where the mandatory parameter, <code class="docutils literal notranslate"><span class="pre">package</span></code>, refers to the analysis package name (along with the namespace it will define ; should be unique at runtime).
+Additionally, several optional parameters are handled:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">NAME</span></code> specifies the analyser helpers filename (where all static functions exposed to the RDF framework through the ROOT dictionary will be stored) ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AUTHOR</span></code>, preferably following the “<code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">&lt;email&#64;address&gt;</span></code>” convention, and <code class="docutils literal notranslate"><span class="pre">DESCRIPTION</span></code>, will be added into the C++ files boilerplates to keep track of the author(s) and purpose(s) of this package ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--standalone</span></code> to switch to the standalone package described above. In combination with the <code class="docutils literal notranslate"><span class="pre">OUTPUT_DIR</span></code> parameter, it allows to store the minimal working example in a completely arbitrary path (instead of the standard <code class="docutils literal notranslate"><span class="pre">case-studies</span></code> subdirectory) with its own CMake directive.</p></li>
+</ul>
+<p>In the <em>standalone</em> mode, the analysis package can be built using the standard CMake recipe, given the FCCAnalyses environment in <code class="docutils literal notranslate"><span class="pre">setup.sh</span></code> is properly sourced:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span><span class="si">${</span><span class="nv">OUTPUT_DIR</span><span class="si">}</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make
+make<span class="w"> </span>install
+</pre></div>
+</div>
+<p>The latter ensures that the headers and shared library/ROOT translation dictionaries are installed in a location reachable by FCCAnalyses.</p>
+</section>
+<section id="analysis-package-exposure-to-rdf">
+<h3><span class="section-number">2.5.9.2. </span>Analysis package exposure to RDF<a class="headerlink" href="#analysis-package-exposure-to-rdf" title="Permalink to this heading"></a></h3>
+<p>To allow an arbitrary multiplicity of analysis packages to be handled at the level of a configuration script runnable with “<code class="docutils literal notranslate"><span class="pre">fccanalysis</span> <span class="pre">run</span></code>”, an additional (optional) <code class="docutils literal notranslate"><span class="pre">analysesList</span></code> list-type object can be parsed.</p>
+<p>On top of the usual <code class="docutils literal notranslate"><span class="pre">FCCAnalyses</span></code> shared object, includes, and corresponding dictionary, the custom case study analysis package name will be parsed, and automatically loaded in the ROOT runtime environment to be exposed to the RDF interface.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html" class="btn btn-neutral float-left" title="2.4. FCC: tracking and vertexing example using specific flavour decays" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="EventProduction.html" class="btn btn-neutral float-right" title="2.6. Central production of events" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: cern2022
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../master/index.html">master</a></dd>
+      <dd><a href="../../bnl2023/index.html">bnl2023</a></dd>
+      <dd><a href="FCCAnalysesProblemsAndSolutions.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

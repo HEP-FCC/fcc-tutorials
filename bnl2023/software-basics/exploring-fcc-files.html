@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1.6. Inspecting an FCC data file &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.7. Tips and tricks" href="tips-tricks.html" />
+    <link rel="prev" title="1.5. Finding data in the Bookkeeping" href="bookkeeping.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">1. First  Steps</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html">1.1. Pre-workshop checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swan.html">1.2. Running the software in SWAN notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction-to-course.html">1.3. Goals of the course</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fccsw.html">1.4. An introduction to FCC Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bookkeeping.html">1.5. Finding data in the Bookkeeping</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.6. Inspecting an FCC data file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-events-tree">1.6.1. The <code class="docutils literal notranslate"><span class="pre">events</span></code> tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-metadata-tree">1.6.2. The <code class="docutils literal notranslate"><span class="pre">metadata</span></code> tree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tips-tricks.html">1.7. Tips and tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asking-questions.html">1.8. Asking good questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fast-sim-and-analysis/README.html">2. Generators, Fast Simulation and Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">3. Full Detector Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="README.html"><span class="section-number">1. </span>First  Steps</a> &raquo;</li>
+      <li><span class="section-number">1.6. </span>Inspecting an FCC data file</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/software-basics/exploring-fcc-files.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="inspecting-an-fcc-data-file">
+<h1><span class="section-number">1.6. </span>Inspecting an FCC data file<a class="headerlink" href="#inspecting-an-fcc-data-file" title="Permalink to this heading"></a></h1>
+<div class="objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<ul class="simple">
+<li><p>Get to know FCC data files and the tools to inspect them</p></li>
+</ul>
+</div>
+<div class="warning admonition">
+<p class="admonition-title">Old data format</p>
+<p>The following sections talk about the old dataformat <code class="docutils literal notranslate"><span class="pre">fcc-edm</span></code>.
+They are kept for historical reasons as there is large FCC-hh dataset already
+generated.</p>
+<p>To find out more about currently used data format: EDM4hep, click
+<a class="reference internal" href="../fast-sim-and-analysis/FCCAnalysesProblemsAndSolutions.html#structure-of-edm4hep-files"><span class="std std-ref">here</span></a>.</p>
+</div>
+<section id="the-events-tree">
+<h2><span class="section-number">1.6.1. </span>The <code class="docutils literal notranslate"><span class="pre">events</span></code> tree<a class="headerlink" href="#the-events-tree" title="Permalink to this heading"></a></h2>
+<p>FCC Data is generally stored in ROOT files. The layout of the file is determined by the “Event Data Model”, which describes conceptually how the data is structured, and technically what branches are written in the final file.</p>
+<p>The implementation of the event data model uses simple structs in order to keep the resulting file simple - it already has a “flat tree” structure.
+The definition of the structs can be found in the <a class="reference external" href="https://github.com/HEP-FCC/fcc-edm/blob/master/edm.yaml"><code class="docutils literal notranslate"><span class="pre">fcc-edm</span></code> repository</a>.
+You will see that the FCC ROOT files contain a branch for every member of theses structs. So  they can either be processed individually, or as a complete struct. The event data model also allows to store pointers to other objects - to use these it is best to use the provided <a class="reference external" href="https://github.com/HEP-FCC/fcc-edm/blob/master/examples/simplewrite.cc">code</a></p>
+<p>In configuring jobs with the FCC software framework, users can choose the Branch names in the produced file. Mostly, they will be one of the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GenParticles</span></code>:  Particles from either a generator like Pythia8 or a particle gun</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GenParticlesFiltered</span></code>: The same collection, but filtered according to some criteria (mostly used to select stable particles that are seen in the detector)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SimTrackerHits</span></code>: Geant information  on energy deposits in the tracker</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SimTrackerHitsPositions</span></code>: The same, but including the MC truth information on the exact coordinates of the deposits</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SimCaloHits</span></code>: Geant information on energy deposits in the calorimeter</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SimCaloHitsPositions</span></code>: The same, but including the MC truth information on the exact coordinates of the deposits</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SimParticles</span></code>: MC truth information about the particles in Geant simulations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RecTrackStates</span></code>: Helix parameters as reconstructed by the software</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RecParticles</span></code> Full particle information after Reconstruction</p></li>
+</ul>
+<div class="challenge admonition">
+<p class="admonition-title">Inspecting a <a class="reference external" href="https://root.cern/manual/storing_root_objects/">ROOT file</a></p>
+<p>Let’s take a look at an example: <code class="docutils literal notranslate"><span class="pre">root://eospublic.cern.ch//eos/experiment/fcc/hh/tutorials/fccee_idea_pgun.root</span></code>.
+(For machines without eos access, this is mirrored at <a class="reference external" href="https://fccsw.web.cern.ch/fccsw/testsamples/tutorial/fccee_idea_pgun.root">https://fccsw.web.cern.ch/fccsw/testsamples/tutorial/fccee_idea_pgun.root</a>)
+This file
+contains simulated data of a single particle passing through the detector and hits from the detector simulation.
+Open the file with ROOT and determine:</p>
+<ul class="simple">
+<li><p>How many events does it contain?</p></li>
+<li><p>What particle type is being simulated?</p></li>
+<li><p>What is the energy of the primary particle?</p></li>
+<li><p>How many hits were recorded (averaged over the run) in the Tracker? And in the calorimeter? What is the event with the maximum number of hits?</p></li>
+</ul>
+</div>
+</section>
+<section id="the-metadata-tree">
+<h2><span class="section-number">1.6.2. </span>The <code class="docutils literal notranslate"><span class="pre">metadata</span></code> tree<a class="headerlink" href="#the-metadata-tree" title="Permalink to this heading"></a></h2>
+<p>FCC data files contain another tree called <code class="docutils literal notranslate"><span class="pre">metadata</span></code>.
+As the name suggests, this information is mostly used to process the actual data in the <code class="docutils literal notranslate"><span class="pre">events</span></code> tree.
+However, files produced with newer (&gt;0.11) versions of FCCSW
+will store the information of the job options file here, so that they can be reproduced (using the same versions of the software). FCCSW provides a script <code class="docutils literal notranslate"><span class="pre">fcc_dump_joboptions</span></code> that can easily access this information.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>k4-print-joboptions<span class="w"> </span>https://fccsw.web.cern.ch/fccsw/testsamples/tutorial/fccee_idea_pgun.root<span class="w"> </span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EventDataSvc</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+
+<span class="n">GeoSvc</span><span class="o">.</span><span class="n">OutputLevel</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="n">GeoSvc</span><span class="o">.</span><span class="n">detectors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.12/x86_64-centos7-gcc8-opt/share/FCCSW/Detector/DetFCCeeIDEA/compact/FCCee_DectMaster.xml&#39;</span><span class="p">];</span>
+
+<span class="n">SimG4Alg</span><span class="o">.</span><span class="n">eventProvider</span> <span class="o">=</span> <span class="s2">&quot;SimG4SingleParticleGeneratorTool/GeantinoGun&quot;</span><span class="p">;</span>
+<span class="n">SimG4Alg</span><span class="o">.</span><span class="n">outputs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SimG4SaveParticleHistory/saveHistory&#39;</span><span class="p">,</span> <span class="s1">&#39;SimG4SaveTrackerHits/saveTrackerHits_Barrel&#39;</span><span class="p">,</span> <span class="s1">&#39;SimG4SaveTrackerHits/saveTrackerHits_Endcap&#39;</span><span class="p">,</span> <span class="s1">&#39;SimG4SaveTrackerHits/saveTrackerHits_DCH&#39;</span><span class="p">];</span>
+
+<span class="n">SimG4Alg</span><span class="o">.</span><span class="n">GeantinoGun</span><span class="o">.</span><span class="n">energyMax</span> <span class="o">=</span> <span class="s2">&quot;2400.0&quot;</span><span class="p">;</span>
+<span class="n">SimG4Alg</span><span class="o">.</span><span class="n">GeantinoGun</span><span class="o">.</span><span class="n">energyMin</span> <span class="o">=</span> <span class="s2">&quot;2400.0&quot;</span><span class="p">;</span>
+<span class="n">SimG4Alg</span><span class="o">.</span><span class="n">GeantinoGun</span><span class="o">.</span><span class="n">etaMax</span> <span class="o">=</span> <span class="s2">&quot;3.5&quot;</span><span class="p">;</span>
+<span class="n">SimG4Alg</span><span class="o">.</span><span class="n">GeantinoGun</span><span class="o">.</span><span class="n">etaMin</span> <span class="o">=</span> <span class="s2">&quot;-3.5&quot;</span><span class="p">;</span>
+<span class="n">SimG4Alg</span><span class="o">.</span><span class="n">GeantinoGun</span><span class="o">.</span><span class="n">particleName</span> <span class="o">=</span> <span class="s2">&quot;mu-&quot;</span><span class="p">;</span>
+<span class="n">SimG4Alg</span><span class="o">.</span><span class="n">GeantinoGun</span><span class="o">.</span><span class="n">phiMax</span> <span class="o">=</span> <span class="s2">&quot;360.0&quot;</span><span class="p">;</span>
+<span class="n">SimG4Alg</span><span class="o">.</span><span class="n">GeantinoGun</span><span class="o">.</span><span class="n">phiMin</span> <span class="o">=</span> <span class="s2">&quot;0.0&quot;</span><span class="p">;</span>
+<span class="n">SimG4Alg</span><span class="o">.</span><span class="n">GeantinoGun</span><span class="o">.</span><span class="n">saveEdm</span> <span class="o">=</span> <span class="kc">False</span><span class="p">;</span>
+<span class="n">SimG4Alg</span><span class="o">.</span><span class="n">GeantinoGun</span><span class="o">.</span><span class="n">vertexX</span> <span class="o">=</span> <span class="s2">&quot;0.0&quot;</span><span class="p">;</span>
+<span class="n">SimG4Alg</span><span class="o">.</span><span class="n">GeantinoGun</span><span class="o">.</span><span class="n">vertexY</span> <span class="o">=</span> <span class="s2">&quot;0.0&quot;</span><span class="p">;</span>
+<span class="n">SimG4Alg</span><span class="o">.</span><span class="n">GeantinoGun</span><span class="o">.</span><span class="n">vertexZ</span> <span class="o">=</span> <span class="s2">&quot;0.0&quot;</span><span class="p">;</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>The output can be redirected to a new job options file that can be run with <code class="docutils literal notranslate"><span class="pre">fccrun</span></code>, provided that all the paths to the detector xmls etc. are still valid.</p>
+<p>Note that some older files on eos may not contain the metadata information.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bookkeeping.html" class="btn btn-neutral float-left" title="1.5. Finding data in the Bookkeeping" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tips-tricks.html" class="btn btn-neutral float-right" title="1.7. Tips and tricks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: bnl2023
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../master/index.html">master</a></dd>
+      <dd><a href="exploring-fcc-files.html">bnl2023</a></dd>
+      <dd><a href="../../cern2022/index.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

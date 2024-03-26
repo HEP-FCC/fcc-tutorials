@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.1. FCC: Getting started with event generation &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.2. FCC: Getting started with simulating events in Delphes" href="k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html" />
+    <link rel="prev" title="2. Generators, Fast Simulation and Analysis" href="README.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">2. Generators, Fast Simulation and Analysis</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.1. FCC: Getting started with event generation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">2.1.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enabling-fccsw">2.1.2. Enabling FCCSW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generators">2.1.3. Generators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">2.1.3.1. Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pythia8">2.1.3.2. Pythia8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#whizard">2.1.3.3. Whizard</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kkmcee">2.1.3.4. KKMCee</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bhlumi">2.1.3.5. BHLUMI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#babayaga">2.1.3.6. BabaYaga</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#herwig">2.1.3.7. Herwig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#madgraph5">2.1.3.8. MadGraph5</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hands-on-case-study-ditau-events-with-pythia8-whizard-and-kkmcee">2.1.4. Hands-on case study: ditau events with Pythia8, Whizard and KKMCee</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#generating-ditaus-with-pythia8">2.1.4.1. Generating ditaus with Pythia8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generating-ditaus-with-whizard">2.1.4.2. Generating ditaus with Whizard</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generating-ditaus-with-kkmcee">2.1.4.3. Generating ditaus with KKMCee</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#looking-at-the-produced-files-comparing-distributions">2.1.4.4. Looking at the produced files. Comparing distributions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html">2.2. FCC: Getting started with simulating events in Delphes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.html">2.3. FCC: Analysing simulated events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html">2.4. FCC: tracking and vertexing example using specific flavour decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html">2.5. FCCAnalyses: Common problems and solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EventProduction.html">2.6. Central production of events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">3. Full Detector Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="README.html"><span class="section-number">2. </span>Generators, Fast Simulation and Analysis</a> &raquo;</li>
+      <li><span class="section-number">2.1. </span>FCC: Getting started with event generation</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/fast-sim-and-analysis/FccFastSimGeneration.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="fcc-getting-started-with-event-generation">
+<h1><span class="section-number">2.1. </span>FCC: Getting started with event generation<a class="headerlink" href="#fcc-getting-started-with-event-generation" title="Permalink to this heading"></a></h1>
+<section id="overview">
+<h2><span class="section-number">2.1.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+</section>
+<section id="enabling-fccsw">
+<h2><span class="section-number">2.1.2. </span>Enabling FCCSW<a class="headerlink" href="#enabling-fccsw" title="Permalink to this heading"></a></h2>
+<p>The FCC software <code class="docutils literal notranslate"><span class="pre">FCCSW</span></code> is fully embedded in the <code class="docutils literal notranslate"><span class="pre">key4hep</span></code> software stack or ecosystem, which means that the components providing the framework and those FCC specific are all available in <code class="docutils literal notranslate"><span class="pre">key4hep</span></code>. To configure your environment for the FCC software is therefore sufficient to initialise <code class="docutils literal notranslate"><span class="pre">key4hep</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">cvmfs</span><span class="o">/</span><span class="n">sw</span><span class="o">.</span><span class="n">hsf</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">key4hep</span><span class="o">/</span><span class="n">setup</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<div class="callout admonition">
+<p class="admonition-title">Nota Bene</p>
+<p>For legacy reasons the following is still provided, fully equivalent to the above</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">cvmfs</span><span class="o">/</span><span class="n">fcc</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">/</span><span class="n">sw</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">setup</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>Note however that not all the <code class="docutils literal notranslate"><span class="pre">cvmfs</span></code> tier-1 centers replicate the <code class="docutils literal notranslate"><span class="pre">fcc.cern.ch</span></code>, so this may lead to slowdowns or even failures.</p>
+</div>
+<p>Builds exist on CernVM-FS for <code class="docutils literal notranslate"><span class="pre">CentOS7</span></code> (this is the Operating System run on <code class="docutils literal notranslate"><span class="pre">lxplus</span></code>) using as compiler <code class="docutils literal notranslate"><span class="pre">Gcc</span> <span class="pre">11</span></code> (currently gcc version <code class="docutils literal notranslate"><span class="pre">11.2.0</span></code>).</p>
+<div class="callout admonition">
+<p class="admonition-title">Nota Bene</p>
+<p>The combination of old <code class="docutils literal notranslate"><span class="pre">glibc</span></code> version available on <code class="docutils literal notranslate"><span class="pre">CentOS7</span></code> with the backward compatibility attributes of glibc makes the provided stack in principle working for newer OSes, such as <code class="docutils literal notranslate"><span class="pre">CentOS8</span></code>, <code class="docutils literal notranslate"><span class="pre">AlmaLinux9</span></code> or <code class="docutils literal notranslate"><span class="pre">Fedora37</span></code>. This in general holds, though less core aspects, such graphics, might still be OS specific.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">gaudimain</span></code> steering application here is called <code class="docutils literal notranslate"><span class="pre">k4run</span></code> which should be available at this point:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>which<span class="w"> </span>k4run
+/cvmfs/sw.hsf.org/spackages7/k4fwcore/1.0pre16/x86_64-centos7-gcc11.2.0-opt/tp4u6/bin/k4run
+</pre></div>
+</div>
+<p>(The output might differ, but shouldn’t be empty and the structure should be similar).</p>
+<p>The application <code class="docutils literal notranslate"><span class="pre">fccrun</span></code> is still provided, fully equivalent to <code class="docutils literal notranslate"><span class="pre">k4run</span></code>.</p>
+<div class="callout admonition">
+<p class="admonition-title">Nota Bene</p>
+<p>You will need to source the <code class="docutils literal notranslate"><span class="pre">/cvmfs/sw.hsf.org/key4hep/setup.sh</span></code> script everytime you want to use the software.</p>
+</div>
+</section>
+<section id="generators">
+<h2><span class="section-number">2.1.3. </span>Generators<a class="headerlink" href="#generators" title="Permalink to this heading"></a></h2>
+<section id="id1">
+<h3><span class="section-number">2.1.3.1. </span>Overview<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>The physics generators available for FCC usually come from <code class="docutils literal notranslate"><span class="pre">key4hep</span></code>. However, any generator
+able to generate events in one of the understood formats, e.g. HepMC or EDM4hep or LHEf, can be used in standalone.
+Following the discussion at the <a class="reference external" href="https://indico.cern.ch/event/1078675/">1st ECFA workshop on Generators</a>, the recommended formats are <code class="docutils literal notranslate"><span class="pre">HepMC3</span></code> and <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code>; <code class="docutils literal notranslate"><span class="pre">LHEf</span></code> is still much in use though.
+This pages intend to illustrate the use of a few general purpose generators available when enabling FCCSW:
+pythia8, whizard, MadGraph5, Herwig, KKMCee, BHLUMI, BabaYaga.</p>
+</section>
+<section id="pythia8">
+<h3><span class="section-number">2.1.3.2. </span>Pythia8<a class="headerlink" href="#pythia8" title="Permalink to this heading"></a></h3>
+<p>Pythia8 is fully intergrated in <code class="docutils literal notranslate"><span class="pre">Key4hep</span></code> software stack and it provides diverse functionality in addition to event generation, including capability to read events in <code class="docutils literal notranslate"><span class="pre">LHEf</span></code> format.</p>
+<p>To use Pythia8 we need a Gaudi steering file and a Pythia8 configuration file, usually having extension <code class="docutils literal notranslate"><span class="pre">.cmd</span></code>. Examples of these <code class="docutils literal notranslate"><span class="pre">.cmd</span></code> files are available from the <a class="reference external" href="https://github.com/HEP-FCC/FCC-config/tree/main/FCCee/Generator/Pythia8">FCC-config</a> repository.</p>
+<p>The Gaudi steering file needs to activate the <code class="docutils literal notranslate"><span class="pre">GaudiTool</span></code> that interfaces <code class="docutils literal notranslate"><span class="pre">Pythia8</span></code>, available from the <code class="docutils literal notranslate"><span class="pre">k4Gen</span></code> repository under the name <a class="reference external" href="https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/PythiaInterface.h">PythiaInterface</a>.</p>
+<p>An example of steering file can be found at <a class="reference external" href="https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py">pythia.py</a>. The steering file runs the minimal set of algorithms to run Pythia8 and produce an output in <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code> format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py
+$ k4run pythia.py -h | head -n 1
+ --&gt;  Pythia8 --&gt;  HepMCToEDMConverter --&gt;  StableParticles --&gt;  out
+</pre></div>
+</div>
+<p>For example, to generate 500  e<sup>+</sup>e<sup>-</sup> → mu<sup>+</sup>mu<sup>-</sup> at 91.2 GeV, we can do the following: download the configuration file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/main/FCCee/Generator/Pythia8/p8_ee_Zmumu_ecm91.cmd
+</pre></div>
+</div>
+<p>and run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">k4run</span> <span class="n">pythia</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">n</span> <span class="mi">500</span> <span class="o">--</span><span class="n">out</span><span class="o">.</span><span class="n">filename</span> <span class="n">p8_mumu_500</span><span class="o">.</span><span class="n">e4h</span><span class="o">.</span><span class="n">root</span> <span class="o">--</span><span class="n">Pythia8</span><span class="o">.</span><span class="n">PythiaInterface</span><span class="o">.</span><span class="n">pythiacard</span> <span class="n">p8_ee_Zmumu_ecm91</span><span class="o">.</span><span class="n">cmd</span>
+</pre></div>
+</div>
+</section>
+<section id="whizard">
+<h3><span class="section-number">2.1.3.3. </span>Whizard<a class="headerlink" href="#whizard" title="Permalink to this heading"></a></h3>
+<p>Whizard is available as standalone program:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>which<span class="w"> </span>whizard
+/cvmfs/sw.hsf.org/spackages6/whizard/3.0.3/x86_64-centos7-gcc11.2.0-opt/yy7yk/bin/whizard
+</pre></div>
+</div>
+<p>Whizard is run as this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">whizard</span> <span class="o">&lt;</span><span class="n">process_config</span><span class="o">&gt;.</span><span class="n">sin</span>
+</pre></div>
+</div>
+<p>Example of Sindarin configuration files are found under</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/cvmfs/sw.hsf.org/spackages6/whizard/3.0.3/x86_64-centos7-gcc11.2.0-opt/yy7yk/share/whizard/examples/
+</pre></div>
+</div>
+<p>or at <a class="reference external" href="https://gitlab.tp.nt.uni-siegen.de/whizard/public/-/tree/master/share/examples">https://gitlab.tp.nt.uni-siegen.de/whizard/public/-/tree/master/share/examples</a>.</p>
+<p>Some examples more specific to FCC can be found at <a class="reference external" href="https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/">https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/</a>`.</p>
+<div class="toggle admonition">
+<p class="admonition-title">Show dimuon example</p>
+<p>It is advised to work in a separate directory for each process. For example, for Z_mumu, we have:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>test_whizard/Z_mumu<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>test_whizard/Z_mumu
+<span class="w"> </span>wget<span class="w"> </span>https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/Z_mumu.sin
+<span class="w"> </span>whizard<span class="w"> </span>Z_mumu.sin
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>| Writing log to &#39;whizard.log&#39;
+|=============================================================================|
+|                                                                             |
+|    WW             WW  WW   WW  WW  WWWWWW      WW      WWWWW    WWWW        |
+|     WW    WW     WW   WW   WW  WW     WW      WWWW     WW  WW   WW  WW      |
+|      WW  WW WW  WW    WWWWWWW  WW    WW      WW  WW    WWWWW    WW   WW     |
+|       WWWW   WWWW     WW   WW  WW   WW      WWWWWWWW   WW  WW   WW  WW      |
+|        WW     WW      WW   WW  WW  WWWWWW  WW      WW  WW   WW  WWWW        |
+|                                                                             |
+|                                                                             |
+
+...
+
+|=============================================================================|
+|                               WHIZARD 3.0.1
+|=============================================================================|
+| Reading model file &#39;/cvmfs/sw.hsf.org/spackages6/whizard/3.0.1/x86_64-centos7-gcc11.2.0-opt/pmm4s/share/whizard/models/SM.mdl&#39;
+| Preloaded model: SM
+| Process library &#39;default_lib&#39;: initialized
+| Preloaded library: default_lib
+| Reading model file &#39;/cvmfs/sw.hsf.org/spackages6/whizard/3.0.1/x86_64-centos7-gcc11.2.0-opt/pmm4s/share/whizard/models/SM_hadrons.mdl&#39;
+| Reading commands from file &#39;Z_mumu.sin&#39;
+| Switching to model &#39;SM&#39;, scheme &#39;default&#39;
+
+...
+
+$description = &quot;A WHIZARD 3.0 Example.
+   Z -&gt; mumu @ 91.2 events for FCC ee.&quot;
+$y_label = &quot;$N_{\textrm{events}}$&quot;
+$sample = &quot;z_mumu&quot;
+| Starting simulation for process &#39;zmumu&#39;
+| Simulate: using integration grids from file &#39;zmumu.m1.vg&#39;
+| RNG: Initializing TAO random-number generator
+| RNG: Setting seed for random-number generator to 22345
+| Simulation: requested number of events = 1000
+|             corr. to luminosity [fb-1] =   6.6285E-04
+| Events: writing to HepMC file &#39;z_mumu.hepmc&#39;
+| Events: writing to raw file &#39;z_mumu.evx&#39;
+| Events: generating 1000 unweighted, unpolarized events ...
+| Events: event normalization mode &#39;1&#39;
+|         ... event sample complete.
+| Events: actual unweighting efficiency =   1.16 %
+Warning: Encountered events with excess weight: 6 events (  0.600 %)
+| Maximum excess weight = 2.465E+00
+| Average excess weight = 4.511E-03
+| Events: closing HepMC file &#39;z_mumu.hepmc&#39;
+| Events: closing raw file &#39;z_mumu.evx&#39;
+| There were no errors and    2 warning(s).
+| WHIZARD run finished.
+|=============================================================================|
+</pre></div>
+</div>
+</div>
+<p>The file <code class="docutils literal notranslate"><span class="pre">z_mumu.hepmc</span></code> contains 100 e<sup>+</sup>e<sup>-</sup> → mu<sup>+</sup>mu<sup>-</sup>(gamma) events in HepMC 3 format .</p>
+</section>
+<section id="kkmcee">
+<h3><span class="section-number">2.1.3.4. </span>KKMCee<a class="headerlink" href="#kkmcee" title="Permalink to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">KKMCee</span></code> is an adaptation of the <code class="docutils literal notranslate"><span class="pre">KKMC</span></code> Monte Carlo generator (the latest version of the <code class="docutils literal notranslate"><span class="pre">Koral</span></code> generators) to the
+case of FCC-ee.
+KKMCee is available as standalone program when using the key4hep stack:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>which<span class="w"> </span>KKMCee
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">cvmfs</span><span class="o">/</span><span class="n">sw</span><span class="o">.</span><span class="n">hsf</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">spackages6</span><span class="o">/</span><span class="n">kkmcee</span><span class="o">/</span><span class="mf">5.00.02</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">centos7</span><span class="o">-</span><span class="n">gcc11</span><span class="mf">.2.0</span><span class="o">-</span><span class="n">opt</span><span class="o">/</span><span class="n">eodg6</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">KKMCee</span>
+</pre></div>
+</div>
+<p>A help function is available:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">KKMCee</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+<div class="toggle admonition">
+<p class="admonition-title">Show help function output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+++</span> <span class="n">Wrapper</span> <span class="n">around</span> <span class="n">the</span> <span class="n">KKMCee</span> <span class="n">executable</span>  <span class="o">+++</span>
+
+<span class="n">Usage</span><span class="p">:</span> \<span class="n">tKKMCee</span> <span class="o">-</span><span class="n">f</span> <span class="n">Mu</span><span class="o">|</span><span class="n">Tau</span><span class="o">|</span><span class="n">UDS</span><span class="o">|</span><span class="n">C</span><span class="o">|</span><span class="n">B</span><span class="o">|</span><span class="n">Hadrons</span> <span class="o">-</span><span class="n">e</span> <span class="n">Ecms</span> <span class="o">-</span><span class="n">n</span> <span class="n">Nevts</span> <span class="o">-</span><span class="n">o</span> <span class="n">output_file</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">initial_seed</span><span class="p">]</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span>
+       \<span class="n">tKKMCee</span> <span class="o">-</span><span class="n">c</span> <span class="n">config_file</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">initial_seed</span><span class="p">]</span>
+
+<span class="n">Options</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="o">--</span><span class="n">config</span> <span class="n">file</span> 		<span class="n">Path</span> <span class="n">to</span> <span class="n">configuration</span> <span class="n">file</span>
+  <span class="o">-</span><span class="n">f</span><span class="p">,</span> <span class="o">--</span><span class="n">flavour</span> <span class="n">flavour</span> 	<span class="n">Flavour</span> <span class="n">to</span> <span class="n">be</span> <span class="n">generated</span> <span class="p">(</span><span class="n">Mu</span><span class="o">|</span><span class="n">Tau</span><span class="o">|</span><span class="n">UDS</span><span class="o">|</span><span class="n">C</span><span class="o">|</span><span class="n">B</span><span class="o">|</span><span class="n">Hadrons</span><span class="p">)</span>
+  <span class="o">-</span><span class="n">e</span><span class="p">,</span> <span class="o">--</span><span class="n">ecms</span> <span class="n">energy</span> 		<span class="n">Center</span> <span class="n">of</span> <span class="n">Mass</span> <span class="n">energy</span> <span class="ow">in</span> <span class="n">GeV</span>
+  <span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="o">--</span><span class="n">nevts</span> <span class="n">events</span> 		<span class="n">Number</span> <span class="n">of</span> <span class="n">events</span> <span class="n">to</span> <span class="n">be</span> <span class="n">generated</span>
+  <span class="o">-</span><span class="n">o</span><span class="p">,</span> <span class="o">--</span><span class="n">outfile</span> <span class="n">file</span> 		<span class="n">File</span> <span class="k">with</span> <span class="n">the</span> <span class="n">generated</span> <span class="n">events</span> <span class="ow">in</span> <span class="n">HEPMCv3</span> <span class="nb">format</span> <span class="p">[</span><span class="n">kkmcee</span><span class="o">.</span><span class="n">hepmc</span><span class="p">]</span>
+  <span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="n">initialseed</span> 		<span class="n">Long</span> <span class="n">number</span> <span class="n">to</span> <span class="n">be</span> <span class="n">used</span> <span class="k">for</span> <span class="n">initial</span> <span class="n">seeding</span> <span class="p">(</span><span class="n">randomly</span> <span class="n">generated</span><span class="p">,</span> <span class="k">if</span> <span class="n">missing</span><span class="p">)</span>
+  <span class="o">-</span><span class="n">b</span><span class="p">,</span> <span class="o">--</span><span class="n">bessig</span> <span class="n">bessig</span> 		<span class="n">Beam</span><span class="o">-</span><span class="n">Energy</span><span class="o">-</span><span class="n">Spread</span> <span class="n">of</span> <span class="n">both</span> <span class="n">beams</span> <span class="p">(</span><span class="ow">or</span> <span class="n">of</span> <span class="n">the</span> <span class="n">first</span> <span class="n">beam</span><span class="p">,</span> <span class="k">if</span> <span class="n">bessig2</span><span class="o">&lt;</span><span class="mf">0.</span><span class="p">)</span>
+                      		<span class="p">[</span><span class="n">fraction</span> <span class="n">of</span> <span class="n">Ecms</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">default</span> <span class="o">-</span><span class="mf">1.</span> <span class="p">(</span><span class="n">no</span> <span class="n">spread</span><span class="p">)]</span>
+  <span class="o">-</span><span class="n">g</span><span class="p">,</span> <span class="o">--</span><span class="n">bessig2</span> <span class="n">bessig2</span> 	<span class="n">Beam</span><span class="o">-</span><span class="n">Energy</span><span class="o">-</span><span class="n">Spread</span> <span class="n">of</span> <span class="n">the</span> <span class="n">second</span> <span class="n">beam</span> <span class="k">if</span> <span class="n">different</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">first</span> <span class="n">beam</span><span class="p">;</span> <span class="n">fraction</span> <span class="n">of</span> <span class="n">Ecms</span><span class="o">/</span><span class="mf">2.</span>
+                      		<span class="p">[</span><span class="n">fraction</span> <span class="n">of</span> <span class="n">Ecms</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">default</span> <span class="o">-</span><span class="mf">1.</span> <span class="p">(</span><span class="n">no</span> <span class="n">spread</span> <span class="ow">or</span> <span class="n">equal</span> <span class="n">to</span> <span class="n">first</span> <span class="n">beam</span><span class="p">)]</span>
+  <span class="o">-</span><span class="n">r</span><span class="p">,</span> <span class="o">--</span><span class="n">besrho</span> <span class="n">rho</span> 		<span class="n">Beam</span><span class="o">-</span><span class="n">Energy</span><span class="o">-</span><span class="n">Spread</span> <span class="n">correlation</span> <span class="p">[</span><span class="n">default</span> <span class="mf">0.</span><span class="p">]</span>
+  <span class="o">-</span><span class="n">d</span><span class="p">,</span> <span class="o">--</span><span class="n">debug</span> <span class="n">lvl</span> 		 <span class="n">PrintOut</span> <span class="n">Level</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span> <span class="p">[</span><span class="n">default</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">Special</span> <span class="n">options</span> <span class="k">for</span> <span class="n">taus</span> <span class="n">only</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">t</span><span class="p">,</span> <span class="o">--</span><span class="n">taudec</span> <span class="n">t1</span><span class="o">*</span><span class="mi">1000</span><span class="o">+</span><span class="n">t2</span> 	<span class="n">decay</span> <span class="n">channel</span> <span class="k">for</span> <span class="n">the</span> <span class="n">first</span> <span class="p">(</span><span class="n">t1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">second</span> <span class="n">tau</span> <span class="p">(</span><span class="n">t2</span><span class="p">)</span>
+                      		 <span class="mi">0</span>        <span class="n">Inclusive</span>
+                      		 <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span>    <span class="n">electron</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">pi</span>
+                      		 <span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span>  <span class="n">rho</span><span class="p">,</span><span class="n">a1</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">K</span><span class="o">*</span>
+                      		 <span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span>  <span class="mi">3</span><span class="n">pip0</span><span class="p">,</span><span class="n">pi3pi0</span><span class="p">,</span><span class="mi">3</span><span class="n">pi2pi0</span><span class="p">,</span><span class="mi">5</span><span class="n">pi</span><span class="p">,</span><span class="mi">5</span><span class="n">pip0</span><span class="p">,</span><span class="mi">3</span><span class="n">pi3p0</span>
+                      		 <span class="mi">14</span><span class="p">,</span> <span class="o">...</span> <span class="p">(</span><span class="n">other</span> <span class="n">rare</span> <span class="n">decays</span> <span class="n">see</span> <span class="n">tauola</span><span class="o">++</span><span class="p">)</span>
+  <span class="o">--</span><span class="n">tauopt</span> <span class="n">file</span> 		<span class="n">File</span> <span class="k">with</span> <span class="n">tau</span> <span class="n">options</span> <span class="p">(</span><span class="n">see</span> <span class="n">Tauola</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">KKMCee_defaults</span><span class="p">)</span>
+                      		 <span class="n">the</span> <span class="n">file</span> <span class="ow">is</span> <span class="n">included</span> <span class="k">as</span> <span class="n">it</span> <span class="ow">is</span> <span class="ow">and</span> <span class="n">overwrites</span> <span class="n">other</span> <span class="n">settings</span>
+
+<span class="n">Examples</span><span class="p">:</span>
+<span class="n">KKMCee</span> <span class="o">-</span><span class="n">f</span> <span class="n">Mu</span> <span class="o">-</span><span class="n">e</span> <span class="mf">91.2</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10000</span> <span class="o">-</span><span class="n">o</span> <span class="n">kkmu_10000</span><span class="o">.</span><span class="n">hepmc</span> <span class="o">-</span><span class="n">b</span> <span class="mf">0.001</span>
+<span class="n">KKMCee</span> <span class="o">-</span><span class="n">c</span> <span class="n">kkmc_ditau</span><span class="o">.</span><span class="n">input</span>
+<span class="n">KKMCee</span> <span class="o">-</span><span class="n">f</span> <span class="n">B</span> <span class="o">-</span><span class="n">e</span> <span class="mf">91.2</span> <span class="o">-</span><span class="n">n</span> <span class="mi">1000</span> <span class="o">-</span><span class="n">o</span> <span class="n">kkbb_1000</span><span class="o">.</span><span class="n">hepmc</span>
+
+  <span class="n">NB</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="n">This</span> <span class="n">wrapper</span> <span class="n">works</span> <span class="n">only</span> <span class="k">for</span> <span class="n">KKMCee</span> <span class="n">versions</span> <span class="mi">5</span> <span class="ow">or</span> <span class="n">newer</span>
+      <span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="n">Output</span> <span class="ow">is</span> <span class="n">HEPMC</span> <span class="n">v3</span>
+</pre></div>
+</div>
+</div>
+<p>Note that the BES (Beam Energy Spread) options are only available in version 4.32.01 and higher.</p>
+<p>A configuration example file for taus is available under at</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ls `dirname $( which KKMCee )`/../share/KKMCee/examples/kkmc-tauola.input
+</pre></div>
+</div>
+<div class="toggle admonition">
+<p class="admonition-title">Show dimuon example</p>
+<p>To generate a sample of dimuon events using the example files, do the following</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>KKMCee<span class="w"> </span>-f<span class="w"> </span>Mu<span class="w"> </span>-e<span class="w"> </span><span class="m">91</span>.2<span class="w"> </span>-n<span class="w"> </span><span class="m">1000</span><span class="w"> </span>-o<span class="w"> </span>kkmu_1000.hepmc
+</pre></div>
+</div>
+<p>The output should look something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Seeds: 29318493 48191772
+  29318493      IJKLIN= 29318493  48191772
+         0      NTOTIN= 0
+         0      NTOT2N= 0
+  ------- starting from the scratch ----------
+ranmar initialized: ij,kl,ijkl,ntot,ntot2=       974     18625  29318493         0         0
+        1000  requested events
+ ---------------
+ ****************************
+ *    KK2f_ReaDataX Starts  *
+ ****************************
+ ---------------
+ ---------------
+ ---------------
+ ---------------
+ ---------------
+BeginX
+********************************************************************************
+*               ACTUAL DATA FOR THIS PARTICULAR RUN
+********************************************************************************
+*indx_____data______ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0ccccccccc0
+*     Center-of-mass energy [GeV]
+    1    91.0000         CMSene =xpar( 1) Average Center of mass energy [GeV]
+********************************************************************************
+*     Define process
+  413    1.00000          KFfin, muon
+  100    1.00000          store lhe file to (LHE_OUT.LHE)
+ ---------------          26          36 LHE_OUT.LHE
+************************* one can change the lhf file name between brackets
+********************************************************************************
+EndX
+ **************************
+ *   KK2f_ReaDataX Ends   *
+ **************************
+ Tables are READ from DiskFile  dizet/table.down
+amz,amh,amtop,swsq,gammz,amw,gammw=
+     =  91.1876000 125.1000000 173.0000000   0.2234020   2.4953766  80.3588894   2.0898788
+ 
+ ...
+ 
+ 
+
+                            Event listing (summary)
+
+    I particle/jet KS     KF  orig    p_x      p_y      p_z       E        m
+
+    1 !e-!         21      11    0    0.000    0.000   45.500   45.500    0.001
+    2 !e+!         21     -11    0    0.000    0.000  -45.500   45.500    0.001
+    3 (Z0)         11      23    1    0.039    0.001    0.115   90.879   90.879
+    4 gamma         1      22    1    0.000    0.000   -0.001    0.001    0.000
+    5 gamma         1      22    1   -0.039   -0.001   -0.114    0.120    0.000
+    6 mu-           1      13    3   14.678    0.229   43.067   45.500    0.106
+    7 mu+           1     -13    3  -14.639   -0.229  -42.952   45.379    0.106
+                   sum:  0.00         0.000    0.000    0.000   91.000   91.000
+ iev=          501
+  generation finished
+  xSecPb, xErrPb =   1442.5021729176829        13.903134156944603
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++    GLK_PRINT: bmin.eq.bmax, id=     50004 ++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++    GLK_PRINT: bmin.eq.bmax, id=     50005 ++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+real	0m4.043s
+user	0m3.777s
+sys	0m0.085s
+</pre></div>
+</div>
+</div>
+<p>and a file <code class="docutils literal notranslate"><span class="pre">kkmu_1000.hepmc</span></code> created.</p>
+<p><code class="docutils literal notranslate"><span class="pre">KKMCee</span></code> creates several files during its run. These are saved into a folder called <code class="docutils literal notranslate"><span class="pre">KKMCee-&lt;date&gt;-&lt;time&gt;</span></code>, for example <code class="docutils literal notranslate"><span class="pre">KKMCee-12Oct2022-191047</span></code>.
+This folder contains the files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls KKMCee-12Oct2022-191047
+DIZET-table1  TabMain77.output  TabMainC.output  mcgen.root  pro.input  pro.output  pro77.output
+</pre></div>
+</div>
+<p>The file <code class="docutils literal notranslate"><span class="pre">pro.input</span></code> contains the configuration options and can be used to repeat the run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>KKMCee<span class="w"> </span>-c<span class="w"> </span>KKMCee-12Oct2022-191047/pro.input
+</pre></div>
+</div>
+<p>and, of course, as base configuration file example for further variations.</p>
+</section>
+<section id="bhlumi">
+<h3><span class="section-number">2.1.3.5. </span>BHLUMI<a class="headerlink" href="#bhlumi" title="Permalink to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">BHLUMI</span></code> is a Monte Carlo generator of Bhabha events used at LEP for luminosity studies.
+BHLUMI is available as standalone program when using the key4hep stack:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>which<span class="w"> </span>BHLUMI
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">cvmfs</span><span class="o">/</span><span class="n">sw</span><span class="o">.</span><span class="n">hsf</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">spackages4</span><span class="o">/</span><span class="n">bhlumi</span><span class="o">/</span><span class="mf">4.04</span><span class="o">-</span><span class="n">linuxLHE</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">centos7</span><span class="o">-</span><span class="n">gcc8</span><span class="mf">.3.0</span><span class="o">-</span><span class="n">opt</span><span class="o">/</span><span class="n">o7rmcus</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">BHLUMI</span>
+</pre></div>
+</div>
+<p>A help function is available:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BHLUMI</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+<div class="toggle admonition">
+<p class="admonition-title">Show help function output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+++</span> <span class="n">Wrapper</span> <span class="n">around</span> <span class="n">the</span> <span class="n">BHLUMI</span><span class="o">.</span><span class="n">exe</span> <span class="n">executable</span> <span class="o">+++</span>
+
+<span class="n">Usage</span><span class="p">:</span> 	<span class="n">BHLUMI</span> <span class="o">-</span><span class="n">e</span> <span class="n">Ecms</span> <span class="o">-</span><span class="n">n</span> <span class="n">Nevts</span> <span class="o">-</span><span class="n">f</span> <span class="n">Thmin</span> <span class="o">-</span><span class="n">t</span> <span class="n">Thmax</span> <span class="o">-</span><span class="n">x</span> <span class="n">epscms</span> <span class="o">-</span><span class="n">o</span> <span class="n">output_file</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">seed_file</span><span class="p">]</span>
+       	<span class="n">BHLUMI</span> <span class="o">-</span><span class="n">c</span> <span class="n">config_file</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">seed_file</span><span class="p">]</span>
+
+<span class="n">Switches</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="o">--</span><span class="n">config</span> <span class="n">file</span> 		<span class="n">Path</span> <span class="n">to</span> <span class="n">configuration</span> <span class="n">file</span>
+  <span class="o">-</span><span class="n">e</span><span class="p">,</span> <span class="o">--</span><span class="n">ecms</span> <span class="n">energy</span> 		<span class="n">Center</span> <span class="n">of</span> <span class="n">Mass</span> <span class="n">energy</span> <span class="ow">in</span> <span class="n">GeV</span>
+  <span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="o">--</span><span class="n">nevts</span> <span class="n">energy</span> 		<span class="n">Number</span> <span class="n">of</span> <span class="n">events</span> <span class="n">to</span> <span class="n">be</span> <span class="n">generated</span>
+  <span class="o">-</span><span class="n">f</span><span class="p">,</span> <span class="o">--</span><span class="n">Thmin</span> <span class="n">theta</span> 		<span class="n">Minimum</span> <span class="n">theta</span> <span class="p">[</span><span class="n">rad</span><span class="p">]</span>
+  <span class="o">-</span><span class="n">t</span><span class="p">,</span> <span class="o">--</span><span class="n">Thmax</span> <span class="n">theta</span> 		<span class="n">Maximum</span> <span class="n">theta</span> <span class="p">[</span><span class="n">rad</span><span class="p">]</span>
+  <span class="o">-</span><span class="n">x</span><span class="p">,</span> <span class="o">--</span><span class="n">epscms</span> <span class="n">fraction</span> 	<span class="n">Energy</span> <span class="n">cut</span><span class="o">-</span><span class="n">off</span> <span class="ow">in</span>  <span class="n">fraction</span> <span class="n">of</span> <span class="n">Ecms</span>
+  <span class="o">-</span><span class="n">o</span><span class="p">,</span> <span class="o">--</span><span class="n">outfile</span> <span class="n">file</span> 		<span class="n">File</span> <span class="k">with</span> <span class="n">the</span> <span class="n">generated</span> <span class="n">events</span> <span class="ow">in</span> <span class="n">LHE</span> <span class="nb">format</span>
+  <span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="n">seedfile</span> <span class="n">file</span> 		<span class="n">File</span> <span class="n">to</span> <span class="n">be</span> <span class="n">used</span> <span class="k">for</span> <span class="n">seeding</span> <span class="p">(</span><span class="n">randomly</span> <span class="n">generated</span><span class="p">,</span> <span class="k">if</span> <span class="n">missing</span><span class="p">)</span>
+
+<span class="n">Examples</span><span class="p">:</span>
+<span class="n">BHLUMI</span> <span class="o">-</span><span class="n">f</span> <span class="mf">0.022</span> <span class="o">-</span><span class="n">t</span> <span class="mf">0.082</span> <span class="o">-</span><span class="n">x</span> <span class="mf">0.001</span> <span class="o">-</span><span class="n">e</span> <span class="mf">91.2</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10000</span> <span class="o">-</span><span class="n">o</span> <span class="n">kkmu_10000</span><span class="o">.</span><span class="n">LHE</span>
+<span class="n">BHLUMI</span> <span class="o">-</span><span class="n">c</span> <span class="n">bhlumi</span><span class="o">.</span><span class="n">input</span>
+
+<span class="n">Additional</span> <span class="n">switches</span> <span class="p">(</span><span class="k">for</span> <span class="n">experts</span> <span class="n">only</span><span class="p">):</span>
+  <span class="o">-</span><span class="n">k</span><span class="p">,</span> <span class="o">--</span><span class="n">keyopt</span> <span class="n">KEYOPT</span> 		<span class="n">Technical</span> <span class="n">parameters</span> <span class="n">switch</span> <span class="p">[</span><span class="n">default</span> <span class="mi">3021</span><span class="p">]</span>
+  				<span class="n">KEYOPT</span> <span class="o">=</span> <span class="mi">1000</span><span class="o">*</span><span class="n">KEYGEN</span> <span class="o">+</span> <span class="mi">100</span><span class="o">*</span><span class="n">KEYREM</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">KEYWGT</span> <span class="o">+</span> <span class="n">KEYRND</span>
+  <span class="o">-</span><span class="n">r</span><span class="p">,</span> <span class="o">--</span><span class="n">keyrad</span> <span class="n">KEYRAD</span> 		<span class="n">Physics</span> <span class="n">parameters</span> <span class="n">switch</span> <span class="p">[</span><span class="n">default</span> <span class="mi">1021</span><span class="p">]</span>
+  				<span class="n">KEYRAD</span> <span class="o">=</span> <span class="mi">1000</span><span class="o">*</span><span class="n">KEYZET</span> <span class="o">+</span> <span class="mi">100</span><span class="o">*</span><span class="n">KEYUPD</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">KEYMOD</span> <span class="o">+</span> <span class="n">KEYPIA</span>
+  <span class="p">(</span><span class="n">Contact</span> <span class="n">BHLUMI</span> <span class="n">authors</span> <span class="k">for</span> <span class="n">details</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">through</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">KrakowHEPSoft</span><span class="o">/</span><span class="n">BHLUMI</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="babayaga">
+<h3><span class="section-number">2.1.3.6. </span>BabaYaga<a class="headerlink" href="#babayaga" title="Permalink to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">BabaYaga</span></code> is a Monte Carlo generator of two-photons events used at LEP.
+BabaYaga is available as standalone program when using the key4hep stack:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>which<span class="w"> </span>babayaga
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">cvmfs</span><span class="o">/</span><span class="n">sw</span><span class="o">.</span><span class="n">hsf</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">spackages4</span><span class="o">/</span><span class="n">babayaga</span><span class="o">/</span><span class="n">fcc</span><span class="o">-</span><span class="mf">1.0.0</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">centos7</span><span class="o">-</span><span class="n">gcc8</span><span class="mf">.3.0</span><span class="o">-</span><span class="n">opt</span><span class="o">/</span><span class="n">jsgdir7</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">babayaga</span>
+</pre></div>
+</div>
+<p>A help function is available:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">babayaga</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+<div class="toggle admonition">
+<p class="admonition-title">Show help function output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="o">+++</span> <span class="n">Wrapper</span> <span class="n">around</span> <span class="n">the</span> <span class="n">babayaga</span><span class="o">-</span><span class="n">fcc</span><span class="o">.</span><span class="n">exe</span> <span class="n">executable</span> <span class="o">+++</span>
+
+<span class="o">+++</span> <span class="n">Process</span><span class="p">:</span> <span class="n">e</span><span class="o">+</span><span class="n">e</span><span class="o">-</span> <span class="o">-&gt;</span> <span class="n">gamma</span> <span class="n">gamma</span>
+
+<span class="n">Usage</span><span class="p">:</span> 	<span class="n">babayaga</span> <span class="o">-</span><span class="n">e</span> <span class="n">Ecms</span> <span class="o">-</span><span class="n">n</span> <span class="n">Nevts</span> <span class="o">-</span><span class="n">f</span> <span class="n">Thmin</span> <span class="o">-</span><span class="n">t</span> <span class="n">Thmax</span> <span class="o">-</span><span class="n">x</span> <span class="n">epscms</span> <span class="o">-</span><span class="n">o</span> <span class="n">output_file</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">seed</span><span class="p">]</span>
+       	<span class="n">babayaga</span> <span class="o">-</span><span class="n">c</span> <span class="n">config_file</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">seed</span><span class="p">]</span>
+
+<span class="n">Switches</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="o">--</span><span class="n">config</span> <span class="n">file</span> 		<span class="n">Path</span> <span class="n">to</span> <span class="n">configuration</span> <span class="n">file</span>
+  <span class="o">-</span><span class="n">e</span><span class="p">,</span> <span class="o">--</span><span class="n">ecms</span> <span class="n">energy</span> 		<span class="n">Center</span> <span class="n">of</span> <span class="n">Mass</span> <span class="n">energy</span> <span class="ow">in</span> <span class="n">GeV</span>
+  <span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="o">--</span><span class="n">nevts</span> <span class="n">energy</span> 		<span class="n">Number</span> <span class="n">of</span> <span class="n">events</span> <span class="n">to</span> <span class="n">be</span> <span class="n">generated</span>
+  <span class="o">-</span><span class="n">f</span><span class="p">,</span> <span class="o">--</span><span class="n">Thmin</span> <span class="n">angle</span> 		<span class="n">Minimum</span> <span class="n">theta</span> <span class="p">[</span><span class="n">deg</span><span class="p">]</span>
+  <span class="o">-</span><span class="n">t</span><span class="p">,</span> <span class="o">--</span><span class="n">Thmax</span> <span class="n">angle</span> 		<span class="n">Maximum</span> <span class="n">theta</span> <span class="p">[</span><span class="n">deg</span><span class="p">]</span>
+  <span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="o">--</span><span class="n">acolmax</span> <span class="n">angle</span> 		<span class="n">Max</span> <span class="n">acollinearity</span> <span class="p">[</span><span class="n">deg</span><span class="p">]</span>
+  <span class="o">-</span><span class="n">m</span><span class="p">,</span> <span class="o">--</span><span class="n">emin</span> <span class="n">energy</span> 		<span class="n">Min</span> <span class="n">energy</span> <span class="ow">in</span> <span class="n">GeV</span>
+  <span class="o">-</span><span class="n">x</span><span class="p">,</span> <span class="o">--</span><span class="n">eps</span> <span class="n">fraction</span> 		<span class="n">Soft</span><span class="o">-</span><span class="n">photon</span> <span class="n">cut</span><span class="o">-</span><span class="n">off</span>
+  <span class="o">-</span><span class="n">o</span><span class="p">,</span> <span class="o">--</span><span class="n">outfile</span> <span class="n">file</span> 		<span class="n">File</span> <span class="k">with</span> <span class="n">the</span> <span class="n">generated</span> <span class="n">events</span> <span class="ow">in</span> <span class="n">LHE</span> <span class="nb">format</span>
+  <span class="o">-</span><span class="n">w</span><span class="p">,</span> <span class="o">--</span><span class="n">outdir</span> <span class="n">path</span> 		<span class="n">Path</span> <span class="k">with</span> <span class="n">working</span> <span class="n">space</span> <span class="p">(</span><span class="ow">and</span> <span class="n">residual</span> <span class="n">files</span><span class="p">)</span>
+  <span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="n">seed</span> <span class="n">number</span> 		<span class="n">Number</span> <span class="n">used</span> <span class="k">for</span> <span class="n">seeding</span> <span class="p">(</span><span class="n">randomly</span> <span class="n">generated</span><span class="p">,</span> <span class="k">if</span> <span class="n">missing</span><span class="p">)</span>
+  <span class="o">-</span><span class="n">d</span><span class="p">,</span> <span class="o">--</span><span class="n">debug</span> <span class="n">number</span> 		<span class="n">Debug</span> <span class="n">level</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+
+<span class="n">Examples</span><span class="p">:</span>
+<span class="n">babayaga</span> <span class="o">-</span><span class="n">f</span> <span class="mf">15.</span> <span class="o">-</span><span class="n">t</span> <span class="mf">165.</span> <span class="o">-</span><span class="n">e</span> <span class="mf">91.2</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10000</span> <span class="o">-</span><span class="n">o</span> <span class="n">bbyg_10000</span><span class="o">.</span><span class="n">LHE</span>
+<span class="n">babayaga</span> <span class="o">-</span><span class="n">c</span> <span class="n">babayaga</span><span class="o">.</span><span class="n">input</span> <span class="o">-</span><span class="n">o</span> <span class="n">bbyg</span><span class="o">.</span><span class="n">LHE</span>
+
+</pre></div>
+</div>
+</div>
+</section>
+<section id="herwig">
+<h3><span class="section-number">2.1.3.7. </span>Herwig<a class="headerlink" href="#herwig" title="Permalink to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Herwig</span></code> is another historical LEP generator providing a difefrent approach to hadronization wrt <code class="docutils literal notranslate"><span class="pre">Pythia8</span></code>. It is available as standalone program:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ which Herwig
+/cvmfs/sw.hsf.org/spackages7/herwig3/7.2.3/x86_64-centos7-gcc11.2.0-opt/q3pxd/bin/Herwig
+</pre></div>
+</div>
+</section>
+<section id="madgraph5">
+<h3><span class="section-number">2.1.3.8. </span>MadGraph5<a class="headerlink" href="#madgraph5" title="Permalink to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">MadGraph5</span></code> was developed for <code class="docutils literal notranslate"><span class="pre">LHC</span></code> but it is reality general purpose and can be used also for <code class="docutils literal notranslate"><span class="pre">FCC-ee</span></code>. It is available as standalone program:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>which<span class="w"> </span>mg5_aMC
+/cvmfs/sw.hsf.org/spackages7/madgraph5amc/2.8.1/x86_64-centos7-gcc11.2.0-opt/nlauf/bin/mg5_aMC
+</pre></div>
+</div>
+</section>
+</section>
+<section id="hands-on-case-study-ditau-events-with-pythia8-whizard-and-kkmcee">
+<h2><span class="section-number">2.1.4. </span>Hands-on case study: ditau events with Pythia8, Whizard and KKMCee<a class="headerlink" href="#hands-on-case-study-ditau-events-with-pythia8-whizard-and-kkmcee" title="Permalink to this heading"></a></h2>
+<p>In this section we describe, with exercises, the generation of an equivalent sample of Monte Carlo events with three diffent generators: <code class="docutils literal notranslate"><span class="pre">Pythia8</span></code>, <code class="docutils literal notranslate"><span class="pre">Whizard</span></code> and <code class="docutils literal notranslate"><span class="pre">KKMCee</span></code>. The process chosen is <span class="math notranslate nohighlight">\(e^{-}e^{+} \rightarrow \tau^{-}\tau^{+}\)</span>
+(hereafter referred to as <em>ditaus</em>), with both <em>taus</em> decaying leptonically with a <em>muon</em> in the final state. The centre of mass energy of 91.2 GeV. In the three cases 10000 will be generated and saved in <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> files in <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code> format: the steps to arrive at this results are however different.</p>
+<section id="generating-ditaus-with-pythia8">
+<h3><span class="section-number">2.1.4.1. </span>Generating ditaus with Pythia8<a class="headerlink" href="#generating-ditaus-with-pythia8" title="Permalink to this heading"></a></h3>
+<p>As explained in the dedicated <a class="reference internal" href="#pythia8"><span class="std std-doc">Pythia8 section</span></a>, we need a <code class="docutils literal notranslate"><span class="pre">Pythia8</span></code> configuration file and a <code class="docutils literal notranslate"><span class="pre">Gaudi</span></code> configuration file.
+For the former, to generate ditau events we will use the file
+<a class="reference external" href="https://github.com/HEP-FCC/FCC-config/blob/main/FCCee/Generator/Pythia8/p8_ee_Ztautau_mumu_ecm91.cmd">p8_ee_Ztautau_mumu_ecm91.cmd</a>. We create a sub-directory <code class="docutils literal notranslate"><span class="pre">cards</span></code> and we retrieve in it the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir cards; cd cards
+$ wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/main/FCCee/Generator/Pythia8/p8_ee_Ztautau_mumu_ecm91.cmd
+</pre></div>
+</div>
+<p>For the second, we create a sub-directory <code class="docutils literal notranslate"><span class="pre">config</span></code> and we retrieve in it the <code class="docutils literal notranslate"><span class="pre">pythia.py</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir config; cd config
+$ wget https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py
+</pre></div>
+</div>
+<p>Before running it, we also create sub-directories <code class="docutils literal notranslate"><span class="pre">gen/&lt;generator_tag&gt;_tautau_ecm91</span></code> for the generator files in format <code class="docutils literal notranslate"><span class="pre">edm4hep</span></code>.</p>
+<div class="callout admonition">
+<p class="admonition-title">Nota Bene</p>
+<p>The sub-directory structure here is not mandatory but copes with the dataset structure suggested by <code class="docutils literal notranslate"><span class="pre">FCCAnalyses</span></code>, as we can see later.</p>
+</div>
+<p>Now: how will we run it? (hint: check specific section)</p>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">k4run</span> <span class="n">config</span><span class="o">/</span><span class="n">pythia</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10000</span> <span class="o">--</span><span class="n">out</span><span class="o">.</span><span class="n">filename</span> <span class="n">gen</span><span class="o">/</span><span class="n">p8_tautau_ecm91</span><span class="o">/</span><span class="n">events_1</span><span class="o">.</span><span class="n">root</span> <span class="o">--</span><span class="n">Pythia8</span><span class="o">.</span><span class="n">PythiaInterface</span><span class="o">.</span><span class="n">pythiacard</span> <span class="n">cards</span><span class="o">/</span><span class="n">p8_ee_Ztautau_mumu_ecm91</span><span class="o">.</span><span class="n">cmd</span>
+</pre></div>
+</div>
+</div>
+<p>Running will take a few minutes. Among the last lines of the output there should be the total cross-section for the process:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">*-------</span>  <span class="n">PYTHIA</span> <span class="n">Event</span> <span class="ow">and</span> <span class="n">Cross</span> <span class="n">Section</span> <span class="n">Statistics</span>  <span class="o">-------------------------------------------------------------*</span>
+ <span class="o">|</span>                                                                                                                 <span class="o">|</span>
+ <span class="o">|</span> <span class="n">Subprocess</span>                                    <span class="n">Code</span> <span class="o">|</span>            <span class="n">Number</span> <span class="n">of</span> <span class="n">events</span>       <span class="o">|</span>      <span class="n">sigma</span> <span class="o">+-</span> <span class="n">delta</span>    <span class="o">|</span>
+ <span class="o">|</span>                                                    <span class="o">|</span>       <span class="n">Tried</span>   <span class="n">Selected</span>   <span class="n">Accepted</span> <span class="o">|</span>     <span class="p">(</span><span class="n">estimated</span><span class="p">)</span> <span class="p">(</span><span class="n">mb</span><span class="p">)</span>   <span class="o">|</span>
+ <span class="o">|</span>                                                    <span class="o">|</span>                                   <span class="o">|</span>                        <span class="o">|</span>
+ <span class="o">|-----------------------------------------------------------------------------------------------------------------|</span>
+ <span class="o">|</span>                                                    <span class="o">|</span>                                   <span class="o">|</span>                        <span class="o">|</span>
+ <span class="o">|</span> <span class="n">f</span> <span class="n">fbar</span> <span class="o">-&gt;</span> <span class="n">gamma</span><span class="o">*/</span><span class="n">Z0</span>                            <span class="mi">221</span> <span class="o">|</span>      <span class="mi">140682</span>      <span class="mi">10000</span>      <span class="mi">10000</span> <span class="o">|</span>   <span class="mf">1.458e-06</span>  <span class="mf">7.715e-09</span> <span class="o">|</span>
+ <span class="o">|</span>                                                    <span class="o">|</span>                                   <span class="o">|</span>                        <span class="o">|</span>
+ <span class="o">|</span> <span class="nb">sum</span>                                                <span class="o">|</span>      <span class="mi">140682</span>      <span class="mi">10000</span>      <span class="mi">10000</span> <span class="o">|</span>   <span class="mf">1.458e-06</span>  <span class="mf">7.715e-09</span> <span class="o">|</span>
+ <span class="o">|</span>                                                                                                                 <span class="o">|</span>
+ <span class="o">*-------</span>  <span class="n">End</span> <span class="n">PYTHIA</span> <span class="n">Event</span> <span class="ow">and</span> <span class="n">Cross</span> <span class="n">Section</span> <span class="n">Statistics</span> <span class="o">----------------------------------------------------------*</span>
+</pre></div>
+</div>
+<p>i.e. 1458.0 +- 7.7 pb.</p>
+</section>
+<section id="generating-ditaus-with-whizard">
+<h3><span class="section-number">2.1.4.2. </span>Generating ditaus with Whizard<a class="headerlink" href="#generating-ditaus-with-whizard" title="Permalink to this heading"></a></h3>
+<p>As explained in the dedicated <a class="reference internal" href="#whizard"><span class="std std-doc">Whizard section</span></a>, to use <code class="docutils literal notranslate"><span class="pre">whizard</span></code> we need a <code class="docutils literal notranslate"><span class="pre">Sindarin</span></code> configuration file. To generate ditau events we will use the file
+<a class="reference external" href="http://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/Z_tautau.sin">Z_tautau.sin</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget http://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/Z_tautau.sin
+</pre></div>
+</div>
+<p>and run it in a dedicate directory to not pollute the working one with the many files produced:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir -p whizard; cd whizard;
+$ whizard ../Z_tautau.sin
+</pre></div>
+</div>
+<p>The output created by <code class="docutils literal notranslate"><span class="pre">whizard</span></code> is <code class="docutils literal notranslate"><span class="pre">LHEf</span></code> (Les Houches Event format); this is because the current build does not support writing <code class="docutils literal notranslate"><span class="pre">HepMC</span></code>; this may change in the future.</p>
+<p>Exercise: look at produced <code class="docutils literal notranslate"><span class="pre">LHEf</span></code> file <code class="docutils literal notranslate"><span class="pre">z_tautau.lhe</span></code>: what did we notice?</p>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<p>The taus are not decayed. We need another solution for that.</p>
+</div>
+<p>The first lines of the <code class="docutils literal notranslate"><span class="pre">LHEf</span></code> file give the total cross-section: 1.508 +- 2 pb, which seems definitely higher than the others.</p>
+<section id="lhef-to-edm4hep-conversion">
+<h4><span class="section-number">2.1.4.2.1. </span><code class="docutils literal notranslate"><span class="pre">LHEf</span></code> to <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code> conversion<a class="headerlink" href="#lhef-to-edm4hep-conversion" title="Permalink to this heading"></a></h4>
+<p>In order to get the events in <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code> format, we exploit the fact that <code class="docutils literal notranslate"><span class="pre">Pythia</span></code> provides <code class="docutils literal notranslate"><span class="pre">LHEf</span></code> reader functionality. To activate that we will use <code class="docutils literal notranslate"><span class="pre">Gaudi</span></code> and special <code class="docutils literal notranslate"><span class="pre">.cmd</span></code> file the consider the input <code class="docutils literal notranslate"><span class="pre">LHEf</span></code> input file as a <code class="docutils literal notranslate"><span class="pre">Beam</span></code>. This special <code class="docutils literal notranslate"><span class="pre">.cmd</span></code> is called <code class="docutils literal notranslate"><span class="pre">p8_lhereader.cmd</span></code> and it is available on the web:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="n">cd</span> <span class="o">../</span><span class="n">cards</span>
+<span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">fccsw</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">apr2023</span><span class="o">/</span><span class="n">tutorial1</span><span class="o">/</span><span class="n">p8_lhereader</span><span class="o">.</span><span class="n">cmd</span>
+</pre></div>
+</div>
+<p>Please note the lines</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>! 4) Read-in Les Houches Event file - alternative beam and process selection.
+Beams:frameType = 4                      ! read info from a LHEF
+Beams:LHEF = z_tautau.lhe                ! the LHEF to read from
+</pre></div>
+</div>
+<p>This file needs to be edited to enter the exact locaton of the input file (it could also be a symlink to avoid always editng the file.</p>
+<p>Also note the lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>! Tau decays to mu nu_tau nu_mu (from pythia8)
+15:onMode = off
+15:onIfAny = 14
+</pre></div>
+</div>
+<p>which will make decay the taus in <code class="docutils literal notranslate"><span class="pre">pythia8</span></code></p>
+<p>As steering we will use the file <code class="docutils literal notranslate"><span class="pre">pythia.py</span></code>.</p>
+<p>Q: how will we run it from the whizard sub-directory? (hint: think of the conversion file)</p>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd whizard
+$ k4run ../config/pythia.py -n 10000 --out.filename ../gen/wz_tautau_ecm91/events_1.root --Pythia8.PythiaInterface.pythiacard ../cards/p8_lhereader.cmd | tee wz_ee_Ztautau_mumu_ecm91.log
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="generating-ditaus-with-kkmcee">
+<h3><span class="section-number">2.1.4.3. </span>Generating ditaus with KKMCee<a class="headerlink" href="#generating-ditaus-with-kkmcee" title="Permalink to this heading"></a></h3>
+<p>As shown in the <a class="reference internal" href="#kkmcee"><span class="std std-doc">KKMCee section</span></a>, event generation with the <code class="docutils literal notranslate"><span class="pre">KKMCee</span></code> is controlled through a configuration file. The interface available in <code class="docutils literal notranslate"><span class="pre">key4hep</span></code> allowed a generation of the configuration file through command line switches. Starting from the command line switches is therefore always a good option when no confguration file is available.</p>
+<p>Currently, <code class="docutils literal notranslate"><span class="pre">KKMCee</span></code> does not have the option to save directly the events in <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code> format. In order to get there we need first to generate the events in <code class="docutils literal notranslate"><span class="pre">HepMC</span></code> format.</p>
+<section id="generating-hepmc-events">
+<h4><span class="section-number">2.1.4.3.1. </span>Generating <code class="docutils literal notranslate"><span class="pre">HepMC</span></code> events<a class="headerlink" href="#generating-hepmc-events" title="Permalink to this heading"></a></h4>
+<p>What are the commands (options) to generate 10000 ditau events and saved them into the file gen/kk_ee_Ztautau_mumu_ecm91_10000.hepmc ?</p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>KKMCee<span class="w"> </span>-f<span class="w"> </span>Tau<span class="w"> </span>-e<span class="w"> </span><span class="m">91</span>.2<span class="w"> </span>-n<span class="w"> </span><span class="m">10000</span><span class="w"> </span>-o<span class="w"> </span>kk_ee_Zautau_mumu_10000.hepmc<span class="w"> </span>-t<span class="w"> </span><span class="m">2002</span>
+</pre></div>
+</div>
+</div>
+<div class="toggle admonition">
+<p class="admonition-title">Expand to see the example of the produced <code class="docutils literal notranslate"><span class="pre">HepMC</span></code> output </p>
+<p>The <code class="docutils literal notranslate"><span class="pre">HepMC</span></code> output is an ASCII format and can browsed with for example <code class="docutils literal notranslate"><span class="pre">more</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>more<span class="w"> </span>kk_ee_Ztautau_mumu_10000.hepmc
+HepMC::Version<span class="w"> </span><span class="m">3</span>.02.05
+HepMC::Asciiv3-START_EVENT_LISTING
+E<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">13</span>
+U<span class="w"> </span>GEV<span class="w"> </span>MM
+A<span class="w"> </span><span class="m">6</span><span class="w"> </span>spin<span class="w"> </span><span class="m">0</span>.008477<span class="w"> </span>-0.585915<span class="w"> </span>-0.810328
+A<span class="w"> </span><span class="m">7</span><span class="w"> </span>spin<span class="w"> </span><span class="m">0</span>.895044<span class="w"> </span>-0.441222<span class="w"> </span><span class="m">0</span>.064956
+P<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span>-11<span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span>-4.5599999997136848e+01<span class="w"> </span><span class="m">4</span>.5600000000000001e+01<span class="w"> </span><span class="m">5</span>.1099859770630950e-04<span class="w"> </span><span class="m">4</span>
+P<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>-11<span class="w"> </span><span class="m">2</span>.2399816427048513e-07<span class="w"> </span><span class="m">1</span>.2760500083922739e-07<span class="w"> </span>-4.5594392324226938e+01<span class="w"> </span><span class="m">4</span>.5594392327084165e+01<span class="w"> </span><span class="m">5</span>.1043808629749475e-04<span class="w"> </span><span class="m">2</span>
+P<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">22</span><span class="w"> </span>-2.2399816427048513e-07<span class="w"> </span>-1.2760500083922739e-07<span class="w"> </span>-5.6076729099135154e-03<span class="w"> </span><span class="m">5</span>.6076729158391651e-03<span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span><span class="m">1</span>
+P<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span><span class="m">4</span>.5599999997136848e+01<span class="w"> </span><span class="m">4</span>.5600000000000001e+01<span class="w"> </span><span class="m">5</span>.1099859770630950e-04<span class="w"> </span><span class="m">4</span>
+V<span class="w"> </span>-2<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">[</span><span class="m">2</span>,4<span class="o">]</span>
+P<span class="w"> </span><span class="m">5</span><span class="w"> </span>-2<span class="w"> </span><span class="m">23</span><span class="w"> </span><span class="m">2</span>.2399816427048513e-07<span class="w"> </span><span class="m">1</span>.2760500083922739e-07<span class="w"> </span><span class="m">5</span>.6076729099103773e-03<span class="w"> </span><span class="m">9</span>.1194392327084159e+01<span class="w"> </span><span class="m">9</span>.1194392154672272e+01<span class="w"> </span><span class="m">2</span>
+P<span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="m">7</span>.1885962308218696e+00<span class="w"> </span>-4.4991780056897120e+01<span class="w"> </span>-9.8145772963693700e-02<span class="w"> </span><span class="m">4</span>.5597189910708785e+01<span class="w"> </span><span class="m">1</span>.7770500000001239e+00<span class="w"> </span><span class="m">2</span>
+P<span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="m">5</span><span class="w"> </span>-15<span class="w"> </span>-7.1885960068237056e+00<span class="w"> </span><span class="m">4</span>.4991780184502126e+01<span class="w"> </span><span class="m">1</span>.0375344587360721e-01<span class="w"> </span><span class="m">4</span>.5597202416375396e+01<span class="w"> </span><span class="m">1</span>.7770499999998681e+00<span class="w"> </span><span class="m">2</span>
+P<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="m">3</span>.6528532505035400e+00<span class="w"> </span>-2.5398200988769531e+01<span class="w"> </span><span class="m">4</span>.4600862264633179e-01<span class="w"> </span><span class="m">2</span>.5663415908813477e+01<span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span><span class="m">1</span>
+P<span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">13</span><span class="w"> </span><span class="m">2</span>.9088804721832275e+00<span class="w"> </span>-1.4574359893798828e+01<span class="w"> </span>-6.1780035495758057e-01<span class="w"> </span><span class="m">1</span>.4875025749206543e+01<span class="w"> </span><span class="m">1</span>.0565830000000000e-01<span class="w"> </span><span class="m">1</span>
+P<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">6</span><span class="w"> </span>-14<span class="w"> </span><span class="m">6</span>.2686276435852051e-01<span class="w"> </span>-5.0192222595214844e+00<span class="w"> </span><span class="m">7</span>.3646016418933868e-02<span class="w"> </span><span class="m">5</span>.0587520599365234e+00<span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span><span class="m">1</span>
+P<span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="m">7</span><span class="w"> </span>-16<span class="w"> </span>-1.4101594686508179e+00<span class="w"> </span><span class="m">1</span>.0276637077331543e+01<span class="w"> </span><span class="m">1</span>.8954864144325256e-01<span class="w"> </span><span class="m">1</span>.0374669075012207e+01<span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span><span class="m">1</span>
+P<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">7</span><span class="w"> </span>-13<span class="w"> </span>-5.2335274219512939e-01<span class="w"> </span><span class="m">1</span>.9895267486572266e+00<span class="w"> </span><span class="m">2</span>.5705483555793762e-01<span class="w"> </span><span class="m">2</span>.0758986473083496e+00<span class="w"> </span><span class="m">1</span>.0565830000000000e-01<span class="w"> </span><span class="m">1</span>
+P<span class="w"> </span><span class="m">13</span><span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="m">14</span><span class="w"> </span>-5.2550840377807617e+00<span class="w"> </span><span class="m">3</span>.2725616455078125e+01<span class="w"> </span>-3.4285002946853638e-01<span class="w"> </span><span class="m">3</span>.3146636962890625e+01<span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span><span class="m">1</span>
+E<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="m">17</span>
+U<span class="w"> </span>GEV<span class="w"> </span>MM
+A<span class="w"> </span><span class="m">8</span><span class="w"> </span>spin<span class="w"> </span>-0.961817<span class="w"> </span><span class="m">0</span>.224045<span class="w"> </span><span class="m">0</span>.157199
+A<span class="w"> </span><span class="m">9</span><span class="w"> </span>spin<span class="w"> </span>-0.961817<span class="w"> </span><span class="m">0</span>.224045<span class="w"> </span><span class="m">0</span>.157199
+A<span class="w"> </span><span class="m">11</span><span class="w"> </span>spin<span class="w"> </span>-0.790568<span class="w"> </span>-0.498846<span class="w"> </span>-0.355182
+P<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span>-11<span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span>-4.5599999997136848e+01<span class="w"> </span><span class="m">4</span>.5600000000000001e+01<span class="w"> </span><span class="m">5</span>.1099859770630950e-04<span class="w"> </span><span class="m">4</span>
+P<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>-11<span class="w"> </span><span class="m">1</span>.3608988909162606e-03<span class="w"> </span>-7.0797770900342773e-04<span class="w"> </span>-4.5535420867045751e+01<span class="w"> </span><span class="m">4</span>.5535402652364432e+01<span class="w"> </span>-4.0757567471711616e-02<span class="w"> </span><span class="m">2</span>
+P<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">22</span><span class="w"> </span>-1.3608988909162606e-03<span class="w"> </span><span class="m">7</span>.0797770900342773e-04<span class="w"> </span>-6.4579130091094755e-02<span class="w"> </span><span class="m">6</span>.4597347635566904e-02<span class="w"> </span>-1.6130980174698654e-09<span class="w"> </span><span class="m">1</span>
+P<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span><span class="m">4</span>.5599999997136848e+01<span class="w"> </span><span class="m">4</span>.5600000000000001e+01<span class="w"> </span><span class="m">5</span>.1099859770630950e-04<span class="w"> </span><span class="m">4</span>
+P<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">11</span><span class="w"> </span>-6.9206286709266992e-06<span class="w"> </span><span class="m">1</span>.4913930365122828e-04<span class="w"> </span><span class="m">4</span>.5598536086585199e+01<span class="w"> </span><span class="m">4</span>.5598528495827317e+01<span class="w"> </span>-2.6311159737751326e-02<span class="w"> </span><span class="m">2</span>
+P<span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">22</span><span class="w"> </span><span class="m">6</span>.9206286709266992e-06<span class="w"> </span>-1.4913930365122828e-04<span class="w"> </span><span class="m">1</span>.4639105516485410e-03<span class="w"> </span><span class="m">1</span>.4715041726827383e-03<span class="w"> </span><span class="m">2</span>.0579515874459978e-11<span class="w"> </span><span class="m">1</span>
+V<span class="w"> </span>-3<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">[</span><span class="m">2</span>,5<span class="o">]</span>
+P<span class="w"> </span><span class="m">7</span><span class="w"> </span>-3<span class="w"> </span><span class="m">23</span><span class="w"> </span><span class="m">1</span>.3539782622453340e-03<span class="w"> </span>-5.5883840535219948e-04<span class="w"> </span><span class="m">6</span>.3115219539447764e-02<span class="w"> </span><span class="m">9</span>.1133931148191749e+01<span class="w"> </span><span class="m">9</span>.1133909281051146e+01<span class="w"> </span><span class="m">2</span>
+P<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">7</span><span class="w"> </span>-15<span class="w"> </span><span class="m">3</span>.9415751172627040e+01<span class="w"> </span><span class="m">2</span>.1813196014962450e+01<span class="w"> </span><span class="m">6</span>.5533728999791174e+00<span class="w"> </span><span class="m">4</span>.5585978851090765e+01<span class="w"> </span><span class="m">2</span>.3911943786087866e+00<span class="w"> </span><span class="m">2</span>
+P<span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="m">8</span><span class="w"> </span>-15<span class="w"> </span><span class="m">3</span>.9337461622363861e+01<span class="w"> </span><span class="m">2</span>.1673662453262313e+01<span class="w"> </span><span class="m">6</span>.5670154262523361e+00<span class="w"> </span><span class="m">4</span>.5425401807139110e+01<span class="w"> </span><span class="m">1</span>.7770499999996121e+00<span class="w"> </span><span class="m">2</span>
+P<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">22</span><span class="w"> </span><span class="m">7</span>.8289550263179436e-02<span class="w"> </span><span class="m">1</span>.3953356170013725e-01<span class="w"> </span>-1.3642526273218885e-02<span class="w"> </span><span class="m">1</span>.6057704395165695e-01<span class="w"> </span>-2.6341780319308772e-09<span class="w"> </span><span class="m">1</span>
+P<span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="m">15</span><span class="w"> </span>-3.9414397194364788e+01<span class="w"> </span>-2.1813754853367801e+01<span class="w"> </span>-6.4902576804396714e+00<span class="w"> </span><span class="m">4</span>.5547952297100949e+01<span class="w"> </span><span class="m">1</span>.7770499999997402e+00<span class="w"> </span><span class="m">2</span>
+P<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="m">16</span><span class="w"> </span>-2.1019369125366211e+01<span class="w"> </span>-1.1058233261108398e+01<span class="w"> </span>-3.3810205459594727e+00<span class="w"> </span><span class="m">2</span>.3990200042724609e+01<span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span><span class="m">1</span>
+P<span class="w"> </span><span class="m">13</span><span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="m">13</span><span class="w"> </span>-1.0991277694702148e+00<span class="w"> </span>-4.3037441372871399e-01<span class="w"> </span>-7.9439476132392883e-02<span class="w"> </span><span class="m">1</span>.1877619028091431e+00<span class="w"> </span><span class="m">1</span>.0565830000000000e-01<span class="w"> </span><span class="m">1</span>
+P<span class="w"> </span><span class="m">14</span><span class="w"> </span><span class="m">11</span><span class="w"> </span>-14<span class="w"> </span>-1.7295900344848633e+01<span class="w"> </span>-1.0325146675109863e+01<span class="w"> </span>-3.0297973155975342e+00<span class="w"> </span><span class="m">2</span>.0369989395141602e+01<span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span><span class="m">1</span>
+P<span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="m">9</span><span class="w"> </span>-16<span class="w"> </span><span class="m">3</span>.7669422626495361e+00<span class="w"> </span><span class="m">2</span>.1739947795867920e+00<span class="w"> </span><span class="m">1</span>.1482763290405273e+00<span class="w"> </span><span class="m">4</span>.4982938766479492e+00<span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span><span class="m">1</span>
+P<span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="m">9</span><span class="w"> </span>-13<span class="w"> </span><span class="m">2</span>.2649795532226562e+01<span class="w"> </span><span class="m">1</span>.2544136047363281e+01<span class="w"> </span><span class="m">3</span>.6078701019287109e+00<span class="w"> </span><span class="m">2</span>.6141853332519531e+01<span class="w"> </span><span class="m">1</span>.0565830000000000e-01<span class="w"> </span><span class="m">1</span>
+P<span class="w"> </span><span class="m">17</span><span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="m">14</span><span class="w"> </span><span class="m">1</span>.2920722961425781e+01<span class="w"> </span><span class="m">6</span>.9555315971374512e+00<span class="w"> </span><span class="m">1</span>.8108688592910767e+00<span class="w"> </span><span class="m">1</span>.4785254478454590e+01<span class="w"> </span><span class="m">0</span>.0000000000000000e+00<span class="w"> </span><span class="m">1</span>
+...
+</pre></div>
+</div>
+<p>The detailed description of the ASCII <code class="docutils literal notranslate"><span class="pre">HepMC</span></code> output can be found in Section 3.4 of <a class="reference external" href="https://arxiv.org/abs/1912.08005">HepMC3 writeup</a>.
+The first two line indicate the version of <code class="docutils literal notranslate"><span class="pre">HepMC</span></code> (here 3.02.04) and the type of output, i.e. <code class="docutils literal notranslate"><span class="pre">Asciiv3</span></code> (<code class="docutils literal notranslate"><span class="pre">HepMC</span></code> supports also binary formats as output).
+The block for each event starts with a line <code class="docutils literal notranslate"><span class="pre">E</span></code>, indicating the event number, the number of vertices and the number of particles. The line staring with <code class="docutils literal notranslate"><span class="pre">U</span></code> gives the adopted units for energy and distances. The lines starting with <code class="docutils literal notranslate"><span class="pre">P</span></code> are the particle lines: the first integer is the particle number in the list, the second the particle number of the parent particle, the third the <code class="docutils literal notranslate"><span class="pre">PDG</span></code> particle ID, then we have the 3-momentum, the nergy and the mass; finally the status, with <code class="docutils literal notranslate"><span class="pre">status==1</span></code> labelling <em>stable</em> particles entering leaving the interaction point and entering the detector. The lines starting with <code class="docutils literal notranslate"><span class="pre">A</span></code> indicate additional attributes: the can be per run, per event or per element of the listing. In this case they are used to provide helicity information for the two taus: the first number is the particle number, the second the name of the attribute, the rest the helicity information.</p>
+<p>Q: What can be conidered <em>strange</em> in the above listing ?</p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<p>A close-up look at the listing rasing two questions
+1. The number of the second event is still 0. This is due to a bug in the <code class="docutils literal notranslate"><span class="pre">HepMC</span></code> interface of <code class="docutils literal notranslate"><span class="pre">KKMCee</span></code>; it has no influence
+in the following processing, since not really used.
+2. The number of vertices does not seem to correspond to what found in the listing. The number of vertices, for example 4 in the first listing, correponds to the collision plus the decays one: the collision one is indicated by <code class="docutils literal notranslate"><span class="pre">V</span></code>, the other 3 are not indicated explicitely, but can be infered by looking at the particles having the same non-null parent ID: the decays of the Z boson (PDG id = 23), of Tau- (</p>
+</div>
+</div>
+<p>The remaining output files from the run are found in the <code class="docutils literal notranslate"><span class="pre">KKMCee-&lt;date&gt;-&lt;time&gt;</span></code> directory. In particular the file <code class="docutils literal notranslate"><span class="pre">pro.output</span></code> contains at the end information about the process cross-section.</p>
+<p>In this example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tail -37 KKMCee-&lt;date&gt;-&lt;time&gt;/pro.output
+$ tail -37 kk/KKMCee-24Apr2023-060444/pro.output
+   *****************************
+   ****   KKMCee   Finalize ****
+   *****************************
+********************************************************************************
+*                                                                              *
+*                   ****************************************                   *
+*                   ******      KKMCee::Finalize      ******                   *
+*                   ****************************************                   *
+*   f_NevGen =      10000 =                          No. of generated events   *
+*   XsPrimPb =       2700.8551   =                   Primary from Foam [pb]    *
+*  FoamInteg =       1714.1189   =                   Crude from FOAM   [pb]    *
+*         +- =    0.0015340174   =                   error                     *
+*                   ****************************************                   *
+*   &lt;WtMain&gt; =      0.54999872   =                   average WtMain            *
+*         +- =    0.0014270066   =                   error abs.                *
+*     XsMain =       1485.4669   =                   Xsection main [pb]        *
+*         +- =    0.0070075399   =                   error absolute            *
+*         +- =    0.0025945634   =                   error relative            *
+*                   ********** More from WtMainMonit *******                   *
+*      AveWt =      0.54999872   =                   average &lt;WtMain&gt;          *
+*      ERela =    0.0025945634   =                   relative error            *
+*      sigma =      0.38656078   =                   dispersion of WtMain      *
+*   DB_WTmax =               4   =                   input WTmax               *
+*      WtMax =       5.6197178   =                   maximum  WTmain           *
+*      WtMin =               0   =                   mainimum WTmain           *
+*      AvUnd =               0   =                   underflow                 *
+*      AvOve =   3.8040121e-05   =                   overflow                  *
+* AvOve/&lt;Wt&gt; =   6.9164016e-05   =                   relative: AvOve/AveWt     *
+*       Ntot =           73381   =                   Ntot primary events       *
+*       Nacc =           10000   =                   accepted events           *
+*  Nacc/Ntot =      0.13627506   =                   acceptance rate           *
+*       Nneg =               0   =                   WT&lt;0 events               *
+*       Nove =               2   =                   WT&gt;WTmax events           *
+*  Nove/Ntot =   2.7255012e-05   =                   Nove/Ntot                 *
+*       Nzer =            1209   =                   WT=0 events               *
+*                                                                              *
+********************************************************************************
+
+</pre></div>
+</div>
+<p>i.e the total ditau cross-section at 91.2 GeV from <code class="docutils literal notranslate"><span class="pre">KKMCee</span></code> is 1485.5 +- 0.007 pb .</p>
+</section>
+<section id="hepmc-to-edm4hep-conversion">
+<h4><span class="section-number">2.1.4.3.2. </span><code class="docutils literal notranslate"><span class="pre">HepMC</span></code> to <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code> conversion<a class="headerlink" href="#hepmc-to-edm4hep-conversion" title="Permalink to this heading"></a></h4>
+<p>In order to get the events in <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code> format, we will use <code class="docutils literal notranslate"><span class="pre">Gaudi</span></code> and the tools available in <a class="reference external" href="https://github.com/key4hep/k4FWCore">k4FWCore</a> and <a class="reference external" href="https://github.com/HEP-FCC/k4Gen/">k4Gen</a>. We need a Gaudi steering file that reads the <code class="docutils literal notranslate"><span class="pre">HepMC</span></code> file and writes out the <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code> file.
+A minimal version of such a steering code is available on the tutorial reference page:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">fccsw</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">apr2023</span><span class="o">/</span><span class="n">tutorial1</span><span class="o">/</span><span class="n">hepmc2edm</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Let’s see what it does: that is shown by the first line of the help function</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ k4run hepmc2edm.py -h
+ --&gt;  GenAlg  --&gt;  HepMCToEDMConverter  --&gt;  out
+...
+</pre></div>
+</div>
+<section id="dissection-of-hepmc2edm-py">
+<h5><span class="section-number">2.1.4.3.2.1. </span>Dissection of <code class="docutils literal notranslate"><span class="pre">hepmc2edm.py</span></code><a class="headerlink" href="#dissection-of-hepmc2edm-py" title="Permalink to this heading"></a></h5>
+<div class="toggle admonition">
+<p class="admonition-title">Expand</p>
+<p>The tool that we need is <a class="reference external" href="https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCFileReader.h">HepMCFileReader</a>, which is a <code class="docutils literal notranslate"><span class="pre">GaudiTool</span></code>, not a <code class="docutils literal notranslate"><span class="pre">GaudiAlgorithm</span></code>, which is used as a signal provider (such as a Monte Carlo generator) within the <a class="reference external" href="https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/GenAlg.h">Generator Algorithm (GenAlg)</a>. This is done in this part of the code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">HepMCFileReader</span>
+<span class="n">hepmcreader</span> <span class="o">=</span> <span class="n">HepMCFileReader</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">GenAlg</span>
+<span class="n">reader</span> <span class="o">=</span> <span class="n">GenAlg</span><span class="p">()</span>
+<span class="n">reader</span><span class="o">.</span><span class="n">SignalProvider</span> <span class="o">=</span> <span class="n">hepmcreader</span>
+<span class="n">reader</span><span class="o">.</span><span class="n">hepmc</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="s2">&quot;hepmc&quot;</span>
+<span class="n">ApplicationMgr</span><span class="p">()</span><span class="o">.</span><span class="n">TopAlg</span> <span class="o">+=</span> <span class="p">[</span><span class="n">reader</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Then we convert the event from <code class="docutils literal notranslate"><span class="pre">HepMC</span></code> to <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code> with the <a class="reference external" href="https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCToEDMConverter.h">HepMCToEDMConverter</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">HepMCToEDMConverter</span>
+<span class="n">hepmc_converter</span> <span class="o">=</span> <span class="n">HepMCToEDMConverter</span><span class="p">()</span>
+<span class="n">hepmc_converter</span><span class="o">.</span><span class="n">hepmc</span><span class="o">.</span><span class="n">Path</span><span class="o">=</span><span class="s2">&quot;hepmc&quot;</span>
+<span class="n">hepmc_converter</span><span class="o">.</span><span class="n">GenParticles</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="s2">&quot;GenParticles&quot;</span>
+<span class="n">ApplicationMgr</span><span class="p">()</span><span class="o">.</span><span class="n">TopAlg</span> <span class="o">+=</span> <span class="p">[</span><span class="n">hepmc_converter</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Finally we write out the converted events into a file with the <a class="reference external" href="https://github.com/key4hep/k4FWCore/blob/master/k4FWCore/components/PodioOutput.h">PodioOutput</a> algorithm:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">PodioOutput</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">PodioOutput</span><span class="p">(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;hepmc2edm_output.root&quot;</span><span class="p">)</span>
+<span class="n">out</span><span class="o">.</span><span class="n">outputCommands</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;keep *&quot;</span><span class="p">]</span>
+<span class="n">ApplicationMgr</span><span class="p">()</span><span class="o">.</span><span class="n">TopAlg</span> <span class="o">+=</span> <span class="p">[</span><span class="n">out</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="running-hepmc2edm-py">
+<h5><span class="section-number">2.1.4.3.2.2. </span>Running <code class="docutils literal notranslate"><span class="pre">hepmc2edm.py</span></code><a class="headerlink" href="#running-hepmc2edm-py" title="Permalink to this heading"></a></h5>
+<p>Among the <code class="docutils literal notranslate"><span class="pre">hepmc2edm</span></code> switches relevant for the purpose are those controling input an output files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ k4run hepmc2edm.py -h
+...
+  --GenAlg.HepMCFileReader.Filename [GENALG.HEPMCFILEREADER.FILENAME], --Filename.GenAlg.HepMCFileReader [GENALG.HEPMCFILEREADER.FILENAME]
+                        Name of the HepMC file to read [HepMCFileReader]
+...
+  --out.filename [OUT.FILENAME], --filename.out [OUT.FILENAME]
+                        Name of the file to create [PodioOutput]
+...
+</pre></div>
+</div>
+<p>We would like the output file to be called <code class="docutils literal notranslate"><span class="pre">kk_Ztautau_mumu_10000.e4h.root</span></code> . Which command should we use for that?</p>
+<div class="toggle admonition">
+<p class="admonition-title">Check answer</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>config/hepmc2edm.py<span class="w"> </span>-n<span class="w"> </span><span class="m">10000</span><span class="w"> </span>--GenAlg.HepMCFileReader.Filename<span class="w"> </span>kk/kk_tautau_10000.hepmc<span class="w"> </span>--out.filename<span class="w"> </span>gen/kk_tautau_ecm91/events_1.root
+</pre></div>
+</div>
+</div>
+<p>Q: Can you explain why we need to pass the <code class="docutils literal notranslate"><span class="pre">-n</span> <span class="pre">10000</span></code> switch and how you could modify <code class="docutils literal notranslate"><span class="pre">hepmc2edm.py</span></code> to avoid that?</p>
+<div class="toggle admonition">
+<p class="admonition-title">Check answer</p>
+<p>Because <code class="docutils literal notranslate"><span class="pre">hepmc2edm.py</span></code> contains this piece of code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Configurables</span> <span class="kn">import</span> <span class="n">ApplicationMgr</span>
+<span class="n">ApplicationMgr</span><span class="p">(</span>
+               <span class="n">EvtSel</span><span class="o">=</span><span class="s1">&#39;NONE&#39;</span><span class="p">,</span>
+               <span class="n">EvtMax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+               <span class="n">OutputLevel</span><span class="o">=</span><span class="n">INFO</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>The setting <code class="docutils literal notranslate"><span class="pre">EvtMax=1</span></code> is overwritten by <code class="docutils literal notranslate"><span class="pre">-n</span> <span class="pre">&lt;n_evts&gt;</span></code>. To avoid this one could set <code class="docutils literal notranslate"><span class="pre">EvtMax=10000</span></code> inside <code class="docutils literal notranslate"><span class="pre">hepmc2edm.py</span></code> (try!)</p>
+</div>
+<p>Note <em>en passant</em> that the <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code> file is much smaller than the <code class="docutils literal notranslate"><span class="pre">HepMC</span></code> one:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls -lt
+total 43032
+-rw-r--r-- 1 ganis vboxsf  3661630 Oct 18  2022 kk_tautau_10000.e4h.root
+-rw-r--r-- 1 ganis vboxsf     1232 Oct 18  2022 hepmc2edm.py
+drwxr-xr-x 1 ganis vboxsf      288 Oct 18 16:12 KKMCee-18Oct2022-161012
+-rw-r--r-- 1 ganis vboxsf 19584017 Oct 18 16:12 kk_tautau_10000.hepmc
+</pre></div>
+</div>
+<p>Q: Can you explain why?</p>
+<div class="toggle admonition">
+<p class="admonition-title">Check answer</p>
+<p>Because <code class="docutils literal notranslate"><span class="pre">kk_tautau_10000.e4h.root</span></code> is a <code class="docutils literal notranslate"><span class="pre">ROOT</span></code> file, which binary and compressed.</p>
+</div>
+<p>Q: How the cross-sections compare?</p>
+<div class="toggle admonition">
+<p class="admonition-title">Answer</p>
+<p>The differences of the cross-section calculated by <code class="docutils literal notranslate"><span class="pre">KKMCee</span></code> and <code class="docutils literal notranslate"><span class="pre">Pythia8</span></code> is (1485.5 - 1467.0) pb = 18.5 pb ; the errors have a statistical and systematic component. Assuming half and half for statistical and systematics, and the systematics fully correlated, the error on the difference is about 8.5 pb, i.e. the two calculatons differ by 2.6 standard deviations. What would you check first?</p>
+</div>
+</section>
+</section>
+</section>
+<section id="looking-at-the-produced-files-comparing-distributions">
+<h3><span class="section-number">2.1.4.4. </span>Looking at the produced files. Comparing distributions<a class="headerlink" href="#looking-at-the-produced-files-comparing-distributions" title="Permalink to this heading"></a></h3>
+<p>The idea here is to look at some distributions, typically key for generators (angles, momenta). We take as example: acollinearity (of the initial taus, of the decaying products), momenta and cosinus of polar angles of the final 1-prompt products.</p>
+<section id="looking-the-mcparticle-class">
+<h4><span class="section-number">2.1.4.4.1. </span>Looking the MCParticle class<a class="headerlink" href="#looking-the-mcparticle-class" title="Permalink to this heading"></a></h4>
+<p>Despite being ROOT files and the information stored in <code class="docutils literal notranslate"><span class="pre">POD</span></code> (Plain Old Data), the <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code> files are not easily usable, because interpreting the PODs requires the higher level PODIO / EDM4hep classes.
+This is what the helper functions available in FCCAnalyses, which depend of <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code>, do. They can be used to create <code class="docutils literal notranslate"><span class="pre">flat</span></code> ntuples, to be used for the analysis later on.</p>
+</section>
+<section id="building-fccanalyses">
+<h4><span class="section-number">2.1.4.4.2. </span>Building FCCAnalyses<a class="headerlink" href="#building-fccanalyses" title="Permalink to this heading"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">FCCAnalyses</span></code> is avaibale at <a class="reference external" href="https://github.com/HEP-FCC/FCCAnalyses">https://github.com/HEP-FCC/FCCAnalyses</a>. <code class="docutils literal notranslate"><span class="pre">FCCAnalysis</span></code>, which is based on ROOT DataFrame, changes regularly, almost daily.
+Therefore it is always good to rebuild the latest version. It is advised to do it in a separate directory,
+for example <code class="docutils literal notranslate"><span class="pre">../FCCAnalyses</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd ..
+$ git clone https://github.com/HEP-FCC/FCCAnalyses.git
+$ cd FCCAnalyses; mkdir {build,install}; cd build
+$ cmake -DCMAKE_INSTALL_PREFIX=../install ..
+$ make -j4 install
+$ cd ..
+$ source setup.sh
+$ cd ../tutorials1
+</pre></div>
+</div>
+<p>It is mandatory to run setup after the build in the source directory.</p>
+<p>Now we are ready to go.</p>
+</section>
+<section id="creating-histograms-with-fccanalyses">
+<h4><span class="section-number">2.1.4.4.3. </span>Creating histograms with FCCAnalyses<a class="headerlink" href="#creating-histograms-with-fccanalyses" title="Permalink to this heading"></a></h4>
+<p>At this purpose we will use the recently introduced <code class="docutils literal notranslate"><span class="pre">build_graph</span></code> attribute. The example is availble at
+<a class="reference external" href="http://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/histmaker_ttmm.py">histmaker_ttmm.py</a>.</p>
+<section id="dissection-of-histmaker-ttmm-py">
+<h5><span class="section-number">2.1.4.4.3.1. </span>Dissection of <code class="docutils literal notranslate"><span class="pre">histmaker_ttmm.py</span></code><a class="headerlink" href="#dissection-of-histmaker-ttmm-py" title="Permalink to this heading"></a></h5>
+<div class="toggle admonition">
+<p class="admonition-title">Expand</p>
+<p>The files need to be organised in a special way: directories need to be called as the process, files below need to be called <code class="docutils literal notranslate"><span class="pre">events_&lt;num&gt;</span></code>, when <code class="docutils literal notranslate"><span class="pre">&lt;num&gt;</span></code> is any number. So in the current case we have</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls -lt gen
+total 0
+drwxr-xr-x. 2 ganis sf 26 Apr 24 07:38 wz_tautau_ecm91
+drwxr-xr-x. 2 ganis sf 26 Apr 24 07:37 p8_tautau_ecm91
+drwxr-xr-x. 2 ganis sf 26 Apr 24 07:37 kk_tautau_ecm91
+</pre></div>
+</div>
+<p>translating in the following <code class="docutils literal notranslate"><span class="pre">processList</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of processes (mandatory)</span>
+<span class="n">processList</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;p8_tautau_ecm91&#39;</span><span class="p">:</span>    <span class="p">{</span><span class="s1">&#39;fraction&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
+    <span class="s1">&#39;wz_tautau_ecm91&#39;</span><span class="p">:</span>    <span class="p">{</span><span class="s1">&#39;fraction&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
+    <span class="s1">&#39;kk_tautau_ecm91&#39;</span><span class="p">:</span>    <span class="p">{</span><span class="s1">&#39;fraction&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then we need to define where the files are and where they will to go:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the input dir (optional)</span>
+<span class="n">inputDir</span>    <span class="o">=</span> <span class="s2">&quot;gen/&quot;</span>
+
+<span class="c1">#Optional: output directory, default is local running directory</span>
+<span class="n">outputDir</span>   <span class="o">=</span> <span class="s2">&quot;outputs&quot;</span>
+</pre></div>
+</div>
+<p>Define some binning for histograms:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># define some binning for various histograms</span>
+<span class="n">bins_p_l</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="c1"># 0.5 GeV bins</span>
+<span class="n">bins_cosTheta</span> <span class="o">=</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">bins_acol</span> <span class="o">=</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">.9</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we come to the <code class="docutils literal notranslate"><span class="pre">build_graph</span></code>: here the input is the <code class="docutils literal notranslate"><span class="pre">RDataFrame</span></code> called <code class="docutils literal notranslate"><span class="pre">df</span></code> and the output a list of histograms called <code class="docutils literal notranslate"><span class="pre">results</span></code>.
+We can use the built-in functions to extract the information, or define our own as in here</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="kn">import</span> <span class="nn">ROOT</span>
+    <span class="n">ROOT</span><span class="o">.</span><span class="n">gInterpreter</span><span class="o">.</span><span class="n">Declare</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="s2">       #ifndef funDone</span>
+<span class="s2">       #define funDone</span>
+
+<span class="s2">       float cosTheta(const edm4hep::Vector3f&amp; in){</span>
+<span class="s2">          return (in.z/sqrt(pow(in.x,2)+pow(in.y,2)+pow(in.z,2)));</span>
+<span class="s2">       };</span>
+
+<span class="s2">       float scalarProductNorm(const edm4hep::Vector3f&amp; in1, const edm4hep::Vector3f&amp; in2 ){</span>
+<span class="s2">          return ((in1.x*in2.x + in1.y*in2.y + in1.z*in2.z)/sqrt(pow(in1.x,2)+pow(in1.y,2)+pow(in1.z,2))/sqrt(pow(in2.x,2)+pow(in2.y,2)+pow(in2.z,2) ));</span>
+<span class="s2">       };</span>
+
+<span class="s2">       float momP(const edm4hep::Vector3f&amp; in ){</span>
+<span class="s2">          return (sqrt(pow(in.x,2)+pow(in.y,2)+pow(in.z,2)));</span>
+<span class="s2">       };</span>
+
+<span class="s2">       #endif</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which will need for the acollinearity and 1-prompt momentum and cos(theta).
+The histograms are defined in here</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># baseline histograms, before any selection cuts (store with _cut0)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;P_mup&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_p_l</span><span class="p">),</span> <span class="s2">&quot;muplus_p&quot;</span><span class="p">))</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;P_mum&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_p_l</span><span class="p">),</span> <span class="s2">&quot;muminus_p&quot;</span><span class="p">))</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;CosTheta_taup&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_cosTheta</span><span class="p">),</span> <span class="s2">&quot;cthetaup&quot;</span><span class="p">))</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;CosTheta_mup&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_cosTheta</span><span class="p">),</span> <span class="s2">&quot;cthemup&quot;</span><span class="p">))</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;AcolTau&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_acol</span><span class="p">),</span> <span class="s2">&quot;acoltau&quot;</span><span class="p">))</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Histo1D</span><span class="p">((</span><span class="s2">&quot;AcolMu&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">bins_acol</span><span class="p">),</span> <span class="s2">&quot;acolmu&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="running-histmaker-ttmm-py">
+<h5><span class="section-number">2.1.4.4.3.2. </span>Running <code class="docutils literal notranslate"><span class="pre">histmaker_ttmm.py</span></code><a class="headerlink" href="#running-histmaker-ttmm-py" title="Permalink to this heading"></a></h5>
+<p>The <code class="docutils literal notranslate"><span class="pre">build_graph</span></code> is part of the <code class="docutils literal notranslate"><span class="pre">fccanalyses</span> <span class="pre">run</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fccanalysis run histmaker_ttmm.py
+</pre></div>
+</div>
+<p>This should produce <code class="docutils literal notranslate"><span class="pre">ROTO</span></code> files with the histograms in <code class="docutils literal notranslate"><span class="pre">./outputs</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> $ ls -lt outputs/
+total 24
+-rw-r--r--. 1 ganis sf 7386 Apr 24 18:01 kk_tautau_ecm91.root
+-rw-r--r--. 1 ganis sf 7384 Apr 24 18:01 wz_tautau_ecm91.root
+-rw-r--r--. 1 ganis sf 7399 Apr 24 18:01 p8_tautau_ecm91.root
+</pre></div>
+</div>
+</section>
+</section>
+<section id="comparing-distributions">
+<h4><span class="section-number">2.1.4.4.4. </span>Comparing distributions<a class="headerlink" href="#comparing-distributions" title="Permalink to this heading"></a></h4>
+<p>FCCAnalyses provides the <code class="docutils literal notranslate"><span class="pre">plots</span></code> option to prepare some plots. A possible way to plot the histos is available at
+<a class="reference external" href="http://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/plots_ttmm.py">plots_ttmm.py</a>, which can run as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fccanalysis plots plots_ttmm.py
+</pre></div>
+</div>
+<p>with results available under <code class="docutils literal notranslate"><span class="pre">plots</span></code>.</p>
+<p>Example of a result are: <a class="reference download internal" download="" href="../_downloads/c5d588f0a6740fc45d4cd2af64268b19/p_mup.png"><span class="xref download myst">positive muon momentum</span></a>, <a class="reference download internal" download="" href="../_downloads/d3e59f826ae7c334ae9070c7d62060e0/costheta_mup.png"><span class="xref download myst">positive muon cosine theta</span></a>, <a class="reference download internal" download="" href="../_downloads/27539a26cd9b60d3a72306f6e3a893a6/acolmu.png"><span class="xref download myst">acollinearity of muons</span></a>.</p>
+</section>
+<section id="possible-conclusion-of-the-exercise">
+<h4><span class="section-number">2.1.4.4.5. </span>Possible conclusion of the exercise<a class="headerlink" href="#possible-conclusion-of-the-exercise" title="Permalink to this heading"></a></h4>
+<p>Think of your own. Expand for a possible one.</p>
+<div class="toggle admonition">
+<p class="admonition-title">Hint</p>
+<p>The distributions show a lot of similarities, which means that for detector optimisation studies the choice of the generator probably won’t matter. However, the total cross-section is significantly different, so for studies where exact calculations matter more, the <code class="docutils literal notranslate"><span class="pre">KKMCee</span></code> seems the choice to go, because it is the only one giving the total cross-section compatible with experiment (ALEPH at 91.197 GeV gave 1.4771 ± 0.0066± 0.0027 pb).</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="README.html" class="btn btn-neutral float-left" title="2. Generators, Fast Simulation and Analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html" class="btn btn-neutral float-right" title="2.2. FCC: Getting started with simulating events in Delphes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: bnl2023
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../master/index.html">master</a></dd>
+      <dd><a href="FccFastSimGeneration.html">bnl2023</a></dd>
+      <dd><a href="../../cern2022/index.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

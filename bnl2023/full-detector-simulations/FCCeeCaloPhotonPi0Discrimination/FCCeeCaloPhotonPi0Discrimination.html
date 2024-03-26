@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.5. FCC-ee photon/pi0 discrimination using noble liquid calorimeter &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.6. Changing geometry" href="../Geometry/Geometry.html" />
+    <link rel="prev" title="3.4. Noble Liquid Calorimeter Full Simulation Exercise" href="../FccCaloPerformance/CaloFullSimExercise.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fast-sim-and-analysis/README.html">2. Generators, Fast Simulation and Analysis</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../README.html">3. Full Detector Simulations</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeCLD/FCCeeCLD.html">3.1. FCCee: Full Simulation of CLD, the CLID detector for FCC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeDriftChamber/FCCeeDriftChamber.html">3.2. FCCee: Full Simulation of IDEA Driftchamber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeGuineaPigIRBackgrounds/README.html">3.3. Using Guinea-Pig to generate interaction region backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FccCaloPerformance/CaloFullSimExercise.html">3.4. Noble Liquid Calorimeter Full Simulation Exercise</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.5. FCC-ee photon/pi0 discrimination using noble liquid calorimeter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation-of-fccanalyses">3.5.1. Installation of FCCAnalyses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-fccanalyses-skeleton">3.5.2. Build FCCAnalyses skeleton</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-the-highest-energetic-cluster">3.5.3. Get the highest energetic cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-the-list-of-cells-from-the-cluster">3.5.4. Get the list of cells from the cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-sub-collection-of-cells">3.5.5. Create sub-collection of cells</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-collection-of-cells-observables">3.5.6. Create collection of cells observables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-the-mva-inference">3.5.7. Adding the MVA inference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#removing-the-last-layers">3.5.8. Removing the last layers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compare-the-performance">3.5.9. Compare the performance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Geometry/Geometry.html">3.6. Changing geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Visualization/Visualization.html">3.7. Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../README.html"><span class="section-number">3. </span>Full Detector Simulations</a> &raquo;</li>
+      <li><span class="section-number">3.5. </span>FCC-ee photon/pi0 discrimination using noble liquid calorimeter</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="fcc-ee-photon-pi0-discrimination-using-noble-liquid-calorimeter">
+<h1><span class="section-number">3.5. </span>FCC-ee photon/pi0 discrimination using noble liquid calorimeter<a class="headerlink" href="#fcc-ee-photon-pi0-discrimination-using-noble-liquid-calorimeter" title="Permalink to this heading"></a></h1>
+<div class="objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<p>This tutorial will teach you how to:</p>
+<ul class="simple">
+<li><p>produce flat ntuples from full simulation samples using FCCAnalyses</p></li>
+<li><p>infer state of the art deep learning within FCCAnalyses</p></li>
+<li><p>produce discrimination <strong>plots</strong> single photons/pi0</p></li>
+</ul>
+</div>
+<section id="installation-of-fccanalyses">
+<h2><span class="section-number">3.5.1. </span>Installation of FCCAnalyses<a class="headerlink" href="#installation-of-fccanalyses" title="Permalink to this heading"></a></h2>
+<p>For this tutorial we will need to use FCCAnalyses. We can either use it from the stack, or if you have it installed locally use it. If you want to install it, you need to clone and install it.
+Go inside the area that you have setup for the tutorials and get the FCCAnalyses code:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/HEP-FCC/FCCAnalyses.git
+</pre></div>
+</div>
+<p>Go inside the directory and run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>./setup.sh
+mkdir<span class="w"> </span>build<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>../install
+make<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span>..
+</pre></div>
+</div>
+</section>
+<section id="build-fccanalyses-skeleton">
+<h2><span class="section-number">3.5.2. </span>Build FCCAnalyses skeleton<a class="headerlink" href="#build-fccanalyses-skeleton" title="Permalink to this heading"></a></h2>
+<p>We start by creating a file named <code class="docutils literal notranslate"><span class="pre">analysis_tutorial_mva.py</span></code> (or any other name you prefer to use) with the following information.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mandatory: RDFanalysis class where the user defines the operations on the TTree</span>
+<span class="k">class</span> <span class="nc">RDFanalysis</span><span class="p">():</span>
+    <span class="c1">#__________________________________________________________</span>
+    <span class="c1"># Mandatory: analysers function to define the analysers to process, please make sure you return the last dataframe, in this example it is df2</span>
+    <span class="k">def</span> <span class="nf">analysers</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+        <span class="n">df2</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span>
+
+              <span class="p">)</span>
+        <span class="k">return</span> <span class="n">df2</span>
+
+    <span class="c1">#__________________________________________________________</span>
+    <span class="c1"># Mandatory: output function, please make sure you return the branchlist as a python list</span>
+    <span class="k">def</span> <span class="nf">output</span><span class="p">():</span>
+        <span class="n">branchList</span> <span class="o">=</span> <span class="p">[</span>
+
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">branchList</span>
+</pre></div>
+</div>
+<p>At the top of the file, we need to define special variables needed to load the DD4Hep geometry, but first we need to get the path where they are located from the python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the environment variable FCCDETECTORS</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getenv</span>
+<span class="n">FCCDETECTORS</span> <span class="o">=</span> <span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;FCCDETECTORS&quot;</span><span class="p">)</span>
+<span class="c1"># define geometryFile and readoutName to load a DD4Hep detector and readout</span>
+<span class="n">geometryFile</span> <span class="o">=</span> <span class="n">FCCDETECTORS</span> <span class="o">+</span> <span class="s2">&quot;/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectMaster.xml&quot;</span>
+<span class="n">readoutName</span>  <span class="o">=</span> <span class="s2">&quot;ECalBarrelPhiEta&quot;</span>
+</pre></div>
+</div>
+<p>At the top of the file, also add <code class="docutils literal notranslate"><span class="pre">tesFile=</span></code> to point to where your files are located from the calorimeter full simulation tutorial. If you do not have those files, you can use those two:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">testFile</span><span class="o">=</span><span class="s1">&#39;/eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat_smallSampleNotUsedForTraining/output_caloFullSim_10GeV_pdgId_22_noiseFalse.root&#39;</span>
+<span class="c1">#testFile=&#39;/eos/experiment/fcc/ee/tutorial/pi0GammaLAr2022/edm4hepFormat_smallSampleNotUsedForTraining/output_caloFullSim_10GeV_pdgId_111_noiseFalse.root&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="get-the-highest-energetic-cluster">
+<h2><span class="section-number">3.5.3. </span>Get the highest energetic cluster<a class="headerlink" href="#get-the-highest-energetic-cluster" title="Permalink to this heading"></a></h2>
+<p>Let’s now define new columns to the RootDataFrame object <code class="docutils literal notranslate"><span class="pre">df2</span></code> inside the function <code class="docutils literal notranslate"><span class="pre">analysers</span></code> of the class <code class="docutils literal notranslate"><span class="pre">RDFanalysis</span></code>. We start by defining the index in the collection <code class="docutils literal notranslate"><span class="pre">CaloClusters</span></code> which is of type <a class="reference external" href="https://edm4hep.web.cern.ch/_cluster_data_8h_source.html">ClusterData</a> of the cluster with maximum energy:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;maxEnergyCluster_index&quot;</span><span class="p">,</span> <span class="s2">&quot;std::distance(CaloClusters.energy.begin(), std::max_element(CaloClusters.energy.begin(), CaloClusters.energy.end()))&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Similarly, define the index in the collection <code class="docutils literal notranslate"><span class="pre">CaloClusters</span></code> of the cluster with minimum energy, the total number of clusters in the event and the cluster energy.</p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;minEnergyCluster_index&quot;</span><span class="p">,</span> <span class="s2">&quot;std::distance(CaloClusters.energy.begin(), std::min_element(CaloClusters.energy.begin(), CaloClusters.energy.end()))&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;clusters_n&quot;</span><span class="p">,</span> <span class="s2">&quot;CaloClusters.energy.size()&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;clusters_energy&quot;</span><span class="p">,</span> <span class="s2">&quot;CaloClusters.energy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now we need to add all the variables that we have defined to the <code class="docutils literal notranslate"><span class="pre">branchList</span></code> of the <code class="docutils literal notranslate"><span class="pre">output</span></code> function of the same <code class="docutils literal notranslate"><span class="pre">RDFanalysis</span></code> class.</p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;maxEnergyCluster_index&quot;</span><span class="p">,</span> <span class="s2">&quot;minEnergyCluster_index&quot;</span><span class="p">,</span> <span class="s2">&quot;clusters_n&quot;</span><span class="p">,</span> <span class="s2">&quot;clusters_energy&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>And let’s run on a few events to check that everything is fine.
+To find the options to configure the code to run on a few (10) events using as input file the test file in the python <code class="docutils literal notranslate"><span class="pre">testFile</span></code> and to store an output file <code class="docutils literal notranslate"><span class="pre">photons.root</span></code> using the command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>--help
+</pre></div>
+</div>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>analysis_tutorial_mva.py<span class="w"> </span>--nevents<span class="w"> </span><span class="m">10</span><span class="w"> </span>--output<span class="w"> </span>photons.root<span class="w"> </span>--test
+</pre></div>
+</div>
+</div>
+<p>Open the produced root file <code class="docutils literal notranslate"><span class="pre">photons.root</span></code> and inspect it with <code class="docutils literal notranslate"><span class="pre">Scan</span></code> for example check that the index we have calculated indeed correspond to the clusters of maximum/minimum energy:</p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>root<span class="w"> </span>-l<span class="w"> </span>photons.root
+events-&gt;Scan<span class="o">(</span><span class="s2">&quot;maxEnergyCluster_index:minEnergyCluster_index:clusters_n:clusters_energy&quot;</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="get-the-list-of-cells-from-the-cluster">
+<h2><span class="section-number">3.5.4. </span>Get the list of cells from the cluster<a class="headerlink" href="#get-the-list-of-cells-from-the-cluster" title="Permalink to this heading"></a></h2>
+<p>We now need to obtain the index of the first and last cells of the maximum energy cluster. For that we need to select the <code class="docutils literal notranslate"><span class="pre">maxEnergyCluster_index</span></code> in the <code class="docutils literal notranslate"><span class="pre">CaloClusters</span></code> collection and evaluate <code class="docutils literal notranslate"><span class="pre">hits_begin</span></code> and <code class="docutils literal notranslate"><span class="pre">hits_end</span></code>:</p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;maxEnergyCluster_firstCell_index&quot;</span><span class="p">,</span> <span class="s2">&quot;CaloClusters[maxEnergyCluster_index].hits_begin&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;maxEnergyCluster_lastCell_index&quot;</span><span class="p">,</span>  <span class="s2">&quot;CaloClusters[maxEnergyCluster_index].hits_end&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="create-sub-collection-of-cells">
+<h2><span class="section-number">3.5.5. </span>Create sub-collection of cells<a class="headerlink" href="#create-sub-collection-of-cells" title="Permalink to this heading"></a></h2>
+<p>Using the positions of the first and last cells in the <code class="docutils literal notranslate"><span class="pre">PositionedCaloClusterCells</span></code> collection we now need to create a sub-collection from the full collection between the two indices. To achieve this with the ROOT version in this tutorial, we need to declare some extra code after the definition of the <code class="docutils literal notranslate"><span class="pre">analysers</span></code> function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ROOT</span><span class="o">.</span><span class="n">gInterpreter</span><span class="o">.</span><span class="n">Declare</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">template&lt;typename T&gt;</span>
+<span class="s2">ROOT::VecOps::RVec&lt;T&gt; myRange(ROOT::VecOps::RVec&lt;T&gt;&amp; vec, std::size_t begin, std::size_t end)</span>
+<span class="s2">{</span>
+<span class="s2">   ROOT::VecOps::RVec&lt;T&gt; ret;</span>
+<span class="s2">   ret.reserve(end - begin);</span>
+<span class="s2">   for (auto i = begin; i &lt; end; ++i)</span>
+<span class="s2">      ret.push_back(vec[i]);</span>
+<span class="s2">   return ret;</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note, With the root version used for this tutorial (<code class="docutils literal notranslate"><span class="pre">ROOT</span> <span class="pre">v6.26</span></code>) it is not possible to do this inline, while from <code class="docutils literal notranslate"><span class="pre">ROOT</span> <span class="pre">v6.28</span></code> it will be possible using <code class="docutils literal notranslate"><span class="pre">Take</span></code> and <code class="docutils literal notranslate"><span class="pre">Range</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Take</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">Range</span><span class="p">(</span><span class="n">id_end</span> <span class="o">-</span> <span class="n">id_begin</span><span class="p">)</span> <span class="o">+</span> <span class="n">id_begin</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now you can create the sub-collection <code class="docutils literal notranslate"><span class="pre">maxEnergyCluster_Cells</span></code> from the input collection <code class="docutils literal notranslate"><span class="pre">PositionedCaloClusterCells</span></code> from <code class="docutils literal notranslate"><span class="pre">maxEnergyCluster_firstCell_index</span></code> to <code class="docutils literal notranslate"><span class="pre">maxEnergyCluster_lastCell_index</span></code> using the newly defined <code class="docutils literal notranslate"><span class="pre">myRange</span></code> function:</p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;maxEnergyCluster_cells&quot;</span><span class="p">,</span> <span class="s2">&quot;myRange(PositionedCaloClusterCells, maxEnergyCluster_firstCell_index, maxEnergyCluster_lastCell_index)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="create-collection-of-cells-observables">
+<h2><span class="section-number">3.5.6. </span>Create collection of cells observables<a class="headerlink" href="#create-collection-of-cells-observables" title="Permalink to this heading"></a></h2>
+<p>Using the newly defined collection <code class="docutils literal notranslate"><span class="pre">maxEnergyCluster_cells</span></code>, create new variables of their energies, phi, theta, layer and number of cells, using functions like <a class="reference external" href="https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/FCCAnalyses/CaloNtupleizer.h#L23#L33">here</a></p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;maxEnergyCluster_cells_energy&quot;</span><span class="p">,</span> <span class="s2">&quot;CaloNtupleizer::getCaloHit_energy(maxEnergyCluster_cells)&quot;</span> <span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;maxEnergyCluster_cells_phi&quot;</span><span class="p">,</span>    <span class="s2">&quot;CaloNtupleizer::getCaloHit_phi(maxEnergyCluster_cells)&quot;</span> <span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;maxEnergyCluster_cells_theta&quot;</span><span class="p">,</span>  <span class="s2">&quot;CaloNtupleizer::getCaloHit_theta(maxEnergyCluster_cells)&quot;</span> <span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;maxEnergyCluster_cells_layer&quot;</span> <span class="p">,</span> <span class="s2">&quot;CaloNtupleizer::getCaloHit_layer(maxEnergyCluster_cells)&quot;</span> <span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;maxEnergyCluster_cells_n&quot;</span> <span class="p">,</span>     <span class="s2">&quot;maxEnergyCluster_cells.size()&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The last variable to add is the radius of the cell position, you can compute it inline defining first collections <code class="docutils literal notranslate"><span class="pre">maxEnergyCluster_cells_x</span></code> and <code class="docutils literal notranslate"><span class="pre">maxEnergyCluster_cells_y</span></code>. Hint you need to use the <code class="docutils literal notranslate"><span class="pre">myRange</span></code> function <code class="docutils literal notranslate"><span class="pre">PositionedCaloClusterCells</span></code> and the <code class="docutils literal notranslate"><span class="pre">position</span></code> attribute of the collection which is of type <code class="docutils literal notranslate"><span class="pre">edm4hep::CalorimeterHitData</span></code> <a class="reference external" href="https://edm4hep.web.cern.ch/classedm4hep_1_1_calorimeter_hit_data.html">see here</a> and you need to calculate the radius as usual with <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;maxEnergyCluster_cells_x&quot;</span><span class="p">,</span> <span class="s2">&quot;myRange(PositionedCaloClusterCells.position.x, maxEnergyCluster_firstCell_index, maxEnergyCluster_lastCell_index)&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;maxEnergyCluster_cells_y&quot;</span><span class="p">,</span> <span class="s2">&quot;myRange(PositionedCaloClusterCells.position.y, maxEnergyCluster_firstCell_index, maxEnergyCluster_lastCell_index)&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;maxEnergyCluster_cells_radius&quot;</span><span class="p">,</span> <span class="s2">&quot;sqrt(pow(maxEnergyCluster_cells_x,2)+pow(maxEnergyCluster_cells_y,2))&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Do not forget to add all the newly defined variables to the output <code class="docutils literal notranslate"><span class="pre">branchList</span></code>.</p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;maxEnergyCluster_cells_energy&quot;</span><span class="p">,</span><span class="s2">&quot;maxEnergyCluster_cells_phi&quot;</span><span class="p">,</span><span class="s2">&quot;maxEnergyCluster_cells_theta&quot;</span><span class="p">,</span><span class="s2">&quot;maxEnergyCluster_cells_layer&quot;</span><span class="p">,</span><span class="s2">&quot;maxEnergyCluster_cells_n&quot;</span><span class="p">,</span><span class="s2">&quot;maxEnergyCluster_cells_radius&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s give it a try on a few events as last time.</p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>analysis_tutorial_mva.py<span class="w"> </span>--nevents<span class="w"> </span><span class="m">10</span><span class="w"> </span>--output<span class="w"> </span>photons.root<span class="w"> </span>--test
+</pre></div>
+</div>
+</div>
+</section>
+<section id="adding-the-mva-inference">
+<h2><span class="section-number">3.5.7. </span>Adding the MVA inference<a class="headerlink" href="#adding-the-mva-inference" title="Permalink to this heading"></a></h2>
+<p>Now we add the weaver part at the beginning of the <code class="docutils literal notranslate"><span class="pre">analysers</span></code> function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ROOT</span> <span class="kn">import</span> <span class="n">WeaverUtils</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getenv</span>
+<span class="n">test_inputs_path</span> <span class="o">=</span> <span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;TEST_INPUT_DATA_DIR&#39;</span><span class="p">,</span> <span class="s1">&#39;/eos/experiment/fcc/ee/tutorial/PNet_pi0Gamma/v1&#39;</span><span class="p">)</span>
+<span class="n">weaver</span> <span class="o">=</span> <span class="n">WeaverUtils</span><span class="o">.</span><span class="n">setup_weaver</span><span class="p">(</span><span class="n">test_inputs_path</span> <span class="o">+</span> <span class="s1">&#39;/fccee_pi_vs_gamma_v1.onnx&#39;</span><span class="p">,</span>
+                                      <span class="n">test_inputs_path</span> <span class="o">+</span> <span class="s1">&#39;/preprocess_fccee_pi_vs_gamma_v1.json&#39;</span><span class="p">,</span>
+                                      <span class="p">(</span><span class="s1">&#39;recocells_e&#39;</span><span class="p">,</span> <span class="s1">&#39;recocells_theta&#39;</span><span class="p">,</span> <span class="s1">&#39;recocells_phi&#39;</span><span class="p">,</span> <span class="s1">&#39;recocells_radius&#39;</span><span class="p">,</span> <span class="s1">&#39;recocells_layer&#39;</span><span class="p">))</span>
+
+</pre></div>
+</div>
+<p>We need to transform our collection of cells observables in a vector as we might want to evaluate several cluster in the same event:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># retrieve all information about jet constituents for each jet in collection</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;cells_e&quot;</span><span class="p">,</span>         <span class="s2">&quot;Utils::as_vector(maxEnergyCluster_cells_energy)&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;cells_theta&quot;</span><span class="p">,</span>     <span class="s2">&quot;Utils::as_vector(maxEnergyCluster_cells_theta)&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;cells_phi&quot;</span><span class="p">,</span>       <span class="s2">&quot;Utils::as_vector(maxEnergyCluster_cells_phi)&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;cells_radius&quot;</span><span class="p">,</span>    <span class="s2">&quot;Utils::as_vector(maxEnergyCluster_cells_radius)&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;cells_layer&quot;</span><span class="p">,</span>     <span class="s2">&quot;Utils::as_vector(maxEnergyCluster_cells_layer)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then we evaluate the network:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;MVAVec&quot;</span><span class="p">,</span> <span class="s2">&quot;WeaverUtils::get_weights(cells_e, cells_theta, cells_phi, cells_radius, cells_layer)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and retrieve the weights</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;Cluster_isPhoton&quot;</span><span class="p">,</span> <span class="s2">&quot;WeaverUtils::get_weight(MVAVec, 0)&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;Cluster_isPi0&quot;</span><span class="p">,</span>    <span class="s2">&quot;WeaverUtils::get_weight(MVAVec, 1)&quot;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>Finally add the newly defined variable to the <code class="docutils literal notranslate"><span class="pre">branchList</span></code> in the <code class="docutils literal notranslate"><span class="pre">output</span></code> function and run over the full statistics. Do not forget to change the <code class="docutils literal notranslate"><span class="pre">testFile</span></code> when switching pi0, photon</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>analysis_tutorial_mva.py<span class="w"> </span>--output<span class="w"> </span>pi0s.root<span class="w"> </span>--test
+fccanalysis<span class="w"> </span>run<span class="w"> </span>analysis_tutorial_mva.py<span class="w"> </span>--output<span class="w"> </span>photons.root<span class="w"> </span>--test
+</pre></div>
+</div>
+</section>
+<section id="removing-the-last-layers">
+<h2><span class="section-number">3.5.8. </span>Removing the last layers<a class="headerlink" href="#removing-the-last-layers" title="Permalink to this heading"></a></h2>
+<p>In this section we will remove the last layers of the calorimeter and evaluate the same MVA model with less layers. First let’s have a look at one the output file and try to find how many layers we have in the calorimeter. For that plot the number of layers for a few events and look at the histogram</p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>events-&gt;Draw<span class="o">(</span><span class="s2">&quot;maxEnergyCluster_cells_layer&quot;</span>,<span class="s2">&quot;&quot;</span>,<span class="s2">&quot;&quot;</span>,10<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now you produce new file removing the last 2 layers of the calorimeter adding a filter on the cells.
+Need to comment one the definition of the cells collection and add the two lines below</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#.Define(&quot;maxEnergyCluster_cells&quot;, &quot;myRange(PositionedCaloClusterCells, maxEnergyCluster_firstCell_index, maxEnergyCluster_lastCell_index)&quot;)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;maxEnergyCluster_cellsFull&quot;</span><span class="p">,</span> <span class="s2">&quot;myRange(PositionedCaloClusterCells, maxEnergyCluster_firstCell_index, maxEnergyCluster_lastCell_index)&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;maxEnergyCluster_cells&quot;</span><span class="p">,</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">CaloNtupleizer</span><span class="o">.</span><span class="n">sel_layers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),[</span><span class="s2">&quot;maxEnergyCluster_cellsFull&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>and we run again (don’t forget to switch the testFile)</p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>analysis_tutorial_mva.py<span class="w"> </span>--output<span class="w"> </span>pi0s_10layers.root<span class="w"> </span>--test
+fccanalysis<span class="w"> </span>run<span class="w"> </span>analysis_tutorial_mva.py<span class="w"> </span>--output<span class="w"> </span>photons_10layers.root<span class="w"> </span>--test
+</pre></div>
+</div>
+</div>
+</section>
+<section id="compare-the-performance">
+<h2><span class="section-number">3.5.9. </span>Compare the performance<a class="headerlink" href="#compare-the-performance" title="Permalink to this heading"></a></h2>
+<p>We get the following plotting scripts</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/HEP-FCC/fcc-tutorials/master/full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/draw_rocCurve_pi0_gamma_GNN.py
+wget<span class="w"> </span>https://raw.githubusercontent.com/HEP-FCC/fcc-tutorials/master/full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/rocCurveFacility.py
+</pre></div>
+</div>
+<p>Edit <code class="docutils literal notranslate"><span class="pre">draw_rocCurve_pi0_gamma_GNN.py</span></code> and edit the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Where your files are</span>
+<span class="n">input_file_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="c1">#name of your files</span>
+<span class="n">pi0_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_file_path</span><span class="p">,</span> <span class="s2">&quot;pi0s.root&quot;</span><span class="p">)</span>
+<span class="n">photon_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_file_path</span><span class="p">,</span> <span class="s2">&quot;photons.root&quot;</span><span class="p">)</span>
+<span class="c1">#output name</span>
+<span class="n">output_string_suffix</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+<p>and run first with the full layers</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>draw_rocCurve_pi0_gamma_GNN.py
+</pre></div>
+</div>
+<p>change the name to use the 10 layers files</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#name of your files</span>
+<span class="n">pi0_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_file_path</span><span class="p">,</span> <span class="s2">&quot;pi0s_10layers.root&quot;</span><span class="p">)</span>
+<span class="n">photon_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_file_path</span><span class="p">,</span> <span class="s2">&quot;photons_10layers.root&quot;</span><span class="p">)</span>
+<span class="c1">#output name</span>
+<span class="n">output_string_suffix</span> <span class="o">=</span> <span class="s2">&quot;_10layers&quot;</span>
+</pre></div>
+</div>
+<p>and run again with only 10 layers</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>draw_rocCurve_pi0_gamma_GNN.py
+</pre></div>
+</div>
+<p>look at the produced plot and compare the performance.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../FccCaloPerformance/CaloFullSimExercise.html" class="btn btn-neutral float-left" title="3.4. Noble Liquid Calorimeter Full Simulation Exercise" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Geometry/Geometry.html" class="btn btn-neutral float-right" title="3.6. Changing geometry" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: bnl2023
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../../master/index.html">master</a></dd>
+      <dd><a href="FCCeeCaloPhotonPi0Discrimination.html">bnl2023</a></dd>
+      <dd><a href="../../../cern2022/index.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

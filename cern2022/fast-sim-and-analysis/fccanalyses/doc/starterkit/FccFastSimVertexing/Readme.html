@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.4. FCC: tracking and vertexing example using specific flavour decays &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="2.5. FCCAnalyses: Common problems and solutions" href="../../../../FCCAnalysesProblemsAndSolutions.html" />
+    <link rel="prev" title="2.3. FCC: Getting started with analysing simulated events" href="../FccFastSimAnalysis/Readme.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../../../../../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../README.html">2. Generators, Fast Simulation and Analysis</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../FccFastSimGeneration.html">2.1. FCC: Getting started with event generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html">2.2. FCC: Getting started with simulating events in Delphes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FccFastSimAnalysis/Readme.html">2.3. FCC: Getting started with analysing simulated events</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.4. FCC: tracking and vertexing example using specific flavour decays</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation-of-fccanalyses">2.4.1. Installation of FCCAnalyses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-a-custom-sub-package-in-fccanalyses">2.4.2. Building a custom sub-package in FCCAnalyses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reconstruction-of-the-primary-vertex-and-of-primary-tracks">2.4.3. Reconstruction of the primary vertex and of primary tracks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#exercises">2.4.3.1. Exercises:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#reconstruction-of-displaced-vertices-in-an-exclusive-decay-chain-starting-example">2.4.4. Reconstruction of displaced vertices in an exclusive decay chain: starting example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exercise-analysis-of-tau-rightarrow-3-mu">2.4.5. Exercise: analysis of <span class="math notranslate nohighlight">\(\tau \rightarrow 3 \mu\)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../FCCAnalysesProblemsAndSolutions.html">2.5. FCCAnalyses: Common problems and solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../EventProduction.html">2.6. Central production of events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../full-detector-simulations/README.html">3. Full Detector Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../../README.html"><span class="section-number">2. </span>Generators, Fast Simulation and Analysis</a> &raquo;</li>
+      <li><span class="section-number">2.4. </span>FCC: tracking and vertexing example using specific flavour decays</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="fcc-tracking-and-vertexing-example-using-specific-flavour-decays">
+<h1><span class="section-number">2.4. </span>FCC: tracking and vertexing example using specific flavour decays<a class="headerlink" href="#fcc-tracking-and-vertexing-example-using-specific-flavour-decays" title="Permalink to this heading"></a></h1>
+<div class="objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<p>This tutorial will teach you how to:</p>
+<ul class="simple">
+<li><p>fit some tracks to a common vertex in <strong>FCCAnalyses</strong>, recontruct the primary vertex and the primary tracks</p></li>
+<li><p>retrieve the tracks corresponding to a specific flavour decay in <strong>FCCAnalyses</strong></p></li>
+<li><p>produce <strong>flat ntuples</strong> with observables of interest with <strong>FCCAnalyses</strong></p></li>
+<li><p>build your own algorithm inside <strong>FCCAnalyses</strong></p></li>
+</ul>
+<p>For the vertex fitter, we make use of the code developed by Franco Bedeschi, <a class="reference external" href="https://indico.cern.ch/event/1003610/contributions/4214579/attachments/2187815/3696958/Bedeschi_Vertexing_Feb2021.pdf">see this talk</a>.
+The <a class="reference external" href="https://indico.cern.ch/event/1180976/contributions/4960968/attachments/2481467/4259924/Bedeschi_Vertexing_Jul2022.pdf">subsequent updates presented in July 2022</a> offer possibilities for complex reconstructions, but they are not yet ready to use in the public FCCAnalyses version (coming soon).</p>
+<p>To reconstruct the primary vertex and the primary tracks, we follow the LCFI+ algorithm (T. Suehara,T. Tanabe), described in <a class="reference external" href="https://arxiv.org/pdf/1506.08371.pdf">arXiv:1506.08371</a>.</p>
+</div>
+<section id="installation-of-fccanalyses">
+<h2><span class="section-number">2.4.1. </span>Installation of FCCAnalyses<a class="headerlink" href="#installation-of-fccanalyses" title="Permalink to this heading"></a></h2>
+<p>For this tutorial we will need to develop some code inside FCCAnalyses, thus we need to install it locally. If not already done, you need to clone and install it.
+Go inside the area that you have setup for the tutorials and get the FCCAnalyses code:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/HEP-FCC/FCCAnalyses.git
+</pre></div>
+</div>
+<p>Go inside the directory and run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>./setup.sh
+mkdir<span class="w"> </span>build<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>../install
+make<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span>..
+</pre></div>
+</div>
+</section>
+<section id="building-a-custom-sub-package-in-fccanalyses">
+<h2><span class="section-number">2.4.2. </span>Building a custom sub-package in FCCAnalyses<a class="headerlink" href="#building-a-custom-sub-package-in-fccanalyses" title="Permalink to this heading"></a></h2>
+<p>In order to add new code, we need to develop inside FCCAnalyses. For that we setup a dedicated area to work using this setup script.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>./setupUserCode.sh<span class="w"> </span>myAnalysis
+</pre></div>
+</div>
+<p>We now have a new directory <code class="docutils literal notranslate"><span class="pre">myAnalysis</span></code> that contains both include <code class="docutils literal notranslate"><span class="pre">myAnalysis/include/myAnalysis.h</span></code> and source <code class="docutils literal notranslate"><span class="pre">myAnalysis/src/myAnalysis.cc</span></code> files within the <code class="docutils literal notranslate"><span class="pre">myAnalysis</span></code> namespace. In the following of this tutorial, when new code needs to be added, it should be done in those two files. An example is given below:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#in the header file</span>
+<span class="n">rv</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dummy_collection</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">rv</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;&amp;</span><span class="p">);</span>
+
+<span class="cp">#in the source file</span>
+<span class="n">rv</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dummy_collection</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">rv</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">parts</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">rv</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">parts</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">    </span><span class="n">output</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">parts</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">momentum</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, in your python analysis script, you can now call you newly defined function, don’t forget it is inside a namespace!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;dummy_collection&quot;</span><span class="p">,</span> <span class="s2">&quot;myAnalysis::dummy_collection(ReconstructedParticles)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It takes as argument the collection named in our ROOT files <code class="docutils literal notranslate"><span class="pre">ReconstructedParticles</span></code>, which is a vector of <code class="docutils literal notranslate"><span class="pre">edm4hep::ReconstructedParticleData</span></code> <a class="reference external" href="https://edm4hep.web.cern.ch/classedm4hep_1_1_reconstructed_particle_data.html">see here</a> and also add the newly defined column <code class="docutils literal notranslate"><span class="pre">dummy_collection</span></code> to the list of output variables, this can be seen in <code class="docutils literal notranslate"><span class="pre">myAnalysis/scripts/analysis_cfg.py</span></code></p>
+<p>Last thing, do not forget to compile before running to use your new code.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">OUTPUT_DIR</span><span class="si">}</span>/build
+cmake<span class="w"> </span>..<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">LOCAL_DIR</span><span class="si">}</span>
+</pre></div>
+</div>
+</section>
+<section id="reconstruction-of-the-primary-vertex-and-of-primary-tracks">
+<h2><span class="section-number">2.4.3. </span>Reconstruction of the primary vertex and of primary tracks<a class="headerlink" href="#reconstruction-of-the-primary-vertex-and-of-primary-tracks" title="Permalink to this heading"></a></h2>
+<p>Let’s start by running primary vertex reconstruction on a few events of one test file:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py<span class="w"> </span>--test<span class="w"> </span>--nevents<span class="w"> </span><span class="m">1000</span><span class="w"> </span>--output<span class="w"> </span>primary_Zuds.root
+</pre></div>
+</div>
+<p>Note: with the option <code class="docutils literal notranslate"><span class="pre">--test</span></code>, we process the file that is hard-coded under <code class="docutils literal notranslate"><span class="pre">testFile</span></code> inside <code class="docutils literal notranslate"><span class="pre">analysis_primary_vertex.py</span></code>. In this case, it is a file of <span class="math notranslate nohighlight">\(Z \rightarrow q \bar{q}\)</span> with <span class="math notranslate nohighlight">\(q=u,d,s\)</span>.</p>
+<p>The resulting ntuple <code class="docutils literal notranslate"><span class="pre">primary_Zuds.root</span></code> contains the MC event vertex <code class="docutils literal notranslate"><span class="pre">MC_PrimaryVertex</span></code>, and the reconstructed primary vertex <code class="docutils literal notranslate"><span class="pre">PrimaryVertex</span></code>.</p>
+<div class="toggle admonition">
+<p class="admonition-title">Snippet of <code class="docutils literal notranslate"><span class="pre">analysis_primary_vertex.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="c1"># MC event primary vertex</span>
+  <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;MC_PrimaryVertex&quot;</span><span class="p">,</span>  <span class="s2">&quot;FCCAnalyses::MCParticle::get_EventPrimaryVertex(21)( Particle )&quot;</span> <span class="p">)</span>
+
+  <span class="c1"># Fit all tracks of the events to a common vertex  - here using a beam-spot constraint:</span>
+
+  <span class="c1"># VertexObject_allTracks is an object of type VertexingUtils::FCCAnalysesVertex</span>
+  <span class="c1"># It contains in particular :</span>
+  <span class="c1">#  - an edm4hep::VertexData :</span>
+  <span class="c1">#        std::int32_t primary{}; ///&lt; boolean flag, if vertex is the primary vertex of the event</span>
+  <span class="c1">#        float chi2{}; ///&lt; chi-squared of the vertex fit</span>
+  <span class="c1">#        ::edm4hep::Vector3f position{}; ///&lt; [mm] position of the vertex.</span>
+  <span class="c1">#        std::array&lt;float, 6&gt; covMatrix{}; ///&lt; covariance matrix of the position</span>
+  <span class="c1">#           (stored as lower triangle matrix, i.e. cov(xx),cov(y,x),cov(z,x),cov(y,y),... )</span>
+  <span class="c1"># - ROOT::VecOps::RVec&lt;float&gt; reco_chi2 : the contribution to the chi2 of all tracks used in the fit</span>
+  <span class="c1"># - ROOT::VecOps::RVec&lt; TVector3 &gt;  updated_track_momentum_at_vertex : the post-fit (px, py, pz )</span>
+  <span class="c1">#         of the tracks, at the vertex (and not at their d.c.a.)</span>
+
+  <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;VertexObject_allTracks&quot;</span><span class="p">,</span>  <span class="s2">&quot;VertexFitterSimple::VertexFitter_Tk ( 1, EFlowTrack_1, true, 4.5, 20e-3, 300)&quot;</span><span class="p">)</span>
+
+  <span class="c1"># EFlowTrack_1 is the collection of all tracks (the fitting method can of course be applied to a subset of tracks (see later)).</span>
+  <span class="c1"># &quot;true&quot; means that a beam-spot constraint is applied. Default is no BSC. Following args are the BS size and position, in mum :</span>
+  <span class="c1">#                                   bool BeamSpotConstraint = false,</span>
+  <span class="c1">#                                   double sigmax=0., double sigmay=0., double sigmaz=0.,</span>
+  <span class="c1">#                                   double bsc_x=0., double bsc_y=0., double bsc_z=0. )  ;</span>
+
+
+  <span class="c1"># This returns the  edm4hep::VertexData :</span>
+  <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;Vertex_allTracks&quot;</span><span class="p">,</span>  <span class="s2">&quot;VertexingUtils::get_VertexData( VertexObject_allTracks )&quot;</span><span class="p">)</span>   <span class="c1"># primary vertex, in mm</span>
+
+
+  <span class="c1"># This is not a good estimate of the primary vertex: even in a Z -&gt; uds event, there</span>
+  <span class="c1"># are displaced tracks (e.g. Ks, Lambdas), which would bias the fit.</span>
+  <span class="c1"># Below, we determine the &quot;primary tracks&quot; using an iterative algorithm - cf LCFI+.</span>
+  <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;RecoedPrimaryTracks&quot;</span><span class="p">,</span>  <span class="s2">&quot;VertexFitterSimple::get_PrimaryTracks( VertexObject_allTracks, EFlowTrack_1, true, 4.5, 20e-3, 300, 0., 0., 0., 0)&quot;</span><span class="p">)</span>
+
+  <span class="c1"># Now we run again the vertex fit, but only on the primary tracks :</span>
+  <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;PrimaryVertexObject&quot;</span><span class="p">,</span>   <span class="s2">&quot;VertexFitterSimple::VertexFitter_Tk ( 1, RecoedPrimaryTracks, true, 4.5, 20e-3, 300) &quot;</span><span class="p">)</span>
+  <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;PrimaryVertex&quot;</span><span class="p">,</span>   <span class="s2">&quot;VertexingUtils::get_VertexData( PrimaryVertexObject )&quot;</span><span class="p">)</span>
+
+  <span class="c1"># It is often useful to retrieve the secondary (i.e. non-primary) tracks, for example to search for secondary vertices.</span>
+  <span class="c1"># The method below simply &quot;subtracts&quot; the primary tracks from the full collection :</span>
+  <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;SecondaryTracks&quot;</span><span class="p">,</span>   <span class="s2">&quot;VertexFitterSimple::get_NonPrimaryTracks( EFlowTrack_1,  RecoedPrimaryTracks )&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>To produce some example plots, just run the ROOT macro <code class="docutils literal notranslate"><span class="pre">examples/FCCee/tutorials/vertexing/plots_primary_vertex.x</span></code></p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>root<span class="w"> </span>-l
+.x<span class="w"> </span>examples/FCCee/tutorials/vertexing/plots_primary_vertex.x
+</pre></div>
+</div>
+</div>
+<p>This produces normalised <span class="math notranslate nohighlight">\(\chi^2\)</span> of the primary vertex fit, the resolutions in <code class="docutils literal notranslate"><span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">z</span></code>, and the pulls of the fitted vertex position.</p>
+<section id="exercises">
+<h3><span class="section-number">2.4.3.1. </span>Exercises:<a class="headerlink" href="#exercises" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>add the number of primary and secondary tracks into the ntuple using the function <code class="docutils literal notranslate"><span class="pre">ReconstructedParticle2Track::getTK_n(ROOT::VecOps::RVec&lt;edm4hep::TrackState&gt;</span> <span class="pre">x)</span></code> <a class="reference external" href="https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/FCCAnalyses/ReconstructedParticle2Track.h#L111">see here</a></p></li>
+</ol>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of primary and secondary tracks :</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;n_RecoedPrimaryTracks&quot;</span><span class="p">,</span>  <span class="s2">&quot;ReconstructedParticle2Track::getTK_n( RecoedPrimaryTracks )&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;n_SecondaryTracks&quot;</span><span class="p">,</span>  <span class="s2">&quot;ReconstructedParticle2Track::getTK_n( SecondaryTracks )&quot;</span> <span class="p">)</span>
+<span class="c1"># equivalent : (this is to show that a simple C++ statement can be included in a &quot;.Define&quot;)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;n_SecondaryTracks_v2&quot;</span><span class="p">,</span> <span class="s2">&quot; return ntracks - n_RecoedPrimaryTracks ; &quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>and add the corresponding collection to the <code class="docutils literal notranslate"><span class="pre">branchList</span></code>:</p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">branchList</span> <span class="o">=</span> <span class="p">[</span>
+ <span class="s2">&quot;MC_PrimaryVertex&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;ntracks&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;Vertex_allTracks&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;PrimaryVertex&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;n_RecoedPrimaryTracks&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;n_SecondaryTracks&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;n_SecondaryTracks_v2&quot;</span><span class="p">,</span>
+ <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Add the total <span class="math notranslate nohighlight">\(p_T\)</span> that is carried by the primary tracks. This requires some simple analysis code to be written (in our <code class="docutils literal notranslate"><span class="pre">myAnalysis</span></code>) and compiled. Then, the python analyser file needs to be updated to include <code class="docutils literal notranslate"><span class="pre">analysesList</span> <span class="pre">=</span> <span class="pre">['myAnalysis']</span></code>.</p></li>
+</ol>
+<p>Hint: use the <code class="docutils literal notranslate"><span class="pre">updated_track_momentum_at_vertex</span></code> that is contained in <code class="docutils literal notranslate"><span class="pre">VertexingUtils::FCCAnalysesVertex</span></code> (contains a <code class="docutils literal notranslate"><span class="pre">TVector3</span></code> for each track used in the vertex fit) and use this function implementation:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="nf">sum_momentum_tracks</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">VertexingUtils</span><span class="o">::</span><span class="n">FCCAnalysesVertex</span><span class="o">&amp;</span><span class="w">  </span><span class="n">vertex</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<p>Add inside <code class="docutils literal notranslate"><span class="pre">myAnalysis/include/myAnalysis.h</span></code></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">...</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FCCAnalyses/VertexingUtils.h&quot;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">FCCAnalyses</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">sum_momentum_tracks</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">VertexingUtils</span><span class="o">::</span><span class="n">FCCAnalysesVertex</span><span class="o">&amp;</span><span class="w">  </span><span class="n">vertex</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Add inside <code class="docutils literal notranslate"><span class="pre">myAnalysis/src/myAnalysis.cc</span></code></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">sum_momentum_tracks</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">VertexingUtils</span><span class="o">::</span><span class="n">FCCAnalysesVertex</span><span class="o">&amp;</span><span class="w">  </span><span class="n">vertex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">   </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="w"> </span><span class="n">TVector3</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">momenta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vertex</span><span class="p">.</span><span class="n">updated_track_momentum_at_vertex</span><span class="w"> </span><span class="p">;</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">momenta</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">TVector3</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">momenta</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">px</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">py</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">pt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="n">px</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">pow</span><span class="p">(</span><span class="n">py</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="p">;</span>
+<span class="w">      </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">pt</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Compile as explained above:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">OUTPUT_DIR</span><span class="si">}</span>/build
+cmake<span class="w"> </span>..<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">LOCAL_DIR</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>Edit your <code class="docutils literal notranslate"><span class="pre">examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py</span></code> and add at the very top :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">analysesList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;myAnalysis&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>and finally, add the variable in your analyser (both definition and in the branchList) <code class="docutils literal notranslate"><span class="pre">examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Total pT carried by the primary tracks:</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;sum_pt_primaries&quot;</span><span class="p">,</span>   <span class="s2">&quot;myAnalysis::sum_momentum_tracks( PrimaryVertexObject )&quot;</span><span class="p">)</span>
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="n">branchList</span> <span class="o">=</span> <span class="p">[</span>
+<span class="c1">#</span>
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="s2">&quot;sum_pt_primaries&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Compare these distributions in <span class="math notranslate nohighlight">\(Z \rightarrow uds\)</span> events and in <span class="math notranslate nohighlight">\(Z \rightarrow b\bar{b}\)</span> events.</p></li>
+</ol>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<p>Edit the file <code class="docutils literal notranslate"><span class="pre">examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py</span></code>, search for <code class="docutils literal notranslate"><span class="pre">testFile</span></code> and replace the <code class="docutils literal notranslate"><span class="pre">Zuds</span></code> file by the <code class="docutils literal notranslate"><span class="pre">Zbb</span></code> file (currently commented).</p>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>To go beyond:
+The reconstruction of all secondary vertices following the LCFI+ algorithm has been implemented in <strong>FCCAnalyses</strong> by Kunal Gautam and Armin Ilg. The Pull request is ready and will be merged soon: <a class="reference external" href="https://github.com/HEP-FCC/FCCAnalyses/pull/206">https://github.com/HEP-FCC/FCCAnalyses/pull/206</a>. It contains an <code class="docutils literal notranslate"><span class="pre">analysis_SV.py</span></code> which:</p></li>
+</ol>
+<ul class="simple">
+<li><p>reconstructs the primary vertex and primary tracks as done above</p></li>
+<li><p>reconstructs jets using the Durham algorithm</p></li>
+<li><p>reconstructs secondary vertices within all jets, and determines some properties of these secondary vertices
+It is also possible to reconstruct all secondary vertices in an event, without reconstructing jets.</p></li>
+</ul>
+</section>
+</section>
+<section id="reconstruction-of-displaced-vertices-in-an-exclusive-decay-chain-starting-example">
+<h2><span class="section-number">2.4.4. </span>Reconstruction of displaced vertices in an exclusive decay chain: starting example<a class="headerlink" href="#reconstruction-of-displaced-vertices-in-an-exclusive-decay-chain-starting-example" title="Permalink to this heading"></a></h2>
+<p>We consider here <span class="math notranslate nohighlight">\(Z \rightarrow b \bar{b}\)</span> events.
+When a <span class="math notranslate nohighlight">\(B_s\)</span> is produced, it is forced to decay into <span class="math notranslate nohighlight">\(J/\Psi \Phi\)</span> with <span class="math notranslate nohighlight">\(J/\Psi \rightarrow \mu^+\mu^-\)</span> and <span class="math notranslate nohighlight">\(\Phi \rightarrow K^+ K^-\)</span>.
+We want to reconstruct the <span class="math notranslate nohighlight">\(B_s\)</span> decay vertex and determine the resolution on the position of this vertex. Here, we use the MC-matching information to figure out which are the reconstructed tracks that are matched to the <span class="math notranslate nohighlight">\(B_s\)</span> decay products, and we fit these tracks to a common vertex. That means, we “seed” the vertex reconstruction using the MC-truth information. Let’s run the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>examples/FCCee/tutorials/vertexing/analysis_Bs2JpsiPhi_MCseeded.py<span class="w">  </span>--test<span class="w"> </span>--nevents<span class="w"> </span><span class="m">1000</span><span class="w"> </span>--output<span class="w"> </span>Bs2JpsiPhi_MCseeded.root
+</pre></div>
+</div>
+<p>The ntuple <code class="docutils literal notranslate"><span class="pre">Bs2JpsiPhi_MCseeded.root</span></code> contains the MC decay vertex of the <span class="math notranslate nohighlight">\(B_s\)</span>, and the reconstructed decay vertex.</p>
+<div class="toggle admonition">
+<p class="admonition-title">Snippet of <code class="docutils literal notranslate"><span class="pre">analysis_Bs2JpsiPhi_MCseeded.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="c1"># MC indices of the decay Bs (PDG = 531) -&gt; mu+ (PDG = -13) mu- (PDG = 13) K+ (PDG = 321) K- (PDG = -321)</span>
+ <span class="c1"># Retrieves a vector of int&#39;s which correspond to indices in the Particle block</span>
+ <span class="c1"># vector[0] = the mother, and then the daughters in the order specified, i.e. here</span>
+ <span class="c1">#       [1] = the mu+, [2] = the mu-, [3] = the K+, [4] = the K-</span>
+ <span class="c1"># Boolean arguments :</span>
+ <span class="c1">#        1st: stableDaughters. when set to true, the dsughters specified in the list are looked</span>
+ <span class="c1">#             for among the final, stable particles that come out from the mother, i.e. the decay tree is</span>
+ <span class="c1">#             explored recursively if needed.</span>
+ <span class="c1">#        2nd: chargeConjugateMother</span>
+ <span class="c1">#        3rd: chargeConjugateDaughters</span>
+ <span class="c1">#        4th: inclusiveDecay: when set to false, if a mother is found, that decays</span>
+ <span class="c1">#             into the particles specified in the list plus other particle(s), this decay is not selected.</span>
+ <span class="c1"># If the event contains more than one such decays,only the first one is kept.</span>
+ <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;Bs2MuMuKK_indices&quot;</span><span class="p">,</span>  <span class="s2">&quot;MCParticle::get_indices( 531, {-13,13,321,-321}, true, true, true, false) ( Particle, Particle1)&quot;</span> <span class="p">)</span>
+
+ <span class="c1"># select events for which the requested decay chain has been found:</span>
+ <span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;Bs2MuMuKK_indices.size() &gt; 0&quot;</span><span class="p">)</span>
+
+ <span class="c1"># the mu+ (MCParticle) that comes from the Bs decay :</span>
+ <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;MC_Muplus&quot;</span><span class="p">,</span>  <span class="s2">&quot;return Particle.at(  Bs2MuMuKK_indices[1] ) ;&quot;</span><span class="p">)</span>
+ <span class="c1"># Decay vertex (an edm4hep::Vector3d) of the Bs (MC) = production vertex of the muplus :</span>
+ <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;BsMCDecayVertex&quot;</span><span class="p">,</span>   <span class="s2">&quot; return  MC_Muplus.vertex ; &quot;</span><span class="p">)</span>
+
+ <span class="c1"># Returns the RecoParticles associated with the four  Bs decay products.</span>
+ <span class="c1"># The size of this collection is always 4 provided that Bs2MuMuKK_indices is not empty,</span>
+ <span class="c1"># possibly including &quot;dummy&quot; particles in case one of the legs did not make a RecoParticle</span>
+ <span class="c1"># (e.g. because it is outsice the tracker acceptance).</span>
+ <span class="c1"># This is done on purpose, in order to maintain the mapping with the indices - i.e. the 1st particle in</span>
+ <span class="c1"># the list BsRecoParticles is the mu+, then the mu-, etc.</span>
+ <span class="c1"># (selRP_matched_to_list ignores the unstable MC particles that are in the input list of indices</span>
+ <span class="c1"># hence the mother particle, which is the [0] element of the Bs2MuMuKK_indices vector).</span>
+ <span class="c1">#</span>
+ <span class="c1"># The matching between RecoParticles and MCParticles requires 4 collections. For more</span>
+ <span class="c1"># detail, see https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics</span>
+ <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;BsRecoParticles&quot;</span><span class="p">,</span>  <span class="s2">&quot;ReconstructedParticle2MC::selRP_matched_to_list( Bs2MuMuKK_indices,    </span>
+      <span class="n">MCRecoAssociations0</span><span class="p">,</span><span class="n">MCRecoAssociations1</span><span class="p">,</span><span class="n">ReconstructedParticles</span><span class="p">,</span><span class="n">Particle</span><span class="p">)</span><span class="s2">&quot;)</span>
+
+ <span class="c1"># the corresponding tracks - here, dummy particles, if any, are removed, i.e. one may have &lt; 4 tracks,</span>
+ <span class="c1"># e.g. if one muon or kaon was emitted outside of the acceptance</span>
+ <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;BsTracks&quot;</span><span class="p">,</span>   <span class="s2">&quot;ReconstructedParticle2Track::getRP2TRK( BsRecoParticles, EFlowTrack_1)&quot;</span> <span class="p">)</span>
+
+ <span class="c1"># number of tracks in this BsTracks collection ( = the #tracks used to reconstruct the Bs vertex)</span>
+ <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;n_BsTracks&quot;</span><span class="p">,</span> <span class="s2">&quot;ReconstructedParticle2Track::getTK_n( BsTracks )&quot;</span><span class="p">)</span>
+
+ <span class="c1"># Fit the tracks to a common vertex. That would be a secondary vertex, hence we put</span>
+ <span class="c1"># a &quot;2&quot; as the first argument of VertexFitter_Tk :</span>
+ <span class="c1">#        First the full object, of type Vertexing::FCCAnalysesVertex</span>
+ <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;BsVertexObject&quot;</span><span class="p">,</span>   <span class="s2">&quot;VertexFitterSimple::VertexFitter_Tk( 2, BsTracks)&quot;</span> <span class="p">)</span>
+ <span class="c1">#        from which we extract the edm4hep::VertexData object, which contains the vertex positiob in mm</span>
+ <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;BsVertex&quot;</span><span class="p">,</span>  <span class="s2">&quot;VertexingUtils::get_VertexData( BsVertexObject )&quot;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+<p>Run the root macro <code class="docutils literal notranslate"><span class="pre">examples/FCCee/tutorials/vertexing/plots_Bs2JsiPhi.x</span></code> produces various plots showing the vertex <span class="math notranslate nohighlight">\(\chi^2\)</span>, the vertex resolutions and the pulls of the vertex fit.</p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>root<span class="w"> </span>-l
+.x<span class="w"> </span>examples/FCCee/tutorials/vertexing/plots_Bs2JsiPhi.x
+</pre></div>
+</div>
+</div>
+</section>
+<section id="exercise-analysis-of-tau-rightarrow-3-mu">
+<h2><span class="section-number">2.4.5. </span>Exercise: analysis of <span class="math notranslate nohighlight">\(\tau \rightarrow 3 \mu\)</span><a class="headerlink" href="#exercise-analysis-of-tau-rightarrow-3-mu" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Start from <code class="docutils literal notranslate"><span class="pre">examples/FCCee/tutorials/vertexing/analysis_Bs2JpsiPhi.py</span></code> and adapt it to the decay <span class="math notranslate nohighlight">\(\tau \rightarrow 3 \mu\)</span>.</p></li>
+</ol>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>examples/FCCee/tutorials/vertexing/analysis_Bs2JpsiPhi_MCseeded.py<span class="w"> </span>examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_MCseeded.py
+</pre></div>
+</div>
+<p>and edit to change the <code class="docutils literal notranslate"><span class="pre">testFile</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">testFile</span><span class="o">=</span> <span class="s2">&quot;/eos/experiment/fcc/ee/generation/DelphesEvents/spring2021/IDEA/p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2MuMuMu/events_189205650.root&quot;</span>
+</pre></div>
+</div>
+<p>and modify the call to <code class="docutils literal notranslate"><span class="pre">MCParticle::get_indices</span></code> to retrieve properly the indices of the decay of interest and replace subsequently <code class="docutils literal notranslate"><span class="pre">Bs2MuMuKK_indices</span></code> into the name you chose - and, to have meaningful variable names, <code class="docutils literal notranslate"><span class="pre">Bsxxx</span></code> into <code class="docutils literal notranslate"><span class="pre">Tauxxx</span></code>.</p>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;indices&quot;</span><span class="p">,</span>  <span class="s2">&quot;MCParticle::get_indices( 15, {-13,13,13}, true, true, true, false) ( Particle, Particle1)&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>The full file can be found in  <code class="docutils literal notranslate"><span class="pre">examples/FCCee/tutorials/vertexing/Exercises/analysis_Tau3Mu_MCseeded_start.py</span></code>.</p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Add the reconstructed <span class="math notranslate nohighlight">\(\tau\)</span> mass to the ntuple (you will need to write new code). Check that the mass resolution is improved when it is determined from the track momenta <strong>at the tau decay vertex</strong>, compared to a blunt 3-muon mass determined from the default track momenta (taken at the distance of closest approach).</p></li>
+</ol>
+<p>Suggested implementation, to be added to your <code class="docutils literal notranslate"><span class="pre">myAnalysis/include/myAnalysis.h</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;TLorentzVector.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;edm4hep/ReconstructedParticleData.h&quot;</span>
+<span class="p">[...]</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">tau3mu_vertex_mass</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">VertexingUtils</span><span class="o">::</span><span class="n">FCCAnalysesVertex</span><span class="o">&amp;</span><span class="w"> </span><span class="n">vertex</span><span class="w"> </span><span class="p">);</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">tau3mu_raw_mass</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;&amp;</span><span class="w">  </span><span class="n">legs</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<p>This needs to be added to your <code class="docutils literal notranslate"><span class="pre">myAnalysis/src/myAnalysis.cc</span></code> :</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">tau3mu_vertex_mass</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">VertexingUtils</span><span class="o">::</span><span class="n">FCCAnalysesVertex</span><span class="o">&amp;</span><span class="w"> </span><span class="n">vertex</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">double</span><span class="w"> </span><span class="n">muon_mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1056</span><span class="p">;</span>
+<span class="w">   </span><span class="n">TLorentzVector</span><span class="w"> </span><span class="n">tau</span><span class="p">;</span>
+<span class="w">   </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="w"> </span><span class="n">TVector3</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">momenta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vertex</span><span class="p">.</span><span class="n">updated_track_momentum_at_vertex</span><span class="w"> </span><span class="p">;</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">momenta</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ileg</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ileg</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">ileg</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">TVector3</span><span class="w"> </span><span class="n">track_momentum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">momenta</span><span class="p">[</span><span class="w"> </span><span class="n">ileg</span><span class="w"> </span><span class="p">];</span>
+<span class="w">     </span><span class="n">TLorentzVector</span><span class="w"> </span><span class="n">leg</span><span class="p">;</span>
+<span class="w">     </span><span class="n">leg</span><span class="p">.</span><span class="n">SetXYZM</span><span class="p">(</span><span class="w"> </span><span class="n">track_momentum</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">track_momentum</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">track_momentum</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">muon_mass</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">     </span><span class="n">tau</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">leg</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">tau</span><span class="p">.</span><span class="n">M</span><span class="p">();</span>
+<span class="w"> </span><span class="p">}</span>
+
+<span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">tau3mu_raw_mass</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;&amp;</span><span class="w">  </span><span class="n">legs</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">muon_mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1056</span><span class="p">;</span>
+<span class="w">  </span><span class="n">TLorentzVector</span><span class="w"> </span><span class="n">tau</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">legs</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ileg</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ileg</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">ileg</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">TLorentzVector</span><span class="w"> </span><span class="n">leg</span><span class="p">;</span>
+<span class="w">     </span><span class="n">leg</span><span class="p">.</span><span class="n">SetXYZM</span><span class="p">(</span><span class="n">legs</span><span class="p">[</span><span class="n">ileg</span><span class="p">].</span><span class="n">momentum</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">legs</span><span class="p">[</span><span class="n">ileg</span><span class="p">].</span><span class="n">momentum</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">legs</span><span class="p">[</span><span class="n">ileg</span><span class="p">].</span><span class="n">momentum</span><span class="p">.</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">muon_mass</span><span class="w"> </span><span class="p">);</span>
+<span class="w">     </span><span class="n">tau</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">leg</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">tau</span><span class="p">.</span><span class="n">M</span><span class="p">();</span>
+<span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The local code needs to be recompiled:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">OUTPUT_DIR</span><span class="si">}</span>/build
+cmake<span class="w"> </span>..<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">LOCAL_DIR</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>Add the call to your <code class="docutils literal notranslate"><span class="pre">examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_MCseeded.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="c1"># The reco&#39;ed tau mass - from the post-VertxFit momenta, at the tau decay vertex :</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;TauMass&quot;</span><span class="p">,</span>   <span class="s2">&quot;myAnalysis::tau3mu_vertex_mass( TauVertexObject ) &quot;</span><span class="p">)</span>
+ <span class="c1"># The &quot;raw&quot; mass - using the track  momenta at their dca :</span>
+ <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;RawMass&quot;</span><span class="p">,</span>  <span class="s2">&quot;myAnalysis::tau3mu_raw_mass( TauRecoParticles ) &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and add the new variables to the list of branches <code class="docutils literal notranslate"><span class="pre">branchList</span></code> as usual.
+Moreover, in order to be able to run the local code from <code class="docutils literal notranslate"><span class="pre">myAnalysis</span></code>, don’t forget to add</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">analysesList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;myAnalysis&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>at the beggining of your <code class="docutils literal notranslate"><span class="pre">examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_MCseeded.py</span></code>.</p>
+<p>Run fccanalyses:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_MCseeded.py<span class="w"> </span>--test<span class="w"> </span>--nevents<span class="w"> </span><span class="m">1000</span><span class="w"> </span>--output<span class="w"> </span>Tau3Mu_MCseeded.root
+</pre></div>
+</div>
+<p>Plot the mass distributions in ROOT:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>root<span class="w"> </span>-l<span class="w"> </span>Tau3Mu_MCseeded.root
+TH1F*<span class="w"> </span><span class="nv">h1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>new<span class="w"> </span>TH1F<span class="o">(</span><span class="s2">&quot;h1&quot;</span>,<span class="s2">&quot;;Tau Mass (GeV); a.u.&quot;</span>,20,<span class="w"> </span><span class="m">1</span>.75,<span class="w"> </span><span class="m">1</span>.8<span class="o">)</span><span class="w"> </span><span class="p">;</span>
+events-&gt;Draw<span class="o">(</span><span class="s2">&quot;TauMass &gt;&gt;h1&quot;</span><span class="o">)</span><span class="p">;</span>
+TH1F*<span class="w"> </span><span class="nv">h2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>new<span class="w"> </span>TH1F<span class="o">(</span><span class="s2">&quot;h2&quot;</span>,<span class="s2">&quot;;Raw Mass (GeV); a.u.&quot;</span>,<span class="w"> </span><span class="m">20</span>,<span class="w"> </span><span class="m">1</span>.75,<span class="w"> </span><span class="m">1</span>.8<span class="o">)</span><span class="w"> </span><span class="p">;</span>
+events-&gt;Draw<span class="o">(</span><span class="s2">&quot;RawMass &gt;&gt;h2&quot;</span><span class="o">)</span><span class="p">;</span>
+h1-&gt;SetLineColor<span class="o">(</span><span class="m">2</span><span class="o">)</span><span class="p">;</span>
+h1-&gt;Draw<span class="o">(</span><span class="s2">&quot;hist&quot;</span><span class="o">)</span><span class="p">;</span>
+h2-&gt;Draw<span class="o">(</span><span class="s2">&quot;same, hist&quot;</span><span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>So far, everything was done using “Monte-Carlo seeding”, which gives the resolutions that we expect, in the absence of possible combinatoric issues. The next step is to write a new <code class="docutils literal notranslate"><span class="pre">analysis.py</span></code> which starts from the reconstructed muons.</p></li>
+</ol>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_MCseeded.py<span class="w">  </span>examples/FCCee/tutorials/vertexing/analysis_Tau3Mu.py
+</pre></div>
+</div>
+<p>and just keep the “core” of the <code class="docutils literal notranslate"><span class="pre">analysers</span></code> function such that you have something like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RDFanalysis</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">analysers</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+        <span class="n">df2</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">df</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">df2</span>
+</pre></div>
+</div>
+<p>clear out the <code class="docutils literal notranslate"><span class="pre">branchList</span></code>,
+and insert new <code class="docutils literal notranslate"><span class="pre">Define</span></code>s:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="c1"># Use the &quot;AllMuons&quot; collection, which contains also non-isolated muons (in contrast to the &quot;Muons&quot; collection)</span>
+ <span class="c1">#    Actually, &quot;Muon&quot; or (&quot;AllMuon&quot;) just contain pointers (indices) to the RecoParticle collections,</span>
+ <span class="c1">#    hence one needs to first retrieve the RecoParticles corresponding to these muons.</span>
+ <span class="c1">#    ( for more detail about the collections, see https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics  )</span>
+ <span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;Muon0&quot;</span><span class="p">,</span> <span class="s2">&quot;AllMuon#0.index&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;muons&quot;</span><span class="p">,</span>  <span class="s2">&quot;ReconstructedParticle::get(Muon0, ReconstructedParticles)&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;n_muons&quot;</span><span class="p">,</span>  <span class="s2">&quot;ReconstructedParticle::get_n( muons ) &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We now want to write a method that builds muon triplets - actually, since the MC files produced for this tutorial only forced the decay of the <span class="math notranslate nohighlight">\(\tau^-\)</span>, we are interested in triplets with total charge = -1.</p>
+<p><strong>Exercise:</strong> code a function in your <code class="docutils literal notranslate"><span class="pre">myAnalysis</span></code> that builds such triplet</p>
+<p>Hint, the function should take as input the <code class="docutils literal notranslate"><span class="pre">ReconstructedParticles</span></code> and the charge of the triplet, and should return all combinations of 3-muons in a vector of vector of <code class="docutils literal notranslate"><span class="pre">ReconstructedParticles</span></code>. It could be something like (to be added to <code class="docutils literal notranslate"><span class="pre">myAnalysis/include/myAnalysis.h</span></code>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">build_triplets</span><span class="p">(</span><span class="k">const</span><span class="w">   </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;&amp;</span><span class="w">  </span><span class="n">in</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">total_charge</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<p>This needs to be added to your <code class="docutils literal notranslate"><span class="pre">myAnalysis/src/myAnalysis.cc</span></code> :</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">build_triplets</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">total_charge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="w"> </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w">  </span><span class="n">results</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">charge</span><span class="w"> </span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">results</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">       </span><span class="kt">float</span><span class="w"> </span><span class="n">charge_i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pi</span><span class="p">.</span><span class="n">charge</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">       </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="w"> </span><span class="n">pj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">charge_j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pj</span><span class="p">.</span><span class="n">charge</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="w"> </span><span class="n">pk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+<span class="w">          </span><span class="kt">float</span><span class="w"> </span><span class="n">charge_k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pk</span><span class="p">.</span><span class="n">charge</span><span class="w"> </span><span class="p">;</span>
+<span class="w">          </span><span class="kt">float</span><span class="w"> </span><span class="n">charge_tot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">charge_i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">charge_j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">charge_k</span><span class="p">;</span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">charge_tot</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">total_charge</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a_triplet</span><span class="p">;</span>
+<span class="w">            </span><span class="n">a_triplet</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="p">);</span>
+<span class="w">            </span><span class="n">a_triplet</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="w"> </span><span class="n">pj</span><span class="w"> </span><span class="p">);</span>
+<span class="w">            </span><span class="n">a_triplet</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="w"> </span><span class="n">pk</span><span class="w"> </span><span class="p">);</span>
+<span class="w">            </span><span class="n">results</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="w"> </span><span class="n">a_triplet</span><span class="w"> </span><span class="p">);</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="c1">//end loop over k</span>
+<span class="w">      </span><span class="p">}</span><span class="c1">//end loop over j</span>
+<span class="w">    </span><span class="p">}</span><span class="c1">//end loop over i</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">results</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can then use it in your <code class="docutils literal notranslate"><span class="pre">examples/FCCee/tutorials/vertexing/analysis_Tau3Mu.py</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="c1"># Build triplets of muons.</span>
+ <span class="c1"># We are interested in tau- -&gt; mu- mu- mu+ (the MC files produced for this tutorial</span>
+ <span class="c1"># only forced the decay of the tau- , not the tau+ ).</span>
+ <span class="c1"># Hence we look for triples of total charge = -1 :</span>
+ <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;triplets_m&quot;</span><span class="p">,</span>  <span class="s2">&quot;myAnalysis::build_triplets( muons, -1. )&quot;</span><span class="p">)</span>   <span class="c1"># returns a vector of triplets, i.e. of vectors of 3 RecoParticles</span>
+ <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;n_triplets_m&quot;</span><span class="p">,</span>  <span class="s2">&quot;return triplets_m.size() ; &quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>NB: the efficiency for having the three muons from the tau decay that fall within the tracker acceptance is about 95%. However, a track will reach the muon detector only if its momentum is larger than about 2 GeV (in Delphes, the efficiency for muons below 2 GeV is set to zero). When adding the requirement that the three muons have p &gt; 2 GeV, the efficiency drops to about 75%. You can check that using the MC information, starting e.g. from analysis_Tau3Mu_MCseeded.py. Consequently: out of 1000 signal events, only ~  a triplet is found in 750 events only.</p>
+<p>It is then simple to build a tau candidate from the first triplet that has been found, e.g. :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="c1"># ----------------------------------------------------</span>
+ <span class="c1"># Simple: consider only the 1st triplet :</span>
+
+ <span class="c1">#  .Define(&quot;the_muons_candidate_0&quot;,  &quot;return triplets_m[0] ; &quot;)  # the_muons_candidates = a vector of 3 RecoParticles</span>
+
+ <span class="c1"># get the corresponding tracks:</span>
+ <span class="c1">#   .Define(&quot;the_muontracks_candidate_0&quot;,  &quot;ReconstructedParticle2Track::getRP2TRK( the_muons_candidate_0, EFlowTrack_1)&quot;)</span>
+ <span class="c1"># and fit them to a common vertex :</span>
+ <span class="c1">#   .Define(&quot;TauVertexObject_candidate_0&quot;,   &quot;VertexFitterSimple::VertexFitter_Tk( 2, the_muontracks_candidate_0)&quot; )</span>
+ <span class="c1"># Now we can get the mass of this candidate, as before :</span>
+ <span class="c1">#   .Define(&quot;TauMass_candidate_0&quot;,   &quot;myAnalysis::tau3mu_vertex_mass( TauVertexObject_candidate_0 )&quot; )</span>
+
+</pre></div>
+</div>
+<p>but we would like to retrieve all tau candidates and decide later which one to use.</p>
+</div>
+<p><strong>Exercise</strong>: code a function in your <code class="docutils literal notranslate"><span class="pre">myAnalysis</span></code> to retrieve all tau candidates, and their corresponding tau mass.</p>
+<p>Hint, the functions could be of type (to be added to <code class="docutils literal notranslate"><span class="pre">myAnalysis/include/myAnalysis.h</span></code>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="w"> </span><span class="n">VertexingUtils</span><span class="o">::</span><span class="n">FCCAnalysesVertex</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">build_AllTauVertexObject</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;&amp;</span><span class="w">  </span><span class="n">triplets</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">TrackState</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">allTracks</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+
+<span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">build_AllTauMasses</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="w"> </span><span class="n">VertexingUtils</span><span class="o">::</span><span class="n">FCCAnalysesVertex</span><span class="o">&gt;&amp;</span><span class="w">  </span><span class="n">vertices</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<p>This needs to be added to your <code class="docutils literal notranslate"><span class="pre">myAnalysis/src/myAnalysis.cc</span></code></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="w"> </span><span class="n">VertexingUtils</span><span class="o">::</span><span class="n">FCCAnalysesVertex</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">build_AllTauVertexObject</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;&amp;</span><span class="w">  </span><span class="n">triplets</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">TrackState</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">allTracks</span><span class="w"> </span><span class="p">)</span><span class="w">  </span><span class="p">{</span>
+<span class="w">     </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="w"> </span><span class="n">VertexingUtils</span><span class="o">::</span><span class="n">FCCAnalysesVertex</span><span class="w"> </span><span class="o">&gt;</span><span class="w">  </span><span class="n">results</span><span class="p">;</span>
+<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">ntriplets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">triplets</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<span class="w">     </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ntriplets</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;</span><span class="w"> </span><span class="n">legs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">triplets</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+
+<span class="w">         </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">TrackState</span><span class="o">&gt;</span><span class="w"> </span><span class="n">the_tracks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ReconstructedParticle2Track</span><span class="o">::</span><span class="n">getRP2TRK</span><span class="p">(</span><span class="w"> </span><span class="n">legs</span><span class="p">,</span><span class="w"> </span><span class="n">allTracks</span><span class="w"> </span><span class="p">);</span>
+<span class="w">         </span><span class="n">VertexingUtils</span><span class="o">::</span><span class="n">FCCAnalysesVertex</span><span class="w"> </span><span class="n">vertex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VertexFitterSimple</span><span class="o">::</span><span class="n">VertexFitter_Tk</span><span class="p">(</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">the_tracks</span><span class="w"> </span><span class="p">);</span>
+<span class="w">         </span><span class="n">results</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="w"> </span><span class="n">vertex</span><span class="w"> </span><span class="p">);</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="k">return</span><span class="w"> </span><span class="n">results</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">build_AllTauMasses</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="w"> </span><span class="n">VertexingUtils</span><span class="o">::</span><span class="n">FCCAnalysesVertex</span><span class="o">&gt;&amp;</span><span class="w">  </span><span class="n">vertices</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">&gt;</span><span class="w">  </span><span class="n">results</span><span class="p">;</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="o">:</span><span class="w"> </span><span class="n">vertices</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">mass</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">tau3mu_vertex_mass</span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">);</span>
+<span class="w">    </span><span class="n">results</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="w"> </span><span class="n">mass</span><span class="w">  </span><span class="p">);</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="k">return</span><span class="w"> </span><span class="n">results</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and these includes must be added to <code class="docutils literal notranslate"><span class="pre">myAnalysis/include/myAnalysis.h</span></code> :</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FCCAnalyses/ReconstructedParticle2Track.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;FCCAnalyses/VertexFitterSimple.h&quot;</span>
+</pre></div>
+</div>
+<p>The local code needs to be recompiled:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">OUTPUT_DIR</span><span class="si">}</span>/build
+cmake<span class="w"> </span>..<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">LOCAL_DIR</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>and you can then use in your analyser <code class="docutils literal notranslate"><span class="pre">examples/FCCee/tutorials/vertexing/analysis_Tau3Mu.py</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>   <span class="c1"># ----------------------------------------------------</span>
+   <span class="c1"># Now consider all triplets :</span>
+
+   <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;TauVertexObject_allCandidates&quot;</span><span class="p">,</span>  <span class="s2">&quot;myAnalysis::build_AllTauVertexObject( triplets_m , EFlowTrack_1 ) &quot;</span><span class="p">)</span>
+   <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;TauMass_allCandidates&quot;</span><span class="p">,</span>   <span class="s2">&quot;myAnalysis::build_AllTauMasses( TauVertexObject_allCandidates )&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>and you add the mass of all candidates in your ntuple:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="n">branchList</span> <span class="o">=</span> <span class="p">[</span>
+               <span class="s2">&quot;n_muons&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;n_triplets_m&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;TauMass_allCandidates&quot;</span>
+               <span class="p">]</span>
+</pre></div>
+</div>
+<p>Run fccanalyses:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>examples/FCCee/tutorials/vertexing/analysis_Tau3Mu.py<span class="w"> </span>--test<span class="w"> </span>--nevents<span class="w"> </span><span class="m">1000</span><span class="w"> </span>--output<span class="w"> </span>Tau3Mu.root
+</pre></div>
+</div>
+<p>and look at the ntuple:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>root<span class="w"> </span>-l<span class="w"> </span>Tau3Mu.root
+events<span class="w"> </span>-&gt;<span class="w"> </span>Draw<span class="o">(</span><span class="s2">&quot;TauMass_allCandidates&quot;</span><span class="o">)</span><span class="w">   </span>//<span class="w"> </span>candidates<span class="w"> </span>at<span class="w"> </span>large<span class="w"> </span>mass<span class="w"> </span>pick<span class="w"> </span>up<span class="w"> </span>a<span class="w"> </span>muon<span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span><span class="s2">&quot;other&quot;</span><span class="w"> </span>leg
+events<span class="w"> </span>-&gt;<span class="w"> </span>Draw<span class="o">(</span><span class="s2">&quot;TauMass_allCandidates&quot;</span>,<span class="s2">&quot;TauMass_allCandidates &lt; 2&quot;</span><span class="o">)</span><span class="w">   </span>//<span class="w"> </span>the<span class="w"> </span>genuine<span class="w"> </span>tau<span class="w"> </span>to<span class="w"> </span>3mu<span class="w"> </span>candidates
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>We now want to look at the background.
+Copy your analysis_Tau3Mu.py:</p></li>
+</ol>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>examples/FCCee/tutorials/vertexing/analysis_Tau3Mu.py<span class="w"> </span>examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_stage1.py
+</pre></div>
+</div>
+<p>The main background is expected to come from <span class="math notranslate nohighlight">\(\tau \rightarrow 3 \pi \nu\)</span> decays, when the charged pions are misidentified as muons. But there is no “fakes” in Delphes: all the “Muon” objects that you have on the edm4hep file do originate from genuine muons (which may, of course, come from a hadron decay). To alleviate this limitation, we first select the <code class="docutils literal notranslate"><span class="pre">ReconstructedParticle</span></code>s that are matched to a stable, charged hadron. Edit your <code class="docutils literal notranslate"><span class="pre">examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_stage1.py</span></code> and add, after the <code class="docutils literal notranslate"><span class="pre">.Define(&quot;n_muons&quot;,</span> <span class="pre">...</span> <span class="pre">)</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="c1"># -----------------------------------------</span>
+ <span class="c1"># Add fake muons from pi -&gt; mu</span>
+
+ <span class="c1"># This selects the charged hadrons :</span>
+ <span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;MCRecoAssociations0&quot;</span><span class="p">,</span> <span class="s2">&quot;MCRecoAssociations#0.index&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;MCRecoAssociations1&quot;</span><span class="p">,</span> <span class="s2">&quot;MCRecoAssociations#1.index&quot;</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;ChargedHadrons&quot;</span><span class="p">,</span><span class="s2">&quot;ReconstructedParticle2MC::selRP_ChargedHadrons(MCRecoAssociations0, MCRecoAssociations1, ReconstructedParticles, Particle)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>( As mentioned earlier, the matching between RecoParticles and MCParticles requires 4 collections. See <a class="reference external" href="https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics">here</a> for more detail ).</p>
+<p>and further select the ones that are above 2 GeV - since only particles above 2 GeV will make it to the muon detector:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Only the ones with  p &gt; 2 GeV could be selected as muons :</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;ChargedHadrons_pgt2&quot;</span><span class="p">,</span>  <span class="s2">&quot;ReconstructedParticle::sel_p(2.) ( ChargedHadrons )&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we want to apply a “flat” fake rate, i.e. accept a random fraction of the above particles as muons.</p>
+<p><strong>Exercise:</strong> code a method in your <code class="docutils literal notranslate"><span class="pre">myAnalysis</span></code> that does that.</p>
+<p>Hint, in your header file <code class="docutils literal notranslate"><span class="pre">myAnalysis/include/myAnalysis.h</span></code> you need to define a <code class="docutils literal notranslate"><span class="pre">struct</span></code> and add few includes, like:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="p">...</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">selRP_Fakes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">selRP_Fakes</span><span class="p">(</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">arg_fakeRate</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">arg_mass</span><span class="w"> </span><span class="p">);</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">m_fakeRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-3</span><span class="p">;</span><span class="w"> </span><span class="c1">//fake rate</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">m_mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.106</span><span class="p">;</span><span class="w">  </span><span class="c1">// muon mass</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">default_random_engine</span><span class="w"> </span><span class="n">m_generator</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">uniform_real_distribution</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_flat</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;</span><span class="w">  </span><span class="k">operator</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">in</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<div class="toggle admonition">
+<p class="admonition-title">Suggested answer</p>
+<p>This needs to be added in your <code class="docutils literal notranslate"><span class="pre">myAnalysis/src/myAnalysis.cc</span></code></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">selRP_Fakes</span><span class="o">::</span><span class="n">selRP_Fakes</span><span class="p">(</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">arg_fakeRate</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w">  </span><span class="n">arg_mass</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m_fakeRate</span><span class="p">(</span><span class="n">arg_fakeRate</span><span class="p">),</span><span class="w"> </span><span class="n">m_mass</span><span class="p">(</span><span class="w"> </span><span class="n">arg_mass</span><span class="p">)</span><span class="w">  </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">system_clock</span><span class="o">::</span><span class="n">now</span><span class="p">().</span><span class="n">time_since_epoch</span><span class="p">().</span><span class="n">count</span><span class="p">();</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">default_random_engine</span><span class="w"> </span><span class="nf">generator</span><span class="w"> </span><span class="p">(</span><span class="n">seed</span><span class="p">);</span>
+<span class="w">  </span><span class="n">m_generator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generator</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">uniform_real_distribution</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">flatdis</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">);</span>
+<span class="w">  </span><span class="n">m_flat</span><span class="p">.</span><span class="n">param</span><span class="p">(</span><span class="w"> </span><span class="n">flatdis</span><span class="p">.</span><span class="n">param</span><span class="p">()</span><span class="w"> </span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;</span><span class="w"> </span><span class="n">selRP_Fakes</span><span class="o">::</span><span class="k">operator</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ROOT</span><span class="o">::</span><span class="n">VecOps</span><span class="o">::</span><span class="n">RVec</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">arandom</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">m_flat</span><span class="w"> </span><span class="p">(</span><span class="n">m_generator</span><span class="w"> </span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">arandom</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">m_fakeRate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">ReconstructedParticleData</span><span class="w"> </span><span class="n">reso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">;</span>
+<span class="w">      </span><span class="c1">// overwrite the mass:</span>
+<span class="w">      </span><span class="n">reso</span><span class="p">.</span><span class="n">mass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_mass</span><span class="p">;</span>
+<span class="w">      </span><span class="n">result</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="w"> </span><span class="n">reso</span><span class="w"> </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and compile:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">OUTPUT_DIR</span><span class="si">}</span>/build
+cmake<span class="w"> </span>..<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install
+<span class="nb">cd</span><span class="w"> </span><span class="si">${</span><span class="nv">LOCAL_DIR</span><span class="si">}</span>
+</pre></div>
+</div>
+<p>We then use this method in the analyser <code class="docutils literal notranslate"><span class="pre">examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_stage1.py</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build fake muons based on a flat fake rate (random selection) - HUGE fake rate used on purpose here :</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;fakeMuons_5em2&quot;</span><span class="p">,</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">myAnalysis</span><span class="o">.</span><span class="n">selRP_Fakes</span><span class="p">(</span><span class="mf">5e-2</span><span class="p">,</span> <span class="mf">0.106</span><span class="p">),</span> <span class="p">[</span><span class="s2">&quot;ChargedHadrons_pgt2&quot;</span><span class="p">]</span> <span class="p">)</span>
+<span class="c1"># Now we marge the collection of fake muons with the genuine muons :</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;muons_with_fakes&quot;</span><span class="p">,</span>  <span class="s2">&quot;ReconstructedParticle::merge( muons, fakeMuons_5em2 )&quot;</span><span class="p">)</span>
+<span class="c1"># and we use this collection later on, instead of &quot;muons&quot; :</span>
+<span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;theMuons&quot;</span><span class="p">,</span> <span class="s2">&quot;muons_with_fakes&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;n_muons_withFakes&quot;</span><span class="p">,</span>  <span class="s2">&quot;ReconstructedParticle::get_n( theMuons )&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and we just need to replace the muon collection when building the triplets :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;triplets_m&quot;</span><span class="p">,</span>  <span class="s2">&quot;myAnalysis::build_triplets( theMuons, -1. )&quot;</span><span class="p">)</span>   <span class="c1"># returns a vector of triplets, i.e. of vectors of 3 RecoParticles</span>
+</pre></div>
+</div>
+<p>Moreover, in order to pass the functor constructor of <code class="docutils literal notranslate"><span class="pre">selRP_Fakes</span></code> as above (<code class="docutils literal notranslate"><span class="pre">ROOT.myAnalysis.selRP_Fakes(5e-2,</span> <span class="pre">0.106)</span></code>, not inside a string), we need to add</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ROOT</span>
+</pre></div>
+</div>
+<p>at the top of <code class="docutils literal notranslate"><span class="pre">examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_stage1.py</span></code>.</p>
+<p>You can also add the total visible energy into your ntuple:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Total visible energy in the event :</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;RecoPartEnergies&quot;</span><span class="p">,</span>  <span class="s2">&quot;ReconstructedParticle::get_e( ReconstructedParticles )&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;visible_energy&quot;</span><span class="p">,</span>  <span class="s2">&quot;Sum( RecoPartEnergies )&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and add it to your <code class="docutils literal notranslate"><span class="pre">branchList</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="n">branchList</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s2">&quot;n_muons&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;n_triplets_m&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;TauMass_allCandidates&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;visible_energy&quot;</span>
+        <span class="p">]</span>
+
+</pre></div>
+</div>
+<p>Run it again on the test signal file, in order to make sure that nothing is broken :</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_stage1.py<span class="w"> </span>--test<span class="w"> </span>--nevents<span class="w"> </span><span class="m">1000</span><span class="w"> </span>--output<span class="w"> </span>Tau3Mu.root
+</pre></div>
+</div>
+</div>
+<p>The files <code class="docutils literal notranslate"><span class="pre">analysis_Tau3Mu_stage1.py</span></code>, <code class="docutils literal notranslate"><span class="pre">myAnalysis.h</span></code> and <code class="docutils literal notranslate"><span class="pre">myAnalysis.cc</span></code> with all the changes discussed above can be found in the <code class="docutils literal notranslate"><span class="pre">examples/FCCee/tutorials/vertexing/Exercises/</span></code> directory of FCCAnalyses.</p>
+<ol class="arabic simple" start="5">
+<li><p>We now have a simple analyser that can be used to process the signal and background samples, and plot the mass of the <span class="math notranslate nohighlight">\(\tau \rightarrow 3\mu\)</span> candidates. For that we need to process the full statistics. In order for you to have access to <code class="docutils literal notranslate"><span class="pre">/afs/cern.ch/work/f/fccsw/public/FCCDicts/</span></code>, we need to add you CERN login to an afs group. If not already provided, please do so.</p></li>
+</ol>
+<p>All samples that have been centrally produced can be found <a class="reference external" href="http://fcc-physics-events.web.cern.ch/fcc-physics-events/FCCee/index.php">on this web page</a>. We use <code class="docutils literal notranslate"><span class="pre">spring2021</span></code> samples (in <code class="docutils literal notranslate"><span class="pre">Production</span> <span class="pre">tags</span></code>), and the files made with <code class="docutils literal notranslate"><span class="pre">IDEA</span></code>. If you enter <code class="docutils literal notranslate"><span class="pre">TauMinus2MuMuMu</span></code> and <code class="docutils literal notranslate"><span class="pre">TauMinus2PiPiPinus</span></code> in the search field, you will see the datasets produced for the signal anf the <span class="math notranslate nohighlight">\(\tau \rightarrow 3\pi \nu\)</span> background. The first column shows the dataset names, in this case <code class="docutils literal notranslate"><span class="pre">p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2MuMuMu</span></code> and <code class="docutils literal notranslate"><span class="pre">p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2PiPiPinu</span></code>.</p>
+<p>To run fccanalyses over these datasets (and not anymore over one test file), the list of datasets to be processed should be inserted in your <code class="docutils literal notranslate"><span class="pre">examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_stage1.py</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ROOT</span>
+
+<span class="n">analysesList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;myAnalysis&#39;</span><span class="p">]</span>
+
+<span class="n">processList</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2MuMuMu&#39;</span><span class="p">:{},</span>
+    <span class="s1">&#39;p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2PiPiPinu&#39;</span><span class="p">:{}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>as well as</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Mandatory: Production tag when running over EDM4Hep centrally produced events, this points to the yaml files for getting sample statistics</span>
+<span class="n">prodTag</span>     <span class="o">=</span> <span class="s2">&quot;FCCee/spring2021/IDEA/&quot;</span>
+</pre></div>
+</div>
+<p>and we tell <code class="docutils literal notranslate"><span class="pre">fccanalyses</span></code> to put all files into the <code class="docutils literal notranslate"><span class="pre">TauMu</span></code> directory :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Optional: output directory, default is local running directory</span>
+<span class="n">outputDir</span>    <span class="o">=</span> <span class="s2">&quot;Tau3Mu&quot;</span>
+
+</pre></div>
+</div>
+<p>This produces flat ntuples:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_stage1.py
+</pre></div>
+</div>
+<p>After a few minutes, you will see two ntuples, one for the signal, the other for the background, in the <code class="docutils literal notranslate"><span class="pre">TauMu</span></code> directory.</p>
+<p>Now that you have ntuples with the variables you need for your analysis, you may analyse them using the tools you prefer. As explained <a class="reference external" href="https://github.com/HEP-FCC/FCCAnalyses">here</a>, you can also use <code class="docutils literal notranslate"><span class="pre">fccanalysis</span></code> to produce histograms of some variables, with some sets of cuts, and to plot them. The normalisation is then taken care of by <code class="docutils literal notranslate"><span class="pre">fccanalyses</span></code>, thanks to a json file (<code class="docutils literal notranslate"><span class="pre">FCCee_procDict_spring2021_IDEA.json</span></code>) which contains the cross-section of the MC processes. To use these functionnalities :</p>
+<p>This produces histograms of selected variables, with some selection :</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>final<span class="w"> </span>examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_final.py
+</pre></div>
+</div>
+<div class="toggle admonition">
+<p class="admonition-title">Snippet of <code class="docutils literal notranslate"><span class="pre">analysis_Tau3Mu_final.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">###Dictionnay of the list of cuts. The key is the name of the selection that will be added to the output file</span>
+<span class="n">cutList</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;nocut&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;sel0&quot;</span><span class="p">:</span><span class="s2">&quot;n_triplets_m &gt; 0&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;sel1&quot;</span><span class="p">:</span><span class="s2">&quot;Min( TauMass_allCandidates ) &lt; 3&quot;</span>
+            <span class="p">}</span>
+
+
+<span class="c1">#Dictionary for the ouput variable/hitograms. The key is the name of the variable in the output files. &quot;name&quot; is the name of the variable in the input file, &quot;title&quot; is the x-axis label of the histogram, &quot;bin&quot; the number of bins of the histogram, &quot;xmin&quot; the minimum x-axis value and &quot;xmax&quot; the maximum x-axis value.</span>
+<span class="n">histoList</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;mTau&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;TauMass_allCandidates&quot;</span><span class="p">,</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;m_</span><span class="si">{tau}</span><span class="s2"> [GeV]&quot;</span><span class="p">,</span><span class="s2">&quot;bin&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="s2">&quot;xmin&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;xmax&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">},</span>
+    <span class="s2">&quot;mTau_zoom&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;TauMass_allCandidates&quot;</span><span class="p">,</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;m_</span><span class="si">{tau}</span><span class="s2"> [GeV]&quot;</span><span class="p">,</span><span class="s2">&quot;bin&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="s2">&quot;xmin&quot;</span><span class="p">:</span><span class="mf">1.7</span><span class="p">,</span><span class="s2">&quot;xmax&quot;</span><span class="p">:</span><span class="mf">1.9</span><span class="p">},</span>
+    <span class="s2">&quot;Evis&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;visible_energy&quot;</span><span class="p">,</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;E_</span><span class="si">{vis}</span><span class="s2"> [GeV]&quot;</span><span class="p">,</span><span class="s2">&quot;bin&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="s2">&quot;xmin&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;xmax&quot;</span><span class="p">:</span><span class="mf">91.2</span><span class="p">},</span>
+
+</pre></div>
+</div>
+</div>
+<p>This produces three histograms, for three sets of selections. The histogram files appear in the <code class="docutils literal notranslate"><span class="pre">TauMu/final</span></code> directory. There are now 6 files (2 processes, 3 sets of cuts). The histograms are normalised to a luminosity of one inverse pb.</p>
+<p>Finally, this makes some plots :</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>plots<span class="w"> </span>examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_plots.py
+</pre></div>
+</div>
+<p>which appear in the <code class="docutils literal notranslate"><span class="pre">Tau3Mu/plots</span></code> directory. Look for example at the plot <code class="docutils literal notranslate"><span class="pre">mTaTau3Mu_nostack_log</span></code> in <code class="docutils literal notranslate"><span class="pre">Tau3Mu/plots/sel1</span></code>. The candidates in the background sample, corresponding to <span class="math notranslate nohighlight">\(\tau \rightarrow 3 \pi \nu\)</span> decays, are reconstructed at a mass that is usually below the <span class="math notranslate nohighlight">\(\tau\)</span> mass due to the presence of the neutrino. Note that the background sample corresponds to a very low statistics (50M have been produced, we expect 14B) and we see fluctuations. The signal cross-section used here correponds to <span class="math notranslate nohighlight">\(B( \tau \rightarrow 3 \mu) = 2 \times 10^{-8}\)</span>, which is roughly the current upper limit. The luminosity for these final plots is entered in analysis_Tau3Mu_plots.py.</p>
+<ol class="arabic simple" start="6">
+<li><p>To go beyond:</p></li>
+</ol>
+<p>Interested in studying the FCC-ee sensitivity to <span class="math notranslate nohighlight">\(\tau \rightarrow 3 \mu\)</span> ? Please contact <a class="reference external" href="mailto:alberto&#46;lusiani&#37;&#52;&#48;pi&#46;infn&#46;it">alberto<span>&#46;</span>lusiani<span>&#64;</span>pi<span>&#46;</span>infn<span>&#46;</span>it</a> and <a class="reference external" href="mailto:monteil&#37;&#52;&#48;in2p3&#46;fr">monteil<span>&#64;</span>in2p3<span>&#46;</span>fr</a>.</p>
+<p>Note that the samples used here are just low statistics, test samples. Larger samples that are more accurate (KKMC instead of Pythia) will be produced if someone is interested.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../FccFastSimAnalysis/Readme.html" class="btn btn-neutral float-left" title="2.3. FCC: Getting started with analysing simulated events" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../../FCCAnalysesProblemsAndSolutions.html" class="btn btn-neutral float-right" title="2.5. FCCAnalyses: Common problems and solutions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: cern2022
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../../../../../master/index.html">master</a></dd>
+      <dd><a href="../../../../../../bnl2023/index.html">bnl2023</a></dd>
+      <dd><a href="Readme.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

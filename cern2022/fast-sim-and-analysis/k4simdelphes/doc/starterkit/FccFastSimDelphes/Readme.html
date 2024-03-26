@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.2. FCC: Getting started with simulating events in Delphes &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="2.3. FCC: Getting started with analysing simulated events" href="../../../../fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.html" />
+    <link rel="prev" title="2.1. FCC: Getting started with event generation" href="../../../../FccFastSimGeneration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../../../../../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../README.html">2. Generators, Fast Simulation and Analysis</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../FccFastSimGeneration.html">2.1. FCC: Getting started with event generation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.2. FCC: Getting started with simulating events in Delphes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#part-i-generate-and-simulate-events-with-delphesedm4hep">2.2.1. Part I: Generate and simulate Events with DelphesEDM4Hep</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.html">2.3. FCC: Getting started with analysing simulated events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.html">2.4. FCC: tracking and vertexing example using specific flavour decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../FCCAnalysesProblemsAndSolutions.html">2.5. FCCAnalyses: Common problems and solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../EventProduction.html">2.6. Central production of events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../full-detector-simulations/README.html">3. Full Detector Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../../README.html"><span class="section-number">2. </span>Generators, Fast Simulation and Analysis</a> &raquo;</li>
+      <li><span class="section-number">2.2. </span>FCC: Getting started with simulating events in Delphes</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/fast-sim-and-analysis/k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="fcc-getting-started-with-simulating-events-in-delphes">
+<h1><span class="section-number">2.2. </span>FCC: Getting started with simulating events in Delphes<a class="headerlink" href="#fcc-getting-started-with-simulating-events-in-delphes" title="Permalink to this heading"></a></h1>
+<div class="objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<p>This tutorial will teach you how to:</p>
+<ul class="simple">
+<li><p><strong>generate</strong> signal and background samples with <strong>Pythia8</strong> with and without EvtGen</p></li>
+<li><p>run a fast parametric <strong>detector simulation</strong> with <strong>Delphes</strong> in the EDM4Hep format</p></li>
+<li><p>apply an <strong>event selection</strong> on those samples with <strong>FCCAnalyses</strong></p></li>
+<li><p>produce <strong>flat ntuples</strong> with observables of interest with <strong>FCCAnalyses</strong></p></li>
+<li><p>produce plots with <strong>FCCAnalyses</strong></p></li>
+</ul>
+</div>
+<p>First login to a fresh shell on lxplus, on OSG, or in one of the virtual machines that could be provided on open stack. Usage of bash shell is highly recommended. Create a working directory and go inside</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">mytutorial</span>
+<span class="n">cd</span> <span class="n">mytutorial</span>
+</pre></div>
+</div>
+<p>Then, make sure your <strong>setup of the FCC software</strong> is working correctly. A quick check is that the executable <code class="docutils literal notranslate"><span class="pre">DelphesPythia8_EDM4HEP</span></code>, which allows you to run jobs in the EDM4Hep format is available on the command line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>which<span class="w"> </span>DelphesPythia8_EDM4HEP
+</pre></div>
+</div>
+<p>If the above command fails without printing a path like <code class="docutils literal notranslate"><span class="pre">/cvmfs/sw.hsf.org/spackages/linux-centos7-broadwell/gcc-8.3.0/edm4hep-master-kopc27l5fhxopkwfblet2xrwh6dbd322/bin/DelphesPythia8_EDM4HEP</span></code>, you need to setup the FCC software stack</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">cvmfs</span><span class="o">/</span><span class="n">fcc</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">/</span><span class="n">sw</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">setup</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>When sourcing the stack, you should see a message like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">...</span>  <span class="n">Key4HEP</span> <span class="n">release</span><span class="p">:</span> <span class="n">key4hep</span><span class="o">-</span><span class="n">stack</span><span class="o">/</span><span class="mi">2021</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">02</span>
+ <span class="o">...</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">following</span> <span class="n">command</span> <span class="n">to</span> <span class="n">reproduce</span> <span class="n">the</span> <span class="n">current</span> <span class="n">environment</span><span class="p">:</span> 
+ <span class="o">...</span> 
+         <span class="n">source</span> <span class="o">/</span><span class="n">cvmfs</span><span class="o">/</span><span class="n">sw</span><span class="o">.</span><span class="n">hsf</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">spackages2</span><span class="o">/</span><span class="n">key4hep</span><span class="o">-</span><span class="n">stack</span><span class="o">/</span><span class="mi">2021</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">02</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">centos7</span><span class="o">-</span><span class="n">gcc8</span><span class="mf">.3.0</span><span class="o">-</span><span class="n">opt</span><span class="o">/</span><span class="n">w6suthuzrwtg3mfan5xjglrv7pz6wvbc</span><span class="o">/</span><span class="n">setup</span><span class="o">.</span><span class="n">sh</span>
+ <span class="o">...</span> 
+ <span class="o">...</span> <span class="n">done</span><span class="o">.</span> 
+</pre></div>
+</div>
+<p>which means that the version <code class="docutils literal notranslate"><span class="pre">2021-06-02</span></code> of <code class="docutils literal notranslate"><span class="pre">key4hep-stack</span></code> is sourced.</p>
+<p>You can check all the packages associated to this release by using spack</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/sw.hsf.org/contrib/spack/share/spack/setup-env.sh<span class="w"> </span>
+spack<span class="w"> </span>find<span class="w"> </span>-p<span class="w"> </span>-d<span class="w"> </span>key4hep-stack@2021-06-02
+</pre></div>
+</div>
+<p>for example to check the version of <code class="docutils literal notranslate"><span class="pre">k4simdelphes</span></code> installed in  version <code class="docutils literal notranslate"><span class="pre">2021-06-02</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>find<span class="w"> </span>-p<span class="w"> </span>-d<span class="w"> </span>key4hep-stack@2021-06-02<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>k4simdelphes
+</pre></div>
+</div>
+<p>of course, if you are setting up the lastest software, the version number has to be changed to the one you actually sourced.</p>
+<section id="part-i-generate-and-simulate-events-with-delphesedm4hep">
+<span id="delphesedm4hep"></span><h2><span class="section-number">2.2.1. </span>Part I: Generate and simulate Events with DelphesEDM4Hep<a class="headerlink" href="#part-i-generate-and-simulate-events-with-delphesedm4hep" title="Permalink to this heading"></a></h2>
+<p>For this tutorial we will consider the following <strong>physics processes</strong>:</p>
+<ul class="simple">
+<li><p>e+ e- -&gt; ZH -&gt; Z to mumu and H to anything</p></li>
+<li><p>e+ e- -&gt; ZZ -&gt; Z to anything</p></li>
+<li><p>e+ e- -&gt; WW -&gt; W to anything</p></li>
+</ul>
+<p>Let’s start by downloading the official pythia cards for the various processes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Generator/Pythia8/p8_noBES_ee_ZH_ecm240.cmd
+wget<span class="w"> </span>https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Generator/Pythia8/p8_noBES_ee_ZZ_ecm240.cmd
+wget<span class="w"> </span>https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Generator/Pythia8/p8_noBES_ee_WW_ecm240.cmd
+</pre></div>
+</div>
+<p>The detector response of the baseline FCC-ee IDEA detector configuration is estimated with Delphes.
+Other detector cards can be found in the <code class="docutils literal notranslate"><span class="pre">$DELPHES_DIR/cards</span></code> directory, such as a ATLAS, CMS or ILD detector configurations:
+<code class="docutils literal notranslate"><span class="pre">delphes_card_ATLAS.tcl</span></code>, <code class="docutils literal notranslate"><span class="pre">delphes_card_CMS.tcl</span></code> and <code class="docutils literal notranslate"><span class="pre">delphes_card_ILD.tcl</span></code>.</p>
+<p>But let’s download the official one:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Delphes/card_IDEA.tcl
+</pre></div>
+</div>
+<p>To check the arguments ordering, please run the executable:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DelphesPythia8_EDM4HEP</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+<p>it should produce the following message:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Usage</span><span class="p">:</span> <span class="n">DelphesPythia8config_file</span> <span class="n">output_config_file</span> <span class="n">pythia_card</span> <span class="n">output_file</span>
+<span class="n">config_file</span> <span class="o">-</span> <span class="n">configuration</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">Tcl</span> <span class="nb">format</span><span class="p">,</span>
+<span class="n">output_config_file</span> <span class="o">-</span> <span class="n">configuration</span> <span class="n">file</span> <span class="n">steering</span> <span class="n">the</span> <span class="n">content</span> <span class="n">of</span> <span class="n">the</span> <span class="n">edm4hep</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">Tcl</span> <span class="nb">format</span><span class="p">,</span>
+<span class="n">pythia_card</span> <span class="o">-</span> <span class="n">Pythia8</span> <span class="n">configuration</span> <span class="n">file</span><span class="p">,</span>
+<span class="n">output_file</span> <span class="o">-</span> <span class="n">output</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">ROOT</span> <span class="nb">format</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>where the first argument is the delphes card, the second argument the configuration file for the edm4hep output (see later), the third argument is the pythia card and the last argument is the output file name.</p>
+<p>Before running we need to define the collections that we want to write. The first name for example <code class="docutils literal notranslate"><span class="pre">GenParticleCollections</span></code> is the type of output collection in EDM4hep (in this case <code class="docutils literal notranslate"><span class="pre">GenParticleCollections</span></code> is of type <code class="docutils literal notranslate"><span class="pre">edm4hep::MCParticleCollection</span></code>) and the second argument for example <code class="docutils literal notranslate"><span class="pre">Particle</span></code> is the name of the collection in the Delphes card that will be used and stored in the EDM4Hep output file with the same name.</p>
+<p>We also download the official version of this file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Delphes/edm4hep_IDEA.tcl
+</pre></div>
+</div>
+<p>The following commands will run Pythia8 and Delphes and produce the relevant signal and background samples:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>DelphesPythia8_EDM4HEP<span class="w"> </span>card_IDEA.tcl<span class="w"> </span>edm4hep_IDEA.tcl<span class="w"> </span>p8_noBES_ee_ZH_ecm240.cmd<span class="w"> </span>p8_ee_ZH_ecm240_edm4hep.root
+DelphesPythia8_EDM4HEP<span class="w"> </span>card_IDEA.tcl<span class="w"> </span>edm4hep_IDEA.tcl<span class="w"> </span>p8_noBES_ee_ZZ_ecm240.cmd<span class="w"> </span>p8_ee_ZZ_ecm240_edm4hep.root
+DelphesPythia8_EDM4HEP<span class="w"> </span>card_IDEA.tcl<span class="w"> </span>edm4hep_IDEA.tcl<span class="w"> </span>p8_noBES_ee_WW_ecm240.cmd<span class="w"> </span>p8_ee_WW_ecm240_edm4hep.root
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../../../FccFastSimGeneration.html" class="btn btn-neutral float-left" title="2.1. FCC: Getting started with event generation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../../fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.html" class="btn btn-neutral float-right" title="2.3. FCC: Getting started with analysing simulated events" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: cern2022
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../../../../../master/index.html">master</a></dd>
+      <dd><a href="../../../../../../bnl2023/index.html">bnl2023</a></dd>
+      <dd><a href="Readme.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

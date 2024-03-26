@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3. Full Detector Simulations &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.1. FCCee: Full Simulation of CLD, the CLID detector for FCC" href="FCCeeCLD/FCCeeCLD.html" />
+    <link rel="prev" title="2.6. Central production of events" href="../fast-sim-and-analysis/EventProduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fast-sim-and-analysis/README.html">2. Generators, Fast Simulation and Analysis</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Full Detector Simulations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeCLD/FCCeeCLD.html">3.1. FCCee: Full Simulation of CLD, the CLID detector for FCC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeDriftChamber/FCCeeDriftChamber.html">3.2. FCCee: Full Simulation of IDEA Driftchamber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeGuineaPigIRBackgrounds/README.html">3.3. Using Guinea-Pig to generate interaction region backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FccCaloPerformance/CaloFullSimExercise.html">3.4. Noble Liquid Calorimeter Full Simulation Exercise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html">3.5. FCC-ee photon/pi0 discrimination using noble liquid calorimeter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry/Geometry.html">3.6. Changing geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Visualization/Visualization.html">3.7. Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">3. </span>Full Detector Simulations</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/full-detector-simulations/README.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="full-detector-simulations">
+<h1><span class="section-number">3. </span>Full Detector Simulations<a class="headerlink" href="#full-detector-simulations" title="Permalink to this heading"></a></h1>
+<p>If you have any problems or questions, you can <a class="reference external" href="https://github.com/HEP-FCC/starterkit-lessons/issues">open an issue</a> on the <a class="reference external" href="https://github.com/HEP-FCC/starterkit-lessons">GitHub repository where these lessons are developed</a>.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="FCCeeCLD/FCCeeCLD.html">3.1. FCCee: Full Simulation of CLD, the CLID detector for FCC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeCLD/FCCeeCLD.html#setting-up-the-environment">3.1.1. Setting up the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeCLD/FCCeeCLD.html#generate-some-signal-to-process-taus-from-the-particle-gun">3.1.2. Generate some signal to process: taus from the particle gun</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="FCCeeDriftChamber/FCCeeDriftChamber.html">3.2. FCCee: Full Simulation of IDEA Driftchamber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FCCeeGuineaPigIRBackgrounds/README.html">3.3. Using Guinea-Pig to generate interaction region backgrounds</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeGuineaPigIRBackgrounds/README.html#generating-e-e-pairs-with-guinea-pig">3.3.1. Generating <span class="math notranslate nohighlight">\(e^{+} e^{-}\)</span> pairs with Guinea-Pig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeGuineaPigIRBackgrounds/README.html#generating-large-amounts-of-data-with-guinea-pig">3.3.2. Generating large amounts of data with Guinea-Pig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeGuineaPigIRBackgrounds/README.html#analysing-the-data-only-for-ilcsoft-users">3.3.3. Analysing the data (only for ILCSOFT users)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeGuineaPigIRBackgrounds/README.html#tracking-the-pairs-in-the-detector-using-key4hep">3.3.4. Tracking the pairs in the detector using Key4HEP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeGuineaPigIRBackgrounds/README.html#gp-production-of-gamma-gamma-hadrons">3.3.5. GP production of <span class="math notranslate nohighlight">\(\gamma\gamma\)</span> hadrons</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="FccCaloPerformance/CaloFullSimExercise.html">3.4. Noble Liquid Calorimeter Full Simulation Exercise</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="FccCaloPerformance/CaloFullSimExercise.html#setting-up-your-environment">3.4.1. Setting up your environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FccCaloPerformance/CaloFullSimExercise.html#getting-familiar-with-the-detector-geometry">3.4.2. Getting familiar with the detector geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FccCaloPerformance/CaloFullSimExercise.html#running-simple-simulation-and-evaluating-performance">3.4.3. Running simple simulation and evaluating performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FccCaloPerformance/CaloFullSimExercise.html#changing-the-geometry">3.4.4. Changing the geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FccCaloPerformance/CaloFullSimExercise.html#applying-energy-corrections">3.4.5. Applying energy corrections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FccCaloPerformance/CaloFullSimExercise.html#adding-noise">3.4.6. Adding noise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FccCaloPerformance/CaloFullSimExercise.html#preparing-for-the-next-tutorial">3.4.7. Preparing for the next tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FccCaloPerformance/CaloFullSimExercise.html#bonus-exercise">3.4.8. Bonus exercise</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html">3.5. FCC-ee photon/pi0 discrimination using noble liquid calorimeter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#installation-of-fccanalyses">3.5.1. Installation of FCCAnalyses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#build-fccanalyses-skeleton">3.5.2. Build FCCAnalyses skeleton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#get-the-highest-energetic-cluster">3.5.3. Get the highest energetic cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#get-the-list-of-cells-from-the-cluster">3.5.4. Get the list of cells from the cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#create-sub-collection-of-cells">3.5.5. Create sub-collection of cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#create-collection-of-cells-observables">3.5.6. Create collection of cells observables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#adding-the-mva-inference">3.5.7. Adding the MVA inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#removing-the-last-layers">3.5.8. Removing the last layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.html#compare-the-performance">3.5.9. Compare the performance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Geometry/Geometry.html">3.6. Changing geometry</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Geometry/Geometry.html#setup">3.6.1. Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry/Geometry.html#modify-an-existing-xml-file">3.6.2. Modify an existing XML file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry/Geometry.html#overlap-checking">3.6.3. Overlap checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry/Geometry.html#modifying-the-ecal">3.6.4. Modifying the ECAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry/Geometry.html#geometry-driver-modifications">3.6.5. Geometry driver modifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry/Geometry.html#final-note">3.6.6. Final note</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Visualization/Visualization.html">3.7. Visualization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Visualization/Visualization.html#key4hep-tool-geodisplay">3.7.1. Key4hep tool: geoDisplay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Visualization/Visualization.html#geant4">3.7.2. Geant4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Visualization/Visualization.html#phoenix-fcc">3.7.3. Phoenix&#64;FCC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Visualization/Visualization.html#event-data-from-cld-reconstructed-events">3.7.3.1. Event Data from CLD Reconstructed Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Visualization/Visualization.html#event-data-from-delphes-fast-simulation">3.7.3.2. Event Data from Delphes Fast Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Visualization/Visualization.html#detector-geometry">3.7.3.3. Detector Geometry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../fast-sim-and-analysis/EventProduction.html" class="btn btn-neutral float-left" title="2.6. Central production of events" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="FCCeeCLD/FCCeeCLD.html" class="btn btn-neutral float-right" title="3.1. FCCee: Full Simulation of CLD, the CLID detector for FCC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: cern2022
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../master/index.html">master</a></dd>
+      <dd><a href="../../bnl2023/index.html">bnl2023</a></dd>
+      <dd><a href="README.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

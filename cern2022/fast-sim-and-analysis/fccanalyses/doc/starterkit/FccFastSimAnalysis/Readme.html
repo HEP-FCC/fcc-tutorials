@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.3. FCC: Getting started with analysing simulated events &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/custom-admonitions.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../_static/copybutton.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="2.4. FCC: tracking and vertexing example using specific flavour decays" href="../FccFastSimVertexing/Readme.html" />
+    <link rel="prev" title="2.2. FCC: Getting started with simulating events in Delphes" href="../../../../k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html" class="icon icon-home"> FCC Tutorials
+            <img src="../../../../../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../README.html">2. Generators, Fast Simulation and Analysis</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../FccFastSimGeneration.html">2.1. FCC: Getting started with event generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html">2.2. FCC: Getting started with simulating events in Delphes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.3. FCC: Getting started with analysing simulated events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#part-ii-analyse-with-fccanalyses">2.3.1. Part II: Analyse with FCCAnalyses</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../FccFastSimVertexing/Readme.html">2.4. FCC: tracking and vertexing example using specific flavour decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../FCCAnalysesProblemsAndSolutions.html">2.5. FCCAnalyses: Common problems and solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../EventProduction.html">2.6. Central production of events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../full-detector-simulations/README.html">3. Full Detector Simulations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../../README.html"><span class="section-number">2. </span>Generators, Fast Simulation and Analysis</a> &raquo;</li>
+      <li><span class="section-number">2.3. </span>FCC: Getting started with analysing simulated events</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/master/fast-sim-and-analysis/fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="fcc-getting-started-with-analysing-simulated-events">
+<h1><span class="section-number">2.3. </span>FCC: Getting started with analysing simulated events<a class="headerlink" href="#fcc-getting-started-with-analysing-simulated-events" title="Permalink to this heading"></a></h1>
+<div class="objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<p>This tutorial will teach you how to:</p>
+<ul class="simple">
+<li><p>apply an <strong>event selection</strong> on Delphes samples with <strong>FCCAnalyses</strong></p></li>
+<li><p>produce <strong>flat ntuples</strong> with observables of interest with <strong>FCCAnalyses</strong></p></li>
+<li><p>produce plots with <strong>FCCAnalyses</strong></p></li>
+<li><p>compare distributions produced with different generators</p></li>
+</ul>
+</div>
+<section id="part-ii-analyse-with-fccanalyses">
+<h2><span class="section-number">2.3.1. </span>Part II: Analyse with FCCAnalyses<a class="headerlink" href="#part-ii-analyse-with-fccanalyses" title="Permalink to this heading"></a></h2>
+<p>We stay in the same directory where we have produced our samples with <code class="docutils literal notranslate"><span class="pre">DelphesPythia8_EDM4HEP</span></code>.</p>
+<p>For this part we start by making sure we can use FCCAnalyses by checking we can load the library correctly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!python</span>
+<span class="kn">import</span> <span class="nn">ROOT</span>
+<span class="n">ROOT</span><span class="o">.</span><span class="n">gSystem</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="s2">&quot;libFCCAnalyses&quot;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>if no error message, it means we can load it.</p>
+<p>Alternatively, you can check with spack, replacing <code class="docutils literal notranslate"><span class="pre">&lt;version&gt;</span></code> by the key4hep version you have set up.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spack</span> <span class="n">find</span> <span class="o">-</span><span class="n">p</span> <span class="o">-</span><span class="n">d</span> <span class="n">key4hep</span><span class="o">-</span><span class="n">stack</span><span class="o">@&lt;</span><span class="n">version</span><span class="o">&gt;</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">fccanalyses</span>
+</pre></div>
+</div>
+<p>create a file called <code class="docutils literal notranslate"><span class="pre">analysis_stage1.py</span></code> containing</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Mandatory: RDFanalysis class where the use defines the operations on the TTree</span>
+<span class="k">class</span> <span class="nc">RDFanalysis</span><span class="p">():</span>
+
+    <span class="c1">#__________________________________________________________</span>
+    <span class="c1">#Mandatory: analysers funtion to define the analysers to process, please make sure you return the last dataframe, in this example it is df2</span>
+    <span class="k">def</span> <span class="nf">analysers</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+        <span class="n">df2</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">df</span>
+            <span class="c1"># define an alias for muon index collection</span>
+            <span class="o">.</span><span class="n">Alias</span><span class="p">(</span><span class="s2">&quot;Muon0&quot;</span><span class="p">,</span> <span class="s2">&quot;Muon#0.index&quot;</span><span class="p">)</span>
+            <span class="c1"># define the muon collection</span>
+            <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;muons&quot;</span><span class="p">,</span>  <span class="s2">&quot;ReconstructedParticle::get(Muon0, ReconstructedParticles)&quot;</span><span class="p">)</span>
+            <span class="c1">#select muons on pT</span>
+            <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;selected_muons&quot;</span><span class="p">,</span> <span class="s2">&quot;ReconstructedParticle::sel_pt(10.)(muons)&quot;</span><span class="p">)</span>
+            <span class="c1"># create branch with muon transverse momentum</span>
+            <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;selected_muons_pt&quot;</span><span class="p">,</span> <span class="s2">&quot;ReconstructedParticle::get_pt(selected_muons)&quot;</span><span class="p">)</span>
+            <span class="c1"># create branch with muon rapidity</span>
+            <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;selected_muons_y&quot;</span><span class="p">,</span>  <span class="s2">&quot;ReconstructedParticle::get_y(selected_muons)&quot;</span><span class="p">)</span>
+            <span class="c1"># create branch with muon total momentum</span>
+            <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;selected_muons_p&quot;</span><span class="p">,</span>     <span class="s2">&quot;ReconstructedParticle::get_p(selected_muons)&quot;</span><span class="p">)</span>
+            <span class="c1"># create branch with muon energy</span>
+            <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;selected_muons_e&quot;</span><span class="p">,</span>     <span class="s2">&quot;ReconstructedParticle::get_e(selected_muons)&quot;</span><span class="p">)</span>
+            <span class="c1"># find zed candidates from  di-muon resonances</span>
+            <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;zed_leptonic&quot;</span><span class="p">,</span>         <span class="s2">&quot;ReconstructedParticle::resonanceBuilder(91)(selected_muons)&quot;</span><span class="p">)</span>
+            <span class="c1"># create branch with zed mass</span>
+            <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;zed_leptonic_m&quot;</span><span class="p">,</span>       <span class="s2">&quot;ReconstructedParticle::get_mass(zed_leptonic)&quot;</span><span class="p">)</span>
+            <span class="c1"># create branch with zed transverse momenta</span>
+            <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;zed_leptonic_pt&quot;</span><span class="p">,</span>      <span class="s2">&quot;ReconstructedParticle::get_pt(zed_leptonic)&quot;</span><span class="p">)</span>
+            <span class="c1"># calculate recoil of zed_leptonic</span>
+            <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;zed_leptonic_recoil&quot;</span><span class="p">,</span>  <span class="s2">&quot;ReconstructedParticle::recoilBuilder(240)(zed_leptonic)&quot;</span><span class="p">)</span>
+            <span class="c1"># create branch with recoil mass</span>
+            <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;zed_leptonic_recoil_m&quot;</span><span class="p">,</span><span class="s2">&quot;ReconstructedParticle::get_mass(zed_leptonic_recoil)&quot;</span><span class="p">)</span>
+            <span class="c1"># create branch with leptonic charge</span>
+            <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;zed_leptonic_charge&quot;</span><span class="p">,</span><span class="s2">&quot;ReconstructedParticle::get_charge(zed_leptonic)&quot;</span><span class="p">)</span>
+            <span class="c1"># Filter at least one candidate</span>
+            <span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;zed_leptonic_recoil_m.size()&gt;0&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">df2</span>
+
+    <span class="c1">#__________________________________________________________</span>
+    <span class="c1">#Mandatory: output function, please make sure you return the branchlist as a python list</span>
+    <span class="k">def</span> <span class="nf">output</span><span class="p">():</span>
+        <span class="n">branchList</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;selected_muons_pt&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;selected_muons_y&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;selected_muons_p&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;selected_muons_e&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;zed_leptonic_pt&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;zed_leptonic_m&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;zed_leptonic_charge&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;zed_leptonic_recoil_m&quot;</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">branchList</span>
+</pre></div>
+</div>
+<p>And run the analysis stage 1 on previously produced samples:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># for testing purposes, take these from eos</span>
+<span class="nv">TESTSAMPLEDIR</span><span class="o">=</span>https://fccsw.web.cern.ch/testsamples/tutorial/
+<span class="c1"># if you want to use the previously produced samples, uncomment:</span>
+<span class="c1"># TESTSAMPLEDIR=$PWD</span>
+fccanalysis<span class="w"> </span>run<span class="w"> </span>analysis_stage1.py<span class="w"> </span>--output<span class="w"> </span>p8_ee_ZH_ecm240.root<span class="w"> </span>--files-list<span class="w"> </span><span class="nv">$TESTSAMPLEDIR</span>/p8_ee_ZH_ecm240_edm4hep.root
+fccanalysis<span class="w"> </span>run<span class="w"> </span>analysis_stage1.py<span class="w"> </span>--output<span class="w"> </span>p8_ee_ZZ_ecm240.root<span class="w"> </span>--files-list<span class="w"> </span><span class="nv">$TESTSAMPLEDIR</span>/p8_ee_ZZ_ecm240_edm4hep.root
+fccanalysis<span class="w"> </span>run<span class="w"> </span>analysis_stage1.py<span class="w"> </span>--output<span class="w"> </span>p8_ee_WW_ecm240.root<span class="w"> </span>--files-list<span class="w"> </span><span class="nv">$TESTSAMPLEDIR</span>/p8_ee_WW_ecm240_edm4hep.root
+</pre></div>
+</div>
+<p>this will produce small ntuples pre-selection files with only variables you are interested in.</p>
+<p>This first analysis stage usually runs on large samples on batch, and the idea is to produce small ntuples with less variables. From those small ntuples we could consider running a second analysis stage, for example let us create a file called <code class="docutils literal notranslate"><span class="pre">analysis_stage2.py</span></code> containing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">processList</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;p8_ee_ZZ_ecm240&#39;</span><span class="p">:{},</span>
+    <span class="s1">&#39;p8_ee_WW_ecm240&#39;</span><span class="p">:{},</span>
+    <span class="s1">&#39;p8_ee_ZH_ecm240&#39;</span><span class="p">:{}</span>
+<span class="p">}</span>
+
+<span class="n">inputDir</span>    <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">outputDir</span>   <span class="o">=</span> <span class="s2">&quot;stage2&quot;</span>
+
+<span class="c1">#USER DEFINED CODE</span>
+<span class="kn">import</span> <span class="nn">ROOT</span>
+<span class="n">ROOT</span><span class="o">.</span><span class="n">gInterpreter</span><span class="o">.</span><span class="n">Declare</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">bool myFilter(ROOT::VecOps::RVec&lt;float&gt; mass) {</span>
+<span class="s2">    for (size_t i = 0; i &lt; mass.size(); ++i) {</span>
+<span class="s2">        if (mass.at(i)&gt;80. &amp;&amp; mass.at(i)&lt;100.)</span>
+<span class="s2">            return true;</span>
+<span class="s2">    }</span>
+<span class="s2">    return false;</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="c1">#END USER DEFINED CODE</span>
+
+<span class="c1">#Mandatory: RDFanalysis class where the use defines the operations on the TTree</span>
+<span class="k">class</span> <span class="nc">RDFanalysis</span><span class="p">():</span>
+
+    <span class="c1">#__________________________________________________________</span>
+    <span class="c1">#Mandatory: analysers funtion to define the analysers to process, please make sure you return the last dataframe, in this example it is df2</span>
+    <span class="k">def</span> <span class="nf">analysers</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+        <span class="n">df2</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span>
+               <span class="c1">#Filter to have exactly one Z candidate</span>
+               <span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s2">&quot;zed_leptonic_m.size() == 1&quot;</span><span class="p">)</span>
+               <span class="c1">#Define Z candidate mass</span>
+               <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;Zcand_m&quot;</span><span class="p">,</span><span class="s2">&quot;zed_leptonic_m[0]&quot;</span><span class="p">)</span>
+               <span class="c1">#Define Z candidate recoil mass</span>
+               <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;Zcand_recoil_m&quot;</span><span class="p">,</span><span class="s2">&quot;zed_leptonic_recoil_m[0]&quot;</span><span class="p">)</span>
+               <span class="c1">#Define Z candidate pt</span>
+               <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;Zcand_pt&quot;</span><span class="p">,</span><span class="s2">&quot;zed_leptonic_pt[0]&quot;</span><span class="p">)</span>
+               <span class="c1">#Define Z candidate charge</span>
+               <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;Zcand_q&quot;</span><span class="p">,</span><span class="s2">&quot;zed_leptonic_charge[0]&quot;</span><span class="p">)</span>
+               <span class="c1">#Define new var rdf entry (example)</span>
+               <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;entry&quot;</span><span class="p">,</span> <span class="s2">&quot;rdfentry_&quot;</span><span class="p">)</span>
+               <span class="c1">#Define a weight based on entry (inline example of possible operations)</span>
+               <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="s2">&quot;return 1./(entry+1)&quot;</span><span class="p">)</span>
+               <span class="c1">#Define a variable based on a custom filter</span>
+               <span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="s2">&quot;MyFilter&quot;</span><span class="p">,</span> <span class="s2">&quot;myFilter(zed_leptonic_m)&quot;</span><span class="p">)</span>
+               <span class="p">)</span>
+        <span class="k">return</span> <span class="n">df2</span>
+
+    <span class="c1">#__________________________________________________________</span>
+    <span class="c1">#Mandatory: output function, please make sure you return the branchlist as a python list.</span>
+    <span class="k">def</span> <span class="nf">output</span><span class="p">():</span>
+        <span class="n">branchList</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;Zcand_m&quot;</span><span class="p">,</span> <span class="s2">&quot;Zcand_pt&quot;</span><span class="p">,</span> <span class="s2">&quot;Zcand_q&quot;</span><span class="p">,</span><span class="s2">&quot;MyFilter&quot;</span><span class="p">,</span><span class="s2">&quot;Zcand_recoil_m&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;entry&quot;</span><span class="p">,</span><span class="s2">&quot;weight&quot;</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">branchList</span>
+</pre></div>
+</div>
+<p>And run the analysis stage 2 on previously produced samples in stage 1:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>analysis_stage2.py
+</pre></div>
+</div>
+<p>lets now run the final selection on the pre-selection files, for that create a <code class="docutils literal notranslate"><span class="pre">analysis_final.py</span></code> file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Input directory where the files produced at the pre-selection level are</span>
+<span class="n">inputDir</span>  <span class="o">=</span> <span class="s2">&quot;stage2&quot;</span>
+
+<span class="c1">#Input directory where the files produced at the pre-selection level are</span>
+<span class="n">outputDir</span>  <span class="o">=</span> <span class="s2">&quot;final&quot;</span>
+
+<span class="n">processList</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;p8_ee_ZZ_ecm240&#39;</span><span class="p">:{},</span>
+    <span class="s1">&#39;p8_ee_WW_ecm240&#39;</span><span class="p">:{},</span>
+    <span class="s1">&#39;p8_ee_ZH_ecm240&#39;</span><span class="p">:{}</span>
+<span class="p">}</span>
+
+<span class="c1">#Link to the dictonary that contains all the cross section informations etc...</span>
+<span class="n">procDict</span> <span class="o">=</span> <span class="s2">&quot;https://fcc-physics-events.web.cern.ch/fcc-physics-events/data/FCCDicts/FCCee_procDict_spring2021_IDEA.json&quot;</span>
+
+<span class="c1">#produces ROOT TTrees, default is False</span>
+<span class="n">doTree</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1">###Dictionnay of the list of cuts. The key is the name of the selection that will be added to the output file</span>
+<span class="n">cutList</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;sel0&quot;</span><span class="p">:</span><span class="s2">&quot;Zcand_q == 0&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;sel1&quot;</span><span class="p">:</span><span class="s2">&quot;Zcand_q == -1 || Zcand_q == 1&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;sel2&quot;</span><span class="p">:</span><span class="s2">&quot;Zcand_m &gt; 80 &amp;&amp; Zcand_m &lt; 100&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;sel3&quot;</span><span class="p">:</span><span class="s2">&quot;MyFilter==true &amp;&amp; (Zcand_m &lt; 80 || Zcand_m &gt; 100)&quot;</span>
+            <span class="p">}</span>
+
+
+<span class="c1">#Dictionary for the ouput variable/hitograms. The key is the name of the variable in the output files. &quot;name&quot; is the name of the variable in the input file, &quot;title&quot; is the x-axis label of the histogram, &quot;bin&quot; the number of bins of the histogram, &quot;xmin&quot; the minimum x-axis value and &quot;xmax&quot; the maximum x-axis value.</span>
+<span class="n">histoList</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;mz&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Zcand_m&quot;</span><span class="p">,</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;m_</span><span class="si">{Z}</span><span class="s2"> [GeV]&quot;</span><span class="p">,</span><span class="s2">&quot;bin&quot;</span><span class="p">:</span><span class="mi">125</span><span class="p">,</span><span class="s2">&quot;xmin&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;xmax&quot;</span><span class="p">:</span><span class="mi">250</span><span class="p">},</span>
+    <span class="s2">&quot;mz_zoom&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Zcand_m&quot;</span><span class="p">,</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;m_</span><span class="si">{Z}</span><span class="s2"> [GeV]&quot;</span><span class="p">,</span><span class="s2">&quot;bin&quot;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="s2">&quot;xmin&quot;</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span><span class="s2">&quot;xmax&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">},</span>
+    <span class="s2">&quot;leptonic_recoil_m&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Zcand_recoil_m&quot;</span><span class="p">,</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Z leptonic recoil [GeV]&quot;</span><span class="p">,</span><span class="s2">&quot;bin&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="s2">&quot;xmin&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;xmax&quot;</span><span class="p">:</span><span class="mi">200</span><span class="p">},</span>
+    <span class="s2">&quot;leptonic_recoil_m_zoom&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Zcand_recoil_m&quot;</span><span class="p">,</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Z leptonic recoil [GeV]&quot;</span><span class="p">,</span><span class="s2">&quot;bin&quot;</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span><span class="s2">&quot;xmin&quot;</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span><span class="s2">&quot;xmax&quot;</span><span class="p">:</span><span class="mi">160</span><span class="p">},</span>
+    <span class="s2">&quot;leptonic_recoil_m_zoom1&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Zcand_recoil_m&quot;</span><span class="p">,</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Z leptonic recoil [GeV]&quot;</span><span class="p">,</span><span class="s2">&quot;bin&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="s2">&quot;xmin&quot;</span><span class="p">:</span><span class="mi">120</span><span class="p">,</span><span class="s2">&quot;xmax&quot;</span><span class="p">:</span><span class="mi">140</span><span class="p">},</span>
+    <span class="s2">&quot;leptonic_recoil_m_zoom2&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Zcand_recoil_m&quot;</span><span class="p">,</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Z leptonic recoil [GeV]&quot;</span><span class="p">,</span><span class="s2">&quot;bin&quot;</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span><span class="s2">&quot;xmin&quot;</span><span class="p">:</span><span class="mi">120</span><span class="p">,</span><span class="s2">&quot;xmax&quot;</span><span class="p">:</span><span class="mi">140</span><span class="p">},</span>
+    <span class="s2">&quot;leptonic_recoil_m_zoom3&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Zcand_recoil_m&quot;</span><span class="p">,</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Z leptonic recoil [GeV]&quot;</span><span class="p">,</span><span class="s2">&quot;bin&quot;</span><span class="p">:</span><span class="mi">400</span><span class="p">,</span><span class="s2">&quot;xmin&quot;</span><span class="p">:</span><span class="mi">120</span><span class="p">,</span><span class="s2">&quot;xmax&quot;</span><span class="p">:</span><span class="mi">140</span><span class="p">},</span>
+    <span class="s2">&quot;leptonic_recoil_m_zoom4&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Zcand_recoil_m&quot;</span><span class="p">,</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Z leptonic recoil [GeV]&quot;</span><span class="p">,</span><span class="s2">&quot;bin&quot;</span><span class="p">:</span><span class="mi">800</span><span class="p">,</span><span class="s2">&quot;xmin&quot;</span><span class="p">:</span><span class="mi">120</span><span class="p">,</span><span class="s2">&quot;xmax&quot;</span><span class="p">:</span><span class="mi">140</span><span class="p">},</span>
+    <span class="s2">&quot;leptonic_recoil_m_zoom5&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Zcand_recoil_m&quot;</span><span class="p">,</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Z leptonic recoil [GeV]&quot;</span><span class="p">,</span><span class="s2">&quot;bin&quot;</span><span class="p">:</span><span class="mi">2000</span><span class="p">,</span><span class="s2">&quot;xmin&quot;</span><span class="p">:</span><span class="mi">120</span><span class="p">,</span><span class="s2">&quot;xmax&quot;</span><span class="p">:</span><span class="mi">140</span><span class="p">},</span>
+    <span class="s2">&quot;leptonic_recoil_m_zoom6&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Zcand_recoil_m&quot;</span><span class="p">,</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Z leptonic recoil [GeV]&quot;</span><span class="p">,</span><span class="s2">&quot;bin&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="s2">&quot;xmin&quot;</span><span class="p">:</span><span class="mf">130.3</span><span class="p">,</span><span class="s2">&quot;xmax&quot;</span><span class="p">:</span><span class="mf">132.5</span><span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>final<span class="w"> </span>analysis_final.py
+</pre></div>
+</div>
+<p>this will produce 2 files for each sample and each selection, one with final tree with variables of interest, and one with histograms.</p>
+<p>Now we can write the code to produce plots, in <code class="docutils literal notranslate"><span class="pre">analysis_plots.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ROOT</span>
+
+<span class="c1"># global parameters</span>
+<span class="n">intLumi</span>        <span class="o">=</span> <span class="mf">5.0e+06</span> <span class="c1">#in pb-1</span>
+<span class="n">ana_tex</span>        <span class="o">=</span> <span class="s1">&#39;e^{+}e^{-} #rightarrow ZH #rightarrow #mu^{+}#mu^{-} + X&#39;</span>
+<span class="n">delphesVersion</span> <span class="o">=</span> <span class="s1">&#39;3.4.2&#39;</span>
+<span class="n">energy</span>         <span class="o">=</span> <span class="mf">240.0</span>
+<span class="n">collider</span>       <span class="o">=</span> <span class="s1">&#39;FCC-ee&#39;</span>
+<span class="n">inputDir</span>       <span class="o">=</span> <span class="s1">&#39;final&#39;</span>
+<span class="n">formats</span>        <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="s1">&#39;pdf&#39;</span><span class="p">]</span>
+<span class="n">yaxis</span>          <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span><span class="s1">&#39;log&#39;</span><span class="p">]</span>
+<span class="n">stacksig</span>       <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;stack&#39;</span><span class="p">,</span><span class="s1">&#39;nostack&#39;</span><span class="p">]</span>
+<span class="n">outdir</span>         <span class="o">=</span> <span class="s1">&#39;plots/&#39;</span>
+
+<span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mz&#39;</span><span class="p">,</span><span class="s1">&#39;mz_zoom&#39;</span><span class="p">,</span><span class="s1">&#39;leptonic_recoil_m&#39;</span><span class="p">,</span><span class="s1">&#39;leptonic_recoil_m_zoom&#39;</span><span class="p">]</span>
+
+<span class="c1">###Dictionary with the analysis name as a key, and the list of selections to be plotted for this analysis. The name of the selections should be the same than in the final selection</span>
+<span class="n">selections</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">selections</span><span class="p">[</span><span class="s1">&#39;ZH&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sel0&quot;</span><span class="p">,</span><span class="s2">&quot;sel1&quot;</span><span class="p">,</span><span class="s2">&quot;sel2&quot;</span><span class="p">,</span><span class="s2">&quot;sel3&quot;</span><span class="p">]</span>
+<span class="n">selections</span><span class="p">[</span><span class="s1">&#39;ZH_2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sel0&quot;</span><span class="p">,</span><span class="s2">&quot;sel1&quot;</span><span class="p">]</span>
+
+<span class="n">extralabel</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">extralabel</span><span class="p">[</span><span class="s1">&#39;sel0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Selection: N_</span><span class="si">{Z}</span><span class="s2"> = 1&quot;</span>
+<span class="n">extralabel</span><span class="p">[</span><span class="s1">&#39;sel1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Selection: N_</span><span class="si">{Z}</span><span class="s2"> = 1; 80 GeV &lt; m_</span><span class="si">{Z}</span><span class="s2"> &lt; 100 GeV&quot;</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">colors</span><span class="p">[</span><span class="s1">&#39;ZH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">kRed</span>
+<span class="n">colors</span><span class="p">[</span><span class="s1">&#39;WW&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">kBlue</span><span class="o">+</span><span class="mi">1</span>
+<span class="n">colors</span><span class="p">[</span><span class="s1">&#39;ZZ&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">kGreen</span><span class="o">+</span><span class="mi">2</span>
+<span class="n">colors</span><span class="p">[</span><span class="s1">&#39;VV&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">kGreen</span><span class="o">+</span><span class="mi">3</span>
+
+<span class="n">plots</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">plots</span><span class="p">[</span><span class="s1">&#39;ZH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;signal&#39;</span><span class="p">:{</span><span class="s1">&#39;ZH&#39;</span><span class="p">:[</span><span class="s1">&#39;p8_ee_ZH_ecm240&#39;</span><span class="p">]},</span>
+               <span class="s1">&#39;backgrounds&#39;</span><span class="p">:{</span><span class="s1">&#39;WW&#39;</span><span class="p">:[</span><span class="s1">&#39;p8_ee_WW_ecm240&#39;</span><span class="p">],</span>
+                              <span class="s1">&#39;ZZ&#39;</span><span class="p">:[</span><span class="s1">&#39;p8_ee_ZZ_ecm240&#39;</span><span class="p">]}</span>
+           <span class="p">}</span>
+
+
+<span class="n">plots</span><span class="p">[</span><span class="s1">&#39;ZH_2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;signal&#39;</span><span class="p">:{</span><span class="s1">&#39;ZH&#39;</span><span class="p">:[</span><span class="s1">&#39;p8_ee_ZH_ecm240&#39;</span><span class="p">]},</span>
+                 <span class="s1">&#39;backgrounds&#39;</span><span class="p">:{</span><span class="s1">&#39;VV&#39;</span><span class="p">:[</span><span class="s1">&#39;p8_ee_WW_ecm240&#39;</span><span class="p">,</span><span class="s1">&#39;p8_ee_ZZ_ecm240&#39;</span><span class="p">]}</span>
+             <span class="p">}</span>
+
+<span class="n">legend</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">legend</span><span class="p">[</span><span class="s1">&#39;ZH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ZH&#39;</span>
+<span class="n">legend</span><span class="p">[</span><span class="s1">&#39;WW&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;WW&#39;</span>
+<span class="n">legend</span><span class="p">[</span><span class="s1">&#39;ZZ&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ZZ&#39;</span>
+<span class="n">legend</span><span class="p">[</span><span class="s1">&#39;VV&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;VV boson&#39;</span>
+</pre></div>
+</div>
+<p>Run the plotting script with the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>plots<span class="w"> </span>analysis_plots.py
+</pre></div>
+</div>
+<p>and look at them in <code class="docutils literal notranslate"><span class="pre">plots/</span></code>.</p>
+<p>Please note that the event statistics is not great because we only produced on 10 000 events in the <code class="docutils literal notranslate"><span class="pre">k4SimDelphes</span></code> step.</p>
+<div class="challenge admonition">
+<p class="admonition-title">Exercises</p>
+<ol class="arabic simple">
+<li><p>Modify <code class="docutils literal notranslate"><span class="pre">plots.py</span></code> to include the muon tracks (look at the output file <code class="docutils literal notranslate"><span class="pre">_edm4hep.root</span></code> or to <code class="docutils literal notranslate"><span class="pre">analysis.py</span></code> to check the name.</p></li>
+<li><p>Add the track informations to the output files by modifying <code class="docutils literal notranslate"><span class="pre">analysis.py</span></code> for the <code class="docutils literal notranslate"><span class="pre">efcharged</span></code> collection and produce plots with them as in 1)</p></li>
+<li><p>Produce plots with larger statistics by re-running <code class="docutils literal notranslate"><span class="pre">DelphesPythia8_EDM4HEP</span></code> with more events.</p></li>
+<li><p><strong>This part can only be on lxplus and for people having the access rights to eos and the analysis dictonary</strong>
+In order to produce plots with more statistics using centrally produced samples, we could use already processed large statistics samples.
+To do so we re-run the pre-selection over 10 percent of the total statistics <a class="reference external" href="http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA.php">here</a>.
+Add to your a <code class="docutils literal notranslate"><span class="pre">analysis_stage1.py</span></code> file</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">processList</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;p8_ee_ZZ_ecm240&#39;</span><span class="p">:{</span><span class="s1">&#39;fraction&#39;</span><span class="p">:</span><span class="mf">0.1</span><span class="p">},</span>
+    <span class="s1">&#39;p8_ee_WW_ecm240&#39;</span><span class="p">:{</span><span class="s1">&#39;fraction&#39;</span><span class="p">:</span><span class="mf">0.1</span><span class="p">},</span>
+    <span class="s1">&#39;p8_ee_ZH_ecm240&#39;</span><span class="p">:{</span><span class="s1">&#39;fraction&#39;</span><span class="p">:</span><span class="mf">0.1</span><span class="p">}</span>
+<span class="p">}</span>
+<span class="n">prodTag</span>     <span class="o">=</span> <span class="s2">&quot;FCCee/spring2021/IDEA/&quot;</span>
+</pre></div>
+</div>
+<p>and run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>analysis_stage1.py
+</pre></div>
+</div>
+<p>and as before run the stage 2, final selection and plots:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fccanalysis<span class="w"> </span>run<span class="w"> </span>analysis_stage2.py
+fccanalysis<span class="w"> </span>final<span class="w"> </span>analysis_final.py
+fccanalysis<span class="w"> </span>plots<span class="w"> </span>analysis_plots.py
+</pre></div>
+</div>
+<p>and look at the new plots in <code class="docutils literal notranslate"><span class="pre">plots/</span></code>.</p>
+<p>To further increase the event statistics, increase the value (up to 1) of the parameter <code class="docutils literal notranslate"><span class="pre">fraction</span></code> in <code class="docutils literal notranslate"><span class="pre">analysis_stage1</span></code> (no value mean 1)</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../../../k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html" class="btn btn-neutral float-left" title="2.2. FCC: Getting started with simulating events in Delphes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../FccFastSimVertexing/Readme.html" class="btn btn-neutral float-right" title="2.4. FCC: tracking and vertexing example using specific flavour decays" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: cern2022
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../../../../../master/index.html">master</a></dd>
+      <dd><a href="../../../../../../bnl2023/index.html">bnl2023</a></dd>
+      <dd><a href="Readme.html">cern2022</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
