@@ -14,6 +14,7 @@ So, let's start playing with Full Sim!
 # connect to a machine with cvmfs access and running an OS supported by Key4hep (Alma9 here)
 ssh -X username@submit-test.mit.edu # or ssh -X username@lxplus.cern.ch
 # set-up the Key4hep environment
+# make sure you are in bash or zsh shell
 source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
 # create a repository for the tutorial
 mkdir FCC_Full_Sim_Tutorial
@@ -252,7 +253,7 @@ Now, let's copy the file containing the geometry on your local machine:
 scp USERNAME@HOSTNAME:ABSOLUTE_PATH_TO_GEOMETRY .
 ```
 
-Load the file from your computer with the triple-dot button of this webpage: https://root.cern/js/latest/ .
+Load the file from your computer with the triple-dot button of this webpage: [https://root.cern/js/latest/](https://root.cern/js/latest/).
 
 From there, you can navigate the geometry hierarchy to see how volumes are nested, display all or parts of the detector (right click on a volume > Draw > all), play with the camera settings (right click on an empty space in the display window > Show Controls, Clipping > Enable X and Enable Y), etc. See the following picture for illustration:
 
