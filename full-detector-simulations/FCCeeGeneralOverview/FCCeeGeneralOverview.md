@@ -1,6 +1,6 @@
 # FCC-ee Full Sim General Overview
 
-<!-- This version has been prepared for a 30 minutes tutorial at the Second US FCC Workshop (2024): https://indico.mit.edu/event/876/contributions/2893/ -->
+<!-- This version has been prepared for the tutorial at the Second US FCC Workshop (2024): https://indico.mit.edu/event/876/contributions/2893/ -->
 
 Welcome to this general overview of the FCC-ee Full Simulation.
 This tutorial aims at showing you how to run the state of the art full simulation of the various detector concepts currently under study for FCC-ee: CLD, ALLEGRO and IDEA. The [DD4hep](https://dd4hep.web.cern.ch/dd4hep/usermanuals/DD4hepManual/DD4hepManual.pdf) geometry descriptions of these detectors are hosted in the [k4geo](https://github.com/key4hep/k4geo/tree/main/FCCee) GitHub repository and made centrally available with the Key4hep stack under the `$K4GEO` environment variable. This tutorial should work on any machine with `cvmfs` access and running an operating system supported by Key4hep (AlmaLinux 9 and Ubuntu 22).
@@ -11,15 +11,14 @@ So, let's start playing with Full Sim!
 
 ## Setting-up the environment
 ```bash
-# connect to an Alma9 machine with cvmfs access
-ssh -X username@submit-test.mit.edu
+# connect to a machine with cvmfs access and running an OS supported by Key4hep (Alma9 here)
+ssh -X username@submit-test.mit.edu # or ssh -X username@lxplus.cern.ch
 # set-up the Key4hep environment
 source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
 # create a repository for the tutorial
 mkdir FCC_Full_Sim_Tutorial
 cd FCC_Full_Sim_Tutorial
 git clone https://github.com/HEP-FCC/fcc-tutorials
-cd fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/
 ```
 
 ## Towards Full Sim physics analyses with CLD
@@ -32,32 +31,31 @@ Let's first run the CLD Geant4 simulation, through ddsim, for some $e^{+}e^{-} \
 <!-- /eos/experiment/fcc/ee/generation/stdhep/wzp6_ee_mumuH_ecm240/events_057189088.stdhep.gz -->
 
 ```bash
+# get the CLD config repository
+git clone https://github.com/key4hep/CLDConfig.git
+cd CLDConfig/CLDConfig
 # retrieve Z(mumu)H(X) MC generator events
 wget http://fccsw.web.cern.ch/fccsw/tutorials/MIT2024/wzp6_ee_mumuH_ecm240_GEN.stdhep.gz
 gunzip wzp6_ee_mumuH_ecm240_GEN.stdhep.gz
 # run the Geant4 simulation
-ddsim -I wzp6_ee_mumuH_ecm240_GEN.stdhep -N 10 -O wzp6_ee_mumuH_ecm240_CLD_SIM.root --compactFile $K4GEO/FCCee/CLD/compact/CLD_o2_v05/CLD_o2_v05.xml
+ddsim -I wzp6_ee_mumuH_ecm240_GEN.stdhep -N 10 -O wzp6_ee_mumuH_ecm240_CLD_SIM.root --compactFile $K4GEO/FCCee/CLD/compact/CLD_o2_v05/CLD_o2_v05.xml --steeringFile cld_steer.py
 # NB: we run only on 10 events (-N 10) here for the sake of time
-# for such small amount of event the detector geometry construction step dominates, it takes about 5 seconds per events and the geometry loading takes 1min30s
+# for such small amount of event the detector geometry construction step dominates, it takes about 5 seconds per event and the geometry loading takes 1min30s
 ```
-<!-- Takes 2 min 30 sec, only  52.13 for event processing though: 5.21 s/Event -->
+<!-- Takes 2 min 30 sec, only  52.13 s for event processing though: 5.21 s/Event -->
 
-
-This will produce an output file in edm4hep dataformat with Geant4 SimHits that can then be fed to the reconstruction step. Note that ddsim can also digest other MC output format like `hepevt`, `hepmc`, `pairs` (GuineaPig output), ..., and of course also has particle gun**s** as we will see later. More information can be obtained with `ddsim -h`.
+While the code runs (~ 2min30 s), you can browse the [k4geo](https://github.com/key4hep/k4geo/tree/main/FCCee) repository to see how the code is organized. This step produced an output file in edm4hep dataformat with Geant4 SIM hits that can then be fed to the reconstruction step. Note that ddsim can also digest other MC output format like `hepevt`, `hepmc`, `pairs` (GuineaPig output), ..., and of course also has particle gun**s** as we will see later. More information can be obtained with `ddsim -h`.
 
 ### Running CLD reconstruction
 
 Let's now apply the CLD reconstruction (from ILCSoft through the Gaudi wrappers and data format converters) on top of the SIM step:
 
 ```
-cd ../../../
-git clone https://github.com/key4hep/CLDConfig.git
-cd CLDConfig/CLDConfig
 sed -i "s/DEBUG/INFO/" CLDReconstruction.py
-k4run CLDReconstruction.py --inputFiles ../../fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/wzp6_ee_mumuH_ecm240_CLD_SIM.root --outputBasename ../../fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/wzp6_ee_mumuH_ecm240_CLD_RECO --num-events -1
+k4run CLDReconstruction.py --inputFiles wzp6_ee_mumuH_ecm240_CLD_SIM.root --outputBasename wzp6_ee_mumuH_ecm240_CLD_RECO --num-events -1
 # Do not forget to modify the geoservice.detectors variable if you do not use the central detector
-cd ../../fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/
 ```
+<!-- takes 1m40s -->
 
 This created an edm4hep ROOT file with a bunch of new DIGI/RECO level collections, including `edm4hep::ReconstructedParticle` from Particle Flow (PandoraPFA). You can inspect the ROOT file content with
 
@@ -104,6 +102,7 @@ canvas_recoil.Print("recoil_mass.png")
 
 Let's run it on a sample with slightly more stat:
 ```
+cd ../../fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/
 wget https://fccsw.web.cern.ch/fccsw/tutorials/MIT2024/wzp6_ee_mumuH_ecm240_CLD_RECO_moreStat.root
 python plot_recoil_mass.py wzp6_ee_mumuH_ecm240_CLD_RECO_moreStat.root
 display recoil_mass.png
@@ -158,6 +157,7 @@ Let's now run a first particle gun simulation:
 cd fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/
 ddsim --enableGun --gun.distribution uniform --gun.energy "10*GeV" --gun.particle e- --gun.thetaMin "55*degree" --gun.thetaMax "125*degree"  --numberOfEvents 100 --outputFile electron_gun_10GeV_ALLEGRO_SIM.root --random.enableEventSeed --random.seed 42 --compactFile $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v02/ALLEGRO_o1_v02.xml
 ```
+<!-- takes ~2min30s -->
 
 And apply the ALLEGRO reconstruction, including an MVA based calibration:
 ```
