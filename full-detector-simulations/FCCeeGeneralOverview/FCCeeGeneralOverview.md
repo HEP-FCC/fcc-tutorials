@@ -13,8 +13,8 @@ So, let's start playing with Full Sim!
 ```bash
 # connect to a machine with cvmfs access and running an OS supported by Key4hep (Alma9 here)
 ssh -X username@submit-test.mit.edu # or ssh -X username@lxplus.cern.ch
-# set-up the Key4hep environment
-# make sure you are in bash or zsh shell
+# set-up the Key4hep environment, using the nightlies since we need the latest and greatest version of the packages
+# (make sure you are in bash or zsh shell)
 source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
 # create a repository for the tutorial
 mkdir FCC_Full_Sim_Tutorial
@@ -75,11 +75,12 @@ Let's now use the reconstructed sample to produce some physics quantities. As an
 
 <!-- Explain a bit the script -->
 ```
+import sys
 from podio import root_io
 import ROOT
 ROOT.gROOT.SetBatch(True)
 
-input_file_path = "wzp6_ee_mumuH_ecm240_CLD_RECO.root"
+input_file_path = sys.argv[1]
 podio_reader = root_io.Reader(input_file_path)
 
 th1_recoil = ROOT.TH1F("Recoil Mass", "Recoil Mass", 100, 110, 160)
@@ -101,11 +102,59 @@ th1_recoil.Draw()
 canvas_recoil.Print("recoil_mass.png")
 ```
 
-Let's run it on a sample with slightly more stat:
+The equivalent C++ ROOT macro looks like this:
+```
+#include "podio/ROOTFrameReader.h"
+#include "podio/Frame.h"
+
+#include "edm4hep/ReconstructedParticleCollection.h"
+
+int plot_recoil_mass(std::string input_file_path) {
+  auto reader = podio::ROOTFrameReader();
+  reader.openFile(input_file_path);
+
+  TH1* th1_recoil = new TH1F("Recoil Mass", "Recoil Mass", 100, 110., 160.);
+
+  ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<Double32_t>> p_cm(0., 0., 0., 240.);
+  for (size_t i = 0; i < reader.getEntries("events"); ++i) {
+    auto event = podio::Frame(reader.readNextEntry("events"));
+    auto& pfos = event.get<edm4hep::ReconstructedParticleCollection>("TightSelectedPandoraPFOs");
+    int n_good_muons = 0;
+    ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<Double32_t>> p_mumu;
+    for (const auto& pfo : pfos) {
+      if (std::abs(pfo.getPDG()) == 13 and pfo.getEnergy() > 20.) {
+        n_good_muons++;
+        p_mumu += ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<Double32_t>>(pfo.getMomentum().x, pfo.getMomentum().y, pfo.getMomentum().z, pfo.getEnergy());
+      }
+    }
+    if(n_good_muons == 2)
+      th1_recoil->Fill((p_cm - p_mumu).M());
+  }
+  TCanvas* canvas_recoil = new TCanvas("Recoil Mass", "Recoil Mass");
+  th1_recoil->Draw();
+  canvas_recoil->Print("recoil_mass.png");
+  return 0;
+}
+```
+
+Let's get a similar sample but with more stat:
 ```
 cd ../../fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/
 wget https://fccsw.web.cern.ch/fccsw/tutorials/MIT2024/wzp6_ee_mumuH_ecm240_CLD_RECO_moreStat.root
+```
+
+and produce the simple Higgs recoil mass plot in Python:
+``` 
 python plot_recoil_mass.py wzp6_ee_mumuH_ecm240_CLD_RECO_moreStat.root
+display recoil_mass.png
+```
+
+or in C++ with the ROOT interpreter:
+```
+root -b
+.L plot_recoil_mass.C
+plot_recoil_mass("wzp6_ee_mumuH_ecm240_CLD_RECO_moreStat.root")
+.q
 display recoil_mass.png
 ```
 

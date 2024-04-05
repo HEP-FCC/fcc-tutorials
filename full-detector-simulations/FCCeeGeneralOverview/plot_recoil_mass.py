@@ -6,15 +6,15 @@ ROOT.gROOT.SetBatch(True)
 input_file_path = sys.argv[1]
 podio_reader = root_io.Reader(input_file_path)
 
-th1_recoil = ROOT.TH1F("Recoil Mass", "Recoil Mass", 100, 110, 160)
+th1_recoil = ROOT.TH1F("Recoil Mass", "Recoil Mass", 100, 110., 160.)
 
-p_cm = ROOT.Math.LorentzVector('ROOT::Math::PxPyPzE4D<double>')(0, 0, 0, 240)
+p_cm = ROOT.Math.LorentzVector('ROOT::Math::PxPyPzE4D<double>')(0., 0., 0., 240.)
 for event in podio_reader.get("events"):
     pfos = event.get("TightSelectedPandoraPFOs")
     n_good_muons = 0
     p_mumu = ROOT.Math.LorentzVector('ROOT::Math::PxPyPzE4D<double>')()
     for pfo in pfos:
-        if abs(pfo.getPDG()) == 13 and pfo.getEnergy() > 20:
+        if abs(pfo.getPDG()) == 13 and pfo.getEnergy() > 20.:
             n_good_muons += 1
             p_mumu += ROOT.Math.LorentzVector('ROOT::Math::PxPyPzE4D<double>')(pfo.getMomentum().x, pfo.getMomentum().y, pfo.getMomentum().z, pfo.getEnergy())
     if n_good_muons == 2:
