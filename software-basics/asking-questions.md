@@ -15,7 +15,7 @@ This lesson is about how to get help with getting unstuck.
 :class: callout
 
 For FCC specific questions your best bet are the FCC mailing
-list : `fcc-experiments-sw-devATSPAMNOTcern.ch`
+list : `FCC-PED-SoftwareAndComputing-Documentation@cern.ch`
 A recent alternative to the mailing lists is the [Mattermost chat](https://mattermost.web.cern.ch/fccsw) having dedicated channels, and the [discourse forum](https://fccsw-forum.web.cern.ch)
 
 For more general questions [Stack Overflow](https://stackoverflow.com/) and
