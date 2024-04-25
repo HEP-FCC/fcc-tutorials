@@ -294,8 +294,8 @@ fccanalysis run analysis_tutorial_mva.py --output photons_10layers.root --test
 
 We get the following plotting scripts
 ```shell
-wget https://raw.githubusercontent.com/HEP-FCC/fcc-tutorials/master/full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/draw_rocCurve_pi0_gamma_GNN.py
-wget https://raw.githubusercontent.com/HEP-FCC/fcc-tutorials/master/full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/rocCurveFacility.py
+wget https://raw.githubusercontent.com/HEP-FCC/fcc-tutorials/main/full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/draw_rocCurve_pi0_gamma_GNN.py
+wget https://raw.githubusercontent.com/HEP-FCC/fcc-tutorials/main/full-detector-simulations/FCCeeCaloPhotonPi0Discrimination/rocCurveFacility.py
 ```
 
 Edit `draw_rocCurve_pi0_gamma_GNN.py` and edit the following:

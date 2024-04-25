@@ -212,7 +212,7 @@ By comparing the CMS and FCC Delphes cards, try to explain:
 []() Other documentation
 ------------------------
 
--   [Submit FCCSW jobs using the condor queue](https://github.com/HEP-FCC/fcc-tutorials/blob/master/FccCondor.md)
+-   [Submit FCCSW jobs using the condor queue](https://github.com/HEP-FCC/fcc-tutorials/blob/main/FccCondor.md)
 -   [Submit Heppy jobs using the batch queue](https://github.com/HEP-FCC/heppy/blob/master/doc/Heppy_-_Parallel_Processing.md)
 -   [FCCSW webpage](http://fccsw.web.cern.ch/fccsw/index.html)
 -   [Pythia8 manual](http://home.thep.lu.se/~torbjorn/pythia81html/Welcome.html)
