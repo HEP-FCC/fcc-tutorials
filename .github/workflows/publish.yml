@@ -1,4 +1,4 @@
-name: publish
+name: Publish
 
 on: [push]
 
@@ -6,7 +6,7 @@ jobs:
   sphinx:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
     - name: Install Requirements
@@ -20,9 +20,9 @@ jobs:
       run: |
         cd build
         git init
-        git config user.name "Key4hep bot"
-        git config user.email "Key4hep.bot@example.com"
-        git remote add upstream https://vvolkl:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
+        git config user.name "FCCSW Bot"
+        git config user.email "fccsw.bot@example.com"
+        git remote add upstream https://kjvbrt:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
 
         touch .nojekyll
         git add .nojekyll
