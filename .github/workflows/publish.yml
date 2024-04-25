@@ -1,6 +1,10 @@
 name: Publish
 
-on: [push]
+on:
+  push:
+    branches:
+    - master
+  pull_request:
 
 jobs:
   sphinx:
@@ -16,7 +20,6 @@ jobs:
       run: |
         sphinx-multiversion . build
     - name: Publish gh-pages
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
       run: |
         cd build
         git init
