@@ -39,7 +39,7 @@ You can check that the command to run jobs in the Gaudi framework is available o
 ```bash
 which fccrun
 ```
-If you don't see a valid path like `/usr/local/bin/fccrun`  you should consult [the documentation page on FCCSW setup](https://github.com/vvolkl/fcc-tutorials/blob/master/FccSoftwareGettingStarted.md)
+If you don't see a valid path like `/usr/local/bin/fccrun`  you should consult [the documentation page on FCCSW setup](https://github.com/vvolkl/fcc-tutorials/blob/main/FccSoftwareGettingStarted.md)
 
 ## Using the DD4hep detector model in FCC Software.
 

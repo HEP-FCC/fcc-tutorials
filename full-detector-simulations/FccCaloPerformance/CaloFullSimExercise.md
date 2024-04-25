@@ -57,7 +57,7 @@ Open the file `runCaloSim.py` and briefly browse it to get familiar with the `Ga
 NB: everything defined as a `Gaudi::Property` in the C++ implementation (e.g. `MomentumMin` from `MomentumRangeParticleGun`) can be set at run time in command line arguments. 
 The complete list of parameters that can be modified is displayed with `fccrun runCaloSim.py -h`.   
 
-Run the simulation with  `fccrun runCaloSim.py` (you can safely ignore the warnings and the error about HistogramSvc). While this command runs, try to answer the following questions by browsing [runCaloSim.py](https://github.com/HEP-FCC/fcc-tutorials/blob/master/full-detector-simulations/FccCaloPerformance/runCaloSim.py):
+Run the simulation with  `fccrun runCaloSim.py` (you can safely ignore the warnings and the error about HistogramSvc). While this command runs, try to answer the following questions by browsing [runCaloSim.py](https://github.com/HEP-FCC/fcc-tutorials/blob/main/full-detector-simulations/FccCaloPerformance/runCaloSim.py):
 
 - how to change the type of particle you shoot in the detector?
 :::{admonition} Answer

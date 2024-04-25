@@ -16,7 +16,7 @@ You also agree to abide by our [contributor code of conduct][conduct].
 1.  We use the [fork and pull][gh-fork-pull] model to manage changes.
     More information about [forking a repository][gh-fork] and [making a Pull Request][gh-pull].
 
-2.  For our lessons, you should branch from and submit pull requests against the `master` branch.
+2.  For our lessons, you should branch from and submit pull requests against the `main` branch.
 
 3.  When editing lesson pages, you need only commit changes to the Markdown source files.
 

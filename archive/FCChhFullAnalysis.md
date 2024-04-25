@@ -39,7 +39,7 @@ But first, make sure your **setup of the FCC software** is working correctly. A 
 !which fccrun
 ```
 
-If the above command fails without printing a path like `/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.10/x86_64-centos7-gcc62-opt/scripts/fccrun` check [**the documentation page on FCC software setup**](https://github.com/HEP-FCC/fcc-tutorials/blob/master/FccSoftwareGettingStarted.md).
+If the above command fails without printing a path like `/cvmfs/fcc.cern.ch/sw/releases/fccsw/0.10/x86_64-centos7-gcc62-opt/scripts/fccrun` check [**the documentation page on FCC software setup**](https://github.com/HEP-FCC/fcc-tutorials/blob/main/FccSoftwareGettingStarted.md).
 
 
 ## Part I: Generate and simulate Events with FCCSW
@@ -797,7 +797,7 @@ By comparing the CMS and FCC Delphes cards, try to explain:
 []() Other documentation
 ------------------------
 
--   [Submit FCCSW jobs using the condor queue](https://github.com/HEP-FCC/fcc-tutorials/blob/master/FccCondor.md)
+-   [Submit FCCSW jobs using the condor queue](https://github.com/HEP-FCC/fcc-tutorials/blob/main/FccCondor.md)
 -   [Submit Heppy jobs using the batch queue](https://github.com/HEP-FCC/heppy/blob/master/doc/Heppy_-_Parallel_Processing.md)
 -   [FCCSW webpage](http://fccsw.web.cern.ch/fccsw/index.html)
 -   [Pythia8 manual](http://home.thep.lu.se/~torbjorn/pythia81html/Welcome.html)

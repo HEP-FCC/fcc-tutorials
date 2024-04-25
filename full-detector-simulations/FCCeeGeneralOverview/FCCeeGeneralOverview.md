@@ -260,7 +260,7 @@ From there, you can navigate the geometry hierarchy to see how volumes are neste
 :align: center
 ```
 
-This tool is useful but not perfect and will not meet all the needs (especially if you want to overlay a physics event). To go further, other solutions are described in the dedicated [Visualization](https://hep-fcc.github.io/fcc-tutorials/master/full-detector-simulations/Visualization/Visualization.html) tutorial.
+This tool is useful but not perfect and will not meet all the needs (especially if you want to overlay a physics event). To go further, other solutions are described in the dedicated [Visualization](https://hep-fcc.github.io/fcc-tutorials/main/full-detector-simulations/Visualization/Visualization.html) tutorial.
 
 ## Additional Resources
  - [Key4hep tutorial](https://key4hep.github.io/key4hep-doc/setup-and-getting-started/README.html)
