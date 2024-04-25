@@ -1082,7 +1082,7 @@ for example `../FCCAnalyses`.
 
 ```
 $ cd ..
-$ git clone --branch v0.9.0 https://github.com/HEP-FCC/FCCAnalyses.git
+$ git clone --branch pre-edm4hep1 https://github.com/HEP-FCC/FCCAnalyses.git
 $ cd FCCAnalyses; mkdir {build,install}; cd build
 $ cmake -DCMAKE_INSTALL_PREFIX=../install ..
 $ make -j4 install
