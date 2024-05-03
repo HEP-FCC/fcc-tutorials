@@ -21,6 +21,7 @@ jobs:
     - name: Publish gh-pages
       run: |
         cd build
+        cp -r main master
         git init
         git config user.name "FCCSW Bot"
         git config user.email "fccsw.bot@example.com"
