@@ -261,6 +261,9 @@ The IDEA tracking system Full Sim description is getting complete: the Vertex an
 For this, let's run the IDEA simulation and digitization:
 
 ```bash
+# if you did not follow the entire tutorial sequencially, you have to do the following first
+# git clone https://github.com/HEP-FCC/fcc-tutorials
+# cd fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/
 ddsim --enableGun --gun.distribution uniform --gun.energy "10*GeV" --gun.particle e- --numberOfEvents 100 --outputFile electron_gun_10GeV_IDEA_SIM.root --random.enableEventSeed --random.seed 42 --compactFile $K4GEO/FCCee/IDEA/compact/IDEA_o1_v02/IDEA_o1_v02.xml
 k4run run_IDEA_DIGI.py --EventDataSvc.input="electron_gun_10GeV_IDEA_SIM.root" --out.filename="electron_gun_10GeV_IDEA_DIGI.root"
 ```
