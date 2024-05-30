@@ -12,7 +12,7 @@ running central production of events requires specific rights
 
 When samples produced by the [EventProducer](https://github.com/HEP-FCC/EventProducer)
 framework are ready they will appear on this
-[web-page](http://fcc-physics-events.web.cern.ch/).
+[web-page](https://fcc-physics-events.web.cern.ch/).
 :::
 
 
