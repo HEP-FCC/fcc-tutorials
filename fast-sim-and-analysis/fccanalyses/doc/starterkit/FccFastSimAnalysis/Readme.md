@@ -1123,13 +1123,13 @@ fccanalysis plots plots_flavor.py
 
 ## Advanced
 
-1) To evaluate the impact of detector performance, smear the neutral hadron resolution in the `ReconstructedParticlesNoMuons` collection and check the impact on the dijet invariant mass resolution. An example can be found [here] (https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/smearing/smear_jets.py): 
+1) To evaluate the impact of detector performance, smear the neutral hadron resolution in the `ReconstructedParticlesNoMuons` collection and check the impact on the dijet invariant mass resolution. An example can be found [here] (https://github.com/HEP-FCC/FCCAnalyses/blob/master/examples/FCCee/smearing/smear_jets.py):
 
 2) Now smear the impact parameter resolution and evaluate the imapct on the efficiency of selecting two B-tagged jets or two C-tagged jets. 
 
 3) **This part can only be on lxplus and for people having the access rights to eos and the analysis dictonary**
 In order to produce plots with more statistics using centrally produced samples, we could use already processed large statistics samples.
-To do so we re-run the pre-selection over 10 percent of the total statistics [here](http://fcc-physics-events.web.cern.ch/fcc-physics-events/Delphesevents_spring2021_IDEA.php).
+To do so we re-run the pre-selection over 10 percent of the total statistics [here](https://fcc-physics-events.web.cern.ch/FCCee/spring2021/Delphesevents_IDEA.php).
 Add to your a `analysis_stage1.py` file
 
 ```python
