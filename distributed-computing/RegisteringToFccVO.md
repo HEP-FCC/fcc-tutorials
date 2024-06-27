@@ -13,7 +13,7 @@ You need to use a browser where you have installed your certificate and the
 usually does not work. Safari might also work.
 :::
 
-[signup]: https://voms2.cern.ch:8443/voms/fcc/aup/sign.action
+[signup]: https://fcc-auth.cern.ch/dashboard#!/newClient
 
 ## Enabling DIRAC
 
