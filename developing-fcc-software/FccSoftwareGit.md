@@ -11,7 +11,7 @@ code.
 For a general introduction to git, have a look at these tutorials:
 
 -   [Atlassian tutorial](https://www.atlassian.com/git/tutorials/)
--   [Interactive tutorial](http://pcottle.github.io/learnGitBranching/)
+-   [Interactive tutorial](https://pcottle.github.io/learnGitBranching/)
 -   [The git book](https://git-scm.com/book/en/v2)
 
 ## First time setup of git

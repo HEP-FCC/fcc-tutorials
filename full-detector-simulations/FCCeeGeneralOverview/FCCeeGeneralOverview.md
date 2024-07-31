@@ -36,7 +36,7 @@ Let's first run the CLD Geant4 simulation, through ddsim, for some $e^{+}e^{-} \
 git clone https://github.com/key4hep/CLDConfig.git
 cd CLDConfig/CLDConfig
 # retrieve Z(mumu)H(X) MC generator events
-wget http://fccsw.web.cern.ch/fccsw/tutorials/MIT2024/wzp6_ee_mumuH_ecm240_GEN.stdhep.gz
+wget https://fccsw.web.cern.ch/fccsw/tutorials/MIT2024/wzp6_ee_mumuH_ecm240_GEN.stdhep.gz
 gunzip wzp6_ee_mumuH_ecm240_GEN.stdhep.gz
 # run the Geant4 simulation
 ddsim -I wzp6_ee_mumuH_ecm240_GEN.stdhep -N 10 -O wzp6_ee_mumuH_ecm240_CLD_SIM.root --compactFile $K4GEO/FCCee/CLD/compact/CLD_o2_v05/CLD_o2_v05.xml --steeringFile cld_steer.py
@@ -313,7 +313,11 @@ From there, you can navigate the geometry hierarchy to see how volumes are neste
 :align: center
 ```
 
-This tool is useful but not perfect and will not meet all the needs (especially if you want to overlay a physics event). To go further, other solutions are described in the dedicated [Visualization](https://hep-fcc.github.io/fcc-tutorials/main/full-detector-simulations/Visualization/Visualization.html) tutorial.
+This tool is useful but not perfect and will not meet all the needs (especially
+if you want to overlay a physics event). To go further, other solutions are
+described in the dedicated
+[Visualization](../Visualization/Visualization.md#visualization)
+tutorial.
 
 ## Additional Resources
  - [Key4hep tutorial](https://key4hep.github.io/key4hep-doc/setup-and-getting-started/README.html)

@@ -61,7 +61,7 @@ is still available.
 ## Special notes or alternative cases / settings
 ### Bash shell
 
-The [Bash shell](http://cern.ch/go/gdJ9) will be used
+The [Bash shell](https://cern.ch/go/gdJ9) will be used
 throughout the workshop.
 The default for new computing accounts is now Bash. If you have an older
 account, the default used to be a shell called `tcsh`

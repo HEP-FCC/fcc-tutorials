@@ -181,12 +181,12 @@ Pythia8 card (in this case `p8_ee_default.cmd`), that does not include specific
 decays nor specific matching/merging parameters.
 :::
 
-To assist you in writing your own Pythia8 configuration cards, the manual is available [here](http://home.thep.lu.se/~torbjorn/pythia81html/Welcome.html)
+To assist you in writing your own Pythia8 configuration cards, the manual is available [here](https://pythia.org/latest-manual/Welcome.html)
 
 ## Expert mode
 
 The following commands should be run with care, as they update the database, web-page etc...
-They run automatically every four hours with crontab, thus you will eventually know when your samples are ready to be used by browsing the corresponding configuration on this [web-page](http://fcc-physics-events.web.cern.ch/).
+They run automatically every four hours with crontab, thus you will eventually know when your samples are ready to be used by browsing the corresponding configuration on this [web-page](https://fcc-physics-events.web.cern.ch/).
 The `--force` option is used to force the script to run in order to optimize running time, processes that have not been flagged will not be checked.
 
 ### Updating the database
