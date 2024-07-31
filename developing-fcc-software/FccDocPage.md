@@ -21,8 +21,8 @@ will be great.
 ## How to write Mardown
 
 This tutorial website is generated with [Sphinx](https://www.sphinx-doc.org/)
-machinery using [Read the Docs](https://readthedocs.org/). Specific parser of
-Mardown we use is [MyST](https://myst-parser.readthedocs.io).
+machinery using [Read the Docs](https://readthedocs.org/) theme. Specific
+parser of Mardown we use is [MyST](https://myst-parser.readthedocs.io).
 
 
 ## Custom Admonitions

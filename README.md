@@ -4,6 +4,13 @@ These are the lessons taught during the [FCC Software Tutorials][tutorial] (the
 format is heavily inspired by the [LHCb starterkit][lhcb-starterkit]).
 
 List of previous workshop/tutorial events:
+* Computing and software tutorials as part of
+    [Second Annual U.S. Future Circular Collider (FCC) Workshop 2024](https://indico.mit.edu/event/876/)
+    at MIT; 25--27 Mar 2024.
+* Software tutorials as part of
+    [First Annual U.S. Future Circular Collider (FCC) Workshop 2023](https://www.bnl.gov/usfccworkshop/)
+    ([Indico](https://indico.cern.ch/event/1244371/)) at Brookhaven National
+    Laboratory; 24--26 April 2023.
 * [FCC Software Hands-on Tutorial](https://indico.cern.ch/event/1182767/) at
     CERN; 19--21 October 2022.
 * [Software tutorial](https://indico.cern.ch/event/945608/timetable/?layout=room#147-link-to-software-tutorial)
