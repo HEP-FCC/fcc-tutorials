@@ -51,8 +51,9 @@ If you'd just like to learn about how to use the FCC Software,
     :includehidden:
     :caption: External links:
 
-    FCCSW main page <https://hep-fcc.github.io/FCCSW/>
-    FCCAnalyses reference documentation <https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html>
+    FCC Software <https://fccsw.web.cern.ch/>
+    FCC-ee Detector Full Sim <https://fcc-ee-detector-full-sim.docs.cern.ch/>
+    FCCAnalyses <https://hep-fcc.github.io/FCCAnalyses/>
     Analysis essentials <https://hsf-training.github.io/analysis-essentials/>
     FCC Software glossary <https://hep-fcc.github.io/glossary>
 ```
