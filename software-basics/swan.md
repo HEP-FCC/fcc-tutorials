@@ -9,7 +9,7 @@
 
 SWAN is a web service for running jupyter notebooks at CERN, and is a very convenient way of running tutorials if one has a CERN computing account.
 
-SWAN can be used only with a browser and is reached by visiting <http://swan.cern.ch> . 
+SWAN can be used only with a browser and is reached by visiting <https://swan.cern.ch>.
 
 After logging in, SWAN will ask you to configure your session. The default software stack (`102` at the moment can be kept, but to use the Key4hep, software the following environment script has to be used:
 ```

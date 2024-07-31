@@ -101,7 +101,7 @@ Software visit
 [conduct]: CONDUCT.md
 [license]: LICENSE.md
 [issues]: https://github.com/HEP-FCC/fcc-tutorials/issues
-[pro-git-chapter]: http://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project
+[pro-git-chapter]: https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project
 [gh-fork]: https://help.github.com/en/articles/fork-a-repo
 [gh-pull]: https://help.github.com/en/articles/about-pull-requests
 [gh-fork-pull]: https://reflectoring.io/github-fork-and-pull/

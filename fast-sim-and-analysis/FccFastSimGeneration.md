@@ -756,9 +756,9 @@ i.e. 1458.0 +- 7.7 pb.
 ### Generating ditaus with Whizard
 
 As explained in the dedicated [Whizard section](#whizard), to use `whizard` we need a `Sindarin` configuration file. To generate ditau events we will use the file
-[Z_tautau.sin](http://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/Z_tautau.sin):
+[Z_tautau.sin](https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/Z_tautau.sin):
 ```
-$ wget http://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/Z_tautau.sin
+$ wget https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/Z_tautau.sin
 ```
 and run it in a dedicate directory to not pollute the working one with the many files produced:
 ```
@@ -783,7 +783,7 @@ The first lines of the `LHEf` file give the total cross-section: 1.508 +- 2 pb, 
 In order to get the events in `EDM4hep` format, we exploit the fact that `Pythia` provides `LHEf` reader functionality. To activate that we will use `Gaudi` and special `.cmd` file the consider the input `LHEf` input file as a `Beam`. This special `.cmd` is called `p8_lhereader.cmd` and it is available on the web:
 ```
 S cd ../cards
-wget http://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/p8_lhereader.cmd
+wget https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/p8_lhereader.cmd
 ```
 Please note the lines
 ```
@@ -952,7 +952,7 @@ i.e the total ditau cross-section at 91.2 GeV from `KKMCee` is 1485.5 +- 0.007 p
 In order to get the events in `EDM4hep` format, we will use `Gaudi` and the tools available in [k4FWCore](https://github.com/key4hep/k4FWCore) and [k4Gen](https://github.com/HEP-FCC/k4Gen/). We need a Gaudi steering file that reads the `HepMC` file and writes out the `EDM4hep` file.
 A minimal version of such a steering code is available on the tutorial reference page:
 ```
-wget http://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/hepmc2edm.py
+wget https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/hepmc2edm.py
 ```
 Let's see what it does: that is shown by the first line of the help function
 ```
@@ -1096,7 +1096,7 @@ Now we are ready to go.
 
 #### Creating histograms with FCCAnalyses
 At this purpose we will use the recently introduced `build_graph` attribute. The example is availble at 
-[histmaker_ttmm.py](http://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/histmaker_ttmm.py).
+[histmaker_ttmm.py](https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/histmaker_ttmm.py).
 
 ##### Dissection of `histmaker_ttmm.py`
 
@@ -1193,7 +1193,7 @@ total 24
 #### Comparing distributions
 
 FCCAnalyses provides the `plots` option to prepare some plots. A possible way to plot the histos is available at
-[plots_ttmm.py](http://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/plots_ttmm.py), which can run as
+[plots_ttmm.py](https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/plots_ttmm.py), which can run as
 ```
 $ fccanalysis plots plots_ttmm.py
 ```
