@@ -1,6 +1,6 @@
 # Visualization
 
-Visualization is of paramount importance in order to easily understand the behaviour of the detector and simulation. In this section, several tools of visualizing the detector geometry and the particle tracks are provided.
+Visualization is of paramount importance in order to easily understand the behavior of the detector and simulation. In this section, several tools of visualizing the detector geometry and the particle tracks are provided.
 
 ## Key4hep tool: geoDisplay
 
@@ -16,9 +16,9 @@ To use it, just pass as first argument the `xml` file with the detector descript
 geoDisplay $DD4hepINSTALL/DDDetectors/compact/SiD.xml
 ```
 
-## Geant4 
+## Geant4
 
-The `Geant 4` visualization capabilities can be accesed as
+The `Geant 4` visualization capabilities can be accessed as
 
 ```shell
 source /cvmfs/sft.cern.ch/lcg/views/dev4/latest/x86_64-centos7-gcc11-opt/setup.sh 
@@ -33,92 +33,99 @@ ddsim --compactFile $DD4hepINSTALL/DDDetectors/compact/SiD.xml --runType qt
 
 As in the previous step, the `LCG` version of `Key4hep` was sourced.
 
+
 ## Phoenix@FCC
 
 [Phoenix](https://github.com/HSF/phoenix) is a web based event display for High
 Energy Physics. To visualize FCC events one needs to provide detector geometry
 and generated events --- event data.
 
-In this tutorial we will be working with files/programs stored on two computers. First
-computer will be the one which can source FCCSW stack, e.g. `lxplus` and the
-second one will be yours with the recent web browser. We will call the first
+In this tutorial we will be working with files/programs stored on two computers.
+First computer will be the one which can source Key4hep stack, e.g. `lxplus` and
+the second one will be yours with the recent web browser. We will call the first
 one the _remote machine_ and the second one the _local machine_.
 
 
 ### Event Data from CLD Reconstructed Events
 
 Let's start with the visualization of the event data in the established detector
-design CLD, which started its life as the detector designed for the CLIC linear
-collider concept. The detectors in FCCSW are described in
+design -- CLD, which started its life as the detector designed for the linear
+collider concept CLIC. The detectors in Key4hep are described using
 [DD4hep](https://dd4hep.web.cern.ch/dd4hep/) compact files. The compact files
 are written in XML and expose configuration options for the detector.
 
-Example CLD compact file can be examined after sourcing of the FCCSW stack on
+Example CLD compact file can be examined after sourcing of the Key4hep stack on
 the remote machine
 ```sh
-source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
+source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
 ```
 like so
 ```sh
-less ${FCCDETECTORS}/Detector/DetFCCeeCLD/compact/FCCee_o2_v02/FCCee_o2_v02.xml
+less ${K4GEO}/FCCee/CLD/compact/CLD_o2_v07/CLD_o2_v07.xml
 ```
-This is a copy of the
-[FCCDetectors](https://github.com/HEP-FCC/FCCDetectors/blob/main/doc/DD4hepInFCCSW.md#visualisation)
-repository, which stores FCC detector designs.
+This file is part part of the [k4geo](https://github.com/key4hep/k4geo/)
+repository, which stores among other detector concepts integrated in Key4hep
+also FCC-ee detector designs.
 
-The Phoenix web application already showcases the CLD detector
-[here](https://fccsw.web.cern.ch/fccsw/phoenix/#/fccee-cld/) and we will
+The Phoenix web application already showcases the CLD detector in different
+options [here](https://fccsw.web.cern.ch/fccsw/phoenix/) and we will
 simulate few events in order to visualize them there.
 
 On the remote machine we will need to clone the
-[CLICPerformance](https://github.com/iLCSoft/CLICPerformance) repository
+[CLDConfig](https://github.com/iLCSoft/CLICPerformance) repository
 ```sh
-git clone https://github.com/iLCSoft/CLICPerformance.git
-cd CLICPerformance/fcceeConfig
+git clone https://github.com/key4hep/CLDConfig.git
+cd CLDConfig/CLDConfig
 ```
 
 run the simulation
 ```sh
-ddsim --compactFile $LCGEO/FCCee/compact/FCCee_o1_v04/FCCee_o1_v04.xml \
-      --outputFile tops_edm4hep.root \
-      --steeringFile fcc_steer.py \
-      --inputFiles ../Tests/yyxyev_000.stdhep \
-      --numberOfEvents 7
+ddsim --compactFile ${K4GEO}/FCCee/CLD/compact/CLD_o2_v07/CLD_o2_v07.xml \
+      --steeringFile cld_steer.py \
+      --inputFiles ../test/yyxyev_000.stdhep \
+      --outputFile tops_cld_SIM_edm4hep.root \
+      --numberOfEvents 5
 ```
 
-and after that, run the reconstruction with the help of
-[this](https://fccsw.web.cern.ch/fccsw/tutorials/static/python/fccRec_e4h_input.py)
-steering file
+and after that, run the reconstruction with the help of the
+`CLDReconstruction.py` steering file
 ```sh
-wget https://fccsw.web.cern.ch/fccsw/tutorials/static/python/fccRec_e4h_input.py
-k4run fccRec_e4h_input.py
+k4run CLDReconstruction.py --inputFiles tops_cld_SIM_edm4hep.root \
+                           --outputBasename tops_cld \
+                           --num-events -1
 ```
 
-There should be a file called `tops_cld.root` inside of our working directory.
+There should now be a file called `tops_cld_REC_edm4hep.root` inside our working
+directory. More information about running of the CLD FullSim you can visit
+[FCC-ee Detector Full Sim](https://fcc-ee-detector-full-sim.docs.cern.ch/CLD/)
+page.
 
-In order to visualize the events from this file we need co convert the
-[EDM4hep](https://edm4hep.web.cern.ch/) ROOT file into intermediate JSON format
-with the command:
+In order to visualize the events inside `tops_cld_REC_edm4hep.root` file we
+need to convert the [EDM4hep](https://edm4hep.web.cern.ch/) ROOT file into
+intermediate JSON representation with the command:
 ```sh
-edm4hep2json tops_cld.root
+edm4hep2json -e 0 tops_cld_REC_edm4hep.root
 ```
 
-:::{admonition} EDM4hep Collections
+:::{admonition} EDM4hep in JSON
 :class: callout
-One should specify a list collections to be exported with the `-l` flag. The
-default ones are:
-* `GenParticles`
-* `BuildUpVertices`
-* `SiTracks`
-* `PandoraClusters`
-* `VertexJets`
-* `EventHeader`
+Be careful when converting EDM4hep ROOT files into JSON files as JSON is very
+ineffective in storing information leading to very large file size.
+
+Always check size of your file to be around 200MB at maximum. One can check the
+file size using `du` command
+```bash
+du -h tops_cld_REC.edm4hep.json
+```
+
+The `edm4hep2json` offers possibility to limit either number of events exported
+or which collections. See `edm4hep2json -h` for more details.
 :::
 
 Now we download the obtained file from the remote machine into our local one.
 Most easily done with `scp`
 ```sh
-scp lxplus.cern.ch:CLICPerformance/fcceeConfig/tops_cld.edm4hep.json .
+scp lxplus.cern.ch:CLDConfig/CLDConfig/tops_cld_REC.edm4hep.json .
 ```
 
 To upload the EDM4hep JSON file into the
@@ -155,76 +162,33 @@ The obtained EDM4hep JSON file should look similar to
 
 ### Event Data from Delphes Fast Simulation
 
-Starting the same way as in [](delphesedm4hep) we will first generate few
-events on the remote machine. One can reuse the files generated for that
-exercise e.g. `p8_ee_ZH_ecm240_edm4hep.root` or quickly generate them with the
-following steps.
+Let's start by generating sample files using [](delphesedm4hep) tutorial section.
 
-First download Pythia card
+Produced EDM4hep ROOT file(s) needs to be converted into intermediate JSON
+format with the `edm4hep2json` converter. Let's look at the file more closely,
+so we can decide what to keep/convert.
+
+Primary tool for inspecting EDM4hep files is `podio-dump`. This command can show
+you list of all collections and also metadata stored in the file. To list the
+collections in the default frame use
 ```sh
-wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Generator/Pythia8/p8_noBES_ee_ZH_ecm240.cmd
+podio-dump p8_ee_ZH_ecm240_edm4hep.root
 ```
 
-and then Delphes cards. One for the detector response
-```sh
-wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Delphes/card_IDEA.tcl
-```
-
-and the other for the [EDM4hep](https://edm4hep.web.cern.ch/) formated output
-```sh
-wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/spring2021/FCCee/Delphes/edm4hep_IDEA.tcl
-```
-
-Finally, run the simulation with
-```sh
-DelphesPythia8_EDM4HEP card_IDEA.tcl edm4hep_IDEA.tcl p8_noBES_ee_ZH_ecm240.cmd p8_ee_ZH_ecm240_edm4hep.root
-```
-
-Produced EDM4hep ROOT file needs to be converted into intermediate JSON format
-with the `edm4hep2json` converter. Let's look at the file more closely, so we
-can decide what to keep/convert.
-
-Start root with
+Alternatively, one can always use ROOT to inspect the file. Start by running
 ```sh
 root p8_ee_ZH_ecm240_edm4hep.root
 ```
-
 and execute the `Show()` command on the `events` TTree
 ```
 root [1] events->Show(2);
 ```
+this will show you all the branches which are by the PODIO reader to recreate
+EDM4hep objects and their relations in memory.
 
-this will show you all trees and branches, similar to this example
-```
-MCRecoAssociations = (vector<edm4hep::MCRecoParticleAssociationData>*)0x5578924809e0
-MCRecoAssociations.weight = 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000
-MCRecoAssociations#0 = (vector<podio::ObjectID>*)0x557890797c00
-MCRecoAssociations#0.index = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
-MCRecoAssociations#0.collectionID = 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14
-MCRecoAssociations#1 = (vector<podio::ObjectID>*)0x5578925c1f00
-MCRecoAssociations#1.index = 133, 118, 117, 152, 153, 115, 164, 155, 138, 224, 217, 228, 165, 227, 218, 90, 230, 122, 87, 88
-MCRecoAssociations#1.collectionID = 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11
-EFlowTrack      = (vector<edm4hep::TrackData>*)0x557892a7d3a0
-EFlowTrack.type = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-EFlowTrack.chi2 = 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000
-EFlowTrack.ndf  = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-EFlowTrack.dEdx = 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000
-EFlowTrack.dEdxError = 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000
-EFlowTrack.radiusOfInnermostHit = 17.000000, 17.000000, 17.000000, 17.000000, 17.000000, 17.000000, 17.000000, 17.000000, 17.000000, 17.000000, 320.000000, 655.494995, 17.000000, 655.494995, 320.000000, 17.000000, 17.000000, 17.000000, 17.000000, 17.000000
-EFlowTrack.subDetectorHitNumbers_begin = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-EFlowTrack.subDetectorHitNumbers_end = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-EFlowTrack.trackStates_begin = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
-EFlowTrack.trackStates_end = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
-EFlowTrack.dxQuantities_begin = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
-EFlowTrack.dxQuantities_end = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
-EFlowTrack.trackerHits_begin = 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38
-EFlowTrack.trackerHits_end = 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40
-EFlowTrack.tracks_begin = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-EFlowTrack.tracks_end = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-```
-
-We select desired collections with `-l` flag and limit number of converted
-events to 10 with `-n` flag
+Using `edm4hep2json` for converting the EDM4hep ROOT file into JSON we select
+desired collections with `-l` flag and limit number of converted events to 10
+with `-n` flag
 ```sh
 edm4hep2json -l ReconstructedParticles,Jet,EFlowTrack,TrackerHits,Particle,MCRecoAssociations,MissingET -n 10 p8_ee_ZH_ecm240_edm4hep.root
 ```

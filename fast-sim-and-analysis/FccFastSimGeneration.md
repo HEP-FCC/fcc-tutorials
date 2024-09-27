@@ -22,12 +22,11 @@ source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 Note however that not all the `cvmfs` tier-1 centers replicate the `fcc.cern.ch`, so this may lead to slowdowns or even failures.
 :::
 
-Builds exist on CernVM-FS for `CentOS7` (this is the Operating System run on `lxplus`) using as compiler `Gcc 11` (currently gcc version `11.2.0`).
-
 :::{admonition} Nota Bene
 :class: callout
 
-The combination of old `glibc` version available on `CentOS7` with the backward compatibility attributes of glibc makes the provided stack in principle working for newer OSes, such as `CentOS8`, `AlmaLinux9` or `Fedora37`. This in general holds, though less core aspects, such graphics, might still be OS specific.
+Currently, the Key4hep stack supports `AlmaLinux9` (compatible with `lxplus`
+machines) and `Ubuntu 22.04`.
 :::
 
 The `gaudimain` steering application here is called `k4run` which should be available at this point:
@@ -43,7 +42,8 @@ The application `fccrun` is still provided, fully equivalent to `k4run`.
 :::{admonition} Nota Bene
 :class: callout
 
-You will need to source the `/cvmfs/sw.hsf.org/key4hep/setup.sh` script everytime you want to use the software.
+You will need to source the `/cvmfs/sw.hsf.org/key4hep/setup.sh` script
+everytime you want to use the FCC Software.
 :::
 
 
@@ -114,6 +114,25 @@ It is advised to work in a separate directory for each process. For example, for
 ```bash
  mkdir -p test_whizard/Z_mumu; cd test_whizard/Z_mumu
  wget https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/Z_mumu.sin
+```
+
+In order to change output format from LHEf to HepMC3 one needs to comment out
+last two lines of the Sindarin configuration file and comment in HepMC3
+configuration line:
+```diff
+< # simulate (zmumu) { $sample = "z_mumu" sample_format = hepmc }
+---
+> simulate (zmumu) { $sample = "z_mumu" sample_format = hepmc }
+54,55c54,55
+< $lhef_version = "3.0"
+< simulate (zmumu) { $sample = "z_mumu" sample_format = lhef }
+---
+> # $lhef_version = "3.0"
+> # simulate (zmumu) { $sample = "z_mumu" sample_format = lhef }
+```
+
+Afterwards run
+```bash
  whizard Z_mumu.sin
 ```
 
@@ -172,7 +191,7 @@ Warning: Encountered events with excess weight: 6 events (  0.600 %)
 
 :::
 
-The file `z_mumu.hepmc` contains 100 e<sup>+</sup>e<sup>-</sup> &#8594; mu<sup>+</sup>mu<sup>-</sup>(gamma) events in HepMC 3 format .
+The file `z_mumu.hepmc` contains 100 e<sup>+</sup>e<sup>-</sup> &#8594; mu<sup>+</sup>mu<sup>-</sup>(gamma) events in HepMC 3 format.
 
 ###  KKMCee
 
@@ -679,7 +698,7 @@ babayaga -c babayaga.input -o bbyg.LHE
 
 ###  Herwig
 
-`Herwig` is another historical LEP generator providing a difefrent approach to hadronization wrt `Pythia8`. It is available as standalone program:
+`Herwig` is another historical LEP generator providing a diferent approach to hadronization wrt. `Pythia8`. It is available as standalone program:
 
 ```
 $ which Herwig
@@ -689,7 +708,7 @@ $ which Herwig
 
 ###  MadGraph5
 
-`MadGraph5` was developed for `LHC` but it is reality general purpose and can be used also for `FCC-ee`. It is available as standalone program:
+`MadGraph5` was developed for `LHC` but it is in reality general purpose and can be used also for `FCC-ee`. It is available as standalone program:
 
 ```bash
 $ which mg5_aMC

@@ -1,4 +1,3 @@
-
 # FCC: Getting started with simulating events in Delphes
 
 :::{admonition} Learning Objectives
@@ -38,17 +37,17 @@ When sourcing the stack, you should see a message like:
 ```
  ...  Key4HEP release: key4hep-stack/2023-04-08
  ... Use the following command to reproduce the current environment: 
- ... 
+ ...
          source /cvmfs/sw.hsf.org/spackages7/key4hep-stack/2023-04-08/x86_64-centos7-gcc11.2.0-opt/urwcv/setup.sh
- ... 
- ... done. 
+ ...
+ ... done.
 ```
 
 which means that the version `2023-04-08` of `key4hep-stack` is sourced.
 
 
 (delphesedm4hep)=
-## Part I: Generate and simulate Events with DelphesEDM4Hep
+## Generate and Simulate Events with DelphesEDM4Hep
 
 For this tutorial we will consider the following **physics processes**:
 
