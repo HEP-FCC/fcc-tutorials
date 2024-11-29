@@ -12,7 +12,7 @@ So, let's start playing with Full Sim!
 ## Setting-up the environment
 ```bash
 # connect to a machine with cvmfs access and running an OS supported by Key4hep (Alma9 here)
-ssh -X username@submit-test.mit.edu # or ssh -X username@lxplus.cern.ch
+ssh -X username@lxplus.cern.ch
 # set-up the Key4hep environment, using the nightlies since we need the latest and greatest version of the packages
 # (make sure you are in bash or zsh shell)
 source /cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
@@ -53,7 +53,7 @@ Let's now apply the CLD reconstruction (from ILCSoft through the Gaudi wrappers 
 
 ```
 sed -i "s/DEBUG/INFO/" CLDReconstruction.py
-k4run CLDReconstruction.py --inputFiles wzp6_ee_mumuH_ecm240_CLD_SIM.root --outputBasename wzp6_ee_mumuH_ecm240_CLD_RECO --num-events -1
+k4run CLDReconstruction.py --inputFiles wzp6_ee_mumuH_ecm240_CLD_SIM.root --outputBasename wzp6_ee_mumuH_ecm240_CLD --num-events -1
 # Do not forget to modify the geoservice.detectors variable if you do not use the central detector
 ```
 <!-- takes 1m40s -->
@@ -61,13 +61,13 @@ k4run CLDReconstruction.py --inputFiles wzp6_ee_mumuH_ecm240_CLD_SIM.root --outp
 This created an edm4hep ROOT file with a bunch of new DIGI/RECO level collections, including `edm4hep::ReconstructedParticle` from Particle Flow (PandoraPFA). You can inspect the ROOT file content with
 
 ```
-podio-dump wzp6_ee_mumuH_ecm240_CLD_RECO_edm4hep.root
+podio-dump wzp6_ee_mumuH_ecm240_CLD_REC.edm4hep.root
 ```
 <!-- Explain a bit the rootfile content -->
 
 A detailed documentation on the collection content still has to be written.
 
-NB: this step also produces a file named `wzp6_ee_mumuH_ecm240_CLD_RECO_aida.root` where you can find a lot of debugging distributions such as the pulls of the track fit.
+NB: this step also produces a file named `wzp6_ee_mumuH_ecm240_CLD_aida.root` where you can find a lot of debugging distributions such as the pulls of the track fit.
 
 ### Plotting the Higgs recoil mass
 
@@ -136,13 +136,12 @@ int plot_recoil_mass(std::string input_file_path) {
   return 0;
 }
 ```
-
+<!--
 Let's get a similar sample but with more stat:
 ```
 cd ../../fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/
 wget https://fccsw.web.cern.ch/fccsw/tutorials/MIT2024/wzp6_ee_mumuH_ecm240_CLD_RECO_moreStat.root
 ```
-
 and produce the simple Higgs recoil mass plot in Python:
 ``` 
 python plot_recoil_mass.py wzp6_ee_mumuH_ecm240_CLD_RECO_moreStat.root
@@ -154,6 +153,24 @@ or in C++ with the ROOT interpreter:
 root -b
 .L plot_recoil_mass.C
 plot_recoil_mass("wzp6_ee_mumuH_ecm240_CLD_RECO_moreStat.root")
+.q
+display recoil_mass.png
+```
+-->
+
+To produce the Higgs recoil mass plot, copy the content of the above code in a file and run it.
+
+In Python:
+```
+python plot_recoil_mass.py wzp6_ee_mumuH_ecm240_CLD_REC.edm4hep.root
+display recoil_mass.png
+```
+
+or in C++ with the ROOT interpreter:
+```
+root -b
+.L plot_recoil_mass.C
+plot_recoil_mass("wzp6_ee_mumuH_ecm240_CLD_REC.edm4hep.root")
 .q
 display recoil_mass.png
 ```
