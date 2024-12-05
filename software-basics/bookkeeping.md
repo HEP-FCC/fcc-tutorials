@@ -15,19 +15,32 @@ eventually lead to the data you need.
 * Store FCC data in the central storage
 :::
 
-## Gaining access permissions
+## Obtaining access permissions
 
-Read/write access to the shared filesystem is gained by subscribing to the relevant egroups [here](https://e-groups.cern.ch/e-groups/EgroupsSearchForm.do):
-
+In general, access to the EOS shared filesystem is obtained by subscribing to the relevant egroups [here](https://e-groups.cern.ch/e-groups/EgroupsSearchForm.do).
+For running the tutorials read access is sufficient, which is granted through subscription to the following e-group:
 ```
-fcc-eos-read-hh
-fcc-eos-read-ee
-fcc-eos-read-eh
-
-fcc-eos-write-hh
-fcc-eos-write-ee
-fcc-eos-write-eh
+fcc-eos-access
 ```
+which is open for self subscription requests.
+
+For analysis activities, the physics groups have dedicated areas under `/eos/experiment/fcc/ee/analyses_storage/`
+```
+/eos/experiment/fcc/ee/analyses_storage/BSM
+/eos/experiment/fcc/ee/analyses_storage/EW_and_QCD
+/eos/experiment/fcc/ee/analyses_storage/flavour
+/eos/experiment/fcc/ee/analyses_storage/Higgs_and_TOP
+```
+Write access to those areas is controlled by dedicated e-groups
+```
+fcc-eos-write-ee-analyses-bsm
+fcc-eos-write-ee-analyses-ew-qcd
+fcc-eos-write-ee-analyses-flavor
+fcc-eos-write-ee-analyses-higgs-top
+```
+managed by the conveners of those physics groups, which should be contacted for subscription.
+
+See the [here](https://hep-fcc.github.io/FCCSW/computing/) for more information about FCC computing resources.
 
 ## Finding Data
 
