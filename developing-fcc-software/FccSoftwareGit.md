@@ -39,7 +39,7 @@ When working on lxplus we recommend to clone github repositories via SSH, especi
 
 It may be useful to install [Git integration tools](https://github.com/git/git/tree/master/contrib/completion) for your shell that allow tab-completion of most git commands and also can show you in your prompt on which branch you currently are, what changes you have pending, etc.
 
-Other tools with a graphical interface are available, e.g., `git-gui`, `git-cola`, `gitkraken` (which present the main Git commands as buttons, shows differences between commits, etc.) and `tig` (a terminal-based tool that graphically displays the Git commit history).
+Other tools with a graphical interface are available, e.g., `git-gui`, `git-cola`, `gitkraken` (which present the main Git commands as buttons, shows differences between commits, etc.) and `tig` (a terminal-based tool that graphically displays the Git commit history). Most editors have dedicated plugins as well (magit for emacs, vim-fugitive for vim, etc).
 
 ## How to contribute
 
@@ -59,7 +59,7 @@ The repositories 1 and 2 are added as remote to the repository 3. Let's start by
 git clone git@github.com:[YOUR_GITHUB_USER]/key4hep_repo.git
 ```
 
-That command links the local copy to the remote repository. The default name of this remote repository is `origin`. Let's add the officialrepository as remote too, but with a different name. The usual convention is to name the official repository `upstream`:
+That command links the local copy to the remote repository. The default name of this remote repository is `origin`. Let's add the official repository as remote too, but with a different name. The usual convention is to name the official repository `upstream`:
 ```bash
 cd FCCSW
 git remote add upstream https://github.com/key4hep/key4hep_repo.git
@@ -67,9 +67,9 @@ git remote add upstream https://github.com/key4hep/key4hep_repo.git
 
 ### Development workflow
 
-This section shows how to work with a non-global package, how to develop a change and upstream it to the official repository.
+This section explains how to use a locally installed package instead of the one provided in the stack, make changes to it, and contribute those changes to the official repository.
 
-A recommend zero step is to open an issue in the corresponding repository, e.g. [in FCCSW repository](https://github.com/HEP-FCC/FCCSW/issues).
+A recommended zero step is to open an issue in the corresponding repository, e.g. [in FCCSW repository](https://github.com/HEP-FCC/FCCSW/issues).
 
 #### Source the software stack
 
@@ -84,6 +84,7 @@ source /cvmfs/sw.hsf.org/key4hep/setup.sh
 The sourcing of stacks accepts arguments:
 * -r <year-month-day>, for a specific date
 * -d, for packages compiled with debug symbols
+* -h or -help, for help related to the usage and arguments
 
 #### Branching
 
@@ -269,6 +270,10 @@ git push --set-upstream origin [NAME_OF_LOCAL_BRANCH]
 ```
 
 where the option `--set-upstream` sets up tracking so that future `git pull` and `git push` commands will automatically reference `origin/[NAME_OF_LOCAL_BRANCH]`
+
+:::{admonition}
+GitHub web interface allows to update (rebase) and solve simple merge conflicts as well, see [link](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github)
+:::
 
 ### Cleaning history
 
