@@ -39,13 +39,12 @@ cd CLDConfig/CLDConfig
 wget https://fccsw.web.cern.ch/fccsw/tutorials/MIT2024/wzp6_ee_mumuH_ecm240_GEN.stdhep.gz
 gunzip wzp6_ee_mumuH_ecm240_GEN.stdhep.gz
 # run the Geant4 simulation
-ddsim -I wzp6_ee_mumuH_ecm240_GEN.stdhep -N 10 -O wzp6_ee_mumuH_ecm240_CLD_SIM.root --compactFile $K4GEO/FCCee/CLD/compact/CLD_o2_v05/CLD_o2_v05.xml --steeringFile cld_steer.py
+ddsim -I wzp6_ee_mumuH_ecm240_GEN.stdhep -N 10 -O wzp6_ee_mumuH_ecm240_CLD_SIM.root --compactFile $K4GEO/FCCee/CLD/compact/CLD_o2_v05/CLD_o2_v07.xml --steeringFile cld_steer.py
 # NB: we run only on 10 events (-N 10) here for the sake of time
 # for such small amount of event the detector geometry construction step dominates, it takes about 5 seconds per event and the geometry loading takes 1min30s
 ```
-<!-- Takes 2 min 30 sec, only  52.13 s for event processing though: 5.21 s/Event -->
 
-While the code runs (~ 2min30 s), you can browse the [k4geo](https://github.com/key4hep/k4geo/tree/main/FCCee) repository to see how the code is organized. This step produced an output file in edm4hep dataformat with Geant4 SIM hits that can then be fed to the reconstruction step. Note that ddsim can also digest other MC output format like `hepevt`, `hepmc`, `pairs` (GuineaPig output), ..., and of course also has particle gun**s** as we will see later. More information can be obtained with `ddsim -h`.
+While the code runs, you can browse the [k4geo](https://github.com/key4hep/k4geo/tree/main/FCCee) repository to see how the code is organized. This step produced an output file in edm4hep dataformat with Geant4 SIM hits that can then be fed to the reconstruction step. Note that ddsim can also digest other MC output format like `hepevt`, `hepmc`, `pairs` (GuineaPig output), ..., and of course also has particle gun**s** as we will see later. More information can be obtained with `ddsim -h`.
 
 ### Running CLD reconstruction
 
@@ -195,7 +194,7 @@ NB: a typical DD4hep detector implementation has a C++ detector builder where th
 ```
 # No need to run this for the tutorial, it is just here for completeness
 cd k4geo
-# modify a detector builder, e.g. detector/calorimeter/ECalBarrel_NobleLiquid_InclinedTrapezoids_o1_v02_geo.cpp
+# modify a detector builder, e.g. detector/calorimeter/ECalBarrel_NobleLiquid_InclinedTrapezoids_o1_v03_geo.cpp
 mkdir build install
 cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=../install
@@ -206,51 +205,63 @@ cd ..
 ```
 In the xml compact file, the detector builder to use is specified by the `type` keyword in the `detector` beacon (e.g. `<detector id=1 name="MyCoolDetectorName" type="MYCOOLDETECTOR" ... />`) and it should match the detector type defined in the C++ builder with the instruction `DECLARE_DETELEMENT(MYCOOLDETECTOR)`.
 
-Now lets first modify the sub-detector content of ALLEGRO. Since we will deal with the calorimeter, let's remove the drift chamber to run faster. For this, you just need to open the main detector "compact file" (`xml` file with detector parameters) with your favorite text editor and remove the import of the drift chamber (line 39), for instance:
+Now lets first modify the sub-detector content of ALLEGRO. Since we will deal with the calorimeter, let's remove the muon system to run faster.
+For this, you just need to open the main detector "compact file" (`xml` file with detector parameters) with your favorite text editor and remove the import of the muon system, for instance:
 
 ```
 # copy paste won't work here
-vim $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v02/ALLEGRO_o1_v02.xml
-:39
+vim $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v03/ALLEGRO_o1_v03.xml
+:51
 dd
 :wq
 ```
 
 ### Running a first ALLEGRO ECAL simulation
 
-Let's now run a first particle gun simulation:
+Let's now run a first particle gun simulation and reconstruction by following the instructions [here](https://github.com/HEP-FCC/FCC-config/tree/main/FCCee/FullSim/ALLEGRO/ALLEGRO_o1_v03#instructions), outside of the tutorial repository.
+Once done, copy the output rootfile to the tutorial repository `fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/` and go back there.
 
+<!--
 ```bash
 cd fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/
-ddsim --enableGun --gun.distribution uniform --gun.energy "10*GeV" --gun.particle e- --gun.thetaMin "55*degree" --gun.thetaMax "125*degree"  --numberOfEvents 100 --outputFile electron_gun_10GeV_ALLEGRO_SIM.root --random.enableEventSeed --random.seed 42 --compactFile $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v02/ALLEGRO_o1_v02.xml
+ddsim --enableGun --gun.distribution uniform --gun.energy "10*GeV" --gun.particle e- --gun.thetaMin "55*degree" --gun.thetaMax "125*degree"  --numberOfEvents 100 --outputFile electron_gun_10GeV_ALLEGRO_SIM.root --random.enableEventSeed --random.seed 42 --compactFile $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v03/ALLEGRO_o1_v03.xml
 ```
-<!-- takes ~2min30s -->
 
 And apply the ALLEGRO reconstruction, including an MVA based calibration:
 ```
 wget https://fccsw.web.cern.ch/fccsw/tutorials/MIT2024/lgbm_calibration-CaloClusters.onnx # needed for the MVA calibration
 k4run run_ALLEGRO_RECO.py --EventDataSvc.input="electron_gun_10GeV_ALLEGRO_SIM.root" --out.filename="electron_gun_10GeV_ALLEGRO_RECO.root"
 ```
+-->
 
 Now let's plot the energy resolution for raw clusters and MVA calibrated clusters:
 
 ```bash
-python plot_calo_energy_resolution.py electron_gun_10GeV_ALLEGRO_RECO.root
+python plot_calo_energy_resolution.py RECO_FILE_NAME.root
 display electron_gun_10GeV_ALLEGRO_RECO_clusterEnergyResolution.png
 display electron_gun_10GeV_ALLEGRO_RECO_calibratedClusterEnergyResolution.png
 ```
 
-Look at both distributions to see how the MVA calibration improves the performance, both in terms of response and resolution. NB: the MVA calibration was not trained exactly in the configuration used here.
+Look at both distributions to see how the MVA calibration affects the distribution.
 
 ### Changing Liquid Argon to Liquid Krypton
 
 In a sampling calorimeter, the ratio between the energy deposited in the dead absorbers and sensitive media (sampling fraction) is an important parameter for energy resolution: the more energy in the sensitive media the better. Liquid Krypton being denser than Liquid Argon, it is an appealing choice for the detector design. Though it is more expensive and difficult to procure in real life, testing this option in Full Sim is extremely cheap:
 
 ```
-vim $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v02/ECalBarrel_thetamodulemerged.xml
-# change "LAr" to "LKr" in line 114 and 121
+# make sure you properly followed the steps described in the exercise "Modifying the sub-detector content"
+# i.e. called k4_local_repo in your local k4geo repository, so that $K4GEO points to your modified version
+vim $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v03/ECalBarrel_thetamodulemerged.xml
+# change "LAr" to "LKr" everywhere
+:%s/LAr/LKr/gc
 ```
 
+You can now re-run the simulation and reconstruction with the same steps as in the previous exercise.
+The cluster energy distribution will show you that, to accommodate the change to LKr, the sampling fraction should be updated.
+This is typically done by experts but a central recipe is being prepared for this.
+
+
+<!--
 And to accomodate this change, we have to update the sampling fraction in the steering file:
 
 ```
@@ -269,14 +280,16 @@ display electron_gun_10GeV_ALLEGRO_LKr_RECO_clusterEnergyResolution.png
 
 See how the energy resolution improved with LKr. NB: here the MVA calibration should be retrainned to achieve good performance.
 
+-->
 
 
 ## Towards IDEA tracking with the detailed Drift Chamber
 
-The IDEA tracking system Full Sim description is getting complete: the Vertex and Drift Chamber have a geometry description and a digitizer while the Silicon Wrapper is on its way. We can thus start to work on the tracking algorithms implementation. In this exercise, we will produce a dataset containing Vertex and Drift Chamber digitized hits and which can therefore be used as input to develop these tracking algorithms.
+A first version of the IDEA tracking system is now available. We can therefore start working on tracking algorithms implementation. In this exercise, we will produce a dataset containing Vertex, Drift Chamber and Silicon Wrapper digitized hits which can be used as a starting point to develop these tracking algorithms.
 
-For this, let's run the IDEA simulation and digitization:
+For this, let's run the IDEA simulation and digitization by following the recipe [here](https://github.com/HEP-FCC/FCC-config/tree/main/FCCee/FullSim/IDEA/IDEA_o1_v03#instructions) (outside of the tutorial repository).
 
+<!--
 ```bash
 # if you did not follow the entire tutorial sequencially, you have to do the following first
 # git clone https://github.com/HEP-FCC/fcc-tutorials
@@ -284,23 +297,24 @@ For this, let's run the IDEA simulation and digitization:
 ddsim --enableGun --gun.distribution uniform --gun.energy "10*GeV" --gun.particle e- --numberOfEvents 100 --outputFile electron_gun_10GeV_IDEA_SIM.root --random.enableEventSeed --random.seed 42 --compactFile $K4GEO/FCCee/IDEA/compact/IDEA_o1_v02/IDEA_o1_v02.xml
 k4run run_IDEA_DIGI.py --EventDataSvc.input="electron_gun_10GeV_IDEA_SIM.root" --out.filename="electron_gun_10GeV_IDEA_DIGI.root"
 ```
+-->
 
 The following collections are the one to use for tracking:
 ```cpp
-CDCHDigis                       extension::DriftChamberDigi
-VTXDDigis                       edm4hep::TrackerHit3D
-VTXIBDigis                      edm4hep::TrackerHit3D
-VTXOBDigis                      edm4hep::TrackerHit3D
+VTXBDigis                             edm4hep::TrackerHit3D
+VTXDDigis                             edm4hep::TrackerHit3D
+DCH_DigiCollection                    extension::SenseWireHit
+SiWrBDigis                            edm4hep::TrackerHit3D
+SiWrDDigis                            edm4hep::TrackerHit3D
+
 ```
-Note that the `extension::DriftChamberDigi` object has two positions attached: one if we assume that the hit is on the left of the wire and one assuming it was on the right. cause the only accessible information from a drift chamber is the distance to the wire which is degenerated. This left/right ambiguity comes from the fact that only the distance to the wire is known and is alleviated during the tracking step.
 
 You can now play with the digitized hits:
 ```cpp
 root electron_gun_10GeV_IDEA_DIGI.root
 # to be ran one by one (no full copy paste)
-events->Draw("leftHitSimHitDeltaDistToWire") // this is the difference of the distance to the wire between the left digi and the sim hit (only produced in debug mode)
-events->Draw("CDCHDigis.rightPosition.x:CDCHDigis.rightPosition.y:CDCHDigis.rightPosition.z") // you can see the electron trajectories
-events->Draw("CDCHHits.eDep/CDCHHits.pathLength", "CDCHHits.eDep/CDCHHits.pathLength < 4e-7") // this shows the de/dx from the simHits
+events->Draw("DCH_DigiCollection.distanceToWire")
+events->Draw("DCHCollection.eDep/DCHCollection.pathLength", "DCHCollection.eDep/DCHCollection.pathLength < 4e-7") // this shows the de/dx from the simHits
 ```
 
 ## Detector visualization
