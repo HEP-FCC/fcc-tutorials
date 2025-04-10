@@ -1,17 +1,17 @@
-# Pre-workshop checklist
+# Pre-tutorial checklist
 
 :::{admonition} Learning Objectives
 :class: objectives
 
-* You will be ready for the workshop!
+* Be ready to run Key4hep workflows!
 :::
 
 
-* Follow this guide before arriving; we will do a quick introduction to environment setup
-but we will not have much time to help you with problems on these issues during the workshop.
-This means you will end up watching instead of participating.
+* Follow this guide before starting the tutorial on your own or before attending a tutorial event.
+During a 'live' tutorial, there will likely be a quick introduction to environment setup
+but not much time can be dedicated to it.
 
-* This will be an interactive workshop. In all cases (in-person or virtual tutorials) you will need to use
+* In all cases (in-person or virtual tutorials) you will need to use
 your own computer (for in-person events there will be no machines for you to use in the room).
 You will use __your own computer__ to connect to resources available for the tutorial (check the event
 announcement for the available options).
@@ -24,12 +24,22 @@ your desktop or someone else's computer.
 access the internet.
    * Do not forget to bring your power supply, as well as the relevant plug adaptor, e.g., for CERN, to Swiss and European plugs.
 
-* The FCCSW is part of the Key4hep software ecosystem has been developed on Linux and the main platform supported is the default platform on CERN lxplus, i.e. CentOS7 .
-  Experimental support for other Linux systems (e.g. Ubuntu 20.04 LTS) is provided as is. Solutions for running on MacOxS are also available and will be presented at the workshop. There is no support for Windows.
+* The FCCSW is part of the Key4hep software ecosystem has been developed on Linux and the main platform supported is the default platform on CERN lxplus, i.e. Alma9.
+  Unbuntu22 is also supported.
+
+## Accessing computing facility capable of running Key4hep applications
+In order to run Key4hep applications,
+you need access to Alma9 (or Ubuntu22) machines with `cvmfs` mounted and with the proper set-up (see the [requirements](https://github.com/key4hep/key4hep-spack?tab=readme-ov-file#requirements)
+to be followed by the system administrators).
+Several computing facilities offer the right environment:
+
+* CERN lxplus: `ssh -X mylxplusname@lxplus.cern.ch`
+* MIT SubMIT: follow the instructions [here](https://github.com/jeyserma/FCCPhysics/blob/main/tutorials/ZmumuHbb/SUBMIT.md#submit).
+* FNAL: follow the instructions [here](https://github.com/jeyserma/FCCPhysics/blob/main/tutorials/ZmumuHbb/SUBMIT.md#submit). 
 
 ## Checking the chosen resources
 
-Please try the following steps with the computer you will use at the workshop (the example is given for lxplus, but should hold for the other resources as well):
+Please try the following steps with the computer you will use for the tutorial (the example is given for lxplus, but should hold for the other resources as well):
 
 1. From a terminal (`xterm` on Linux or `Terminal` on Mac OS X) connect to lxplus with `ssh -X lxplus.cern.ch`.
     If your local username is different from your `lxplus` one use `ssh -X mylxplusname@lxplus.cern.ch`.
@@ -43,7 +53,7 @@ Please try the following steps with the computer you will use at the workshop (t
     >If you're not connected to the CERN network at CERN, do not worry if the X11 forwarding is slow--this is normal.
 
 If you can successfully execute all of the above steps, you are ready to go for
-the workshop!
+the tutorial!
 
 ## Enabling the FCC software ecosystem from `cvmfs`
 
@@ -62,7 +72,7 @@ is still available.
 ### Bash shell
 
 The [Bash shell](https://cern.ch/go/gdJ9) will be used
-throughout the workshop.
+throughout the tutorial.
 The default for new computing accounts is now Bash. If you have an older
 account, the default used to be a shell called `tcsh`
 (“tee-cee-shell”), which has subtly different ways of doing things
