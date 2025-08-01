@@ -1102,12 +1102,12 @@ for example `../FCCAnalyses`.
 ```
 $ cd ..
 $ git clone --branch pre-edm4hep1 https://github.com/HEP-FCC/FCCAnalyses.git
-$ cd FCCAnalyses; mkdir {build,install}; cd build
+$ cd FCCAnalyses
+$ source setup.sh
+$ mkdir {build,install}; cd build
 $ cmake -DCMAKE_INSTALL_PREFIX=../install ..
 $ make -j4 install
-$ cd ..
-$ source setup.sh
-$ cd ../tutorials1
+$ cd ../../tutorials1
 ```
 It is mandatory to run setup after the build in the source directory. 
 
