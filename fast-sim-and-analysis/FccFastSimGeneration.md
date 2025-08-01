@@ -1099,7 +1099,7 @@ This is what the helper functions available in FCCAnalyses, which depend of `EDM
 Therefore it is always good to rebuild the latest version. It is advised to do it in a separate directory,
 for example `../FCCAnalyses`.
 
-```
+```sh
 $ cd ..
 $ git clone --branch pre-edm4hep1 https://github.com/HEP-FCC/FCCAnalyses.git
 $ cd FCCAnalyses
@@ -1123,7 +1123,7 @@ At this purpose we will use the recently introduced `build_graph` attribute. The
 :class: toggle
 
 The files need to be organised in a special way: directories need to be called as the process, files below need to be called `events_<num>`, when `<num>` is any number. So in the current case we have
-```
+```sh
 $ ls -lt gen
 total 0
 drwxr-xr-x. 2 ganis sf 26 Apr 24 07:38 wz_tautau_ecm91
@@ -1197,11 +1197,11 @@ The histograms are defined in here
 ##### Running `histmaker_ttmm.py`
 
 The `build_graph` is part of the `fccanalyses run`:
-```
+```sh
 $ fccanalysis run histmaker_ttmm.py
 ```
 This should produce `ROTO` files with the histograms in `./outputs`:
-```
+```sh
  $ ls -lt outputs/
 total 24
 -rw-r--r--. 1 ganis sf 7386 Apr 24 18:01 kk_tautau_ecm91.root
@@ -1213,7 +1213,7 @@ total 24
 
 FCCAnalyses provides the `plots` option to prepare some plots. A possible way to plot the histos is available at
 [plots_ttmm.py](https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/plots_ttmm.py), which can run as
-```
+```sh
 $ fccanalysis plots plots_ttmm.py
 ```
 with results available under `plots`.
