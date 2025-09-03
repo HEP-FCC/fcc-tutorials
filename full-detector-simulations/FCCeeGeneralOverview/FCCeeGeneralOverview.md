@@ -179,7 +179,7 @@ To produce the Higgs recoil mass plot, copy the content of the above code in a f
 In Python:
 ```bash
 python plot_recoil_mass.py wzp6_ee_mumuH_ecm240_CLD_REC.edm4hep.root
-xdg-open recoil_mass.png
+display recoil_mass.png
 ```
 
 or in C++ with the ROOT interpreter:
@@ -188,7 +188,7 @@ root -b
 .L plot_recoil_mass.C
 plot_recoil_mass("wzp6_ee_mumuH_ecm240_CLD_REC.edm4hep.root")
 .q
-xdg-open recoil_mass.png
+display recoil_mass.png
 ```
 
 This illustrates how easy it is already to do physics with Full Sim. Of course, if we had to do a realistic analysis, we would run on more events, properly select muons from the Z, include backgrounds, ..., and we would therefore use FCCAnalyses or plain C++ but it is not the topic of this tutorial. If you want to go further, the following [Doxygen page](https://edm4hep.web.cern.ch/classedm4hep_1_1_reconstructed_particle-members.html) will help you in understanding what members can be called on a given EDM4hep object.
@@ -223,8 +223,8 @@ cd ..
 ```
 In the XML compact file, the detector builder to use is specified by the `type` keyword in the `detector` beacon (e.g. `<detector id=1 name="MyCoolDetectorName" type="MYCOOLDETECTOR" ... />`) and it should match the detector type defined in the C++ builder with the instruction `DECLARE_DETELEMENT(MYCOOLDETECTOR)`.
 
-Now lets first modify the sub-detector content of ALLEGRO. Since we will deal with the calorimeter, let's remove the muon system to run faster.
-For this, you just need to open the main detector "compact file" (`xml` file with detector parameters) with your favorite text editor and remove the import of the muon system. Look for the line number 51 which should contain `<include ref="MuonTaggerPhiTheta.xml"/>`. Example instructions for the Vim editor:
+Now lets first modify the sub-detector content of ALLEGRO. Since we will deal with the calorimeter, let's remove the muon system, as an example.
+For this, you just need to open the main detector "compact file" (`xml` file with detector parameters) with your favorite text editor and remove the import of the muon system. Look for the line which contains `<include ref="MuonTaggerPhiTheta.xml"/>`. Example instructions for the Vim editor:
 
 ```bash
 # copy paste won't work here
@@ -246,7 +246,7 @@ Starting from the top tutorial directory, launch the ALLEGRO simulation with:
 
 ```bash
 cd fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/
-ddsim --enableGun --gun.distribution uniform --gun.energy "10*GeV" --gun.particle e- --numberOfEvents 100 --outputFile ALLEGRO_sim.root --random.enableEventSeed --random.seed 42 --compactFile $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v03/ALLEGRO_o1_v03.xml
+ddsim --enableGun --gun.distribution uniform --gun.energy "10*GeV" --gun.particle e- --gun.thetaMin "55*degree" --gun.thetaMax "125*degree" --numberOfEvents 100 --outputFile ALLEGRO_sim.root --random.enableEventSeed --random.seed 42 --compactFile $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v03/ALLEGRO_o1_v03.xml
 ```
 
 And apply the ALLEGRO reconstruction, including an MVA based calibration:
@@ -260,8 +260,8 @@ Now let's plot the energy resolution for raw clusters and MVA calibrated cluster
 
 ```bash
 python plot_calo_energy_resolution.py ALLEGRO_sim_digi_reco.root
-xdg-open electron_gun_10GeV_ALLEGRO_RECO_clusterEnergyResolution.png
-xdg-open electron_gun_10GeV_ALLEGRO_RECO_calibratedClusterEnergyResolution.png
+display electron_gun_10GeV_ALLEGRO_RECO_clusterEnergyResolution.png
+display electron_gun_10GeV_ALLEGRO_RECO_calibratedClusterEnergyResolution.png
 ```
 
 Look at both distributions to see how the MVA calibration affects the distribution.
@@ -274,7 +274,7 @@ In a sampling calorimeter, the ratio between the energy deposited in the dead ab
 # make sure you properly followed the steps described in the exercise "Modifying the sub-detector content"
 # i.e. called k4_local_repo in your local k4geo repository, so that $K4GEO points to your modified version
 vim $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v03/ECalBarrel_thetamodulemerged.xml
-# change "LAr" to "LKr" everywhere, vim instruction:
+# change "LAr" to "LKr" everywhere, Vim instruction:
 :%s/LAr/LKr/gc
 ```
 
