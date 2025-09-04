@@ -2,12 +2,22 @@
 
 <!-- This version has been prepared for the tutorial at the Second US FCC Workshop (2024): https://indico.mit.edu/event/876/contributions/2893/ -->
 
-Welcome to this general overview of the FCC-ee Full Simulation.
-This tutorial aims at showing you how to run the state of the art full simulation of the various detector concepts currently under study for FCC-ee: CLD, ALLEGRO and IDEA. The [DD4hep](https://dd4hep.web.cern.ch/dd4hep/usermanuals/DD4hepManual/DD4hepManual.pdf) geometry descriptions of these detectors are hosted in the [k4geo](https://github.com/key4hep/k4geo/tree/main/FCCee) GitHub repository and made centrally available with the Key4hep stack under the `$K4GEO` environment variable. This tutorial should work on any machine with `cvmfs` access and running an operating system supported by Key4hep (AlmaLinux 9 and Ubuntu 22).
+Welcome to this general overview of the FCC-ee Full Simulation. This tutorial
+aims at showing you how to run the state of the art full simulation of the
+various detector concepts currently under study for FCC-ee: CLD, ALLEGRO and
+IDEA. The
+[DD4hep](https://dd4hep.web.cern.ch/dd4hep/usermanuals/DD4hepManual/DD4hepManual.pdf)
+geometry descriptions of these detectors are hosted in the
+[k4geo](https://github.com/key4hep/k4geo/tree/main/FCCee) GitHub repository and
+made centrally available with the Key4hep stack under the `$K4GEO` environment
+variable. This tutorial should work on any machine with `cvmfs` access and
+running an operating system supported by Key4hep (AlmaLinux/RockyLinux/RHEL 9
+and Ubuntu 24.04).
 
 <!-- Click on the k4geo link, show and explain the different existing CLD versions (the one starting by FCCee are legacy for reproducibility, the useful ones are CLD_...) and where they are documented -->
 
 So, let's start playing with Full Sim!
+
 
 ## Setting-up the environment
 ```bash
@@ -22,13 +32,20 @@ cd FCC_Full_Sim_Tutorial
 git clone https://github.com/HEP-FCC/fcc-tutorials
 ```
 
+
 ## Towards Full Sim physics analyses with CLD
 
-The CLD detector has a complete geometry description and reconstruction chain. It is thus a very good candidate to start full sim physics analyses. To illustrate that, we will process some physics events through its Geant4 simulation and reconstruction, look at automatically generated diagnostic plots and produce ourselves the Higgs recoil mass.
+The CLD detector has a complete geometry description and reconstruction chain.
+It is thus a very good candidate to start full sim physics analyses. To
+illustrate that, we will process some physics events through its Geant4
+simulation and reconstruction, look at automatically generated diagnostic plots
+and produce ourselves the Higgs recoil mass.
 
 ### Running CLD simulation
 
-Let's first run the CLD Geant4 simulation, through ddsim, for some $e^{+}e^{-} \to Z(\mu\mu)H(\text{inclusive})$ events, taken from the generation used for Delphes simulation.
+Let's first run the CLD Geant4 simulation, through ddsim, for some
+$e^{+}e^{-} \to Z(\mu\mu)H(\text{inclusive})$ events, taken from the generation
+used for Delphes simulation.
 <!-- /eos/experiment/fcc/ee/generation/stdhep/wzp6_ee_mumuH_ecm240/events_057189088.stdhep.gz -->
 
 ```bash
@@ -39,7 +56,7 @@ cd CLDConfig/CLDConfig
 wget https://fccsw.web.cern.ch/fccsw/tutorials/MIT2024/wzp6_ee_mumuH_ecm240_GEN.stdhep.gz
 gunzip wzp6_ee_mumuH_ecm240_GEN.stdhep.gz
 # run the Geant4 simulation
-ddsim -I wzp6_ee_mumuH_ecm240_GEN.stdhep -N 10 -O wzp6_ee_mumuH_ecm240_CLD_SIM.root --compactFile $K4GEO/FCCee/CLD/compact/CLD_o2_v05/CLD_o2_v07.xml --steeringFile cld_steer.py
+ddsim -I wzp6_ee_mumuH_ecm240_GEN.stdhep -N 10 -O wzp6_ee_mumuH_ecm240_CLD_SIM.root --compactFile $K4GEO/FCCee/CLD/compact/CLD_o2_v07/CLD_o2_v07.xml --steeringFile cld_steer.py
 # NB: we run only on 10 events (-N 10) here for the sake of time
 # for such small amount of event the detector geometry construction step dominates, it takes about 5 seconds per event and the geometry loading takes 1min30s
 ```
@@ -73,7 +90,7 @@ NB: this step also produces a file named `wzp6_ee_mumuH_ecm240_CLD_aida.root` wh
 Let's now use the reconstructed sample to produce some physics quantities. As an example, we will plot the Higgs recoil mass using the Python bindings of [PODIO](https://github.com/key4hep/key4hep-tutorials/blob/main/edm4hep_analysis/edm4hep_api_intro.md#reading-edm4hep-files). The following very simple script already does a decent job:
 
 <!-- Explain a bit the script -->
-```
+```python
 import sys
 from podio import root_io
 import ROOT
@@ -102,14 +119,14 @@ canvas_recoil.Print("recoil_mass.png")
 ```
 
 The equivalent C++ ROOT macro looks like this:
-```
-#include "podio/ROOTFrameReader.h"
+```cpp
+#include "podio/ROOTReader.h"
 #include "podio/Frame.h"
 
 #include "edm4hep/ReconstructedParticleCollection.h"
 
 int plot_recoil_mass(std::string input_file_path) {
-  auto reader = podio::ROOTFrameReader();
+  auto reader = podio::ROOTReader();
   reader.openFile(input_file_path);
 
   TH1* th1_recoil = new TH1F("Recoil Mass", "Recoil Mass", 100, 110., 160.);
@@ -160,13 +177,13 @@ display recoil_mass.png
 To produce the Higgs recoil mass plot, copy the content of the above code in a file and run it.
 
 In Python:
-```
+```bash
 python plot_recoil_mass.py wzp6_ee_mumuH_ecm240_CLD_REC.edm4hep.root
 display recoil_mass.png
 ```
 
 or in C++ with the ROOT interpreter:
-```
+```bash
 root -b
 .L plot_recoil_mass.C
 plot_recoil_mass("wzp6_ee_mumuH_ecm240_CLD_REC.edm4hep.root")
@@ -174,7 +191,8 @@ plot_recoil_mass("wzp6_ee_mumuH_ecm240_CLD_REC.edm4hep.root")
 display recoil_mass.png
 ```
 
-This illustrates how easy it is already to do physics with Full Sim. Of course, if we had to do a realistic analysis, we would run on more events, properly select muons from the Z, include backgrounds, ..., and we would therefore use FCCAnalyses or plain C++ but it is not the topic of this tutorial. If you want to go further, the following [Doxygen page](https://edm4hep.web.cern.ch/classedm4hep_1_1_reconstructed_particle-members.html) will help you in understanding what members can be called on a given edm4hep object.
+This illustrates how easy it is already to do physics with Full Sim. Of course, if we had to do a realistic analysis, we would run on more events, properly select muons from the Z, include backgrounds, ..., and we would therefore use FCCAnalyses or plain C++ but it is not the topic of this tutorial. If you want to go further, the following [Doxygen page](https://edm4hep.web.cern.ch/classedm4hep_1_1_reconstructed_particle-members.html) will help you in understanding what members can be called on a given EDM4hep object.
+
 
 ## Towards detector optimization with Full Sim: ALLEGRO ECAL
 
@@ -184,9 +202,9 @@ In this section we will learn how to run with a modified version of a detector (
 
 So far we have been using the 'central' version of the detector, as directly provided by Key4hep. The first thing we have to do to run a modified version is to clone the repository where the DD4hep detector geometries are hosted and update the environment variable `$K4GEO` so that it points to your local folder:
 
-```
-# go in a 'clean' place i.e. outside of the git repository in which you were before
-cd ../../../
+```bash
+# let's go to the main tutorial directory i.e. outside of the git repository in which you were before
+cd ../../
 git clone https://github.com/key4hep/k4geo
 export K4GEO=$PWD/k4geo/
 ```
@@ -203,12 +221,12 @@ cd ..
 k4_local_repo # this updates environment variables and PATHs such as LD_LIBRARY_PATH
 cd ..
 ```
-In the xml compact file, the detector builder to use is specified by the `type` keyword in the `detector` beacon (e.g. `<detector id=1 name="MyCoolDetectorName" type="MYCOOLDETECTOR" ... />`) and it should match the detector type defined in the C++ builder with the instruction `DECLARE_DETELEMENT(MYCOOLDETECTOR)`.
+In the XML compact file, the detector builder to use is specified by the `type` keyword in the `detector` beacon (e.g. `<detector id=1 name="MyCoolDetectorName" type="MYCOOLDETECTOR" ... />`) and it should match the detector type defined in the C++ builder with the instruction `DECLARE_DETELEMENT(MYCOOLDETECTOR)`.
 
-Now lets first modify the sub-detector content of ALLEGRO. Since we will deal with the calorimeter, let's remove the muon system to run faster.
-For this, you just need to open the main detector "compact file" (`xml` file with detector parameters) with your favorite text editor and remove the import of the muon system, for instance:
+Now lets first modify the sub-detector content of ALLEGRO. Since we will deal with the calorimeter, let's remove the muon system, as an example.
+For this, you just need to open the main detector "compact file" (`xml` file with detector parameters) with your favorite text editor and remove the import of the muon system. Look for the line which contains `<include ref="MuonTaggerPhiTheta.xml"/>`. Example instructions for the Vim editor:
 
-```
+```bash
 # copy paste won't work here
 vim $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v03/ALLEGRO_o1_v03.xml
 :51
@@ -218,26 +236,30 @@ dd
 
 ### Running a first ALLEGRO ECAL simulation
 
-Let's now run a first particle gun simulation and reconstruction by following the instructions [here](https://github.com/HEP-FCC/FCC-config/tree/main/FCCee/FullSim/ALLEGRO/ALLEGRO_o1_v03#instructions), outside of the tutorial repository.
-Once done, copy the output rootfile to the tutorial repository `fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/` and go back there.
+Let's now run a first particle gun simulation and reconstruction.
 
-<!--
+:::{admonition} Nota Bene
+:class: callout
+More detailed and up-to-date instructions can be found [here](https://github.com/HEP-FCC/FCC-config/tree/main/FCCee/FullSim/ALLEGRO/ALLEGRO_o1_v03#instructions).
+:::
+Starting from the top tutorial directory, launch the ALLEGRO simulation with:
+
 ```bash
 cd fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/
-ddsim --enableGun --gun.distribution uniform --gun.energy "10*GeV" --gun.particle e- --gun.thetaMin "55*degree" --gun.thetaMax "125*degree"  --numberOfEvents 100 --outputFile electron_gun_10GeV_ALLEGRO_SIM.root --random.enableEventSeed --random.seed 42 --compactFile $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v03/ALLEGRO_o1_v03.xml
+ddsim --enableGun --gun.distribution uniform --gun.energy "10*GeV" --gun.particle e- --gun.thetaMin "55*degree" --gun.thetaMax "125*degree" --numberOfEvents 100 --outputFile ALLEGRO_sim.root --random.enableEventSeed --random.seed 42 --compactFile $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v03/ALLEGRO_o1_v03.xml
 ```
 
 And apply the ALLEGRO reconstruction, including an MVA based calibration:
+```bash
+# retrieve all necessary files needed also for the MVA calibration
+scp -r <user>@lxplus.cern.ch:/eos/project/f/fccsw-web/www/filesForSimDigiReco/ALLEGRO/ALLEGRO_o1_v03/* .
+k4run $FCCCONFIG/FullSim/ALLEGRO/ALLEGRO_o1_v03/run_digi_reco.py --calibrateClusters
 ```
-wget https://fccsw.web.cern.ch/fccsw/tutorials/MIT2024/lgbm_calibration-CaloClusters.onnx # needed for the MVA calibration
-k4run run_ALLEGRO_RECO.py --EventDataSvc.input="electron_gun_10GeV_ALLEGRO_SIM.root" --out.filename="electron_gun_10GeV_ALLEGRO_RECO.root"
-```
--->
 
 Now let's plot the energy resolution for raw clusters and MVA calibrated clusters:
 
 ```bash
-python plot_calo_energy_resolution.py RECO_FILE_NAME.root
+python plot_calo_energy_resolution.py ALLEGRO_sim_digi_reco.root
 display electron_gun_10GeV_ALLEGRO_RECO_clusterEnergyResolution.png
 display electron_gun_10GeV_ALLEGRO_RECO_calibratedClusterEnergyResolution.png
 ```
@@ -248,11 +270,11 @@ Look at both distributions to see how the MVA calibration affects the distributi
 
 In a sampling calorimeter, the ratio between the energy deposited in the dead absorbers and sensitive media (sampling fraction) is an important parameter for energy resolution: the more energy in the sensitive media the better. Liquid Krypton being denser than Liquid Argon, it is an appealing choice for the detector design. Though it is more expensive and difficult to procure in real life, testing this option in Full Sim is extremely cheap:
 
-```
+```bash
 # make sure you properly followed the steps described in the exercise "Modifying the sub-detector content"
 # i.e. called k4_local_repo in your local k4geo repository, so that $K4GEO points to your modified version
 vim $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v03/ECalBarrel_thetamodulemerged.xml
-# change "LAr" to "LKr" everywhere
+# change "LAr" to "LKr" everywhere, Vim instruction:
 :%s/LAr/LKr/gc
 ```
 
@@ -287,7 +309,25 @@ See how the energy resolution improved with LKr. NB: here the MVA calibration sh
 
 A first version of the IDEA tracking system is now available. We can therefore start working on tracking algorithms implementation. In this exercise, we will produce a dataset containing Vertex, Drift Chamber and Silicon Wrapper digitized hits which can be used as a starting point to develop these tracking algorithms.
 
-For this, let's run the IDEA simulation and digitization by following the recipe [here](https://github.com/HEP-FCC/FCC-config/tree/main/FCCee/FullSim/IDEA/IDEA_o1_v03#instructions) (outside of the tutorial repository).
+For this, let's run the IDEA simulation and digitization.
+
+:::{admonition} Nota Bene
+:class: callout
+More detailed and up-to-date instructions can be found
+[here](https://github.com/HEP-FCC/FCC-config/tree/main/FCCee/FullSim/IDEA/IDEA_o1_v03#instructions).
+:::
+
+Let's first run the IDEA simulation with:
+```bash
+ddsim --enableGun --gun.distribution uniform --gun.energy "10*GeV" --gun.particle e- --numberOfEvents 10 --outputFile IDEA_sim.root --random.enableEventSeed --random.seed 42 --compactFile $K4GEO/FCCee/IDEA/compact/IDEA_o1_v03/IDEA_o1_v03.xml --steeringFile $FCCCONFIG/FullSim/IDEA/IDEA_o1_v03/SteeringFile_IDEA_o1_v03.py
+```
+
+And follow it with digitization and reconstruction
+```bash
+# First get the data needed for the DCH cluster counting parametrization (still work in progress)
+wget --no-clobber https://fccsw.web.cern.ch/fccsw/filesForSimDigiReco/IDEA/DataAlgFORGEANT.root
+k4run $FCCCONFIG/FullSim/IDEA/IDEA_o1_v03/run_digi_reco.py
+```
 
 <!--
 ```bash
@@ -300,7 +340,7 @@ k4run run_IDEA_DIGI.py --EventDataSvc.input="electron_gun_10GeV_IDEA_SIM.root" -
 -->
 
 The following collections are the one to use for tracking:
-```cpp
+```
 VTXBDigis                             edm4hep::TrackerHit3D
 VTXDDigis                             edm4hep::TrackerHit3D
 DCH_DigiCollection                    extension::SenseWireHit
@@ -311,7 +351,7 @@ SiWrDDigis                            edm4hep::TrackerHit3D
 
 You can now play with the digitized hits:
 ```cpp
-root electron_gun_10GeV_IDEA_DIGI.root
+root IDEA_sim_digi_reco.root
 # to be ran one by one (no full copy paste)
 events->Draw("DCH_DigiCollection.distanceToWire")
 events->Draw("DCHCollection.eDep/DCHCollection.pathLength", "DCHCollection.eDep/DCHCollection.pathLength < 4e-7") // this shows the de/dx from the simHits
@@ -324,10 +364,11 @@ Displaying detector geometries is very useful to understand what is actually bei
 Let's first generate the files containing the geometry that will be used by the display tool.
 
 ```bash
+cd ../../..
 wget https://fccsw.web.cern.ch/fccsw/tutorials/static/python/dd4hep2root
 chmod +x dd4hep2root
-./dd4hep2root -c $K4GEO/FCCee/CLD/compact/CLD_o2_v05/CLD_o2_v05.xml -o CLD_o2_v05_geom.root
-echo $PWD/CLD_o2_v05_geom.root
+./dd4hep2root -c $K4GEO/FCCee/CLD/compact/CLD_o2_v07/CLD_o2_v07.xml -o CLD_o2_v07_geom.root
+echo $PWD/CLD_o2_v07_geom.root
 ```
 
 Now, let's copy the file containing the geometry on your local machine:
