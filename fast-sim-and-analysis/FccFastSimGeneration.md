@@ -1166,15 +1166,15 @@ We can use the built-in functions to extract the information, or define our own 
        #ifndef funDone
        #define funDone
 
-       float cosTheta(const edm4hep::Vector3f& in){
+       float cosTheta(const edm4hep::Vector3d& in){
           return (in.z/sqrt(pow(in.x,2)+pow(in.y,2)+pow(in.z,2)));
        };
 
-       float scalarProductNorm(const edm4hep::Vector3f& in1, const edm4hep::Vector3f& in2 ){
+       float scalarProductNorm(const edm4hep::Vector3d& in1, const edm4hep::Vector3d& in2 ){
           return ((in1.x*in2.x + in1.y*in2.y + in1.z*in2.z)/sqrt(pow(in1.x,2)+pow(in1.y,2)+pow(in1.z,2))/sqrt(pow(in2.x,2)+pow(in2.y,2)+pow(in2.z,2) ));
        };
 
-       float momP(const edm4hep::Vector3f& in ){
+       float momP(const edm4hep::Vector3d& in ){
           return (sqrt(pow(in.x,2)+pow(in.y,2)+pow(in.z,2)));
        };
 
