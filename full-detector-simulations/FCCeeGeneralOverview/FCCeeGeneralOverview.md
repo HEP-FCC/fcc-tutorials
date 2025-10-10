@@ -260,8 +260,8 @@ Now let's plot the energy resolution for raw clusters and MVA calibrated cluster
 
 ```bash
 python plot_calo_energy_resolution.py ALLEGRO_sim_digi_reco.root
-ALLEGRO_sim_digi_reco_clusterEnergyResolution.png
-ALLEGRO_sim_digi_reco_calibratedClusterEnergyResolution.png
+display ALLEGRO_sim_digi_reco_clusterEnergyResolution.png
+display ALLEGRO_sim_digi_reco_calibratedClusterEnergyResolution.png
 ```
 
 Look at both distributions to see how the MVA calibration affects the distribution.
