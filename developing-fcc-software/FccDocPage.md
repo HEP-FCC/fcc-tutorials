@@ -25,7 +25,7 @@ machinery using [Read the Docs](https://readthedocs.org/) theme. Specific
 parser of Mardown we use is [MyST](https://myst-parser.readthedocs.io).
 
 
-## Custom Admonitions
+### Custom Admonitions
 
 The `fcc-tutorial` makes use of the following custom admonition classes
 inherited from [LHCb Starterkit](https://lhcb.github.io/starterkit-lessons/):
@@ -63,11 +63,11 @@ Example of collapsible admonition:
 :::{admonition} Collapsable admonition
 :class: prereq dropdown toggle-shown
 
-Text of a collapsable admonition.
+Text of a collapsible admonition.
 :::
 ```
 
-:::{admonition} Collapsable admonition
+:::{admonition} Collapsible admonition
 :class: prereq dropdown toggle-shown
 
 Text of a collapsable admonition.
@@ -76,14 +76,14 @@ Text of a collapsable admonition.
 
 ## When and how is the tutorials page updated?
 
-This tutorials page is hosted at <https://hep-fcc.github.io/fcc-tutorials/> and
+This tutorials page is hosted at <https://fcc-tutorials.web.cern.ch/> and
 the edits are managed using Github pull requests. Once the pull request is
 merged the change to the tutorials page will happen within few minutes.
 
 
 ## For website admins
 
-Administrators controlling access to the webspace need to be members of the
+Administrators controlling the access to the webspace need to be members of the
 `cernbox-project-fccsw-web-admins` e-group.
 
 If you want to have write-access you need to request membership in

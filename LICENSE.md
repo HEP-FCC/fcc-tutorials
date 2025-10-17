@@ -39,8 +39,8 @@ Notices:
 
 ## Software
 
-Except where otherwise noted, the example programs and other software provided 
-by Software Carpentry are made available under the [OSI][osi]-approved
+Except where otherwise noted, the example programs and other software provided
+by FCC Software are made available under the [OSI][osi]-approved
 [Apache 2.0][apache-license] license.
 
 
