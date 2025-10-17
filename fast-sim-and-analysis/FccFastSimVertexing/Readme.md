@@ -1,60 +1,123 @@
+# Tracking and vertexing example using specific flavour decays
 
-# FCC: tracking and vertexing example using specific flavour decays
-
+>
+> Original author: Clement Helsens
+>
 
 :::{admonition} Learning Objectives
 :class: objectives
 
 This tutorial will teach you how to:
 
--   fit some tracks to a common vertex in **FCCAnalyses**, recontruct the primary vertex and the primary tracks
--   retrieve the tracks corresponding to a specific flavour decay in **FCCAnalyses**
--   produce **flat ntuples** with observables of interest with **FCCAnalyses**
--   build your own algorithm inside **FCCAnalyses**
+- fit some tracks to a common vertex in **FCCAnalyses**, reconstruct the
+    primary vertex and the primary tracks
+- retrieve the tracks corresponding to a specific flavour decay in
+    **FCCAnalyses**
+- produce **flat ntuples** with observables of interest with **FCCAnalyses**
+- build your own algorithm inside **FCCAnalyses**
 
-For the vertex fitter, we make use of the code developed by Franco Bedeschi, [see this talk](https://indico.cern.ch/event/1003610/contributions/4214579/attachments/2187815/3696958/Bedeschi_Vertexing_Feb2021.pdf).
-The [subsequent updates presented in July 2022](https://indico.cern.ch/event/1180976/contributions/4960968/attachments/2481467/4259924/Bedeschi_Vertexing_Jul2022.pdf) offer possibilities for complex reconstructions, but they are not yet ready to use in the public FCCAnalyses version (coming soon).
+For the vertex fitter, we make use of the code developed by Franco Bedeschi,
+[see this talk](https://indico.cern.ch/event/1003610/contributions/4214579/attachments/2187815/3696958/Bedeschi_Vertexing_Feb2021.pdf).
+The [subsequent updates presented in July 2022](https://indico.cern.ch/event/1180976/contributions/4960968/attachments/2481467/4259924/Bedeschi_Vertexing_Jul2022.pdf) offer possibilities
+for complex reconstructions, but they are not yet ready to use in the public
+FCCAnalyses version (coming soon).
 
-To reconstruct the primary vertex and the primary tracks, we follow the LCFI+ algorithm (T. Suehara,T. Tanabe), described in [arXiv:1506.08371](https://arxiv.org/pdf/1506.08371.pdf).
+To reconstruct the primary vertex and the primary tracks, we follow the LCFI+
+algorithm (T. Suehara, T. Tanabe), described in
+[arXiv:1506.08371](https://arxiv.org/pdf/1506.08371.pdf).
 
 :::
 
 
-## Installation of FCCAnalyses
-For this tutorial we will need to develop some code inside FCCAnalyses, thus we need to install it locally. If not already done, you need to clone and install it.
-Go inside the area that you have setup for the tutorials and get the FCCAnalyses code:
+## Getting the FCCAnalyses
 
-```shell
-git clone --branch pre-edm4hep1 https://github.com/HEP-FCC/FCCAnalyses.git
+The FCCAnalyses framework is provided already compiled in the Key4hep stack,
+however once the stack is released this version of the FCCAnalyses can't be
+updated anymore. If one wants to benefit from the changes in the upstream
+FCCAnalyses, they need to compile the latest version of it. The compilation
+process is quite streamlined and requires only few steps.
+
+As a first step create a fork of the
+[FCCAnalyses project](https://github.com/HEP-FCC/FCCAnalyses) on GitHub. More
+details about FCC Software development workflow can be found in
+[](./developing-fcc-software/FccSoftwareGit.html#development-workflow).
+
+After a short while the forking should be done and you can download the
+FCCAnalyses to your machine. Go inside the area that you have setup for this
+tutorial (for example `mkdir vtx-tutorial`) and clone your FCCAnalyses
+repository:
+```bash
+cd vtx-tutorial
+git clone --branch pre-edm4hep1 https://github.com/<your-github-handle>/FCCAnalyses.git
 ```
 
-Go inside the directory and run
-
-```shell
+Go inside the FCCAnalyses directory and run the building of the FCCAnalyses
+with:
+```bash
+cd FCCAnalyses
 source ./setup.sh
-mkdir build install
-cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=../install
-make install
+fccanalysis build
+```
+
+After the successfull building of the FCCAnalyses you can return back to the
+main directory:
+```bash
 cd ..
 ```
 
+To check if you are using the locally build version of FCCAnalyses use 
 
-## Building a custom sub-package in FCCAnalyses
 
-In order to add new code, we need to develop inside FCCAnalyses. For that we setup a dedicated area to work using this setup script.
-```shell
-source ./setupUserCode.sh myAnalysis
+
+## Adding analyzers to the FCCAnalyses
+
+In order to extend the number of the available FCCAnalyses analyzers (C++
+functions or functors used in the `.Define()` and `.Filter` methods of the
+ROOT RDataFrame) we can either provide them in the additional C++ header file(s)
+or edit the source code of the FCCAnalyses analyzers library.
+
+For a quick addition of a few analyzers the first method is recommended, however
+since in this method the additional C++ header file(s) need to be JIT compiled
+every time the analysis is run the start-up time of the analysis can become very
+long.
+
+To register the C++ header file with the additional analyzers in your
+analysis use `includePaths` attribute of the analysis script:
+
+```python
+includePaths = ["analyzers.h"]
 ```
 
-We now have a new directory `myAnalysis` that contains both include `myAnalysis/include/myAnalysis.h` and source `myAnalysis/src/myAnalysis.cc` files within the `myAnalysis` namespace. In the following of this tutorial, when new code needs to be added, it should be done in those two files. An example is given below:
+:::{admonition} Include file location
+:class: callout
 
+The location of the include files needs to be relative to the analysis script.
+
+:::
+
+The second method involves directly editing the source code located in the
+`analyzers/dataframe` and afterwards running `fccanalysis build` command.
+
+### Exercise
+
+Let's add a dummy analyzer which extracts $x$ component of the particle
+momentum from the collection of reconstructed particles.
+
+:::{admonition} Suggested solution
+:class: callout toggle
+
+First, download the dummy FCCAnalyses script:
+```bash
+wget dummy_analysis.py
+```
+
+Then create an include file with the text editor of your choice:
+```bash
+vim analyzers.h
+```
+which contains the definition of the dummy analyzer:
 ```cpp
-#in the header file
-rv::RVec<float> dummy_collection(const rv::RVec<edm4hep::ReconstructedParticleData>&);
-
-#in the source file
-rv::RVec<float> dummy_collection(const rv::RVec<edm4hep::ReconstructedParticleData>& parts) {
+rv::RVec<float> dummy_analyzer(const rv::RVec<edm4hep::ReconstructedParticleData>& parts) {
   rv::RVec<float> output;
   for (size_t i = 0; i < parts.size(); ++i)
     output.emplace_back(parts.at(i).momentum.x);
@@ -62,38 +125,43 @@ rv::RVec<float> dummy_collection(const rv::RVec<edm4hep::ReconstructedParticleDa
 }
 ```
 
-Finally, in your python analysis script, you can now call you newly defined function, don't forget it is inside a namespace!
+Add `includePaths` attribute into your dummy analysis script and register the
+dummy analyzer to the dataframe and its output column into the branch list.
 
-```python
-.Define("dummy_collection", "myAnalysis::dummy_collection(ReconstructedParticles)")
+Lastly let's verify if everything works as expected with:
+```
+fccanalysis run dummy_analysis.py --test --nevents 10 --output dummy_result.root
 ```
 
-It takes as argument the collection named in our ROOT files `ReconstructedParticles`, which is a vector of `edm4hep::ReconstructedParticleData` [see here](https://edm4hep.web.cern.ch/classedm4hep_1_1_reconstructed_particle_data.html) and also add the newly defined column `dummy_collection` to the list of output variables, this can be seen in `myAnalysis/scripts/analysis_cfg.py`
+The dummy analyzer takes as argument the collection named
+`ReconstructedParticles`, which is a vector of EDM4Hep objects
+`edm4hep::ReconstructedParticleData`
+[[see here](https://edm4hep.web.cern.ch/classedm4hep_1_1_reconstructed_particle_data.html)]
+and creates (defines) new column `dummy_momentum_collection`, which is later
+added to the list of output variables.
 
-Last thing, do not forget to compile before running to use your new code.
-
-```shell
-cd ${OUTPUT_DIR}/build
-cmake .. && make && make install
-cd ${LOCAL_DIR}
-```
-
+:::
 
 
 ## Reconstruction of the primary vertex and of primary tracks
 
-Let's start by running primary vertex reconstruction on a few events of one test file:
+Let's start by running primary vertex reconstruction on a few events of one
+test file:
 
-```shell
-fccanalysis run examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py --test --nevents 1000 --output primary_Zuds.root
+```bash
+wget analysis_primary_vertex.py
+fccanalysis run analysis_primary_vertex.py --test --nevents 1000 --output primary_Zuds.root
 ```
 
-Note: with the option `--test`, we process the file that is hard-coded under `testFile` inside `analysis_primary_vertex.py`. In this case, it is a file of $Z \rightarrow q \bar{q}$ with $q=u,d,s$.
+Note: with the option `--test`, we process the file that is hard-coded in the
+attribute `testFile` inside of the `analysis_primary_vertex.py` script. In this
+case, it is a file of $Z \rightarrow q \bar{q}$ with $q=u,d,s$.
 
-The resulting ntuple `primary_Zuds.root` contains the MC event vertex `MC_PrimaryVertex`, and the reconstructed primary vertex `PrimaryVertex`.
+The resulting ntuple `primary_Zuds.root` contains the MC event vertex
+`MC_PrimaryVertex`, and the reconstructed primary vertex `PrimaryVertex`.
 
 :::{admonition} Snippet of `analysis_primary_vertex.py`
-:class: toggle
+:class: callout toggle
 ```python
   # MC event primary vertex
   .Define("MC_PrimaryVertex",  "FCCAnalyses::MCParticle::get_EventPrimaryVertex(21)( Particle )" )
@@ -141,50 +209,64 @@ The resulting ntuple `primary_Zuds.root` contains the MC event vertex `MC_Primar
 :::
 
 
-To produce some example plots, just run the ROOT macro ```examples/FCCee/tutorials/vertexing/plots_primary_vertex.x```
+To produce example plots, run the ROOT plotting macro `plot_primary_vertex.C`.
+```
+wget plot_primary_vertex.C
+```
 
 :::{admonition} Suggested answer
-:class: toggle
-```shell
-root -l
-.x examples/FCCee/tutorials/vertexing/plots_primary_vertex.x
+:class: callout toggle
+
+The command to run is
+```bash
+root -b -q 'examples/FCCee/tutorials/vertexing/plot_primary_vertex.C()'
 ```
+and it will produce four plot files (two `.png` and two `.pdf`).
+
 :::
 
-This produces normalised $\chi^2$ of the primary vertex fit, the resolutions in `x, y, z`, and the pulls of the fitted vertex position.
+This produces normalized $\chi^2$ of the primary vertex fit, the resolutions
+in $x$, $y$, $z$, and the pulls of the fitted vertex position.
 
-### Exercises:
-1. add the number of primary and secondary tracks into the ntuple using the function `ReconstructedParticle2Track::getTK_n(ROOT::VecOps::RVec<edm4hep::TrackState> x)` [see here](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/FCCAnalyses/ReconstructedParticle2Track.h#L111)
+### Exercises
+
+1. Add the number of primary and secondary tracks into the ntuple using the
+   function `ReconstructedParticle2Track::getTK_n(ROOT::VecOps::RVec<edm4hep::TrackState> x)`,
+   see the definition
+   [here](https://github.com/HEP-FCC/FCCAnalyses/blob/783b2afc8d3e6b64a6af0447834183dbf4f246b8/analyzers/dataframe/src/ReconstructedParticle2Track.cc#L541).
 
 :::{admonition} Suggested answer
-:class: toggle
+:class: callout toggle
+
+Needed definitions to be added to the dataframe:
 ```python
-# Number of primary and secondary tracks :
+# Number of primary and secondary tracks:
 .Define("n_RecoedPrimaryTracks",  "ReconstructedParticle2Track::getTK_n( RecoedPrimaryTracks )")
 .Define("n_SecondaryTracks",  "ReconstructedParticle2Track::getTK_n( SecondaryTracks )" )
 # equivalent : (this is to show that a simple C++ statement can be included in a ".Define")
-.Define("n_SecondaryTracks_v2", " return ntracks - n_RecoedPrimaryTracks ; " )
+.Define("n_SecondaryTracks_v2", "return ntracks - n_RecoedPrimaryTracks;")
 ```
-:::
 
-and add the corresponding collection to the `branchList`:
+and the corresponding collections to the `branchList`:
 
-:::{admonition} Suggested answer
-:class: toggle
- ```python
+```python
 branchList = [
-  "MC_PrimaryVertex",
-  "ntracks",
-  "Vertex_allTracks",
-  "PrimaryVertex",
-  "n_RecoedPrimaryTracks",
-  "n_SecondaryTracks",
-  "n_SecondaryTracks_v2",
-  ]
- ```
+    "MC_PrimaryVertex",
+    "ntracks",
+    "Vertex_allTracks",
+    "PrimaryVertex",
+    "n_RecoedPrimaryTracks",
+    "n_SecondaryTracks",
+    "n_SecondaryTracks_v2",
+]
+```
+
 :::
 
-2. Add the total $p_T$ that is carried by the primary tracks. This requires some simple analysis code to be written (in our `myAnalysis`) and compiled. Then, the python analyser file needs to be updated to include `analysesList = ['myAnalysis']`.
+2. Add the total $p_{T}$ that is carried by the primary tracks. This requires
+   some simple analysis code to be written (in our `myAnalysis`) and compiled.
+   Then, the python analyzer file needs to be updated to include
+   `analysesList = ['myAnalysis']`.
 
 Hint: use the `updated_track_momentum_at_vertex` that is contained in `VertexingUtils::FCCAnalysesVertex` (contains a `TVector3` for each track used in the vertex fit) and use this function implementation:
 
