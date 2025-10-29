@@ -28,11 +28,11 @@ For example, one can call it with
 edm4hep2json -l ReconstructedParticles,Particle,MCRecoAssociations -e 2,3,5,7,11 my-file.edm4hep.root
 ```
 to save only "ReconstructedParticles,Particle,MCRecoAssociations" object collections, and only the 2nd, 3rd, 5th, 7th, and 11th events in the file.
-
+An example output can be found at [example.edm4hep.json](https://fccsw.web.cern.ch/fccsw/tutorials/eede-tutorial/example_eedE_tutorial.edm4hep.json)
 
 ## Using eedE
 
-Once the data has been converted into a json format via edm4hep2json, one can then head to the website of eedE: https://key4hep.github.io/eede/release/index.html. After pressing the Start button, one is required to upload the EDM4hep json file via the Browse button. You can then select the type of association (`view`) to visualize.
+Once the data has been converted into a json format via edm4hep2json, one can then head to the website of [eedE](https://key4hep.github.io/eede/release/index.html). After pressing the Start button, one is required to upload the EDM4hep json file via the Browse button. You can then select the type of association (`view`) to visualize.
 ```{image} images/eedE/eede_upload.png
 :align: center
 :width: 600px
