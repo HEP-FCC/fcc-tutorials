@@ -33,18 +33,18 @@ to save only "ReconstructedParticles,Particle,MCRecoAssociations" object collect
 ## Using eedE
 
 Once the data has been converted into a json format via edm4hep2json, one can then head to the website of eedE: https://key4hep.github.io/eede/release/index.html. After pressing the Start button, one is required to upload the EDM4hep json file via the Browse button. You can then select the type of association (`view`) to visualize.
-```{image} https://fccsw.web.cern.ch/fccsw/tutorials/static/png/eede_upload.png
+```{image} images/eedE/eede_upload.png
 :align: center
-:width: 300px
+:width: 600px
 ```
 
 ### Visualizing the MC particle Tree
 
 Here we take the MC particle tree as an example.
 In the tree shown in the picture illustrates a collision at 91 GeV, where both the electron and positron emit a ISR photon before they merge into an on-shell Z boson, which decays into a pair of b quarks.
-```{image} https://fccsw.web.cern.ch/fccsw/tutorials/static/png/eede_Zbb_example.png
+```{image} images/eedE/eede_Zbb_example.png
 :align: center
-:width: 300px
+:width: 400px
 ```
 For each MC particle, values for `p`, `t`, `m`, `q` represents the momentum in lab frame, time of production, invariant mass, and charge, while `d` gives the displacement from the origin of lab frame (0,0,0) to the position where the particle is produced.
 
