@@ -25,7 +25,7 @@ If you have any problems or questions, you can
     k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.md
     eedE.md
     fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.md
-    fccanalyses/doc/starterkit/FccFastSimVertexing/Readme.md
+    FccFastSimVertexing/Readme.md
     FCCAnalysesProblemsAndSolutions.md
     EventProduction.md
 ```
