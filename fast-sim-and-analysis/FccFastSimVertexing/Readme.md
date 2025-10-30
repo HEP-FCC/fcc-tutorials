@@ -1,8 +1,10 @@
 # Tracking and vertexing example using specific flavour decays
 
 >
-> Original author: Clement Helsens
+> Original author: Clement Helsens  
+> Edited by: Juraj Smiesko
 >
+
 
 :::{admonition} Learning Objectives
 :class: objectives
@@ -40,7 +42,7 @@ process is quite streamlined and requires only few steps.
 As a first step create a fork of the
 [FCCAnalyses project](https://github.com/HEP-FCC/FCCAnalyses) on GitHub. More
 details about FCC Software development workflow can be found in
-[](./developing-fcc-software/FccSoftwareGit.html#development-workflow).
+[](/developing-fcc-software/FccSoftwareGit.md#development-workflow).
 
 After a short while the forking should be done and you can download the
 FCCAnalyses to your machine. Go inside the area that you have setup for this
@@ -59,14 +61,26 @@ source ./setup.sh
 fccanalysis build
 ```
 
-After the successfull building of the FCCAnalyses you can return back to the
+:::{admonition} Older EDM4hep version
+:class: callout
+
+In this tutorial we will use centrally produced datasets which use relatively
+old EDM4hep version, therefore we will use special branch of FCCAnalyses which
+can work with those datasets.
+
+:::
+
+After the successful building of the FCCAnalyses you can return back to the
 main directory:
 ```bash
 cd ..
 ```
 
-To check if you are using the locally build version of FCCAnalyses use 
-
+To check if you are using the locally build version of FCCAnalyses use
+```bash
+which fccanalysis
+```
+It should lead to executable in your local install directory.
 
 
 ## Adding analyzers to the FCCAnalyses
@@ -96,7 +110,8 @@ The location of the include files needs to be relative to the analysis script.
 :::
 
 The second method involves directly editing the source code located in the
-`analyzers/dataframe` and afterwards running `fccanalysis build` command.
+`analyzers/dataframe` directory of FCCAnalyses and afterwards running
+`fccanalysis build` command.
 
 ### Exercise
 
@@ -104,29 +119,43 @@ Let's add a dummy analyzer which extracts $x$ component of the particle
 momentum from the collection of reconstructed particles.
 
 :::{admonition} Suggested solution
-:class: callout toggle
+:class: solution toggle
 
 First, download the dummy FCCAnalyses script:
 ```bash
-wget dummy_analysis.py
+wget https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/dummy_analysis.py
 ```
 
 Then create an include file with the text editor of your choice:
 ```bash
 vim analyzers.h
 ```
-which contains the definition of the dummy analyzer:
+which contains the definition of the dummy analyzer ([complete `analyzers.h` of
+the tutorial](https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/analyzers.h)):
 ```cpp
-rv::RVec<float> dummy_analyzer(const rv::RVec<edm4hep::ReconstructedParticleData>& parts) {
-  rv::RVec<float> output;
-  for (size_t i = 0; i < parts.size(); ++i)
-    output.emplace_back(parts.at(i).momentum.x);
-  return output;
+#ifndef FCCANA_ADDITIONAL_ANALYZERS_H
+#define FCCANA_ADDITIONAL_ANALYZERS_H
+
+#include "ROOT/RVec.hxx"
+#include "edm4hep/ReconstructedParticleData.h"
+
+namespace FCCAnalyses :: VtxAna {
+  namespace rv = ROOT::VecOps;
+
+  rv::RVec<float> dummy_analyzer(const rv::RVec<edm4hep::ReconstructedParticleData>& parts) {
+    rv::RVec<float> output;
+    for (size_t i = 0; i < parts.size(); ++i)
+      output.emplace_back(parts.at(i).momentum.x);
+    return output;
+  }
 }
+
+#endif /* FCCANA_ADDITIONAL_ANALYZERS_H */
 ```
 
-Add `includePaths` attribute into your dummy analysis script and register the
-dummy analyzer to the dataframe and its output column into the branch list.
+Add (uncomment) `includePaths` attribute in your dummy analysis script and
+register the dummy analyzer to the dataframe and its output column into the
+branch list.
 
 Lastly let's verify if everything works as expected with:
 ```
@@ -149,7 +178,7 @@ Let's start by running primary vertex reconstruction on a few events of one
 test file:
 
 ```bash
-wget analysis_primary_vertex.py
+wget https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/analysis_primary_vertex.py
 fccanalysis run analysis_primary_vertex.py --test --nevents 1000 --output primary_Zuds.root
 ```
 
@@ -163,294 +192,370 @@ The resulting ntuple `primary_Zuds.root` contains the MC event vertex
 :::{admonition} Snippet of `analysis_primary_vertex.py`
 :class: callout toggle
 ```python
-  # MC event primary vertex
-  .Define("MC_PrimaryVertex",  "FCCAnalyses::MCParticle::get_EventPrimaryVertex(21)( Particle )" )
+    # MC event primary vertex
+    .Define("MC_PrimaryVertex",
+            "FCCAnalyses::MCParticle::get_EventPrimaryVertex(21)(Particle)")
 
-  # Fit all tracks of the events to a common vertex  - here using a beam-spot constraint:
+    # Number of tracks
+    .Define("ntracks",
+            "ReconstructedParticle2Track::getTK_n(EFlowTrack_1)")
 
-  # VertexObject_allTracks is an object of type VertexingUtils::FCCAnalysesVertex
-  # It contains in particular :
-  #  - an edm4hep::VertexData :
-  #        std::int32_t primary{}; ///< boolean flag, if vertex is the primary vertex of the event
-  #        float chi2{}; ///< chi-squared of the vertex fit
-  #        ::edm4hep::Vector3f position{}; ///< [mm] position of the vertex.
-  #        std::array<float, 6> covMatrix{}; ///< covariance matrix of the position
-  #           (stored as lower triangle matrix, i.e. cov(xx),cov(y,x),cov(z,x),cov(y,y),... )
-  # - ROOT::VecOps::RVec<float> reco_chi2 : the contribution to the chi2 of all tracks used in the fit
-  # - ROOT::VecOps::RVec< TVector3 >  updated_track_momentum_at_vertex : the post-fit (px, py, pz )
-  #         of the tracks, at the vertex (and not at their d.c.a.)
+    # Fit all tracks of the events to a common vertex --- here using a
+    # beam-spot constraint:
 
-  .Define("VertexObject_allTracks",  "VertexFitterSimple::VertexFitter_Tk ( 1, EFlowTrack_1, true, 4.5, 20e-3, 300)")
+    # VertexObject_allTracks is an object of type `VertexingUtils::FCCAnalysesVertex`
+    # It contains in particular:
+    #   - an `edm4hep::VertexData`:
+    #     - std::int32_t primary{}; ///< boolean flag, if vertex is the primary vertex of the event
+    #     - float chi2{}; ///< chi-squared of the vertex fit
+    #     - edm4hep::Vector3f position{}; ///< [mm] position of the vertex.
+    #     - std::array<float, 6> covMatrix{}; ///< covariance matrix of the position (stored as lower triangle matrix, i.e. cov(xx),cov(y,x),cov(z,x),cov(y,y),...)
+    #   - `ROOT::VecOps::RVec<float> reco_chi2`: the contribution to
+    #     the chi2 of all tracks used in the fit
+    #   - `ROOT::VecOps::RVec<TVector3> updated_track_momentum_at_vertex`:
+    #     the post-fit (px, py, pz ) of the tracks, at the vertex
+    #     (and not at their d.c.a.)
+    .Define("VertexObject_allTracks",
+            "VertexFitterSimple::VertexFitter_Tk(1, EFlowTrack_1, true, 4.5, 20e-3, 300)")
 
-  # EFlowTrack_1 is the collection of all tracks (the fitting method can of course be applied to a subset of tracks (see later)).
-  # "true" means that a beam-spot constraint is applied. Default is no BSC. Following args are the BS size and position, in mum :
-  #                                   bool BeamSpotConstraint = false,
-  #                                   double sigmax=0., double sigmay=0., double sigmaz=0.,
-  #                                   double bsc_x=0., double bsc_y=0., double bsc_z=0. )  ;
+    # `EFlowTrack_1` is the collection of all tracks (the fitting
+    # method can of course be applied to a subset of tracks
+    # (see later)).
+    # "true" means that a beam-spot constraint is applied. Default is
+    # no BSC. Following args are the BS size and position, in mum:
+    #   - bool BeamSpotConstraint = false,
+    #   - double sigmax=0., double sigmay=0., double sigmaz=0.,
+    #   - double bsc_x=0., double bsc_y=0., double bsc_z=0. );
 
+    # This returns the `edm4hep::VertexData`:
+    .Define("Vertex_allTracks",
+            "VertexingUtils::get_VertexData(VertexObject_allTracks)")  # primary vertex, in mm
 
-  # This returns the  edm4hep::VertexData :
-  .Define("Vertex_allTracks",  "VertexingUtils::get_VertexData( VertexObject_allTracks )")   # primary vertex, in mm
+    # This is not a good estimate of the primary vertex: even in a Z -> uds event, there are displaced tracks (e.g. Ks, Lambdas), which would bias the fit.
+    # Below, we determine the "primary tracks" using an iterative algorithm - cf LCFI+.
+    .Define("RecoedPrimaryTracks",
+            "VertexFitterSimple::get_PrimaryTracks(EFlowTrack_1, true, 4.5, 20e-3, 300, 0., 0., 0.)")
 
+    # Now we run again the vertex fit, but only on the primary tracks :
+    .Define("PrimaryVertexObject",
+            "VertexFitterSimple::VertexFitter_Tk(1, RecoedPrimaryTracks, true, 4.5, 20e-3, 300)")
+    .Define("PrimaryVertex",
+            "VertexingUtils::get_VertexData(PrimaryVertexObject)")
 
-  # This is not a good estimate of the primary vertex: even in a Z -> uds event, there
-  # are displaced tracks (e.g. Ks, Lambdas), which would bias the fit.
-  # Below, we determine the "primary tracks" using an iterative algorithm - cf LCFI+.
-  .Define("RecoedPrimaryTracks",  "VertexFitterSimple::get_PrimaryTracks( VertexObject_allTracks, EFlowTrack_1, true, 4.5, 20e-3, 300, 0., 0., 0., 0)")
-
-  # Now we run again the vertex fit, but only on the primary tracks :
-  .Define("PrimaryVertexObject",   "VertexFitterSimple::VertexFitter_Tk ( 1, RecoedPrimaryTracks, true, 4.5, 20e-3, 300) ")
-  .Define("PrimaryVertex",   "VertexingUtils::get_VertexData( PrimaryVertexObject )")
-
-  # It is often useful to retrieve the secondary (i.e. non-primary) tracks, for example to search for secondary vertices.
-  # The method below simply "subtracts" the primary tracks from the full collection :
-  .Define("SecondaryTracks",   "VertexFitterSimple::get_NonPrimaryTracks( EFlowTrack_1,  RecoedPrimaryTracks )")
+    # It is often useful to retrieve the secondary (i.e. non-primary) tracks, for example to search for secondary vertices.
+    # The method below simply "subtracts" the primary tracks from the full collection :
+    .Define("SecondaryTracks",
+            "VertexFitterSimple::get_NonPrimaryTracks(EFlowTrack_1, RecoedPrimaryTracks)")
 ```
 :::
 
 
 To produce example plots, run the ROOT plotting macro `plot_primary_vertex.C`.
 ```
-wget plot_primary_vertex.C
+wget https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/plot_primary_vertex.C
 ```
 
 :::{admonition} Suggested answer
-:class: callout toggle
+:class: solution toggle
 
 The command to run is
 ```bash
-root -b -q 'examples/FCCee/tutorials/vertexing/plot_primary_vertex.C()'
+root -b -q 'plot_primary_vertex.C()'
 ```
 and it will produce four plot files (two `.png` and two `.pdf`).
-
 :::
 
 This produces normalized $\chi^2$ of the primary vertex fit, the resolutions
 in $x$, $y$, $z$, and the pulls of the fitted vertex position.
 
-### Exercises
 
-1. Add the number of primary and secondary tracks into the ntuple using the
-   function `ReconstructedParticle2Track::getTK_n(ROOT::VecOps::RVec<edm4hep::TrackState> x)`,
-   see the definition
-   [here](https://github.com/HEP-FCC/FCCAnalyses/blob/783b2afc8d3e6b64a6af0447834183dbf4f246b8/analyzers/dataframe/src/ReconstructedParticle2Track.cc#L541).
+### Exercise 1
+
+Add the number of primary and secondary tracks into the ntuple using the
+function `ReconstructedParticle2Track::getTK_n(ROOT::VecOps::RVec<edm4hep::TrackState> x)`,
+see the definition
+[here](https://github.com/HEP-FCC/FCCAnalyses/blob/783b2afc8d3e6b64a6af0447834183dbf4f246b8/analyzers/dataframe/src/ReconstructedParticle2Track.cc#L541).
 
 :::{admonition} Suggested answer
-:class: callout toggle
+:class: solution toggle
 
 Needed definitions to be added to the dataframe:
 ```python
-# Number of primary and secondary tracks:
-.Define("n_RecoedPrimaryTracks",  "ReconstructedParticle2Track::getTK_n( RecoedPrimaryTracks )")
-.Define("n_SecondaryTracks",  "ReconstructedParticle2Track::getTK_n( SecondaryTracks )" )
-# equivalent : (this is to show that a simple C++ statement can be included in a ".Define")
-.Define("n_SecondaryTracks_v2", "return ntracks - n_RecoedPrimaryTracks;")
+    # Number of primary and secondary tracks:
+    .Define("n_RecoedPrimaryTracks",
+            "ReconstructedParticle2Track::getTK_n(RecoedPrimaryTracks)")
+    .Define("n_SecondaryTracks",
+            "ReconstructedParticle2Track::getTK_n(SecondaryTracks)")
+    # equivalent: (this is to show that a simple C++ statement can be
+    # included in a ".Define")
+    .Define("n_SecondaryTracks_v2",
+            "return ntracks - n_RecoedPrimaryTracks;")
 ```
 
-and the corresponding collections to the `branchList`:
+and those are the collections which should be in the `branchList`:
 
 ```python
-branchList = [
-    "MC_PrimaryVertex",
-    "ntracks",
-    "Vertex_allTracks",
-    "PrimaryVertex",
-    "n_RecoedPrimaryTracks",
-    "n_SecondaryTracks",
-    "n_SecondaryTracks_v2",
-]
+    branchList = [
+        "MC_PrimaryVertex",
+        "ntracks",
+        "Vertex_allTracks",
+        "PrimaryVertex",
+        "n_RecoedPrimaryTracks",
+        "n_SecondaryTracks",
+        "n_SecondaryTracks_v2",
+    ]
 ```
-
 :::
 
-2. Add the total $p_{T}$ that is carried by the primary tracks. This requires
-   some simple analysis code to be written (in our `myAnalysis`) and compiled.
-   Then, the python analyzer file needs to be updated to include
-   `analysesList = ['myAnalysis']`.
 
-Hint: use the `updated_track_momentum_at_vertex` that is contained in `VertexingUtils::FCCAnalysesVertex` (contains a `TVector3` for each track used in the vertex fit) and use this function implementation:
+### Exercise 2
+
+Add the total $p_{T}$ that is carried by the primary tracks. This requires
+some simple analysis code to be written (added to our `analyzers.h` file).
+Then, the analysis script needs to be updated to include
+`includePaths = ["analyzers.h"]` attribute.
+
+:::{admonition} Hint
+:class: callout
+
+Take advantage of already provided `updated_track_momentum_at_vertex` member
+of the `VertexingUtils::FCCAnalysesVertex` class (contains `TVector3` for each
+track used in the vertex fit) and use function signature like this:
 
 ```cpp
-double sum_momentum_tracks(const VertexingUtils::FCCAnalysesVertex&  vertex);
+double sum_momentum_tracks(const VertexingUtils::FCCAnalysesVertex& vertex);
 ```
+:::
 
 :::{admonition} Suggested answer
-:class: toggle
-Add inside `myAnalysis/include/myAnalysis.h`
+:class: solution toggle
+
+Into the `analyzers.h` add
 ```cpp
 ...
+#include <cmath>
 #include "FCCAnalyses/VertexingUtils.h"
-using namespace FCCAnalyses;
 ...
-double sum_momentum_tracks(const VertexingUtils::FCCAnalysesVertex&  vertex);
+
+  double sum_momentum_tracks(const VertexingUtils::FCCAnalysesVertex& vertex) {
+    ROOT::VecOps::RVec<TVector3> momenta = vertex.updated_track_momentum_at_vertex;
+
+    double sum = 0;
+    for (const auto& p: momenta) {
+       double px = p[0];
+       double py = p[1];
+       double pt = std::sqrt(std::pow(px, 2) + std::pow(py, 2));
+       sum += pt;
+    }
+
+    return sum;
+  }
 ```
 
-Add inside `myAnalysis/src/myAnalysis.cc`
-```cpp
- double sum_momentum_tracks(const VertexingUtils::FCCAnalysesVertex&  vertex) {
-   double sum = 0;
-   ROOT::VecOps::RVec< TVector3 > momenta = vertex.updated_track_momentum_at_vertex ;
-   int n = momenta.size();
-   for (int i=0; i < n; i++) {
-      TVector3 p = momenta[i];
-      double px = p[0];
-      double py = p[1];
-      double pt = sqrt(pow(px,2)+pow(py,2)) ;
-      sum += pt;
-   }
-  return sum;
- }
-```
-
-Compile as explained above:
-```shell
-cd ${OUTPUT_DIR}/build
-cmake .. && make && make install
-cd ${LOCAL_DIR}
-```
-
-Edit your `examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py` and add at the very top :
+Do not forget to edit your `analysis_primary_vertex.py` and add the attribute
+to the top:
 ```python
-analysesList = ['myAnalysis']
+includePaths = ["analyzers.h"]
 ```
 
-and finally, add the variable in your analyser (both definition and in the branchList) `examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py`
+and also create the dataframe variable inside of `analyser()` method and
+register it for saving in the `branchList`
 ```python
-# Total pT carried by the primary tracks:
-.Define("sum_pt_primaries",   "myAnalysis::sum_momentum_tracks( PrimaryVertexObject )")
-[...]
-branchList = [
-#
-[...]
-"sum_pt_primaries",
-]
+            ...
+            # Total pT carried by the primary tracks:
+            .Define("sum_pt_primaries",
+                    "VtxAna::sum_momentum_tracks( PrimaryVertexObject )")
+            ...
+
+        ...
+        branchList = [
+            ...
+            "sum_pt_primaries",
+        ]
+        ...
 ```
 :::
 
-3. Compare these distributions in $Z \rightarrow uds$ events and in $Z \rightarrow b\bar{b}$ events.
+
+### Exercise 3
+
+Compare these distributions in $Z \rightarrow uds$ events and in
+$Z \rightarrow b\bar{b}$ events.
 
 :::{admonition} Suggested answer
-:class: toggle
-Edit the file `examples/FCCee/tutorials/vertexing/analysis_primary_vertex.py`, search for `testFile` and replace the `Zuds` file by the `Zbb` file (currently commented).
+:class: solution toggle
+
+Search the analysis script `analysis_primary_vertex.py` for the `testFile`
+attribute and replace the `Zuds` file by the `Zbb` file (currently commented
+out).
 :::
 
-4. To go beyond:
-The reconstruction of all secondary vertices following the LCFI+ algorithm has been implemented in **FCCAnalyses** by Kunal Gautam and Armin Ilg. The Pull request is ready and will be merged soon: [https://github.com/HEP-FCC/FCCAnalyses/pull/206](https://github.com/HEP-FCC/FCCAnalyses/pull/206). It contains an `analysis_SV.py` which:
+
+### Exercise 4
+
+> **Exercise to go beyond**
+
+The reconstruction of all secondary vertices following the LCFI+ algorithm has
+been implemented in **FCCAnalyses** by Kunal Gautam and Armin Ilg in the pull
+request [PR#206](https://github.com/HEP-FCC/FCCAnalyses/pull/206). It contains
+example analysis script `examples/FCCee/vertex_lcfiplus/analysis_SV.py` which:
   - reconstructs the primary vertex and primary tracks as done above
   - reconstructs jets using the Durham algorithm
-  - reconstructs secondary vertices within all jets, and determines some properties of these secondary vertices
-It is also possible to reconstruct all secondary vertices in an event, without reconstructing jets.
-
+  - reconstructs secondary vertices within all jets, and determines some
+    properties of these secondary vertices
+It is also possible to reconstruct all secondary vertices in an event, without
+reconstructing jets.
 
 
 ## Reconstruction of displaced vertices in an exclusive decay chain: starting example
 
-We consider here $Z \rightarrow b \bar{b}$ events.
-When a $B_s$ is produced, it is forced to decay into $J/\Psi \Phi$ with $J/\Psi \rightarrow \mu^+\mu^-$ and $\Phi \rightarrow K^+ K^-$.
-We want to reconstruct the $B_s$ decay vertex and determine the resolution on the position of this vertex. Here, we use the MC-matching information to figure out which are the reconstructed tracks that are matched to the $B_s$ decay products, and we fit these tracks to a common vertex. That means, we "seed" the vertex reconstruction using the MC-truth information. Let's run the following:
+We consider here $Z \rightarrow b \bar{b}$ events. When a $B_s$ is produced,
+it is forced to decay into $J/\Psi \Phi$ with $J/\Psi \rightarrow \mu^+\mu^-$
+and $\Phi \rightarrow K^+ K^-$. We want to reconstruct the $B_s$ decay vertex
+and determine the resolution on the position of this vertex. Here, we use the
+MC-matching information to figure out which are the reconstructed tracks that
+are matched to the $B_s$ decay products, and we fit these tracks to a common
+vertex. That means, we "seed" the vertex reconstruction using the MC-truth
+information. Let's run the following:
 
-
-```shell
-fccanalysis run examples/FCCee/tutorials/vertexing/analysis_Bs2JpsiPhi_MCseeded.py  --test --nevents 1000 --output Bs2JpsiPhi_MCseeded.root
+```bash
+wget https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/analysis_Bs2JpsiPhi_MCseeded.py
+fccanalysis run analysis_Bs2JpsiPhi_MCseeded.py --test --nevents 1000 --output Bs2JpsiPhi_MCseeded.root
 ```
 
-The ntuple `Bs2JpsiPhi_MCseeded.root` contains the MC decay vertex of the $B_s$, and the reconstructed decay vertex.
+The ntuple `Bs2JpsiPhi_MCseeded.root` contains the MC decay vertex of the
+$B_s$, and the reconstructed decay vertex.
 
 :::{admonition} Snippet of `analysis_Bs2JpsiPhi_MCseeded.py`
-:class: toggle
+:class: callout toggle
 ```python
- # MC indices of the decay Bs (PDG = 531) -> mu+ (PDG = -13) mu- (PDG = 13) K+ (PDG = 321) K- (PDG = -321)
- # Retrieves a vector of int's which correspond to indices in the Particle block
- # vector[0] = the mother, and then the daughters in the order specified, i.e. here
- #       [1] = the mu+, [2] = the mu-, [3] = the K+, [4] = the K-
- # Boolean arguments :
- #        1st: stableDaughters. when set to true, the dsughters specified in the list are looked
- #             for among the final, stable particles that come out from the mother, i.e. the decay tree is
- #             explored recursively if needed.
- #        2nd: chargeConjugateMother
- #        3rd: chargeConjugateDaughters
- #        4th: inclusiveDecay: when set to false, if a mother is found, that decays
- #             into the particles specified in the list plus other particle(s), this decay is not selected.
- # If the event contains more than one such decays,only the first one is kept.
- .Define("Bs2MuMuKK_indices",  "MCParticle::get_indices( 531, {-13,13,321,-321}, true, true, true, false) ( Particle, Particle1)" )
+    # MC indices of the decay
+    # Bs (PDG = 531) -> mu+ (PDG = -13) mu- (PDG = 13) K+ (PDG = 321) K- (PDG = -321)
+    # Retrieves a vector of integers which correspond to indices in the
+    # Particle block
+    # vector[0] = the mother, and then the daughters in the order
+    # specified, i.e. here [1] = the mu+, [2] = the mu-, [3] = the K+,
+    # [4] = the K-
+    #
+    # Boolean arguments:
+    #   1st: `stableDaughters`, when set to true, the daughters specified
+    #        in the list are looked for among the final, stable
+    #        particles that come out from the mother, i.e. the decay
+    #        tree is explored recursively if needed.
+    #   2nd: `chargeConjugateMother`
+    #   3rd: `chargeConjugateDaughters`
+    #   4th: `inclusiveDecay`, when set to false, if a mother is found,
+    #        that decays into the particles specified in the list plus
+    #        other particle(s), this decay is not selected.
+    # If the event contains more than one such decays, only the first
+    # one is kept.
+    .Define("Bs2MuMuKK_indices",
+            "MCParticle::get_indices(531, {-13,13,321,-321}, true, true, true, false) (Particle, Particle1)")
 
- # select events for which the requested decay chain has been found:
- .Filter("Bs2MuMuKK_indices.size() > 0")
+    # select events for which the requested decay chain has been found:
+    .Filter("Bs2MuMuKK_indices.size() > 0")
 
- # the mu+ (MCParticle) that comes from the Bs decay :
- .Define("MC_Muplus",  "return Particle.at(  Bs2MuMuKK_indices[1] ) ;")
- # Decay vertex (an edm4hep::Vector3d) of the Bs (MC) = production vertex of the muplus :
- .Define("BsMCDecayVertex",   " return  MC_Muplus.vertex ; ")
+    # the mu+ (MCParticle) that comes from the Bs decay :
+    .Define("MC_Muplus", "return Particle.at(Bs2MuMuKK_indices[1]);")
+    # Decay vertex (an `edm4hep::Vector3d`) of the Bs (MC) = production
+    # vertex of the muplus:
+    .Define("BsMCDecayVertex", "return MC_Muplus.vertex;")
 
- # Returns the RecoParticles associated with the four  Bs decay products.
- # The size of this collection is always 4 provided that Bs2MuMuKK_indices is not empty,
- # possibly including "dummy" particles in case one of the legs did not make a RecoParticle
- # (e.g. because it is outsice the tracker acceptance).
- # This is done on purpose, in order to maintain the mapping with the indices - i.e. the 1st particle in
- # the list BsRecoParticles is the mu+, then the mu-, etc.
- # (selRP_matched_to_list ignores the unstable MC particles that are in the input list of indices
- # hence the mother particle, which is the [0] element of the Bs2MuMuKK_indices vector).
- #
- # The matching between RecoParticles and MCParticles requires 4 collections. For more
- # detail, see https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics
- .Define("BsRecoParticles",  "ReconstructedParticle2MC::selRP_matched_to_list( Bs2MuMuKK_indices,    
-      MCRecoAssociations0,MCRecoAssociations1,ReconstructedParticles,Particle)")
+    # Returns the RecoParticles associated with the four Bs decay products.
+    # The size of this collection is always 4 provided that
+    # Bs2MuMuKK_indices is not empty, possibly including "dummy"
+    # particles in case one of the legs did not make a RecoParticle
+    # (e.g. because it is outside the tracker acceptance). This is done
+    # on purpose, in order to maintain the mapping with the indices ---
+    # i.e. the 1st particle in the list BsRecoParticles is the mu+,
+    # then the mu-, etc.
+    # (selRP_matched_to_list ignores the unstable MC particles that are
+    # in the input list of indices hence the mother particle, which is
+    # the [0] element of the Bs2MuMuKK_indices vector).
+    #
+    # The matching between RecoParticles and MCParticles requires 4
+    # collections. For more detail, see
+    # https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics
+    .Define("BsRecoParticles",
+            "ReconstructedParticle2MC::selRP_matched_to_list(Bs2MuMuKK_indices, MCRecoAssociations0, MCRecoAssociations1, ReconstructedParticles, Particle)")
 
- # the corresponding tracks - here, dummy particles, if any, are removed, i.e. one may have < 4 tracks,
- # e.g. if one muon or kaon was emitted outside of the acceptance
- .Define("BsTracks",   "ReconstructedParticle2Track::getRP2TRK( BsRecoParticles, EFlowTrack_1)" )
+    # the corresponding tracks --- here, dummy particles, if any, are
+    # removed, i.e. one may have < 4 tracks, e.g. if one muon or kaon
+    # was emitted outside of the acceptance
+    .Define("BsTracks",
+            "ReconstructedParticle2Track::getRP2TRK(BsRecoParticles, EFlowTrack_1)")
 
- # number of tracks in this BsTracks collection ( = the #tracks used to reconstruct the Bs vertex)
- .Define("n_BsTracks", "ReconstructedParticle2Track::getTK_n( BsTracks )")
+    # number of tracks in this BsTracks collection (= the #tracks
+    # used to reconstruct the Bs vertex)
+    .Define("n_BsTracks",
+            "ReconstructedParticle2Track::getTK_n(BsTracks)")
 
- # Fit the tracks to a common vertex. That would be a secondary vertex, hence we put
- # a "2" as the first argument of VertexFitter_Tk :
- #        First the full object, of type Vertexing::FCCAnalysesVertex
- .Define("BsVertexObject",   "VertexFitterSimple::VertexFitter_Tk( 2, BsTracks)" )
- #        from which we extract the edm4hep::VertexData object, which contains the vertex positiob in mm
- .Define("BsVertex",  "VertexingUtils::get_VertexData( BsVertexObject )")
-
+    # Fit the tracks to a common vertex. That would be a secondary
+    # vertex, hence we put a "2" as the first argument of
+    # VertexFitter_Tk: First the full object, of type
+    # Vertexing::FCCAnalysesVertex
+    .Define("BsVertexObject", "VertexFitterSimple::VertexFitter_Tk(2, BsTracks)")
+    # from which we extract the edm4hep::VertexData object, which
+    # contains the vertex position in mm
+    .Define("BsVertex",
+            "VertexingUtils::get_VertexData(BsVertexObject)")
 ```
 :::
 
-Run the root macro `examples/FCCee/tutorials/vertexing/plots_Bs2JsiPhi.x` produces various plots showing the vertex $\chi^2$, the vertex resolutions and the pulls of the vertex fit.
-
-:::{admonition} Suggested answer
-:class: toggle
-```shell
-root -l
-.x examples/FCCee/tutorials/vertexing/plots_Bs2JsiPhi.x
-```
-:::
-
-
-## Exercise: analysis of $\tau \rightarrow 3 \mu$
-
-1. Start from `examples/FCCee/tutorials/vertexing/analysis_Bs2JpsiPhi.py` and adapt it to the decay $\tau \rightarrow 3 \mu$.
-
-```shell
-cp examples/FCCee/tutorials/vertexing/analysis_Bs2JpsiPhi_MCseeded.py examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_MCseeded.py
+When you run the root macro `plot_Bs2JsiPhi.C` it will produce various plots
+showing the vertex $\chi^2$, the vertex resolutions and the pulls of the vertex
+fit
+```bash
+wget https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/plots_Bs2JsiPhi.C
+root -b -q "plot_Bs2JsiPhi.C()"
 ```
 
-and edit to change the `testFile`:
+
+## Analysis of $\tau \rightarrow 3 \mu$
+
+The analysis showcased in
+[](#reconstruction-of-displaced-vertices-in-an-exclusive-decay-chain-starting-example)
+is used as a stepping stone for the following set of exercises.
+
+
+### Exercise 1
+
+Start from the `analysis_Bs2JpsiPhi_MCseeded.py` analysis script and adapt it
+to the decay of $\tau \rightarrow 3 \mu$.
+
+```bash
+cp analysis_Bs2JpsiPhi_MCseeded.py analysis_Tau3Mu_MCseeded.py
+
+# or
+
+wget https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/analysis_Bs2JpsiPhi_MCseeded.py -O analysis_Tau3Mu_MCseeded.py
+```
+
+change the `testFile` to:
 ```python
-testFile= "/eos/experiment/fcc/ee/generation/DelphesEvents/spring2021/IDEA/p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2MuMuMu/events_189205650.root"
+testFile = "/eos/experiment/fcc/ee/generation/DelphesEvents/spring2021/IDEA/p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2MuMuMu/events_189205650.root"
 ```
 
-and modify the call to `MCParticle::get_indices` to retrieve properly the indices of the decay of interest and replace subsequently `Bs2MuMuKK_indices` into the name you chose - and, to have meaningful variable names, `Bsxxx` into `Tauxxx`.
+Modify the call to `MCParticle::get_indices` to retrieve properly the
+indices of the decay of interest. Subsequently rename the `Bs2MuMuKK_indices`
+into the name you chose --- and, to have meaningful variable names, rename
+`Bsxxx` into `Tauxxx`.
 
 
 :::{admonition} Suggested answer
-:class: toggle
- ```python
- .Define("indices",  "MCParticle::get_indices( 15, {-13,13,13}, true, true, true, false) ( Particle, Particle1)" )
+:class: callout toggle
+```python
+    .Define("indices",
+            "MCParticle::get_indices(15, {-13, 13, 13}, true, true, true, false) (Particle, Particle1)" )
  ```
- The full file can be found in  `examples/FCCee/tutorials/vertexing/Exercises/analysis_Tau3Mu_MCseeded_start.py`.
- :::
+
+The full file can be found in [`analysis_Tau3Mu_start.py`]().
+:::
 
 
+### Exercise 2
 
-2. Add the reconstructed $\tau$ mass to the ntuple (you will need to write new code). Check that the mass resolution is improved when it is determined from the track momenta **at the tau decay vertex**, compared to a blunt 3-muon mass determined from the default track momenta (taken at the distance of closest approach).
+Add the reconstructed $\tau$ mass to the ntuple (you will need to write new code). Check that the mass resolution is improved when it is determined from the track momenta **at the tau decay vertex**, compared to a blunt 3-muon mass determined from the default track momenta (taken at the distance of closest approach).
 
 Suggested implementation, to be added to your `myAnalysis/include/myAnalysis.h`:
 ```cpp
@@ -534,7 +639,9 @@ h2->Draw("same, hist");
 :::
 
 
-3. So far, everything was done using "Monte-Carlo seeding", which gives the resolutions that we expect, in the absence of possible combinatoric issues. The next step is to write a new `analysis.py` which starts from the reconstructed muons.
+### Exercise 3
+
+So far, everything was done using "Monte-Carlo seeding", which gives the resolutions that we expect, in the absence of possible combinatoric issues. The next step is to write a new `analysis.py` which starts from the reconstructed muons.
 
 ```shell
 cp examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_MCseeded.py  examples/FCCee/tutorials/vertexing/analysis_Tau3Mu.py
@@ -727,7 +834,10 @@ events -> Draw("TauMass_allCandidates","TauMass_allCandidates < 2")   // the gen
 
 :::
 
-4. We now want to look at the background.
+
+### Exercise 4
+
+We now want to look at the background.
 Copy your analysis_Tau3Mu.py:
 ```shell
 cp examples/FCCee/tutorials/vertexing/analysis_Tau3Mu.py examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_stage1.py
@@ -864,9 +974,17 @@ fccanalysis run examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_stage1.py --t
 
 The files `analysis_Tau3Mu_stage1.py`, `myAnalysis.h` and `myAnalysis.cc` with all the changes discussed above can be found in the `examples/FCCee/tutorials/vertexing/Exercises/` directory of FCCAnalyses.
 
-5. We now have a simple analyser that can be used to process the signal and background samples, and plot the mass of the $\tau \rightarrow 3\mu$ candidates. For that we need to process the full statistics. In order for you to have access to `/afs/cern.ch/work/f/fccsw/public/FCCDicts/`, we need to add you CERN login to an afs group. If not already provided, please do so.
 
-All samples that have been centrally produced can be found [on this web page](https://fcc-physics-events.web.cern.ch/FCCee/). We use `spring2021` samples (in `Production tags`), and the files made with `IDEA`. If you enter `TauMinus2MuMuMu` and `TauMinus2PiPiPinus` in the search field, you will see the datasets produced for the signal anf the $\tau \rightarrow 3\pi \nu$ background. The first column shows the dataset names, in this case `p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2MuMuMu` and `p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2PiPiPinu`.
+### Exercise 5
+
+We now have a simple analyser that can be used to process the signal and
+background samples, and plot the mass of the $\tau \rightarrow 3\mu$ candidates.
+For that we need to process the full statistics. In order for you to have access
+to `/afs/cern.ch/work/f/fccsw/public/FCCDicts/`, we need to add you CERN login
+to an AFS group. If not already provided, please do so.
+
+All samples that have been centrally produced can be found
+[on this web page](https://fcc-physics-events.web.cern.ch/FCCee/). We use `spring2021` samples (in `Production tags`), and the files made with `IDEA`. If you enter `TauMinus2MuMuMu` and `TauMinus2PiPiPinus` in the search field, you will see the datasets produced for the signal anf the $\tau \rightarrow 3\pi \nu$ background. The first column shows the dataset names, in this case `p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2MuMuMu` and `p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2PiPiPinu`.
 
 To run fccanalyses over these datasets (and not anymore over one test file), the list of datasets to be processed should be inserted in your `examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_stage1.py` :
 
@@ -942,10 +1060,15 @@ fccanalysis plots examples/FCCee/tutorials/vertexing/analysis_Tau3Mu_plots.py
 which appear in the `Tau3Mu/plots` directory. Look for example at the plot `mTaTau3Mu_nostack_log` in `Tau3Mu/plots/sel1`. The candidates in the background sample, corresponding to $\tau \rightarrow 3 \pi \nu$ decays, are reconstructed at a mass that is usually below the $\tau$ mass due to the presence of the neutrino. Note that the background sample corresponds to a very low statistics (50M have been produced, we expect 14B) and we see fluctuations. The signal cross-section used here correponds to $B( \tau \rightarrow 3 \mu) = 2 \times 10^{-8}$, which is roughly the current upper limit. The luminosity for these final plots is entered in analysis_Tau3Mu_plots.py.
 
 
+### Exercise 6
 
+> **Exercise to go beyond**
 
-6. To go beyond:
+Interested in studying the FCC-ee sensitivity to $\tau \rightarrow 3 \mu$?
+Please contact
+<[alberto.lusiani@pi.infn.it](mailto:alberto.lusiani@pi.infn.it)> and
+<[monteil@in2p3.fr](mailto:monteil@in2p3.fr)>.
 
-Interested in studying the FCC-ee sensitivity to $\tau \rightarrow 3 \mu$ ? Please contact <alberto.lusiani@pi.infn.it> and <monteil@in2p3.fr>.
-
-Note that the samples used here are just low statistics, test samples. Larger samples that are more accurate (KKMC instead of Pythia) will be produced if someone is interested.
+Note that the input files used in this tutorial are low statistics examples.
+Larger datasets that are more accurate (KKMC instead of Pythia) can be produced
+if someone is interested.

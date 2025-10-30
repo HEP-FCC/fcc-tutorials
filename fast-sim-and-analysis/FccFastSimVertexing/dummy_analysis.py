@@ -11,6 +11,8 @@ fccanalysis run dummy_analysis.py --test --nevents 10 --output dummy_result.root
 testFile = "/eos/experiment/fcc/ee/generation/DelphesEvents/spring2021/IDEA/" \
            "p8_ee_Zuds_ecm91/events_125841058.root"
 
+# includePaths = ["analyzers.h"]
+
 
 class RDFanalysis():
     '''
@@ -22,8 +24,8 @@ class RDFanalysis():
         '''
         df2 = (df
             # Dummy define:
-            # .Define("dummy_momentum_collection",
-            #         "myAnalysis::dummy_analyzer(ReconstructedParticles)")
+            .Define("dummy_momentum_collection",
+                    "VtxAna::dummy_analyzer(ReconstructedParticles)")
         )
 
         return df2
@@ -33,7 +35,7 @@ class RDFanalysis():
         Mandatory method, defining output columns.
         '''
         branchList = [
-            # dummy_momentum_collection",
+            "dummy_momentum_collection",
         ]
 
         return branchList

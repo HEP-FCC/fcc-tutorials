@@ -7,6 +7,8 @@ testFile = '/eos/experiment/fcc/ee/generation/DelphesEvents/spring2021/IDEA/' \
 # testFile = '/eos/experiment/fcc/ee/generation/DelphesEvents/spring2021/IDEA/'
 #            'p8_ee_Zbb_ecm91/events_092272862.root"
 
+includePaths = ["analyzers.h"]
+
 # Mandatory: RDFanalysis class where the user defines the operations on the
 #            dataframe.
 class RDFanalysis():
@@ -32,7 +34,7 @@ class RDFanalysis():
             #     - std::int32_t primary{}; ///< boolean flag, if vertex is the primary vertex of the event
             #     - float chi2{}; ///< chi-squared of the vertex fit
             #     - edm4hep::Vector3f position{}; ///< [mm] position of the vertex.
-            #     - std::array<float, 6> covMatrix{}; ///< covariance matrix of the position (stored as lower triangle matrix, i.e. cov(xx),cov(y,x),cov(z,x),cov(y,y),...)
+            #     - std::array<float, 6> covMatrix{}; ///< covariance matrix of the position (stored as lower triangle matrix, i.e. cov(xx),cov(y,x),cov(z,x),cov(y,y),... )
             #   - `ROOT::VecOps::RVec<float> reco_chi2`: the contribution to
             #     the chi2 of all tracks used in the fit
             #   - `ROOT::VecOps::RVec<TVector3> updated_track_momentum_at_vertex`:
@@ -74,6 +76,19 @@ class RDFanalysis():
             .Define("tracks", "EFlowTrack_1")
             .Define("PV_vec",
                     "ROOT::VecOps::RVec<edm4hep::VertexData> v; v.push_back(Vertex_allTracks); return v;")
+
+            # Number of primary and secondary tracks:
+            .Define("n_RecoedPrimaryTracks",
+                    "ReconstructedParticle2Track::getTK_n(RecoedPrimaryTracks)")
+            .Define("n_SecondaryTracks",
+                    "ReconstructedParticle2Track::getTK_n(SecondaryTracks)")
+            # equivalent: (this is to show that a simple C++ statement can be
+            # included in a ".Define")
+            .Define("n_SecondaryTracks_v2",
+                    "return ntracks - n_RecoedPrimaryTracks;")
+                        # Total pT carried by the primary tracks:
+            .Define("sum_pt_primaries",
+                    "VtxAna::sum_momentum_tracks( PrimaryVertexObject )")
         )
         return df2
 
@@ -86,7 +101,12 @@ class RDFanalysis():
             "ntracks",
             "Vertex_allTracks",
             "PrimaryVertex",
-            "tracks",
-            "PV_vec"
+            # "tracks",
+            # "PV_vec",
+            "n_RecoedPrimaryTracks",
+            "n_SecondaryTracks",
+            "n_SecondaryTracks_v2",
+            "sum_pt_primaries"
         ]
+
         return branchList
