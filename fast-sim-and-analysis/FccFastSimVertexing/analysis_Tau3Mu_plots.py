@@ -12,11 +12,13 @@ yaxis          = ['lin','log']
 stacksig       = ['stack','nostack']
 outdir         = 'Tau3Mu/plots/'
 
-variables = ['mTau', 'mTau_zoom', 'Evis' ]
+variables = ['mTau', 'mTau_zoom', 'Evis']
 
-###Dictonnary with the analysis name as a key, and the list of selections to be plotted for this analysis. The name of the selections should be the same than in the final selection
+# Dictionary with the analysis name as a key, and the list of selections to be
+# plotted for this analysis. The name of the selections should be the same than
+# in the final selection
 selections = {}
-selections['Tau3Mu']   = ["sel0","sel1"]
+selections['Tau3Mu'] = ["sel0", "sel1"]
 
 extralabel = {}
 extralabel['sel0'] = "Selection: N_{candidate} > 0"
@@ -27,12 +29,14 @@ colors['Tau3Mu'] = ROOT.kRed
 colors['Tau3Pi'] = ROOT.kBlue+1
 
 plots = {}
-plots['Tau3Mu'] = {'signal':{'Tau3Mu':['p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2MuMuMu']},
-               'backgrounds':{'Tau3Pi':['p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2PiPiPinu'],
-                              }
-           }
-
-
+plots['Tau3Mu'] = {
+    'signal': {
+        'Tau3Mu': ['p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2MuMuMu']
+    },
+    'backgrounds': {
+        'Tau3Pi': ['p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2PiPiPinu']
+    }
+}
 
 legend = {}
 legend['Tau3Mu'] = 'Tau3Mu'
