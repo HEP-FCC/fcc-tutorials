@@ -1143,7 +1143,7 @@ fccanalysis final analysis_Tau3Mu_final.py
 ```
 
 :::{admonition} Snippet of `analysis_Tau3Mu_final.py`
-:class: toggle
+:class: callout toggle
 
 ```python
 # Dictionnay of the list of cuts. The key is the name of the selection that
@@ -1214,7 +1214,7 @@ final plots is entered in analysis_Tau3Mu_plots.py.
 
 > **Exercise to go beyond**
 
-Interested in studying the FCC-ee sensitivity to $\tau \rightarrow 3 \mu$?
+*Interested in studying the FCC-ee sensitivity to $\tau \rightarrow 3 \mu$?*  
 Please contact
 <[alberto.lusiani@pi.infn.it](mailto:alberto.lusiani@pi.infn.it)> and
 <[monteil@in2p3.fr](mailto:monteil@in2p3.fr)>.
