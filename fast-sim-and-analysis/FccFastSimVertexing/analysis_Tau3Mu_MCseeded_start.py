@@ -88,7 +88,8 @@ class RDFanalysis():
             # vertex, hence we put a "2" as the first argument of
             # VertexFitter_Tk: First the full object, of type
             # Vertexing::FCCAnalysesVertex
-            .Define("TauVertexObject", "VertexFitterSimple::VertexFitter_Tk(2, BsTracks)")
+            .Define("TauVertexObject",
+                    "VertexFitterSimple::VertexFitter_Tk(2, BsTracks)")
             # from which we extract the edm4hep::VertexData object, which
             # contains the vertex position in mm
             .Define("TauVertex",

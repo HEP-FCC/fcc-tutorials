@@ -6,6 +6,8 @@ testFile = "/eos/experiment/fcc/ee/generation/DelphesEvents/spring2021/IDEA/" \
            "p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2MuMuMu/" \
            "events_189205650.root"
 
+includePaths = ["analyzers_Tau3Mu.h"]
+
 
 class RDFanalysis():
     '''
@@ -88,11 +90,17 @@ class RDFanalysis():
             # vertex, hence we put a "2" as the first argument of
             # VertexFitter_Tk: First the full object, of type
             # Vertexing::FCCAnalysesVertex
-            .Define("TauVertexObject", "VertexFitterSimple::VertexFitter_Tk(2, BsTracks)")
+            .Define("TauVertexObject",
+                    "VertexFitterSimple::VertexFitter_Tk(2, BsTracks)")
             # from which we extract the edm4hep::VertexData object, which
             # contains the vertex position in mm
             .Define("TauVertex",
                     "VertexingUtils::get_VertexData(BsVertexObject)")
+            # The reco'ed tau mass --- from the post-VertxFit momenta, at the
+            # tau decay vertex:
+            .Define("TauMass", "VtxAna::tau3mu_vertex_mass(TauVertexObject)")
+            # The "raw" mass --- using the track momenta at their dca:
+            .Define("RawMass", "VtxAna::tau3mu_raw_mass(TauRecoParticles)")
         )
 
         return df2
@@ -108,6 +116,8 @@ class RDFanalysis():
             "n_BsTracks",
             "BsMCDecayVertex",
             "BsVertex",
+            "TauMass",
+            "RawMass",
         ]
 
         return branchList

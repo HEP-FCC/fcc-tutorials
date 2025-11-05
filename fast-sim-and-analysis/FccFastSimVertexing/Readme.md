@@ -407,7 +407,7 @@ It is also possible to reconstruct all secondary vertices in an event, without
 reconstructing jets.
 
 
-## Reconstruction of displaced vertices in an exclusive decay chain: starting example
+## Reconstruction of displaced vertices in an exclusive decay chain
 
 We consider here $Z \rightarrow b \bar{b}$ events. When a $B_s$ is produced,
 it is forced to decay into $J/\Psi \Phi$ with $J/\Psi \rightarrow \mu^+\mu^-$
@@ -514,7 +514,7 @@ root -b -q "plot_Bs2JsiPhi.C()"
 ## Analysis of $\tau \rightarrow 3 \mu$
 
 The analysis showcased in
-[](#reconstruction-of-displaced-vertices-in-an-exclusive-decay-chain-starting-example)
+[](#reconstruction-of-displaced-vertices-in-an-exclusive-decay-chain)
 is used as a stepping stone for the following set of exercises.
 
 
@@ -550,7 +550,7 @@ into the name you chose --- and, to have meaningful variable names, rename
  ```
 
 The full file can be download from
-[here](https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/analysis_Tau3Mu_start.py).
+[here](https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/analysis_Tau3Mu_MCseeded_start.py).
 :::
 
 
@@ -562,55 +562,65 @@ the track momenta **at the tau decay vertex**, compared to a blunt 3-muon mass
 determined from the default track momenta (taken at the distance of closest
 approach).
 
-Suggested implementation, analyzers with the following signatures need to be
-added to your `analyzers.h`:
-```cpp
-[...]
-#include "TLorentzVector.h"
-#include "edm4hep/ReconstructedParticleData.h"
+**Suggested implementation:** analyzers with the following signatures need to be
+added to your analyzers header file `analyzers_Tau3Mu.h` (created by copying
+the `analyzers.h` from previous section):
 
-double tau3mu_vertex_mass(const VertexingUtils::FCCAnalysesVertex& vertex );
-double tau3mu_raw_mass(const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>&  legs);
+```cpp
+double tau3mu_vertex_mass(const VertexingUtils::FCCAnalysesVertex& vertex);
+double tau3mu_raw_mass(const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>& legs);
 ```
 
 :::{admonition} Suggested answer
 :class: solution toggle
 
-This needs to be added to your `analyzers.h` :
+Here is a possible implementation of the suggested functions, to be added to
+the `analyzers_Tau3Mu.h`:
 ```cpp
- double tau3mu_vertex_mass( const VertexingUtils::FCCAnalysesVertex& vertex ) {
-   double muon_mass = 0.1056;
-   TLorentzVector tau;
-   ROOT::VecOps::RVec< TVector3 > momenta = vertex.updated_track_momentum_at_vertex ;
-   int n = momenta.size();
-   for (int ileg=0; ileg < n; ileg++) {
-     TVector3 track_momentum = momenta[ ileg ];
-     TLorentzVector leg;
-     leg.SetXYZM( track_momentum[0], track_momentum[1], track_momentum[2], muon_mass ) ;
-     tau += leg;
-   }
-  return tau.M();
- }
+[...]
 
- double tau3mu_raw_mass( const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>&  legs ) {
-  double muon_mass = 0.1056;
-  TLorentzVector tau;
-  int n = legs.size();
-  for (int ileg=0; ileg < n; ileg++) {
-     TLorentzVector leg;
-     leg.SetXYZM(legs[ileg].momentum.x, legs[ileg].momentum.y, legs[ileg].momentum.z, muon_mass );
-     tau += leg;
+#include "TLorentzVector.h"
+#include "edm4hep/ReconstructedParticleData.h"
+#include "FCCAnalyses/VertexingUtils.h"
+
+[...]
+
+  const double MUON_MASS = 0.1056;  // GeV
+
+  double tau3mu_vertex_mass(const VertexingUtils::FCCAnalysesVertex& vertex) {
+    TLorentzVector tau;
+    ROOT::VecOps::RVec<TVector3> momenta = vertex.updated_track_momentum_at_vertex;
+    int n = momenta.size();
+    for (int ileg=0; ileg < n; ileg++) {
+      TVector3 track_momentum = momenta[ileg];
+      TLorentzVector leg;
+      leg.SetXYZM(track_momentum[0], track_momentum[1], track_momentum[2], MUON_MASS);
+      tau += leg;
+    }
+
+    return tau.M();
   }
-  return tau.M();
- }
+
+  double tau3mu_raw_mass(const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>& legs) {
+    TLorentzVector tau;
+    int n = legs.size();
+    for (int ileg=0; ileg < n; ileg++) {
+      TLorentzVector leg;
+      leg.SetXYZM(legs[ileg].momentum.x, legs[ileg].momentum.y, legs[ileg].momentum.z, MUON_MASS);
+      tau += leg;
+    }
+
+    return tau.M();
+  }
 ```
 
 Add the call to your analysis file, i.e.: `analysis_Tau3Mu_MCseeded.py`:
 ```python
- # The reco'ed tau mass - from the post-VertxFit momenta, at the tau decay vertex :
-.Define("TauMass", "VtxAna::tau3mu_vertex_mass( TauVertexObject ) ")
- # The "raw" mass - using the track  momenta at their dca :
- .Define("RawMass", "VtxAna::tau3mu_raw_mass( TauRecoParticles ) ")
+    # The reco'ed tau mass --- from the post-VertxFit momenta, at the tau decay
+    # vertex:
+    .Define("TauMass", "VtxAna::tau3mu_vertex_mass(TauVertexObject)")
+    # The "raw" mass - using the track  momenta at their dca:
+    .Define("RawMass", "VtxAna::tau3mu_raw_mass(TauRecoParticles)")
 ```
 
 and add the new variables to the list of branches `branchList` as usual.
@@ -618,18 +628,18 @@ and add the new variables to the list of branches `branchList` as usual.
 Moreover, in order to be able to run the local code from `analyzers.h`, don't
 forget to add:
 ```python
-includePaths = ["analyzers.h"]
+includePaths = ["analyzers_Tau3Mu.h"]
 ```
 to the beginning of the analysis script.
 
 Run the `fccanalysis` command:
-```shell
+```bash
 fccanalysis run analysis_Tau3Mu_MCseeded.py --test --nevents 1000 --output Tau3Mu_MCseeded.root
 ```
 
 Plot the mass distributions using ROOT. Launch the ROOT interpreter with
-```
-root -l Tau3Mu_MCseeded.root
+```bash
+root -b Tau3Mu_MCseeded.root
 ```
 and execute the following commands in the ROOT REPL:
 ```cpp
@@ -658,8 +668,8 @@ reconstructed muons.
 cp analysis_Tau3Mu_MCseeded.py  analysis_Tau3Mu.py
 ```
 
-and just keep the "core" of the `analysers` function such that you have 
-something like this:
+and keep only the skeleton of the `analysers()` method such that you delete all
+of the defines and aliases, the result should look something like this:
 
 ```python
 class RDFanalysis():
@@ -670,29 +680,35 @@ class RDFanalysis():
         return df2
 ```
 
-Clear out the `branchList`, and insert new `Define`s:
+Clear out also the `branchList`, and insert new defines into the `analysers()`
+method:
 ```python
-    # Use the "AllMuons" collection, which contains also non-isolated muons (in contrast to the "Muons" collection)
-    #    Actually, "Muon" or ("AllMuon") just contain pointers (indices) to the RecoParticle collections,
-    #    hence one needs to first retrieve the RecoParticles corresponding to these muons.
-    #    ( for more detail about the collections, see https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics  )
+    # Use the "AllMuons" collection, which contains also non-isolated muons (in
+    # contrast to the "Muons" collection)
+    #
+    # Actually, "Muon" or ("AllMuon") just contain pointers (indices) to the
+    # RecoParticle collections, hence one needs to first retrieve the
+    # RecoParticles corresponding to these muons (for more detail about the
+    # subset collections, see:
+    # https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics)
     .Alias("Muon0", "AllMuon#0.index")
-    .Define("muons",  "ReconstructedParticle::get(Muon0, ReconstructedParticles)")
-    .Define("n_muons",  "ReconstructedParticle::get_n( muons ) ")
+    .Define("muons", "ReconstructedParticle::get(Muon0, ReconstructedParticles)")
+    .Define("n_muons", "ReconstructedParticle::get_n(muons)")
 ```
 
 We now want to write a method that builds muon triplets --- actually, since the
 MC files produced for this tutorial only forced the decay of the $\tau^-$, we
-are interested in triplets with total charge = -1.
+are interested in triplets with total charge equal to -1.
 
-**Sub-exercise 1:** code a function in your `analyzers.h` that builds such triplet
+**Sub-exercise 1:** create a function in your `analyzers_Tau3Mu.h` that builds
+such triplet.
 
 :::{admonition} Hint
 :class: callout
-The function should take as input the `ReconstructedParticles` and the
-charge of the triplet, and should return all combinations of 3-muons in a
-vector of vector of `ReconstructedParticles`. Its signature could look
-something like this: `analyzers.h`):
+The function should take as an input the collection of muons (subset collection
+of reconstructed particles) and the charge of the triplet, and should return a
+vector of vectors with all combinations of 3-muons. Its signature should look
+something like this:
 
 ```cpp
 ROOT::VecOps::RVec<ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>>
@@ -706,51 +722,50 @@ build_triplets(const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>& inP
 
 Here is the example implementation of the `build_triplets()` function:
 ```cpp
-ROOT::VecOps::RVec< ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>>
-build_triplets(const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>& inParticles,
-               float total_charge) {
-    ROOT::VecOps::RVec< ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>> results;
-    float charge = 0;
+  ROOT::VecOps::RVec<ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>>
+  build_triplets(const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>& inParticles,
+                 float total_charge) {
+    ROOT::VecOps::RVec<ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>> result;
+
     int n = inParticles.size();
-    if ( n < 3 ) return results;
+    if (n < 3) {
+      return result;
+    }
 
-    for (int i = 0; i < n; i++) {
-       edm4hep::ReconstructedParticleData pi = inParticles[i];
-       float charge_i = pi.charge ;
+    for (int i = 0; i < n; ++i) {
+      edm4hep::ReconstructedParticleData pi = inParticles[i];
 
-       for (int j=i+1; j < n; j++) {
+      for (int j = i + 1; j < n; ++j) {
         edm4hep::ReconstructedParticleData pj = inParticles[j];
-        float charge_j = pj.charge ;
 
-        for (int k=j+1; k < n; k++) {
+        for (int k=j+1; k < n; ++k) {
           edm4hep::ReconstructedParticleData pk = inParticles[k];
-          float charge_k = pk.charge ;
-          float charge_tot = charge_i + charge_j + charge_k;
-          if ( charge_tot == total_charge ) {
-            ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> a_triplet;
-            a_triplet.push_back( pi );
-            a_triplet.push_back( pj );
-            a_triplet.push_back( pk );
-            results.push_back( a_triplet );
+          float charge_tot = pi.charge + pj.charge + pk.charge;
+
+          if (charge_tot == total_charge) {
+            ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> a_triplet = {pi, pj, pk};
+            result.push_back(a_triplet);
           }
-        }//end loop over k
-      }//end loop over j
-    }//end loop over i
- return results;
-}
+        }  // end of the loop over k
+      }  // end of the loop over j
+    }  // end of the loop over i
+
+    return result;
+  }
 ```
 
 You can then use it in your `analysis_Tau3Mu.py`:
 ```python
     # Build triplets of muons.
-    # We are interested in tau- -> mu- mu- mu+ (the MC files produced for this tutorial
-    # only forced the decay of the tau- , not the tau+ ).
-    # Hence we look for triples of total charge = -1 :
-    .Define("triplets_m", "VtxAna::build_triplets(muons, -1.)")  # returns a vector of triplets, i.e. of vectors of 3 RecoParticles
-    .Define("n_triplets_m", "return triplets_m.size();" )
+    # We are interested in tau- -> mu- mu- mu+ (the MC files produced
+    # for this tutorial only forced the decay of the tau- , not the
+    # tau+). Hence we look for triples of total charge = -1:
+    .Define("triplets_m", "VtxAna::build_triplets(muons, -1.)")
+    .Define("n_triplets_m", "return triplets_m.size();")
+
 ```
 
-NB: the efficiency for having the three muons from the tau decay that fall
+**NB:** the efficiency for having the three muons from the tau decay that fall
 within the tracker acceptance is about 95%. However, a track will reach the
 muon detector only if its momentum is larger than about 2 GeV (in Delphes, the
 efficiency for muons below 2 GeV is set to zero). When adding the requirement
@@ -763,11 +778,9 @@ It is then simple to build a tau candidate from the first triplet that has been
 found, e.g.:
 ```python
 # ----------------------------------------------------
-#    # Simple: consider only the 1st triplet:
-
+#    # Considering only the 1st triplet:
 #    .Define("the_muons_candidate_0",
 #            "return triplets_m[0];")  # the_muons_candidates = a vector of 3 RecoParticles
-
 #    # get the corresponding tracks:
 #    .Define("the_muontracks_candidate_0",
 #            "ReconstructedParticle2Track::getRP2TRK(the_muons_candidate_0, EFlowTrack_1)")
@@ -781,13 +794,13 @@ found, e.g.:
 but we would like to retrieve all tau candidates and decide later which one to use.
 :::
 
-**Sub-exercise 2**: code a function in your `analyzers.h` to retrieve all tau
+**Sub-exercise 2**: create a function in your `analyzers_Tau3Mu.h` to retrieve all tau
 candidates, and their corresponding tau mass.
 
 :::{admonition} Hint
 :class: callout
 
-The functions could have the following signatures (to be added to `analyzers.h`):
+The functions could have the following signatures (to be added to `analyzers_Tau3Mu.h`):
 
 ```cpp
 ROOT::VecOps::RVec<VertexingUtils::FCCAnalysesVertex>
@@ -802,7 +815,7 @@ build_AllTauMasses(const ROOT::VecOps::RVec<VertexingUtils::FCCAnalysesVertex>& 
 :::{admonition} Suggested answer
 :class: solution toggle
 
-This are example implementations to be added to your `analyzers.h`
+This are example implementations to be added to your `analyzers_Tau3Mu.h`
 
 ```cpp
 ROOT::VecOps::RVec<VertexingUtils::FCCAnalysesVertex>
@@ -822,7 +835,7 @@ build_AllTauVertexObject(const ROOT::VecOps::RVec<ROOT::VecOps::RVec<edm4hep::Re
 }
 
 
-ROOT::VecOps::RVec<double> 
+ROOT::VecOps::RVec<double>
 build_AllTauMasses(const ROOT::VecOps::RVec<VertexingUtils::FCCAnalysesVertex>& vertices) {
   ROOT::VecOps::RVec<double> results;
   for (auto& v: vertices) {
@@ -865,12 +878,14 @@ Run `fccanalysis`:
 fccanalysis run analysis_Tau3Mu.py --test --nevents 1000 --output Tau3Mu.root
 ```
 
-and look at the output ntuple:
-```bash
-root -l Tau3Mu.root
+and examine the result stored in the output ROOT file with `root -b Tau3Mu.root`
+and the following ROOT REPL instructions:
+```cpp
 TCanvas* c = new TCanvas("c", "c");
-events->Draw("TauMass_allCandidates")   // candidates at large mass pick up a muon from the "other" leg
-events->Draw("TauMass_allCandidates", "TauMass_allCandidates < 2")   // the genuine tau to 3mu candidates
+// candidates at large mass pick up a muon from the "other" leg
+events->Draw("TauMass_allCandidates")
+// the genuine tau to 3mu candidates
+events->Draw("TauMass_allCandidates", "TauMass_allCandidates < 2")
 c->Print("tau_mass.png");
 ```
 :::
@@ -879,40 +894,44 @@ c->Print("tau_mass.png");
 ### Exercise 4
 
 We now want to look at the background.
-Copy your analysis_Tau3Mu.py:
+Create a new script file by copying your `analysis_Tau3Mu.py` into a new file:
 ```bash
 cp analysis_Tau3Mu.py analysis_Tau3Mu_stage1.py
 ```
 
+>
+> **Note:** The `_stage1` suffix indicates that it is a first step in the chain
+> of analysis scripts.
+>
+
 The main background is expected to come from $\tau \rightarrow 3 \pi \nu$
 decays, when the charged pions are misidentified as muons. But there is no
-"fakes" in Delphes: all the "Muon" objects that you have in the EDM4hep file
+"fakes" in Delphes: all "Muon" objects that you have in the EDM4hep file
 do originate from genuine muons (which may, of course, come from a hadron decay).
 To alleviate this limitation, we first select the `ReconstructedParticle`s
 that are matched to a stable, charged hadron. Edit your
-`analysis_Tau3Mu_stage1.py` script file and add the following lines after
-the `.Define("n_muons", ... )`:
+`analysis_Tau3Mu_stage1.py` script file and add the following lines right
+before the `.Define("n_muons", ... )`:
 
 ```python
     # -----------------------------------------
     # Add fake muons from pi -> mu
-
-    # This selects the charged hadrons :
+    # This selects the charged hadrons:
     .Alias("MCRecoAssociations0", "MCRecoAssociations#0.index")
     .Alias("MCRecoAssociations1", "MCRecoAssociations#1.index")
     .Define("ChargedHadrons",
             "ReconstructedParticle2MC::selRP_ChargedHadrons(MCRecoAssociations0, MCRecoAssociations1, ReconstructedParticles, Particle)")
 ```
 
-(As mentioned earlier, the matching between RecoParticles and MCParticles
-requires 4 collections. See
+(As mentioned earlier, the matching between reconstructed particles and Monte
+Carlo particles requires 4 collections. See
 [here](https://github.com/HEP-FCC/FCCAnalyses/tree/master/examples/basics) for more detail).
 
 
 and further select the ones that are above 2 GeV --- since only particles above
 2 GeV will make it to the muon detector:
 ```python
-    # Only the ones with  p > 2 GeV could be selected as muons :
+    # Only the ones with  p > 2 GeV could be selected as muons:
     .Define("ChargedHadrons_pgt2",
             "ReconstructedParticle::sel_p(2.)(ChargedHadrons)")
 ```
@@ -920,78 +939,92 @@ and further select the ones that are above 2 GeV --- since only particles above
 Now we want to apply a "flat" fake rate, i.e. accept a random fraction of the
 above particles as muons.
 
-**Exercise:** code a method in your `analyzers.h` that does that.
+**Exercise itself:** create an analyzer (functor) in your `analyzers_Tau3Mu.h`
+that does that.
 
 :::{admonition} Hint
 :class: callout
-In your header file `analyzers.h` you need to define a functor (`struct`) and 
+
+In your header file `analyzers_Tau3Mu.h` you need to define a C++ struct and
 add few includes, like:
 ```cpp
 #include <random>
 #include <chrono>
 
-...
+[...]
 
-struct selRP_Fakes {
-  selRP_Fakes( float arg_fakeRate, float arg_mass );
-  float m_fakeRate = 1e-3; //fake rate
-  float m_mass = 0.106;  // muon mass
-  std::default_random_engine m_generator;
-  std::uniform_real_distribution<float> m_flat;
-  std::vector<edm4hep::ReconstructedParticleData> operator() (const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>& in);
-};
+  struct selRP_Fakes {
+    selRP_Fakes(float arg_fakeRate, float arg_mass);
+
+    float m_fakeRate = 1e-3;  // fake rate
+    float m_mass = MUON_MASS;  // particle mass
+    std::default_random_engine m_generator;
+    std::uniform_real_distribution<float> m_flat;
+
+    ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>
+    operator() (const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>& inParticles);
+  };
 ```
 :::
 
 :::{admonition} Suggested answer
 :class: solution toggle
 
-The example implementation of the functor to be added into your `analyzers.h`:
+The example implementation of the functor to be added into your
+`analyzers_Tau3Mu.h`:
 ```cpp
-selRP_Fakes::selRP_Fakes( float arg_fakeRate, float  arg_mass ) : m_fakeRate(arg_fakeRate), m_mass( arg_mass)  {
-  unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-  std::default_random_engine generator (seed);
-  m_generator = generator;
-  std::uniform_real_distribution<float> flatdis(0.,1.);
-  m_flat.param( flatdis.param() );
-};
+  selRP_Fakes::selRP_Fakes(float arg_fakeRate, float arg_mass): m_fakeRate(arg_fakeRate),
+                                                                m_mass(arg_mass) {
+    auto seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::default_random_engine generator(seed);
+    m_generator = generator;
+    std::uniform_real_distribution<float> flatdis(0., 1.);
+    m_flat.param(flatdis.param());
+  };
 
-std::vector<edm4hep::ReconstructedParticleData> selRP_Fakes::operator() (const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>& in) {
-  std::vector<edm4hep::ReconstructedParticleData> result;
-  for (size_t i = 0; i < in.size(); ++i) {
-    auto & p = in[i];
-    float arandom =  m_flat (m_generator );
-    if ( arandom <= m_fakeRate) {
-      edm4hep::ReconstructedParticleData reso = p;
-      // overwrite the mass:
-      reso.mass = m_mass;
-      result.push_back( reso );
+  ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>
+  selRP_Fakes::operator() (const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>& inParticles) {
+    ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData> result;
+    for (const auto& p: inParticles) {
+      float arandom = m_flat(m_generator);
+      if (arandom <= m_fakeRate) {
+        edm4hep::ReconstructedParticleData reso = p;
+        // overwrite the mass:
+        reso.mass = m_mass;
+        result.push_back(reso);
+      }
     }
-  }
 
-  return result;
-}
+    return result;
+  }
 ```
 
-We then use this functor in the analysis script `analysis_Tau3Mu_stage1.py`:
+We then use this functor (analyzer) in the analysis script
+`analysis_Tau3Mu_stage1.py`:
 
 ```python
-    # Build fake muons based on a flat fake rate (random selection) - HUGE fake rate used on purpose here :
-    .Define("fakeMuons_5em2", ROOT.myAnalysis.selRP_Fakes(5e-2, 0.106), ["ChargedHadrons_pgt2"] )
-    # Now we marge the collection of fake muons with the genuine muons :
-    .Define("muons_with_fakes",  "ReconstructedParticle::merge( muons, fakeMuons_5em2 )")
-    # and we use this collection later on, instead of "muons" :
-    .Alias("theMuons", "muons_with_fakes")
-    .Define("n_muons_withFakes",  "ReconstructedParticle::get_n( theMuons )")
+    # Build fake muons based on a flat fake rate (random selection) ---
+    # HUGE fake rate used on purpose here:
+    .Define("fakeMuons_5em2",
+            ROOT.VtxAna.selRP_Fakes(5e-2, ROOT.VtxAna.MUON_MASS),
+            ["ChargedHadrons_pgt2"])
+    # Now we merge the collection of fake muons with the genuine muons:
+    .Define("muons_with_fakes",
+            "ReconstructedParticle::merge( muons, fakeMuons_5em2 )")
+    # and we use this collection later on, instead of "muons":
+    .Define("n_muons_with_fakes",
+            "ReconstructedParticle::get_n(muons_with_fakes)")
 ```
 
 and we just need to replace the muon collection when building the triplets:
 ```python
-    .Define("triplets_m", "myAnalysis::build_triplets( theMuons, -1. )")   # returns a vector of triplets, i.e. of vectors of 3 RecoParticles
+    # returns a vector of triplets, i.e. of vectors of 3 RecoParticles
+    .Define("triplets_m", "myAnalysis::build_triplets(muons_with_fakes, -1.)")
 ```
 
 Moreover, in order to pass the functor constructor of `selRP_Fakes` as above
-(`ROOT.myAnalysis.selRP_Fakes(5e-2, 0.106)`, not inside a string), we need to add
+(`ROOT.myAnalysis.selRP_Fakes(5e-2, MUON_MASS)`, not inside a string), we need
+to add
 
 ```python
 import ROOT
@@ -1003,20 +1036,21 @@ at the top of our analysis script `analysis_Tau3Mu_stage1.py`.
 You can also output the total visible energy into your ntuple:
 
 ```python
-    # Total visible energy in the event :
+    # Total visible energy in the event:
     .Define("RecoPartEnergies",
             "ReconstructedParticle::get_e(ReconstructedParticles)")
-    .Define("visible_energy",  "Sum( RecoPartEnergies )")
+    .Define("visible_energy", "Sum(RecoPartEnergies)")
 ```
 
 and add it to your `branchList`:
 
 ```python
     branchList = [
-            "n_muons",
-            "n_triplets_m",
-            "TauMass_allCandidates",
-            "visible_energy"
+        ...
+        "n_muons",
+        "n_triplets_m",
+        "TauMass_allCandidates",
+        "visible_energy"
     ]
 ```
 
@@ -1028,22 +1062,28 @@ fccanalysis run analysis_Tau3Mu_stage1.py --test --nevents 1000 --output Tau3Mu.
 ```
 :::
 
-The files `analysis_Tau3Mu_stage1.py` and `analyzers.h` with all the changes
-discussed above can be also found in the
-`examples/FCCee/tutorials/vertexing/Exercises/` directory of FCCAnalyses.
+The files `analysis_Tau3Mu_stage1.py` and `analyzers_Tau3Mu.h` with all the
+changes discussed above can be downloaded
+[here](https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/Exercises/analysis_Tau3Mu_stage1.py)
+and
+[here](https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/Exercises/analyzers_Tau3Mu.h).
 
 
 ### Exercise 5
 
 We now have a simple analysis that can be used to process the signal and
 background samples, and plot the mass of the $\tau \rightarrow 3\mu$ candidates.
-For that we need to process the full statistics. In order for you to have access
-to `/afs/cern.ch/work/f/fccsw/public/FCCDicts/`, we need to add you CERN login
-to an AFS group. If not already provided, please do so.
+We can now process the full statistics. In order for you to have access
+to the dataset metadata provided in the
+`/afs/cern.ch/work/f/fccsw/public/FCCDicts/`, you need to have CERN computing
+account and have the
+[AFS Workspaces](https://resources-old.web.cern.ch/resources-old/Manage/AFS/Default.aspx)
+service activated.
 
 All samples that have been centrally produced can be found
 [on this web page](https://fcc-physics-events.web.cern.ch/FCCee/). We use
-`spring2021` samples (in `Production tags`), and the files made with `IDEA`.
+`spring2021` samples (in `campaign`), and the files made with `IDEA` detector
+concept.
 If you enter `TauMinus2MuMuMu` and `TauMinus2PiPiPinus` in the search field,
 you will see the datasets produced for the signal and the
 $\tau \rightarrow 3\pi \nu$ background. The first column shows the dataset
@@ -1058,35 +1098,33 @@ the list of datasets to be processed should be inserted into your analysis
 ```python
 import ROOT
 
-analysesList = ['myAnalysis']
-
 processList = {
-    'p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2MuMuMu':{},
-    'p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2PiPiPinu':{}
+    'p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2MuMuMu': {},
+    'p8_noBES_ee_Ztautau_ecm91_EvtGen_TauMinus2PiPiPinu': {}
 }
 ```
 
-as well as
+as well as information where to look for the dataset metadata information
 ```python
-# Mandatory: Production tag when running over EDM4Hep centrally produced events, this points to the yaml files for getting sample statistics
+# Mandatory: Production tag when running over centrally produced events, this
+# points to the yaml files for getting the dataset statistics
 prodTag = "FCCee/spring2021/IDEA/"
 ```
 
-and we tell `fccanalysis` to put all files into the `TauMu` directory :
+and we tell `fccanalysis` to put all files into the `Tau3Mu` directory:
 ```python
-#Optional: output directory, default is local running directory
+# Optional: output directory, default is local running directory
 outputDir = "Tau3Mu"
-
 ```
 
 This produces flat ntuples:
 
-```shell
+```bash
 fccanalysis run analysis_Tau3Mu_stage1.py
 ```
 
 After a few minutes, you will see two ntuples, one for the signal, the other
-for the background, in the `TauMu` directory.
+for the background, in the `Tau3Mu` directory.
 
 Now that you have ntuples with the variables you need for your analysis, you
 may analyze them using the tools you prefer. As explained
@@ -1096,40 +1134,68 @@ them. The normalisation is then taken care of by `fccanalyses`, thanks to a JSON
 file (`FCCee_procDict_spring2021_IDEA.json`) which contains the cross-section
 of the MC processes. To use these functionalities:
 
+The `analysis_Tau3Mu_final.py` analysis script produces histograms of selected
+variables, with some selection:
 
-This produces histograms of selected variables, with some selection :
-
-```shell
-wget https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/Exercises/analysis_Tau3Mu_final.py
+```bash
+wget https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/analysis_Tau3Mu_final.py
 fccanalysis final analysis_Tau3Mu_final.py
 ```
 
 :::{admonition} Snippet of `analysis_Tau3Mu_final.py`
 :class: toggle
+
 ```python
-###Dictionnay of the list of cuts. The key is the name of the selection that will be added to the output file
+# Dictionnay of the list of cuts. The key is the name of the selection that
+# will be added to the output file
 cutList = {"nocut": "true",
-           "sel0":"n_triplets_m > 0",
-           "sel1":"Min( TauMass_allCandidates ) < 3"
-            }
+           "sel0": "n_triplets_m > 0",
+           "sel1": "Min(TauMass_allCandidates) < 3"
+}
 
 
-#Dictionary for the ouput variable/hitograms. The key is the name of the variable in the output files. "name" is the name of the variable in the input file, "title" is the x-axis label of the histogram, "bin" the number of bins of the histogram, "xmin" the minimum x-axis value and "xmax" the maximum x-axis value.
+# Dictionary for the output variables/hitograms. The key is the name of the
+# variable in the output files. "name" is the name of the variable in the
+# input file, "title" is the x-axis label of the histogram, "bin" the number
+# of bins of the histogram, "xmin" the minimum x-axis value and "xmax" the
+# maximum x-axis value.
 histoList = {
-    "mTau":{"name":"TauMass_allCandidates","title":"m_{tau} [GeV]","bin":100,"xmin":0,"xmax":3},
-    "mTau_zoom":{"name":"TauMass_allCandidates","title":"m_{tau} [GeV]","bin":100,"xmin":1.7,"xmax":1.9},
-    "Evis":{"name":"visible_energy","title":"E_{vis} [GeV]","bin":100,"xmin":0,"xmax":91.2},
+    "mTau": {
+        "name": "TauMass_allCandidates",
+        "title": "m_{tau} [GeV]",
+        "bin": 100,
+        "xmin": 0,
+        "xmax": 3
+    },
+    "mTau_zoom": {
+        "name": "TauMass_allCandidates",
+        "title": "m_{tau} [GeV]",
+        "bin": 100,
+        "xmin": 1.7,
+        "xmax": 1.9
+    },
+    "Evis": {
+        "name": "visible_energy",
+        "title": "E_{vis} [GeV]",
+        "bin": 100,
+        "xmin": 0,
+        "xmax": 91.2
+    },
+}
 
 ```
 :::
 
-This produces three histograms, for three sets of selections. The histogram files appear in the `TauMu/final` directory. There are now 6 files (2 processes, 3 sets of cuts). The histograms are normalised to a luminosity of one inverse pb.
+This produces three histograms, for three sets of selections. The histogram
+files appear in the `TauMu/final` directory. There are now 6 files (2 processes,
+3 sets of cuts). The histograms are normalised to a luminosity of one inverse
+pb.
 
 
-Finally, this makes some plots:
+Finally, the plotting script `analysis_Tau3Mu_plots.py` makes few plots:
 
-```shell
-wget https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/Exercises/analysis_Tau3Mu_plots.py
+```bash
+wget https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/analysis_Tau3Mu_plots.py
 fccanalysis plots analysis_Tau3Mu_plots.py
 ```
 
@@ -1139,7 +1205,7 @@ sample, corresponding to $\tau \rightarrow 3 \pi \nu$ decays, are reconstructed
 at a mass that is usually below the $\tau$ mass due to the presence of the
 neutrino. Note that the background sample corresponds to a very low statistics
 (50M have been produced, we expect 14B) and we see fluctuations. The signal
-cross-section used here correponds to $B( \tau \rightarrow 3 \mu) = 2 \times
+cross-section used here corresponds to $B( \tau \rightarrow 3 \mu) = 2 \times
 10^{-8}$, which is roughly the current upper limit. The luminosity for these
 final plots is entered in analysis_Tau3Mu_plots.py.
 
