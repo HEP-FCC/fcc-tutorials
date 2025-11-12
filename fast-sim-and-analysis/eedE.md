@@ -5,6 +5,11 @@ The [EDM4hep event data explorer (eedE)](https://key4hep.github.io/eede/release/
 
 ## edm4hep2json
 
+Please note that the `edm4hep2json` command provided in stack `2022-12-23` does not work. You can open a new SSH connection and source a more recent stack, for example
+```
+source /cvmfs/sw.hsf.org/key4hep/setup.sh -r 2024-03-10
+``` 
+
 eede takes json files as inputs. The `edm4hep2json` command converts the edm4hep data into a json format.
 ```
 edm4hep2json my-file.edm4hep.root
