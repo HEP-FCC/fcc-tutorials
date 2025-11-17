@@ -174,7 +174,7 @@ These files define the detector geometry and simulation parameters for **Delphes
 ```
 wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/winter2023/FCCee/Delphes/card_IDEA.tcl
 ```
-1. The EDM4hep output card describing how Delphes output collections (tracks, jets, leptons, etc.) are mapped to EDM4hep data structures:
+2. The EDM4hep output card describing how Delphes output collections (tracks, jets, leptons, etc.) are mapped to EDM4hep data structures:
 ```
 wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/winter2023/FCCee/Delphes/edm4hep_IDEA.tcl
 ```
@@ -206,13 +206,13 @@ Run the sample generation using:
 
 ```
 DelphesPythia8EvtGen_EDM4HEP_k4Interface card_IDEA.tcl edm4hep_IDEA.tcl \
-p8_ee_Zbb_ecm91_EVTGEN.cmd Bu2TauNu2MuSNL.root DECAY.DEC evt.pdl \
-Bu2TauNu2Mu.dec 521 Bu_SIGNAL 1
+p8_ee_Zbb_ecm91_EVTGEN.cmd Bu2TauNuTAUHADNU.root DECAY.DEC evt.pdl \
+Bu2TauNuTAUHADNU.dec 521 Bu_SIGNAL 1
 ```
 
 **Explanation of arguments:**
 
-1. `Bu2TauNu2MuSNL.root` — output EDM4hep file  
+1. `Bu2TauNuTAUHADNU.root` — output EDM4hep file  
 2. `521` — PDG code of B⁺, the PDG code of the particle whose decays you want to override
 3. `Bu_SIGNAL` — a label for the signal process used for bookkeeping in campaign production 
 4. `1` — force custom decay (use `0` to disable)
