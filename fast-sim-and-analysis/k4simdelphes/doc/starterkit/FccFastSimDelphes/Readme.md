@@ -157,7 +157,7 @@ All standard configuration files for FCC-ee Monte Carlo campaigns are provided i
 This file `p8_ee_Zbb_ecm91_EVTGEN.cmd` defines the hard process $e^{+} e^{-} \;\rightarrow\; Z \;\rightarrow\; b\bar{b}$
 and enables the **EvtGen** interface for hadronic decays.
 
-```
+```bash
 wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/winter2023/FCCee/Generator/Pythia8/p8_ee_Zbb_ecm91_EVTGEN.cmd
 ```
 
@@ -171,11 +171,11 @@ Main:numberOfEvents = 1000
 These files define the detector geometry and simulation parameters for **Delphes**.
 
 1. The Delphes detector card:
-```
+```bash
 wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/winter2023/FCCee/Delphes/card_IDEA.tcl
 ```
 2. The EDM4hep output card describing how Delphes output collections (tracks, jets, leptons, etc.) are mapped to EDM4hep data structures:
-```
+```bash
 wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/winter2023/FCCee/Delphes/edm4hep_IDEA.tcl
 ```
 
@@ -185,16 +185,16 @@ EvtGen needs several text files to describe decays, particle data and custom mod
 
 1. The main EvtGen decay table listing all standard decay channels and branching fractions for hadrons and leptons: 
 
-```
+```bash
 wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/winter2023/FCCee/Generator/EvtGen/DECAY.DEC
 ```
 2. The EvtGen particle data list (PDL) defining particle masses, lifetimes, and PDG codes:
-```
+```bash
 wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/winter2023/FCCee/Generator/EvtGen/evt.pdl
 ```
 3. The custom decay card defining the $B^{+} \;\rightarrow\; \tau^{+} \nu_{\tau} \;\rightarrow\; 3\pi$ channel with a hadronic 3-prong tau decay  $\tau^{+} \;\rightarrow\; \pi^{+}\,\pi^{-}\,\pi^{+}\,\bar{\nu}_{\tau}$: 
 
-```
+```bash
 wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/winter2023/FCCee/Generator/EvtGen/Bu2TauNuTAUHADNU.dec
 ```
 
