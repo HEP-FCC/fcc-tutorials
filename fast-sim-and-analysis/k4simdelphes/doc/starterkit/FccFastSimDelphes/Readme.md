@@ -161,7 +161,6 @@ wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/winter2023/FCCee/Delph
 wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/winter2023/FCCee/Delphes/edm4hep_IDEA.tcl
 ```
 
-**EvtGen decay files**
 EvtGen requires a set of text files containing decay tables, particle properties, and our custom decay definition for $B^{+} \;\rightarrow\; \tau^{+} \nu_{\tau} \;\rightarrow\; 3\pi$ channel with a hadronic 3-prong tau decay  $\tau^{+} \;\rightarrow\; \pi^{+}\,\pi^{-}\,\pi^{+}\,\bar{\nu}_{\tau}$: 
 
 ```bash
