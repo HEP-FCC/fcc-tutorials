@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.1. FCC-ee Full Sim General Overview &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom-admonitions.css?v=e6bfab01" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.2. Using Guinea-Pig to generate interaction region backgrounds" href="../FCCeeGuineaPigIRBackgrounds/README.html" />
+    <link rel="prev" title="3. Full Simulation" href="../README.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            FCC Tutorials
+              <img src="../../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../software-basics/README.html">1. First  Steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fast-sim-and-analysis/README.html">2. Generators, Fast Simulation and Analysis</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../README.html">3. Full Simulation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.1. FCC-ee Full Sim General Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-the-environment">3.1.1. Setting-up the environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#towards-full-sim-physics-analyses-with-cld">3.1.2. Towards Full Sim physics analyses with CLD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#running-cld-simulation">3.1.2.1. Running CLD simulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-cld-reconstruction">3.1.2.2. Running CLD reconstruction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plotting-the-higgs-recoil-mass">3.1.2.3. Plotting the Higgs recoil mass</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#towards-detector-optimization-with-full-sim-allegro-ecal">3.1.3. Towards detector optimization with Full Sim: ALLEGRO ECAL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#modifying-the-sub-detector-content">3.1.3.1. Modifying the sub-detector content</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-a-first-allegro-ecal-simulation">3.1.3.2. Running a first ALLEGRO ECAL simulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changing-liquid-argon-to-liquid-krypton">3.1.3.3. Changing Liquid Argon to Liquid Krypton</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#towards-idea-tracking-with-the-detailed-drift-chamber">3.1.4. Towards IDEA tracking with the detailed Drift Chamber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#detector-visualization">3.1.5. Detector visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-resources">3.1.6. Additional Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeGuineaPigIRBackgrounds/README.html">3.2. Using Guinea-Pig to generate interaction region backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Geometry/Geometry.html">3.3. Changing geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Visualization/Visualization.html">3.4. Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCSW/">FCCSW main page</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/doc/latest/index.html">FCCAnalyses reference documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../README.html"><span class="section-number">3. </span>Full Simulation</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3.1. </span>FCC-ee Full Sim General Overview</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/main/full-detector-simulations/FCCeeGeneralOverview/FCCeeGeneralOverview.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="fcc-ee-full-sim-general-overview">
+<h1><span class="section-number">3.1. </span>FCC-ee Full Sim General Overview<a class="headerlink" href="#fcc-ee-full-sim-general-overview" title="Link to this heading"></a></h1>
+<!-- This version has been prepared for the tutorial at the Second US FCC Workshop (2024): https://indico.mit.edu/event/876/contributions/2893/ -->
+<p>Welcome to this general overview of the FCC-ee Full Simulation.
+This tutorial aims at showing you how to run the state of the art full simulation of the various detector concepts currently under study for FCC-ee: CLD, ALLEGRO and IDEA. The <a class="reference external" href="https://dd4hep.web.cern.ch/dd4hep/usermanuals/DD4hepManual/DD4hepManual.pdf">DD4hep</a> geometry descriptions of these detectors are hosted in the <a class="reference external" href="https://github.com/key4hep/k4geo/tree/main/FCCee">k4geo</a> GitHub repository and made centrally available with the Key4hep stack under the <code class="docutils literal notranslate"><span class="pre">$K4GEO</span></code> environment variable. This tutorial should work on any machine with <code class="docutils literal notranslate"><span class="pre">cvmfs</span></code> access and running an operating system supported by Key4hep (AlmaLinux 9 and Ubuntu 22).</p>
+<!-- Click on the k4geo link, show and explain the different existing CLD versions (the one starting by FCCee are legacy for reproducibility, the useful ones are CLD_...) and where they are documented -->
+<p>So, let’s start playing with Full Sim!</p>
+<section id="setting-up-the-environment">
+<h2><span class="section-number">3.1.1. </span>Setting-up the environment<a class="headerlink" href="#setting-up-the-environment" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># connect to a machine with cvmfs access and running an OS supported by Key4hep (Alma9 here)</span>
+ssh<span class="w"> </span>-X<span class="w"> </span>username@submit-test.mit.edu<span class="w"> </span><span class="c1"># or ssh -X username@lxplus.cern.ch</span>
+<span class="c1"># set-up the Key4hep environment, using the nightlies since we need the latest and greatest version of the packages</span>
+<span class="c1"># (make sure you are in bash or zsh shell)</span>
+<span class="nb">source</span><span class="w"> </span>/cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
+<span class="c1"># create a repository for the tutorial</span>
+mkdir<span class="w"> </span>FCC_Full_Sim_Tutorial
+<span class="nb">cd</span><span class="w"> </span>FCC_Full_Sim_Tutorial
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/HEP-FCC/fcc-tutorials
+</pre></div>
+</div>
+</section>
+<section id="towards-full-sim-physics-analyses-with-cld">
+<h2><span class="section-number">3.1.2. </span>Towards Full Sim physics analyses with CLD<a class="headerlink" href="#towards-full-sim-physics-analyses-with-cld" title="Link to this heading"></a></h2>
+<p>The CLD detector has a complete geometry description and reconstruction chain. It is thus a very good candidate to start full sim physics analyses. To illustrate that, we will process some physics events through its Geant4 simulation and reconstruction, look at automatically generated diagnostic plots and produce ourselves the Higgs recoil mass.</p>
+<section id="running-cld-simulation">
+<h3><span class="section-number">3.1.2.1. </span>Running CLD simulation<a class="headerlink" href="#running-cld-simulation" title="Link to this heading"></a></h3>
+<p>Let’s first run the CLD Geant4 simulation, through ddsim, for some <span class="math notranslate nohighlight">\(e^{+}e^{-} \to Z(\mu\mu)H(\text{inclusive})\)</span> events, taken from the generation used for Delphes simulation.</p>
+<!-- /eos/experiment/fcc/ee/generation/stdhep/wzp6_ee_mumuH_ecm240/events_057189088.stdhep.gz -->
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the CLD config repository</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/key4hep/CLDConfig.git
+<span class="nb">cd</span><span class="w"> </span>CLDConfig/CLDConfig
+<span class="c1"># retrieve Z(mumu)H(X) MC generator events</span>
+wget<span class="w"> </span>http://fccsw.web.cern.ch/fccsw/tutorials/MIT2024/wzp6_ee_mumuH_ecm240_GEN.stdhep.gz
+gunzip<span class="w"> </span>wzp6_ee_mumuH_ecm240_GEN.stdhep.gz
+<span class="c1"># run the Geant4 simulation</span>
+ddsim<span class="w"> </span>-I<span class="w"> </span>wzp6_ee_mumuH_ecm240_GEN.stdhep<span class="w"> </span>-N<span class="w"> </span><span class="m">10</span><span class="w"> </span>-O<span class="w"> </span>wzp6_ee_mumuH_ecm240_CLD_SIM.root<span class="w"> </span>--compactFile<span class="w"> </span><span class="nv">$K4GEO</span>/FCCee/CLD/compact/CLD_o2_v05/CLD_o2_v05.xml<span class="w"> </span>--steeringFile<span class="w"> </span>cld_steer.py
+<span class="c1"># NB: we run only on 10 events (-N 10) here for the sake of time</span>
+<span class="c1"># for such small amount of event the detector geometry construction step dominates, it takes about 5 seconds per event and the geometry loading takes 1min30s</span>
+</pre></div>
+</div>
+<!-- Takes 2 min 30 sec, only  52.13 s for event processing though: 5.21 s/Event -->
+<p>While the code runs (~ 2min30 s), you can browse the <a class="reference external" href="https://github.com/key4hep/k4geo/tree/main/FCCee">k4geo</a> repository to see how the code is organized. This step produced an output file in edm4hep dataformat with Geant4 SIM hits that can then be fed to the reconstruction step. Note that ddsim can also digest other MC output format like <code class="docutils literal notranslate"><span class="pre">hepevt</span></code>, <code class="docutils literal notranslate"><span class="pre">hepmc</span></code>, <code class="docutils literal notranslate"><span class="pre">pairs</span></code> (GuineaPig output), …, and of course also has particle gun<strong>s</strong> as we will see later. More information can be obtained with <code class="docutils literal notranslate"><span class="pre">ddsim</span> <span class="pre">-h</span></code>.</p>
+</section>
+<section id="running-cld-reconstruction">
+<h3><span class="section-number">3.1.2.2. </span>Running CLD reconstruction<a class="headerlink" href="#running-cld-reconstruction" title="Link to this heading"></a></h3>
+<p>Let’s now apply the CLD reconstruction (from ILCSoft through the Gaudi wrappers and data format converters) on top of the SIM step:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s2">&quot;s/DEBUG/INFO/&quot;</span> <span class="n">CLDReconstruction</span><span class="o">.</span><span class="n">py</span>
+<span class="n">k4run</span> <span class="n">CLDReconstruction</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">inputFiles</span> <span class="n">wzp6_ee_mumuH_ecm240_CLD_SIM</span><span class="o">.</span><span class="n">root</span> <span class="o">--</span><span class="n">outputBasename</span> <span class="n">wzp6_ee_mumuH_ecm240_CLD_RECO</span> <span class="o">--</span><span class="n">num</span><span class="o">-</span><span class="n">events</span> <span class="o">-</span><span class="mi">1</span>
+<span class="c1"># Do not forget to modify the geoservice.detectors variable if you do not use the central detector</span>
+</pre></div>
+</div>
+<!-- takes 1m40s -->
+<p>This created an edm4hep ROOT file with a bunch of new DIGI/RECO level collections, including <code class="docutils literal notranslate"><span class="pre">edm4hep::ReconstructedParticle</span></code> from Particle Flow (PandoraPFA). You can inspect the ROOT file content with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">podio</span><span class="o">-</span><span class="n">dump</span> <span class="n">wzp6_ee_mumuH_ecm240_CLD_RECO_edm4hep</span><span class="o">.</span><span class="n">root</span>
+</pre></div>
+</div>
+<!-- Explain a bit the rootfile content -->
+<p>A detailed documentation on the collection content still has to be written.</p>
+<p>NB: this step also produces a file named <code class="docutils literal notranslate"><span class="pre">wzp6_ee_mumuH_ecm240_CLD_RECO_aida.root</span></code> where you can find a lot of debugging distributions such as the pulls of the track fit.</p>
+</section>
+<section id="plotting-the-higgs-recoil-mass">
+<h3><span class="section-number">3.1.2.3. </span>Plotting the Higgs recoil mass<a class="headerlink" href="#plotting-the-higgs-recoil-mass" title="Link to this heading"></a></h3>
+<p>Let’s now use the reconstructed sample to produce some physics quantities. As an example, we will plot the Higgs recoil mass using the Python bindings of <a class="reference external" href="https://github.com/key4hep/key4hep-tutorials/blob/main/edm4hep_analysis/edm4hep_api_intro.md#reading-edm4hep-files">PODIO</a>. The following very simple script already does a decent job:</p>
+<!-- Explain a bit the script -->
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">podio</span> <span class="kn">import</span> <span class="n">root_io</span>
+<span class="kn">import</span> <span class="nn">ROOT</span>
+<span class="n">ROOT</span><span class="o">.</span><span class="n">gROOT</span><span class="o">.</span><span class="n">SetBatch</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">input_file_path</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">podio_reader</span> <span class="o">=</span> <span class="n">root_io</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="n">input_file_path</span><span class="p">)</span>
+
+<span class="n">th1_recoil</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TH1F</span><span class="p">(</span><span class="s2">&quot;Recoil Mass&quot;</span><span class="p">,</span> <span class="s2">&quot;Recoil Mass&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">160</span><span class="p">)</span>
+
+<span class="n">p_cm</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">Math</span><span class="o">.</span><span class="n">LorentzVector</span><span class="p">(</span><span class="s1">&#39;ROOT::Math::PxPyPzE4D&lt;double&gt;&#39;</span><span class="p">)(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">240</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">podio_reader</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">):</span>
+    <span class="n">pfos</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;TightSelectedPandoraPFOs&quot;</span><span class="p">)</span>
+    <span class="n">n_good_muons</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">p_mumu</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">Math</span><span class="o">.</span><span class="n">LorentzVector</span><span class="p">(</span><span class="s1">&#39;ROOT::Math::PxPyPzE4D&lt;double&gt;&#39;</span><span class="p">)()</span>
+    <span class="k">for</span> <span class="n">pfo</span> <span class="ow">in</span> <span class="n">pfos</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">pfo</span><span class="o">.</span><span class="n">getPDG</span><span class="p">())</span> <span class="o">==</span> <span class="mi">13</span> <span class="ow">and</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getEnergy</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="n">n_good_muons</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">p_mumu</span> <span class="o">+=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">Math</span><span class="o">.</span><span class="n">LorentzVector</span><span class="p">(</span><span class="s1">&#39;ROOT::Math::PxPyPzE4D&lt;double&gt;&#39;</span><span class="p">)(</span><span class="n">pfo</span><span class="o">.</span><span class="n">getMomentum</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getMomentum</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getMomentum</span><span class="p">()</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getEnergy</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">n_good_muons</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">th1_recoil</span><span class="o">.</span><span class="n">Fill</span><span class="p">((</span><span class="n">p_cm</span> <span class="o">-</span> <span class="n">p_mumu</span><span class="p">)</span><span class="o">.</span><span class="n">M</span><span class="p">())</span>
+
+<span class="n">canvas_recoil</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">TCanvas</span><span class="p">(</span><span class="s2">&quot;Recoil Mass&quot;</span><span class="p">,</span> <span class="s2">&quot;Recoil Mass&quot;</span><span class="p">)</span>
+<span class="n">th1_recoil</span><span class="o">.</span><span class="n">Draw</span><span class="p">()</span>
+<span class="n">canvas_recoil</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="s2">&quot;recoil_mass.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The equivalent C++ ROOT macro looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#include &quot;podio/ROOTFrameReader.h&quot;</span>
+<span class="c1">#include &quot;podio/Frame.h&quot;</span>
+
+<span class="c1">#include &quot;edm4hep/ReconstructedParticleCollection.h&quot;</span>
+
+<span class="nb">int</span> <span class="n">plot_recoil_mass</span><span class="p">(</span><span class="n">std</span><span class="p">::</span><span class="n">string</span> <span class="n">input_file_path</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">auto</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">podio</span><span class="p">::</span><span class="n">ROOTFrameReader</span><span class="p">();</span>
+  <span class="n">reader</span><span class="o">.</span><span class="n">openFile</span><span class="p">(</span><span class="n">input_file_path</span><span class="p">);</span>
+
+  <span class="n">TH1</span><span class="o">*</span> <span class="n">th1_recoil</span> <span class="o">=</span> <span class="n">new</span> <span class="n">TH1F</span><span class="p">(</span><span class="s2">&quot;Recoil Mass&quot;</span><span class="p">,</span> <span class="s2">&quot;Recoil Mass&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">110.</span><span class="p">,</span> <span class="mf">160.</span><span class="p">);</span>
+
+  <span class="n">ROOT</span><span class="p">::</span><span class="n">Math</span><span class="p">::</span><span class="n">LorentzVector</span><span class="o">&lt;</span><span class="n">ROOT</span><span class="p">::</span><span class="n">Math</span><span class="p">::</span><span class="n">PxPyPzE4D</span><span class="o">&lt;</span><span class="n">Double32_t</span><span class="o">&gt;&gt;</span> <span class="n">p_cm</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">240.</span><span class="p">);</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">reader</span><span class="o">.</span><span class="n">getEntries</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">);</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">auto</span> <span class="n">event</span> <span class="o">=</span> <span class="n">podio</span><span class="p">::</span><span class="n">Frame</span><span class="p">(</span><span class="n">reader</span><span class="o">.</span><span class="n">readNextEntry</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">));</span>
+    <span class="n">auto</span><span class="o">&amp;</span> <span class="n">pfos</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">edm4hep</span><span class="p">::</span><span class="n">ReconstructedParticleCollection</span><span class="o">&gt;</span><span class="p">(</span><span class="s2">&quot;TightSelectedPandoraPFOs&quot;</span><span class="p">);</span>
+    <span class="nb">int</span> <span class="n">n_good_muons</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">ROOT</span><span class="p">::</span><span class="n">Math</span><span class="p">::</span><span class="n">LorentzVector</span><span class="o">&lt;</span><span class="n">ROOT</span><span class="p">::</span><span class="n">Math</span><span class="p">::</span><span class="n">PxPyPzE4D</span><span class="o">&lt;</span><span class="n">Double32_t</span><span class="o">&gt;&gt;</span> <span class="n">p_mumu</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">const</span> <span class="n">auto</span><span class="o">&amp;</span> <span class="n">pfo</span> <span class="p">:</span> <span class="n">pfos</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">std</span><span class="p">::</span><span class="nb">abs</span><span class="p">(</span><span class="n">pfo</span><span class="o">.</span><span class="n">getPDG</span><span class="p">())</span> <span class="o">==</span> <span class="mi">13</span> <span class="ow">and</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getEnergy</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">20.</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">n_good_muons</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">p_mumu</span> <span class="o">+=</span> <span class="n">ROOT</span><span class="p">::</span><span class="n">Math</span><span class="p">::</span><span class="n">LorentzVector</span><span class="o">&lt;</span><span class="n">ROOT</span><span class="p">::</span><span class="n">Math</span><span class="p">::</span><span class="n">PxPyPzE4D</span><span class="o">&lt;</span><span class="n">Double32_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">pfo</span><span class="o">.</span><span class="n">getMomentum</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getMomentum</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getMomentum</span><span class="p">()</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">pfo</span><span class="o">.</span><span class="n">getEnergy</span><span class="p">());</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">n_good_muons</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+      <span class="n">th1_recoil</span><span class="o">-&gt;</span><span class="n">Fill</span><span class="p">((</span><span class="n">p_cm</span> <span class="o">-</span> <span class="n">p_mumu</span><span class="p">)</span><span class="o">.</span><span class="n">M</span><span class="p">());</span>
+  <span class="p">}</span>
+  <span class="n">TCanvas</span><span class="o">*</span> <span class="n">canvas_recoil</span> <span class="o">=</span> <span class="n">new</span> <span class="n">TCanvas</span><span class="p">(</span><span class="s2">&quot;Recoil Mass&quot;</span><span class="p">,</span> <span class="s2">&quot;Recoil Mass&quot;</span><span class="p">);</span>
+  <span class="n">th1_recoil</span><span class="o">-&gt;</span><span class="n">Draw</span><span class="p">();</span>
+  <span class="n">canvas_recoil</span><span class="o">-&gt;</span><span class="n">Print</span><span class="p">(</span><span class="s2">&quot;recoil_mass.png&quot;</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Let’s get a similar sample but with more stat:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">../../</span><span class="n">fcc</span><span class="o">-</span><span class="n">tutorials</span><span class="o">/</span><span class="n">full</span><span class="o">-</span><span class="n">detector</span><span class="o">-</span><span class="n">simulations</span><span class="o">/</span><span class="n">FCCeeGeneralOverview</span><span class="o">/</span>
+<span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">fccsw</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">/</span><span class="n">fccsw</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">MIT2024</span><span class="o">/</span><span class="n">wzp6_ee_mumuH_ecm240_CLD_RECO_moreStat</span><span class="o">.</span><span class="n">root</span>
+</pre></div>
+</div>
+<p>and produce the simple Higgs recoil mass plot in Python:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">plot_recoil_mass</span><span class="o">.</span><span class="n">py</span> <span class="n">wzp6_ee_mumuH_ecm240_CLD_RECO_moreStat</span><span class="o">.</span><span class="n">root</span>
+<span class="n">display</span> <span class="n">recoil_mass</span><span class="o">.</span><span class="n">png</span>
+</pre></div>
+</div>
+<p>or in C++ with the ROOT interpreter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="o">-</span><span class="n">b</span>
+<span class="o">.</span><span class="n">L</span> <span class="n">plot_recoil_mass</span><span class="o">.</span><span class="n">C</span>
+<span class="n">plot_recoil_mass</span><span class="p">(</span><span class="s2">&quot;wzp6_ee_mumuH_ecm240_CLD_RECO_moreStat.root&quot;</span><span class="p">)</span>
+<span class="o">.</span><span class="n">q</span>
+<span class="n">display</span> <span class="n">recoil_mass</span><span class="o">.</span><span class="n">png</span>
+</pre></div>
+</div>
+<p>This illustrates how easy it is already to do physics with Full Sim. Of course, if we had to do a realistic analysis, we would run on more events, properly select muons from the Z, include backgrounds, …, and we would therefore use FCCAnalyses or plain C++ but it is not the topic of this tutorial. If you want to go further, the following <a class="reference external" href="https://edm4hep.web.cern.ch/classedm4hep_1_1_reconstructed_particle-members.html">Doxygen page</a> will help you in understanding what members can be called on a given edm4hep object.</p>
+</section>
+</section>
+<section id="towards-detector-optimization-with-full-sim-allegro-ecal">
+<h2><span class="section-number">3.1.3. </span>Towards detector optimization with Full Sim: ALLEGRO ECAL<a class="headerlink" href="#towards-detector-optimization-with-full-sim-allegro-ecal" title="Link to this heading"></a></h2>
+<p>In this section we will learn how to run with a modified version of a detector (needed for optimization), taking the ALLEGRO ECAL as an example.</p>
+<section id="modifying-the-sub-detector-content">
+<h3><span class="section-number">3.1.3.1. </span>Modifying the sub-detector content<a class="headerlink" href="#modifying-the-sub-detector-content" title="Link to this heading"></a></h3>
+<p>So far we have been using the ‘central’ version of the detector, as directly provided by Key4hep. The first thing we have to do to run a modified version is to clone the repository where the DD4hep detector geometries are hosted and update the environment variable <code class="docutils literal notranslate"><span class="pre">$K4GEO</span></code> so that it points to your local folder:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># go in a &#39;clean&#39; place i.e. outside of the git repository in which you were before
+cd ../../../
+git clone https://github.com/key4hep/k4geo
+export K4GEO=$PWD/k4geo/
+</pre></div>
+</div>
+<p>NB: a typical DD4hep detector implementation has a C++ detector builder where the shapes, volumes and placedVolumes are defined plus an xml “compact” file that configures the detector (e.g. setting the dimensions) and from which the C++ builder retrieves all the free parameters. When modifying the compact file nothing has to be recompiled, when touching the C++ detector builder, <code class="docutils literal notranslate"><span class="pre">k4geo</span></code> has to be recompiled and some more environment variables have to be set in order to use your local detector builder. This can be done as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># No need to run this for the tutorial, it is just here for completeness</span>
+<span class="n">cd</span> <span class="n">k4geo</span>
+<span class="c1"># modify a detector builder, e.g. detector/calorimeter/ECalBarrel_NobleLiquid_InclinedTrapezoids_o1_v02_geo.cpp</span>
+<span class="n">mkdir</span> <span class="n">build</span> <span class="n">install</span>
+<span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">..</span> <span class="o">-</span><span class="n">DCMAKE_INSTALL_PREFIX</span><span class="o">=../</span><span class="n">install</span>
+<span class="n">make</span> <span class="n">install</span> <span class="o">-</span><span class="n">j</span> <span class="mi">8</span>
+<span class="n">cd</span> <span class="o">..</span>
+<span class="n">k4_local_repo</span> <span class="c1"># this updates environment variables and PATHs such as LD_LIBRARY_PATH</span>
+<span class="n">cd</span> <span class="o">..</span>
+</pre></div>
+</div>
+<p>In the xml compact file, the detector builder to use is specified by the <code class="docutils literal notranslate"><span class="pre">type</span></code> keyword in the <code class="docutils literal notranslate"><span class="pre">detector</span></code> beacon (e.g. <code class="docutils literal notranslate"><span class="pre">&lt;detector</span> <span class="pre">id=1</span> <span class="pre">name=&quot;MyCoolDetectorName&quot;</span> <span class="pre">type=&quot;MYCOOLDETECTOR&quot;</span> <span class="pre">...</span> <span class="pre">/&gt;</span></code>) and it should match the detector type defined in the C++ builder with the instruction <code class="docutils literal notranslate"><span class="pre">DECLARE_DETELEMENT(MYCOOLDETECTOR)</span></code>.</p>
+<p>Now lets first modify the sub-detector content of ALLEGRO. Since we will deal with the calorimeter, let’s remove the drift chamber to run faster. For this, you just need to open the main detector “compact file” (<code class="docutils literal notranslate"><span class="pre">xml</span></code> file with detector parameters) with your favorite text editor and remove the import of the drift chamber (line 39), for instance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># copy paste won&#39;t work here
+vim $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v02/ALLEGRO_o1_v02.xml
+:39
+dd
+:wq
+</pre></div>
+</div>
+</section>
+<section id="running-a-first-allegro-ecal-simulation">
+<h3><span class="section-number">3.1.3.2. </span>Running a first ALLEGRO ECAL simulation<a class="headerlink" href="#running-a-first-allegro-ecal-simulation" title="Link to this heading"></a></h3>
+<p>Let’s now run a first particle gun simulation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>fcc-tutorials/full-detector-simulations/FCCeeGeneralOverview/
+ddsim<span class="w"> </span>--enableGun<span class="w"> </span>--gun.distribution<span class="w"> </span>uniform<span class="w"> </span>--gun.energy<span class="w"> </span><span class="s2">&quot;10*GeV&quot;</span><span class="w"> </span>--gun.particle<span class="w"> </span>e-<span class="w"> </span>--gun.thetaMin<span class="w"> </span><span class="s2">&quot;55*degree&quot;</span><span class="w"> </span>--gun.thetaMax<span class="w"> </span><span class="s2">&quot;125*degree&quot;</span><span class="w">  </span>--numberOfEvents<span class="w"> </span><span class="m">100</span><span class="w"> </span>--outputFile<span class="w"> </span>electron_gun_10GeV_ALLEGRO_SIM.root<span class="w"> </span>--random.enableEventSeed<span class="w"> </span>--random.seed<span class="w"> </span><span class="m">42</span><span class="w"> </span>--compactFile<span class="w"> </span><span class="nv">$K4GEO</span>/FCCee/ALLEGRO/compact/ALLEGRO_o1_v02/ALLEGRO_o1_v02.xml
+</pre></div>
+</div>
+<!-- takes ~2min30s -->
+<p>And apply the ALLEGRO reconstruction, including an MVA based calibration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">fccsw</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">/</span><span class="n">fccsw</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">MIT2024</span><span class="o">/</span><span class="n">lgbm_calibration</span><span class="o">-</span><span class="n">CaloClusters</span><span class="o">.</span><span class="n">onnx</span> <span class="c1"># needed for the MVA calibration</span>
+<span class="n">k4run</span> <span class="n">run_ALLEGRO_RECO</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">EventDataSvc</span><span class="o">.</span><span class="n">input</span><span class="o">=</span><span class="s2">&quot;electron_gun_10GeV_ALLEGRO_SIM.root&quot;</span> <span class="o">--</span><span class="n">out</span><span class="o">.</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;electron_gun_10GeV_ALLEGRO_RECO.root&quot;</span>
+</pre></div>
+</div>
+<p>Now let’s plot the energy resolution for raw clusters and MVA calibrated clusters:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>plot_calo_energy_resolution.py<span class="w"> </span>electron_gun_10GeV_ALLEGRO_RECO.root
+display<span class="w"> </span>electron_gun_10GeV_ALLEGRO_RECO_clusterEnergyResolution.png
+display<span class="w"> </span>electron_gun_10GeV_ALLEGRO_RECO_calibratedClusterEnergyResolution.png
+</pre></div>
+</div>
+<p>Look at both distributions to see how the MVA calibration improves the performance, both in terms of response and resolution. NB: the MVA calibration was not trained exactly in the configuration used here.</p>
+</section>
+<section id="changing-liquid-argon-to-liquid-krypton">
+<h3><span class="section-number">3.1.3.3. </span>Changing Liquid Argon to Liquid Krypton<a class="headerlink" href="#changing-liquid-argon-to-liquid-krypton" title="Link to this heading"></a></h3>
+<p>In a sampling calorimeter, the ratio between the energy deposited in the dead absorbers and sensitive media (sampling fraction) is an important parameter for energy resolution: the more energy in the sensitive media the better. Liquid Krypton being denser than Liquid Argon, it is an appealing choice for the detector design. Though it is more expensive and difficult to procure in real life, testing this option in Full Sim is extremely cheap:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>vim $K4GEO/FCCee/ALLEGRO/compact/ALLEGRO_o1_v02/ECalBarrel_thetamodulemerged.xml
+# change &quot;LAr&quot; to &quot;LKr&quot; in line 114 and 121
+</pre></div>
+</div>
+<p>And to accomodate this change, we have to update the sampling fraction in the steering file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vim</span> <span class="n">run_ALLEGRO_RECO</span><span class="o">.</span><span class="n">py</span>
+<span class="c1"># comment out line 105 and uncomment line 106</span>
+</pre></div>
+</div>
+<p>The derivation of new sampling fractions upon geometry change is out of scope for this tutorial.</p>
+<p>Let’s now re-run the simulation with the modified detector:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ddsim<span class="w"> </span>--enableGun<span class="w"> </span>--gun.distribution<span class="w"> </span>uniform<span class="w"> </span>--gun.energy<span class="w"> </span><span class="s2">&quot;10*GeV&quot;</span><span class="w"> </span>--gun.particle<span class="w"> </span>e-<span class="w"> </span>--gun.thetaMin<span class="w"> </span><span class="s2">&quot;55*degree&quot;</span><span class="w"> </span>--gun.thetaMax<span class="w"> </span><span class="s2">&quot;125*degree&quot;</span><span class="w">  </span>--numberOfEvents<span class="w"> </span><span class="m">100</span><span class="w"> </span>--outputFile<span class="w"> </span>electron_gun_10GeV_ALLEGRO_LKr_SIM.root<span class="w"> </span>--random.enableEventSeed<span class="w"> </span>--random.seed<span class="w"> </span><span class="m">42</span><span class="w"> </span>--compactFile<span class="w"> </span><span class="nv">$K4GEO</span>/FCCee/ALLEGRO/compact/ALLEGRO_o1_v02/ALLEGRO_o1_v02.xml
+k4run<span class="w"> </span>run_ALLEGRO_RECO.py<span class="w"> </span>--EventDataSvc.input<span class="o">=</span><span class="s2">&quot;electron_gun_10GeV_ALLEGRO_LKr_SIM.root&quot;</span><span class="w"> </span>--out.filename<span class="o">=</span><span class="s2">&quot;electron_gun_10GeV_ALLEGRO_LKr_RECO.root&quot;</span>
+python<span class="w"> </span>plot_calo_energy_resolution.py<span class="w"> </span>electron_gun_10GeV_ALLEGRO_LKr_RECO.root
+display<span class="w"> </span>electron_gun_10GeV_ALLEGRO_LKr_RECO_clusterEnergyResolution.png
+</pre></div>
+</div>
+<p>See how the energy resolution improved with LKr. NB: here the MVA calibration should be retrainned to achieve good performance.</p>
+</section>
+</section>
+<section id="towards-idea-tracking-with-the-detailed-drift-chamber">
+<h2><span class="section-number">3.1.4. </span>Towards IDEA tracking with the detailed Drift Chamber<a class="headerlink" href="#towards-idea-tracking-with-the-detailed-drift-chamber" title="Link to this heading"></a></h2>
+<p>The IDEA tracking system Full Sim description is getting complete: the Vertex and Drift Chamber have a geometry description and a digitizer while the Silicon Wrapper is on its way. We can thus start to work on the tracking algorithms implementation. In this exercise, we will produce a dataset containing Vertex and Drift Chamber digitized hits and which can therefore be used as input to develop these tracking algorithms.</p>
+<p>For this, let’s run the IDEA simulation and digitization:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ddsim<span class="w"> </span>--enableGun<span class="w"> </span>--gun.distribution<span class="w"> </span>uniform<span class="w"> </span>--gun.energy<span class="w"> </span><span class="s2">&quot;10*GeV&quot;</span><span class="w"> </span>--gun.particle<span class="w"> </span>e-<span class="w"> </span>--numberOfEvents<span class="w"> </span><span class="m">100</span><span class="w"> </span>--outputFile<span class="w"> </span>electron_gun_10GeV_IDEA_SIM.root<span class="w"> </span>--random.enableEventSeed<span class="w"> </span>--random.seed<span class="w"> </span><span class="m">42</span><span class="w"> </span>--compactFile<span class="w"> </span><span class="nv">$K4GEO</span>/FCCee/IDEA/compact/IDEA_o1_v02/IDEA_o1_v02.xml
+k4run<span class="w"> </span>run_IDEA_DIGI.py<span class="w"> </span>--EventDataSvc.input<span class="o">=</span><span class="s2">&quot;electron_gun_10GeV_IDEA_SIM.root&quot;</span><span class="w"> </span>--out.filename<span class="o">=</span><span class="s2">&quot;electron_gun_10GeV_IDEA_DIGI.root&quot;</span>
+</pre></div>
+</div>
+<p>The following collections are the one to use for tracking:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CDCHDigis</span><span class="w">                       </span><span class="n">extension</span><span class="o">::</span><span class="n">DriftChamberDigi</span>
+<span class="n">VTXDDigis</span><span class="w">                       </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">TrackerHit3D</span>
+<span class="n">VTXIBDigis</span><span class="w">                      </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">TrackerHit3D</span>
+<span class="n">VTXOBDigis</span><span class="w">                      </span><span class="n">edm4hep</span><span class="o">::</span><span class="n">TrackerHit3D</span>
+</pre></div>
+</div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">extension::DriftChamberDigi</span></code> object has two positions attached: one if we assume that the hit is on the left of the wire and one assuming it was on the right. cause the only accessible information from a drift chamber is the distance to the wire which is degenerated. This left/right ambiguity comes from the fact that only the distance to the wire is known and is alleviated during the tracking step.</p>
+<p>You can now play with the digitized hits:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="w"> </span><span class="n">electron_gun_10GeV_IDEA_DIGI</span><span class="p">.</span><span class="n">root</span>
+<span class="cp"># to be ran one by one (no full copy paste)</span>
+<span class="n">events</span><span class="o">-&gt;</span><span class="n">Draw</span><span class="p">(</span><span class="s">&quot;leftHitSimHitDeltaDistToWire&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// this is the difference of the distance to the wire between the left digi and the sim hit (only produced in debug mode)</span>
+<span class="n">events</span><span class="o">-&gt;</span><span class="n">Draw</span><span class="p">(</span><span class="s">&quot;CDCHDigis.rightPosition.x:CDCHDigis.rightPosition.y:CDCHDigis.rightPosition.z&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// you can see the electron trajectories</span>
+<span class="n">events</span><span class="o">-&gt;</span><span class="n">Draw</span><span class="p">(</span><span class="s">&quot;CDCHHits.eDep/CDCHHits.pathLength&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CDCHHits.eDep/CDCHHits.pathLength &lt; 4e-7&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// this shows the de/dx from the simHits</span>
+</pre></div>
+</div>
+</section>
+<section id="detector-visualization">
+<h2><span class="section-number">3.1.5. </span>Detector visualization<a class="headerlink" href="#detector-visualization" title="Link to this heading"></a></h2>
+<p>Displaying detector geometries is very useful to understand what is actually being simulated without having to enter the code. One example of tool (out of many) is described here, chosen for its simplicity together with the particular feature of hosting the needed data locally, leading to smooth performance of the visualization.</p>
+<p>Let’s first generate the files containing the geometry that will be used by the display tool.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://fccsw.web.cern.ch/fccsw/tutorials/static/python/dd4hep2root
+chmod<span class="w"> </span>+x<span class="w"> </span>dd4hep2root
+./dd4hep2root<span class="w"> </span>-c<span class="w"> </span><span class="nv">$K4GEO</span>/FCCee/CLD/compact/CLD_o2_v05/CLD_o2_v05.xml<span class="w"> </span>-o<span class="w"> </span>CLD_o2_v05_geom.root
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$PWD</span>/CLD_o2_v05_geom.root
+</pre></div>
+</div>
+<p>Now, let’s copy the file containing the geometry on your local machine:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="n">USERNAME</span><span class="nd">@HOSTNAME</span><span class="p">:</span><span class="n">ABSOLUTE_PATH_TO_GEOMETRY</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>Load the file from your computer with the triple-dot button of this webpage: <a class="reference external" href="https://root.cern/js/latest/">https://root.cern/js/latest/</a>.</p>
+<p>From there, you can navigate the geometry hierarchy to see how volumes are nested, display all or parts of the detector (right click on a volume &gt; Draw &gt; all), play with the camera settings (right click on an empty space in the display window &gt; Show Controls, Clipping &gt; Enable X and Enable Y), etc. See the following picture for illustration:</p>
+<figure class="align-center">
+<img alt="https://fccsw.web.cern.ch/fccsw/tutorials/MIT2024/pictures/JSROOT_Screenshot.png" src="https://fccsw.web.cern.ch/fccsw/tutorials/MIT2024/pictures/JSROOT_Screenshot.png" />
+</figure>
+<p>This tool is useful but not perfect and will not meet all the needs (especially if you want to overlay a physics event). To go further, other solutions are described in the dedicated <a class="reference external" href="https://hep-fcc.github.io/fcc-tutorials/main/full-detector-simulations/Visualization/Visualization.html">Visualization</a> tutorial.</p>
+</section>
+<section id="additional-resources">
+<h2><span class="section-number">3.1.6. </span>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://key4hep.github.io/key4hep-doc/setup-and-getting-started/README.html">Key4hep tutorial</a></p></li>
+<li><p><a class="reference external" href="https://fcc-ee-detector-full-sim.docs.cern.ch/">FCC Full Sim webpage</a></p></li>
+<li><p>Bi-weekly FCC Full Sim <a class="reference external" href="https://indico.cern.ch/category/16938/">working meeting</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../README.html" class="btn btn-neutral float-left" title="3. Full Simulation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../FCCeeGuineaPigIRBackgrounds/README.html" class="btn btn-neutral float-right" title="3.2. Using Guinea-Pig to generate interaction region backgrounds" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: mit2024
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../../main/index.html">main</a></dd>
+      <dd><a href="../../../bnl2023/index.html">bnl2023</a></dd>
+      <dd><a href="../../../cern2022/index.html">cern2022</a></dd>
+      <dd><a href="../../../flavours2025/index.html">flavours2025</a></dd>
+      <dd><a href="FCCeeGeneralOverview.html">mit2024</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
