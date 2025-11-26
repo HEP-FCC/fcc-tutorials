@@ -80,7 +80,6 @@ sphinx-build -b html . build
 
 Start a web server to host the generated files from `build` directory
 ```bash
-cd build
 python -m http.server -d build
 ```
 

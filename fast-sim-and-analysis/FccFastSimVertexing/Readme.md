@@ -1,8 +1,7 @@
 # Tracking and vertexing example using specific flavour decays
 
 >
-> Original authors: Emmanuel Francois Perez, Clement Helsens  
-> Edited by: Juraj Smiesko
+> Original authors: Emmanuel Francois Perez, Clement Helsens
 >
 
 
