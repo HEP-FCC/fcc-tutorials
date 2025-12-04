@@ -1,17 +1,24 @@
 # Distributed computing
 
-These pages provide --- and dissect --- examples of workflows to be run on distributed resources with the [DIRAC Interware system][dirac]
-through [iLCDirac][ilcdirac], the extension developed by the Linear Collider community and used also by CALICE.
+>
+> Original author: Gerardo Ganis
+>
 
-The procedure to be enabled to use the FCC resources through DIRAC is first described. Additional information about the use of
-iLCDirac can be found in the [CLIC][wikiclic] and [ILC][wikiilc] dedicated Wiki pages.
+These pages provide - and dissect - examples of workflows to be run on
+distributed resources with the [DIRAC Interware system][dirac] through
+[iLCDirac][ilcdirac], the extension developed by the Linear Collider community
+and used also by [CALICE][calice].
+
+The procedure how to use the FCC resources through DIRAC is described.
+Additional information about the use of iLCDirac can be found in the
+dedicated [iLCDirac Documentation][ilcdirac-docs].
 
 Unless specified, in the rest of this section the word `DIRAC` refers to the `iLCDirac` extension introduced above.
 
 [dirac]: https://dirac.readthedocs.io/en/latest/
 [ilcdirac]: https://iopscience.iop.org/article/10.1088/1742-6596/513/3/032077/meta
-[wikiclic]: https://twiki.cern.ch/twiki/bin/view/CLIC/DiracForUsers
-[wikiilc]: https://flcwiki.desy.de/ILCDirac
+[calice]: https://twiki.cern.ch/twiki/bin/view/CALICE/
+[ilcdirac-docs]: https://ilcdirac-doc.web.cern.ch/index.html
 
 ```{eval-rst}
 .. toctree::
