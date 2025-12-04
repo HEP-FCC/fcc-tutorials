@@ -1,0 +1,474 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.4. Visualization &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom-admonitions.css?v=e6bfab01" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4. Distributed computing" href="../../distributed-computing/README.html" />
+    <link rel="prev" title="3.3. Changing geometry" href="../Geometry/Geometry.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            FCC Tutorials
+              <img src="../../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../software-basics/README.html">1. First Steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fast-sim-and-analysis/README.html">2. Generators, Fast Simulation and Analysis</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../README.html">3. Full Simulation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeGeneralOverview/FCCeeGeneralOverview.html">3.1. FCC-ee Full Sim General Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FCCeeGuineaPigIRBackgrounds/README.html">3.2. Using Guinea-Pig to generate interaction region backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Geometry/Geometry.html">3.3. Changing geometry</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.4. Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#key4hep-tool-geodisplay">3.4.1. Key4hep tool: geoDisplay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#geant4">3.4.2. Geant4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#phoenix-fcc">3.4.3. Phoenix&#64;FCC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#event-data-from-cld-reconstructed-events">3.4.3.1. Event Data from CLD Reconstructed Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#event-data-from-delphes-fast-simulation">3.4.3.2. Event Data from Delphes Fast Simulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#detector-geometry">3.4.3.3. Detector Geometry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://fccsw.web.cern.ch/">FCC Software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://fcc-ee-detector-full-sim.docs.cern.ch/">FCC-ee Detector Full Sim</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/">FCCAnalyses</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC Software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../README.html"><span class="section-number">3. </span>Full Simulation</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3.4. </span>Visualization</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/main/full-detector-simulations/Visualization/Visualization.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="visualization">
+<h1><span class="section-number">3.4. </span>Visualization<a class="headerlink" href="#visualization" title="Link to this heading"></a></h1>
+<p>Visualization is of paramount importance in order to easily understand the behavior of the detector and simulation. In this section, several tools of visualizing the detector geometry and the particle tracks are provided.</p>
+<section id="key4hep-tool-geodisplay">
+<h2><span class="section-number">3.4.1. </span>Key4hep tool: geoDisplay<a class="headerlink" href="#key4hep-tool-geodisplay" title="Link to this heading"></a></h2>
+<p>The tool <code class="docutils literal notranslate"><span class="pre">geoDisplay</span></code> is available as part of <code class="docutils literal notranslate"><span class="pre">Key4hep</span></code> project. To use it, first we need to source it from <code class="docutils literal notranslate"><span class="pre">LCG</span></code></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/sft.cern.ch/lcg/views/dev4/latest/x86_64-centos7-gcc11-opt/setup.sh<span class="w"> </span>
+</pre></div>
+</div>
+<p>To use it, just pass as first argument the <code class="docutils literal notranslate"><span class="pre">xml</span></code> file with the detector description, for example</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>geoDisplay<span class="w"> </span><span class="nv">$DD4hepINSTALL</span>/DDDetectors/compact/SiD.xml
+</pre></div>
+</div>
+</section>
+<section id="geant4">
+<h2><span class="section-number">3.4.2. </span>Geant4<a class="headerlink" href="#geant4" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Geant</span> <span class="pre">4</span></code> visualization capabilities can be accessed as</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/sft.cern.ch/lcg/views/dev4/latest/x86_64-centos7-gcc11-opt/setup.sh<span class="w"> </span>
+ddsim<span class="w"> </span>--compactFile<span class="w"> </span><span class="nv">$DD4hepINSTALL</span>/DDDetectors/compact/SiD.xml<span class="w"> </span>--runType<span class="w"> </span>vis
+</pre></div>
+</div>
+<p>This version of <code class="docutils literal notranslate"><span class="pre">Geant</span> <span class="pre">4</span></code> is built with <code class="docutils literal notranslate"><span class="pre">Qt</span></code> interface, and can be explicitly called as</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ddsim<span class="w"> </span>--compactFile<span class="w"> </span><span class="nv">$DD4hepINSTALL</span>/DDDetectors/compact/SiD.xml<span class="w"> </span>--runType<span class="w"> </span>qt
+</pre></div>
+</div>
+<p>As in the previous step, the <code class="docutils literal notranslate"><span class="pre">LCG</span></code> version of <code class="docutils literal notranslate"><span class="pre">Key4hep</span></code> was sourced.</p>
+</section>
+<section id="phoenix-fcc">
+<h2><span class="section-number">3.4.3. </span>Phoenix&#64;FCC<a class="headerlink" href="#phoenix-fcc" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://github.com/HSF/phoenix">Phoenix</a> is a web based event display for High
+Energy Physics. To visualize FCC events one needs to provide detector geometry
+and generated events — event data.</p>
+<p>In this tutorial we will be working with files/programs stored on two computers.
+First computer will be the one which can source Key4hep stack, e.g. <code class="docutils literal notranslate"><span class="pre">lxplus</span></code> and
+the second one will be yours with the recent web browser. We will call the first
+one the <em>remote machine</em> and the second one the <em>local machine</em>.</p>
+<section id="event-data-from-cld-reconstructed-events">
+<h3><span class="section-number">3.4.3.1. </span>Event Data from CLD Reconstructed Events<a class="headerlink" href="#event-data-from-cld-reconstructed-events" title="Link to this heading"></a></h3>
+<p>Let’s start with the visualization of the event data in the established detector
+design – CLD, which started its life as the detector designed for the linear
+collider concept CLIC. The detectors in Key4hep are described using
+<a class="reference external" href="https://dd4hep.web.cern.ch/dd4hep/">DD4hep</a> compact files. The compact files
+are written in XML and expose configuration options for the detector.</p>
+<p>Example CLD compact file can be examined after sourcing of the Key4hep stack on
+the remote machine</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh
+</pre></div>
+</div>
+<p>like so</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>less<span class="w"> </span><span class="si">${</span><span class="nv">K4GEO</span><span class="si">}</span>/FCCee/CLD/compact/CLD_o2_v07/CLD_o2_v07.xml
+</pre></div>
+</div>
+<p>This file is part part of the <a class="reference external" href="https://github.com/key4hep/k4geo/">k4geo</a>
+repository, which stores among other detector concepts integrated in Key4hep
+also FCC-ee detector designs.</p>
+<p>The Phoenix web application already showcases the CLD detector in different
+options <a class="reference external" href="https://fccsw.web.cern.ch/fccsw/phoenix/">here</a> and we will
+simulate few events in order to visualize them there.</p>
+<p>On the remote machine we will need to clone the
+<a class="reference external" href="https://github.com/iLCSoft/CLICPerformance">CLDConfig</a> repository</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/key4hep/CLDConfig.git
+<span class="nb">cd</span><span class="w"> </span>CLDConfig/CLDConfig
+</pre></div>
+</div>
+<p>run the simulation</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ddsim<span class="w"> </span>--compactFile<span class="w"> </span><span class="si">${</span><span class="nv">K4GEO</span><span class="si">}</span>/FCCee/CLD/compact/CLD_o2_v07/CLD_o2_v07.xml<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--steeringFile<span class="w"> </span>cld_steer.py<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--inputFiles<span class="w"> </span>../test/yyxyev_000.stdhep<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--outputFile<span class="w"> </span>tops_cld_SIM_edm4hep.root<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--numberOfEvents<span class="w"> </span><span class="m">5</span>
+</pre></div>
+</div>
+<p>and after that, run the reconstruction with the help of the
+<code class="docutils literal notranslate"><span class="pre">CLDReconstruction.py</span></code> steering file</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>k4run<span class="w"> </span>CLDReconstruction.py<span class="w"> </span>--inputFiles<span class="w"> </span>tops_cld_SIM_edm4hep.root<span class="w"> </span><span class="se">\</span>
+<span class="w">                           </span>--outputBasename<span class="w"> </span>tops_cld<span class="w"> </span><span class="se">\</span>
+<span class="w">                           </span>--num-events<span class="w"> </span>-1
+</pre></div>
+</div>
+<p>There should now be a file called <code class="docutils literal notranslate"><span class="pre">tops_cld_REC_edm4hep.root</span></code> inside our working
+directory. More information about running of the CLD FullSim you can visit
+<a class="reference external" href="https://fcc-ee-detector-full-sim.docs.cern.ch/CLD/">FCC-ee Detector Full Sim</a>
+page.</p>
+<p>In order to visualize the events inside <code class="docutils literal notranslate"><span class="pre">tops_cld_REC_edm4hep.root</span></code> file we
+need to convert the <a class="reference external" href="https://edm4hep.web.cern.ch/">EDM4hep</a> ROOT file into
+intermediate JSON representation with the command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>edm4hep2json<span class="w"> </span>-e<span class="w"> </span><span class="m">0</span><span class="w"> </span>tops_cld_REC_edm4hep.root
+</pre></div>
+</div>
+<div class="callout admonition">
+<p class="admonition-title">EDM4hep in JSON</p>
+<p>Be careful when converting EDM4hep ROOT files into JSON files as JSON is very
+ineffective in storing information leading to very large file size.</p>
+<p>Always check size of your file to be around 200MB at maximum. One can check the
+file size using <code class="docutils literal notranslate"><span class="pre">du</span></code> command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>du<span class="w"> </span>-h<span class="w"> </span>tops_cld_REC.edm4hep.json
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">edm4hep2json</span></code> offers possibility to limit either number of events exported
+or which collections. See <code class="docutils literal notranslate"><span class="pre">edm4hep2json</span> <span class="pre">-h</span></code> for more details.</p>
+</div>
+<p>Now we download the obtained file from the remote machine into our local one.
+Most easily done with <code class="docutils literal notranslate"><span class="pre">scp</span></code></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>scp<span class="w"> </span>lxplus.cern.ch:CLDConfig/CLDConfig/tops_cld_REC.edm4hep.json<span class="w"> </span>.
+</pre></div>
+</div>
+<p>To upload the EDM4hep JSON file into the
+<a class="reference external" href="https://fccsw.web.cern.ch/fccsw/phoenix/#/fccee-cld/">Phoenix</a> use the upload
+button in the lover right corner of the web page</p>
+<img alt="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_upload.png" class="align-center" src="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_upload.png" />
+<p>to bring up modal with our desired upload option</p>
+<a class="reference internal image-reference" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_upload_edm4hepjson.png"><img alt="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_upload_edm4hepjson.png" class="align-center" src="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_upload_edm4hepjson.png" style="width: 300px;" />
+</a>
+<p>The detector and event data might look similar to this screenshot</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_cld.png"><img alt="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_cld.png" src="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_cld.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Example reconstructed event in CLD detector</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="solution dropdown admonition">
+<p class="admonition-title">EDM4hep JSON File</p>
+<p>The obtained EDM4hep JSON file should look similar to
+<a class="reference external" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/json/tops_cld.edm4hep.json">this one</a> [Right click to download].</p>
+</div>
+</section>
+<section id="event-data-from-delphes-fast-simulation">
+<h3><span class="section-number">3.4.3.2. </span>Event Data from Delphes Fast Simulation<a class="headerlink" href="#event-data-from-delphes-fast-simulation" title="Link to this heading"></a></h3>
+<p>Let’s start by generating sample files using <a class="reference internal" href="../../fast-sim-and-analysis/k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html#delphesedm4hep"><span class="std std-ref">Generate and Simulate Events with DelphesEDM4Hep</span></a> tutorial section.</p>
+<p>Produced EDM4hep ROOT file(s) needs to be converted into intermediate JSON
+format with the <code class="docutils literal notranslate"><span class="pre">edm4hep2json</span></code> converter. Let’s look at the file more closely,
+so we can decide what to keep/convert.</p>
+<p>Primary tool for inspecting EDM4hep files is <code class="docutils literal notranslate"><span class="pre">podio-dump</span></code>. This command can show
+you list of all collections and also metadata stored in the file. To list the
+collections in the default frame use</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>podio-dump<span class="w"> </span>p8_ee_ZH_ecm240_edm4hep.root
+</pre></div>
+</div>
+<p>Alternatively, one can always use ROOT to inspect the file. Start by running</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>root<span class="w"> </span>p8_ee_ZH_ecm240_edm4hep.root
+</pre></div>
+</div>
+<p>and execute the <code class="docutils literal notranslate"><span class="pre">Show()</span></code> command on the <code class="docutils literal notranslate"><span class="pre">events</span></code> TTree</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">events</span><span class="o">-&gt;</span><span class="n">Show</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>this will show you all the branches which are by the PODIO reader to recreate
+EDM4hep objects and their relations in memory.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">edm4hep2json</span></code> for converting the EDM4hep ROOT file into JSON we select
+desired collections with <code class="docutils literal notranslate"><span class="pre">-l</span></code> flag and limit number of converted events to 10
+with <code class="docutils literal notranslate"><span class="pre">-n</span></code> flag</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>edm4hep2json<span class="w"> </span>-l<span class="w"> </span>ReconstructedParticles,Jet,EFlowTrack,TrackerHits,Particle,MCRecoAssociations,MissingET<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>p8_ee_ZH_ecm240_edm4hep.root
+</pre></div>
+</div>
+<p>The resulting EDM4hep JSON file can now be downloaded with <code class="docutils literal notranslate"><span class="pre">scp</span></code> to the local
+machine and uploaded into
+<a class="reference external" href="https://fccsw.web.cern.ch/fccsw/phoenix/#/fccee-idea/">Phoenix</a> visualization
+of the IDEA detector.</p>
+<div class="solution dropdown admonition">
+<p class="admonition-title">EDM4hep JSON File</p>
+<p>The obtained EDM4hep JSON file should look similar to
+<a class="reference external" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/json/p8_ee_ZH_ecm240_edm4hep.edm4hep.json">this one</a> [Right click to download].</p>
+</div>
+</section>
+<section id="detector-geometry">
+<h3><span class="section-number">3.4.3.3. </span>Detector Geometry<a class="headerlink" href="#detector-geometry" title="Link to this heading"></a></h3>
+<p>There are several ways how to import FCC detector geometry into Phoenix.
+Currently the preferred method is to convert compact DD4hep file(s) to ROOT
+files and from ROOT files to glTF files. The first conversion
+(<code class="docutils literal notranslate"><span class="pre">.xml</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">.root</span></code>) is straightforward and can be done using script like
+<a class="reference external" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/python/dd4hep2root">this</a>.
+With the most important part being the building of the detector geometry from
+the compact file</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ROOT</span>
+
+<span class="n">ROOT</span><span class="o">.</span><span class="n">gSystem</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;libDDCore&#39;</span><span class="p">)</span>
+<span class="n">description</span> <span class="o">=</span> <span class="n">ROOT</span><span class="o">.</span><span class="n">dd4hep</span><span class="o">.</span><span class="n">Detector</span><span class="o">.</span><span class="n">getInstance</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">cfile</span> <span class="ow">in</span> <span class="n">compact_files</span><span class="p">:</span>
+    <span class="n">description</span><span class="o">.</span><span class="n">fromXML</span><span class="p">(</span><span class="n">cfile</span><span class="p">)</span>
+
+<span class="n">ROOT</span><span class="o">.</span><span class="n">gGeoManager</span><span class="o">.</span><span class="n">SetVisLevel</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">ROOT</span><span class="o">.</span><span class="n">gGeoManager</span><span class="o">.</span><span class="n">SetVisOption</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ROOT</span><span class="o">.</span><span class="n">gGeoManager</span><span class="o">.</span><span class="n">Export</span><span class="p">(</span><span class="n">out_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We will try to convert FCCee Noble Liquid Calorimeter. On the remote machine
+with FCCSW stack already sourced download the <code class="docutils literal notranslate"><span class="pre">dd4hep2root</span></code> script</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://fccsw.web.cern.ch/fccsw/tutorials/static/python/dd4hep2root
+</pre></div>
+</div>
+<p>make it executable</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chmod</span> <span class="n">u</span><span class="o">+</span><span class="n">x</span> <span class="n">dd4hep2root</span>
+</pre></div>
+</div>
+<p>and run the conversion with</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./dd4hep2root<span class="w"> </span>-c<span class="w"> </span><span class="si">${</span><span class="nv">FCCDETECTORS</span><span class="si">}</span>/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectEmptyMaster.xml<span class="w"> </span><span class="se">\</span>
+<span class="w">                 </span><span class="si">${</span><span class="nv">FCCDETECTORS</span><span class="si">}</span>/Detector/DetFCCeeECalInclined/compact/FCCee_ECalBarrel.xml
+<span class="w">              </span>-o<span class="w"> </span>fccee_lar.root
+</pre></div>
+</div>
+<p>The resulting file <code class="docutils literal notranslate"><span class="pre">fccee_lar.root</span></code> can already be visualized with ROOT. Let’s
+download it to the local machine with <code class="docutils literal notranslate"><span class="pre">scp</span></code> and then upload it into
+<a class="reference external" href="https://root.cern/js/latest/">JSROOT</a>. This way we don’t have to have ROOT
+installed on our local machine.</p>
+<img alt="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/jsroot_upload.png" class="align-center" src="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/jsroot_upload.png" />
+<p>Resulting in the following visualization</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/jsroot_lar.png"><img alt="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/jsroot_lar.png" src="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/jsroot_lar.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Noble Liquid Calorimeter visualized with JSROOT</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Second conversion (<code class="docutils literal notranslate"><span class="pre">.root</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">.gltf</span></code>) requires additional configuration and
+can be done using the
+<a class="reference external" href="https://github.com/HSF/root_cern-To_gltf-Exporter">root_cern-To_gltf-Exporter</a>.
+We have to create menu items, suppress drawing of detector parts which are too
+detailed or can affect the performance.</p>
+<p>The
+<a class="reference external" href="https://github.com/HSF/root_cern-To_gltf-Exporter">root_cern-To_gltf-Exporter</a>
+converter runs in the browser and is configured with an HTML page. It is
+recommended to run the converter on the local machine, but it should be possible
+to run it also on the remote machine over SSH with XWindowing enabled.</p>
+<p>Let’s start with cloning the converter repository</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/HSF/root_cern-To_gltf-Exporter.git
+<span class="nb">cd</span><span class="w"> </span>root_cern-To_gltf-Exporter
+</pre></div>
+</div>
+<p>then, we create new file <code class="docutils literal notranslate"><span class="pre">fccee_lar_conversion.html</span></code> and use, for example, the
+following configuration for the FCCee Noble Liquid Calorimeter:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/three@0.139.1/build/three.js&quot;</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/three@0.139.1/examples/js/exporters/GLTFExporter.js&quot;</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://root.cern/js/latest/scripts/JSRoot.core.js&quot;</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;module&quot;</span><span class="p">&gt;</span>
+
+<span class="w">    </span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">convertGeometry</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./phoenixExport.js&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">hide_children</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;passive_&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;active_&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;PCB_&quot;</span>
+<span class="w">    </span><span class="p">];</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">subparts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;Cryo Front&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[[</span><span class="s2">&quot;ECAL_Cryo_front_0&quot;</span><span class="p">],</span><span class="w"> </span><span class="mf">.8</span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;Cryo Back&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[[</span><span class="s2">&quot;ECAL_Cryo_back_1&quot;</span><span class="p">],</span><span class="w"> </span><span class="mf">.8</span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;Cryo Sides&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[[</span><span class="s2">&quot;ECAL_Cryo_side_2&quot;</span><span class="p">],</span><span class="w"> </span><span class="mf">.8</span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;Services Front&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[[</span><span class="s2">&quot;services_front_3&quot;</span><span class="p">],</span><span class="w"> </span><span class="mf">.6</span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;Services Back&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[[</span><span class="s2">&quot;services_back_4&quot;</span><span class="p">],</span><span class="w"> </span><span class="mf">.6</span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;Bath&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[[</span><span class="s2">&quot;LAr_bath_5&quot;</span><span class="p">],</span><span class="w"> </span><span class="kc">true</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">convertGeometry</span><span class="p">(</span><span class="s2">&quot;./fccee_lar.root&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;fccee_lar.gltf&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="nx">subparts</span><span class="p">,</span><span class="w"> </span><span class="nx">hide_children</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">120</span><span class="p">);</span>
+<span class="w">  </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Last missing peace is the ROOT file containing the detector geometry
+<code class="docutils literal notranslate"><span class="pre">fccee_lar.root</span></code> which we should also copy into the converter directory.</p>
+<p>To start the converter do</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./run
+</pre></div>
+</div>
+<p>which will start the web server and show URL to which we can connect through
+the web browser</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Started</span> <span class="n">http</span> <span class="n">server</span> <span class="n">to</span> <span class="n">serve</span> <span class="n">requests</span> <span class="n">at</span><span class="p">:</span>
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">8000</span>
+</pre></div>
+</div>
+<p>In the web browser we should see directory listing similar to this one:</p>
+<img alt="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/gltfconv.png" class="align-center" src="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/gltfconv.png" />
+<p>clicking on the <code class="docutils literal notranslate"><span class="pre">fccee_lar_conversion.html</span></code> starts the conversion. At the end of
+it the automatic download pop-up should appear in the browser window. The glTF
+file can be uploaded into Playground section of the
+<a class="reference external" href="https://fccsw.web.cern.ch/fccsw/phoenix/#/playground">Phoenix</a> application by
+selecting the correct geometry file format:</p>
+<a class="reference internal image-reference" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_playground_upload.png"><img alt="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_playground_upload.png" class="align-center" src="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_playground_upload.png" style="width: 300px;" />
+</a>
+<p>The resulting visualization will be similar to the following screenshot</p>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_playground_lar.png"><img alt="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_playground_lar.png" src="https://fccsw.web.cern.ch/fccsw/tutorials/static/png/phoenix_playground_lar.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Example reconstructed event in CLD detector</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="solution dropdown admonition">
+<p class="admonition-title">glTF File</p>
+<p>The obtained glTF file should look similar to
+<a class="reference external" href="https://fccsw.web.cern.ch/fccsw/tutorials/static/gltf/fccee_lar.gltf">this one</a> [Right click to download].</p>
+</div>
+<div class="challenge admonition">
+<p class="admonition-title">LAr Clusters</p>
+<p>Try to reconstruct calorimeter clusters in LAr Calorimeter and visualize them in
+the Phoenix Playground alongside with the detector.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Geometry/Geometry.html" class="btn btn-neutral float-left" title="3.3. Changing geometry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../distributed-computing/README.html" class="btn btn-neutral float-right" title="4. Distributed computing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: main
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="Visualization.html">main</a></dd>
+      <dd><a href="../../../bnl2023/index.html">bnl2023</a></dd>
+      <dd><a href="../../../cern2022/index.html">cern2022</a></dd>
+      <dd><a href="../../../flavours2025/index.html">flavours2025</a></dd>
+      <dd><a href="../../../mit2024/index.html">mit2024</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.3. Understanding generated process: eedE &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom-admonitions.css?v=e6bfab01" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.4. FCC: Analysing simulated events" href="fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.html" />
+    <link rel="prev" title="2.2. FCC: Getting started with simulating events in Delphes" href="k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FCC Tutorials
+              <img src="../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../software-basics/README.html">1. First Steps</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">2. Generators, Fast Simulation and Analysis</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FccFastSimGeneration.html">2.1. FCC: Getting started with event generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html">2.2. FCC: Getting started with simulating events in Delphes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.3. Understanding generated process: eedE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#edm4hep2json">2.3.1. edm4hep2json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-eede">2.3.2. Using eedE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#visualizing-the-mc-particle-tree">2.3.2.1. Visualizing the MC particle Tree</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.html">2.4. FCC: Analysing simulated events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FccFastSimVertexing/Readme.html">2.5. Tracking and vertexing example using specific flavour decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FCCAnalysesProblemsAndSolutions.html">2.6. FCCAnalyses: Common problems and solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EventProduction.html">2.7. Central production of events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../full-detector-simulations/README.html">3. Full Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed-computing/README.html">4. Distributed computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developing-fcc-software/README.html">5. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">6. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://fccsw.web.cern.ch/">FCC Software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://fcc-ee-detector-full-sim.docs.cern.ch/">FCC-ee Detector Full Sim</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/">FCCAnalyses</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC Software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="README.html"><span class="section-number">2. </span>Generators, Fast Simulation and Analysis</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2.3. </span>Understanding generated process: eedE</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/main/fast-sim-and-analysis/eedE.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="understanding-generated-process-eede">
+<h1><span class="section-number">2.3. </span>Understanding generated process: eedE<a class="headerlink" href="#understanding-generated-process-eede" title="Link to this heading"></a></h1>
+<p>The <a class="reference external" href="https://key4hep.github.io/eede/release/index.html">EDM4hep event data explorer (eedE)</a> is a tool for visualizing the association between various objects in EDM4hep events. It is lightweight and self-explanatory. This section explains the usage of eedE.</p>
+<section id="edm4hep2json">
+<h2><span class="section-number">2.3.1. </span>edm4hep2json<a class="headerlink" href="#edm4hep2json" title="Link to this heading"></a></h2>
+<p>Please note that the <code class="docutils literal notranslate"><span class="pre">edm4hep2json</span></code> command provided in stack <code class="docutils literal notranslate"><span class="pre">2022-12-23</span></code> does not work. You can open a new SSH connection and source a more recent stack, for example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">cvmfs</span><span class="o">/</span><span class="n">sw</span><span class="o">.</span><span class="n">hsf</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">key4hep</span><span class="o">/</span><span class="n">setup</span><span class="o">.</span><span class="n">sh</span> <span class="o">-</span><span class="n">r</span> <span class="mi">2024</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">10</span>
+</pre></div>
+</div>
+<p>eede takes json files as inputs. The <code class="docutils literal notranslate"><span class="pre">edm4hep2json</span></code> command converts the edm4hep data into a json format.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">edm4hep2json</span> <span class="n">my</span><span class="o">-</span><span class="n">file</span><span class="o">.</span><span class="n">edm4hep</span><span class="o">.</span><span class="n">root</span>
+</pre></div>
+</div>
+<p>You can use the command with the following options</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Usage</span><span class="p">:</span> <span class="n">edm4hep2json</span> <span class="p">[</span><span class="n">olenfvh</span><span class="p">]</span> <span class="n">FILEPATH</span>
+  <span class="o">-</span><span class="n">o</span><span class="o">/--</span><span class="n">out</span><span class="o">-</span><span class="n">file</span>           <span class="n">output</span> <span class="n">file</span> <span class="n">path</span>
+                            <span class="n">default</span><span class="p">:</span> <span class="s2">&quot;?edm4hep.root&quot;</span> <span class="o">--&gt;</span> <span class="s2">&quot;.edm4hep.json&quot;</span>
+  <span class="o">-</span><span class="n">l</span><span class="o">/--</span><span class="n">coll</span><span class="o">-</span><span class="nb">list</span>          <span class="n">comma</span> <span class="n">separated</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">collections</span> <span class="n">to</span> <span class="n">be</span> <span class="n">converted</span>
+  <span class="o">-</span><span class="n">e</span><span class="o">/--</span><span class="n">events</span>             <span class="n">comma</span> <span class="n">separated</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">events</span> <span class="n">to</span> <span class="n">be</span> <span class="n">processed</span>
+  <span class="o">-</span><span class="n">n</span><span class="o">/--</span><span class="n">nevents</span>            <span class="n">maximal</span> <span class="n">number</span> <span class="n">of</span> <span class="n">events</span> <span class="n">to</span> <span class="n">be</span> <span class="n">processed</span>
+  <span class="o">-</span><span class="n">f</span><span class="o">/--</span><span class="n">frame</span><span class="o">-</span><span class="n">name</span>         <span class="nb">input</span> <span class="n">frame</span> <span class="n">name</span>
+                            <span class="n">default</span><span class="p">:</span> <span class="s2">&quot;events&quot;</span>
+  <span class="o">-</span><span class="n">v</span><span class="o">/--</span><span class="n">verbose</span>            <span class="n">be</span> <span class="n">more</span> <span class="n">verbose</span>
+  <span class="o">-</span><span class="n">h</span><span class="o">/--</span><span class="n">help</span>               <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span>
+</pre></div>
+</div>
+<p>For example, one can call it with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">edm4hep2json</span> <span class="o">-</span><span class="n">l</span> <span class="n">ReconstructedParticles</span><span class="p">,</span><span class="n">Particle</span><span class="p">,</span><span class="n">MCRecoAssociations</span> <span class="o">-</span><span class="n">e</span> <span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span> <span class="n">my</span><span class="o">-</span><span class="n">file</span><span class="o">.</span><span class="n">edm4hep</span><span class="o">.</span><span class="n">root</span>
+</pre></div>
+</div>
+<p>to save only “ReconstructedParticles,Particle,MCRecoAssociations” object collections, and only the 2nd, 3rd, 5th, 7th, and 11th events in the file.
+An example output can be found at <a class="reference external" href="https://fccsw.web.cern.ch/fccsw/tutorials/eede-tutorial/example_eedE_tutorial.edm4hep.json">example.edm4hep.json</a></p>
+</section>
+<section id="using-eede">
+<h2><span class="section-number">2.3.2. </span>Using eedE<a class="headerlink" href="#using-eede" title="Link to this heading"></a></h2>
+<p>Once the data has been converted into a json format via edm4hep2json, one can then head to the website of <a class="reference external" href="https://key4hep.github.io/eede/release/index.html">eedE</a>. After pressing the Start button, one is required to upload the EDM4hep json file via the Browse button. You can then select the type of association (<code class="docutils literal notranslate"><span class="pre">view</span></code>) to visualize.</p>
+<a class="reference internal image-reference" href="../_images/eede_upload.png"><img alt="../_images/eede_upload.png" class="align-center" src="../_images/eede_upload.png" style="width: 600px;" />
+</a>
+<section id="visualizing-the-mc-particle-tree">
+<h3><span class="section-number">2.3.2.1. </span>Visualizing the MC particle Tree<a class="headerlink" href="#visualizing-the-mc-particle-tree" title="Link to this heading"></a></h3>
+<p>Here we take the MC particle tree as an example.
+In the tree shown in the picture illustrates a collision at 91 GeV, where both the electron and positron emit a ISR photon before they merge into an on-shell Z boson, which decays into a pair of b quarks.</p>
+<a class="reference internal image-reference" href="../_images/eede_Zbb_example.png"><img alt="../_images/eede_Zbb_example.png" class="align-center" src="../_images/eede_Zbb_example.png" style="width: 400px;" />
+</a>
+<p>For each MC particle, values for <code class="docutils literal notranslate"><span class="pre">p</span></code>, <code class="docutils literal notranslate"><span class="pre">t</span></code>, <code class="docutils literal notranslate"><span class="pre">m</span></code>, <code class="docutils literal notranslate"><span class="pre">q</span></code> represents the momentum in lab frame, time of production, invariant mass, and charge, while <code class="docutils literal notranslate"><span class="pre">d</span></code> gives the displacement from the origin of lab frame (0,0,0) to the position where the particle is produced.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.html" class="btn btn-neutral float-left" title="2.2. FCC: Getting started with simulating events in Delphes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.html" class="btn btn-neutral float-right" title="2.4. FCC: Analysing simulated events" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: main
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="eedE.html">main</a></dd>
+      <dd><a href="../../bnl2023/index.html">bnl2023</a></dd>
+      <dd><a href="../../cern2022/index.html">cern2022</a></dd>
+      <dd><a href="../../flavours2025/index.html">flavours2025</a></dd>
+      <dd><a href="../../mit2024/index.html">mit2024</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
