@@ -1,20 +1,24 @@
-
 # FCC: Analysing simulated events
 
-Let's first clone and build `FCCAnalyses`.
+>
+> Original author: Michele Selvaggi
+>
 
+Let's first clone and build `FCCAnalyses` with the following commands:
 ```bash
 git clone --branch pre-edm4hep1 https://github.com/HEP-FCC/FCCAnalyses.git
 cd FCCAnalyses
 source ./setup.sh
-mkdir build install && cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=../install
-make install -j 20
+fccanalysis build -j 8
+```
+and create a directory containing this tutorial:
+```bash
 cd ..
 mkdir tutorial && cd tutorial
 ```
 
-Copy the necessary files, either from the web or from some location where the files were produced locally
+Copy the necessary files, either from the web or from some location where the
+files were produced locally
 
 ```bash
 mkdir localSamples && cd localSamples

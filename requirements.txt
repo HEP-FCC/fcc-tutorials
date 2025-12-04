@@ -4,3 +4,4 @@ sphinx-rtd-theme==3.0.2
 sphinx-togglebutton==0.3.2
 sphinx-copybutton==0.5.2
 sphinx-multiversion==0.2.4
+sphinx-autobuild==2025.8.25
