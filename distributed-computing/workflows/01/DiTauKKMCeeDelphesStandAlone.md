@@ -1,15 +1,19 @@
 # Workflow 1
 
-## Purpose
+:::{admonition} Purpose
+:class: objectives
 
-Demonstrate the use of DIRAC generate 10000 tau+tau- events @91.2 GeV with KKMC and process through Delphes/IDEA.
+Demonstrate the use of DIRAC to generate 10'000 $\tau^{+}\tau^{-}$ events
+@ 91.2 GeV with KKMC and process them through Delphes/IDEA.
+:::
 
 ## Output files
 
-**Local mode**<br>
-The output file is located under a sub-directory name `Local_<hash>_JobDir` created under the current directory.
+**Local mode**  
+The output file is located under a sub-directory name `Local_<hash>_JobDir`
+created under the current directory.
 
-**WMS mode**<br>
+**WMS mode**  
 In WMS mode the file will be located under
 
 ```
@@ -24,16 +28,18 @@ e.g. at CERN (storage element `CERN-DST-EOS`):
 
 ## DIRAC components involved
 
-This exercise constist of two steps, the event generation with `KKMCee` and the `Delphes` simulation.
+This exercise consists of two steps, the event generation with `KKMCee` and the
+`Delphes` simulation.
 
-For the first step we need the `KKMC` DIRAC application which we configure with the process, the number of events, the energy and
-the name of the output file.
+For the first step we need the `KKMC` DIRAC application which we configure with
+the process, the number of events, the energy and the name of the output file.
 
-The second step consists in running the `DelphesPythia8_EDM4HEP` standalone application with arguments
+The second step consists in running the `DelphesPythia8_EDM4HEP` standalone
+application with arguments
 
 1. The `Delphes` card implementing the IDEA detector concept;
 2. The definition of the EDM4hep output;
-3. The pythia card reading LHE file formats;
+3. The Pythia card reading LHE file formats;
 4. The output file.
 
 For this we use the generic application DIRAC interface.
@@ -189,7 +195,7 @@ copywithreplace(pythiacardpath, pythiacard, replacements)
 job.setInputSandbox(['./' + delphescard, './' + edm4hepoutdef, './' + pythiacard])
 ```
 
-### Standalone `Delphes` using the DIRAC generic application 
+### Standalone `Delphes` using the DIRAC generic application
 
 ```python
 from ILCDIRAC.Interfaces.API.NewInterface.Applications import GenericApplication
@@ -217,14 +223,14 @@ Suggestion is, after having cloned the repository and initialized the environmen
 from there:
 
 ```
-$ cd workflow/1
-$ mkdir run; cd run
+cd workflow/1
+mkdir run; cd run
 ```
 
 ### Local submission
 
 ```bash
-$ python ../FCC_Dirac_Workflow1.py --wms local
+python ../FCC_Dirac_Workflow1.py --wms local
 ```
 
 ```
@@ -260,8 +266,9 @@ Proceed and submit job(s)? y/[n] : y
 The local sandbox should contain the following:
 
 ```
-$ ls -lt
+ls -lt
 ```
+
 ```
 total 32
 drwx------. 2 ganis sf  2048 Jul 28 18:27 Local_pQl06k_JobDir
@@ -309,8 +316,9 @@ JobID=59838136 Status=Waiting; MinorStatus=Pilot Agent Submission; Site=ANY;
 or, when the job is finished,  get the job files:
 
 ```
-$ dirac-wms-job-get-output 59838136
+dirac-wms-job-get-output 59838136
 ```
+
 ```
 Job output sandbox retrieved in /afs/cern.ch/user/g/ganis/local/dirac/GIT/FCCDIRAC/workflows/1/run/59838136/
 $ ls -lt 59838136/
@@ -324,10 +332,11 @@ total 1295
 -rw-r--r--. 1 ganis sf 227185 Apr 30 15:47 setup.sh
 -rw-r--r--. 1 ganis sf  19080 Jan  1  1970 jobDescription.xml
 ```
+
 or get the output data:
 
 ```
-$ dirac-wms-job-get-output-data 59838136
+dirac-wms-job-get-output-data 59838136
 ```
 
 ```
@@ -339,20 +348,23 @@ $ ls -lt kktautau_delphes_edm4hep_output.root
 The output data are also available on storage element:
 
 ```
-$ ls -lt /eos/experiment/fcc/prod/fcc/user/g/ganis/2021_07/59838/59838136/
+ls -lt /eos/experiment/fcc/prod/fcc/user/g/ganis/2021_07/59838/59838136/
 ```
+
 ```
 total 9427
 -rw-r--r--. 1 fcc001 fcc-cg 9652641 Jul 28 19:13 kktautau_delphes_edm4hep_output.root
 ```
 
 The job id of the user jobs get also be retrieved with the `dirac-wms-select-jobs` command, e.g.
+
 ```
-$ dirac-wms-select-jobs --Date=2021-07-28 --Owner="ganis"
+dirac-wms-select-jobs --Date=2021-07-28 --Owner="ganis"
 ```
+
 ```
 ==> Selected 1 jobs with conditions: Date = 2021-07-28, Owner = ganis
 59838136
 ```
-or from the web portal.
 
+or from the web portal.

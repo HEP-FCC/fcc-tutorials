@@ -1,18 +1,23 @@
 # Overview of the submission scripts
 
-Command line submission to DIRAC is performed using python scripts instantiating the relevant classes.
-The general structure of the script is the following:
+Command line submission to DIRAC is performed using Python scripts
+instantiating the relevant classes. The general structure of the script is
+following:
 
 1. Instantiation of the interface to DIRAC;
-2. Creation of a Job manager instance, including input and output sandbox, and all relevant config and data files; 
-3. Creation and configuration of the application to be run and their registration to the job manager instance;
+2. Creation of a Job manager instance, including input and output sandbox, and
+   all relevant configuration and data files;
+3. Creation and configuration of the application(s) to be run and their
+   registration to the job manager instance;
 4. Job submission
 
-The script may contain or import all the code relevant to the correct definition of the various steps above.
-DIRAC also provides some standard tooling for parsing arguments and homogenize the submission script experience. 
+The script may contain or import all the code relevant to the correct
+definition of the various steps above. DIRAC also provides some standard
+tooling for parsing arguments to homogenize the submission script experience.
 
-The parser is defined the DIRAC core, is part of the generic definition of [Script][script] and provides a callback for
-customizing the actions. Typical usage looks like this:
+The parser is defined in the DIRAC core, is part of the generic definition of
+[Script][script] and provides a callback for customizing the actions. Typical
+usage looks like this:
 
 ```python
 from DIRAC import S_OK, S_ERROR
@@ -48,7 +53,7 @@ from ILCDIRAC.Interfaces.API.DiracILC import DiracILC
 dIlc = DiracILC()
 ```
 
-The returned `dILc` variable contais the API context to be used when relevant.
+The returned `dILc` variable contains the API context to be used when relevant.
 
 [diracapi]: https://raw.githubusercontent.com/DIRACGrid/DIRAC/integration/src/DIRAC/Interfaces/API/Dirac.py
 
@@ -95,7 +100,7 @@ job.append(kkmc)
 
 Available applications defined in [here][diracapp].
 
-[diracapp]: https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/-/tree/Rel-v31r0/Interfaces/API/NewInterface
+[diracapp]: https://gitlab.cern.ch/CLICdp/iLCDirac/ILCDIRAC/-/tree/Rel-v31r0/Interfaces/API/NewInterface/Applications
 
 Finally the job is submitted:
 
@@ -111,7 +116,8 @@ Local submission can be used for testing.
 The example scripts described in these pages, together with the relevant setup scripts, are available from the
 [FCCDIRAC][fccdirac] repository.
 
-The following steps must be executed (only once!) before trying to execute any of the workflows:
+The following steps must be executed (only once!) before trying to execute any
+of the workflows:
 
 ```bash
 $ git clone https://github.com/HEP-FCC/FCCDIRAC
