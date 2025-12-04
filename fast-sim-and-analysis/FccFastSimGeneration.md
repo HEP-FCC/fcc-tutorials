@@ -1,25 +1,28 @@
-FCC: Getting started with event generation
-===================================================================================
+# FCC: Getting started with event generation
 
+>
+> Original author: Gerardo Ganis
+>
 
-## Overview
+## Enabling FCC Software
 
+The FCC software is fully embedded in the [Key4hep][key4hep] software stack or
+ecosystem, which means that the components providing the framework and those FCC
+specific are all available in Key4hep. To configure your environment for the
+FCC software is therefore sufficient to initialise Key4hep:
 
-## Enabling FCCSW
-
-The FCC software `FCCSW` is fully embedded in the `key4hep` software stack or ecosystem, which means that the components providing the framework and those FCC specific are all available in `key4hep`. To configure your environment for the FCC software is therefore sufficient to initialise `key4hep`:
-
-```
+```bash
 source /cvmfs/sw.hsf.org/key4hep/setup.sh
 ```
 :::{admonition} Nota Bene
 :class: callout
 
 For legacy reasons the following is still provided, fully equivalent to the above
-```
+```bash
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```
-Note however that not all the `cvmfs` tier-1 centers replicate the `fcc.cern.ch`, so this may lead to slowdowns or even failures.
+Note however that not all the `cvmfs` tier-1 centers replicate the
+`fcc.cern.ch`, so this may lead to slowdowns or even failures.
 :::
 
 :::{admonition} Nota Bene
@@ -29,11 +32,15 @@ Currently, the Key4hep stack supports `AlmaLinux9` (compatible with `lxplus`
 machines) and `Ubuntu 22.04`.
 :::
 
-The `gaudimain` steering application here is called `k4run` which should be available at this point:
+The main Gaudi steering application of Key4hep stack is called `k4run` which
+should be available at this point:
 
 ```bash
-$ which k4run
-/cvmfs/sw.hsf.org/spackages7/k4fwcore/1.0pre16/x86_64-centos7-gcc11.2.0-opt/tp4u6/bin/k4run
+which k4run
+```
+with response:
+```
+/cvmfs/sw.hsf.org/key4hep/releases/2025-05-29/x86_64-almalinux9-gcc14.2.0-opt/k4fwcore/1.3-lix236/bin/k4run
 ```
 (The output might differ, but shouldn't be empty and the structure should be similar).
 
@@ -43,7 +50,7 @@ The application `fccrun` is still provided, fully equivalent to `k4run`.
 :class: callout
 
 You will need to source the `/cvmfs/sw.hsf.org/key4hep/setup.sh` script
-everytime you want to use the FCC Software.
+every time you want to use the FCC Software.
 :::
 
 
@@ -51,69 +58,91 @@ everytime you want to use the FCC Software.
 
 ### Overview
 
-The physics generators available for FCC usually come from `key4hep`. However, any generator
-able to generate events in one of the understood formats, e.g. HepMC or EDM4hep or LHEf, can be used in standalone.
-Following the discussion at the [1st ECFA workshop on Generators](https://indico.cern.ch/event/1078675/), the recommended formats are `HepMC3` and `EDM4hep`; `LHEf` is still much in use though.
-This pages intend to illustrate the use of a few general purpose generators available when enabling FCCSW:
-pythia8, whizard, MadGraph5, Herwig, KKMCee, BHLUMI, BabaYaga.
+The physics generators available for FCC usually come from Key4hep. However, any
+generator able to generate events in one of the understood formats, e.g. HepMC
+or EDM4hep or LHEf, can be used in standalone.
 
-###  Pythia8
+Following the discussion at the
+[1st ECFA workshop on Generators](https://indico.cern.ch/event/1078675/),
+the recommended formats are `HepMC3` and `EDM4hep`; `LHEf` is still much in use
+though.  This pages intend to illustrate the use of a few general purpose
+generators available: Pythia8, whizard, MadGraph5, Herwig, KKMCee, BHLUMI,
+BabaYaga.
 
-Pythia8 is fully intergrated in `Key4hep` software stack and it provides diverse functionality in addition to event generation, including capability to read events in `LHEf` format.
 
-To use Pythia8 we need a Gaudi steering file and a Pythia8 configuration file, usually having extension `.cmd`. Examples of these `.cmd` files are available from the [FCC-config](https://github.com/HEP-FCC/FCC-config/tree/main/FCCee/Generator/Pythia8) repository.
+### Pythia8
 
-The Gaudi steering file needs to activate the `GaudiTool` that interfaces `Pythia8`, available from the `k4Gen` repository under the name [PythiaInterface](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/PythiaInterface.h).
+Pythia8 is fully integrated in the Key4hep software stack and it provides
+diverse functionality in addition to event generation, including capability to
+read events in `LHEf` format.
 
-An example of steering file can be found at [pythia.py](https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py). The steering file runs the minimal set of algorithms to run Pythia8 and produce an output in `EDM4hep` format:
+To use Pythia8 we need a Gaudi steering file and a Pythia8 configuration file,
+usually having extension `.cmd`. Examples of these `.cmd` files are available
+from the [FCC-config][fcc-config] repository.
+The Gaudi steering file needs to activate the `GaudiTool` that interfaces
+`Pythia8`, available from the `k4Gen` repository under the name
+[PythiaInterface][pythia-interface].
+
+An example of steering file can be found at [pythia.py][pythia-example].
+The steering file runs the minimal set of algorithms to run Pythia8 and produce
+an output in `EDM4hep` format:
+```bash
+wget https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py
+k4run --dry-run pythia.py
 ```
-$ wget https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py
-$ k4run --dry-run pythia.py
- -->  Pythia8 -->  HepMCToEDMConverter -->  StableParticles -->  out
+with expected output
+```
+[k4run - INFO] k4run.main: --> Pythia8 --> HepMCToEDMConverter --> StableParticles --> out
 [...]
 ```
-For example, to generate 500  e<sup>+</sup>e<sup>-</sup> &#8594; mu<sup>+</sup>mu<sup>-</sup> at 91.2 GeV, we can do the following: download the configuration file:
-```
-$ wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/main/FCCee/Generator/Pythia8/p8_ee_Zmumu_ecm91.cmd
+For example, to generate 500 $e^{+}e^{-} \rightarrow \mu^{+}\mu^{-}$ at
+91.2 GeV, one can do the following, download the configuration file:
+```bash
+wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/main/FCCee/Generator/Pythia8/p8_ee_Zmumu_ecm91.cmd
 ```
 and run
-```
+```bash
 k4run pythia.py -n 500 --out.filename p8_mumu_500.e4h.root --Pythia8.PythiaInterface.pythiacard p8_ee_Zmumu_ecm91.cmd
 ```
 
+
 ###  Whizard
 
-Whizard is available as standalone program:
-
+Whizard is available as a standalone executable `whizard`, to check it's
+presence in the current environment one can use:
 ```bash
-$ which whizard
-/cvmfs/sw.hsf.org/spackages6/whizard/3.0.3/x86_64-centos7-gcc11.2.0-opt/yy7yk/bin/whizard
+which whizard
+```
+with expected result similar to
+```
+/cvmfs/sw.hsf.org/key4hep/releases/2025-05-29/x86_64-almalinux9-gcc14.2.0-opt/whizard/3.1.4-zjmc7r/bin/whizard
 ```
 
 Whizard is run as this:
 
-```
+```bash
 whizard <process_config>.sin
 ```
 
-Example of Sindarin configuration files are found under
-
-``` bash
-ls /cvmfs/sw.hsf.org/spackages6/whizard/3.0.3/x86_64-centos7-gcc11.2.0-opt/yy7yk/share/whizard/examples/
+Example Sindarin configuration files can be found under
+```bash
+ls /cvmfs/sw.hsf.org/key4hep/releases/2025-05-29/x86_64-almalinux9-gcc14.2.0-opt/whizard/3.1.4-zjmc7r/share/whizard/examples/
 ```
 or at [https://gitlab.tp.nt.uni-siegen.de/whizard/public/-/tree/master/share/examples](https://gitlab.tp.nt.uni-siegen.de/whizard/public/-/tree/master/share/examples).
 
-Some examples more specific to FCC can be found at [https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/](https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/)`.
+More examples specific to FCC can be found at
+[https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/](https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/).
 
 
-:::{admonition} Show dimuon example
-:class: toggle
+:::{admonition} Dimuon example
+:class: callout toggle
 
 It is advised to work in a separate directory for each process. For example, for Z_mumu, we have:
 
 ```bash
- mkdir -p test_whizard/Z_mumu; cd test_whizard/Z_mumu
- wget https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/Z_mumu.sin
+mkdir -p test_whizard/Z_mumu
+cd test_whizard/Z_mumu
+wget https://fccsw.web.cern.ch/fccsw/share/gen/whizard/Zpole/Z_mumu.sin
 ```
 
 In order to change output format from LHEf to HepMC3 one needs to comment out
@@ -133,7 +162,7 @@ configuration line:
 
 Afterwards run
 ```bash
- whizard Z_mumu.sin
+whizard Z_mumu.sin
 ```
 
 ```
@@ -189,9 +218,11 @@ Warning: Encountered events with excess weight: 6 events (  0.600 %)
 |=============================================================================|
 ```
 
+The file `z_mumu.hepmc` contains 100
+$e^{+}e^{-} \rightarrow \mu^{+}\mu^{-}(\gamma)$ events in HepMC3 format.
+
 :::
 
-The file `z_mumu.hepmc` contains 100 e<sup>+</sup>e<sup>-</sup> &#8594; mu<sup>+</sup>mu<sup>-</sup>(gamma) events in HepMC 3 format.
 
 ###  KKMCee
 
@@ -213,8 +244,8 @@ A help function is available:
 KKMCee -h
 ```
 
-:::{admonition} Show help function output
-:class: toggle
+:::{admonition} Help function output
+:class: discussion toggle
 
 ```
 +++ Wrapper around the KKMCee executable  +++
@@ -264,8 +295,8 @@ A next version will address this issue.
 :::
 
 
-:::{admonition} Show channel numbering
-:class: toggle
+:::{admonition} Channel numbering
+:class: discussion toggle
 ```
 
   Most common decays
@@ -493,12 +524,12 @@ Note that the BES (Beam Energy Spread) options are only available in version 4.3
 
 A configuration example file for taus is available under at
 
-```
+```bash
 ls `dirname $( which KKMCee )`/../share/KKMCee/kkmc-tauola.input
 ```
 
-:::{admonition} Show dimuon example
-:class: toggle
+:::{admonition} Dimuon example
+:class: callout toggle
 
 To generate a sample of dimuon events using the example files, do the following
 
@@ -584,8 +615,10 @@ and a file `kkmu_1000.hepmc` created.
 
 `KKMCee` creates several files during its run. These are saved into a folder called `KKMCee-<date>-<time>`, for example `KKMCee-12Oct2022-191047`.
 This folder contains the files:
+```bash
+ls KKMCee-12Oct2022-191047
 ```
-$ ls KKMCee-12Oct2022-191047
+```
 DIZET-table1  TabMain77.output  TabMainC.output  mcgen.root  pro.input  pro.output  pro77.output
 ```
 The file `pro.input` contains the configuration options and can be used to repeat the run
@@ -611,8 +644,8 @@ A help function is available:
 BHLUMI -h
 ```
 
-:::{admonition} Show help function output
-:class: toggle
+:::{admonition} Help function output
+:class: discussion toggle
 
 ```
 +++ Wrapper around the BHLUMI.exe executable +++
@@ -657,12 +690,12 @@ which babayaga
 ```
 A help function is available:
 
-```
+```bash
 babayaga -h
 ```
 
-:::{admonition} Show help function output
-:class: toggle
+:::{admonition} Help function output
+:class: discussion toggle
 
 ```
 
@@ -700,8 +733,10 @@ babayaga -c babayaga.input -o bbyg.LHE
 
 `Herwig` is another historical LEP generator providing a diferent approach to hadronization wrt. `Pythia8`. It is available as standalone program:
 
+```bash
+which Herwig
 ```
-$ which Herwig
+```
 /cvmfs/sw.hsf.org/spackages7/herwig3/7.2.3/x86_64-centos7-gcc11.2.0-opt/q3pxd/bin/Herwig
 ```
 
@@ -711,9 +746,12 @@ $ which Herwig
 `MadGraph5` was developed for `LHC` but it is in reality general purpose and can be used also for `FCC-ee`. It is available as standalone program:
 
 ```bash
-$ which mg5_aMC
+which mg5_aMC
+```
+```
 /cvmfs/sw.hsf.org/spackages7/madgraph5amc/2.8.1/x86_64-centos7-gcc11.2.0-opt/nlauf/bin/mg5_aMC
 ```
+
 
 ## Hands-on case study: ditau events with Pythia8, Whizard and KKMCee
 
@@ -725,14 +763,14 @@ In this section we describe, with exercises, the generation of an equivalent sam
 As explained in the dedicated [Pythia8 section](#pythia8), we need a `Pythia8` configuration file and a `Gaudi` configuration file.
 For the former, to generate ditau events we will use the file
 [p8_ee_Ztautau_mumu_ecm91.cmd](https://github.com/HEP-FCC/FCC-config/blob/main/FCCee/Generator/Pythia8/p8_ee_Ztautau_mumu_ecm91.cmd). We create a sub-directory `cards` and we retrieve in it the file:
-```
-$ mkdir cards; cd cards
-$ wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/main/FCCee/Generator/Pythia8/p8_ee_Ztautau_mumu_ecm91.cmd
+```bash
+mkdir cards; cd cards
+wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/main/FCCee/Generator/Pythia8/p8_ee_Ztautau_mumu_ecm91.cmd
 ```
 For the second, we create a sub-directory `config` and we retrieve in it the `pythia.py` file:
-```
-$ mkdir config; cd config
-$ wget https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py
+```bash
+mkdir config; cd config
+wget https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py
 ```
 
 Before running it, we also create sub-directories `gen/<generator_tag>_tautau_ecm91` for the generator files in format `edm4hep`.
@@ -746,9 +784,9 @@ The sub-directory structure here is not mandatory but copes with the dataset str
 Now: how will we run it? (hint: check specific section)
 
 :::{admonition} Answer
-:class: toggle
+:class: solution toggle
 
-```
+```bash
 k4run config/pythia.py -n 10000 --out.filename gen/p8_tautau_ecm91/events_1.root --Pythia8.PythiaInterface.pythiacard cards/p8_ee_Ztautau_mumu_ecm91.cmd
 ```
 
@@ -776,20 +814,20 @@ i.e. 1458.0 +- 7.7 pb.
 
 As explained in the dedicated [Whizard section](#whizard), to use `whizard` we need a `Sindarin` configuration file. To generate ditau events we will use the file
 [Z_tautau.sin](https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/Z_tautau.sin):
-```
-$ wget https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/Z_tautau.sin
+```bash
+wget https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/Z_tautau.sin
 ```
 and run it in a dedicate directory to not pollute the working one with the many files produced:
-```
-$ mkdir -p whizard; cd whizard;
-$ whizard ../Z_tautau.sin
+```bash
+mkdir -p whizard; cd whizard;
+whizard ../Z_tautau.sin
 ```
 The output created by `whizard` is `LHEf` (Les Houches Event format); this is because the current build does not support writing `HepMC`; this may change in the future.
 
 Exercise: look at produced `LHEf` file `z_tautau.lhe`: what did we notice?
 
 :::{admonition} Answer
-:class: toggle
+:class: solution toggle
 
 The taus are not decayed. We need another solution for that.
 
@@ -799,9 +837,13 @@ The first lines of the `LHEf` file give the total cross-section: 1.508 +- 2 pb, 
 
 #### `LHEf` to `EDM4hep` conversion
 
-In order to get the events in `EDM4hep` format, we exploit the fact that `Pythia` provides `LHEf` reader functionality. To activate that we will use `Gaudi` and special `.cmd` file the consider the input `LHEf` input file as a `Beam`. This special `.cmd` is called `p8_lhereader.cmd` and it is available on the web:
-```
-S cd ../cards
+In order to get the events in `EDM4hep` format, we exploit the fact that
+`Pythia` provides `LHEf` reader functionality. To activate that we will use
+`Gaudi` and a special `.cmd` file which considers the input `LHEf` input file as
+a `Beam`. This special `.cmd` is called `p8_lhereader.cmd` and it is available
+on the web:
+```bash
+cd ../cards
 wget https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/p8_lhereader.cmd
 ```
 Please note the lines
@@ -822,29 +864,31 @@ which will make decay the taus in `pythia8`
 
 As steering we will use the file `pythia.py`.
 
-Q: how will we run it from the whizard sub-directory? (hint: think of the conversion file)
+**Q:** how will we run it from the whizard sub-directory? (hint: think of the conversion file)
 
 :::{admonition} Answer
-:class: toggle
+:class: solution toggle
 
-```
-$ cd whizard
-$ k4run ../config/pythia.py -n 10000 --out.filename ../gen/wz_tautau_ecm91/events_1.root --Pythia8.PythiaInterface.pythiacard ../cards/p8_lhereader.cmd | tee wz_ee_Ztautau_mumu_ecm91.log
+```bash
+cd whizard
+k4run ../config/pythia.py -n 10000 --out.filename ../gen/wz_tautau_ecm91/events_1.root --Pythia8.PythiaInterface.pythiacard ../cards/p8_lhereader.cmd | tee wz_ee_Ztautau_mumu_ecm91.log
 ```
 :::
 
 
 ### Generating ditaus with KKMCee
+
 As shown in the [KKMCee section](#kkmcee), event generation with the `KKMCee` is controlled through a configuration file. The interface available in `key4hep` allowed a generation of the configuration file through command line switches. Starting from the command line switches is therefore always a good option when no confguration file is available.
 
 Currently, `KKMCee` does not have the option to save directly the events in `EDM4hep` format. In order to get there we need first to generate the events in `HepMC` format.
 
 #### Generating `HepMC` events
 
-What are the commands (options) to generate 10000 ditau events and saved them into the file gen/kk_ee_Ztautau_mumu_ecm91_10000.hepmc ? 
+**Q:** What are the commands (options) to generate 10000 ditau events and save
+them into the file `gen/kk_ee_Ztautau_mumu_ecm91_10000.hepmc`?
 
 :::{admonition} Suggested answer
-:class: toggle
+:class: callout toggle
 
 ```bash
 KKMCee -f Tau -e 91.2 -n 10000 -o kk_ee_Zautau_mumu_10000.hepmc -t 2002
@@ -852,12 +896,14 @@ KKMCee -f Tau -e 91.2 -n 10000 -o kk_ee_Zautau_mumu_10000.hepmc -t 2002
 :::
 
 :::{admonition} Expand to see the example of the produced `HepMC` output 
-:class: toggle
+:class: callout toggle
 
 The `HepMC` output is an ASCII format and can browsed with for example `more`:
 
 ```bash
-$ more kk_ee_Ztautau_mumu_10000.hepmc
+more kk_ee_Ztautau_mumu_10000.hepmc
+```
+```
 HepMC::Version 3.02.05
 HepMC::Asciiv3-START_EVENT_LISTING
 E 0 5 13
@@ -907,24 +953,34 @@ The detailed description of the ASCII `HepMC` output can be found in Section 3.4
 The first two line indicate the version of `HepMC` (here 3.02.04) and the type of output, i.e. `Asciiv3` (`HepMC` supports also binary formats as output).
 The block for each event starts with a line `E`, indicating the event number, the number of vertices and the number of particles. The line staring with `U` gives the adopted units for energy and distances. The lines starting with `P` are the particle lines: the first integer is the particle number in the list, the second the particle number of the parent particle, the third the `PDG` particle ID, then we have the 3-momentum, the nergy and the mass; finally the status, with `status==1` labelling _stable_ particles entering leaving the interaction point and entering the detector. The lines starting with `A` indicate additional attributes: the can be per run, per event or per element of the listing. In this case they are used to provide helicity information for the two taus: the first number is the particle number, the second the name of the attribute, the rest the helicity information.  
 
-Q: What can be conidered _strange_ in the above listing ? 
+**Q:** What can be considered _strange_ in the above listing?
 
 :::{admonition} Suggested answer
-:class: toggle
+:class: solution toggle
 
-A close-up look at the listing rasing two questions 
-    1. The number of the second event is still 0. This is due to a bug in the `HepMC` interface of `KKMCee`; it has no influence
-       in the following processing, since not really used.
-    2. The number of vertices does not seem to correspond to what found in the listing. The number of vertices, for example 4 in the first listing, correponds to the collision plus the decays one: the collision one is indicated by `V`, the other 3 are not indicated explicitely, but can be infered by looking at the particles having the same non-null parent ID: the decays of the Z boson (PDG id = 23), of Tau- (  
-
+A close-up look at the listing raising two questions:
+  1. The number of the second event is still 0. This is due to a bug in the
+     `HepMC` interface of `KKMCee`; it has no influence in the following
+     processing, since not really used.
+  2. The number of vertices does not seem to correspond to what found in the
+     listing. The number of vertices, for example 4 in the first listing,
+     corresponds to the collision plus the decays one: the collision one is
+     indicated by `V`, the other 3 are not indicated explicitly, but can be
+     inferred by looking at the particles having the same non-null parent ID:
+     the decays of the $Z$ boson (PDG id = 23), of $\tau^{-}$ (PDG id = 15) and
+     $\tau^{+}$ (PDG id = -15).
 :::
 
 The remaining output files from the run are found in the `KKMCee-<date>-<time>` directory. In particular the file `pro.output` contains at the end information about the process cross-section. 
 
 In this example 
+```bash
+tail -37 KKMCee-<date>-<time>/pro.output
 ```
-$ tail -37 KKMCee-<date>-<time>/pro.output
-$ tail -37 kk/KKMCee-24Apr2023-060444/pro.output
+```bash
+tail -37 kk/KKMCee-24Apr2023-060444/pro.output
+```
+```
    *****************************
    ****   KKMCee   Finalize ****
    *****************************
@@ -964,18 +1020,26 @@ $ tail -37 kk/KKMCee-24Apr2023-060444/pro.output
 ********************************************************************************
 
 ```
-i.e the total ditau cross-section at 91.2 GeV from `KKMCee` is 1485.5 +- 0.007 pb . 
+i.e the total ditau cross-section at 91.2 GeV from `KKMCee` is
+$1485.5 \pm 0.007~\mathrm{pb}$.
+
 
 #### `HepMC` to `EDM4hep` conversion
 
-In order to get the events in `EDM4hep` format, we will use `Gaudi` and the tools available in [k4FWCore](https://github.com/key4hep/k4FWCore) and [k4Gen](https://github.com/HEP-FCC/k4Gen/). We need a Gaudi steering file that reads the `HepMC` file and writes out the `EDM4hep` file.
-A minimal version of such a steering code is available on the tutorial reference page:
-```
+In order to get the events in `EDM4hep` format, we will use `Gaudi` and the
+tools available in [k4FWCore](https://github.com/key4hep/k4FWCore) and
+[k4Gen](https://github.com/key4hep/k4Gen/). We need a Gaudi steering file that
+reads the `HepMC` file and writes out the `EDM4hep` file.
+A minimal version of such a steering code is available on the tutorial reference
+page:
+```bash
 wget https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/hepmc2edm.py
 ```
 Let's see what it does: that is shown by the first line of the help function
+```bash
+k4run hepmc2edm.py -h
 ```
-$ k4run hepmc2edm.py -h
+```
  -->  GenAlg  -->  HepMCToEDMConverter  -->  out
 ...
 ```
@@ -983,7 +1047,7 @@ $ k4run hepmc2edm.py -h
 ##### Dissection of `hepmc2edm.py`
 
 :::{admonition} Expand
-:class: toggle
+:class: discussion toggle
 
 The tool that we need is [HepMCFileReader](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCFileReader.h), which is a `GaudiTool`, not a `GaudiAlgorithm`, which is used as a signal provider (such as a Monte Carlo generator) within the [Generator Algorithm (GenAlg)](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/GenAlg.h). This is done in this part of the code:
 ```python
@@ -996,16 +1060,18 @@ reader.SignalProvider = hepmcreader
 reader.hepmc.Path = "hepmc"
 ApplicationMgr().TopAlg += [reader]
 ```
+
 Then we convert the event from `HepMC` to `EDM4hep` with the [HepMCToEDMConverter](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCToEDMConverter.h):
-```
+```python
 from Configurables import HepMCToEDMConverter
 hepmc_converter = HepMCToEDMConverter()
 hepmc_converter.hepmc.Path="hepmc"
 hepmc_converter.GenParticles.Path = "GenParticles"
 ApplicationMgr().TopAlg += [hepmc_converter]
 ```
+
 Finally we write out the converted events into a file with the [PodioOutput](https://github.com/key4hep/k4FWCore/blob/master/k4FWCore/components/PodioOutput.h) algorithm:
-```
+```python
 from Configurables import PodioOutput
 out = PodioOutput("out", filename = "hepmc2edm_output.root")
 out.outputCommands = ["keep *"]
@@ -1015,9 +1081,12 @@ ApplicationMgr().TopAlg += [out]
 
 ##### Running `hepmc2edm.py`
 
-Among the `hepmc2edm` switches relevant for the purpose are those controling input an output files:
+Among the `hepmc2edm` switches relevant for the purpose are those controlling
+input an output files:
+```bash
+k4run hepmc2edm.py -h
 ```
-$ k4run hepmc2edm.py -h
+```
 ...
   --GenAlg.HepMCFileReader.Filename [GENALG.HEPMCFILEREADER.FILENAME], --Filename.GenAlg.HepMCFileReader [GENALG.HEPMCFILEREADER.FILENAME]
                         Name of the HepMC file to read [HepMCFileReader]
@@ -1026,21 +1095,22 @@ $ k4run hepmc2edm.py -h
                         Name of the file to create [PodioOutput]
 ...
 ```
-We would like the output file to be called `kk_Ztautau_mumu_10000.e4h.root` . Which command should we use for that?
+**Q:** We would like the output file to be called
+`kk_Ztautau_mumu_10000.e4h.root` . Which command should we use for that?
 
-:::{admonition} Check answer
-:class: toggle
+:::{admonition} Answer
+:class: solution toggle
 
 ```bash
 k4run config/hepmc2edm.py -n 10000 --GenAlg.HepMCFileReader.Filename kk/kk_tautau_10000.hepmc --out.filename gen/kk_tautau_ecm91/events_1.root
 ```
-
 :::
 
-Q: Can you explain why we need to pass the `-n 10000` switch and how you could modify `hepmc2edm.py` to avoid that?
+**Q:** Can you explain why we need to pass the `-n 10000` switch and how you
+could modify `hepmc2edm.py` to avoid that?
 
 :::{admonition} Check answer
-:class: toggle
+:class: solution toggle
 
 Because `hepmc2edm.py` contains this piece of code:
 ```python
@@ -1051,12 +1121,13 @@ ApplicationMgr(
                OutputLevel=INFO,
 ```
 The setting `EvtMax=1` is overwritten by `-n <n_evts>`. To avoid this one could set `EvtMax=10000` inside `hepmc2edm.py` (try!)
-
 :::
 
 Note _en passant_ that the `EDM4hep` file is much smaller than the `HepMC` one:
+```bash
+ls -lt
 ```
-$ ls -lt
+```
 total 43032
 -rw-r--r-- 1 ganis vboxsf  3661630 Oct 18  2022 kk_tautau_10000.e4h.root
 -rw-r--r-- 1 ganis vboxsf     1232 Oct 18  2022 hepmc2edm.py
@@ -1064,23 +1135,27 @@ drwxr-xr-x 1 ganis vboxsf      288 Oct 18 16:12 KKMCee-18Oct2022-161012
 -rw-r--r-- 1 ganis vboxsf 19584017 Oct 18 16:12 kk_tautau_10000.hepmc
 ```
 
-Q: Can you explain why?
+**Q:** Can you explain why?
 
-:::{admonition} Check answer
-:class: toggle
+:::{admonition} Answer
+:class: solution toggle
 
-Because `kk_tautau_10000.e4h.root` is a `ROOT` file, which binary and compressed.
-
+Because `kk_tautau_10000.e4h.root` is a `ROOT` file, which binary and
+compressed.
 :::
 
 
-Q: How the cross-sections compare?
+**Q:** How the cross-sections compare?
 
 :::{admonition} Answer
-:class: toggle
+:class: solution toggle
 
-The differences of the cross-section calculated by `KKMCee` and `Pythia8` is (1485.5 - 1467.0) pb = 18.5 pb ; the errors have a statistical and systematic component. Assuming half and half for statistical and systematics, and the systematics fully correlated, the error on the difference is about 8.5 pb, i.e. the two calculatons differ by 2.6 standard deviations. What would you check first?
-
+The differences of the cross-section calculated by `KKMCee` and `Pythia8` is
+$(1485.5 - 1467.0)~\mathrm{pb} = 18.5~\mathrm{pb}$; the errors have a
+statistical and systematic component. Assuming half and half for statistical
+and systematics, and the systematics fully correlated, the error on the
+difference is about $8.5~\mathrm{pb}$, i.e. the two calculations differ by 2.6
+standard deviations. What would you check first?
 :::
 
 
@@ -1090,26 +1165,29 @@ The idea here is to look at some distributions, typically key for generators (an
 
 #### Looking the MCParticle class
 
-Despite being ROOT files and the information stored in `POD` (Plain Old Data), the `EDM4hep` files are not easily usable, because interpreting the PODs requires the higher level PODIO / EDM4hep classes.
-This is what the helper functions available in FCCAnalyses, which depend of `EDM4hep`, do. They can be used to create `flat` ntuples, to be used for the analysis later on.
+Despite being ROOT files and the information stored in `POD` (Plain Old Data),
+the `EDM4hep` files are not easily usable, because interpreting the PODs
+requires the higher level PODIO / EDM4hep classes. This is what the helper
+functions available in FCCAnalyses, which depend of `EDM4hep`, do. They can be
+used to create `flat` ntuples, to be used for the analysis later on.
 
 #### Building FCCAnalyses
 
-`FCCAnalyses` is avaibale at [https://github.com/HEP-FCC/FCCAnalyses](https://github.com/HEP-FCC/FCCAnalyses). `FCCAnalysis`, which is based on ROOT DataFrame, changes regularly, almost daily.
-Therefore it is always good to rebuild the latest version. It is advised to do it in a separate directory,
-for example `../FCCAnalyses`.
+`FCCAnalyses` is available at
+[https://github.com/HEP-FCC/FCCAnalyses](https://github.com/HEP-FCC/FCCAnalyses).
+`FCCAnalysis`, which is based on ROOT RDataFrame, changes regularly, almost
+daily.  Therefore it is always good to rebuild the latest version. It is advised
+to do it in a separate directory, for example `../FCCAnalyses`.
 
-```sh
-$ cd ..
-$ git clone --branch pre-edm4hep1 https://github.com/HEP-FCC/FCCAnalyses.git
-$ cd FCCAnalyses
-$ source setup.sh
-$ mkdir {build,install}; cd build
-$ cmake -DCMAKE_INSTALL_PREFIX=../install ..
-$ make -j4 install
-$ cd ../../tutorials1
+```bash
+cd ..
+git clone --branch pre-edm4hep1 https://github.com/HEP-FCC/FCCAnalyses.git
+cd FCCAnalyses
+source setup.sh
+fccanalysis build -j 8
+cd ../../tutorials1
 ```
-It is mandatory to run setup after the build in the source directory. 
+It is mandatory to run setup after the build in the source directory.
 
 Now we are ready to go.
 
@@ -1120,18 +1198,22 @@ At this purpose we will use the recently introduced `build_graph` attribute. The
 ##### Dissection of `histmaker_ttmm.py`
 
 :::{admonition} Expand
-:class: toggle
+:class: discussion toggle
 
-The files need to be organised in a special way: directories need to be called as the process, files below need to be called `events_<num>`, when `<num>` is any number. So in the current case we have
-```sh
-$ ls -lt gen
+The files need to be organised in a special way: directories need to be called
+as the process, files below need to be called `events_<num>`, when `<num>` is
+any number. So in the current case we have
+```bash
+ls -lt gen
+```
+```
 total 0
 drwxr-xr-x. 2 ganis sf 26 Apr 24 07:38 wz_tautau_ecm91
 drwxr-xr-x. 2 ganis sf 26 Apr 24 07:37 p8_tautau_ecm91
 drwxr-xr-x. 2 ganis sf 26 Apr 24 07:37 kk_tautau_ecm91
 ```
 translating in the following `processList`:
-```
+```python
 # list of processes (mandatory)
 processList = {
     'p8_tautau_ecm91':    {'fraction':1},
@@ -1141,7 +1223,7 @@ processList = {
 ```
 
 Then we need to define where the files are and where they will to go:
-```
+```python
 # Define the input dir (optional)
 inputDir    = "gen/"
 
@@ -1150,7 +1232,7 @@ outputDir   = "outputs"
 ```
 
 Define some binning for histograms:
-```
+```python
 # define some binning for various histograms
 bins_p_l = (100, 0, 50) # 0.5 GeV bins
 bins_cosTheta = (50, -1, 1)
@@ -1159,7 +1241,7 @@ bins_acol = (50, -1, -.9)
 
 Now we come to the `build_graph`: here the input is the `RDataFrame` called `df` and the output a list of histograms called `results`.
 We can use the built-in functions to extract the information, or define our own as in here
-```
+```python
     import ROOT
     ROOT.gInterpreter.Declare("""
 
@@ -1183,7 +1265,7 @@ We can use the built-in functions to extract the information, or define our own 
 ```
 which will need for the acollinearity and 1-prompt momentum and cos(theta).
 The histograms are defined in here
-```
+```python
     # baseline histograms, before any selection cuts (store with _cut0)
     results.append(df.Histo1D(("P_mup", "", *bins_p_l), "muplus_p"))
     results.append(df.Histo1D(("P_mum", "", *bins_p_l), "muminus_p"))
@@ -1197,12 +1279,14 @@ The histograms are defined in here
 ##### Running `histmaker_ttmm.py`
 
 The `build_graph` is part of the `fccanalyses run`:
-```sh
-$ fccanalysis run histmaker_ttmm.py
+```bash
+fccanalysis run histmaker_ttmm.py
 ```
 This should produce `ROTO` files with the histograms in `./outputs`:
-```sh
- $ ls -lt outputs/
+```bash
+ls -lt outputs/
+```
+```
 total 24
 -rw-r--r--. 1 ganis sf 7386 Apr 24 18:01 kk_tautau_ecm91.root
 -rw-r--r--. 1 ganis sf 7384 Apr 24 18:01 wz_tautau_ecm91.root
@@ -1213,19 +1297,33 @@ total 24
 
 FCCAnalyses provides the `plots` option to prepare some plots. A possible way to plot the histos is available at
 [plots_ttmm.py](https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/plots_ttmm.py), which can run as
-```sh
-$ fccanalysis plots plots_ttmm.py
+```bash
+fccanalysis plots plots_ttmm.py
 ```
 with results available under `plots`.
 
-Example of a result are: [positive muon momentum](images/p_mup.png), [positive muon cosine theta](images/costheta_mup.png), [acollinearity of muons](images/acolmu.png).
+Example of a result are: [positive muon momentum](images/p_mup.png),
+[positive muon cosine theta](images/costheta_mup.png),
+[acollinearity of muons](images/acolmu.png).
+
 
 #### Possible conclusion of the exercise
 
 Think of your own. Expand for a possible one.
 
 :::{admonition} Hint
-:class: toggle
+:class: solution toggle
 
-The distributions show a lot of similarities, which means that for detector optimisation studies the choice of the generator probably won't matter. However, the total cross-section is significantly different, so for studies where exact calculations matter more, the `KKMCee` seems the choice to go, because it is the only one giving the total cross-section compatible with experiment (ALEPH at 91.197 GeV gave 1.4771 ± 0.0066± 0.0027 pb). 
+The distributions show a lot of similarities, which means that for detector
+optimisation studies the choice of the generator probably won't matter. However,
+the total cross-section is significantly different, so for studies where exact
+calculations matter more, the `KKMCee` seems the choice to go, because it is the
+only one giving the total cross-section compatible with experiment (ALEPH at
+$91.197~\mathrm{GeV}$ gave $1.4771 \pm 0.0066 \pm 0.0027~\mathrm{pb}$).
 :::
+
+
+[key4hep]: https://cern.ch/key4hep/
+[fcc-config]: https://github.com/HEP-FCC/FCC-config/tree/main/FCCee/Generator/Pythia8
+[pythia-interface]: https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/PythiaInterface.h
+[pythia-example]: https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py
