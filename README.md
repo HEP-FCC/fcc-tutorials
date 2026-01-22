@@ -36,7 +36,7 @@ If you'd just like to learn about how to use the FCC Software,
 
 ```{eval-rst}
 .. toctree::
-    :numbered:
+    :numbered: 4
     :maxdepth: 2
     :includehidden:
     :caption: Contents:
@@ -49,14 +49,13 @@ If you'd just like to learn about how to use the FCC Software,
     CONTRIBUTING.md
 
 .. toctree::
-    :numbered:
-    :maxdepth: 2
     :includehidden:
     :caption: External links:
 
     FCC Software <https://fccsw.web.cern.ch/>
+    Key4hep <https://key4hep.web.cern.ch>
     FCC-ee Detector Full Sim <https://fcc-ee-detector-full-sim.docs.cern.ch/>
     FCCAnalyses <https://hep-fcc.github.io/FCCAnalyses/>
-    Analysis essentials <https://hsf-training.github.io/analysis-essentials/>
+    HSF Analysis essentials <https://hsf-training.github.io/analysis-essentials/>
     FCC Software glossary <https://hep-fcc.github.io/glossary>
 ```
