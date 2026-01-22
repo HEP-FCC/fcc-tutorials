@@ -1,5 +1,13 @@
 # Getting started with FCC distributed computing
 
+>
+> Original author: Gerardo Ganis
+>
+
+For more detailed documentation how user's can use the distributed resources
+managed by iLCDirac, refer to the iLCDirac's
+[User Guide](https://ilcdirac-doc.web.cern.ch/DOC/Files/UserGuide/index.html).
+
 ## Registering to the FCC VO
 
 The [standard Grid VO registration procedure][signup] should be followed to be
@@ -113,7 +121,7 @@ $ ls -lt /eos/experiment/fcc/prod/fcc/user/g/ganis
 total 9545
 -rw-r--r--. 1 fcc001 fcc-cg 9768981 Nov  3  2021 edm4hep_test_output.root
 ```
-Files can be replicated to another STorage Element, e.g. CNAF-DISK, using
+Files can be replicated to another Storage Element, e.g. CNAF-DISK, using
 `dirac-dms-replicate-lfn`:
 ```
 $ dirac-dms-replicate-lfn /fcc/user/g/ganis/edm4hep_test_output.root CNAF-DISK
@@ -148,5 +156,5 @@ is shown below.
 
 
 [signup]: https://fcc-auth.cern.ch/start-registration
-[diracweb]: https://voilcdiracwebapp2.cern.ch/DIRAC/?view=tabs&theme=Crisp&url_state=1|*DIRAC.JobMonitor.classes.JobMonitor
+[diracweb]: https://voilcdiracwebapp2.cern.ch/DIRAC/?theme=Classic&url_state=1|*DIRAC.JobMonitor.classes.JobMonitor:,
 [cernca]: https://ca.cern.ch/cafiles/certificates/Grid.aspx

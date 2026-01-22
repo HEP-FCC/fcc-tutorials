@@ -4,8 +4,8 @@
 > Original author: Gerardo Ganis
 >
 
-These pages provide - and dissect - examples of workflows to be run on
-distributed resources with the [DIRAC Interware system][dirac] through
+These pages provide &mdash; and dissect &mdash; examples of workflows to be run
+on distributed resources with the [DIRAC Interware system][dirac] through
 [iLCDirac][ilcdirac], the extension developed by the Linear Collider community
 and used also by [CALICE][calice].
 
@@ -22,6 +22,7 @@ Unless specified, in the rest of this section the word `DIRAC` refers to the `iL
 
 ```{eval-rst}
 .. toctree::
+    :maxdepth: 2
     :caption: Contents:
 
     RegisteringToFccVO.md
