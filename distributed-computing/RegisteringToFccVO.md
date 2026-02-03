@@ -4,7 +4,7 @@
 
 The [standard Grid VO registration procedure][signup]
 should be followed to be enable to use the resources connected with the FCC VO (open a request only if you need to).
-If your request is pending approval for too long, please [contact us][mailto:FCC-PED-SoftwareAndComputing-Coordination@cern.ch].
+If your request is pending approval for too long, please [contact us](mailto:FCC-PED-SoftwareAndComputing-Coordination@cern.ch).
 
 :::{admonition} Note
 :class: callout
