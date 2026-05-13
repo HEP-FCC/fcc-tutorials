@@ -1193,7 +1193,7 @@ Now we are ready to go.
 
 #### Creating histograms with FCCAnalyses
 At this purpose we will use the recently introduced `build_graph` attribute. The example is availble at 
-[histmaker_ttmm.py](https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/histmaker_ttmm.py).
+[histmaker_ttmm.py](./fccanalyses/doc/starterkit/FccFastSimAnalysis/histmaker_ttmm.py).
 
 ##### Dissection of `histmaker_ttmm.py`
 
@@ -1282,7 +1282,7 @@ The `build_graph` is part of the `fccanalyses run`:
 ```bash
 fccanalysis run histmaker_ttmm.py
 ```
-This should produce `ROTO` files with the histograms in `./outputs`:
+This should produce `ROOT` files with the histograms in `./outputs`:
 ```bash
 ls -lt outputs/
 ```
