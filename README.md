@@ -31,7 +31,7 @@ If you'd just like to learn about how to use the FCC Software,
 [fccsw-website]: https://cern.ch/fccsw
 [tutorial]: https://hep-fcc.github.io/fcc-tutorials
 [lhcb-starterkit]: https://lhcb.github.io/starterkit-lessons/index.html
-[first-steps]: ./software-basics/README.md#first-steps
+[first-steps]: ./1-first-steps/README.md#first-steps
 
 
 ```{eval-rst}

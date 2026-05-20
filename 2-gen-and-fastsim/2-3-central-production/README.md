@@ -1,4 +1,4 @@
-# Central production of events
+# Central Production
 
 The central production of events for FCC physics studies is done using the
 [EventProducer](https://github.com/HEP-FCC/EventProducer) framework.

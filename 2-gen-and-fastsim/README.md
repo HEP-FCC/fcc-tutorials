@@ -1,13 +1,10 @@
-# Generators, Fast Simulation and Analysis
+# Generation and Fast Simulation
 
-
-If you want to get started with generation and  analysis of fast-simulated
-events, you're at the right place.
+If you want to get started with generation and a first quick inspection of fast-simulated
+events, you're at the right place. This chapter focuses on the generation of samples. A more in-depth look at FCCAnalyse is given in the next chapter.
 
 Fast simulation is currently supported through the Delphes approach. Support for the Papas approach, initially used for FCC-ee, is
 discontinued.
-
-An analysis ntuple will be produced with ROOT's RDataFrame, a simple modular event processing framework for high energy physics.
 
 If you have any problems or questions, you can
 [open an issue][fcc-tutorials-issues] on the
@@ -21,11 +18,8 @@ If you have any problems or questions, you can
 .. toctree::
     :caption: Contents:
 
-    FccFastSimGeneration.md
-    k4simdelphes/doc/starterkit/FccFastSimDelphes/Readme.md
-    eedE.md
-    fccanalyses/doc/starterkit/FccFastSimAnalysis/Readme.md
-    FccFastSimVertexing/Readme.md
-    FCCAnalysesProblemsAndSolutions.md
-    EventProduction.md
+    2-1-event-generation/README.md
+    2-2-fastsim-delphes/README.md
+    2-3-central-production/README.md
+    2-4-eedE/README.md
 ```

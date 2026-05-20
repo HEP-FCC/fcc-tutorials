@@ -1,4 +1,4 @@
-# Tracking and vertexing example using specific flavour decays
+# Beyond the Basics: Tracking and Vertexing
 
 >
 > Original authors: Emmanuel Francois Perez, Clement Helsens

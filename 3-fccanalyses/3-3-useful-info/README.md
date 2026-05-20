@@ -1,4 +1,10 @@
-# FCCAnalyses: Common problems and solutions
+# Some Useful Info on EDM4hep, Analyzers, and More
+
+:::{admonition} Needs Updating ... 
+:class: prereq
+
+This section is currently under construction to reflect the updates made to EDM4hep in the more recent past. 
+:::
 
 This directory contains a number of examples each showcasing a specific functionality of the FCCAnalyses framework. It serves as a reference guide for how to implement specific common usecases or you can work through the examples one-by-one in order as a tutorial to familiarize yourself with the full functionality of the framework.
 

@@ -1,4 +1,4 @@
-Understanding generated process: eedE
+EDM4hep Event Data Explorer: eedE
 ===========================================
 
 The [EDM4hep event data explorer (eedE)](https://key4hep.github.io/eede/release/index.html) is a tool for visualizing the association between various objects in EDM4hep events. It is lightweight and self-explanatory. This section explains the usage of eedE. 
