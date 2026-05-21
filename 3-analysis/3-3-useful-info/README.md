@@ -20,15 +20,15 @@ Certain examples may have additional options, you can always check what options
 are available with `python <example>.py -h`.
 
 
-## Prerequisites
+## EDM4hep in FCCAnalyses
 
-The FCCAnalyses framework is based on the [RDataFrame](https://root.cern/doc/master/classROOT_1_1RDataFrame.html) interface which allows fast and efficient analysis of [ROOT's TTrees](https://root.cern/doc/master/classTTree.html) and on samples following the [EDM4HEP event data model](https://edm4hep.web.cern.ch/). Some brief explanations and links to further material on the two are given below, a basic understanding of both is necessary for using this framework to write your own analysis code.
-
+The FCCAnalyses framework is based on the [RDataFrame](https://root.cern/doc/master/classROOT_1_1RDataFrame.html) interface which allows fast and efficient analysis of [ROOT's TTrees](https://root.cern/doc/master/classTTree.html) and on samples following the [EDM4HEP event data model](https://edm4hep.web.cern.ch/). Some brief explanations and links to further material on the two are given below --- a basic understanding of both is necessary for using this framework to write your own analysis code.
 
 ### EDM4hep event model
 
-```{figure} https://github.com/key4hep/EDM4hep/raw/master/doc/edm4hep_diagram.svg
+```{figure} https://raw.githubusercontent.com/key4hep/EDM4hep/main/doc/edm4hep_diagram.svg
 :align: center
+:alt: EDM4hep event data model overview
 
 EDM4hep event data model overview.
 ```
@@ -39,96 +39,66 @@ datatypes. It is described in a single
 generated with the help of [Podio](https://github.com/AIDASoft/podio). For
 example the datatype for the calorimeter hit has following members:
 ```
-#-------------  CalorimeterHit
-edm4hep::CalorimeterHit:
-  Description: "Calorimeter hit"
-  Author : "F.Gaede, DESY"
-  Members:
-    - uint64_t cellID            //detector specific (geometrical) cell id.
-    - float energy               //energy of the hit in [GeV].
-    - float energyError          //error of the hit energy in [GeV].
-    - float time                 //time of the hit in [ns].
-    - edm4hep::Vector3f position //position of the hit in world coordinates in [mm].
-    - int32_t type               //type of hit. Mapping of integer types to names via collection parameters "CalorimeterHitTypeNames" and "CalorimeterHitTypeValues".
+  edm4hep::CalorimeterHit:
+    Description: "Calorimeter hit"
+    Author: "EDM4hep authors"
+    Members:
+      - uint64_t cellID  // detector specific (geometrical) cell id
+      - float energy [GeV]              // energy of the hit
+      - float energyError [GeV]         // error of the hit energy
+      - float time [ns]                // time of the hit
+      - edm4hep::Vector3f position [mm] // position of the hit in world coordinates
+      - int32_t type                   // type of hit
 ```
 
 [Link to EDM4HEP class overview](https://edm4hep.web.cern.ch/namespaceedm4hep.html)
 
 
 (structure-of-edm4hep-files)=
-### Structure of EDM4hep files
+### Structure of EDM4hep Files
 
-The content of an EDM4hep file can be seen by opening it in ROOT, and by
-inspecting the content of the `events` tree with a TBrowser. Example with a
-file from the "spring2021" campaign:
-
+The content of an EDM4hep file can be seen by opening it in ROOT, and by inspecting the content of the `events` tree with a TBrowser. 
+For example, 
 ```sh
-root -l /eos/experiment/fcc/ee/generation/DelphesEvents/spring2021/IDEA/wzp6_ee_mumuH_ecm240/events_012879310.root
+root -l https://fccsw.web.cern.ch/tutorials/ana-sim-evt/p8_ee_WW_mumu_ecm240/p8_ee_WW_mumu_ecm240_edm4hep.root
 root[0] TBrowser b
 ```
 
-```{figure} browser_events.png
+```{figure} events_TBrowser.png
 :align: center
 :class: with-border
 
-Example file from "spring2021" campaign in ROOT TBrowser.
+Example edm4hep.root file opened in ROOT TBrowser.
 ```
 
-As shown in the screenshot above, there are two types of branches:
+As shown in the screenshot above, there are several types of branches in an
+EDM4hep ROOT file:
 
-1. Branches without a pound sign (`#`) in their name like: `Electron`, `Muon`, ...  
-  They refer to collections of objects.
-:::{admonition} Nota Bene
-:class: callout
-`Particle` denotes the collection of Monte-Carlo particles. `Muon` contains the
-isolated muons, while `AllMuon` contains all muons, isolated or not.
-:::
+1. Main object collections, such as: ```Particle, ReconstructedParticles, CalorimeterHits, ...```  
+These correspond to the main EDM4hep collections containing the physics
+objects and their data members (momentum, charge, mass, vertex position,
+etc.).  
+For example, the `Particle` branch stores the full collection of Monte Carlo particles data type `edm4hep::MCParticleData`.
+The `ReconstructedParticles` branch stores reconstructed particles as data type `edm4hep::ReconstructedParticleData`.
 
-2. Branches with a pound sign in their name:  
-  Each of the object collections listed above, e.g. `Collection`, has up to six
-  associated collections of references, i.e. indices that point to another or to
-  the same object collection. They are labeled `Collection#i`, with
-  `i = 0 ... 5`. For example, the `Muon` collection has one single associated
-  collection of references, `Muon#0`.
 
-To figure out which collection is pointed to by `Muon#0` (or by any other
-collection of references), one can look at the value of `Muon#0.collectionID`
-(see screenshot below).
-The `collectionID` of `Muon#0` is the collection number `7` (in the example file
-used here), which, in the list of "object collections" above, corresponds to the
-collection of `ReconstructedParticles`.
-Indeed, the `Muon` collection itself contains nothing (see screenshot below):
-all the information is contained in the `ReconstructedParticles`. The `Muon`
-collection, together with `Muon#0`, just provides a convenient way to access,
-among the `ReconstructedParticles`, those that were identified as muons.
+2. PODIO auxiliary branches, prefixed with a single underscore `_` such as:  
+```_Particle_parents, _Particle_daughters, _EFlowTrack_trackStates, ...```  
+These are internal storage branches automatically generated by PODIO for
+variable-length members and relations between EDM4hep objects.
 
-```{figure} browser_Muon0.png
-:align: center
-:class: with-border
+3. Relation/index collections, such as:  
+```Muon_objIdx, Electron_objIdx, ...```  
+These collections store indices pointing to objects in another collection.  
+For example, `Muon_objIdx.index` contains indices into the global `ReconstructedParticles` collection.  
+FCCAnalyses makes use of these indices to retrieve the corresponding reconstructed particles. For example to retrieve a list of muons:  
+```python
+df = df.Alias("Muon0", "Muon_objIdx.index")
 
-Muon collection example.
+df = df.Define(
+    "muons_all",
+    "FCCAnalyses::ReconstructedParticle::get(Muon0, ReconstructedParticles)")
 ```
-
-The same holds for the `Electron` and `Photon` collections. On the other hand,
-the `MissingET` collection is already a `ReconstructedParticle`, as can be seen
-by inspecting it in the TBrowser:
-
-```{figure} browser_missingET.png
-:align: center
-:class: with-border
-
-Missing $E_T$ collection example.
-```
-
-The `Particle` collection corresponds to the Monte-Carlo particles. It has two
-associated collections of references, `Particle#0` and `Particle#1`. As can
-be seen by looking at their collectionID, they both point to collection number
-5, i.e.  to the Particle collection itself. Particle#0 and Particle#1 contain,
-respectively, links to the parents and to the daughters of the MC particles ---
-as can be seen in the
-[EDM4hep yaml description here](https://github.com/key4hep/EDM4hep/blob/master/edm4hep.yaml#L156-L157).
-Examples will be given below, showing how to navigate through the Monte-Carlo
-record using `Particle`, `Particle#0` and `Particle#1`.
 
 
 ## Overall organisation of analysis code (C++)

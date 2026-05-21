@@ -20,6 +20,5 @@ If you have any problems or questions, you can
 
     2-1-event-generation/README.md
     2-2-fastsim-delphes/README.md
-    2-3-central-production/README.md
     2-4-eedE/README.md
 ```

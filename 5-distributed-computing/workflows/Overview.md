@@ -1,4 +1,4 @@
-# Overview of the submission scripts
+# Overview of the Submission Scripts
 
 Command line submission to DIRAC is performed using python scripts instantiating the relevant classes.
 The general structure of the script is the following:

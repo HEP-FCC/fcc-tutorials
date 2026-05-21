@@ -1,4 +1,4 @@
-# FCC DIRAC example workflows
+# FCC DIRAC Example Workflows
 
 These pages provide - and dissect - examples of workflows to be run on distributed resources with the [DIRAC Interware system][dirac].
 

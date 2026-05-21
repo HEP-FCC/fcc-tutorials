@@ -1,4 +1,4 @@
-# FCCAnalyses
+# Analysis at FCC
 
 FCCAnalyses is a high-level analysis framework developed within the FCC software ecosystem. It provides a convenient interface for performing physics analyses on EDM4hep-based data using ROOT RDataFrame as the underlying event-processing engine.
 
