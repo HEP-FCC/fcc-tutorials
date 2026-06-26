@@ -23,6 +23,9 @@ jobs:
     - name: Run tests
       run: |
         docker exec CI_container /bin/bash -c \
+        'curl -LO https://github.com/jgm/pandoc/releases/download/3.10/pandoc-3.10-linux-amd64.tar.gz;\
+        tar -xzf pandoc-3.10-linux-amd64.tar.gz;\
+        cp pandoc-3.10/bin/pandoc /usr/local/bin/;\
         cd ./Package;\
         source ${{ matrix.STACK }};\
         mkdir build;\
