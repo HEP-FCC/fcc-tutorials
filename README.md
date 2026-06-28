@@ -31,7 +31,7 @@ If you'd just like to learn about how to use the FCC Software,
 [fccsw-website]: https://cern.ch/fccsw
 [tutorial]: https://hep-fcc.github.io/fcc-tutorials
 [lhcb-starterkit]: https://lhcb.github.io/starterkit-lessons/index.html
-[first-steps]: ./software-basics/README.md#first-steps
+[first-steps]: ./1-first-steps/README.md#first-steps
 
 
 ```{eval-rst}
@@ -41,12 +41,13 @@ If you'd just like to learn about how to use the FCC Software,
     :includehidden:
     :caption: Contents:
 
-    software-basics/README.md
-    fast-sim-and-analysis/README.md
-    full-detector-simulations/README.md
-    distributed-computing/README.md
-    developing-fcc-software/README.md
-    CONTRIBUTING.md
+    1-first-steps/README.md
+    2-gen-and-fastsim/README.md
+    3-analysis/README.md
+    4-full-detector-sim/README.md
+    5-distributed-computing/README.md
+    6-developing-fccsw/README.md
+    7-contributing/README.md
 
 .. toctree::
     :numbered:
