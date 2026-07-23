@@ -1,5 +1,13 @@
 # Pre-tutorial checklist
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Valentin Volkl, Gerardo Ganis, Juraj Smiesko, Brieuc Francois
+:::
+<!-- contributors:end -->
+
 :::{admonition} Learning Objectives
 :class: objectives
 

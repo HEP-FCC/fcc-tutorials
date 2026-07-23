@@ -1,5 +1,13 @@
 # Noble Liquid Calorimeter Full Simulation Exercise
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Clement Helsens, Brieuc Francois, Juraj Smiesko
+:::
+<!-- contributors:end -->
+
 :::{admonition} Learning Objectives
 In this tutorial, you will learn how to run the full simulation of the FCC-ee High Granularity Noble Liquid Calorimeter. Among other topics, this exercise covers:
 * the **generation** of particle gun events with $\pi^0$'s and $\gamma$'s  

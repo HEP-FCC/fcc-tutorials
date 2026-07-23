@@ -1,5 +1,13 @@
 # Guide to the Transition of FCCSW to EDM4hep
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Valentin Volkl, Juraj Smiesko
+:::
+<!-- contributors:end -->
+
 For the studies of the Conceptual Design Report, FCC software used its own datamodel, [FCCEDM](https://github.com/hep-fcc/fccedm).
 The technical implementation was based on a novel library called [PODIO](https://github.com/aidasoft/podio), and tries to use "Plain Old Data" to achieve thread safety and general ease of use.
 

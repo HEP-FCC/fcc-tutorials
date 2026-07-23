@@ -1,5 +1,13 @@
 # Workflow 1
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Gerardo Ganis, Valentin Volkl, Juraj Smiesko
+:::
+<!-- contributors:end -->
+
 ## Purpose
 
 Demonstrate the use of DIRAC generate 10000 tau+tau- events @91.2 GeV with KKMC and process through Delphes/IDEA.

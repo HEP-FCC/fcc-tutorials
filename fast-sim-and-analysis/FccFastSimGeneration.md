@@ -1,5 +1,13 @@
 # FCC: Getting started with event generation
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Colin Bernet, Gerardo Ganis, Clement Helsens, Valentin Volkl, Juraj Smiesko, Joschka Lingemann, Patrick Koppenburg, Aman Desai
+:::
+<!-- contributors:end -->
+
 >
 > Original author: Gerardo Ganis
 >

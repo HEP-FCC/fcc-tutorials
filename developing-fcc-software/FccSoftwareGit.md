@@ -1,6 +1,12 @@
 # Github workflow and contribution guide
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
 
+Joschka Lingemann, Valentin Volkl, Juraj Smiesko
+:::
+<!-- contributors:end -->
 
 ## Overview
 

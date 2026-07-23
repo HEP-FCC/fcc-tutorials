@@ -1,5 +1,13 @@
 # CMake guide for the FCC software
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Joschka Lingemann, Valentin Volkl, Juraj Smiesko
+:::
+<!-- contributors:end -->
+
 ## Overview
 
 CMake is a tool for building software, which has become the de-facto

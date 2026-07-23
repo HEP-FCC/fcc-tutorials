@@ -1,5 +1,13 @@
 # Distributed computing
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Gerardo Ganis, Juraj Smiesko
+:::
+<!-- contributors:end -->
+
 These pages provide --- and dissect --- examples of workflows to be run on distributed resources with the [DIRAC Interware system][dirac]
 through [iLCDirac][ilcdirac], the extension developed by the Linear Collider community and used also by CALICE.
 

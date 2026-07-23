@@ -1,5 +1,13 @@
 # Changing geometry 
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Alvaro Tolosa Delgado, Andre Sailer
+:::
+<!-- contributors:end -->
+
 The description of the componentes of a particle detector can be extremely complex. `DD4hep` exploits the properties of `xml` file format to store hierarchically the geometry and materials of each component of a given detector. Thus the detector description is given in one or more `xml` files.
 
  In this section, the following topics are covered:

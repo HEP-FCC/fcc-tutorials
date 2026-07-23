@@ -1,5 +1,13 @@
 # Tracking and vertexing example using specific flavour decays
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Juraj Smiesko
+:::
+<!-- contributors:end -->
+
 >
 > Original authors: Emmanuel Francois Perez, Clement Helsens
 >

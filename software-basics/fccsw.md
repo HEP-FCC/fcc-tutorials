@@ -1,6 +1,14 @@
 
 # An introduction to FCC Software
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Valentin Volkl, Shehu AbdusSalam, Juraj Smiesko
+:::
+<!-- contributors:end -->
+
 :::{admonition} Learning Objectives
 :class: objectives
 

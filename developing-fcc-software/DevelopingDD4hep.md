@@ -1,5 +1,13 @@
 # Developing DD4hep Detector models
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Valentin Volkl
+:::
+<!-- contributors:end -->
+
 :::{admonition} Learning Objectives
 :class: objectives
 

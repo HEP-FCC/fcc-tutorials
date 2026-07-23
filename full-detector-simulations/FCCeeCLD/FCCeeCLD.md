@@ -1,6 +1,14 @@
 
 # FCCee: Full Simulation of CLD, the CLID detector for FCC
 
+`<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Valentin Volkl, Gerardo Ganis, Aman Desai
+:::
+<!-- contributors:end -->
+
 An adaptation of the CLIC detector for FCC-ee has been implemented and made available for tests at the times of the CDR
 (see, for example, [N. Bacchetta et al., CLD -- A Detector Concept for the FCC-ee](https://arxiv.org/abs/1911.12230))
 The DD4hep description, initially implemented under [iLCSoft/lcgeo](https://github.com/iLCSoft/lcgeo/tree/master/FCCee/compact), is now

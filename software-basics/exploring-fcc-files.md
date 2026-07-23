@@ -1,5 +1,13 @@
 # Inspecting an FCC data file
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Valentin Volkl, Shehu AbdusSalam, Juraj Smiesko, Gerardo Ganis
+:::
+<!-- contributors:end -->
+
 :::{admonition} Learning Objectives
 :class: objectives
 

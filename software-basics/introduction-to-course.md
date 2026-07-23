@@ -1,5 +1,13 @@
 # Goals of the course
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Valentin Volkl, Juraj Smiesko
+:::
+<!-- contributors:end -->
+
 :::{admonition} Learning Objectives
 :class: objectives
 

@@ -1,5 +1,12 @@
 # Writing Gaudi Algorithms
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Valentin Volkl, Gerardo Ganis, Juraj Smiesko
+:::
+<!-- contributors:end -->
 
 :::{admonition} Learning Objectives
 :class: objectives

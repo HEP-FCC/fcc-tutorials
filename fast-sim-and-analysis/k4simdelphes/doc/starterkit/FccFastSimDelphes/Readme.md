@@ -1,5 +1,13 @@
 # FCC: Getting started with simulating events in Delphes
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Clement Helsens, Valentin Volkl, Juraj Smiesko, Vasilisa, Aman Desai, Michele Selvaggi
+:::
+<!-- contributors:end -->
+
 :::{admonition} Learning Objectives
 :class: objectives
 

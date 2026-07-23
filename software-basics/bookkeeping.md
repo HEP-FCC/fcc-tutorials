@@ -1,5 +1,13 @@
 # Finding data in the Bookkeeping
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Valentin Volkl, Juraj Smiesko, Clement Helsens, Gerardo Ganis
+:::
+<!-- contributors:end -->
+
 Knowing how data flows through the various Gaudi applications is crucial for
 knowing where to look for your data.
 

@@ -1,6 +1,14 @@
 
 # FCC-ee photon/pi0 discrimination using noble liquid calorimeter
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Clement Helsens, Juraj Smiesko, Brunella D'Anzi
+:::
+<!-- contributors:end -->
+
 :::{admonition} Learning Objectives
 :class: objectives
 

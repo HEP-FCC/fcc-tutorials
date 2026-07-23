@@ -1,5 +1,13 @@
 # Overview of the submission scripts
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Gerardo Ganis, Valentin Volkl, Juraj Smiesko
+:::
+<!-- contributors:end -->
+
 Command line submission to DIRAC is performed using python scripts instantiating the relevant classes.
 The general structure of the script is the following:
 

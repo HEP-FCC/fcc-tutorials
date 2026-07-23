@@ -1,5 +1,13 @@
 # FCC: Analysing simulated events
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Valentin Volkl, Clement Helsens, Juraj Smiesko, Michele Selvaggi, Aman Desai
+:::
+<!-- contributors:end -->
+
 >
 > Original author: Michele Selvaggi
 >

@@ -1,5 +1,13 @@
 # Structure for /eos/experiment/fcc/prod
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Gerardo Ganis
+:::
+<!-- contributors:end -->
+
 ## Overview
 FCC Monte Carlo productions will be handled by the DIRAC system and stored at CERN under
 

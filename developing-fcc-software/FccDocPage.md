@@ -1,5 +1,12 @@
 # Writing documentation for the FCC Software
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Joschka Lingemann, Juraj Smiesko, Javier Cervantes Villanueva, Valentin Volkl
+:::
+<!-- contributors:end -->
 
 ## Where to put documentation
 

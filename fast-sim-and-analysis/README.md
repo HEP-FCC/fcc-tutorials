@@ -1,5 +1,12 @@
 # Generators, Fast Simulation and Analysis
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Valentin Volkl, Juraj Smiesko, Clement Helsens, Gerardo Ganis, Xunwu Zuo
+:::
+<!-- contributors:end -->
 
 If you want to get started with generation and  analysis of fast-simulated
 events, you're at the right place.

@@ -1,5 +1,13 @@
 # Getting started with FCC distributed computing
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Gerardo Ganis, Juraj Smiesko, Brieuc Francois
+:::
+<!-- contributors:end -->
+
 ## Registering to the FCC VO
 
 The [standard Grid VO registration procedure][signup]

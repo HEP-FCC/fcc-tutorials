@@ -1,5 +1,13 @@
 # Central production of events
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Clement Helsens, Juraj Smiesko
+:::
+<!-- contributors:end -->
+
 The central production of events for FCC physics studies is done using the
 [EventProducer](https://github.com/HEP-FCC/EventProducer) framework.
 

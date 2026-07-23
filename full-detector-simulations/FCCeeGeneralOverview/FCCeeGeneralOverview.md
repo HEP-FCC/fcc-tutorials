@@ -1,5 +1,13 @@
 # FCC-ee Full Sim General Overview
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Brieuc Francois, Juraj Smiesko, Reza Jafari Seyedabad
+:::
+<!-- contributors:end -->
+
 <!-- This version has been prepared for the tutorial at the Second US FCC Workshop (2024): https://indico.mit.edu/event/876/contributions/2893/ -->
 
 Welcome to this general overview of the FCC-ee Full Simulation. This tutorial

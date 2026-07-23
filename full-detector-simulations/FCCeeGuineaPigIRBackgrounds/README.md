@@ -1,5 +1,13 @@
 # Using Guinea-Pig to generate interaction region backgrounds 
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Valentin Volkl, Juraj Smiesko, aciarma
+:::
+<!-- contributors:end -->
+
 :::{admonition} Learning objectives
 :class: objectives
 

@@ -1,5 +1,12 @@
 # Running the software in SWAN notebooks 
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Valentin Volkl, Juraj Smiesko
+:::
+<!-- contributors:end -->
 
 :::{admonition} Learning Objectives
 :class: objectives

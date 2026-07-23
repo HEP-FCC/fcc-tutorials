@@ -1,5 +1,13 @@
 # Tips and tricks
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Valentin Volkl
+:::
+<!-- contributors:end -->
+
 ## Autocompletion using bash history
 
 Add

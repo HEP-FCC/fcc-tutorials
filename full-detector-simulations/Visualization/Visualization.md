@@ -1,5 +1,13 @@
 # Visualization
 
+<!-- contributors:start -->
+:::{admonition} Page contributors
+:class: callout dropdown
+
+Juraj Smiesko, Brunella D'Anzi, Alvaro Tolosa Delgado
+:::
+<!-- contributors:end -->
+
 Visualization is of paramount importance in order to easily understand the behavior of the detector and simulation. In this section, several tools of visualizing the detector geometry and the particle tracks are provided.
 
 ## Key4hep tool: geoDisplay
