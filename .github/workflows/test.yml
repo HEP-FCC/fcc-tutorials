@@ -18,7 +18,7 @@ jobs:
                    || fromJSON('["/cvmfs/sw.hsf.org/key4hep/setup.sh", "/cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh"]') }}
     steps:
     - uses: actions/checkout@v4
-    - uses: cvmfs-contrib/github-action-cvmfs@v4
+    - uses: cvmfs-contrib/github-action-cvmfs@v5
     - name: Start container
       run: |
         docker run -it \
