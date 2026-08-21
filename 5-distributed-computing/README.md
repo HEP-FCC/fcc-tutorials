@@ -28,6 +28,7 @@ Unless specified otherwise, in the remainder of this section the word `DIRAC` re
 
 ```{eval-rst}
 .. toctree::
+    :maxdepth: 2
     :caption: Contents:
 
     ./EventProducer.md
