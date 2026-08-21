@@ -1,6 +1,11 @@
 name: Test
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  schedule:
+    # Daily run against the Key4hep nightlies
+    - cron: '0 3 * * *'
 
 jobs:
   test:
@@ -8,8 +13,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        STACK: ['/cvmfs/sw.hsf.org/key4hep/setup.sh',
-                '/cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh']
+        STACK: ${{ github.event_name == 'schedule'
+                   && fromJSON('["/cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh"]')
+                   || fromJSON('["/cvmfs/sw.hsf.org/key4hep/setup.sh", "/cvmfs/sw-nightlies.hsf.org/key4hep/setup.sh"]') }}
     steps:
     - uses: actions/checkout@v4
     - uses: cvmfs-contrib/github-action-cvmfs@v4
@@ -23,9 +29,9 @@ jobs:
     - name: Run tests
       run: |
         docker exec CI_container /bin/bash -c \
-        'curl -LO https://github.com/jgm/pandoc/releases/download/2.18/pandoc-2.18-linux-amd64.tar.gz;\
-        tar -xzf pandoc-2.18-linux-amd64.tar.gz;\
-        cp pandoc-2.18/bin/pandoc /usr/local/bin/;\
+        'curl -LO https://github.com/jgm/pandoc/releases/download/3.10/pandoc-3.10-linux-amd64.tar.gz;\
+        tar -xzf pandoc-3.10-linux-amd64.tar.gz;\
+        cp pandoc-3.10/bin/pandoc /usr/local/bin/;\
         cd ./Package;\
         source ${{ matrix.STACK }};\
         mkdir build;\
