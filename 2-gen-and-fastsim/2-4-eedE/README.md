@@ -6,58 +6,59 @@ EDM4hep Event Data Explorer: eedE
 :class: callout dropdown
 
 Xunwu Zuo
+
+Pablo Apausa
 :::
 <!-- contributors:end -->
 
-The [EDM4hep event data explorer (eedE)](https://key4hep.github.io/eede/release/index.html) is a tool for visualizing the association between various objects in EDM4hep events. It is lightweight and self-explanatory. This section explains the usage of eedE. 
+The following section explains the usage of [eedE (EDM4hep event data explorer)](https://key4hep.github.io/eede/release/index.html), a web-based tool for visualizing the structure of EDM4hep events. 
 
-## edm4hep2json
+Built in vanilla JavaScript with Pixi.js. It takes JSON files as inputs and renders the association between various objects such as Monte Carlo Particles. 
 
-Please note that the `edm4hep2json` command provided in stack `2022-12-23` does not work. You can open a new SSH connection and source a more recent stack, for example
+## 1. Generating JSON data from a Root EDM4hep file
+
+### 1.1. Source a FCC software stack release
+
 ```
-source /cvmfs/sw.hsf.org/key4hep/setup.sh -r 2024-03-10
+source /cvmfs/sw.hsf.org/key4hep/setup.sh
 ``` 
 
-eede takes json files as inputs. The `edm4hep2json` command converts the edm4hep data into a json format.
+### 1.2. Convert Root event file to JSON
+
+The `edm4hep2json` command converts the Root edm4hep file to JSON. An example output can be found at [example.edm4hep.json](https://fccsw.web.cern.ch/fccsw/tutorials/eede-tutorial/example_eedE_tutorial.edm4hep.json)
+
 ```
-edm4hep2json my-file.edm4hep.root
-```
-You can use the command with the following options
-```
-Usage: edm4hep2json [olenfvh] FILEPATH
-  -o/--out-file           output file path
-                            default: "?edm4hep.root" --> ".edm4hep.json"
-  -l/--coll-list          comma separated list of collections to be converted
-  -e/--events             comma separated list of events to be processed
-  -n/--nevents            maximal number of events to be processed
-  -f/--frame-name         input frame name
-                            default: "events"
-  -v/--verbose            be more verbose
-  -h/--help               show this help message
+edm4hep2json [olenfvh] FILEPATH.edm4hep.root
 ```
 
-For example, one can call it with 
-```
-edm4hep2json -l ReconstructedParticles,Particle,MCRecoAssociations -e 2,3,5,7,11 my-file.edm4hep.root
-```
-to save only "ReconstructedParticles,Particle,MCRecoAssociations" object collections, and only the 2nd, 3rd, 5th, 7th, and 11th events in the file.
-An example output can be found at [example.edm4hep.json](https://fccsw.web.cern.ch/fccsw/tutorials/eede-tutorial/example_eedE_tutorial.edm4hep.json)
+| **Flag**            | **Description**                                                     |
+| ------------------- | ------------------------------------------------------------------- |
+| **-o/--out-file**   | output file path (default: "?.edm4hep.root" --> "?.edm4hep.json")   |
+| **-l/--coll-list**  | comma separated list of collections to be converted                 |
+| **-e/--events**     | comma separated list of events to be processed                      |
+| **-n/--nevents**    | maximal number of events to be processed                            |
+| **-f/--frame-name** | input frame name (default: "events")                                |
+| **-v/--verbose**    | be more verbose                                                     |
+| **-h/--help**       | show this help message                                              |
+ 
+#### Example
 
-## Using eedE
+One can call it with  ``edm4hep2json -l ReconstructedParticles,Particle,MCRecoAssociations -e 2,4 filename.edm4hep.root``. To save only ``ReconstructedParticles``, ``Particle`` and ``MCRecoAssociations`` object collections, keeping the 2nd and 4th events in the file.  
 
-Once the data has been converted into a json format via edm4hep2json, one can then head to the website of [eedE](https://key4hep.github.io/eede/release/index.html). After pressing the Start button, one is required to upload the EDM4hep json file via the Browse button. You can then select the type of association (`view`) to visualize.
+## 2. Using eedE
+
+Once the data has been converted into a JSON format via edm4hep2json, one can then head to [eedE](https://key4hep.github.io/eede/release/index.html). After pressing the Start button, one is required to upload the EDM4hep json file via the Browse button. You can then select the type of association (`view`) to visualize.
 ```{image} eede_upload.png
 :align: center
 :width: 600px
 ```
 
-### Visualizing the MC particle Tree
+### Visualizing the Monte Carlo Particle Tree
 
-Here we take the MC particle tree as an example.
+Here we take the MC Particle Tree as an example.
 In the tree shown in the picture illustrates a collision at 91 GeV, where both the electron and positron emit a ISR photon before they merge into an on-shell Z boson, which decays into a pair of b quarks.
 ```{image} eede_Zbb_example.png
 :align: center
 :width: 400px
 ```
 For each MC particle, values for `p`, `t`, `m`, `q` represents the momentum in lab frame, time of production, invariant mass, and charge, while `d` gives the displacement from the origin of lab frame (0,0,0) to the position where the particle is produced.
-
