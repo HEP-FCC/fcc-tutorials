@@ -67,11 +67,11 @@ The MC Particle Tree shown in the image below illustrates a collision at 91 GeV,
 :align: center
 ```
 
-For each MC particle, `$P_\mathrm{T}$`, `$\cos\theta$` and `p` represent the transverse momentum, the cosine of the polar angle, and the momentum magnitude in the lab frame. While `d` gives the displacement from the origin of lab frame (0,0,0) to the position where the particle is produced.
+For each MC particle, $P_\mathrm{T}$, $\cos\theta$ and $p$ represent the transverse momentum, the cosine of the polar angle, and the momentum magnitude in the lab frame. While $d$ gives the displacement from the origin of lab frame (0,0,0) to the position where the particle is produced.
 
 You can **move around the viewport** by clicking and dragging on the background, **zoom in and out** by pinching with two fingers in a trackpad or moving the scroll wheel in a mouse; and **move around the objects** by clicking and dragging on them.
 
-You can also get more information about an object in the lower left corner: `m`, `φ` and `q` are the particle mass, the azimuthal angle of its momentum, and the electric charge. And `t` gives the time at which it was produced.
+You can also get more information about an object in the lower left corner: $m$, $φ$ and $q$ are the particle mass, the azimuthal angle of its momentum, and the electric charge. And $t$ gives the time at which it was produced.
 
 While in the upper right corner you can filter objects by charge, mass, momentum, vertex, simulator status, generator status, and collection. With the possibility of inverting or resetting the selection. The image below filters out MC Particles with mass below 1 Gev (greyed out). 
 
