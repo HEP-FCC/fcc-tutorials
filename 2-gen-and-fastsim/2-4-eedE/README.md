@@ -15,7 +15,7 @@ The following section explains the usage of [eedE (EDM4hep event data explorer)]
 
 Built in vanilla JavaScript with Pixi.js. It takes JSON files as inputs and renders the association between various objects such as Monte Carlo Particles. 
 
-## 1. Generating JSON data from a Root EDM4hep file
+## 1. Generating JSON data from a ROOT EDM4hep file
 
 ### 1.1. Source a FCC software stack release
 
@@ -23,9 +23,9 @@ Built in vanilla JavaScript with Pixi.js. It takes JSON files as inputs and rend
 source /cvmfs/sw.hsf.org/key4hep/setup.sh
 ``` 
 
-### 1.2. Convert Root event file to JSON
+### 1.2. Convert ROOT event file to JSON
 
-The `edm4hep2json` command converts the Root edm4hep file to JSON.
+The `edm4hep2json` command converts the ROOT edm4hep file to JSON.
 
 ```
 edm4hep2json [olenfvh] FILEPATH.edm4hep.root
@@ -53,7 +53,7 @@ This saves ``ReconstructedParticles``, ``Particle`` and ``MCRecoAssociations`` o
 
 ## 2. Using eedE
 
-Once the data has been converted into JSON, you can then head to [eedE](https://key4hep.github.io/eede/release/index.html). After the Welcome modal, you are required to upload the EDM4hep file with the Browse button and select the type of association to visualize. 
+Once the EDM4hep data has been converted into JSON, you can then head to [eedE](https://key4hep.github.io/eede/release/index.html). After the Welcome modal, you are required to upload the EDM4hep JSON file with the Browse button and select the type of association to visualize. 
  
 ```{image} eede_upload.png
 :align: center
@@ -61,7 +61,7 @@ Once the data has been converted into JSON, you can then head to [eedE](https://
 
 ### Visualizing the Monte Carlo Particle Tree
 
-The MC Particle Tree shown in the image below illustrates a collision at 91 GeV, where both the electron and positron emit a ISR photon before they merge into an on-shell Z boson, which then decays into a pair of b quarks.
+The MC Particle Tree shown in the image below illustrates a collision at the center-of-mass energy 91 GeV, where both the electron and positron emit a ISR photon before they merge into an on-shell Z boson, which then decays into a pair of b quarks.
 
 ```{image} eede_Zbb_example.png
 :align: center
