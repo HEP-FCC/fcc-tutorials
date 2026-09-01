@@ -25,7 +25,7 @@ source /cvmfs/sw.hsf.org/key4hep/setup.sh
 
 ### 1.2. Convert Root event file to JSON
 
-The `edm4hep2json` command converts the Root edm4hep file to JSON. An example output can be found at [example.edm4hep.json](https://fccsw.web.cern.ch/fccsw/tutorials/eede-tutorial/example_eedE_tutorial.edm4hep.json)
+The `edm4hep2json` command converts the Root edm4hep file to JSON.
 
 ```
 edm4hep2json [olenfvh] FILEPATH.edm4hep.root
@@ -43,22 +43,38 @@ edm4hep2json [olenfvh] FILEPATH.edm4hep.root
  
 #### Example
 
-One can call it with  ``edm4hep2json -l ReconstructedParticles,Particle,MCRecoAssociations -e 2,4 filename.edm4hep.root``. To save only ``ReconstructedParticles``, ``Particle`` and ``MCRecoAssociations`` object collections, keeping the 2nd and 4th events in the file.  
+For example, you can call the script with  
+
+```
+edm4hep2json -l ReconstructedParticles,Particle,MCRecoAssociations -e 2,3,5,7,11 filename.edm4hep.root
+```
+
+This saves ``ReconstructedParticles``, ``Particle`` and ``MCRecoAssociations`` object collections, keeping the 2nd, 3rd, 5th, 7th and 11th events in the file. Which can be found at [example.edm4hep.json](https://fccsw.web.cern.ch/fccsw/tutorials/eede-tutorial/example_eedE_tutorial.edm4hep.json). 
 
 ## 2. Using eedE
 
-Once the data has been converted into a JSON format via edm4hep2json, one can then head to [eedE](https://key4hep.github.io/eede/release/index.html). After pressing the Start button, one is required to upload the EDM4hep json file via the Browse button. You can then select the type of association (`view`) to visualize.
+Once the data has been converted into JSON, you can then head to [eedE](https://key4hep.github.io/eede/release/index.html). After the Welcome modal, you are required to upload the EDM4hep file with the Browse button and select the type of association to visualize. 
+ 
 ```{image} eede_upload.png
 :align: center
-:width: 600px
 ```
 
 ### Visualizing the Monte Carlo Particle Tree
 
-Here we take the MC Particle Tree as an example.
-In the tree shown in the picture illustrates a collision at 91 GeV, where both the electron and positron emit a ISR photon before they merge into an on-shell Z boson, which decays into a pair of b quarks.
+The MC Particle Tree shown in the image below illustrates a collision at 91 GeV, where both the electron and positron emit a ISR photon before they merge into an on-shell Z boson, which then decays into a pair of b quarks.
+
 ```{image} eede_Zbb_example.png
 :align: center
-:width: 400px
 ```
-For each MC particle, values for `p`, `t`, `m`, `q` represents the momentum in lab frame, time of production, invariant mass, and charge, while `d` gives the displacement from the origin of lab frame (0,0,0) to the position where the particle is produced.
+
+For each MC particle, `$P_\mathrm{T}$`, `$\cos\theta$` and `p` represent the transverse momentum, the cosine of the polar angle, and the momentum magnitude in the lab frame. While `d` gives the displacement from the origin of lab frame (0,0,0) to the position where the particle is produced.
+
+You can **move around the viewport** by clicking and dragging on the background, **zoom in and out** by pinching with two fingers in a trackpad or moving the scroll wheel in a mouse; and **move around the objects** by clicking and dragging on them.
+
+You can also get more information about an object in the lower left corner: `m`, `φ` and `q` are the particle mass, the azimuthal angle of its momentum, and the electric charge. And `t` gives the time at which it was produced.
+
+While in the upper right corner you can filter objects by charge, mass, momentum, vertex, simulator status, generator status, and collection. With the possibility of inverting or resetting the selection. The image below filters out MC Particles with mass below 1 Gev (greyed out). 
+
+```{image} eede_Zbb_filtering.png
+:align: center
+```
