@@ -18,7 +18,9 @@ If you have any problems or questions, you can [send an email to `FCC-PED-Softwa
 
 Before starting, you should be familiar with using a shell, like `bash`, and with programming in Python.
 
-The [analysis essentials course](https://hsf-training.github.io/analysis-essentials/) has an introduction to these topics, as does the [Software Carpentry workshop](https://software-carpentry.org/lessons/), which includes many other useful computing tools.
+The [Analysis Essentials course](https://hsf-training.github.io/analysis-essentials/) has an introduction to these topics. 
+
+You can also explore the [HSF Training Center](https://hsf-training.org/training-center/) and [HEP Training](https://heptraining.cern.ch/), which feature many other useful computing tools.
 :::
 
 ```{eval-rst}
