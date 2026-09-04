@@ -14,13 +14,11 @@ Michel Villanueva
 - Understand why FCC simulation and analysis need computing resources distributed over many sites
 - Know the difference between a local batch system and the grid
 - Learn the vocabulary used in the rest of this chapter: Virtual Organization, certificate,
-  proxy, job, sandbox, Storage Element, logical file name, replica, production
-- Get a mental picture of what DIRAC does when you submit a job or register a file
+  proxy, job, Storage Element, logical file name, replica, ...
 :::
 
 This page is written for readers who have never used grid computing in High Energy Physics (HEP). Its purpose is to explain the concepts that the
 following pages take for granted. Experienced users of DIRAC, Rucio or familiar with the [WLCG](https://wlcg.web.cern.ch/) can skip straight to [Getting started with FCC distributed computing](RegisteringToFccVO.md).
-
 
 
 ## Why distributed computing?
@@ -31,7 +29,7 @@ As FCC consolidates its physics case and detector designs, the computing needs w
 No single computing center is expected to provide that alone.
 
 The High Energy Physics community solved this problem with the Worldwide LHC Computing Grid (WLCG): a
-federation of computing centres, from CERN itself to national laboratories and university clusters, which agree to run 
+federation of computing centers, from CERN itself to national laboratories and university clusters, which agree to run 
 each other's jobs and store each other's data using common interfaces and a common mechanism to identify users. 
 "The grid" is the common name for this distributed computing system. 
 
@@ -52,6 +50,16 @@ you already have an account, the shared filesystem (AFS, EOS) is mounted on the 
 
 The grid glues many batch systems together behind a single interface. In exchange for scale, there is no shared filesystem across sites,
 you cannot log in, and you need a grid identity rather than a local account.
+
+
+### DIRAC
+
+DIRAC is the Interware that provides a single interface to the grid. It is a software framework that sits between users and the grid,
+hiding the complexity of the underlying batch and storage systems. 
+
+It provides a uniform way to submit jobs, manage data, and monitor the status of tasks across multiple sites. Read more about DIRAC at [diracgrid.org](https://diracgrid.org/dirac.html). 
+
+Next pages will show how to use DIRAC to submit jobs and manage data for FCC simulation and analysis.
 
 
 ## Design principles
@@ -107,6 +115,19 @@ Read more about CVMFS in the [documentation](https://cvmfs.readthedocs.io/en/sta
 
 The grid needs to answer two questions for every request: *who are you* (authentication) and *what are you allowed to do* (authorization).
 
+### Virtual Organizations
+
+A **Virtual Organization (VO)** is the list of people belonging to a scientific community. 
+Sites do not know individual users, they grant resources to VOs. 
+
+When a site sees a request carrying a valid membership of the VO `fcc`, it applies the
+policies it agreed for FCC: which queues, how much disk, which priority.
+
+Membership is recorded in an identity and access management (IAM) service. Registering with the
+VO is the administrative step of [signing up](RegisteringToFccVO.md#registering-to-the-fcc-vo)
+and waiting for the VO managers to approve you.
+
+
 ### Grid certificates
 
 A **grid certificate** is an X.509 certificate, issued to you personally by a **Certification Authority (CA)**. CERN users obtain
@@ -117,8 +138,57 @@ theirs from the [CERN CA](https://ca.cern.ch/ca/). The certificate contains your
 
 This DN is your identity on the grid, independent of any site or storage element.
 
-- To register with a Virtual Organization you must present the certificate from a **web browser**, which means importing it into the browser first, 
+- To interact with web interfaces, you must present the certificate from a web browser, which means importing it into the browser first, 
   together with the CA certificates so that the browser trusts the registration site. 
-- On interactive sessions (like in `lxplus`, the certificate is expected as two files, `~/.globus/usercert.pem` and `~/.globus/userkey.pem`, 
+- On interactive sessions, like in `lxplus`, the certificate is expected as two files, `~/.globus/usercert.pem` and `~/.globus/userkey.pem`, 
   which the DIRAC client reads when creating a proxy.
+
+:::{admonition} Token-based authentication
+:class: note
+
+The WLCG community is moving from X.509 certificates to OAuth2 **tokens** issued by IAM services, similar to the login flows used by web applications. 
+
+While the transition is still ongoing, grid certificates are still used for command-line work, so this tutorial follows the certificate route. 
+
+Check out the progress updates on the [WLCG WG for Transition to Tokens](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGTokensGlobusWG).
+:::
+
+### Proxies
+
+Your certificate is precious and long-lived (typically one year), so you never send it anywhere. Instead you create a **proxy**: 
+a short-lived certificate, signed by your own certificate, which carries your identity plus your VO attributes. Anything that presents
+the proxy is treated as acting on your behalf until it expires, normally after 24 hours.
+
+This is what `dirac-proxy-init` does:
+
+1. It asks for your certificate password, because signing the proxy needs your private key.
+2. It contacts the VO and embeds your `/fcc` attribute.
+3. It writes the proxy to a temporary file (`/tmp/x509up_u<uid>`) that every grid tool on that machine picks up automatically.
+4. It **uploads** a copy to the DIRAC proxy manager. DIRAC needs this copy to act for you when you are not around: 
+   to run a job that starts three days after submission, or to move a file overnight.
+
+We will exercise this in the next pages. For now, just remember that you need a valid proxy to interact with grid services.
+If a command fails with an authentication error, the first thing to check is whether your proxy has expired, with `dirac-proxy-info`.
+
+
+## Other names you will hear
+
+- **Rucio** is a scientific data management system, developed by ATLAS and now used by CMS,
+  Belle II, DUNE and many others. It plays the role of Data Management System and File Catalog, with a rich 
+  *rule-based* model: you declare how many replicas a dataset should have and where, and Rucio takes care. 
+  FCC is considering the adoption of Rucio for its data management, but currently uses DIRAC's own File Catalog.
+
+- **FTS** (File Transfer Service) is the service that performs bulk third-party transfers between Storage Elements. 
+  DIRAC and Rucio both hand large replication requests to FTS.
+
+
+
+:::{admonition} Key Points
+:class: keypoints
+
+- The grid uses batch systems from many sites behind one interface; the price is that nothing is local or interactive.
+- Trust flows through a chain: a CA certifies you, a VO vouches for you, a proxy carries that identity to wherever your job runs. Proxies expire after about a day.
+- A job ships small files in sandboxes and stores large results on Storage Elements. 
+- Files have one logical name (LFN) and possibly many physical replicas; the File Catalog connects them.
+:::
 
