@@ -37,12 +37,12 @@ edm4hep2json [olenfvh] FILEPATH.edm4hep.root
 | **-o/--out-file**   | output file path (default: "?edm4hep.root" --> "?edm4hep.json") |
 | **-l/--coll-list**  | comma separated list of collections to be converted             |
 | **-e/--events**     | comma separated list of events to be processed                  |
-| **-n/--nevents**    | maximal number of events to be processed                        |
+| **-n/--nevents**    | **maximal number of events to be processed**                    |
 | **-f/--frame-name** | input frame name (default: "events")                            |
 | **-v/--verbose**    | be more verbose                                                 |
 | **-h/--help**       | show this help message                                          |
 
-#### Example
+#### It is recommended to limit the number of events to be processed: JSON is less efficient storage format than ROOT, and a few MBs Root file will get converted into hundreds of MBs
 
 For example, you can call the script with
 
@@ -50,7 +50,7 @@ For example, you can call the script with
 edm4hep2json -l ReconstructedParticles,Particle,MCRecoAssociations -e 2,3,5,7,11 filename.edm4hep.root
 ```
 
-This saves `ReconstructedParticles`, `Particle` and `MCRecoAssociations` object collections, keeping the 2nd, 3rd, 5th, 7th and 11th events in the file (specified by the flag `-e 2,3,5,7,11`). 
+This saves `ReconstructedParticles`, `Particle` and `MCRecoAssociations` object collections, keeping the 2nd, 3rd, 5th, 7th and 11th events in the file (specified by the flag `-e 2,3,5,7,11`).
 
 An example output can be found at [example.edm4hep.json](https://fccsw.web.cern.ch/fccsw/tutorials/eede-tutorial/example_eedE_tutorial.edm4hep.json).
 
