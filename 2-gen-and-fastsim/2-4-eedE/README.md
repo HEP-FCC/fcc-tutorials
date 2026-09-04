@@ -50,7 +50,9 @@ For example, you can call the script with
 edm4hep2json -l ReconstructedParticles,Particle,MCRecoAssociations -e 2,3,5,7,11 filename.edm4hep.root
 ```
 
-This saves `ReconstructedParticles`, `Particle` and `MCRecoAssociations` object collections, keeping the 2nd, 3rd, 5th, 7th and 11th events in the file. Which can be found at [example.edm4hep.json](https://fccsw.web.cern.ch/fccsw/tutorials/eede-tutorial/example_eedE_tutorial.edm4hep.json).
+This saves `ReconstructedParticles`, `Particle` and `MCRecoAssociations` object collections, keeping the 2nd, 3rd, 5th, 7th and 11th events in the file (specified by the flag `-e 2,3,5,7,11`). 
+
+An example output can be found at [example.edm4hep.json](https://fccsw.web.cern.ch/fccsw/tutorials/eede-tutorial/example_eedE_tutorial.edm4hep.json).
 
 ## 2. Using eedE
 
