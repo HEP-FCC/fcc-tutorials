@@ -219,7 +219,7 @@ There are several ways how to import FCC detector geometry into Phoenix.
 Currently the preferred method is to convert compact DD4hep file(s) to ROOT
 files and from ROOT files to glTF files. The first conversion
 (`.xml` -> `.root`) is straightforward and can be done using script like
-[this](https://fccsw.web.cern.ch/fccsw/tutorials/static/python/dd4hep2root).
+[this](https://github.com/key4hep/k4geo/blob/main/utils/dd4hep2root.py).
 With the most important part being the building of the detector geometry from
 the compact file
 
@@ -237,17 +237,17 @@ ROOT.gGeoManager.Export(out_path)
 ```
 
 We will try to convert FCCee Noble Liquid Calorimeter. On the remote machine
-with FCCSW stack already sourced download the `dd4hep2root` script
+with FCCSW stack already sourced download the `dd4hep2root.py` script
 ```sh
-wget https://fccsw.web.cern.ch/fccsw/tutorials/static/python/dd4hep2root
+wget https://raw.githubusercontent.com/key4hep/k4geo/main/utils/dd4hep2root.py
 ```
 make it executable
-```
-chmod u+x dd4hep2root
+```sh
+chmod u+x dd4hep2root.py
 ```
 and run the conversion with
 ```sh
-./dd4hep2root -c ${FCCDETECTORS}/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectEmptyMaster.xml \
+./dd4hep2root.py -c ${FCCDETECTORS}/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectEmptyMaster.xml \
                  ${FCCDETECTORS}/Detector/DetFCCeeECalInclined/compact/FCCee_ECalBarrel.xml
               -o fccee_lar.root
 ```
