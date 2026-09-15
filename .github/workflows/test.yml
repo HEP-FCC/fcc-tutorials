@@ -37,6 +37,6 @@ jobs:
         mkdir build;\
         cd build;\
         cmake ${{ contains(matrix.STACK, 'sw-nightlies') && '-GNinja' || '' }} ..;\
-        make;\
-        make test;
+        cmake --build .;\
+        ctest;
         '
