@@ -33,7 +33,7 @@ jobs:
         tar -xzf pandoc-3.10-linux-amd64.tar.gz;\
         cp pandoc-3.10/bin/pandoc /usr/local/bin/;\
         cd ./Package;\
-        source ${{ matrix.STACK }};\
+        source ${{ matrix.STACK }} ${{ contains(matrix.STACK, 'sw-nightlies') && '--spack' || '' }};\
         mkdir build;\
         cd build;\
         cmake ..;\
