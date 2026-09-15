@@ -36,7 +36,7 @@ jobs:
         source ${{ matrix.STACK }};\
         mkdir build;\
         cd build;\
-        cmake ..;\
-        make;\
+        cmake ${{ contains(matrix.STACK, 'sw-nightlies') && '-GNinja' || '' }} ..;\
+        make --build .;\
         make test;
         '
