@@ -373,9 +373,9 @@ Let's first generate the files containing the geometry that will be used by the 
 
 ```bash
 cd ../../..
-wget https://fccsw.web.cern.ch/fccsw/tutorials/static/python/dd4hep2root
-chmod +x dd4hep2root
-./dd4hep2root -c $K4GEO/FCCee/CLD/compact/CLD_o2_v07/CLD_o2_v07.xml -o CLD_o2_v07_geom.root
+wget https://raw.githubusercontent.com/key4hep/k4geo/main/utils/dd4hep2root.py
+chmod +x dd4hep2root.py
+./dd4hep2root.py -c $K4GEO/FCCee/CLD/compact/CLD_o2_v07/CLD_o2_v07.xml -o CLD_o2_v07_geom.root
 echo $PWD/CLD_o2_v07_geom.root
 ```
 
