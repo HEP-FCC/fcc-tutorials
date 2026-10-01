@@ -10,6 +10,8 @@ exclude_patterns = [
     'venv',
     '.github',
     'README.md',
+    'CONTRIBUTING.md',
+    'LICENSE.md',
     'archive'
 ]
 
