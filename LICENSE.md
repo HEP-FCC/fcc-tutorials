@@ -1,1 +1,0 @@
-7-contributing/LICENSE.md
