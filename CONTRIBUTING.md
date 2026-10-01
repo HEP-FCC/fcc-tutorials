@@ -61,7 +61,7 @@ In case you are editing the tutorials using the FCC Software (Key4hep) stack, it
 is necessary to clear the `PYTHONPATH` environment variable after sourcing of
 the stack
 ```bash
-source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
+source /cvmfs/sw.hsf.org/key4hep/setup.sh
 unset PYTHONPATH
 ```
 
