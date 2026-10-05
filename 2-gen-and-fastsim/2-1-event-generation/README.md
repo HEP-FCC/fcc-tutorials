@@ -25,12 +25,11 @@ source /cvmfs/sw.hsf.org/key4hep/setup.sh
 :::{admonition} Nota Bene
 :class: callout
 
-For legacy reasons the following is still provided, fully equivalent to the above
 ```bash
 source /cvmfs/fcc.cern.ch/sw/latest/setup.sh
 ```
-Note however that not all the `cvmfs` tier-1 centers replicate the
-`fcc.cern.ch`, so this may lead to slowdowns or even failures.
+also works; `/cvmfs/fcc.cern.ch` hosts alongside the Key4hep stack also FCC-specific software and data, for the purposes of this tutorial sourcing either is equivalent. Note however that not all the `cvmfs` tier-1 centers replicate the
+`fcc.cern.ch`, so this endpoint might not be available.
 :::
 
 :::{admonition} Nota Bene
