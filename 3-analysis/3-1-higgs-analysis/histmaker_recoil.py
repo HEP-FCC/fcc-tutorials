@@ -1,176 +1,109 @@
-# list of processes (mandatory)
+"""Part I: reconstruct muons, select recoil candidates and fill histograms.
+
+Run with: fccanalysis run histmaker_recoil.py
+Muon reconstruction is adapted from LiveSoftwareTutorials/Analysis/ee.
+"""
+
+# selection requirements; momenta and masses are in GeV.
+MUON_MOMENTUM_MIN = 20.0
+MUON_ISOLATION_MAX = 0.25
+Z_MASS_MIN = 86.0
+Z_MASS_MAX = 96.0
+Z_MOMENTUM_MIN = 20.0
+Z_MOMENTUM_MAX = 70.0
+RECOIL_MASS_MIN = 120.0
+RECOIL_MASS_MAX = 140.0
+
+# Effective final-state cross sections in pb; branching fractions are included.
 processList = {
-    #'p8_ee_ZZ_ecm240':{'fraction':1},
-    #'p8_ee_WW_ecm240':{'fraction':1}, 
-    #'wzp6_ee_mumuH_ecm240':{'fraction':1},
-    'p8_ee_WW_mumu_ecm240':    {'fraction':1, 'crossSection': 0.25792}, 
-    'p8_ee_ZZ_mumubb_ecm240':  {'fraction':1, 'crossSection': 2 * 1.35899 * 0.034 * 0.152},
-    'p8_ee_ZH_Zmumu_ecm240':   {'fraction':1, 'crossSection': 0.201868 * 0.034},
+    "wzp8_ee_mumuH_Hbb_ecm240": {
+        "fraction": 1.0,
+        "crossSection": 0.00394,
+        "kfactor": 1.0,
+        "matchingEfficiency": 1.0
+    },
+    "p8_ee_ZZ_mumubb_ecm240": {
+        "fraction": 1.0,
+        "crossSection": 0.01404652064,
+        "kfactor": 1.0,
+        "matchingEfficiency": 1.0
+    },
+    "p8_ee_WW_mumu_ecm240": {
+        "fraction": 1.0,
+        "crossSection": 0.25792,
+        "kfactor": 1.0,
+        "matchingEfficiency": 1.0
+    },
 }
-
-# Production tag when running over EDM4Hep centrally produced events, this points to the yaml files for getting sample statistics (mandatory)
-#prodTag     = "FCCee/winter2023/IDEA/"
-
-# Link to the dictonary that contains all the cross section informations etc... (mandatory)
+# Use the FCCAnalyses standard dictionary, overridden by processList above.
 procDict = "FCCee_procDict_winter2023_IDEA.json"
-
-# additional/custom C++ functions, defined in header files (optional)
 includePaths = ["functions.h"]
-
-# Define the input dir (optional)
-#inputDir    = "outputs/FCCee/higgs/mH-recoil/mumu/stage1"
-inputDir    = "./localSamples/"
-
-#Optional: output directory, default is local running directory
-outputDir   = "./outputs/histmaker/recoil/"
-
-
-# optional: ncpus, default is 4, -1 uses all cores available
-nCPUS       = -1
-
-# scale the histograms with the cross-section and integrated luminosity
+inputDir = "inputs/"
+outputDir = "outputs/recoil/"
+nCPUS = -1
 doScale = True
-intLumi = 5000000 # 5 /ab
+intLumi = 10.6e6  # pb^-1 = 10.6 ab^-1
 
 
-# define some binning for various histograms
-bins_p_mu = (2000, 0, 200) # 100 MeV bins
-bins_m_ll = (2000, 0, 200) # 100 MeV bins
-bins_p_ll = (2000, 0, 200) # 100 MeV bins
-bins_recoil = (200000, 0, 200) # 1 MeV bins 
-bins_cosThetaMiss = (10000, 0, 1)
-
-bins_theta = (500, -5, 5)
-bins_eta = (600, -3, 3)
-bins_phi = (500, -5, 5)
-
-bins_count = (50, 0, 50)
-bins_charge = (10, -5, 5)
-bins_iso = (500, 0, 5)
-
-
-
-# build_graph function that contains the analysis logic, cuts and histograms (mandatory)
 def build_graph(df, dataset):
-
     results = []
     df = df.Define("weight", "1.0")
     weightsum = df.Sum("weight")
-    
-    # define some aliases to be used later on
+
     df = df.Alias("Particle0", "_Particle_daughters.index")
     df = df.Alias("Particle1", "_Particle_parents.index")
     df = df.Alias("RecoMCLink0", "_RecoMCLink_from.index")
     df = df.Alias("RecoMCLink1", "_RecoMCLink_to.index")
     df = df.Alias("Muon0", "Muon_objIdx.index")
+    df = df.Define("muons_all", "FCCAnalyses::ReconstructedParticle::get(Muon0, ReconstructedParticles)",)
 
+    df = df.Define(
+        "muons",
+        f"FCCAnalyses::ReconstructedParticle::sel_p({MUON_MOMENTUM_MIN})(muons_all)",
+    )
+    df = df.Define("q_muons", "FCCAnalyses::ReconstructedParticle::get_charge(muons)")
+    df = df.Define("no_muons", "FCCAnalyses::ReconstructedParticle::get_n(muons)")
 
-    # get all the leptons from the collection
-    df = df.Define("muons_all", "FCCAnalyses::ReconstructedParticle::get(Muon0, ReconstructedParticles)")    
-    # select leptons with momentum > 20 GeV
-    df = df.Define("muons", "FCCAnalyses::ReconstructedParticle::sel_p(20)(muons_all)")
-    
-    df = df.Define("muons_p", "FCCAnalyses::ReconstructedParticle::get_p(muons)")
-    df = df.Define("muons_theta", "FCCAnalyses::ReconstructedParticle::get_theta(muons)")
-    df = df.Define("muons_phi", "FCCAnalyses::ReconstructedParticle::get_phi(muons)")
-    df = df.Define("muons_q", "FCCAnalyses::ReconstructedParticle::get_charge(muons)")
-    df = df.Define("muons_no", "FCCAnalyses::ReconstructedParticle::get_n(muons)")
-    
-    # compute the muon isolation and store muons with an isolation cut of 0.25 in a separate column muons_sel_iso
-    df = df.Define("muons_iso", "FCCAnalyses::ZHfunctions::coneIsolation(0.01, 0.5)(muons, ReconstructedParticles)")
-    df = df.Define("muons_sel_iso", "FCCAnalyses::ZHfunctions::sel_iso(0.25)(muons, muons_iso)")
-    
+    df = df.Define(
+        "iso_muons",
+        "FCCAnalyses::ZHfunctions::coneIsolation(0.01, 0.5)(muons, ReconstructedParticles)",)
+    df = df.Define(
+        "muons_sel_iso",
+        f"FCCAnalyses::ZHfunctions::sel_iso({MUON_ISOLATION_MAX})(muons, iso_muons)",)
+    # Loose preselection: the candidate builder needs an opposite-sign muon pair.
+    df = df.Filter("muons_sel_iso.size() > 0")
+    df = df.Filter("no_muons >= 2 && abs(Sum(q_muons)) < q_muons.size()")
 
-    # baseline histograms, before any selection cuts (store with _cut0)
-    results.append(df.Histo1D(("muons_p_cut0", "", *bins_p_mu), "muons_p"))
-    results.append(df.Histo1D(("muons_theta_cut0", "", *bins_theta), "muons_theta"))
-    results.append(df.Histo1D(("muons_phi_cut0", "", *bins_phi), "muons_phi"))
-    results.append(df.Histo1D(("muons_q_cut0", "", *bins_charge), "muons_q"))
-    results.append(df.Histo1D(("muons_no_cut0", "", *bins_count), "muons_no"))
-    results.append(df.Histo1D(("muons_iso_cut0", "", *bins_iso), "muons_iso"))
-    
+    df = df.Define(
+        "zbuilder_result",
+        "FCCAnalyses::ZHfunctions::resonanceBuilder_mass_recoil("
+        "91.2, 125, 0.4, 240, false)(muons, RecoMCLink0, RecoMCLink1, "
+        "ReconstructedParticles, Particle, Particle0, Particle1)",)
 
-    #########
-    ### CUT 0: all events
-    #########
-    df = df.Define("cut0", "0")
-    results.append(df.Histo1D(("cutFlow", "", *bins_count), "cut0"))
+    # Define the observables used by the final selection and histograms.
+    df = df.Define("zmumu", "Vec_rp{zbuilder_result[0]}")
 
+    df = df.Define("m_zmumu", "FCCAnalyses::ReconstructedParticle::get_mass(zmumu)[0]")
+    df = df.Define("p_zmumu", "FCCAnalyses::ReconstructedParticle::get_p(zmumu)[0]")
+    df = df.Define("recoil_zmumu", "FCCAnalyses::ReconstructedParticle::recoilBuilder(240)(zmumu)",)
+    df = df.Define("m_recoil_zmumu", "FCCAnalyses::ReconstructedParticle::get_mass(recoil_zmumu)[0]",)
 
-    #########
-    ### CUT 1: at least 1 muon with at least one isolated one
-    #########
-    df = df.Filter("muons_no >= 1 && muons_sel_iso.size() > 0")
-    df = df.Define("cut1", "1")
-    results.append(df.Histo1D(("cutFlow", "", *bins_count), "cut1"))
+    # Apply the physics cuts to the defined observables.
+    df = df.Filter(f"m_zmumu > {Z_MASS_MIN} && m_zmumu < {Z_MASS_MAX}")
+    df = df.Filter(f"p_zmumu > {Z_MOMENTUM_MIN} && p_zmumu < {Z_MOMENTUM_MAX}")
+    df = df.Filter(f"m_recoil_zmumu > {RECOIL_MASS_MIN} && m_recoil_zmumu < {RECOIL_MASS_MAX}")
 
-    
-    #########
-    ### CUT 2 :at least 2 opposite-sign (OS) leptons
-    #########
-    df = df.Filter("muons_no >= 2 && abs(Sum(muons_q)) < muons_q.size()")
-    df = df.Define("cut2", "2")
-    results.append(df.Histo1D(("cutFlow", "", *bins_count), "cut2"))
-    
-    # now we build the Z resonance based on the available leptons.
-    # the function resonanceBuilder_mass_recoil returns the best lepton pair compatible with the Z mass (91.2 GeV) and recoil at 125 GeV
-    # the argument 0.4 gives a weight to the Z mass and the recoil mass in the chi2 minimization
-    # technically, it returns a ReconstructedParticleData object with index 0 the di-lepton system, index and 2 the leptons of the pair
-    df = df.Define("zbuilder_result", "FCCAnalyses::ZHfunctions::resonanceBuilder_mass_recoil(91.2, 125, 0.4, 240, false)(muons, RecoMCLink0, RecoMCLink1, ReconstructedParticles, Particle, Particle0, Particle1)")
-    df = df.Define("zmumu", "Vec_rp{zbuilder_result[0]}") # the Z
-    df = df.Define("zmumu_muons", "Vec_rp{zbuilder_result[1],zbuilder_result[2]}") # the leptons 
-    df = df.Define("zmumu_m", "FCCAnalyses::ReconstructedParticle::get_mass(zmumu)[0]") # Z mass
-    df = df.Define("zmumu_p", "FCCAnalyses::ReconstructedParticle::get_p(zmumu)[0]") # momentum of the Z
-    df = df.Define("zmumu_recoil", "FCCAnalyses::ReconstructedParticle::recoilBuilder(240)(zmumu)") # compute the recoil based on the reconstructed Z
-    df = df.Define("zmumu_recoil_m", "FCCAnalyses::ReconstructedParticle::get_mass(zmumu_recoil)[0]") # recoil mass
-    df = df.Define("zmumu_muons_p", "FCCAnalyses::ReconstructedParticle::get_p(zmumu_muons)") # get the momentum of the 2 muons from the Z resonance
-     
-
-
-    #########
-    ### CUT 3: Z mass window
-    #########  
-    df = df.Filter("zmumu_m > 86 && zmumu_m < 96")
-    df = df.Define("cut3", "3")
-    results.append(df.Histo1D(("cutFlow", "", *bins_count), "cut3"))
-
-    
-    #########
-    ### CUT 4: Z momentum
-    #########  
-    df = df.Filter("zmumu_p > 20 && zmumu_p < 70")
-    df = df.Define("cut4", "4")
-    results.append(df.Histo1D(("cutFlow", "", *bins_count), "cut4"))
-
-    
-    #########
-    ### CUT 5: cosThetaMiss
-    #########  
-    df = df.Define("missingEnergy", "FCCAnalyses::ZHfunctions::missingEnergy(240., ReconstructedParticles)")
-    #df = df.Define("cosTheta_miss", "FCCAnalyses::get_cosTheta_miss(missingEnergy)")
-    df = df.Define("cosTheta_miss", "FCCAnalyses::ZHfunctions::get_cosTheta_miss(missingEnergy)")
-    results.append(df.Histo1D(("cosThetaMiss_cut4", "", *bins_cosThetaMiss), "cosTheta_miss")) # plot it before the cut
-
-    df = df.Filter("cosTheta_miss < 0.98")
-    df = df.Define("cut5", "5")
-    results.append(df.Histo1D(("cutFlow", "", *bins_count), "cut5"))
-
-
-    #########
-    ### CUT 6: recoil mass window
-    #########  
-    df = df.Filter("zmumu_recoil_m < 140 && zmumu_recoil_m > 120")
-    df = df.Define("cut6", "6")
-    results.append(df.Histo1D(("cutFlow", "", *bins_count), "cut6"))
-    
-
-    ########################
-    # Final histograms
-    ########################
-    results.append(df.Histo1D(("zmumu_m", "", *bins_m_ll), "zmumu_m"))
-    results.append(df.Histo1D(("zmumu_recoil_m", "", *bins_recoil), "zmumu_recoil_m"))
-    results.append(df.Histo1D(("zmumu_p", "", *bins_p_ll), "zmumu_p"))
-    results.append(df.Histo1D(("zmumu_muons_p", "", *bins_p_mu), "zmumu_muons_p"))
-    
-
+    # Final distributions after all cuts.
+    results.append(df.Histo1D(
+        ("m_zmumu", ";Dimuon mass [GeV];Events", 100, 86, 96),
+        "m_zmumu", "weight",
+    ))
+    results.append(df.Histo1D(
+        ("p_zmumu", ";Dimuon momentum [GeV];Events", 100, 20, 70),
+        "p_zmumu", "weight",
+    ))
+    results.append(df.Histo1D(
+        ("m_recoil_zmumu", ";Recoil mass [GeV];Events", 200, 120, 140),
+        "m_recoil_zmumu", "weight",
+    ))
     return results, weightsum
