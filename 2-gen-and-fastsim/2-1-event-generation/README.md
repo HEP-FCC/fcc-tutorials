@@ -93,6 +93,7 @@ The Gaudi steering file needs to activate the `GaudiTool` that interfaces
 An example of steering file can be found at [pythia.py][pythia-example].
 The steering file runs the minimal set of algorithms to run Pythia8 and produce
 an output in `EDM4hep` format:
+<!-- ci-fragment: pythia8 -->
 ```bash
 wget https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py
 k4run --dry-run pythia.py
@@ -104,10 +105,12 @@ with expected output
 ```
 For example, to generate 500 $e^{+}e^{-} \rightarrow \mu^{+}\mu^{-}$ at
 91.2 GeV, one can do the following, download the configuration file:
+<!-- ci-fragment: pythia8 -->
 ```bash
 wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/main/FCCee/Generator/Pythia8/p8_ee_Zmumu_ecm91.cmd
 ```
 and run
+<!-- ci-fragment: pythia8 -->
 ```bash
 k4run pythia.py -n 500 --out.filename p8_mumu_500.e4h.root --Pythia8.PythiaInterface.pythiacard p8_ee_Zmumu_ecm91.cmd
 ```
