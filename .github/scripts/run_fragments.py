@@ -68,7 +68,14 @@ def main():
     with tempfile.TemporaryDirectory(prefix=f"fragments-{args.tag}-") as work:
         work = Path(work)
         (work / "fragments.sh").write_text(script)
-        subprocess.run(["bash", "fragments.sh"], cwd=work, check=True)
+        status = subprocess.run(["bash", "fragments.sh"], cwd=work).returncode
+        if status:
+            print(
+                f"FAILED: fragment exited with status {status}; the failing fence is the "
+                f"last '+++ {page.name}:LINE' marker above",
+                file=sys.stderr,
+            )
+            return 1
         failed = False
         for item in args.validate:
             name, events = item.rsplit(":", 1)
