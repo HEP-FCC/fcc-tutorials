@@ -100,7 +100,7 @@ k4run --dry-run pythia.py
 ```
 with expected output
 ```
-[k4run - INFO] k4run.main: --> Pythia8 --> HepMCToEDMConverter --> StableParticles --> out
+[k4run - INFO] k4run.main: --> eventHeaderCreator --> Pythia8 --> HepMCToEDMConverter --> StableParticles
 [...]
 ```
 For example, to generate 500 $e^{+}e^{-} \rightarrow \mu^{+}\mu^{-}$ at
@@ -112,7 +112,7 @@ wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/main/FCCee/Generator/P
 and run
 <!-- ci-fragment: pythia8 -->
 ```bash
-k4run pythia.py -n 500 --out.filename p8_mumu_500.e4h.root --Pythia8.PythiaInterface.pythiacard p8_ee_Zmumu_ecm91.cmd
+k4run pythia.py -n 500 --IOSvc.Output p8_mumu_500.e4h.root --Pythia8.PythiaInterface.pythiacard p8_ee_Zmumu_ecm91.cmd
 ```
 
 
