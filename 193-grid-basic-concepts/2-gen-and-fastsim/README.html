@@ -1,0 +1,240 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. Generation and Fast Simulation &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom-admonitions.css?v=e6bfab01" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.1. Getting Started with Event Generation" href="2-1-event-generation/README.html" />
+    <link rel="prev" title="1.8. Asking good questions" href="../1-first-steps/asking-questions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FCC Tutorials
+              <img src="../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../1-first-steps/README.html">1. First Steps</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Generation and Fast Simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="2-1-event-generation/README.html">2.1. Getting Started with Event Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-2-fastsim-delphes/README.html">2.2. Getting Started with Fast Simulation in Delphes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-4-eedE/README.html">2.3. EDM4hep Event Data Explorer: eedE</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../3-analysis/README.html">3. Analysis at FCC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-full-detector-sim/README.html">4. Full Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5-distributed-computing/README.html">5. Distributed Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6-developing-fccsw/README.html">6. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7-contributing/README.html">7. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://fccsw.web.cern.ch/">FCC Software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://key4hep.web.cern.ch">Key4hep</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://fcc-ee-detector-full-sim.docs.cern.ch/">FCC-ee Detector Full Sim</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/">FCCAnalyses</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">HSF Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC Software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2. </span>Generation and Fast Simulation</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/main/2-gen-and-fastsim/README.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="generation-and-fast-simulation">
+<h1><span class="section-number">2. </span>Generation and Fast Simulation<a class="headerlink" href="#generation-and-fast-simulation" title="Link to this heading"></a></h1>
+<!-- contributors:start -->
+<div class="callout dropdown admonition">
+<p class="admonition-title">Page contributors</p>
+<p>Valentin Volkl, Juraj Smiesko, Clement Helsens, Gerardo Ganis, Xunwu Zuo</p>
+</div>
+<!-- contributors:end -->
+<p>If you want to get started with generation and  analysis of fast-simulated
+events, you’re at the right place.</p>
+<p>If you want to get started with generation and a first quick inspection of fast-simulated
+events, you’re at the right place. This chapter focuses on the generation of samples. A more in-depth look at FCCAnalyse is given in the next chapter.</p>
+<p>Fast simulation is currently supported through the Delphes approach. Support for the Papas approach, initially used for FCC-ee, is
+discontinued.</p>
+<p>If you have any problems or questions, you can
+<a class="reference external" href="https://github.com/HEP-FCC/fcc-tutorials/issues">open an issue</a> on the
+<a class="reference external" href="https://github.com/HEP-FCC/fcc-tutorials">GitHub repository where these lessons are developed</a>.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="2-1-event-generation/README.html">2.1. Getting Started with Event Generation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="2-1-event-generation/README.html#enabling-fcc-software">2.1.1. Enabling FCC Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-1-event-generation/README.html#generators">2.1.2. Generators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="2-1-event-generation/README.html#overview">2.1.2.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-1-event-generation/README.html#pythia8">2.1.2.2. Pythia8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-1-event-generation/README.html#whizard">2.1.2.3. Whizard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-1-event-generation/README.html#kkmcee">2.1.2.4. KKMCee</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-1-event-generation/README.html#bhlumi">2.1.2.5. BHLUMI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-1-event-generation/README.html#babayaga">2.1.2.6. BabaYaga</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-1-event-generation/README.html#herwig">2.1.2.7. Herwig</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-1-event-generation/README.html#madgraph5">2.1.2.8. MadGraph5</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="2-1-event-generation/README.html#hands-on-case-study-ditau-events-with-pythia8-whizard-and-kkmcee">2.1.3. Hands-on case study: ditau events with Pythia8, Whizard and KKMCee</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="2-1-event-generation/README.html#generating-ditaus-with-pythia8">2.1.3.1. Generating ditaus with Pythia8</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-1-event-generation/README.html#generating-ditaus-with-whizard">2.1.3.2. Generating ditaus with Whizard</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="2-1-event-generation/README.html#lhef-to-edm4hep-conversion"><code class="docutils literal notranslate"><span class="pre">LHEf</span></code> to <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code> conversion</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="2-1-event-generation/README.html#generating-ditaus-with-kkmcee">2.1.3.3. Generating ditaus with KKMCee</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="2-1-event-generation/README.html#generating-hepmc-events">Generating <code class="docutils literal notranslate"><span class="pre">HepMC</span></code> events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="2-1-event-generation/README.html#hepmc-to-edm4hep-conversion"><code class="docutils literal notranslate"><span class="pre">HepMC</span></code> to <code class="docutils literal notranslate"><span class="pre">EDM4hep</span></code> conversion</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="2-1-event-generation/README.html#dissection-of-hepmc2edm-py">Dissection of <code class="docutils literal notranslate"><span class="pre">hepmc2edm.py</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="2-1-event-generation/README.html#running-hepmc2edm-py">Running <code class="docutils literal notranslate"><span class="pre">hepmc2edm.py</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="2-1-event-generation/README.html#looking-at-the-produced-files-comparing-distributions">2.1.3.4. Looking at the produced files. Comparing distributions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="2-1-event-generation/README.html#looking-the-mcparticle-class">Looking the MCParticle class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="2-1-event-generation/README.html#building-fccanalyses">Building FCCAnalyses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="2-1-event-generation/README.html#creating-histograms-with-fccanalyses">Creating histograms with FCCAnalyses</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="2-1-event-generation/README.html#dissection-of-histmaker-ttmm-py">Dissection of <code class="docutils literal notranslate"><span class="pre">histmaker_ttmm.py</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="2-1-event-generation/README.html#running-histmaker-ttmm-py">Running <code class="docutils literal notranslate"><span class="pre">histmaker_ttmm.py</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="2-1-event-generation/README.html#comparing-distributions">Comparing distributions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="2-1-event-generation/README.html#possible-conclusion-of-the-exercise">Possible conclusion of the exercise</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="2-2-fastsim-delphes/README.html">2.2. Getting Started with Fast Simulation in Delphes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="2-2-fastsim-delphes/README.html#generate-and-simulate-events-with-delphesedm4hep">2.2.1. Generate and Simulate Events with DelphesEDM4Hep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-2-fastsim-delphes/README.html#sample-generation-pythia8-evtgen">2.2.2. Sample Generation: Pythia8 + EvtGen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-2-fastsim-delphes/README.html#creating-custom-decay-file">2.2.3. Creating custom decay file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="2-4-eedE/README.html">2.3. EDM4hep Event Data Explorer: eedE</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="2-4-eedE/README.html#edm4hep2json">2.3.1. edm4hep2json</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-4-eedE/README.html#using-eede">2.3.2. Using eedE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="2-4-eedE/README.html#visualizing-the-mc-particle-tree">2.3.2.1. Visualizing the MC particle Tree</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../1-first-steps/asking-questions.html" class="btn btn-neutral float-left" title="1.8. Asking good questions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="2-1-event-generation/README.html" class="btn btn-neutral float-right" title="2.1. Getting Started with Event Generation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: 193-grid-basic-concepts
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../main/index.html">main</a></dd>
+      <dd><a href="README.html">193-grid-basic-concepts</a></dd>
+      <dd><a href="../../bnl2023/index.html">bnl2023</a></dd>
+      <dd><a href="../../cern2022/index.html">cern2022</a></dd>
+      <dd><a href="../../flavours2025/index.html">flavours2025</a></dd>
+      <dd><a href="../../mit2024/index.html">mit2024</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.1. Distributed computing: basic concepts &mdash; FCC Tutorials  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom-admonitions.css?v=e6bfab01" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5.2. Getting started with FCC distributed computing" href="RegisteringToFccVO.html" />
+    <link rel="prev" title="5. Distributed Computing" href="README.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FCC Tutorials
+              <img src="../_static/fcc-logo-light.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../1-first-steps/README.html">1. First Steps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2-gen-and-fastsim/README.html">2. Generation and Fast Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-analysis/README.html">3. Analysis at FCC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-full-detector-sim/README.html">4. Full Simulation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="README.html">5. Distributed Computing</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.1. Distributed computing: basic concepts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#why-distributed-computing">5.1.1. Why distributed computing?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-grid-and-local-batch-systems">5.1.1.1. The grid and local batch systems</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dirac">5.1.1.2. DIRAC</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#design-principles">5.1.2. Design principles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#compute-vs-storage">5.1.2.1. Compute vs Storage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#networking">5.1.2.2. Networking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#software-distribution">5.1.2.3. Software distribution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#identity-and-authorization">5.1.3. Identity and authorization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#virtual-organizations">5.1.3.1. Virtual Organizations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#grid-certificates">5.1.3.2. Grid certificates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#proxies">5.1.3.3. Proxies</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#other-names-you-will-hear">5.1.4. Other names you will hear</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="RegisteringToFccVO.html">5.2. Getting started with FCC distributed computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Workflows.html">5.3. FCC DIRAC Example Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OutputStructure.html">5.4. Structure for /eos/experiment/fcc/prod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EventProducer.html">5.5. EventProducer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../6-developing-fccsw/README.html">6. Developing FCCSW</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7-contributing/README.html">7. Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://fccsw.web.cern.ch/">FCC Software</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://key4hep.web.cern.ch">Key4hep</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://fcc-ee-detector-full-sim.docs.cern.ch/">FCC-ee Detector Full Sim</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/FCCAnalyses/">FCCAnalyses</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hsf-training.github.io/analysis-essentials/">HSF Analysis essentials</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://hep-fcc.github.io/glossary">FCC Software glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FCC Tutorials</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="README.html"><span class="section-number">5. </span>Distributed Computing</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5.1. </span>Distributed computing: basic concepts</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/HEP-FCC/fcc-tutorials/blob/main/5-distributed-computing/Concepts.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="distributed-computing-basic-concepts">
+<h1><span class="section-number">5.1. </span>Distributed computing: basic concepts<a class="headerlink" href="#distributed-computing-basic-concepts" title="Link to this heading"></a></h1>
+<!-- contributors:start -->
+<div class="callout dropdown admonition">
+<p class="admonition-title">Page contributors</p>
+<p>Michel Villanueva</p>
+</div>
+<!-- contributors:end -->
+<div class="objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<ul class="simple">
+<li><p>Understand why FCC simulation and analysis need computing resources distributed over many sites</p></li>
+<li><p>Know the difference between a local batch system and the grid</p></li>
+<li><p>Learn the vocabulary used in the rest of this chapter: Virtual Organization, certificate,
+proxy, job, Storage Element, logical file name, replica, …</p></li>
+</ul>
+</div>
+<p>This page is written for readers who have never used grid computing in High Energy Physics (HEP). Its purpose is to explain the concepts that the
+following pages take for granted. Experienced users of DIRAC, Rucio or familiar with the <a class="reference external" href="https://wlcg.web.cern.ch/">WLCG</a> can skip straight to <a class="reference internal" href="RegisteringToFccVO.html"><span class="std std-doc">Getting started with FCC distributed computing</span></a>.</p>
+<section id="why-distributed-computing">
+<h2><span class="section-number">5.1.1. </span>Why distributed computing?<a class="headerlink" href="#why-distributed-computing" title="Link to this heading"></a></h2>
+<p>A full detector simulation of a single FCC-ee event takes seconds of CPU time. Physics studies need billions of events
+for every process and every detector concept, and the resulting files <a class="reference external" href="https://doi.org/10.1140/epjp/s13360-021-02189-y">add up to tens of petabytes</a>.
+As FCC consolidates its physics case and detector designs, the computing needs will grow even further.
+No single computing center is expected to provide that alone.</p>
+<p>The High Energy Physics community solved this problem with the Worldwide LHC Computing Grid (WLCG): a
+federation of computing centers, from CERN itself to national laboratories and university clusters, which agree to run
+each other’s jobs and store each other’s data using common interfaces and a common mechanism to identify users.
+“The grid” is the common name for this distributed computing system.</p>
+<p>At this moment, FCC does not have its own grid. It uses a share of the existing WLCG.</p>
+<p>The grid is different from your local resources in different ways:</p>
+<ul class="simple">
+<li><p><strong>Nothing is local.</strong> Your program runs on a machine you have never logged into. Everything it needs (software, input data, configuration)
+has to be brought there, and everything it produces has to be stored somewhere.</p></li>
+<li><p><strong>Authentication is centrally handled.</strong> A remote site has no account for you. Instead, sites trust the FCC Virtual Organization (VO).
+To use the grid, you need to become a member of the VO. All the certificate and proxy machinery described below exists to make this trust chain work.</p></li>
+</ul>
+<section id="the-grid-and-local-batch-systems">
+<h3><span class="section-number">5.1.1.1. </span>The grid and local batch systems<a class="headerlink" href="#the-grid-and-local-batch-systems" title="Link to this heading"></a></h3>
+<p>A <strong>batch system</strong> is a scheduler that queues jobs and runs them on a farm of machines inside one computing center.
+For example, CERN runs <a class="reference external" href="https://batchdocs.web.cern.ch/">HTCondor</a> on its farm, reachable from <code class="docutils literal notranslate"><span class="pre">lxplus</span></code>. Many universities run HTCondor or Slurm. In batch system
+you already have an account, the shared filesystem (AFS, EOS) is mounted on the worker nodes, and you can <code class="docutils literal notranslate"><span class="pre">ssh</span></code> in to look at things.</p>
+<p>The grid glues many batch systems together behind a single interface. In exchange for scale, there is no shared filesystem across sites,
+you cannot log in, and you need a grid identity rather than a local account.</p>
+</section>
+<section id="dirac">
+<h3><span class="section-number">5.1.1.2. </span>DIRAC<a class="headerlink" href="#dirac" title="Link to this heading"></a></h3>
+<p>DIRAC is the Interware that provides a single interface to the grid. It is a software framework that sits between users and the grid,
+hiding the complexity of the underlying batch and storage systems.</p>
+<p>It provides a uniform way to submit jobs, manage data, and monitor the status of tasks across multiple sites. Read more about DIRAC at <a class="reference external" href="https://diracgrid.org/dirac.html">diracgrid.org</a>.</p>
+<p>Next pages will show how to use DIRAC to submit jobs and manage data for FCC simulation and analysis.</p>
+</section>
+</section>
+<section id="design-principles">
+<h2><span class="section-number">5.1.2. </span>Design principles<a class="headerlink" href="#design-principles" title="Link to this heading"></a></h2>
+<section id="compute-vs-storage">
+<h3><span class="section-number">5.1.2.1. </span>Compute vs Storage<a class="headerlink" href="#compute-vs-storage" title="Link to this heading"></a></h3>
+<p>A core design principle for distributed computing in HEP is the separation of <strong>compute</strong> vs <strong>storage</strong>.</p>
+<ul class="simple">
+<li><p><strong>Jobs are transient entities</strong> that simply consume and produce data. They run on worker nodes, and once done they disappear. No information is preserved in the long term.</p></li>
+<li><p>In contrast, <strong>data has persistence</strong>, replication policies, and provenance — it “lives” long after a job finishes.</p></li>
+</ul>
+<p>Following this logic, elements on the grid are divided into two categories:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Building block</p></th>
+<th class="head"><p>What it is</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Computing Element (CE)</strong></p></td>
+<td><p>The site’s front door for jobs. DIRAC talks to the CE; the CE hands work to the site’s local batch system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Storage Element (SE)</strong></p></td>
+<td><p>A disk or tape service where files live. Each SE has a name inside DIRAC and speaks one or more transfer protocols.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="networking">
+<h3><span class="section-number">5.1.2.2. </span>Networking<a class="headerlink" href="#networking" title="Link to this heading"></a></h3>
+<p>Another core component of the grid is the network. Without networking, there is no distributed computing.</p>
+<p>Sites are connected to each other through a combination of public internet and dedicated regional
+research networks (e.g. GÉANT, ESnet, Internet2).</p>
+<p>CERN (as the Tier-0 center) is connected to the Tier-1 data centers around the world on a dedicated, private network called the
+LHC Optical Private Network (LHCOPN). It relies on dedicated long-distance optical-fiber links (10 to 100 gigabits per second),
+spanning oceans and continents.</p>
+<p>Multiple federations across the Europe, Asia Pacific and the Americas are interconnected with LHC Open Network Environment (LHCONE).
+Unlike LHCOPN, LHCONE is not a set of dedicated physical links, but a virtual network that provides high-bandwidth,
+low-latency connectivity between sites, while also ensuring security and reliability without requiring new dedicated infrastructure.</p>
+<p>Without going deep into the details, the idea is to illustrate the importance of networking in distributed computing.</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>At the time of writing, FCC does not have its own dedicated network. It uses the WLCG infrastructure, sharing it the with the LHC and other HEP experiments.</p>
+</div>
+</section>
+<section id="software-distribution">
+<h3><span class="section-number">5.1.2.3. </span>Software distribution<a class="headerlink" href="#software-distribution" title="Link to this heading"></a></h3>
+<p>The <a class="reference external" href="https://cernvm.cern.ch/fs/">CERN VM File System</a> (CVMFS) is a read-only filesystem that distributes software to worker nodes.
+It is mounted on every WLCG site, and it is a very efficient way to make software available to jobs that run on remote sites.</p>
+<p>CVMFS is what makes it possible for a job to <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">/cvmfs/sw.hsf.org/key4hep/setup.sh</span></code> on any worker node in the world and find exactly
+the same software you tested on a local resource like <code class="docutils literal notranslate"><span class="pre">lxplus</span></code>.</p>
+<p>Read more about CVMFS in the <a class="reference external" href="https://cvmfs.readthedocs.io/en/stable/cpt-overview/">documentation</a>.</p>
+</section>
+</section>
+<section id="identity-and-authorization">
+<h2><span class="section-number">5.1.3. </span>Identity and authorization<a class="headerlink" href="#identity-and-authorization" title="Link to this heading"></a></h2>
+<p>The grid needs to answer two questions for every request: <em>who are you</em> (authentication) and <em>what are you allowed to do</em> (authorization).</p>
+<section id="virtual-organizations">
+<h3><span class="section-number">5.1.3.1. </span>Virtual Organizations<a class="headerlink" href="#virtual-organizations" title="Link to this heading"></a></h3>
+<p>A <strong>Virtual Organization (VO)</strong> is the list of people belonging to a scientific community.
+Sites do not know individual users, they grant resources to VOs.</p>
+<p>When a site sees a request carrying a valid membership of the VO <code class="docutils literal notranslate"><span class="pre">fcc</span></code>, it applies the
+policies it agreed for FCC: which queues, how much disk, which priority.</p>
+<p>Membership is recorded in an identity and access management (IAM) service. Registering with the
+VO is the administrative step of <a class="reference internal" href="RegisteringToFccVO.html#registering-to-the-fcc-vo"><span class="std std-ref">signing up</span></a>
+and waiting for the VO managers to approve you.</p>
+</section>
+<section id="grid-certificates">
+<h3><span class="section-number">5.1.3.2. </span>Grid certificates<a class="headerlink" href="#grid-certificates" title="Link to this heading"></a></h3>
+<p>A <strong>grid certificate</strong> is an X.509 certificate, issued to you personally by a <strong>Certification Authority (CA)</strong>. CERN users obtain
+theirs from the <a class="reference external" href="https://ca.cern.ch/ca/">CERN CA</a>. The certificate contains your  <strong>Distinguished Name (DN)</strong>, a string such as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">ch</span><span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">cern</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Organic</span> <span class="n">Units</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">Users</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">feynman</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="mi">137137</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">Richard</span> <span class="n">Feynman</span>
+</pre></div>
+</div>
+<p>This DN is your identity on the grid, independent of any site or storage element.</p>
+<ul class="simple">
+<li><p>To interact with web interfaces, you must present the certificate from a web browser, which means importing it into the browser first,
+together with the CA certificates so that the browser trusts the registration site.</p></li>
+<li><p>On interactive sessions, like in <code class="docutils literal notranslate"><span class="pre">lxplus</span></code>, the certificate is expected as two files, <code class="docutils literal notranslate"><span class="pre">~/.globus/usercert.pem</span></code> and <code class="docutils literal notranslate"><span class="pre">~/.globus/userkey.pem</span></code>,
+which the DIRAC client reads when creating a proxy.</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Token-based authentication</p>
+<p>The WLCG community is moving from X.509 certificates to OAuth2 <strong>tokens</strong> issued by IAM services, similar to the login flows used by web applications.</p>
+<p>While the transition is still ongoing, grid certificates are still used for command-line work, so this tutorial follows the certificate route.</p>
+<p>Check out the progress updates on the <a class="reference external" href="https://twiki.cern.ch/twiki/bin/view/LCG/WLCGTokensGlobusWG">WLCG WG for Transition to Tokens</a>.</p>
+</div>
+</section>
+<section id="proxies">
+<h3><span class="section-number">5.1.3.3. </span>Proxies<a class="headerlink" href="#proxies" title="Link to this heading"></a></h3>
+<p>Your certificate is precious and long-lived (typically one year), so you never send it anywhere. Instead you create a <strong>proxy</strong>:
+a short-lived certificate, signed by your own certificate, which carries your identity plus your VO attributes. Anything that presents
+the proxy is treated as acting on your behalf until it expires, normally after 24 hours.</p>
+<p>This is what <code class="docutils literal notranslate"><span class="pre">dirac-proxy-init</span></code> does:</p>
+<ol class="arabic simple">
+<li><p>It asks for your certificate password, because signing the proxy needs your private key.</p></li>
+<li><p>It contacts the VO and embeds your <code class="docutils literal notranslate"><span class="pre">/fcc</span></code> attribute.</p></li>
+<li><p>It writes the proxy to a temporary file (<code class="docutils literal notranslate"><span class="pre">/tmp/x509up_u&lt;uid&gt;</span></code>) that every grid tool on that machine picks up automatically.</p></li>
+<li><p>It <strong>uploads</strong> a copy to the DIRAC proxy manager. DIRAC needs this copy to act for you when you are not around:
+to run a job that starts three days after submission, or to move a file overnight.</p></li>
+</ol>
+<p>We will exercise this in the next pages. For now, just remember that you need a valid proxy to interact with grid services.
+If a command fails with an authentication error, the first thing to check is whether your proxy has expired, with <code class="docutils literal notranslate"><span class="pre">dirac-proxy-info</span></code>.</p>
+</section>
+</section>
+<section id="other-names-you-will-hear">
+<h2><span class="section-number">5.1.4. </span>Other names you will hear<a class="headerlink" href="#other-names-you-will-hear" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Rucio</strong> is a scientific data management system, developed by ATLAS and now used by CMS,
+Belle II, DUNE and many others. It plays the role of Data Management System and File Catalog, with a rich
+<em>rule-based</em> model: you declare how many replicas a dataset should have and where, and Rucio takes care.
+FCC is considering the adoption of Rucio for its data management, but currently uses DIRAC’s own File Catalog.</p></li>
+<li><p><strong>FTS</strong> (File Transfer Service) is the service that performs bulk third-party transfers between Storage Elements.
+DIRAC and Rucio both hand large replication requests to FTS.</p></li>
+</ul>
+<div class="keypoints admonition">
+<p class="admonition-title">Key Points</p>
+<ul class="simple">
+<li><p>The grid uses batch systems from many sites behind one interface; the price is that nothing is local or interactive.</p></li>
+<li><p>Trust flows through a chain: a CA certifies you, a VO vouches for you, a proxy carries that identity to wherever your job runs. Proxies expire after about a day.</p></li>
+<li><p>A job ships small files in sandboxes and stores large results on Storage Elements.</p></li>
+<li><p>Files have one logical name (LFN) and possibly many physical replicas; the File Catalog connects them.</p></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="README.html" class="btn btn-neutral float-left" title="5. Distributed Computing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="RegisteringToFccVO.html" class="btn btn-neutral float-right" title="5.2. Getting started with FCC distributed computing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, CERN.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    <span class="fa fa-book"> Other Versions</span>
+    v: 193-grid-basic-concepts
+    <span class="fa fa-caret-down"></span>
+  </span>
+  <div class="rst-other-versions">
+    <dl>
+      <dt>Branches</dt>
+      <dd><a href="../../main/index.html">main</a></dd>
+      <dd><a href="Concepts.html">193-grid-basic-concepts</a></dd>
+      <dd><a href="../../bnl2023/index.html">bnl2023</a></dd>
+      <dd><a href="../../cern2022/index.html">cern2022</a></dd>
+      <dd><a href="../../flavours2025/index.html">flavours2025</a></dd>
+      <dd><a href="../../mit2024/index.html">mit2024</a></dd>
+    </dl>
+  </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
