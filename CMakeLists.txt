@@ -26,3 +26,13 @@ add_nb_test("2-gen-and-fastsim/2-1-event-generation/README")
 add_nb_test("2-gen-and-fastsim/2-2-fastsim-delphes/README")
 add_nb_test("3-analysis/3-1-higgs-analysis/README")
 add_nb_test("4-full-detector-sim/FccCaloPerformance/CaloFullSimExercise")
+
+# Executing a notebook without code cells passes trivially; make that visible.
+# Scoped to the event-generation page for now.
+function(add_nb_code_guard testpage)
+  add_test(NAME ${testpage}-has-code-cells
+           COMMAND python3 ${CMAKE_SOURCE_DIR}/.github/scripts/check_notebook_has_code.py
+                   ${CMAKE_SOURCE_DIR}/${testpage}.ipynb)
+endfunction()
+
+add_nb_code_guard("2-gen-and-fastsim/2-1-event-generation/README")
