@@ -369,13 +369,10 @@ events->Draw("DCHCollection.eDep/DCHCollection.pathLength", "DCHCollection.eDep/
 
 Displaying detector geometries is very useful to understand what is actually being simulated without having to enter the code. One example of tool (out of many) is described here, chosen for its simplicity together with the particular feature of hosting the needed data locally, leading to smooth performance of the visualization.
 
-Let's first generate the files containing the geometry that will be used by the display tool.
+With the key4hep software stack sourced, let's first generate the files containing the geometry that will be used by the display tool.
 
 ```bash
-cd ../../..
-wget https://raw.githubusercontent.com/key4hep/k4geo/main/utils/dd4hep2root.py
-chmod +x dd4hep2root.py
-./dd4hep2root.py -c $K4GEO/FCCee/CLD/compact/CLD_o2_v07/CLD_o2_v07.xml -o CLD_o2_v07_geom.root
+dd4hep2root -c $K4GEO/FCCee/CLD/compact/CLD_o2_v07/CLD_o2_v07.xml -o CLD_o2_v07_geom.root
 echo $PWD/CLD_o2_v07_geom.root
 ```
 
