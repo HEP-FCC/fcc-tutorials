@@ -142,24 +142,12 @@ The `cernvm-launch` also supports listing, stopping, starting virtual machines. 
 
 ### Windows
 
-On Windows, some additional steps are required before you can connect via SSH.
-The following instructions may help in achieving this:
+Open PowerShell and connect to lxplus using the built-in OpenSSH client:
 
-Set up steps (you only have to perform this once):
+```powershell
+ssh mylxplusname@lxplus.cern.ch
+```
 
-1. Download the [Xming installer](https://sourceforge.net/projects/xming/files/latest/download).
-2. Run the installer.
-3. Download [PuTTY](https://the.earth.li/~sgtatham/putty/latest/x86/putty.exe).
+Replace `mylxplusname` with your CERN username. If `ssh` is not recognized, install **OpenSSH Client** from Windows **Settings > System > Optional features > View features**.
 
-The following steps have to be executed each time you want to connect:
-
-1. Start PuTTY.
-2. In the list on the left, unfold `Connection` and `SSH`, then click the `X11` item.
-3. In the window that appears, make sure the check box labeled `Enable X11 forwarding` is checked.
-4. Return to the previous window by selecting `Session` int he list on the left.
-5. In the text box labeled `Host Name (or IP address)`, type `lxplus.cern.ch`.
-6. Make sure the `Port` text box contains the number `22`.
-7. Click the `Open` button on the bottom of the screen.
-8. A window appears with the text `login as:`. Type your CERN username, followed by Enter.
-9. The window should say `Using keyboard-interactive authentication. Password:`. Type your password, again followed by Enter.
-10. You now have a remote SSH session at an lxplus server node!
+The optional graphical examples require an X server as well as SSH forwarding. Windows' built-in OpenSSH client does not support X11 forwarding. One option is to run `ssh -X` from a Linux shell in WSL 2 with WSLg. See Microsoft's guide to [running Linux GUI apps on WSL](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps). Most of this tutorial does not require graphical forwarding however, so you can also continue without it.
