@@ -71,20 +71,26 @@ by your OS is too old.
 
 ### Building
 
-The documentation pages are build by executing
+The pages are built with [Jupyter Book 2](https://next.jupyterbook.org/),
+which is based on the [MyST-MD](https://mystmd.org/) engine and needs
+[Node.js](https://nodejs.org/) (version 18 or newer) available in your `PATH`.
+The static HTML site is generated with
 ```bash
-sphinx-build -b html . build
+jupyter book build --html
 ```
+and lands in the `_build/html` directory.
 
 ### Browsing the result
 
-Start a web server to host the generated files from `build` directory
+The quickest way to preview your changes is the live-reloading development
+server, which rebuilds the pages every time a Markdown file is saved:
 ```bash
-python -m http.server -d build
+jupyter book start
 ```
 
 You should be able to see your local version by opening a web-browser and
-navigating to [http://localhost:8000](http://localhost:8000).
+navigating to the address printed in the terminal (by default
+[http://localhost:3000](http://localhost:3000)).
 
 
 ## How to Write
@@ -95,12 +101,8 @@ More information about how to write the tutorials for the FCC Software visit
 
 ## Legal
 
-```{eval-rst}
-.. toctree::
-
-    CONDUCT.md
-    LICENSE.md
-```
+* [Contributor Code of Conduct](CONDUCT.md)
+* [License](LICENSE.md)
 
 
 [fcc-software]: https://fccsw.web.cern.ch/

@@ -1,0 +1,115 @@
+# Jupyter Book 2 / MyST-MD configuration.
+# See https://mystmd.org/guide/frontmatter for the project options and
+# https://mystmd.org/guide/website-templates for the site options.
+version: 1
+
+project:
+  title: FCC Tutorials
+  copyright: 2026, CERN
+  github: https://github.com/HEP-FCC/fcc-tutorials
+  # Number the page titles in the table of contents (Sphinx `:numbered: 4`).
+  numbering:
+    title:
+      enabled: true
+  # Directories that must not be picked up as content.
+  exclude:
+    - archive/**
+    - venv/**
+    - .github/**
+    - _build/**
+    - node_modules/**
+    - CLAUDE.md
+    - README.md
+    - TODO.md
+    # Rendered through the symlinks in 7-contributing/
+    - CONTRIBUTING.md
+    - LICENSE.md
+    - CODE_OF_CONDUCT.md
+    - '**/*-test.md'
+    - '**/*.ipynb'
+  toc:
+    - file: index.md
+    - file: 1-first-steps/README.md
+      children:
+        - file: 1-first-steps/prerequisites.md
+        - file: 1-first-steps/swan.md
+        - file: 1-first-steps/introduction-to-course.md
+        - file: 1-first-steps/fccsw.md
+        - file: 1-first-steps/bookkeeping.md
+        - file: 1-first-steps/exploring-fcc-files.md
+        - file: 1-first-steps/tips-tricks.md
+        - file: 1-first-steps/asking-questions.md
+    - file: 2-gen-and-fastsim/README.md
+      children:
+        - file: 2-gen-and-fastsim/2-1-event-generation/README.md
+        - file: 2-gen-and-fastsim/2-2-fastsim-delphes/README.md
+        - file: 2-gen-and-fastsim/2-4-eedE/README.md
+    - file: 3-analysis/README.md
+      children:
+        - file: 3-analysis/3-1-higgs-analysis/README.md
+        - file: 3-analysis/3-2-tracking-vertexing/README.md
+        - file: 3-analysis/3-3-useful-info/README.md
+    - file: 4-full-detector-sim/README.md
+      children:
+        - file: 4-full-detector-sim/FCCeeGeneralOverview/FCCeeGeneralOverview.md
+        - file: 4-full-detector-sim/FCCeeGuineaPigIRBackgrounds/README.md
+        - file: 4-full-detector-sim/Geometry/Geometry.md
+        - file: 4-full-detector-sim/Visualization/Visualization.md
+        # Pages that are built but not listed in the navigation (they are not
+        # part of the Sphinx toctree on `main` either, but have stable URLs).
+        - file: 4-full-detector-sim/FCCeeCLD/FCCeeCLD.md
+          hidden: true
+        - file: 4-full-detector-sim/FCCeeDriftChamber/FCCeeDriftChamber.md
+          hidden: true
+        - file: 4-full-detector-sim/FCCeeCaloPhotonPi0Discrimination/FCCeeCaloPhotonPi0Discrimination.md
+          hidden: true
+        - file: 4-full-detector-sim/FccCaloPerformance/CaloFullSimExercise.md
+          hidden: true
+    - file: 5-distributed-computing/README.md
+      children:
+        - file: 5-distributed-computing/EventProducer.md
+        - file: 5-distributed-computing/RegisteringToFccVO.md
+        - file: 5-distributed-computing/Workflows.md
+          children:
+            - file: 5-distributed-computing/workflows/Overview.md
+            - file: 5-distributed-computing/workflows/01/DiTauKKMCeeDelphesStandAlone.md
+        - file: 5-distributed-computing/OutputStructure.md
+    - file: 6-developing-fccsw/README.md
+      children:
+        - file: 6-developing-fccsw/FccSoftwareGit.md
+        - file: 6-developing-fccsw/FccCMakeGuide.md
+        - file: 6-developing-fccsw/WritingAlgorithms.md
+        - file: 6-developing-fccsw/DevelopingDD4hep.md
+        - file: 6-developing-fccsw/Edm4hepTransition.md
+        - file: 6-developing-fccsw/FccDocPage.md
+    - file: 7-contributing/README.md
+      children:
+        - file: 7-contributing/CONDUCT.md
+        - file: 7-contributing/LICENSE.md
+    - title: External links
+      children:
+        - title: FCC Software
+          url: https://fccsw.web.cern.ch/
+        - title: Key4hep
+          url: https://key4hep.web.cern.ch
+        - title: FCC-ee Detector Full Sim
+          url: https://fcc-ee-detector-full-sim.docs.cern.ch/
+        - title: FCCAnalyses
+          url: https://hep-fcc.github.io/FCCAnalyses/
+        - title: HSF Analysis essentials
+          url: https://hsf-training.github.io/analysis-essentials/
+        - title: FCC Software glossary
+          url: https://hep-fcc.github.io/glossary
+
+site:
+  template: book-theme
+  options:
+    # Dark-text logo on the light theme, light-text logo on the dark theme
+    logo: _static/img/fcc-logo-dark.png
+    logo_dark: _static/img/fcc-logo-light.png
+    logo_text: FCC Tutorials
+    favicon: _static/img/favicon.ico
+    # Keep the directory layout in the URLs (e.g. /1-first-steps/fccsw)
+    folders: true
+    # Colours for the custom admonitions (prereq, callout, challenge, ...)
+    style: _static/css/custom-admonitions.css

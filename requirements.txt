@@ -1,7 +1,2 @@
-Sphinx==7.4.7
-myst-parser==3.0.1
-sphinx-rtd-theme==3.0.2
-sphinx-togglebutton==0.3.2
-sphinx-copybutton==0.5.2
-sphinx-multiversion==0.2.4
-sphinx-autobuild==2025.8.25
+# Jupyter Book 2 (MyST-MD based). Requires Node.js >= 18 on PATH.
+jupyter-book==2.1.6

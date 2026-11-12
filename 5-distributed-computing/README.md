@@ -26,13 +26,7 @@ Unless specified otherwise, in the remainder of this section the word `DIRAC` re
 [wikiclic]: https://twiki.cern.ch/twiki/bin/view/CLIC/DiracForUsers
 [wikiilc]: https://flcwiki.desy.de/ILCDirac
 
-```{eval-rst}
-.. toctree::
-    :maxdepth: 2
-    :caption: Contents:
-
-    ./EventProducer.md
-    ./RegisteringToFccVO.md
-    ./Workflows.md
-    ./OutputStructure.md
-```
+* [EventProducer](EventProducer.md)
+* [Getting started with FCC distributed computing](RegisteringToFccVO.md)
+* [FCC DIRAC Example Workflows](Workflows.md)
+* [Structure for /eos/experiment/fcc/prod](OutputStructure.md)

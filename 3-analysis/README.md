@@ -12,12 +12,6 @@ If you have any problems or questions, you can
 [fcc-tutorials-issues]: https://github.com/HEP-FCC/fcc-tutorials/issues
 [fcc-tutorials-repo]: https://github.com/HEP-FCC/fcc-tutorials
 
-```{eval-rst}
-.. toctree::
-    :caption: Contents:
-
-    3-1-higgs-analysis/README.md
-    3-2-tracking-vertexing/README.md
-    3-3-useful-info/README.md
-
-```
+* [Getting Started: Higgs Mass Analysis with FCCAnalyses](3-1-higgs-analysis/README.md)
+* [Beyond the Basics: Tracking and Vertexing](3-2-tracking-vertexing/README.md)
+* [Some Useful Info on EDM4hep, Analyzers, and More](3-3-useful-info/README.md)

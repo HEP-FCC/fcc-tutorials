@@ -31,32 +31,24 @@ If you'd just like to learn about how to use the FCC Software,
 [fccsw-website]: https://cern.ch/fccsw
 [tutorial]: https://hep-fcc.github.io/fcc-tutorials
 [lhcb-starterkit]: https://lhcb.github.io/starterkit-lessons/index.html
-[first-steps]: ./1-first-steps/README.md#first-steps
+[first-steps]: ./1-first-steps/README.md
 
 
-```{eval-rst}
-.. toctree::
-    :numbered: 4
-    :maxdepth: 2
-    :includehidden:
-    :caption: Contents:
+## Contents
 
-    1-first-steps/README.md
-    2-gen-and-fastsim/README.md
-    3-analysis/README.md
-    4-full-detector-sim/README.md
-    5-distributed-computing/README.md
-    6-developing-fccsw/README.md
-    7-contributing/README.md
+1. [First Steps](1-first-steps/README.md)
+2. [Generation and Fast Simulation](2-gen-and-fastsim/README.md)
+3. [Analysis at FCC](3-analysis/README.md)
+4. [Full Simulation](4-full-detector-sim/README.md)
+5. [Distributed Computing](5-distributed-computing/README.md)
+6. [Developing FCCSW](6-developing-fccsw/README.md)
+7. [Contributing](7-contributing/README.md)
 
-.. toctree::
-    :includehidden:
-    :caption: External links:
+## External links
 
-    FCC Software <https://fccsw.web.cern.ch/>
-    Key4hep <https://key4hep.web.cern.ch>
-    FCC-ee Detector Full Sim <https://fcc-ee-detector-full-sim.docs.cern.ch/>
-    FCCAnalyses <https://hep-fcc.github.io/FCCAnalyses/>
-    HSF Analysis essentials <https://hsf-training.github.io/analysis-essentials/>
-    FCC Software glossary <https://hep-fcc.github.io/glossary>
-```
+* [FCC Software](https://fccsw.web.cern.ch/)
+* [Key4hep](https://key4hep.web.cern.ch)
+* [FCC-ee Detector Full Sim](https://fcc-ee-detector-full-sim.docs.cern.ch/)
+* [FCCAnalyses](https://hep-fcc.github.io/FCCAnalyses/)
+* [HSF Analysis essentials](https://hsf-training.github.io/analysis-essentials/)
+* [FCC Software glossary](https://hep-fcc.github.io/glossary)

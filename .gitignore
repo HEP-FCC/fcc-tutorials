@@ -42,3 +42,5 @@ book.pdf
 build
 venv
 .vscode
+# Jupyter Book 2 build output
+_build
