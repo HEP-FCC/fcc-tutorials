@@ -36,6 +36,7 @@ jobs:
         source ${{ matrix.STACK }} ${{ contains(matrix.STACK, 'sw-nightlies') && '--spack' || '' }};\
         mkdir build;\
         cd build;\
+        source ../.github/scripts/setup_herwig_ci.sh;\
         cmake ..;\
         make;\
         ctest --output-on-failure --no-tests=error;
