@@ -1,6 +1,4 @@
-# SPDX-License-Identifier: Apache-2.0
 # Adapted from ianna/mcp-server-key4hep at bde7af183f57d14cabc809f1d35b281cd4d5dd69.
-# The standalone CLI was removed. See LICENSE.validate_edm4hep for license terms.
 """Read every event with podio's backend-independent reader.
 
 This is structural validation, not a physics-reference comparison. Importing
