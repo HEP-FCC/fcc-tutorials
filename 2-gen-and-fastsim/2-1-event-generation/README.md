@@ -903,16 +903,13 @@ Currently, `KKMCee` does not have the option to save directly the events in `EDM
 
 #### Generating `HepMC` events
 
-**Q:** What are the commands (options) to generate 10000 ditau events and save
-them into the file `gen/kk_ee_Ztautau_mumu_ecm91_10000.hepmc`?
+From the ditau exercise directory, generate 10,000 events with one tau forced
+to decay to a muon:
 
-:::{admonition} Suggested answer
-:class: callout toggle
-
+<!-- ci-fragment: kkmcee-ditau -->
 ```bash
-KKMCee -f Tau -e 91.2 -n 10000 -o kk_ee_Zautau_mumu_10000.hepmc -t 2002
+KKMCee -f Tau -e 91.2 -n 10000 -o kk_tautau_10000.hepmc -t 2002
 ```
-:::
 
 :::{admonition} Expand to see the example of the produced `HepMC` output 
 :class: callout toggle
@@ -920,7 +917,7 @@ KKMCee -f Tau -e 91.2 -n 10000 -o kk_ee_Zautau_mumu_10000.hepmc -t 2002
 The `HepMC` output is an ASCII format and can browsed with for example `more`:
 
 ```bash
-more kk_ee_Ztautau_mumu_10000.hepmc
+more kk_tautau_10000.hepmc
 ```
 ```
 HepMC::Version 3.02.05
@@ -1045,102 +1042,55 @@ $1485.5 \pm 0.007~\mathrm{pb}$.
 
 #### `HepMC` to `EDM4hep` conversion
 
-In order to get the events in `EDM4hep` format, we will use `Gaudi` and the
-tools available in [k4FWCore](https://github.com/key4hep/k4FWCore) and
-[k4Gen](https://github.com/key4hep/k4Gen/). We need a Gaudi steering file that
-reads the `HepMC` file and writes out the `EDM4hep` file.
-A minimal version of such a steering code is available on the tutorial reference
-page:
+`HepMCFileReader` supplies events to `GenAlg`. The converter writes
+`MCParticles`, keeping all HepMC statuses so the analysis can access both
+the original taus and their decay products. `IOSvc` writes the EDM4hep file.
+
+<!-- ci-fragment: kkmcee-ditau -->
 ```bash
-wget https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/hepmc2edm.py
-```
-Let's see what it does: that is shown by the first line of the help function
-```bash
-k4run hepmc2edm.py -h
-```
-```
- -->  GenAlg  -->  HepMCToEDMConverter  -->  out
-...
-```
-
-##### Dissection of `hepmc2edm.py`
-
-:::{admonition} Expand
-:class: discussion toggle
-
-The tool that we need is [HepMCFileReader](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCFileReader.h), which is a `GaudiTool`, not a `GaudiAlgorithm`, which is used as a signal provider (such as a Monte Carlo generator) within the [Generator Algorithm (GenAlg)](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/GenAlg.h). This is done in this part of the code:
-```python
-from Configurables import HepMCFileReader
-hepmcreader = HepMCFileReader()
-
-from Configurables import GenAlg
-reader = GenAlg()
-reader.SignalProvider = hepmcreader
-reader.hepmc.Path = "hepmc"
-ApplicationMgr().TopAlg += [reader]
-```
-
-Then we convert the event from `HepMC` to `EDM4hep` with the [HepMCToEDMConverter](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCToEDMConverter.h):
-```python
+mkdir -p config gen/kk_tautau_ecm91
+cat > config/hepmc2edm.py <<'PYTHON'
+from Configurables import EventDataSvc, GenAlg, GenParticleFilter, HepMCFileReader
 from Configurables import HepMCToEDMConverter
-hepmc_converter = HepMCToEDMConverter()
-hepmc_converter.hepmc.Path="hepmc"
-hepmc_converter.GenParticles.Path = "GenParticles"
-ApplicationMgr().TopAlg += [hepmc_converter]
-```
+from k4FWCore import ApplicationMgr, IOSvc
 
-Finally we write out the converted events into a file with the [PodioOutput](https://github.com/key4hep/k4FWCore/blob/master/k4FWCore/components/PodioOutput.h) algorithm:
-```python
-from Configurables import PodioOutput
-out = PodioOutput("out", filename = "hepmc2edm_output.root")
-out.outputCommands = ["keep *"]
-ApplicationMgr().TopAlg += [out]
-```
-:::
+reader = GenAlg("GenAlg")
+reader.SignalProvider = HepMCFileReader("HepMCFileReader")
+reader.hepmc.Path = "hepmc"
 
-##### Running `hepmc2edm.py`
+converter = HepMCToEDMConverter()
+converter.hepmc.Path = "hepmc"
+converter.hepmcStatusList = []
+converter.GenParticles.Path = "MCParticles"
 
-Among the `hepmc2edm` switches relevant for the purpose are those controlling
-input an output files:
-```bash
-k4run hepmc2edm.py -h
-```
-```
-...
-  --GenAlg.HepMCFileReader.Filename [GENALG.HEPMCFILEREADER.FILENAME], --Filename.GenAlg.HepMCFileReader [GENALG.HEPMCFILEREADER.FILENAME]
-                        Name of the HepMC file to read [HepMCFileReader]
-...
-  --out.filename [OUT.FILENAME], --filename.out [OUT.FILENAME]
-                        Name of the file to create [PodioOutput]
-...
-```
-**Q:** We would like the output file to be called
-`kk_Ztautau_mumu_10000.e4h.root` . Which command should we use for that?
+stable_particles = GenParticleFilter("StableParticles")
+stable_particles.accept = [1]
+stable_particles.GenParticles.Path = "MCParticles"
+stable_particles.GenParticlesFiltered.Path = "MCParticlesStable"
 
-:::{admonition} Answer
-:class: solution toggle
+io = IOSvc()
+io.Output = "hepmc2edm_output.root"
+io.outputCommands = ["keep *"]
 
-```bash
-k4run config/hepmc2edm.py -n 10000 --GenAlg.HepMCFileReader.Filename kk/kk_tautau_10000.hepmc --out.filename gen/kk_tautau_ecm91/events_1.root
-```
-:::
-
-**Q:** Can you explain why we need to pass the `-n 10000` switch and how you
-could modify `hepmc2edm.py` to avoid that?
-
-:::{admonition} Check answer
-:class: solution toggle
-
-Because `hepmc2edm.py` contains this piece of code:
-```python
-from Configurables import ApplicationMgr
 ApplicationMgr(
-               EvtSel='NONE',
-               EvtMax=1,
-               OutputLevel=INFO,
+    EvtSel="NONE",
+    EvtMax=1,
+    ExtSvc=[EventDataSvc("EventDataSvc"), io],
+    TopAlg=[reader, converter, stable_particles],
+)
+PYTHON
 ```
-The setting `EvtMax=1` is overwritten by `-n <n_evts>`. To avoid this one could set `EvtMax=10000` inside `hepmc2edm.py` (try!)
-:::
+
+Use `-n` to override the steering file's one-event default. The
+`--GenAlg.HepMCFileReader.Filename` and `--IOSvc.Output` options select the
+input and output files:
+
+<!-- ci-fragment: kkmcee-ditau -->
+```bash
+k4run config/hepmc2edm.py -n 10000 \
+    --GenAlg.HepMCFileReader.Filename kk_tautau_10000.hepmc \
+    --IOSvc.Output gen/kk_tautau_ecm91/events_1.root
+```
 
 Note _en passant_ that the `EDM4hep` file is much smaller than the `HepMC` one:
 ```bash
