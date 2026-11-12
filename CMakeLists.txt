@@ -39,3 +39,6 @@ endfunction()
 
 add_fragment_test("2-gen-and-fastsim/2-1-event-generation/README" pythia8
                   --validate p8_mumu_500.e4h.root:500)
+
+add_fragment_test("2-gen-and-fastsim/2-1-event-generation/README" whizard-ditau
+                  --validate gen/wz_tautau_ecm91/events_1.root:10)
