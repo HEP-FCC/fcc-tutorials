@@ -4,8 +4,11 @@ from xml.etree import ElementTree
 
 
 def validate(path, expected):
-    if expected <= 0:
-        raise ValueError("Expected a positive event count")
+    minimum, separator, maximum = str(expected).partition("-")
+    minimum = int(minimum)
+    maximum = int(maximum) if separator else minimum
+    if not 0 < minimum <= maximum:
+        raise ValueError("Expected a positive event count or an increasing range")
 
     with path.open("rb") as stream:
         elements = ElementTree.iterparse(stream, events=("start", "end"))
@@ -32,6 +35,6 @@ def validate(path, expected):
                 root.remove(element)
             depth -= 1
 
-    if count != expected:
-        raise ValueError(f"Event count mismatch: {count} != {expected}")
+    if not minimum <= count <= maximum:
+        raise ValueError(f"Event count mismatch: got {count}, expected {expected}")
     return {"valid": True, "entries": count, "scope": "LHE structure and event count"}

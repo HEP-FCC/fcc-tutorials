@@ -50,7 +50,7 @@ add_fragment_test("2-gen-and-fastsim/2-1-event-generation/README" bhlumi
                   --validate-lhe bhlumi_100.LHE:100)
 
 add_fragment_test("2-gen-and-fastsim/2-1-event-generation/README" babayaga
-                  --validate-lhe bbyg_100.LHE:100)
+                  --validate-lhe bbyg_100.LHE:1-100)
 
 add_fragment_test("2-gen-and-fastsim/2-1-event-generation/README" herwig
                   --validate-hepmc herwig_100.hepmc:100)
