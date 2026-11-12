@@ -11,7 +11,7 @@ the rendered page):
 
 All fragments with the same tag run, in page order, in ONE fresh bash shell inside
 an empty directory, so `cd` and variables carry over as they would for a reader.
-Afterwards every `--validate FILE:EVENTS` output is checked with key4hep-validate.
+Afterwards every `--validate FILE:EVENTS` output is checked with the local EDM4hep validator.
 """
 
 import argparse
@@ -21,6 +21,8 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
+
+from validate_edm4hep import validate
 
 MARKER = re.compile(r"^\s*<!--\s*ci-fragment:\s*([\w.-]+)\s*-->\s*$")
 FENCE = re.compile(r"^\s*```\s*(bash|sh|shell)?\s*$")
@@ -79,14 +81,12 @@ def main():
         failed = False
         for item in args.validate:
             name, events = item.rsplit(":", 1)
-            proc = subprocess.run(
-                [sys.executable, "-m", "mcp_server_key4hep.cli", "validate",
-                 str(work / name), "--events", events],
-                capture_output=True, text=True,
-            )
-            result = json.loads(proc.stdout) if proc.stdout.strip() else {"error": proc.stderr}
-            print(f"{name}: {json.dumps(result, sort_keys=True)}")
-            failed |= proc.returncode != 0
+            try:
+                result = validate(work / name, int(events))
+            except Exception as exc:
+                result = {"valid": False, "error": f"{type(exc).__name__}: {exc}"}
+                failed = True
+            print(f"{name}: {json.dumps(result, sort_keys=True)}", flush=True)
         return 1 if failed else 0
 
 

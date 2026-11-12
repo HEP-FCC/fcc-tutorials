@@ -7,10 +7,6 @@ on:
     # Daily run against the Key4hep nightlies
     - cron: '0 3 * * *'
 
-env:
-  # Pin the validator (ianna/mcp-server-key4hep, merge of #2); bump deliberately.
-  KEY4HEP_VALIDATE_REF: bde7af183f57d14cabc809f1d35b281cd4d5dd69
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -32,17 +28,15 @@ jobs:
                    -d ghcr.io/key4hep/key4hep-images/alma9:latest /bin/bash
     - name: Run tests
       run: |
-        docker exec CI_container /bin/bash -c \
-        'curl -LO https://github.com/jgm/pandoc/releases/download/3.10/pandoc-3.10-linux-amd64.tar.gz;\
+        docker exec CI_container /bin/bash -e -c \
+        'curl -fLO https://github.com/jgm/pandoc/releases/download/3.10/pandoc-3.10-linux-amd64.tar.gz;\
         tar -xzf pandoc-3.10-linux-amd64.tar.gz;\
         cp pandoc-3.10/bin/pandoc /usr/local/bin/;\
-        git clone -q https://github.com/ianna/mcp-server-key4hep.git /tmp/key4hep-validate;\
-        git -C /tmp/key4hep-validate checkout -q ${{ env.KEY4HEP_VALIDATE_REF }};\
         cd ./Package;\
         source ${{ matrix.STACK }} ${{ contains(matrix.STACK, 'sw-nightlies') && '--spack' || '' }};\
         mkdir build;\
         cd build;\
-        cmake -DKEY4HEP_VALIDATE_SRC=/tmp/key4hep-validate/src ..;\
+        cmake ..;\
         make;\
-        ctest --output-on-failure;
+        ctest --output-on-failure --no-tests=error;
         '
