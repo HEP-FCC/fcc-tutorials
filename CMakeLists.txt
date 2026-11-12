@@ -28,7 +28,7 @@ add_nb_test("3-analysis/3-1-higgs-analysis/README")
 add_nb_test("4-full-detector-sim/FccCaloPerformance/CaloFullSimExercise")
 
 # Shell fragments run verbatim (see .github/scripts/run_fragments.py), followed by
-# structural EDM4hep validation of the files the tutorial tells readers to produce.
+# structural validation of the files the tutorial tells readers to produce.
 function(add_fragment_test page tag)
   get_filename_component(_page_dir ${CMAKE_SOURCE_DIR}/${page} DIRECTORY)
   add_test(NAME ${page}-fragments-${tag}
@@ -45,3 +45,9 @@ add_fragment_test("2-gen-and-fastsim/2-1-event-generation/README" whizard-ditau
 
 add_fragment_test("2-gen-and-fastsim/2-1-event-generation/README" kkmcee-ditau
                   --validate gen/kk_tautau_ecm91/events_1.root:10000)
+
+add_fragment_test("2-gen-and-fastsim/2-1-event-generation/README" bhlumi
+                  --validate-lhe bhlumi_100.LHE:100)
+
+add_fragment_test("2-gen-and-fastsim/2-1-event-generation/README" babayaga
+                  --validate-lhe bbyg_100.LHE:100)

@@ -11,7 +11,8 @@ the rendered page):
 
 All fragments with the same tag run, in page order, in ONE fresh bash shell inside
 an empty directory, so `cd` and variables carry over as they would for a reader.
-Afterwards every `--validate FILE:EVENTS` output is checked with the local EDM4hep validator.
+Afterwards, check EDM4hep outputs with `--validate FILE:EVENTS` and LHE outputs
+with `--validate-lhe FILE:EVENTS`.
 """
 
 import argparse
@@ -22,7 +23,8 @@ import sys
 import tempfile
 from pathlib import Path
 
-from validate_edm4hep import validate
+from validate_edm4hep import validate as validate_edm4hep
+from validate_lhe import validate as validate_lhe
 
 MARKER = re.compile(r"^\s*<!--\s*ci-fragment:\s*([\w.-]+)\s*-->\s*$")
 FENCE = re.compile(r"^\s*```\s*(bash|sh|shell)?\s*$")
@@ -57,6 +59,7 @@ def main():
     parser.add_argument("page", type=Path)
     parser.add_argument("tag")
     parser.add_argument("--validate", action="append", default=[], metavar="FILE:EVENTS")
+    parser.add_argument("--validate-lhe", action="append", default=[], metavar="FILE:EVENTS")
     parser.add_argument("--print", action="store_true", help="Print the script and exit")
     args = parser.parse_args()
     page = args.page.resolve()
@@ -79,14 +82,16 @@ def main():
             )
             return 1
         failed = False
-        for item in args.validate:
-            name, events = item.rsplit(":", 1)
-            try:
-                result = validate(work / name, int(events))
-            except Exception as exc:
-                result = {"valid": False, "error": f"{type(exc).__name__}: {exc}"}
-                failed = True
-            print(f"{name}: {json.dumps(result, sort_keys=True)}", flush=True)
+        checks = [(args.validate, validate_edm4hep), (args.validate_lhe, validate_lhe)]
+        for items, validate in checks:
+            for item in items:
+                name, events = item.rsplit(":", 1)
+                try:
+                    result = validate(work / name, int(events))
+                except Exception as exc:
+                    result = {"valid": False, "error": f"{type(exc).__name__}: {exc}"}
+                    failed = True
+                print(f"{name}: {json.dumps(result, sort_keys=True)}", flush=True)
         return 1 if failed else 0
 
 

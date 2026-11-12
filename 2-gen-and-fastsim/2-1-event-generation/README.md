@@ -687,6 +687,13 @@ Additional switches (for experts only):
 
 :::
 
+A short run at 91.2 GeV produces a 100-event LHE sample:
+
+<!-- ci-fragment: bhlumi -->
+```bash
+BHLUMI -f 0.022 -t 0.082 -x 0.001 -e 91.2 -n 100 -o bhlumi_100.LHE
+```
+
 ###  BabaYaga
 
 `BabaYaga` is a Monte Carlo generator of two-photons events used at LEP.
@@ -737,6 +744,13 @@ babayaga -c babayaga.input -o bbyg.LHE
 ```
 
 :::
+
+A short run at 91.2 GeV produces a 100-event LHE sample:
+
+<!-- ci-fragment: babayaga -->
+```bash
+babayaga -f 15. -t 165. -e 91.2 -n 100 -o bbyg_100.LHE
+```
 
 
 ###  Herwig
