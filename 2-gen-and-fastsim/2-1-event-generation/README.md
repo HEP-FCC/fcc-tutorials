@@ -764,6 +764,27 @@ which Herwig
 /cvmfs/sw.hsf.org/spackages7/herwig3/7.2.3/x86_64-centos7-gcc11.2.0-opt/q3pxd/bin/Herwig
 ```
 
+This example runs Herwig's built-in electron–positron setup at 91.2 GeV.
+It generates 100 quark–antiquark events and writes the showered and hadronized
+events in HepMC3 ASCII format.
+
+<!-- ci-fragment: herwig -->
+```bash
+cat > fcc-lep.in <<'HERWIG'
+read snippets/EECollider.in
+cd /Herwig/MatrixElements
+insert SubProcess:MatrixElements 0 MEee2gZ2qq
+cd /Herwig/Generators
+set EventGenerator:EventHandler:LuminosityFunction:Energy 91.2
+read snippets/HepMC.in
+set /Herwig/Analysis/HepMC:Format GenEventHepMC3
+set /Herwig/Analysis/HepMC:Filename herwig_100.hepmc
+saverun fcc-lep EventGenerator
+HERWIG
+Herwig read fcc-lep.in
+Herwig run fcc-lep.run -N 100
+```
+
 
 ###  MadGraph5
 
@@ -774,6 +795,31 @@ which mg5_aMC
 ```
 ```
 /cvmfs/sw.hsf.org/spackages7/madgraph5amc/2.8.1/x86_64-centos7-gcc11.2.0-opt/nlauf/bin/mg5_aMC
+```
+
+This example generates 100 electron–positron dimuon events at 91.2 GeV.
+MadGraph writes the unweighted hard-process events in LHE format.
+
+<!-- ci-fragment: madgraph5 -->
+```bash
+cat > fcc-mumu.mg5 <<'MADGRAPH'
+set run_mode 0
+set automatic_html_opening False
+generate e+ e- > mu+ mu-
+output fcc_mumu -f
+launch fcc_mumu
+shower=OFF
+done
+set lpp1 0
+set lpp2 0
+set ebeam1 45.6
+set ebeam2 45.6
+set nevents 100
+set use_syst False
+done
+MADGRAPH
+mg5_aMC fcc-mumu.mg5
+gzip -dc fcc_mumu/Events/run_01/unweighted_events.lhe.gz > madgraph5_100.lhe
 ```
 
 

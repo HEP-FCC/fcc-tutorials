@@ -12,7 +12,8 @@ the rendered page):
 All fragments with the same tag run, in page order, in ONE fresh bash shell inside
 an empty directory, so `cd` and variables carry over as they would for a reader.
 Afterwards, check EDM4hep outputs with `--validate FILE:EVENTS` and LHE outputs
-with `--validate-lhe FILE:EVENTS`.
+with `--validate-lhe FILE:EVENTS`, or HepMC3 ASCII outputs with
+`--validate-hepmc FILE:EVENTS`.
 """
 
 import argparse
@@ -24,6 +25,7 @@ import tempfile
 from pathlib import Path
 
 from validate_edm4hep import validate as validate_edm4hep
+from validate_hepmc import validate as validate_hepmc
 from validate_lhe import validate as validate_lhe
 
 MARKER = re.compile(r"^\s*<!--\s*ci-fragment:\s*([\w.-]+)\s*-->\s*$")
@@ -60,6 +62,7 @@ def main():
     parser.add_argument("tag")
     parser.add_argument("--validate", action="append", default=[], metavar="FILE:EVENTS")
     parser.add_argument("--validate-lhe", action="append", default=[], metavar="FILE:EVENTS")
+    parser.add_argument("--validate-hepmc", action="append", default=[], metavar="FILE:EVENTS")
     parser.add_argument("--print", action="store_true", help="Print the script and exit")
     args = parser.parse_args()
     page = args.page.resolve()
@@ -82,7 +85,11 @@ def main():
             )
             return 1
         failed = False
-        checks = [(args.validate, validate_edm4hep), (args.validate_lhe, validate_lhe)]
+        checks = [
+            (args.validate, validate_edm4hep),
+            (args.validate_lhe, validate_lhe),
+            (args.validate_hepmc, validate_hepmc),
+        ]
         for items, validate in checks:
             for item in items:
                 name, events = item.rsplit(":", 1)
