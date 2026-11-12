@@ -12,7 +12,7 @@ the rendered page):
 All fragments with the same tag run, in page order, in ONE fresh bash shell inside
 an empty directory, so `cd` and variables carry over as they would for a reader.
 Afterwards, check EDM4hep outputs with `--validate FILE:EVENTS` and LHE outputs
-with `--validate-lhe FILE:EVENTS`.
+with `--validate-lhe FILE:EVENTS`. LHE counts can also be a MIN-MAX range.
 """
 
 import argparse
@@ -59,7 +59,7 @@ def main():
     parser.add_argument("page", type=Path)
     parser.add_argument("tag")
     parser.add_argument("--validate", action="append", default=[], metavar="FILE:EVENTS")
-    parser.add_argument("--validate-lhe", action="append", default=[], metavar="FILE:EVENTS")
+    parser.add_argument("--validate-lhe", action="append", default=[], metavar="FILE:COUNT_OR_RANGE")
     parser.add_argument("--print", action="store_true", help="Print the script and exit")
     args = parser.parse_args()
     page = args.page.resolve()
@@ -87,7 +87,8 @@ def main():
             for item in items:
                 name, events = item.rsplit(":", 1)
                 try:
-                    result = validate(work / name, int(events))
+                    count = events if validate is validate_lhe else int(events)
+                    result = validate(work / name, count)
                 except Exception as exc:
                     result = {"valid": False, "error": f"{type(exc).__name__}: {exc}"}
                     failed = True

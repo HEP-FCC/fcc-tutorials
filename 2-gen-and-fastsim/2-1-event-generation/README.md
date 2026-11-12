@@ -745,7 +745,8 @@ babayaga -c babayaga.input -o bbyg.LHE
 
 :::
 
-A short run at 91.2 GeV produces a 100-event LHE sample:
+This short run at 91.2 GeV requests 100 trials. BabaYaga writes the events
+that pass its cuts, so the LHE file can contain fewer than 100 events.
 
 <!-- ci-fragment: babayaga -->
 ```bash
