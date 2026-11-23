@@ -236,18 +236,9 @@ ROOT.gGeoManager.SetVisOption(0)
 ROOT.gGeoManager.Export(out_path)
 ```
 
-We will try to convert FCCee Noble Liquid Calorimeter. On the remote machine
-with FCCSW stack already sourced download the `dd4hep2root.py` script
+We will try to convert FCCee Noble Liquid Calorimeter. On the remote machine, with key4hep stack already sourced run the conversion with
 ```sh
-wget https://raw.githubusercontent.com/key4hep/k4geo/main/utils/dd4hep2root.py
-```
-make it executable
-```sh
-chmod u+x dd4hep2root.py
-```
-and run the conversion with
-```sh
-./dd4hep2root.py -c ${FCCDETECTORS}/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectEmptyMaster.xml \
+dd4hep2root -c ${FCCDETECTORS}/Detector/DetFCCeeIDEA-LAr/compact/FCCee_DectEmptyMaster.xml \
                  ${FCCDETECTORS}/Detector/DetFCCeeECalInclined/compact/FCCee_ECalBarrel.xml
               -o fccee_lar.root
 ```
