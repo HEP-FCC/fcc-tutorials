@@ -23,17 +23,3 @@ The [Analysis Essentials course](https://hsf-training.github.io/analysis-essenti
 You can also explore the [HSF Training Center](https://hsf-training.org/training-center/) and [HEP Training](https://heptraining.cern.ch/), which feature many other useful computing tools.
 :::
 
-```{eval-rst}
-.. toctree::
-    :hidden:
-    :caption: Contents:
-
-    prerequisites.md
-    swan.md
-    introduction-to-course.md
-    fccsw.md
-    bookkeeping.md
-    exploring-fcc-files.md
-    tips-tricks.md
-    asking-questions.md
-```

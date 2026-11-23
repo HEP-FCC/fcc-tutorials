@@ -126,8 +126,7 @@ Let's add a dummy analyzer which extracts $x$ component of the particle
 momentum from the collection of reconstructed particles.
 
 :::{admonition} Suggested solution
-:class: solution toggle
-
+:class: solution dropdown
 First, download the dummy FCCAnalyses script:
 ```bash
 wget https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/dummy_analysis.py
@@ -197,7 +196,7 @@ The resulting ntuple `primary_Zuds.root` contains the MC event vertex
 `MC_PrimaryVertex`, and the reconstructed primary vertex `PrimaryVertex`.
 
 :::{admonition} Snippet of `analysis_primary_vertex.py`
-:class: callout toggle
+:class: callout dropdown
 ```python
     # MC event primary vertex
     .Define("MC_PrimaryVertex",
@@ -263,8 +262,7 @@ wget https://fccsw.web.cern.ch/fccsw/tutorials/vtx-tutorial/plot_primary_vertex.
 ```
 
 :::{admonition} Suggested answer
-:class: solution toggle
-
+:class: solution dropdown
 The command to run is
 ```bash
 root -b -q 'plot_primary_vertex.C()'
@@ -284,8 +282,7 @@ see the definition
 [here](https://github.com/HEP-FCC/FCCAnalyses/blob/783b2afc8d3e6b64a6af0447834183dbf4f246b8/analyzers/dataframe/src/ReconstructedParticle2Track.cc#L541).
 
 :::{admonition} Suggested answer
-:class: solution toggle
-
+:class: solution dropdown
 Needed definitions to be added to the dataframe:
 ```python
     # Number of primary and secondary tracks:
@@ -335,8 +332,7 @@ double sum_momentum_tracks(const VertexingUtils::FCCAnalysesVertex& vertex);
 :::
 
 :::{admonition} Suggested answer
-:class: solution toggle
-
+:class: solution dropdown
 Into the `analyzers.h` add
 ```cpp
 ...
@@ -390,8 +386,7 @@ Compare these distributions in $Z \rightarrow uds$ events and in
 $Z \rightarrow b\bar{b}$ events.
 
 :::{admonition} Suggested answer
-:class: solution toggle
-
+:class: solution dropdown
 Search the analysis script `analysis_primary_vertex.py` for the `testFile`
 attribute and replace the `Zuds` file by the `Zbb` file (currently commented
 out).
@@ -434,7 +429,7 @@ The ntuple `Bs2JpsiPhi_MCseeded.root` contains the MC decay vertex of the
 $B_s$, and the reconstructed decay vertex.
 
 :::{admonition} Snippet of `analysis_Bs2JpsiPhi_MCseeded.py`
-:class: callout toggle
+:class: callout dropdown
 ```python
     # MC indices of the decay
     # Bs (PDG = 531) -> mu+ (PDG = -13) mu- (PDG = 13) K+ (PDG = 321) K- (PDG = -321)
@@ -550,7 +545,7 @@ into the name you chose --- and, to have meaningful variable names, rename
 
 
 :::{admonition} Suggested answer
-:class: solution toggle
+:class: solution dropdown
 ```python
     .Define("Tau3Mu_indices",
             "MCParticle::get_indices(15, {-13, 13, 13}, true, true, true, false) (Particle, Particle1)" )
@@ -579,8 +574,7 @@ double tau3mu_raw_mass(const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleDa
 ```
 
 :::{admonition} Suggested answer
-:class: solution toggle
-
+:class: solution dropdown
 Here is a possible implementation of the suggested functions, to be added to
 the `analyzers_Tau3Mu.h`:
 ```cpp
@@ -725,8 +719,7 @@ build_triplets(const ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>& inP
 :::
 
 :::{admonition} Suggested answer
-:class: solution toggle
-
+:class: solution dropdown
 Here is the example implementation of the `build_triplets()` function:
 ```cpp
   ROOT::VecOps::RVec<ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>>
@@ -820,8 +813,7 @@ build_AllTauMasses(const ROOT::VecOps::RVec<VertexingUtils::FCCAnalysesVertex>& 
 :::
 
 :::{admonition} Suggested answer
-:class: solution toggle
-
+:class: solution dropdown
 This are example implementations to be added to your `analyzers_Tau3Mu.h`
 
 ```cpp
@@ -975,8 +967,7 @@ add few includes, like:
 :::
 
 :::{admonition} Suggested answer
-:class: solution toggle
-
+:class: solution dropdown
 The example implementation of the functor to be added into your
 `analyzers_Tau3Mu.h`:
 ```cpp
@@ -1150,8 +1141,7 @@ fccanalysis final analysis_Tau3Mu_final.py
 ```
 
 :::{admonition} Snippet of `analysis_Tau3Mu_final.py`
-:class: callout toggle
-
+:class: callout dropdown
 ```python
 # Dictionnay of the list of cuts. The key is the name of the selection that
 # will be added to the output file

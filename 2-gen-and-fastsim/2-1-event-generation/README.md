@@ -142,8 +142,7 @@ More examples specific to FCC can be found at
 
 
 :::{admonition} Dimuon example
-:class: callout toggle
-
+:class: callout dropdown
 It is advised to work in a separate directory for each process. For example, for Z_mumu, we have:
 
 ```bash
@@ -252,8 +251,7 @@ KKMCee -h
 ```
 
 :::{admonition} Help function output
-:class: discussion toggle
-
+:class: discussion dropdown
 ```
 +++ Wrapper around the KKMCee executable  +++
 
@@ -303,7 +301,7 @@ A next version will address this issue.
 
 
 :::{admonition} Channel numbering
-:class: discussion toggle
+:class: discussion dropdown
 ```
 
   Most common decays
@@ -536,8 +534,7 @@ ls `dirname $( which KKMCee )`/../share/KKMCee/kkmc-tauola.input
 ```
 
 :::{admonition} Dimuon example
-:class: callout toggle
-
+:class: callout dropdown
 To generate a sample of dimuon events using the example files, do the following
 
 ```bash
@@ -652,8 +649,7 @@ BHLUMI -h
 ```
 
 :::{admonition} Help function output
-:class: discussion toggle
-
+:class: discussion dropdown
 ```
 +++ Wrapper around the BHLUMI.exe executable +++
 
@@ -702,8 +698,7 @@ babayaga -h
 ```
 
 :::{admonition} Help function output
-:class: discussion toggle
-
+:class: discussion dropdown
 ```
 
 +++ Wrapper around the babayaga-fcc.exe executable +++
@@ -791,8 +786,7 @@ The sub-directory structure here is not mandatory but copes with the dataset str
 Now: how will we run it? (hint: check specific section)
 
 :::{admonition} Answer
-:class: solution toggle
-
+:class: solution dropdown
 ```bash
 k4run config/pythia.py -n 10000 --out.filename gen/p8_tautau_ecm91/events_1.root --Pythia8.PythiaInterface.pythiacard cards/p8_ee_Ztautau_mumu_ecm91.cmd
 ```
@@ -834,8 +828,7 @@ The output created by `whizard` is `LHEf` (Les Houches Event format); this is be
 Exercise: look at produced `LHEf` file `z_tautau.lhe`: what did we notice?
 
 :::{admonition} Answer
-:class: solution toggle
-
+:class: solution dropdown
 The taus are not decayed. We need another solution for that.
 
 :::
@@ -874,8 +867,7 @@ As steering we will use the file `pythia.py`.
 **Q:** how will we run it from the whizard sub-directory? (hint: think of the conversion file)
 
 :::{admonition} Answer
-:class: solution toggle
-
+:class: solution dropdown
 ```bash
 cd whizard
 k4run ../config/pythia.py -n 10000 --out.filename ../gen/wz_tautau_ecm91/events_1.root --Pythia8.PythiaInterface.pythiacard ../cards/p8_lhereader.cmd | tee wz_ee_Ztautau_mumu_ecm91.log
@@ -895,16 +887,14 @@ Currently, `KKMCee` does not have the option to save directly the events in `EDM
 them into the file `gen/kk_ee_Ztautau_mumu_ecm91_10000.hepmc`?
 
 :::{admonition} Suggested answer
-:class: callout toggle
-
+:class: callout dropdown
 ```bash
 KKMCee -f Tau -e 91.2 -n 10000 -o kk_ee_Zautau_mumu_10000.hepmc -t 2002
 ```
 :::
 
 :::{admonition} Expand to see the example of the produced `HepMC` output 
-:class: callout toggle
-
+:class: callout dropdown
 The `HepMC` output is an ASCII format and can browsed with for example `more`:
 
 ```bash
@@ -963,8 +953,7 @@ The block for each event starts with a line `E`, indicating the event number, th
 **Q:** What can be considered _strange_ in the above listing?
 
 :::{admonition} Suggested answer
-:class: solution toggle
-
+:class: solution dropdown
 A close-up look at the listing raising two questions:
   1. The number of the second event is still 0. This is due to a bug in the
      `HepMC` interface of `KKMCee`; it has no influence in the following
@@ -1054,8 +1043,7 @@ k4run hepmc2edm.py -h
 ##### Dissection of `hepmc2edm.py`
 
 :::{admonition} Expand
-:class: discussion toggle
-
+:class: discussion dropdown
 The tool that we need is [HepMCFileReader](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCFileReader.h), which is a `GaudiTool`, not a `GaudiAlgorithm`, which is used as a signal provider (such as a Monte Carlo generator) within the [Generator Algorithm (GenAlg)](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/GenAlg.h). This is done in this part of the code:
 ```python
 from Configurables import HepMCFileReader
@@ -1106,8 +1094,7 @@ k4run hepmc2edm.py -h
 `kk_Ztautau_mumu_10000.e4h.root` . Which command should we use for that?
 
 :::{admonition} Answer
-:class: solution toggle
-
+:class: solution dropdown
 ```bash
 k4run config/hepmc2edm.py -n 10000 --GenAlg.HepMCFileReader.Filename kk/kk_tautau_10000.hepmc --out.filename gen/kk_tautau_ecm91/events_1.root
 ```
@@ -1117,8 +1104,7 @@ k4run config/hepmc2edm.py -n 10000 --GenAlg.HepMCFileReader.Filename kk/kk_tauta
 could modify `hepmc2edm.py` to avoid that?
 
 :::{admonition} Check answer
-:class: solution toggle
-
+:class: solution dropdown
 Because `hepmc2edm.py` contains this piece of code:
 ```python
 from Configurables import ApplicationMgr
@@ -1145,8 +1131,7 @@ drwxr-xr-x 1 ganis vboxsf      288 Oct 18 16:12 KKMCee-18Oct2022-161012
 **Q:** Can you explain why?
 
 :::{admonition} Answer
-:class: solution toggle
-
+:class: solution dropdown
 Because `kk_tautau_10000.e4h.root` is a `ROOT` file, which binary and
 compressed.
 :::
@@ -1155,8 +1140,7 @@ compressed.
 **Q:** How the cross-sections compare?
 
 :::{admonition} Answer
-:class: solution toggle
-
+:class: solution dropdown
 The differences of the cross-section calculated by `KKMCee` and `Pythia8` is
 $(1485.5 - 1467.0)~\mathrm{pb} = 18.5~\mathrm{pb}$; the errors have a
 statistical and systematic component. Assuming half and half for statistical
@@ -1205,8 +1189,7 @@ At this purpose we will use the recently introduced `build_graph` attribute. The
 ##### Dissection of `histmaker_ttmm.py`
 
 :::{admonition} Expand
-:class: discussion toggle
-
+:class: discussion dropdown
 The files need to be organised in a special way: directories need to be called
 as the process, files below need to be called `events_<num>`, when `<num>` is
 any number. So in the current case we have
@@ -1319,8 +1302,7 @@ Example of a result are: [positive muon momentum](p_mup.png),
 Think of your own. Expand for a possible one.
 
 :::{admonition} Hint
-:class: solution toggle
-
+:class: solution dropdown
 The distributions show a lot of similarities, which means that for detector
 optimisation studies the choice of the generator probably won't matter. However,
 the total cross-section is significantly different, so for studies where exact

@@ -16,13 +16,7 @@ If you have any problems or questions, you can
 [fcc-tutorials-issues]: https://github.com/HEP-FCC/fcc-tutorials/issues
 [fcc-tutorials-repo]: https://github.com/HEP-FCC/fcc-tutorials
 
-```{eval-rst}
-.. toctree::
-    :caption: Contents:
-
-    FCCeeGeneralOverview/FCCeeGeneralOverview.md
-    FCCeeGuineaPigIRBackgrounds/README.md
-    Geometry/Geometry.md
-    Visualization/Visualization.md
-
-```
+* [FCC-ee Full Sim General Overview](FCCeeGeneralOverview/FCCeeGeneralOverview.md)
+* [Using Guinea-Pig to generate interaction region backgrounds](FCCeeGuineaPigIRBackgrounds/README.md)
+* [Changing geometry](Geometry/Geometry.md)
+* [Visualization](Visualization/Visualization.md)

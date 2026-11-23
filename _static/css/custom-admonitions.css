@@ -1,182 +1,215 @@
-/* Custom admonitions inspired by LHCb Starterkit*/
+/* Custom admonitions inspired by the LHCb Starterkit, adapted to the
+ * Jupyter Book 2 / MyST-MD book theme.
+ *
+ * MyST renders an admonition as
+ *   <aside class="myst-admonition ... <custom classes>">
+ *     <div class="myst-admonition-header ..."><svg class="myst-admonition-header-icon"/> Title</div>
+ *     <div class="myst-admonition-content ...">...</div>
+ *   </aside>
+ * (a collapsible `dropdown` admonition uses <details>/<summary> instead).
+ * The `:class:` option of the directive is appended to the element classes,
+ * so the tutorial classes below can be styled directly. Icons use the
+ * Font Awesome 4.7 sheet that the theme already loads. */
 
-.rst-content .admonition button.toggle-button {
-    top: .15em;
-    right: 0.4em;
+.myst-admonition.prereq {
+  --adm-fg: #8a6d3b;
+  --adm-bg: #fcf8e3;
+  --adm-fg-dark: #e6c98a;
+  --adm-icon: "\f135"; /* rocket */
 }
 
-.rst-content .admonition button.toggle-button:before {
-    top: -0.5em;
-    position: relative;
+.myst-admonition.callout {
+  --adm-fg: #214f78;
+  --adm-bg: #9bc2e4;
+  --adm-fg-dark: #9bc2e4;
+  --adm-icon: "\f129"; /* info */
 }
 
-
-/* Prerequisite admonition */
-.rst-content .prereq.admonition {
-    background-color: inherit;
-    border: 2px solid;
-    border-color: #faebcc;
+.myst-admonition.challenge {
+  --adm-fg: #3c763d;
+  --adm-bg: #dff0d8;
+  --adm-fg-dark: #a3d39c;
+  --adm-icon: "\f024"; /* flag */
 }
 
-.rst-content .prereq.admonition .admonition-title {
-    color: #8a6d3b;
-    background-color: #fcf8e3;
-    border-bottom: 2px solid;
-    border-color: inherit;
+.myst-admonition.solution {
+  --adm-fg: #a94442;
+  --adm-bg: #f2dede;
+  --adm-fg-dark: #e8a3a1;
+  --adm-icon: "\f00c"; /* check */
 }
 
-.rst-content .prereq.admonition .admonition-title:before {
-    margin-right: 12px;
-    content: "\f135"; /* rocket */
+.myst-admonition.objectives {
+  --adm-fg: #8a6d3b;
+  --adm-bg: #fcf8e3;
+  --adm-fg-dark: #e6c98a;
+  --adm-icon: "\f201"; /* line-chart */
 }
 
-.rst-content .prereq.admonition button.toggle-button {
-  color: #8a6d3b;
+.myst-admonition.keypoints {
+  --adm-fg: #3c763d;
+  --adm-bg: #dff0d8;
+  --adm-fg-dark: #a3d39c;
+  --adm-icon: "\f084"; /* key */
 }
 
-
-/* Callout admonition */
-.rst-content .callout.admonition {
-    background-color: inherit;
-    border: 2px solid;
-    border-color: #73a9d9;
+.myst-admonition.discussion {
+  --adm-fg: #31708f;
+  --adm-bg: #d9edf7;
+  --adm-fg-dark: #9fd0e6;
+  --adm-icon: "\f0f3"; /* bell */
 }
 
-.rst-content .callout.admonition .admonition-title {
-    color: #214f78;
-    background-color: #9bc2e4;
-    border-bottom: 2px solid;
-    border-color: inherit;
+/* Box border */
+.myst-admonition.prereq,
+.myst-admonition.callout,
+.myst-admonition.challenge,
+.myst-admonition.solution,
+.myst-admonition.objectives,
+.myst-admonition.keypoints,
+.myst-admonition.discussion {
+  border-left-color: var(--adm-fg);
 }
 
-.rst-content .callout.admonition .admonition-title:before {
-    margin-right: 12px;
-    /* content: "\f05a"; /* info-circle */
-    content: "\f129"; /* info */
+/* Title bar */
+.myst-admonition.prereq > .myst-admonition-header,
+.myst-admonition.callout > .myst-admonition-header,
+.myst-admonition.challenge > .myst-admonition-header,
+.myst-admonition.solution > .myst-admonition-header,
+.myst-admonition.objectives > .myst-admonition-header,
+.myst-admonition.keypoints > .myst-admonition-header,
+.myst-admonition.discussion > .myst-admonition-header {
+  color: var(--adm-fg);
+  background-color: var(--adm-bg);
 }
 
-.rst-content .callout.admonition button.toggle-button {
-  color: #214f78;
+html.dark .myst-admonition.prereq > .myst-admonition-header,
+html.dark .myst-admonition.callout > .myst-admonition-header,
+html.dark .myst-admonition.challenge > .myst-admonition-header,
+html.dark .myst-admonition.solution > .myst-admonition-header,
+html.dark .myst-admonition.objectives > .myst-admonition-header,
+html.dark .myst-admonition.keypoints > .myst-admonition-header,
+html.dark .myst-admonition.discussion > .myst-admonition-header {
+  color: var(--adm-fg-dark);
+  background-color: color-mix(in srgb, var(--adm-fg) 30%, transparent);
 }
 
-
-/* Challenge admonition */
-.rst-content .challenge.admonition {
-    background-color: inherit;
-    border: 2px solid;
-    border-color: #d6e9c6;
+/* Replace the theme's SVG icon with the Starterkit Font Awesome glyphs */
+.myst-admonition.prereq > .myst-admonition-header > .myst-admonition-header-icon,
+.myst-admonition.callout > .myst-admonition-header > .myst-admonition-header-icon,
+.myst-admonition.challenge > .myst-admonition-header > .myst-admonition-header-icon,
+.myst-admonition.solution > .myst-admonition-header > .myst-admonition-header-icon,
+.myst-admonition.objectives > .myst-admonition-header > .myst-admonition-header-icon,
+.myst-admonition.keypoints > .myst-admonition-header > .myst-admonition-header-icon,
+.myst-admonition.discussion > .myst-admonition-header > .myst-admonition-header-icon {
+  display: none;
 }
 
-.rst-content .challenge.admonition .admonition-title {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-bottom: 2px solid;
-    border-color: inherit;
+.myst-admonition.prereq > .myst-admonition-header::before,
+.myst-admonition.callout > .myst-admonition-header::before,
+.myst-admonition.challenge > .myst-admonition-header::before,
+.myst-admonition.solution > .myst-admonition-header::before,
+.myst-admonition.objectives > .myst-admonition-header::before,
+.myst-admonition.keypoints > .myst-admonition-header::before,
+.myst-admonition.discussion > .myst-admonition-header::before {
+  content: var(--adm-icon);
+  font-family: FontAwesome;
+  font-size: 1.1rem;
+  width: 2rem;
+  padding-left: 0.5rem;
+  margin-right: 0.5rem;
+  flex: none;
+  align-self: center;
+  text-align: center;
 }
 
-.rst-content .challenge.admonition .admonition-title:before {
-    margin-right: 12px;
-    /* content: "\f456"; /* flag-pennant */
-    /* content: "\f11e"; /* flag-checkered */
-    content: "\f024"; /* flag */
+/* ------------------------------------------------------------------
+ * Typography and layout
+ *
+ * They build the book with a slightly larger font,
+ * a wider text column and larger, more padded code blocks.
+ * ------------------------------------------------------------------ */
+
+:root {
+  /* The theme sizes everything in rem/ch, so this scales the whole page.
+   * Theme default: 16px. */
+  --fcc-font-size: 17px;
+  /* The text column is six of these grid tracks (theme default: 10ch,
+   * i.e. ~60 characters per line). */
+  --fcc-body-track: 12ch;
 }
 
-.rst-content .challenge.admonition button.toggle-button {
-  color: #3c763d;
+html {
+  font-size: var(--fcc-font-size);
 }
 
-
-/* Solution admonition */
-.rst-content .solution.admonition {
-    background-color: inherit;
-    border: 2px solid;
-    border-color: #ebccd1;
+.article.content {
+  line-height: 1.7;
 }
 
-.rst-content .solution.admonition .admonition-title {
-    color: #a94442;
-    background-color: #f2dede;
-    border-bottom: 2px solid;
-    border-color: inherit;
+/* Widen the text column. These are the theme's `article-grid` templates
+ * for the lg/xl/2xl breakpoints with the body tracks made configurable;
+ * `xl:article-grid` (primary sidebar) must stay in sync with the article. */
+@media (min-width: 1024px) {
+  .article-grid,
+  .xl\:article-grid {
+    grid-template-columns:
+      [screen-start] .25rem [screen-inset-start page-start] 1rem
+      [page-inset-start body-outset-start] 1fr
+      [body-start gutter-left-start] 1rem
+      [body-inset-start] minmax(8ch, var(--fcc-body-track))
+      [middle-start] minmax(8ch, var(--fcc-body-track))
+      [gutter-left-end] minmax(8ch, var(--fcc-body-track)) minmax(8ch, var(--fcc-body-track))
+      [gutter-right-start] minmax(8ch, var(--fcc-body-track))
+      [middle-end] minmax(8ch, var(--fcc-body-track))
+      [body-inset-end] 1rem [body-end gutter-right-end] 3rem
+      [body-outset-end] minmax(5rem, 13rem) [page-inset-end] 3rem
+      [page-end] 1fr [screen-inset-end] .25rem [screen-end];
+  }
 }
 
-.rst-content .solution.admonition .admonition-title:before {
-    margin-right: 12px;
-    content: "\f00c"; /* check */
+@media (min-width: 1280px) {
+  .article-grid,
+  .xl\:article-grid {
+    grid-template-columns:
+      [screen-start] .25rem [screen-inset-start] 1fr [page-start] 3rem
+      [page-inset-start] minmax(4rem, 9rem) [body-outset-start] 3rem
+      [body-start gutter-left-start] 1rem
+      [body-inset-start] minmax(8ch, var(--fcc-body-track))
+      [middle-start] minmax(8ch, var(--fcc-body-track))
+      [gutter-left-end] minmax(8ch, var(--fcc-body-track)) minmax(8ch, var(--fcc-body-track))
+      [gutter-right-start] minmax(8ch, var(--fcc-body-track))
+      [middle-end] minmax(8ch, var(--fcc-body-track))
+      [body-inset-end] 1rem [body-end gutter-right-end] 3rem
+      [body-outset-end] minmax(5rem, 13rem) [page-inset-end] 3rem
+      [page-end] 1fr [screen-inset-end] .25rem [screen-end];
+  }
 }
 
-.rst-content .objectives.admonition button.toggle-button {
-  color: #a94442;
+@media (min-width: 1536px) {
+  .article-grid,
+  .xl\:article-grid {
+    grid-template-columns:
+      [screen-start] .5rem [screen-inset-start] 1fr [page-start] 3rem
+      [page-inset-start] minmax(4rem, 9rem) [body-outset-start] 3rem
+      [body-start gutter-left-start] 1rem
+      [body-inset-start] minmax(8ch, var(--fcc-body-track))
+      [middle-start] minmax(8ch, var(--fcc-body-track))
+      [gutter-left-end] minmax(8ch, var(--fcc-body-track)) minmax(8ch, var(--fcc-body-track))
+      [gutter-right-start] minmax(8ch, var(--fcc-body-track))
+      [middle-end] minmax(8ch, var(--fcc-body-track))
+      [body-inset-end] 1rem [body-end gutter-right-end] 3rem
+      [body-outset-end] minmax(5rem, 13rem) [page-inset-end] 3rem
+      [page-end] 1fr [screen-inset-end] .5rem [screen-end];
+  }
 }
 
-
-/* Objectives admonition */
-.rst-content .objectives.admonition {
-    background-color: inherit;
-    border: 2px solid;
-    border-color: #faebcc;
+/* Code blocks: theme default is `text-sm` (0.875rem) with `p-3` padding */
+.myst-code {
+  font-size: 0.9375rem;
+  line-height: 1.6;
 }
 
-.rst-content .objectives.admonition .admonition-title {
-    color: #8a6d3b;
-    background-color: #fcf8e3;
-    border-bottom: 2px solid;
-    border-color: inherit;
-}
-
-.rst-content .objectives.admonition .admonition-title:before {
-    margin-right: 12px;
-    content: "\f201"; /* chart-line */
-}
-
-.rst-content .objectives.admonition button.toggle-button {
-  color: #8a6d3b;
-}
-
-
-/* Keypoints admonition */
-.rst-content .keypoints.admonition {
-    background-color: inherit;
-    border: 2px solid;
-    border-color: #d6e9c6;
-}
-
-.rst-content .keypoints.admonition .admonition-title {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-bottom: 2px solid;
-    border-color: inherit;
-}
-
-.rst-content .keypoints.admonition .admonition-title:before {
-    margin-right: 12px;
-    content: "\f084"; /* key */
-}
-
-.rst-content .keypoints.admonition button.toggle-button {
-  color: #3c763d;
-}
-
-
-/* Discussion admonition */
-.rst-content .discussion.admonition {
-    background-color: inherit;
-    border: 2px solid;
-    border-color: #bce8f1;
-}
-
-.rst-content .discussion.admonition .admonition-title {
-    color: #31708f;
-    background-color: #d9edf7;
-    border-bottom: 2px solid;
-    border-color: inherit;
-}
-
-.rst-content .discussion.admonition .admonition-title:before {
-    margin-right: 12px;
-    content: "\f0f3"; /* bell */
-}
-
-.rst-content .discussion.admonition button.toggle-button {
-  color: #31708f;
+.myst-code-body {
+  padding: 1rem 1.25rem;
 }

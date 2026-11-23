@@ -91,7 +91,7 @@ Let's now define new columns to the RootDataFrame object ```df2``` inside the fu
 Similarly, define the index in the collection ```CaloClusters``` of the cluster with minimum energy, the total number of clusters in the event and the cluster energy.
 
 :::{admonition} Suggested answer
-:class: toggle
+:class: dropdown
 ```python
 .Define("minEnergyCluster_index", "std::distance(CaloClusters.energy.begin(), std::min_element(CaloClusters.energy.begin(), CaloClusters.energy.end()))")
 .Define("clusters_n", "CaloClusters.energy.size()")
@@ -102,7 +102,7 @@ Similarly, define the index in the collection ```CaloClusters``` of the cluster 
 Now we need to add all the variables that we have defined to the ```branchList``` of the ```output``` function of the same ```RDFanalysis``` class.
 
 :::{admonition} Suggested answer
-:class: toggle
+:class: dropdown
 ```python
 "maxEnergyCluster_index", "minEnergyCluster_index", "clusters_n", "clusters_energy"
 ```
@@ -116,7 +116,7 @@ fccanalysis run --help
 ```
 
 :::{admonition} Suggested answer
-:class: toggle
+:class: dropdown
 ```shell
 fccanalysis run analysis_tutorial_mva.py --nevents 10 --output photons.root --test
 ```
@@ -125,7 +125,7 @@ fccanalysis run analysis_tutorial_mva.py --nevents 10 --output photons.root --te
 Open the produced root file ```photons.root``` and inspect it with ```Scan``` for example check that the index we have calculated indeed correspond to the clusters of maximum/minimum energy:
 
 :::{admonition} Suggested answer
-:class: toggle
+:class: dropdown
 ```shell
 root -l photons.root
 events->Scan("maxEnergyCluster_index:minEnergyCluster_index:clusters_n:clusters_energy")
@@ -137,7 +137,7 @@ events->Scan("maxEnergyCluster_index:minEnergyCluster_index:clusters_n:clusters_
 We now need to obtain the index of the first and last cells of the maximum energy cluster. For that we need to select the ```maxEnergyCluster_index``` in the ```CaloClusters``` collection and evaluate ```hits_begin``` and ```hits_end```:
 
 :::{admonition} Suggested answer
-:class: toggle
+:class: dropdown
 ```python
 .Define("maxEnergyCluster_firstCell_index", "CaloClusters[maxEnergyCluster_index].hits_begin")
 .Define("maxEnergyCluster_lastCell_index",  "CaloClusters[maxEnergyCluster_index].hits_end")
@@ -171,7 +171,7 @@ Take(vec, Range(id_end - id_begin) + id_begin)
 Now you can create the sub-collection ```maxEnergyCluster_Cells``` from the input collection ```PositionedCaloClusterCells``` from ```maxEnergyCluster_firstCell_index``` to ```maxEnergyCluster_lastCell_index``` using the newly defined ```myRange``` function:
 
 :::{admonition} Suggested answer
-:class: toggle
+:class: dropdown
 ```python
 .Define("maxEnergyCluster_cells", "myRange(PositionedCaloClusterCells, maxEnergyCluster_firstCell_index, maxEnergyCluster_lastCell_index)")
 ```
@@ -182,7 +182,7 @@ Now you can create the sub-collection ```maxEnergyCluster_Cells``` from the inpu
 Using the newly defined collection ```maxEnergyCluster_cells```, create new variables of their energies, phi, theta, layer and number of cells, using functions like [here](https://github.com/HEP-FCC/FCCAnalyses/blob/master/analyzers/dataframe/FCCAnalyses/CaloNtupleizer.h#L23#L33)
 
 :::{admonition} Suggested answer
-:class: toggle
+:class: dropdown
 ```python
 .Define("maxEnergyCluster_cells_energy", "CaloNtupleizer::getCaloHit_energy(maxEnergyCluster_cells)" )
 .Define("maxEnergyCluster_cells_phi",    "CaloNtupleizer::getCaloHit_phi(maxEnergyCluster_cells)" )
@@ -196,7 +196,7 @@ The last variable to add is the radius of the cell position, you can compute it 
 
 
 :::{admonition} Suggested answer
-:class: toggle
+:class: dropdown
 ```python
 .Define("maxEnergyCluster_cells_x", "myRange(PositionedCaloClusterCells.position.x, maxEnergyCluster_firstCell_index, maxEnergyCluster_lastCell_index)")
 .Define("maxEnergyCluster_cells_y", "myRange(PositionedCaloClusterCells.position.y, maxEnergyCluster_firstCell_index, maxEnergyCluster_lastCell_index)")
@@ -207,7 +207,7 @@ The last variable to add is the radius of the cell position, you can compute it 
 Do not forget to add all the newly defined variables to the output ```branchList```.
 
 :::{admonition} Suggested answer
-:class: toggle
+:class: dropdown
 ```python
 "maxEnergyCluster_cells_energy","maxEnergyCluster_cells_phi","maxEnergyCluster_cells_theta","maxEnergyCluster_cells_layer","maxEnergyCluster_cells_n","maxEnergyCluster_cells_radius"
 ```
@@ -216,7 +216,7 @@ Do not forget to add all the newly defined variables to the output ```branchList
 Let's give it a try on a few events as last time.
 
 :::{admonition} Suggested answer
-:class: toggle
+:class: dropdown
 ```shell
 fccanalysis run analysis_tutorial_mva.py --nevents 10 --output photons.root --test
 ```
@@ -273,7 +273,7 @@ fccanalysis run analysis_tutorial_mva.py --output photons.root --test
 In this section we will remove the last layers of the calorimeter and evaluate the same MVA model with less layers. First let's have a look at one the output file and try to find how many layers we have in the calorimeter. For that plot the number of layers for a few events and look at the histogram
 
 :::{admonition} Suggested answer
-:class: toggle
+:class: dropdown
 ```shell
 events->Draw("maxEnergyCluster_cells_layer","","",10)
 ```
@@ -291,7 +291,7 @@ Need to comment one the definition of the cells collection and add the two lines
 
 and we run again (don't forget to switch the testFile)
 :::{admonition} Suggested answer
-:class: toggle
+:class: dropdown
 ```shell
 fccanalysis run analysis_tutorial_mva.py --output pi0s_10layers.root --test
 fccanalysis run analysis_tutorial_mva.py --output photons_10layers.root --test

@@ -171,8 +171,7 @@ DelphesPythia8EvtGen_EDM4HEP_k4Interface -h
 ```
 
 :::{admonition} `DelphesPythia8EvtGen_EDM4HEP_k4Interface` CLI arguments
-:class: callout toggle
-
+:class: callout dropdown
 The `DelphesPythia8EvtGen_EDM4HEP_k4Interface` takes the following CLI
 arguments.
 

@@ -48,12 +48,12 @@ Take a few minutes to browse the above codes to get a glimpse of how things work
 Looking at [FCCee_ECalBarrel.xml](https://github.com/HEP-FCC/FCCDetectors/blob/main/Detector/DetFCCeeECalInclined/compact/FCCee_ECalBarrel.xml), try to answer the following questions:
 * what is the thickness of readout electrodes?
 :::{admonition} Answer
-:class: toggle
+:class: dropdown
 This is defined by the variable `readout_thickness`: **1.2 mm**
 :::
 * how many longitudinal layers (i.e. radial segmentation) has this calorimeter?
 :::{admonition} Answer
-:class: toggle
+:class: dropdown
 The radial extent of each layer is set under the `layer` tag (mind that a layer can be 'repeated'): **12**
 :::
 
@@ -69,35 +69,35 @@ Run the simulation with  `fccrun runCaloSim.py` (you can safely ignore the warni
 
 - how to change the type of particle you shoot in the detector?
 :::{admonition} Answer
-:class: toggle
+:class: dropdown
 This is a particle gun property which is set by a parameter at the beginning of the file `pgun.PdgCodes = [pdgCode]`. NB: a mixture of particles can be used (it is a list).
 :::
 - how to modify the number of events that are generated?
 :::{admonition} Answer
-:class: toggle
+:class: dropdown
 This is defined by the `EvtMax` parameter of the `ApplicationMgr`
 :::
 - how many different values do we have for the sampling fraction? Why is that (physics-wise)?
 :::{admonition} Answer
-:class: toggle
+:class: dropdown
 We have 12 values for the sampling fraction, one per longitudinal layer. This is due to the geometry: the absorbers have a rectangular shape and the circumference is smaller at the inner radius than at the outer radius. The sensitive media is thus wider (compared to the non-sensitive media) when going to higher radius which is why the sampling fraction grows. Note that the first layer, called the pre-sampler, has a large sampling fraction because the absorbers are made of a material way lighter than Lead there. We do this to improve the quality of the upstream material correction discussed later.
 :::
 
 The above command generated 200 events with 10 GeV photon gun and ran the calorimeter reconstruction on it.
 - Looking at the end of prompt output when running `runCaloSim.py`, what algorithm takes most of the computing time? What do you think this algorithm does?
 :::{admonition} Answer
-:class: toggle
+:class: dropdown
 The algorithm taking most of the computation time is `SimG4Alg:Execute`. It deals with the propagation of particles through matter and is especially dominated by the development of the electromagnetic shower which features a lot of secondary particles. NB: an alternative to this 'first principle' approach would be to develop the shower from a more empirical point of view through e.g. machine learning but this is not easy and goes beyond the scope of this tutorial. 
 :::
 
 Produce the energy resolution plot with `python plot_energy_resolution.py output_caloFullSim_10GeV_pdgId_22_noiseFalse.root` and display it with `display output_caloFullSim_10GeV_pdgId_22_noiseFalse_energyResolution.png`.
 - Assuming there is no noise nor constant term, derive the sampling term of this version of the calorimeter based on the width of the Gaussian fit from the plot.
 :::{admonition} Hint
-:class: toggle
+:class: dropdown
 $\frac{\sigma_E}{E} = \frac{a}{\sqrt E},  \sigma_E = 0.28 \text{ GeV}, E = 10 \text{ GeV}, a = ?$
 :::
 :::{admonition} Answer
-:class: toggle
+:class: dropdown
 $a = 0.09 \text{ Gev}^\frac{1}{2}$
 NB: this is of course not the exact value of the sampling term since the noise and constant term should be considered and a fit on a large energy spectrum should be performed, see e.g. [here](https://indico.desy.de/event/33640/contributions/128389/attachments/77680/100499/20221006_Brieuc_Francois_Noble_Liquid_Calorimetry_forFCCee_ECFA_Workshop_DESY.pdf#page=3).
 :::
@@ -132,12 +132,12 @@ Run the simulation again, reproduce the performance plot using the new sample an
 
 - How did the energy resolution change? Can you explain this behavior?
 :::{admonition} Answer
-:class: toggle
+:class: dropdown
 The energy resolution improved because we have now a higher ratio between sensitive and non-sensitive material budget. 
 :::
 - compute again the sampling term assuming a null noise and constant term
 :::{admonition} Answer
-:class: toggle
+:class: dropdown
  $a = 0.07 \text{ Gev}^\frac{1}{2}$
  NB: this is of course not the exact value of the sampling term since the noise and constant term should be considered and a fit on a large energy spectrum should be performed, see e.g. [here](https://indico.desy.de/event/33640/contributions/128389/attachments/77680/100499/20221006_Brieuc_Francois_Noble_Liquid_Calorimetry_forFCCee_ECFA_Workshop_DESY.pdf#page=4).
 :::
@@ -158,7 +158,7 @@ A further important step in having an accurate description of the detector respo
 - produce the performance plot and compare it to the one without noise
 - what do you observe?
 :::{admonition} Answer
-:class: toggle 
+:class: dropdown
 The resolution barely changed. This is partially due to the lack of statistics but also to the fact that the noise impact is small because this version of the calorimeter has been optimized to feature a low noise and at 10 GeV we are already dominated by the sampling term. 
 :::
 
@@ -171,7 +171,7 @@ Open a new terminal, go to the Full Sim tutorial repository `fcc-tutorials/4-ful
 
 Write a macro that plots the longitudinal profile of the electromagnetic shower energy deposits and run it on both the photon and neutral pion samples.
 :::{admonition} Hint
-:class: toggle
+:class: dropdown
 - use a TProfile
 - the radial extent of the sensitive calorimeter is 2160 mm to 2560 mm
 - there are 12 longitudinal layers, the first one is 15 mm thick while the other ones are 35 mm thick 
@@ -182,6 +182,6 @@ Write a macro that plots the longitudinal profile of the electromagnetic shower 
 Compare the longitudinal shower profile for photons and neutral pions.
 - What do you observe?
 :::{admonition} Answer
-:class: toggle
+:class: dropdown
 For a given cluster energy, the single photon showers deposit their energy deeper in the calorimeter than the showers from neutral pions. This is due to the fact that the latter correspond to two close-by photon showers with smaller energy. 
 :::

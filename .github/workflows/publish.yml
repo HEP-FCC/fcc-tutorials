@@ -4,35 +4,51 @@ on:
   push:
     branches:
     - main
+  workflow_dispatch:
+
+# Allow the job to deploy to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Run only one deployment at a time, but let an in-progress one finish
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  sphinx:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v7
+    - id: pages
+      uses: actions/configure-pages@v5
+    - uses: actions/setup-python@v5
       with:
-        fetch-depth: 0
+        python-version: '3.12'
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22
     - name: Install Requirements
       run: |
         pip3 install -r requirements.txt
-    - name: Sphinx build
+    - name: Jupyter Book build
+      env:
+        # Path the site is served from, e.g. /fcc-tutorials
+        BASE_URL: ${{ steps.pages.outputs.base_path }}
       run: |
-        sphinx-multiversion . build
-    - name: Publish gh-pages
-      run: |
-        cd build
-        cp -r main master
-        git init
-        git config user.name "FCCSW Bot"
-        git config user.email "fccsw.bot@example.com"
-        git remote add upstream https://kjvbrt:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
+        jupyter book build --html
+    - uses: actions/upload-pages-artifact@v4
+      with:
+        path: _build/html
 
-        touch .nojekyll
-        git add .nojekyll
-        git commit -m "Initial commit"
-        git branch -m gh-pages
-        touch .
-        cp ../.github/aux/gh-pages-redirect.html index.html
-        git add -A .
-        git commit -m "Rebuild page at ${GITHUB_SHA}"
-        git push -f upstream gh-pages:gh-pages
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+    - id: deployment
+      uses: actions/deploy-pages@v4

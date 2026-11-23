@@ -12,15 +12,9 @@ Sooner rather than later you will find it necessary write code for FCCSW. These 
 
 
 
-```{eval-rst}
-.. toctree::
-    :caption: Contents:
-
-    FccSoftwareGit.md
-    FccCMakeGuide.md
-    WritingAlgorithms.md
-    DevelopingDD4hep.md
-    Edm4hepTransition.md
-    FccDocPage.md
-
-```
+* [Github workflow and contribution guide](FccSoftwareGit.md)
+* [CMake guide for the FCC software](FccCMakeGuide.md)
+* [Writing Gaudi Algorithms](WritingAlgorithms.md)
+* [Developing DD4hep Detector models](DevelopingDD4hep.md)
+* [Guide to the Transition of FCCSW to EDM4hep](Edm4hepTransition.md)
+* [Writing documentation for the FCC Software](FccDocPage.md)

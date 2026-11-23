@@ -21,11 +21,5 @@ The python scripts discussed in these pages are available at
 [dirac]: https://dirac.readthedocs.io/en/latest/
 [fccdirac]: https://github.com/HEP-FCC/FCCDIRAC/tree/master/workflows
 
-```{eval-rst}
-.. toctree::
-    :maxdepth: 2
-    :caption: Contents:
-
-    workflows/Overview.md
-    workflows/01/DiTauKKMCeeDelphesStandAlone.md
-```
+* [Overview of the job submission script](workflows/Overview.md)
+* [Workflow 1: Ditau with KKMCee + Delphes](workflows/01/DiTauKKMCeeDelphesStandAlone.md)

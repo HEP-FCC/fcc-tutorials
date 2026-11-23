@@ -26,11 +26,6 @@ If you have any problems or questions, you can
 [fcc-tutorials-issues]: https://github.com/HEP-FCC/fcc-tutorials/issues
 [fcc-tutorials-repo]: https://github.com/HEP-FCC/fcc-tutorials
 
-```{eval-rst}
-.. toctree::
-    :caption: Contents:
-
-    2-1-event-generation/README.md
-    2-2-fastsim-delphes/README.md
-    2-4-eedE/README.md
-```
+* [Getting Started with Event Generation](2-1-event-generation/README.md)
+* [Getting Started with Fast Simulation in Delphes](2-2-fastsim-delphes/README.md)
+* [EDM4hep Event Data Explorer: eedE](2-4-eedE/README.md)
