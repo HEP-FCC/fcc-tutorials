@@ -41,9 +41,9 @@ you need access to Alma9 (or Ubuntu22) machines with `cvmfs` mounted and with th
 to be followed by the system administrators).
 Several computing facilities offer the right environment:
 
-* CERN lxplus: `ssh -X mylxplusname@lxplus.cern.ch`
+* CERN lxplus: See [The LXPLUS Service](https://lxplusdoc.web.cern.ch/) 
 * MIT SubMIT: follow the instructions [here](https://github.com/jeyserma/FCCPhysics/blob/main/tutorials/ZmumuHbb/SUBMIT.md#submit).
-* FNAL: follow the instructions [here](https://github.com/jeyserma/FCCPhysics/blob/main/tutorials/ZmumuHbb/SUBMIT.md#submit). 
+* FNAL: A Fermilab account is required to access this facility and [the documentation](https://eafjupyter.readthedocs.io/en/latest/). 
 
 ## Checking the chosen resources
 
