@@ -93,23 +93,26 @@ The Gaudi steering file needs to activate the `GaudiTool` that interfaces
 An example of steering file can be found at [pythia.py][pythia-example].
 The steering file runs the minimal set of algorithms to run Pythia8 and produce
 an output in `EDM4hep` format:
+<!-- ci-fragment: pythia8 -->
 ```bash
 wget https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py
 k4run --dry-run pythia.py
 ```
 with expected output
 ```
-[k4run - INFO] k4run.main: --> Pythia8 --> HepMCToEDMConverter --> StableParticles --> out
+[k4run - INFO] k4run.main: --> eventHeaderCreator --> Pythia8 --> HepMCToEDMConverter --> StableParticles
 [...]
 ```
 For example, to generate 500 $e^{+}e^{-} \rightarrow \mu^{+}\mu^{-}$ at
 91.2 GeV, one can do the following, download the configuration file:
+<!-- ci-fragment: pythia8 -->
 ```bash
 wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/main/FCCee/Generator/Pythia8/p8_ee_Zmumu_ecm91.cmd
 ```
 and run
+<!-- ci-fragment: pythia8 -->
 ```bash
-k4run pythia.py -n 500 --out.filename p8_mumu_500.e4h.root --Pythia8.PythiaInterface.pythiacard p8_ee_Zmumu_ecm91.cmd
+k4run pythia.py -n 500 --IOSvc.Output p8_mumu_500.e4h.root --Pythia8.PythiaInterface.pythiacard p8_ee_Zmumu_ecm91.cmd
 ```
 
 
@@ -763,7 +766,7 @@ which mg5_aMC
 ## Hands-on case study: ditau events with Pythia8, Whizard and KKMCee
 
 In this section we describe, with exercises, the generation of an equivalent sample of Monte Carlo events with three diffent generators: `Pythia8`, `Whizard` and `KKMCee`. The process chosen is $e^{-}e^{+} \rightarrow \tau^{-}\tau^{+}$
- (hereafter referred to as _ditaus_), with both _taus_ decaying leptonically with a _muon_ in the final state. The centre of mass energy of 91.2 GeV. In the three cases 10000 will be generated and saved in `ROOT` files in `EDM4hep` format: the steps to arrive at this results are however different.
+ (hereafter referred to as _ditaus_), with both _taus_ decaying leptonically with a _muon_ in the final state. The centre of mass energy of 91.2 GeV. Each workflow produces an EDM4hep ROOT file. The Pythia8 and KKMCee examples use 10,000 events, and the Whizard example uses a 10-event sample.
 
 ### Generating ditaus with Pythia8
 
@@ -821,13 +824,18 @@ i.e. 1458.0 +- 7.7 pb.
 
 As explained in the dedicated [Whizard section](#whizard), to use `whizard` we need a `Sindarin` configuration file. To generate ditau events we will use the file
 [Z_tautau.sin](https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/Z_tautau.sin):
+
+<!-- ci-fragment: whizard-ditau -->
 ```bash
 wget https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/Z_tautau.sin
 ```
-and run it in a dedicate directory to not pollute the working one with the many files produced:
+Run it in a dedicated directory to keep the generated files together. The downloaded
+card generates 10 events, which is enough to exercise the conversion.
+
+<!-- ci-fragment: whizard-ditau -->
 ```bash
-mkdir -p whizard; cd whizard;
-whizard ../Z_tautau.sin
+mkdir -p whizard
+(cd whizard && whizard ../Z_tautau.sin)
 ```
 The output created by `whizard` is `LHEf` (Les Houches Event format); this is because the current build does not support writing `HepMC`; this may change in the future.
 
@@ -848,10 +856,13 @@ In order to get the events in `EDM4hep` format, we exploit the fact that
 `Pythia` provides `LHEf` reader functionality. To activate that we will use
 `Gaudi` and a special `.cmd` file which considers the input `LHEf` input file as
 a `Beam`. This special `.cmd` is called `p8_lhereader.cmd` and it is available
-on the web:
+on the web. Download the card and the same Pythia8 steering used above:
+
+<!-- ci-fragment: whizard-ditau -->
 ```bash
-cd ../cards
-wget https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/p8_lhereader.cmd
+mkdir -p cards config gen/wz_tautau_ecm91
+wget -O cards/p8_lhereader.cmd https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/p8_lhereader.cmd
+wget -O config/pythia.py https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py
 ```
 Please note the lines
 ```
@@ -859,7 +870,7 @@ Please note the lines
 Beams:frameType = 4                      ! read info from a LHEF
 Beams:LHEF = z_tautau.lhe                ! the LHEF to read from
 ```
-This file needs to be edited to enter the exact locaton of the input file (it could also be a symlink to avoid always editng the file.
+Run the conversion from the `whizard` directory so Pythia8 finds `z_tautau.lhe` at the relative path in the card.
 
 Also note the lines:
 ```
@@ -876,9 +887,10 @@ As steering we will use the file `pythia.py`.
 :::{admonition} Answer
 :class: solution toggle
 
+<!-- ci-fragment: whizard-ditau -->
 ```bash
 cd whizard
-k4run ../config/pythia.py -n 10000 --out.filename ../gen/wz_tautau_ecm91/events_1.root --Pythia8.PythiaInterface.pythiacard ../cards/p8_lhereader.cmd | tee wz_ee_Ztautau_mumu_ecm91.log
+k4run ../config/pythia.py -n 10 --IOSvc.Output ../gen/wz_tautau_ecm91/events_1.root --Pythia8.PythiaInterface.pythiacard ../cards/p8_lhereader.cmd | tee wz_ee_Ztautau_mumu_ecm91.log
 ```
 :::
 
@@ -891,16 +903,13 @@ Currently, `KKMCee` does not have the option to save directly the events in `EDM
 
 #### Generating `HepMC` events
 
-**Q:** What are the commands (options) to generate 10000 ditau events and save
-them into the file `gen/kk_ee_Ztautau_mumu_ecm91_10000.hepmc`?
+From the ditau exercise directory, generate 10,000 events with one tau forced
+to decay to a muon:
 
-:::{admonition} Suggested answer
-:class: callout toggle
-
+<!-- ci-fragment: kkmcee-ditau -->
 ```bash
-KKMCee -f Tau -e 91.2 -n 10000 -o kk_ee_Zautau_mumu_10000.hepmc -t 2002
+KKMCee -f Tau -e 91.2 -n 10000 -o kk_tautau_10000.hepmc -t 2002
 ```
-:::
 
 :::{admonition} Expand to see the example of the produced `HepMC` output 
 :class: callout toggle
@@ -908,7 +917,7 @@ KKMCee -f Tau -e 91.2 -n 10000 -o kk_ee_Zautau_mumu_10000.hepmc -t 2002
 The `HepMC` output is an ASCII format and can browsed with for example `more`:
 
 ```bash
-more kk_ee_Ztautau_mumu_10000.hepmc
+more kk_tautau_10000.hepmc
 ```
 ```
 HepMC::Version 3.02.05
@@ -1033,102 +1042,55 @@ $1485.5 \pm 0.007~\mathrm{pb}$.
 
 #### `HepMC` to `EDM4hep` conversion
 
-In order to get the events in `EDM4hep` format, we will use `Gaudi` and the
-tools available in [k4FWCore](https://github.com/key4hep/k4FWCore) and
-[k4Gen](https://github.com/key4hep/k4Gen/). We need a Gaudi steering file that
-reads the `HepMC` file and writes out the `EDM4hep` file.
-A minimal version of such a steering code is available on the tutorial reference
-page:
+`HepMCFileReader` supplies events to `GenAlg`. The converter writes
+`MCParticles`, keeping all HepMC statuses so the analysis can access both
+the original taus and their decay products. `IOSvc` writes the EDM4hep file.
+
+<!-- ci-fragment: kkmcee-ditau -->
 ```bash
-wget https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/hepmc2edm.py
-```
-Let's see what it does: that is shown by the first line of the help function
-```bash
-k4run hepmc2edm.py -h
-```
-```
- -->  GenAlg  -->  HepMCToEDMConverter  -->  out
-...
-```
-
-##### Dissection of `hepmc2edm.py`
-
-:::{admonition} Expand
-:class: discussion toggle
-
-The tool that we need is [HepMCFileReader](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCFileReader.h), which is a `GaudiTool`, not a `GaudiAlgorithm`, which is used as a signal provider (such as a Monte Carlo generator) within the [Generator Algorithm (GenAlg)](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/GenAlg.h). This is done in this part of the code:
-```python
-from Configurables import HepMCFileReader
-hepmcreader = HepMCFileReader()
-
-from Configurables import GenAlg
-reader = GenAlg()
-reader.SignalProvider = hepmcreader
-reader.hepmc.Path = "hepmc"
-ApplicationMgr().TopAlg += [reader]
-```
-
-Then we convert the event from `HepMC` to `EDM4hep` with the [HepMCToEDMConverter](https://github.com/HEP-FCC/k4Gen/blob/main/k4Gen/src/components/HepMCToEDMConverter.h):
-```python
+mkdir -p config gen/kk_tautau_ecm91
+cat > config/hepmc2edm.py <<'PYTHON'
+from Configurables import EventDataSvc, GenAlg, GenParticleFilter, HepMCFileReader
 from Configurables import HepMCToEDMConverter
-hepmc_converter = HepMCToEDMConverter()
-hepmc_converter.hepmc.Path="hepmc"
-hepmc_converter.GenParticles.Path = "GenParticles"
-ApplicationMgr().TopAlg += [hepmc_converter]
-```
+from k4FWCore import ApplicationMgr, IOSvc
 
-Finally we write out the converted events into a file with the [PodioOutput](https://github.com/key4hep/k4FWCore/blob/master/k4FWCore/components/PodioOutput.h) algorithm:
-```python
-from Configurables import PodioOutput
-out = PodioOutput("out", filename = "hepmc2edm_output.root")
-out.outputCommands = ["keep *"]
-ApplicationMgr().TopAlg += [out]
-```
-:::
+reader = GenAlg("GenAlg")
+reader.SignalProvider = HepMCFileReader("HepMCFileReader")
+reader.hepmc.Path = "hepmc"
 
-##### Running `hepmc2edm.py`
+converter = HepMCToEDMConverter()
+converter.hepmc.Path = "hepmc"
+converter.hepmcStatusList = []
+converter.GenParticles.Path = "MCParticles"
 
-Among the `hepmc2edm` switches relevant for the purpose are those controlling
-input an output files:
-```bash
-k4run hepmc2edm.py -h
-```
-```
-...
-  --GenAlg.HepMCFileReader.Filename [GENALG.HEPMCFILEREADER.FILENAME], --Filename.GenAlg.HepMCFileReader [GENALG.HEPMCFILEREADER.FILENAME]
-                        Name of the HepMC file to read [HepMCFileReader]
-...
-  --out.filename [OUT.FILENAME], --filename.out [OUT.FILENAME]
-                        Name of the file to create [PodioOutput]
-...
-```
-**Q:** We would like the output file to be called
-`kk_Ztautau_mumu_10000.e4h.root` . Which command should we use for that?
+stable_particles = GenParticleFilter("StableParticles")
+stable_particles.accept = [1]
+stable_particles.GenParticles.Path = "MCParticles"
+stable_particles.GenParticlesFiltered.Path = "MCParticlesStable"
 
-:::{admonition} Answer
-:class: solution toggle
+io = IOSvc()
+io.Output = "hepmc2edm_output.root"
+io.outputCommands = ["keep *"]
 
-```bash
-k4run config/hepmc2edm.py -n 10000 --GenAlg.HepMCFileReader.Filename kk/kk_tautau_10000.hepmc --out.filename gen/kk_tautau_ecm91/events_1.root
-```
-:::
-
-**Q:** Can you explain why we need to pass the `-n 10000` switch and how you
-could modify `hepmc2edm.py` to avoid that?
-
-:::{admonition} Check answer
-:class: solution toggle
-
-Because `hepmc2edm.py` contains this piece of code:
-```python
-from Configurables import ApplicationMgr
 ApplicationMgr(
-               EvtSel='NONE',
-               EvtMax=1,
-               OutputLevel=INFO,
+    EvtSel="NONE",
+    EvtMax=1,
+    ExtSvc=[EventDataSvc("EventDataSvc"), io],
+    TopAlg=[reader, converter, stable_particles],
+)
+PYTHON
 ```
-The setting `EvtMax=1` is overwritten by `-n <n_evts>`. To avoid this one could set `EvtMax=10000` inside `hepmc2edm.py` (try!)
-:::
+
+Use `-n` to override the steering file's one-event default. The
+`--GenAlg.HepMCFileReader.Filename` and `--IOSvc.Output` options select the
+input and output files:
+
+<!-- ci-fragment: kkmcee-ditau -->
+```bash
+k4run config/hepmc2edm.py -n 10000 \
+    --GenAlg.HepMCFileReader.Filename kk_tautau_10000.hepmc \
+    --IOSvc.Output gen/kk_tautau_ecm91/events_1.root
+```
 
 Note _en passant_ that the `EDM4hep` file is much smaller than the `HepMC` one:
 ```bash
