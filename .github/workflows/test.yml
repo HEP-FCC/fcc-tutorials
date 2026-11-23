@@ -28,8 +28,8 @@ jobs:
                    -d ghcr.io/key4hep/key4hep-images/alma9:latest /bin/bash
     - name: Run tests
       run: |
-        docker exec CI_container /bin/bash -c \
-        'curl -LO https://github.com/jgm/pandoc/releases/download/3.10/pandoc-3.10-linux-amd64.tar.gz;\
+        docker exec CI_container /bin/bash -e -c \
+        'curl -fLO https://github.com/jgm/pandoc/releases/download/3.10/pandoc-3.10-linux-amd64.tar.gz;\
         tar -xzf pandoc-3.10-linux-amd64.tar.gz;\
         cp pandoc-3.10/bin/pandoc /usr/local/bin/;\
         cd ./Package;\
@@ -38,5 +38,5 @@ jobs:
         cd build;\
         cmake ..;\
         make;\
-        make test;
+        ctest --output-on-failure --no-tests=error;
         '

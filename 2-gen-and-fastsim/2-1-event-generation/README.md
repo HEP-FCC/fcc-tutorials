@@ -93,23 +93,26 @@ The Gaudi steering file needs to activate the `GaudiTool` that interfaces
 An example of steering file can be found at [pythia.py][pythia-example].
 The steering file runs the minimal set of algorithms to run Pythia8 and produce
 an output in `EDM4hep` format:
+<!-- ci-fragment: pythia8 -->
 ```bash
 wget https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py
 k4run --dry-run pythia.py
 ```
 with expected output
 ```
-[k4run - INFO] k4run.main: --> Pythia8 --> HepMCToEDMConverter --> StableParticles --> out
+[k4run - INFO] k4run.main: --> eventHeaderCreator --> Pythia8 --> HepMCToEDMConverter --> StableParticles
 [...]
 ```
 For example, to generate 500 $e^{+}e^{-} \rightarrow \mu^{+}\mu^{-}$ at
 91.2 GeV, one can do the following, download the configuration file:
+<!-- ci-fragment: pythia8 -->
 ```bash
 wget https://raw.githubusercontent.com/HEP-FCC/FCC-config/main/FCCee/Generator/Pythia8/p8_ee_Zmumu_ecm91.cmd
 ```
 and run
+<!-- ci-fragment: pythia8 -->
 ```bash
-k4run pythia.py -n 500 --out.filename p8_mumu_500.e4h.root --Pythia8.PythiaInterface.pythiacard p8_ee_Zmumu_ecm91.cmd
+k4run pythia.py -n 500 --IOSvc.Output p8_mumu_500.e4h.root --Pythia8.PythiaInterface.pythiacard p8_ee_Zmumu_ecm91.cmd
 ```
 
 
@@ -763,7 +766,7 @@ which mg5_aMC
 ## Hands-on case study: ditau events with Pythia8, Whizard and KKMCee
 
 In this section we describe, with exercises, the generation of an equivalent sample of Monte Carlo events with three diffent generators: `Pythia8`, `Whizard` and `KKMCee`. The process chosen is $e^{-}e^{+} \rightarrow \tau^{-}\tau^{+}$
- (hereafter referred to as _ditaus_), with both _taus_ decaying leptonically with a _muon_ in the final state. The centre of mass energy of 91.2 GeV. In the three cases 10000 will be generated and saved in `ROOT` files in `EDM4hep` format: the steps to arrive at this results are however different.
+ (hereafter referred to as _ditaus_), with both _taus_ decaying leptonically with a _muon_ in the final state. The centre of mass energy of 91.2 GeV. Each workflow produces an EDM4hep ROOT file. The Pythia8 and KKMCee examples use 10,000 events, and the Whizard example uses a 10-event sample.
 
 ### Generating ditaus with Pythia8
 
@@ -821,13 +824,18 @@ i.e. 1458.0 +- 7.7 pb.
 
 As explained in the dedicated [Whizard section](#whizard), to use `whizard` we need a `Sindarin` configuration file. To generate ditau events we will use the file
 [Z_tautau.sin](https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/Z_tautau.sin):
+
+<!-- ci-fragment: whizard-ditau -->
 ```bash
 wget https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/Z_tautau.sin
 ```
-and run it in a dedicate directory to not pollute the working one with the many files produced:
+Run it in a dedicated directory to keep the generated files together. The downloaded
+card generates 10 events, which is enough to exercise the conversion.
+
+<!-- ci-fragment: whizard-ditau -->
 ```bash
-mkdir -p whizard; cd whizard;
-whizard ../Z_tautau.sin
+mkdir -p whizard
+(cd whizard && whizard ../Z_tautau.sin)
 ```
 The output created by `whizard` is `LHEf` (Les Houches Event format); this is because the current build does not support writing `HepMC`; this may change in the future.
 
@@ -848,10 +856,13 @@ In order to get the events in `EDM4hep` format, we exploit the fact that
 `Pythia` provides `LHEf` reader functionality. To activate that we will use
 `Gaudi` and a special `.cmd` file which considers the input `LHEf` input file as
 a `Beam`. This special `.cmd` is called `p8_lhereader.cmd` and it is available
-on the web:
+on the web. Download the card and the same Pythia8 steering used above:
+
+<!-- ci-fragment: whizard-ditau -->
 ```bash
-cd ../cards
-wget https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/p8_lhereader.cmd
+mkdir -p cards config gen/wz_tautau_ecm91
+wget -O cards/p8_lhereader.cmd https://fccsw.web.cern.ch/tutorials/apr2023/tutorial1/p8_lhereader.cmd
+wget -O config/pythia.py https://raw.githubusercontent.com/HEP-FCC/k4Gen/main/k4Gen/options/pythia.py
 ```
 Please note the lines
 ```
@@ -859,7 +870,7 @@ Please note the lines
 Beams:frameType = 4                      ! read info from a LHEF
 Beams:LHEF = z_tautau.lhe                ! the LHEF to read from
 ```
-This file needs to be edited to enter the exact locaton of the input file (it could also be a symlink to avoid always editng the file.
+Run the conversion from the `whizard` directory so Pythia8 finds `z_tautau.lhe` at the relative path in the card.
 
 Also note the lines:
 ```
@@ -876,9 +887,10 @@ As steering we will use the file `pythia.py`.
 :::{admonition} Answer
 :class: solution toggle
 
+<!-- ci-fragment: whizard-ditau -->
 ```bash
 cd whizard
-k4run ../config/pythia.py -n 10000 --out.filename ../gen/wz_tautau_ecm91/events_1.root --Pythia8.PythiaInterface.pythiacard ../cards/p8_lhereader.cmd | tee wz_ee_Ztautau_mumu_ecm91.log
+k4run ../config/pythia.py -n 10 --IOSvc.Output ../gen/wz_tautau_ecm91/events_1.root --Pythia8.PythiaInterface.pythiacard ../cards/p8_lhereader.cmd | tee wz_ee_Ztautau_mumu_ecm91.log
 ```
 :::
 
