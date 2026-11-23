@@ -1,151 +1,76 @@
-import os, copy
+# Adapted from https://github.com/HEP-FCC/LiveSoftwareTutorials/blob/main/Analysis/ee/solutions/01_basic_selection.py
+""" Stage-1 analysis: ee->Z(->mu+mu-)H(->bb) """
 
-# list of processes
-processList = {
-    "p8_ee_ZH_Zmumu_ecm240": {
-        "fraction": 1,
-        "crossSection": 0.201868 * 0.034,
-    },
-    "p8_ee_ZZ_mumubb_ecm240": {
-        "fraction": 1,
-        "crossSection": 2 * 1.35899 * 0.034 * 0.152,
-    },
-}
+import json
+import os
+from pathlib import Path
+import urllib.request
 
-# Production tag when running over EDM4Hep centrally produced events, this points to the yaml files for getting sample statistics (mandatory)
-#prodTag     = "FCCee/winter2023/IDEA/"
+from addons.FastJet.jetClusteringHelper import ExclusiveJetClusteringHelper
+from addons.ONNXRuntime.jetFlavourHelper import JetFlavourHelper
 
-#Optional: output directory, default is local running directory
-outputDir   = "./outputs/treemaker/flavor/"
-
-# Define the input dir (optional)
-inputDir    = "./localSamples/"
-
-# additional/costom C++ functions, defined in header files (optional)
-includePaths = ["functions.h"]
-
-## latest particle transformer model, trained on 9M jets in winter2023 samples
-model_name = "fccee_flavtagging_edm4hep_wc_v1"
-
-## model files needed for unit testing in CI
-url_model_dir = "https://fccsw.web.cern.ch/fccsw/testsamples/jet_flavour_tagging/winter2023/wc_pt_13_01_2022/"
-url_preproc = "{}/{}.json".format(url_model_dir, model_name)
-url_model = "{}/{}.onnx".format(url_model_dir, model_name)
-
-## model files locally stored on /eos
-model_dir = (
-    "/eos/experiment/fcc/ee/jet_flavour_tagging/winter2023/wc_pt_13_01_2022/"
+# Model files for the flavour tagging inference.
+MODEL_NAME = "fccee_flavtagging_edm4hep_wc_v1"
+MODEL_URL_DIR = (
+    "https://fccsw.web.cern.ch/fccsw/testsamples/jet_flavour_tagging/"
+    "winter2023/wc_pt_13_01_2022"
 )
-local_preproc = "{}/{}.json".format(model_dir, model_name)
-local_model = "{}/{}.onnx".format(model_dir, model_name)
+MODEL_EOS_DIR = (
+    "/eos/experiment/fcc/ee/jet_flavour_tagging/winter2023/"
+    "wc_pt_13_01_2022"
+)
 
-## get local file, else download from url
+# Small helper function to download the model files if they are not already present.
 def get_file_path(url, filename):
+    """Use a local model when available; otherwise download the test model."""
     if os.path.exists(filename):
         return os.path.abspath(filename)
-    else:
-        urllib.request.urlretrieve(url, os.path.basename(url))
-        return os.path.basename(url)
+    local_path = Path("models") / os.path.basename(url)
+    local_path.parent.mkdir(exist_ok=True)
+    if not local_path.is_file():
+        temporary_path = local_path.with_suffix(local_path.suffix + ".part")
+        urllib.request.urlretrieve(url, temporary_path)
+        temporary_path.replace(local_path)
+    return str(local_path.resolve())
 
 
-weaver_preproc = get_file_path(url_preproc, local_preproc)
-weaver_model = get_file_path(url_model, local_model)
+class Analysis:
+    """Select ee->Z(->mu+mu-)H(->bb) candidates and run flavour tagging on two jets."""
 
-from addons.ONNXRuntime.jetFlavourHelper import JetFlavourHelper
-from addons.FastJet.jetClusteringHelper import (
-    ExclusiveJetClusteringHelper,
-)
+    def __init__(self, _):
 
-jetFlavourHelper = None
-jetClusteringHelper = None
+        self.process_list = {
+            "wzp8_ee_mumuH_Hbb_ecm240": {
+                "fraction": 1.0,
+            },
+            "p8_ee_ZZ_mumubb_ecm240": {
+                "fraction": 1.0,
+            },
+            "p8_ee_WW_mumu_ecm240": {
+                "fraction": 1.0,
+            },
+        }
 
+        # The input and output directories are relative to the current working directory.
+        self.input_dir = "./inputs/"
+        self.output_dir = "./outputs/flavor/stage1/"
+        # The include paths are needed for the C++ helper functions used in the analysis.
+        self.include_paths = [str(Path(__file__).with_name("functions.h"))]
 
-# Mandatory: RDFanalysis class where the use defines the operations on the TTree
-class RDFanalysis:
-
-    # __________________________________________________________
-    # Mandatory: analysers funtion to define the analysers to process, please make sure you return the last dataframe, in this example it is df2
-    def analysers(df):
-
-        # __________________________________________________________
-        # Mandatory: analysers funtion to define the analysers to process, please make sure you return the last dataframe, in this example it is df2
-
-        # define some aliases to be used later on
-        df = df.Alias("Particle0", "_Particle_daughters.index")
-        df = df.Alias("Particle1", "_Particle_parents.index")
-        df = df.Alias("RecoMCLink0", "_RecoMCLink_from.index")
-        df = df.Alias("RecoMCLink1", "_RecoMCLink_to.index")
-        df = df.Alias("Muon0", "Muon_objIdx.index")
-        # get all the leptons from the collection
-        df = df.Define(
-            "muons_all",
-            "FCCAnalyses::ReconstructedParticle::get(Muon0, ReconstructedParticles)",
+        # Download the pre-processing and model files for the jet-flavour inference.
+        preproc_url = f"{MODEL_URL_DIR}/{MODEL_NAME}.json"
+        model_url = f"{MODEL_URL_DIR}/{MODEL_NAME}.onnx"
+        self.weaver_preproc = get_file_path(
+            preproc_url, f"{MODEL_EOS_DIR}/{MODEL_NAME}.json"
         )
-        # select leptons with momentum > 20 GeV
-        df = df.Define(
-            "muons",
-            "FCCAnalyses::ReconstructedParticle::sel_p(20)(muons_all)",
-        )
-        df = df.Define(
-            "muons_p", "FCCAnalyses::ReconstructedParticle::get_p(muons)"
-        )
-        df = df.Define(
-            "muons_theta",
-            "FCCAnalyses::ReconstructedParticle::get_theta(muons)",
-        )
-        df = df.Define(
-            "muons_phi",
-            "FCCAnalyses::ReconstructedParticle::get_phi(muons)",
-        )
-        df = df.Define(
-            "muons_q",
-            "FCCAnalyses::ReconstructedParticle::get_charge(muons)",
-        )
-        df = df.Define(
-            "muons_no", "FCCAnalyses::ReconstructedParticle::get_n(muons)"
+        self.weaver_model = get_file_path(
+            model_url, f"{MODEL_EOS_DIR}/{MODEL_NAME}.onnx"
         )
 
-        # compute the muon isolation and store muons with an isolation cut of 0.25 in a separate column muons_sel_iso
-        df = df.Define(
-            "muons_iso",
-            "FCCAnalyses::ZHfunctions::coneIsolation(0.01, 0.5)(muons, ReconstructedParticles)",
-        )
-        df = df.Define(
-            "muons_sel_iso",
-            "FCCAnalyses::ZHfunctions::sel_iso(0.25)(muons, muons_iso)",
-        )
-
-        #########
-        ### CUT 1: at least 1 muon with at least one isolated one
-        #########
-        df = df.Filter("muons_no >= 1 && muons_sel_iso.size() > 0")
-        #########
-        ### CUT 2 :at least 2 opposite-sign (OS) leptons
-        #########
-        df = df.Filter("muons_no >= 2 && abs(Sum(muons_q)) < muons_q.size()")
-        # now we build the Z resonance based on the available leptons.
-        # the function resonanceBuilder_mass_recoil returns the best lepton pair compatible with the Z mass (91.2 GeV) and recoil at 125 GeV
-        # the argument 0.4 gives a weight to the Z mass and the recoil mass in the chi2 minimization
-        # technically, it returns a ReconstructedParticleData object with index 0 the di-lepton system, index and 2 the leptons of the pair
-
-        ## here cluster jets in the events but first remove muons from the list of
-        ## reconstructed particles
-
-        ## create a new collection of reconstructed particles removing muons with p>20
-        df = df.Define(
-            "ReconstructedParticlesNoMuons",
-            "FCCAnalyses::ReconstructedParticle::remove(ReconstructedParticles,muons)",
-        )
-
-        ## perform N=2 jet clustering
-        global jetClusteringHelper
-        global jetFlavourHelper
-
-        ## define jet and run clustering parameters
-        ## name of collections in EDM root files
+        # Dictionary mapping the EDM4hep collection names to the names used by the flavour tagger and jet clustering helpers.
         collections = {
             "GenParticles": "Particle",
-            "PFParticles": "ReconstructedParticles",
+            "PFParticles": "ReconstructedParticlesNoMuons",
             "PFTracks": "EFlowTrack",
             "PFPhotons": "EFlowPhoton",
             "PFNeutralHadrons": "EFlowNeutralHadron",
@@ -157,105 +82,90 @@ class RDFanalysis:
             "Bz": "magFieldBz",
         }
 
-        collections_nomuons = copy.deepcopy(collections)
-        collections_nomuons["PFParticles"] = "ReconstructedParticlesNoMuons"
-
-        jetClusteringHelper = ExclusiveJetClusteringHelper(
-            collections_nomuons["PFParticles"], 2
+        self.jet_clustering_helper = ExclusiveJetClusteringHelper(
+            collections["PFParticles"], 2
         )
-        df = jetClusteringHelper.define(df)
-
-        ## define jet flavour tagging parameters
-
-        jetFlavourHelper = JetFlavourHelper(
-            collections_nomuons,
-            jetClusteringHelper.jets,
-            jetClusteringHelper.constituents,
+        self.jet_flavour_helper = JetFlavourHelper(
+            collections,
+            self.jet_clustering_helper.jets,
+            self.jet_clustering_helper.constituents,
         )
+        with open(self.weaver_preproc, encoding="utf-8") as preproc_file:
+            self.jet_flavour_helper.scores = json.load(preproc_file)["output_names"]
 
-        ## define observables for tagger
-        df = jetFlavourHelper.define(df)
 
-        ## tagger inference
-        df = jetFlavourHelper.inference(weaver_preproc, weaver_model, df)
+    def analyzers(self, df):
+        """Define the Z(mu+mu-)H(bb) reconstruction graph."""
+        df = df.Alias("Particle0", "_Particle_daughters.index")
+        df = df.Alias("Particle1", "_Particle_parents.index")
+        df = df.Alias("RecoMCLink0", "_RecoMCLink_from.index")
+        df = df.Alias("RecoMCLink1", "_RecoMCLink_to.index")
+        df = df.Alias("Muon0", "Muon_objIdx.index")
+        df = df.Define("muons_all", "FCCAnalyses::ReconstructedParticle::get(Muon0, ReconstructedParticles)",)
+
+        df = df.Define(
+            "muons",
+            "FCCAnalyses::ReconstructedParticle::sel_p(20)(muons_all)",
+        )
+        df = df.Define("q_muons", "FCCAnalyses::ReconstructedParticle::get_charge(muons)")
+        df = df.Define("no_muons", "FCCAnalyses::ReconstructedParticle::get_n(muons)")
+
+        df = df.Define(
+            "iso_muons",
+            "FCCAnalyses::ZHfunctions::coneIsolation(0.01, 0.5)(muons, ReconstructedParticles)",)
+        df = df.Define(
+            "muons_sel_iso",
+            "FCCAnalyses::ZHfunctions::sel_iso(0.25)(muons, iso_muons)",)
+        # At least one isolated muon and an opposite-sign muon pair.
+        df = df.Filter("muons_sel_iso.size() > 0")
+        df = df.Filter("no_muons >= 2 && abs(Sum(q_muons)) < q_muons.size()")
+
+        # Remove the selected muons from the list of reconstructed particles to avoid double-counting them in the jet clustering.
+        df = df.Define(
+            "ReconstructedParticlesNoMuons",
+            "FCCAnalyses::ReconstructedParticle::remove(ReconstructedParticles, muons)",)
+
+        # Run the jet clustering and flavour tagging inference.
+        df = df.Filter("ReconstructedParticlesNoMuons.size() >= 2")
+        df = self.jet_clustering_helper.define(df)
+        df = df.Filter("event_njet == 2")
+        df = self.jet_flavour_helper.define(df)
+        df = self.jet_flavour_helper.inference(self.weaver_preproc, self.weaver_model, df)
 
         df = df.Define(
             "zbuilder_result",
-            "FCCAnalyses::ZHfunctions::resonanceBuilder_mass_recoil(91.2, 125, 0.4, 240, false)(muons, RecoMCLink0, RecoMCLink1, ReconstructedParticles, Particle, Particle0, Particle1)",
-        )
-        df = df.Define("zmumu", "Vec_rp{zbuilder_result[0]}")  # the Z
-        df = df.Define(
-            "zmumu_muons", "Vec_rp{zbuilder_result[1],zbuilder_result[2]}"
-        )  # the leptons
-        df = df.Define(
-            "zmumu_m",
-            "FCCAnalyses::ReconstructedParticle::get_mass(zmumu)[0]",
-        )  # Z mass
-        df = df.Define(
-            "zmumu_p", "FCCAnalyses::ReconstructedParticle::get_p(zmumu)[0]"
-        )  # momentum of the Z
-        df = df.Define(
-            "zmumu_recoil",
-            "FCCAnalyses::ReconstructedParticle::recoilBuilder(240)(zmumu)",
-        )  # compute the recoil based on the reconstructed Z
-        df = df.Define(
-            "zmumu_recoil_m",
-            "FCCAnalyses::ReconstructedParticle::get_mass(zmumu_recoil)[0]",
-        )  # recoil mass
-        df = df.Define(
-            "zmumu_muons_p",
-            "FCCAnalyses::ReconstructedParticle::get_p(zmumu_muons)",
-        )  # get the momentum of the 2 muons from the Z resonance
+            "FCCAnalyses::ZHfunctions::resonanceBuilder_mass_recoil("
+            "91.2, 125, 0.4, 240, false)(muons, RecoMCLink0, RecoMCLink1, "
+            "ReconstructedParticles, Particle, Particle0, Particle1)",)
+
+        df = df.Define("zmumu", "Vec_rp{zbuilder_result[0]}")
+
+        df = df.Define("m_zmumu", "FCCAnalyses::ReconstructedParticle::get_mass(zmumu)[0]")
+        df = df.Define("p_zmumu", "FCCAnalyses::ReconstructedParticle::get_p(zmumu)[0]")
+        df = df.Define("recoil_zmumu", "FCCAnalyses::ReconstructedParticle::recoilBuilder(240)(zmumu)",)
+        df = df.Define("m_recoil_zmumu", "FCCAnalyses::ReconstructedParticle::get_mass(recoil_zmumu)[0]",)
+
+        # Compute the sum of the two leading jets' b-tagging scores and store it in a new column called "scoresum_B".
+        df = df.Define("scoresum_B", "recojet_isB[0] + recojet_isB[1]")
 
         df = df.Define(
-            "missingEnergy",
-            "FCCAnalyses::ZHfunctions::missingEnergy(240., ReconstructedParticles)",
-        )
-        # .Define("cosTheta_miss", "FCCAnalyses::get_cosTheta_miss(missingEnergy)")
-        df = df.Define(
-            "cosTheta_miss",
-            "FCCAnalyses::ZHfunctions::get_cosTheta_miss(missingEnergy)",
-        )
+            "p4_jets",
+            "JetConstituentsUtils::compute_tlv_jets("
+            f"{self.jet_clustering_helper.jets})",)
 
-        df = df.Define(
-            "missing_p",
-            "FCCAnalyses::ReconstructedParticle::get_p(missingEnergy)",
-        )
-
-        #########
-        ### CUT 3: Njets = 2
-        #########
-        df = df.Filter("event_njet > 1")
-
-        df = df.Define(
-            "jets_p4",
-            "JetConstituentsUtils::compute_tlv_jets({})".format(
-                jetClusteringHelper.jets
-            ),
-        )
-        df = df.Define(
-            "jj_m",
-            "JetConstituentsUtils::InvariantMass(jets_p4[0], jets_p4[1])",
-        )
+        df = df.Define("m_jj", "JetConstituentsUtils::InvariantMass(p4_jets[0], p4_jets[1])")
 
         return df
 
-    # __________________________________________________________
-    # Mandatory: output function, please make sure you return the branchlist as a python list
-    def output():
-        branchList = [
-            "zmumu_m",
-            "zmumu_p",
-            "zmumu_recoil_m",
-            "cosTheta_miss",
-            "missing_p",
-            "jj_m",
+    def output(self):
+        """Columns persisted in the stage-1 output ROOT file."""
+        branch_list = [
+            "m_zmumu",
+            "p_zmumu",
+            "m_recoil_zmumu",
+            "m_jj",
+            "scoresum_B",
         ]
-
-        ##  outputs jet properties
-        # branchList += jetClusteringHelper.outputBranches()
-
-        ## outputs jet scores and constituent breakdown
-        branchList += jetFlavourHelper.outputBranches()
-
-        return branchList
+        # Add the output branches from the jet flavour helper.
+        branch_list += self.jet_flavour_helper.outputBranches()
+        return branch_list

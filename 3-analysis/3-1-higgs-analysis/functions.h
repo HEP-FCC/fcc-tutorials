@@ -1,7 +1,11 @@
+// Adapted from https://github.com/HEP-FCC/LiveSoftwareTutorials/blob/main/Analysis/ee/functions.h
 #ifndef ZHfunctions_H
 #define ZHfunctions_H
 
+#include <algorithm>
 #include <cmath>
+#include <cstdlib>
+#include <iostream>
 #include <vector>
 #include <math.h>
 
@@ -30,13 +34,13 @@ struct resonanceBuilder_mass_recoil {
 
 resonanceBuilder_mass_recoil::resonanceBuilder_mass_recoil(float arg_resonance_mass, float arg_recoil_mass, float arg_chi2_recoil_frac, float arg_ecm, bool arg_use_MC_Kinematics) {m_resonance_mass = arg_resonance_mass, m_recoil_mass = arg_recoil_mass, chi2_recoil_frac = arg_chi2_recoil_frac, ecm = arg_ecm, m_use_MC_Kinematics = arg_use_MC_Kinematics;}
 
-Vec_rp resonanceBuilder_mass_recoil::resonanceBuilder_mass_recoil::operator()(Vec_rp legs, Vec_i recind, Vec_i mcind, Vec_rp reco, Vec_mc mc, Vec_i parents, Vec_i daugthers) {
+Vec_rp resonanceBuilder_mass_recoil::operator()(Vec_rp legs, Vec_i recind, Vec_i mcind, Vec_rp reco, Vec_mc mc, Vec_i parents, Vec_i daugthers) {
 
     Vec_rp result;
     result.reserve(3);
     std::vector<std::vector<int>> pairs; // for each permutation, add the indices of the muons
     int n = legs.size();
-  
+
     if(n > 1) {
         ROOT::VecOps::RVec<bool> v(n);
         std::fill(v.end() - 2, v.end(), true); // helper variable for permutations
@@ -44,7 +48,7 @@ Vec_rp resonanceBuilder_mass_recoil::resonanceBuilder_mass_recoil::operator()(Ve
             std::vector<int> pair;
             rp reso;
             reso.charge = 0;
-            TLorentzVector reso_lv; 
+            TLorentzVector reso_lv;
             for(int i = 0; i < n; ++i) {
                 if(v[i]) {
                     pair.push_back(i);
@@ -80,43 +84,43 @@ Vec_rp resonanceBuilder_mass_recoil::resonanceBuilder_mass_recoil::operator()(Ve
         std::cout << "ERROR: resonanceBuilder_mass_recoil, at least two leptons required." << std::endl;
         exit(1);
     }
-  
+
     if(result.size() > 1) {
-  
+
         Vec_rp bestReso;
-        
+
         int idx_min = -1;
         float d_min = 9e9;
         for (int i = 0; i < result.size(); ++i) {
-            
+
             // calculate recoil
             auto recoil_p4 = TLorentzVector(0, 0, 0, ecm);
             TLorentzVector tv1;
             tv1.SetXYZM(result.at(i).momentum.x, result.at(i).momentum.y, result.at(i).momentum.z, result.at(i).mass);
             recoil_p4 -= tv1;
-      
+
             auto recoil_fcc = edm4hep::ReconstructedParticleData();
             recoil_fcc.momentum.x = recoil_p4.Px();
             recoil_fcc.momentum.y = recoil_p4.Py();
             recoil_fcc.momentum.z = recoil_p4.Pz();
             recoil_fcc.mass = recoil_p4.M();
-            
+
             TLorentzVector tg;
             tg.SetXYZM(result.at(i).momentum.x, result.at(i).momentum.y, result.at(i).momentum.z, result.at(i).mass);
-        
+
             float boost = tg.P();
             float mass = std::pow(result.at(i).mass - m_resonance_mass, 2); // mass
             float rec = std::pow(recoil_fcc.mass - m_recoil_mass, 2); // recoil
             float d = (1.0-chi2_recoil_frac)*mass + chi2_recoil_frac*rec;
-            
+
             if(d < d_min) {
                 d_min = d;
                 idx_min = i;
             }
 
-     
+
         }
-        if(idx_min > -1) { 
+        if(idx_min > -1) {
             bestReso.push_back(result.at(idx_min));
             auto & l1 = legs[pairs[idx_min][0]];
             auto & l2 = legs[pairs[idx_min][1]];
@@ -130,13 +134,14 @@ Vec_rp resonanceBuilder_mass_recoil::resonanceBuilder_mass_recoil::operator()(Ve
         return bestReso;
     }
     else {
-        auto & l1 = legs[0];
-        auto & l2 = legs[1];
+        if (result.empty()) return {};
+        auto & l1 = legs[pairs[0][0]];
+        auto & l2 = legs[pairs[0][1]];
         result.emplace_back(l1);
         result.emplace_back(l2);
         return result;
     }
-}    
+}
 
 
 
@@ -160,7 +165,7 @@ ROOT::VecOps::RVec<edm4hep::ReconstructedParticleData>  sel_iso::operator() (Vec
     return result;
 }
 
- 
+
 // compute the cone isolation for reco particles
 struct coneIsolation {
 
@@ -173,8 +178,8 @@ struct coneIsolation {
 };
 
 coneIsolation::coneIsolation(float arg_dr_min, float arg_dr_max) : dr_min(arg_dr_min), dr_max( arg_dr_max ) { };
-Vec_f coneIsolation::coneIsolation::operator() (Vec_rp in, Vec_rp rps) {
-  
+Vec_f coneIsolation::operator() (Vec_rp in, Vec_rp rps) {
+
     Vec_f result;
     result.reserve(in.size());
 
@@ -186,11 +191,11 @@ Vec_f coneIsolation::coneIsolation::operator() (Vec_rp in, Vec_rp rps) {
 
         ROOT::Math::PxPyPzEVector tlv;
         tlv.SetPxPyPzE(rps.at(i).momentum.x, rps.at(i).momentum.y, rps.at(i).momentum.z, rps.at(i).energy);
-        
+
         if(rps.at(i).charge == 0) lv_neutral.push_back(tlv);
         else lv_charged.push_back(tlv);
     }
-    
+
     for(size_t i = 0; i < in.size(); ++i) {
 
         ROOT::Math::PxPyPzEVector tlv;
@@ -198,36 +203,36 @@ Vec_f coneIsolation::coneIsolation::operator() (Vec_rp in, Vec_rp rps) {
         lv_reco.push_back(tlv);
     }
 
-    
-    // compute the isolation (see https://github.com/delphes/delphes/blob/master/modules/Isolation.cc#L154) 
+
+    // compute the isolation (see https://github.com/delphes/delphes/blob/master/modules/Isolation.cc#L154)
     for (auto & lv_reco_ : lv_reco) {
-    
+
         double sumNeutral = 0.0;
         double sumCharged = 0.0;
-    
+
         // charged
         for (auto & lv_charged_ : lv_charged) {
-    
+
             double dr = coneIsolation::deltaR(lv_reco_.Eta(), lv_reco_.Phi(), lv_charged_.Eta(), lv_charged_.Phi());
             if(dr > dr_min && dr < dr_max) sumCharged += lv_charged_.P();
         }
-        
+
         // neutral
         for (auto & lv_neutral_ : lv_neutral) {
-    
+
             double dr = coneIsolation::deltaR(lv_reco_.Eta(), lv_reco_.Phi(), lv_neutral_.Eta(), lv_neutral_.Phi());
             if(dr > dr_min && dr < dr_max) sumNeutral += lv_neutral_.P();
         }
-        
+
         double sum = sumCharged + sumNeutral;
         double ratio= sum / lv_reco_.P();
         result.emplace_back(ratio);
     }
     return result;
 }
- 
- 
- 
+
+
+
 // returns missing energy vector, based on reco particles
 Vec_rp missingEnergy(float ecm, Vec_rp in, float p_cutoff = 0.0) {
     float px = 0, py = 0, pz = 0, e = 0;
@@ -238,7 +243,7 @@ Vec_rp missingEnergy(float ecm, Vec_rp in, float p_cutoff = 0.0) {
         pz += -p.momentum.z;
         e += p.energy;
     }
-    
+
     Vec_rp ret;
     rp res;
     res.momentum.x = px;
@@ -251,10 +256,10 @@ Vec_rp missingEnergy(float ecm, Vec_rp in, float p_cutoff = 0.0) {
 
 // calculate the cosine(theta) of the missing energy vector
 float get_cosTheta_miss(Vec_rp met){
-    
+
     float costheta = 0.;
     if(met.size() > 0) {
-        
+
         TLorentzVector lv_met;
         lv_met.SetPxPyPzE(met[0].momentum.x, met[0].momentum.y, met[0].momentum.z, met[0].energy);
         costheta = fabs(std::cos(lv_met.Theta()));
@@ -262,8 +267,8 @@ float get_cosTheta_miss(Vec_rp met){
     return costheta;
 }
 
- 
- 
+
+
 
 }}
 
